@@ -103,6 +103,15 @@ with tempfile.TemporaryDirectory() as tmp:
     chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
     ok(chk.get('bằng') == 'ok' and chk.get('học sinh') == 'ok', 'real: the check accepts the attested reading')
 
+# 2c. Tatoeba: lines that are not Vietnamese (real sentences of the snapshot: #451795 by GrizaLeono, #13958199 by
+# TanukiKun, #8854364 by dotheduyet1999, #13594913 by leucammieuvu; CC BY 2.0 FR)
+import build_db  # noqa: E402
+ok(build_db.tatoeba_problem('Nenormalas havi la koron dekstraflanke.') == 'not Vietnamese'
+   and build_db.tatoeba_problem('𤾓𢆥𥪞揆𠊛些').startswith('Han')
+   and build_db.tatoeba_problem('Tôi thích golf.') == ''
+   and build_db.tatoeba_problem('Laptop của tôi đang chạy Linux.') == '',
+   'tatoeba: a line in another language or in chữ Nôm is refused; names and loans are kept')
+
 # 3. the join: whole word first, else character by character with every reading, nothing chosen silently
 con = sqlite3.connect(':memory:')
 con.executescript(open(os.path.join(HERE, 'schema.sql'), encoding='utf-8').read())

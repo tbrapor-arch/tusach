@@ -26,6 +26,7 @@ import os
 import re
 import sqlite3
 import sys
+import unicodedata
 from collections import Counter, defaultdict
 
 import yaml
@@ -331,21 +332,53 @@ def load_cedict(raw, add):
 
 
 # ---------------------------------------------------------------------------------------------- Tatoeba
+VI_LETTERS = re.compile(r'[ăâêôơưđ]|[\u0300\u0301\u0303\u0309\u0323]')
+
+
+def tatoeba_problem(text):
+    """Why a Tatoeba sentence filed as Vietnamese is not used ('' if it is). Measured on the snapshot of 17 Nov 2026
+    (33,328 sentences, 22,190 with an English translation): 3 are written in chữ Nôm, a few are not Vietnamese at all
+    (an Esperanto line); 257 have over 30% of words that are not Vietnamese syllables, nearly all because of names and
+    loans (Boston, golf, Linux), which are kept. A sentence is refused when it contains Han characters, or when none of
+    its words has a Vietnamese letter or tone mark and fewer than half are possible Vietnamese syllables."""
+    t = vi.nfc(text)
+    if vi.CJK.search(t):
+        return 'Han characters (chữ Nôm)'
+    toks = re.findall(r'[^\W\d_]+', t.lower())
+    if not toks:
+        return 'no word'
+    valid = sum(1 for x in toks if not vi.syllable_problems(x))
+    if not VI_LETTERS.search(unicodedata.normalize('NFD', t.lower())) and valid * 2 < len(toks):
+        return 'not Vietnamese'
+    return ''
+
+
 def load_tatoeba(raw, add):
     """Example sentences with their English translation, sentence id and author, attached after the dictionary is
-    loaded (see attach_examples)."""
+    loaded (see attach_examples). Sentences without an author (orphans, 4) are not used: each example is credited to
+    its author. tatoeba_problem() drops lines that are not Vietnamese. The snapshot has no information on authors'
+    proficiency (Tatoeba's user_languages export is not in it); the six authors with most sentences (two thirds of
+    them) were sampled by eye on 18 Nov 2026 and read as fluent, so no author is filtered."""
     def rows(name):
         with bz2.open(need(raw, 'tatoeba', name), 'rt', encoding='utf-8') as f:
             for line in f:
                 yield line.rstrip('\n').split('\t')
-    vie = {p[0]: (vi.nfc(p[2]), p[3] if len(p) > 3 else '') for p in rows('vie_sentences_detailed.tsv.bz2') if len(p) >= 3}
+    vie = {p[0]: (vi.nfc(p[2]), p[3]) for p in rows('vie_sentences_detailed.tsv.bz2') if len(p) >= 4}
     eng = {p[0]: p[2] for p in rows('eng_sentences_detailed.tsv.bz2') if len(p) >= 3}
+    dropped = Counter()
     pairs = {}
     for p in rows('vie-eng_links.tsv.bz2'):
         if len(p) >= 2 and p[0] in vie and p[1] in eng and p[0] not in pairs:
             pairs[p[0]] = eng[p[1]]
-    add.sentences = [(vie[i][0], en, f'#{i} by {vie[i][1] or "?"}') for i, en in pairs.items()]
+    for i in list(pairs):
+        why = 'no author' if vie[i][1] in ('', '\\N') else tatoeba_problem(vie[i][0])
+        if why:
+            dropped[why] += 1
+            del pairs[i]
+    add.sentences = [(vie[i][0], en, f'#{i} by {vie[i][1]}') for i, en in pairs.items()]
     add.n = len(add.sentences)
+    print(f'  tatoeba: {len(vie)} Vietnamese sentences, {len(pairs) + sum(dropped.values())} with English; used '
+          f'{len(pairs)}; not used: {dict(dropped)}')
 
 
 def load_tatoeba_challenge(raw, add):
@@ -634,21 +667,27 @@ def frequencies(con, raw, corpus):
     return desc
 
 
+EX_MIN, EX_BEST, EX_MAX = 4, 8, 20     # syllables of a card example: 4-20, the closest to 8 first
+
+
 def attach_examples(con, sentences, known, per_word=2):
-    """Tatoeba sentences on the words they contain (cut by tools/vi.py cut(), the cutter of tools/cards.py): the
-    shortest ones first, `per_word` per word."""
+    """Tatoeba sentences on the words they contain (cut by tools/vi.py cut(), the cutter of tools/cards.py), `per_word`
+    per word: sentences of EX_MIN-EX_MAX syllables, the closest to EX_BEST first (the shortest-first order gave one-word
+    lines such as "Chạy!" as examples), then by length of text and id, so the choice never depends on the run."""
     first = {}
     for k, eid in con.execute('SELECT key, min(id) FROM entry GROUP BY key'):
         first[k] = eid
     have = Counter()
     rows = []
-    for v, en, ref in sorted(sentences, key=lambda x: len(x[0])):
-        for w in {w[2] for w in vi.words(vi.cut(v, known)) if w[0] == 'w'}:
+    usable = [x for x in sentences if EX_MIN <= len(x[0].split()) <= EX_MAX]
+    for v, en, ref in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
+        for w in sorted({w[2] for w in vi.words(vi.cut(v, known)) if w[0] == 'w'}):
             if w in first and have[w] < per_word:
                 have[w] += 1
                 rows.append((first[w], 'tatoeba', v, en, ref))
     con.executemany('INSERT INTO example(entry_id, source, vi, en, ref) VALUES (?,?,?,?,?)', rows)
-    print(f'tatoeba: {len(rows)} examples on {len(have)} words')
+    print(f'tatoeba: {len(rows)} examples on {len(have)} words (from {len(usable)} sentences of {EX_MIN}-{EX_MAX} '
+          f'syllables)')
 
 
 FW_MIN = 200     # FrequencyWords syllables seen at least this often (3,588 syllables in vi_50k) validate the table
