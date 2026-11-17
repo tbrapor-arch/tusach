@@ -1,0 +1,2 @@
+# Every word-card id the published page has had: tools/build_app.py keeps a card for each, so a saved word or
+# a link from the private module never stops opening. Add ids (tools/published_ids.py), never remove any.

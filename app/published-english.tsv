@@ -1,0 +1,2 @@
+# Card id <TAB> English rank <TAB> English, as last published (tools/published_ids.py). tools/check_cards.py
+# fails a build in which a card's English rank is lower than here. Ranks: tools/english.py RANK.

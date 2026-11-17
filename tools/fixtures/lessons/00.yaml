@@ -1,0 +1,47 @@
+# TEST FIXTURE — not course content. Three invented lines so that `make app`, `make lint` and tools/smoke.py run
+# before the syllabus is approved. Used only while course/lessons/ has no lesson (or with TUSACH_FIXTURE=1).
+# Not checked by a native speaker. Delete nothing here when real lessons arrive: the build simply stops using it.
+id: 0
+fixture: true
+title:
+  vi: Chào anh
+  en: Hello (test fixture)
+review: false
+setting: TEST FIXTURE, not a lesson. Two students meet.
+dialogue:
+- n: 1
+  speaker: Lan
+  vi: Chào anh! Tôi là Lan.
+  en: Hello! I'm Lan.
+- n: 2
+  speaker: Nam
+  vi: Chào chị! Tôi là học_sinh.
+  en: Hello! I'm a student.
+- n: 3
+  speaker: Lan
+  vi: Tôi cũng là học_sinh.
+  en: I'm a student too.
+notes:
+- ref: 2
+  topic: bridge
+  text: >-
+    học sinh "pupil, student" is the Chinese word 學生 read the Vietnamese way: Cantonese hok6 saang1, Taigi ha̍k-sing,
+    Mandarin xuéshēng. The final -c of học is the -k of Cantonese and Taigi, which Mandarin lost.
+- ref: 1
+  topic: pronouns
+  text: >-
+    anh and chị are "older brother" and "older sister", used as "you" to someone a little older than you.
+new_words:
+- {w: chào, en: hello; to greet}
+- {w: anh, en: you (to a man a little older)}
+- {w: chị, en: you (to a woman a little older)}
+- {w: tôi, en: I, me}
+- {w: là, en: to be (X is Y)}
+- {w: học_sinh, en: pupil, student}
+- {w: cũng, en: also, too}
+- {w: Lan, en: Lan (a woman's name), name: true}
+exercises:
+  translate:
+  - {vi: Anh là học_sinh., en: You are a student.}
+  fill:
+  - {vi: Chị ___ là học_sinh., answer: cũng, en: You are a student too.}

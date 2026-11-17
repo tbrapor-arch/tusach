@@ -1,358 +1,228 @@
-"""Word cards and line segmentation, shared by the app (tools/build_app.py) and the private module's build (podcast,
-drama, songs, books, exam texts), so that a word gets the same card everywhere and lines are cut the same way.
+"""The one word pipeline: every module (lessons now; books, podcast, lists, subtitles later, public or private) cuts its
+text into words and gets its word cards here, so a word has the same card wherever it is tapped. No module may build
+cards or cut text another way (handover section 4.1: Tsheh-tû's book lists had their own path, and 42 % of their
+example lines had a wrong reading).
 
     import cards
-    cards.init(con, english.English(con, ...))   # once; cards.dictionary then fills up as words are looked up
-    cards.lookup('毋過', 'm-koh')                 # -> card id '毋過|m-koh'
-    cards.tokenize(hanji, tailo, groups)          # a line cut by its own Tâi-lô words (the course's rule)
-    cards.tokenize(hanji, tailo, fallback=True)   # same, or by the dictionary when the Tâi-lô does not line up
+    con = cards.open_db('public')              # the app page; 'private' for the private module (refuses the wrong db)
+    cards.init(con, course=cards.course_words(lesson_dicts))
+    toks = cards.tokenize('Tôi là học_sinh.')  # a course line: cut by its own boundaries, never guessed
+    toks = cards.tokenize_text('Tôi là học sinh.')   # a text without boundaries (books…): cut by the dictionary
+    cards.dictionary                           # card id -> card, filled as words are looked up
 
-Each word token carries `x`: the other ways the line can be cut at that word (dictionary words starting on the same
-character, longest first, the token's own word included), shown on the card as "Other splits". Each card of two or
-more characters carries `comp`: the word cut into the longest dictionary words it contains (勞動法 -> 勞動 + 法), shown
-as its composition line.
+    store = cards.Store('data/build/cards.json')    # the shared card file of this repository
+    store.replace_module('lessons', toks_of_the_module)   # a partial build adds to it; other modules keep their cards
+    store.save()
+
+A token is {'p': text} (punctuation, spaces, numbers) or {'w': {'t': surface, 'id': card id or None}}. A word with no
+card is kept in the store's `missing` list and fails tools/check_cards.py: "no word without a card".
+
+Card (JSON, in the page's DATA.dict): w (the word), k (key), en, en_src, en_rank, chars (chữ Hán, Hán-Việt words only),
+yue / nan / cmn (Jyutping, Tâi-lô literary, pinyin), label (same | false-friend | native | ''), ex {vi, en},
+parts (syllable card ids), name (1 for a person or place name), fixture (1 if only the test fixture has it), src.
 """
+import datetime
+import json
 import os
-import re
+import sqlite3
 import sys
-import unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
-from lint import UNIT_RE, CJK, words  # noqa: E402
-from sandhi import sandhi  # noqa: E402
-from variants import Variants  # noqa: E402
 import english  # noqa: E402
-import sutian  # noqa: E402
+import vi  # noqa: E402
 
-SOURCES = ('moe', 'itaigi', 'taihoa', 'tgb')
+DB = {'public': os.path.join(ROOT, 'data/build/vi.db'), 'private': os.path.join(ROOT, 'data/build/vi-nc.db')}
+STORE = os.path.join(ROOT, 'data/build/cards.json')
+PUBLIC_MODULES = ('lessons',)
+
 dictionary = {}
-con = VARIANTS = SUTIAN = ENGLISH = None
-CEDICT = {}
-HEAD = set()        # (Hàn-jī, key): what counts as a word for splits and compositions (see init)
-FREQ = {}           # (Hàn-jī, key) -> corpus frequency of MOE words, to choose between cuts
-BEST = {}           # Hàn-jī -> key of its usual MOE reading (colloquial first, then most frequent)
-EXTRA = {}          # Hàn-jī -> key, taihoa words the MOE lacks (2-4 characters written as one word)
-MAX = 5
+con = ENGLISH = None
+COURSE = {}       # card id -> course data for the word (en, chars, label, name) from the lessons' new_words
+NAMES = {}        # surface (spaces, original case) -> card id, for names declared in new_words with `name: true`
+KNOWN = set()     # every dictionary key, for the dictionary cutter
 
 
-def init(connection, eng=None, ced=None, table=None):
-    """Set the database and the English source. `eng` can be set later (cards.ENGLISH = ...) before the first lookup."""
-    global con, VARIANTS, SUTIAN, ENGLISH, CEDICT, HAS_ADDED
-    con = connection
-    HAS_ADDED = 'added' in [r[1] for r in con.execute('PRAGMA table_info(entry)')]   # headwords from the ministry's table
-    VARIANTS = Variants(con)
-    SUTIAN = table if table is not None else sutian.load()
-    CEDICT = ced if ced is not None else english.load_cedict()
-    ENGLISH = eng
-    HEAD.clear()
-    # MOE words (the other sources list many phrases as words: 真好, 我欲), and single characters from any source
-    HEAD.update(con.execute("SELECT hanji, tkey FROM entry WHERE source = 'moe' AND kind IN ('word', 'shared', 'other') "
-                            "AND tkey != '' AND tailo NOT LIKE '% %' AND length(hanji) <= 6"))
-    HEAD.update(con.execute(f"SELECT hanji, tkey FROM entry WHERE source IN {SOURCES} AND kind != 'xref' "
-                            "AND tkey != '' AND length(hanji) = 1"))
-    FREQ.clear()
-    for h, k, f in con.execute("SELECT hanji, tkey, max(freq) FROM entry WHERE source = 'moe' AND freq IS NOT NULL GROUP BY 1, 2"):
-        FREQ[(h, k)] = f or 0
-    BEST.clear()
-    # (the older export's entries first: a headword added from the ministry's current table does not change how
-    # a character already in the dictionary is read when a text is cut by the dictionary)
-    added = 'coalesce(added, 0), ' if 'added' in [r[1] for r in con.execute('PRAGMA table_info(entry)')] else ''
-    for h, k in con.execute("SELECT hanji, tkey FROM entry WHERE source='moe' AND kind != 'xref' AND tailo != '' "
-                            f"ORDER BY {added}(wenbai='colloquial') DESC, freq DESC"):
-        BEST.setdefault(h, k)
-    EXTRA.clear()
-    for h, k in con.execute("SELECT hanji, tkey FROM entry WHERE source = 'taihoa' AND kind = 'word' AND tailo != '' "
-                            "AND tailo NOT LIKE '% %' AND length(hanji) BETWEEN 2 AND 4 ORDER BY freq DESC"):
-        if h not in BEST:
-            EXTRA.setdefault(h, k)
-
-
-def is_han(s):
-    return bool(s) and all(re.match(CJK, c) for c in s)
-
-
-# ---- Mandarin glosses: pinyin + English for the Mandarin equivalents (CC-CEDICT, CC BY-SA 4.0)
-def _py_marks(num):
-    marks = {'a': 'āáǎà', 'e': 'ēéěè', 'i': 'īíǐì', 'o': 'ōóǒò', 'u': 'ūúǔù', 'ü': 'ǖǘǚǜ'}
-    out = []
-    for syl in num.replace('u:', 'ü').split():
-        m = re.match(r'^([a-zü]+)([1-5])$', syl.lower())
-        if not m:
-            out.append(syl)
-            continue
-        base, t = m.group(1), int(m.group(2))
-        if t == 5:
-            out.append(base)
-            continue
-        idx = base.find('a') if 'a' in base else base.find('e') if 'e' in base else base.find('ou') if 'ou' in base \
-            else max(base.rfind(v) for v in 'iouü')
-        out.append(base[:idx] + marks[base[idx]][t - 1] + base[idx + 1:])
-    return ' '.join(out)
-
-
-def mandarin_gloss(word):
-    e = CEDICT.get(word)
-    if e:
-        en = '; '.join(g for g in e['english'] if not g.startswith(('variant of', 'old variant', 'CL:')))[:90]
-        return {'w': word, 'py': _py_marks(e['pinyin']), 'en': en}
+def open_db(purpose, path=None):
+    """The database for a build. 'public' (the app page) must be a public build (meta nc = 0, vi.db); 'private' (the
+    private module) must be the non-commercial build (meta nc = 1, vi-nc.db). Anything else stops the build."""
+    if purpose not in DB:
+        raise SystemExit(f'cards.open_db: unknown purpose {purpose!r}')
+    path = path or os.environ.get('TUSACH_DB') or DB[purpose]
+    if not os.path.exists(path):
+        raise SystemExit(f'cards.open_db: {path} not found: run `make {"db" if purpose == "public" else "db-nc"}`')
+    c = sqlite3.connect(path)
     try:
-        from pypinyin import pinyin, Style
-        return {'w': word, 'py': ' '.join(x[0] for x in pinyin(word, style=Style.TONE)), 'en': ''}
-    except ImportError:
-        return {'w': word, 'py': '', 'en': ''}
+        nc = dict(c.execute('SELECT key, value FROM meta')).get('nc')
+    except sqlite3.Error:
+        nc = None
+    want = '0' if purpose == 'public' else '1'
+    if nc != want:
+        raise SystemExit(f'cards.open_db: refusing {path} for a {purpose} build: it is '
+                         f'{"a non-commercial" if nc == "1" else "a public" if nc == "0" else "an unmarked"} database '
+                         f'(public page: `make db` -> vi.db; private module: `make db-nc` -> vi-nc.db)')
+    return c
 
 
-# characters that are only variant forms of one another (the same word written two ways)
-VARIANT_PAIRS = ['臺台', '脣唇', '份分', '裡裏', '著着', '媽嬤', '爿旁', '己治', '仝同', '个個', '佇佇', '撮簇', '迌迌',
-                 '暫站', '叼佗', '券卷']
-_VAR = {}
-for _p in VARIANT_PAIRS:
-    _VAR[_p[0]] = _VAR.get(_p[0], set()) | {_p[1]}
-    _VAR[_p[1]] = _VAR.get(_p[1], set()) | {_p[0]}
+def course_words(lessons):
+    """{card id: {en, chars, label, name, w}} from lesson dicts (their new_words). Course English wins on the card."""
+    out = {}
+    for L in lessons:
+        for w in L.get('new_words') or []:
+            surf = vi.nfc(w['w']).replace('_', ' ')
+            cid = ('name:' + surf) if w.get('name') else vi.card_id(vi.key(surf), w.get('tag'))
+            out[cid] = {'w': surf, **{k: w[k] for k in ('en', 'chars', 'label', 'name', 'tag') if w.get(k)}}
+    return out
 
 
-def same_word(dict_hanji, seg):
-    """The dictionary's Hàn-jī for the word is the text's, or differs only by variant characters (臺/台, 脣/唇) or by
-    syllables it writes in Tâi-lô (bē記 for 袂記). Anything else is another word that sounds the same."""
-    if not dict_hanji or dict_hanji == seg:   # a source without Hàn-jī (tgb) only has the reading to go by
-        return True
-    a, b = UNIT_RE.findall(dict_hanji or ''), UNIT_RE.findall(seg)
-    if len(a) != len(b):
-        return False
-    return all(x == y or y in _VAR.get(x, ()) or not is_han(x) for x, y in zip(a, b))
+def init(connection, course=None, written=None):
+    global con, ENGLISH
+    con = connection
+    dictionary.clear()
+    COURSE.clear()
+    COURSE.update(course or {})
+    NAMES.clear()
+    for cid, c in COURSE.items():
+        if c.get('name'):
+            NAMES[c['w']] = cid
+    ENGLISH = english.English(con, {cid: c['en'] for cid, c in COURSE.items() if c.get('en')}, written)
+    KNOWN.clear()
+    KNOWN.update(k for (k,) in con.execute('SELECT DISTINCT key FROM entry'))
 
 
-def lookup(seg, k):
-    """Dictionary card for one word (Hàn-jī segment + key)."""
-    did = f'{seg}|{k}'
-    if did in dictionary:
-        return did
-    rows = con.execute("""SELECT id, source, hanji, tailo, cognate, mandarin_best, hsk_old, hsk_new, freq_rank, wenbai, src_id
-                          FROM entry WHERE tkey=? AND source IN ('moe','itaigi','taihoa','tgb') AND kind != 'xref'
-                          ORDER BY (hanji=?) DESC, source='moe' DESC, freq DESC""", (k, seg)).fetchall()
-    card = {'hanji': seg, 'tkey': k}
-    eid = dh = None
-    eid_en = None   # the entries the English is read from, when not eid alone
-    if rows and not same_word(rows[0][2], seg) and HAS_ADDED and \
-            con.execute('SELECT added FROM entry WHERE id=?', (rows[0][0],)).fetchone()[0]:
-        # a headword from the ministry's current table that is another word (起慼 is not 起感): the choice made before
-        # the table was taken in (the older 起chheh), checked the same way below
-        rows = [r for r in rows if not con.execute('SELECT added FROM entry WHERE id=?', (r[0],)).fetchone()[0]]
-    rows = rows[:1]
-    if rows and not same_word(rows[0][2], seg):
-        rows = []   # only a homophone written with other characters (扇 sì → 四, 爸 pa → 巴): not this word
-    if rows:
-        eid, src, h, t, cog, mb, ho, hn, rank, wb, sid = rows[0]
-        dh = h
-        mand = [w for (w,) in con.execute('SELECT DISTINCT word FROM mandarin WHERE entry_id=? LIMIT 6', (eid,))]
-        if not mand and src == 'moe' and HAS_ADDED and con.execute('SELECT added FROM entry WHERE id=?', (eid,)).fetchone()[0]:
-            # a headword taken in from the ministry's current table has no Mandarin equivalents: the same word (same
-            # characters and reading) in the other dictionaries gives them, and the English they bring
-            sib = [i for (i, hh) in con.execute(
-                "SELECT id, hanji FROM entry e WHERE tkey=? AND id!=? AND source IN ('moe','itaigi','taihoa','tgb') "
-                "AND kind != 'xref' AND EXISTS (SELECT 1 FROM mandarin m WHERE m.entry_id=e.id) "
-                "ORDER BY hanji=? DESC, source='moe' DESC, freq DESC", (k, eid, h)) if hh and (hh == h or same_word(hh, seg))]
-            if sib:
-                mand = list(dict.fromkeys(w for i in sib for (w,) in con.execute(
-                    'SELECT word FROM mandarin WHERE entry_id=? ORDER BY rowid', (i,))))[:6]
-                eid_en = [eid] + sib
-        card.update(source=src, dict_hanji=h, tailo=t, cognate=cog, mandarin=mand, hsk=ho or hn, rank=rank,
-                    mand=[mandarin_gloss(w) for w in mand[:4]], wenbai=wb)
-        alts = VARIANTS.alts(seg, t, eid if src == 'moe' else None)
-        if alts:
-            card['alts'] = alts
-        dia = VARIANTS.dialect_rows(seg, t)
-        if dia:
-            card['dialect'] = dia
-        if src == 'moe':
-            rid = sutian.word(SUTIAN, h, t)
-            if rid:
-                card['moe_id'] = rid
-            card['senses'] = [{'pos': p, 'def': d} for p, d in con.execute(
-                'SELECT pos, definition_zh FROM sense WHERE entry_id=? ORDER BY ord LIMIT 4', (eid,))]
-            ex = con.execute("SELECT hanji, tailo, mandarin FROM example WHERE entry_id=? AND length(hanji)>3 "
-                             "ORDER BY id LIMIT 1", (eid,)).fetchone()
-            if ex:
-                card['example'] = {'hanji': ex[0], 'tailo': ex[1], 'mandarin': ex[2]}
-                leku = sutian.example(SUTIAN, ex[0])
-                if leku:
-                    card['example']['leku'] = leku
-    else:
-        syls = k.split('-')
-        chars = UNIT_RE.findall(seg)
-        card['parts'] = [lookup(c, s) for c, s in zip(chars, syls)] if len(syls) > 1 and len(chars) == len(syls) else []
-    comp = compose(seg, k)
-    if comp:
-        card['comp'] = comp
-    # last resort for the English: the pieces' English joined (the parts of a course compound, else its composition)
-    parts = [(dictionary[p].get('gloss'), dictionary[p].get('gloss_src')) for p in card.get('parts') or comp or []]
-    en, en_src = ENGLISH.gloss(seg, k, eid_en or eid, dh, parts)
-    if not en and len(seg) == 1:     # a character met only inside words: its own CC-CEDICT meaning
-        en, en_src = english.cedict_en(CEDICT, seg), f'mandarin:{seg}'
-    if en:
-        card['gloss'] = en
-        if en_src not in ('course', 'written'):
-            card['gloss_src'] = en_src
-    dictionary[did] = card
-    return did
+def _bridge(chars):
+    out = {}
+    for lang, r in con.execute('SELECT lang, reading FROM chinese WHERE chars=? ORDER BY rowid', (chars,)):
+        out.setdefault(lang, [])
+        if r not in out[lang]:
+            out[lang].append(r)
+    return {lang: ' / '.join(v) for lang, v in out.items()}
 
 
-def compose(seg, k):
-    """A word of two or more characters cut into the dictionary words it contains (never itself): fewest pieces, then
-    the most frequent words (紅菜頭 -> 紅 + 菜頭, not 紅菜 + 頭; 勞動法 -> 勞動 + 法; 毋過 -> 毋 + 過). Card ids, or None
-    when the word's characters and syllables do not line up."""
-    chars, syls = UNIT_RE.findall(seg), k.split('-')
-    n = len(chars)
-    if n < 2 or n != len(syls) or not is_han(seg):
+def lookup(k, tag=None, surface=None):
+    """Card id for the word with key `k` (and homograph tag), or None when neither the dictionary nor the course has it."""
+    cid = vi.card_id(k, tag)
+    if cid in dictionary:
+        return cid
+    rows = con.execute("SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank "
+                       "FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? AND (?='' OR e.tag=?) "
+                       "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k, tag or '', tag or '')).fetchall()
+    course = COURSE.get(cid, {})
+    if not rows and not course:
         return None
-    best = [(0, 0, [])] + [None] * n          # per position: (pieces, -frequency, [(word, key)])
-    for i in range(n):
-        if best[i] is None:
-            continue
-        for m in range(1, min(n - i, MAX, n - 1) + 1):
-            w, kk = ''.join(chars[i:i + m]), '-'.join(syls[i:i + m])
-            if m > 1 and (w, kk) not in HEAD:
-                continue
-            c = (best[i][0] + 1, best[i][1] - (FREQ.get((w, kk), 0) if m > 1 else 0), best[i][2] + [(w, kk)])
-            if best[i + m] is None or c[:2] < best[i + m][:2]:
-                best[i + m] = c
+    card = {'w': course.get('w') or (rows[0][0] if rows else (surface or k).replace('_', ' ')), 'k': k}
+    if tag:
+        card['tag'] = tag
+    chars = course.get('chars') or next((r[2] for r in rows if r[2]), '')
+    label = course.get('label') or next((r[3] for r in rows if r[3]), '')
+    if chars:
+        card['chars'] = chars
+        card.update(_bridge(chars))
+    if label:
+        card['label'] = label
+    if rows and all(r[5] for r in rows):     # only the test fixture has the word: the card says so
+        card['fixture'] = 1
+    if rows:
+        card['src'] = sorted({r[4] for r in rows})
+        rank = next((r[7] for r in rows if r[7]), None)
+        if rank:
+            card['rank'] = rank
+        ex = con.execute(f"SELECT vi, en FROM example WHERE entry_id IN ({','.join('?' * len(rows))}) ORDER BY id LIMIT 1",
+                         [r[6] for r in rows]).fetchone()
+        if ex:
+            card['ex'] = {'vi': ex[0], 'en': ex[1]}
+    syls = k.split()
+    if len(syls) > 1:
+        card['parts'] = [p for p in (lookup(s) for s in syls) if p]
+    parts = [(dictionary[p].get('en'), dictionary[p].get('en_src')) for p in card.get('parts', [])]
+    en, src = ENGLISH.gloss(cid, k, tag, parts if len(parts) == len(syls) else ())
+    card['en'], card['en_src'], card['en_rank'] = en, src, english.rank(src)
+    dictionary[cid] = card
+    return cid
+
+
+def name_card(surface):
+    cid = NAMES.get(surface)
+    if cid and cid not in dictionary:
+        c = COURSE[cid]
+        en = c.get('en') or ''
+        dictionary[cid] = {'w': surface, 'k': surface, 'name': 1, 'en': en, 'en_src': 'course' if en else '',
+                           'en_rank': english.rank('course' if en else ''), 'label': c.get('label', '')}
+    return cid
+
+
+def tokenize(line):
+    """A course line, cut by its own boundaries (underscores inside words, `~tag` for homographs): nothing is guessed."""
     out = []
-    for w, kk in best[n][2]:
-        pid = lookup(w, kk)
-        pc = dictionary[pid]
-        if not pc.get('gloss') and len(pc.setdefault('in', [])) < 4 and f'{seg}|{k}' not in pc['in']:   # a bound character: the words it is in
-            pc['in'].append(f'{seg}|{k}')
-        out.append(pid)
-    return out
-
-
-def _alts(units, sylk, gaps, p, own):
-    """Dictionary words starting at unit p (the line's own syllables give their reading), longest first."""
-    out = []
-    for m in range(MAX, 0, -1):
-        if p + m > len(units) or any(gaps[p:p + m - 1]):
+    for t in vi.words(line):
+        if t[0] != 'w':
+            out.append({'p': t[1].replace('_', ' ')})
             continue
-        w, kk = ''.join(units[p:p + m]), '-'.join(sylk[p:p + m])
-        if not is_han(w) or not kk:
-            continue
-        if (w, kk) in HEAD or f'{w}|{kk}' == own:
-            out.append(lookup(w, kk))
-    return out if len(out) > 1 else None
-
-
-def tokenize(hanji, tailo, groups=None, fallback=False):
-    """Align a line into display tokens: {w: word} or {p: punctuation} items. The line is cut by its own Tâi-lô words
-    (hyphens and spaces). If the Hàn-jī and Tâi-lô do not line up, the line stays one untappable token, or with
-    `fallback`, it is cut by the dictionary instead (dict_tokens)."""
-    ws = words(tailo)
-    spoken = sandhi(groups or tailo, 'phrase')[0]
-    spoken_ws = words(spoken)
-    spans = list(UNIT_RE.finditer(hanji))
-    nsyl = sum(len(k.split('-')) for _, k, _, _ in ws if k)
-    if len(spans) != nsyl or len(spoken_ws) != len(ws):
-        return dict_tokens(hanji, tailo) if fallback else [{'w': {'h': hanji, 't': tailo, 's': spoken, 'id': None}}]
-    units = [m.group() for m in spans]
-    gaps = [bool(hanji[spans[j].end():spans[j + 1].start()].strip()) for j in range(len(spans) - 1)] + [True]
-    sylk = [s for _, k, _, _ in ws if k for s in k.split('-')]
-    pos = 0
-    si = 0
-    out = []
-    for (surf, k, neutral, _), (ssurf, _, _, _) in zip(ws, spoken_ws):
-        if not k:
-            continue
-        n = len(k.split('-'))
-        seg_spans = spans[si:si + n]
-        p = si
-        si += n
-        start, end = seg_spans[0].start(), seg_spans[-1].end()
-        if start > pos:
-            out.append({'p': hanji[pos:start]})
-        seg = hanji[start:end]
-        prefix = '--' if neutral else ''
-        is_cjk = bool(re.match(CJK, seg[:1]))
-        w = {'h': seg, 't': prefix + surf, 's': prefix + ssurf, 'id': lookup(seg, k) if is_cjk else None}
-        x = _alts(units, sylk, gaps, p, w['id']) if is_cjk else None
-        if x:
-            w['x'] = x
-        out.append({'w': w})
-        pos = end
-    if pos < len(hanji):
-        out.append({'p': hanji[pos:]})
-    return out
-
-
-def _toneless(t):
-    t = re.sub(r'[\u0300-\u036f]', '', unicodedata.normalize('NFD', (t or '').lower()))
-    return [x for x in re.split(r'[^a-z]+', t) if x]
-
-
-def dict_tokens(text, tailo=None):
-    """Cut a Hàn-jī text by the dictionary: MOE words, longest first, up to 5 characters, each with its usual MOE reading;
-    where that leaves single characters, a taihoa word written as one word (霸道 pà-tō) whose reading is heard in the
-    line's Tâi-lô (when given). For texts without a Tâi-lô that lines up (exam questions, songs, unsure transcript lines)."""
-    chars = list(text)
-    cut = []          # (start, length, key) of each dictionary word
-    i = 0
-    while i < len(chars):
-        if not re.match(CJK, chars[i]):
-            i += 1
-            continue
-        for n in range(MAX, 0, -1):
-            w = ''.join(chars[i:i + n])
-            if len(w) == n and is_han(w) and w in BEST:
-                cut.append((i, n, BEST[w]))
-                i += n
-                break
-        else:
-            cut.append((i, 1, None))
-            i += 1
-    heard = ' %s ' % ' '.join(_toneless(tailo)) if tailo else None
-    ones = {cut[j][0] for j in range(len(cut)) if cut[j][1] == 1}
-    merged = {}
-    for j, (s, n, k) in enumerate(cut):
-        if n != 1 or s in merged:
-            continue
-        for m in range(4, 1, -1):
-            w = ''.join(chars[s:s + m])
-            if w in EXTRA and all(s + q in ones for q in range(m)) and (
-                    heard is None or ' %s ' % ' '.join(_toneless(EXTRA[w].replace('-', ' '))) in heard):
-                merged[s] = (m, EXTRA[w])
-                for q in range(1, m):
-                    merged[s + q] = None
-                break
-    words_ = []
-    for s, n, k in cut:
-        if s in merged:
-            if merged[s] is None:
-                continue
-            n, k = merged[s]
-        words_.append((s, n, k))
-    out, pos = [], 0
-    for s, n, k in words_:
-        if s > pos:
-            out.append({'p': ''.join(chars[pos:s])})
-        h = ''.join(chars[s:s + n])
-        if k:
-            w = {'h': h, 'id': lookup(h, k)}
-            x = []
-            for m in range(n, 0, -1):     # never longer than the cut word: the app's longest match must cut the same
-                sub = ''.join(chars[s:s + m])
-                if len(sub) == m and is_han(sub) and (sub in BEST or sub in EXTRA):
-                    x.append(lookup(sub, BEST.get(sub) or EXTRA[sub]))
-            if len(x) > 1 and w['id'] in x:
-                w['x'] = x
-            out.append({'w': w})
-        else:
-            out.append({'p': h})
-        pos = s + n
-    if pos < len(chars):
-        out.append({'p': ''.join(chars[pos:])})
-    # untappable neighbours joined into one piece
-    merged_out = []
+        _, surf, k, tag, _start = t
+        shown = surf.replace('_', ' ')
+        cid = name_card(shown) if shown in NAMES and not tag else lookup(k, tag, surf)
+        out.append({'w': {'t': shown, 'id': cid}})
+    merged = []
     for t in out:
-        if 'p' in t and merged_out and 'p' in merged_out[-1]:
-            merged_out[-1]['p'] += t['p']
+        if 'p' in t and merged and 'p' in merged[-1]:
+            merged[-1]['p'] += t['p']
         else:
-            merged_out.append(t)
-    return merged_out
+            merged.append(t)
+    return merged
+
+
+def tokenize_text(text):
+    """A text with no boundaries of its own (books, transcripts, subtitles): cut by the dictionary (tools/vi.py cut()),
+    then exactly as a course line. TODO(cutter): measure the cut against a hand-cut reference (handover step 5)."""
+    return tokenize(vi.cut(text, KNOWN | {vi.key(n) for n in NAMES}))
+
+
+def ids_of(tokens):
+    return [t['w']['id'] for t in tokens if 'w' in t]
+
+
+class Store:
+    """The shared card file of a repository. Each module (lessons, a book, a podcast…) records the cards it uses and
+    the words it has; building one module replaces only its own record and adds its cards, so a partial build never
+    leaves another module's words without a card and never needs generated files restored (handover section 4.4)."""
+
+    def __init__(self, path=STORE):
+        self.path = path
+        d = json.load(open(path, encoding='utf-8')) if os.path.exists(path) else {}
+        self.cards = d.get('cards', {})
+        self.modules = d.get('modules', {})
+
+    def replace_module(self, name, tokens, extra_ids=()):
+        """`tokens`: every token of the module's texts (from tokenize / tokenize_text); `extra_ids`: other card ids the
+        module shows (new-word lists, example lists). The cards come from cards.dictionary."""
+        words = [t['w'] for t in tokens if 'w' in t]
+        ids = sorted({w['id'] for w in words if w['id']} | {i for i in extra_ids if i})
+        # a compound's parts are shown on its card: they are part of the module too
+        todo = list(ids)
+        while todo:
+            for p in dictionary[todo.pop()].get('parts', []):
+                if p not in ids:
+                    ids.append(p)
+                    todo.append(p)
+        self.modules[name] = {'cards': sorted(ids), 'missing': sorted({w['t'] for w in words if not w['id']}),
+                              'built': datetime.date.today().isoformat()}
+        for i in ids:
+            self.cards[i] = dictionary[i]
+
+    def keep(self, ids):
+        """Cards a published page has had (app/published-card-ids.txt): kept even when no module uses them now."""
+        self.modules['_published'] = {'cards': sorted(i for i in ids if i in self.cards), 'missing': [], 'built': ''}
+
+    def page_cards(self, modules):
+        ids = {i for m in modules for i in self.modules.get(m, {}).get('cards', [])}
+        return {i: self.cards[i] for i in sorted(ids)}
+
+    def save(self):
+        used = {i for m in self.modules.values() for i in m['cards']}
+        self.cards = {i: c for i, c in sorted(self.cards.items()) if i in used}
+        tmp = self.path + '.tmp'
+        os.makedirs(os.path.dirname(self.path), exist_ok=True)
+        json.dump({'cards': self.cards, 'modules': self.modules}, open(tmp, 'w', encoding='utf-8'), ensure_ascii=False,
+                  indent=0, sort_keys=True)
+        os.replace(tmp, self.path)

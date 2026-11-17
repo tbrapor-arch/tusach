@@ -1,0 +1,45 @@
+# TEST FIXTURE — not course content, not a dictionary.
+# A handful of hand-entered entries so that `make db`, `make app`, `make lint` and tools/smoke.py run before any real
+# source exists (tools/build_db.py loads this file as source `fixture`). The bridge readings of 學生 are the ones in
+# the handover's own table. Not checked by a native speaker. tools/lint.py refuses a real lesson that uses a word
+# found only here.
+entries:
+  - word: chào
+    en: hello; to greet
+    label: native
+    example: {vi: Chào bà!, en: Hello! (to an older woman)}
+  - word: anh
+    en: you (to a man a little older); older brother
+    label: native
+  - word: chị
+    en: you (to a woman a little older); older sister
+    label: native
+  - word: tôi
+    en: I, me
+    label: native
+  - word: là
+    en: to be (X is Y)
+    label: native
+  - word: cũng
+    en: also, too
+    label: native
+  - word: học sinh
+    en: pupil, school student
+    chars: 學生
+    label: same
+    example: {vi: Em là học sinh lớp năm., en: I am a pupil in year five.}
+  - word: học
+    en: to study, to learn
+    chars: 學
+    label: same
+  - word: sinh
+    en: to be born; life
+    chars: 生
+    label: same
+hanviet:
+  學: học
+  生: sinh
+chinese:
+  學生: {yue: hok6 saang1, nan: ha̍k-sing, cmn: xuéshēng}
+  學: {yue: hok6, nan: ha̍k, cmn: xué}
+  生: {yue: saang1 / sang1, nan: sing, cmn: shēng}

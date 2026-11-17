@@ -1,0 +1,8 @@
+# The course plan. No lesson may be drafted before the owner approves the syllabus AND the first word list
+# (fixed decision, 17 Nov 2026): tools/lint.py refuses any file in course/lessons/ while either is not approved.
+# Proposal to write: handover section 7 (about 100 lessons, review every 7th, a bridge thread, native words first in
+# the dialogues, an early pronouns and kinship strand). Pronunciation: Northern (Hanoi). Lesson language: English.
+approved:
+  syllabus: null        # e.g. {by: owner, date: 2026-11-20}
+  word_list: null       # e.g. {by: owner, date: 2026-11-20, file: course/wordlist.tsv}
+lessons: []             # [{n: 1, en: planned title, vi: ...}], shown greyed on the lessons home until written

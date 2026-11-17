@@ -1,53 +1,48 @@
-CREATE TABLE source(id TEXT PRIMARY KEY, name TEXT, year TEXT, license TEXT, commercial_ok INT, note TEXT);
+-- vi.db / vi-nc.db: the Vietnamese learner database, built by tools/build_db.py from pinned open sources. Never edited
+-- by hand. Text is NFC. A word's key is lower-case NFC with one space between syllables (tools/vi.py key()).
 
--- One row per headword per source. Romanisation is always Tâi-lô (MOE system).
+CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT);
+-- meta rows: nc = 0 | 1 (1: non-commercial sources included, private builds only), built (date), sources (ids)
+
+CREATE TABLE source(
+  id TEXT PRIMARY KEY,
+  name TEXT,
+  version TEXT,           -- pinned version / commit, as in data/fetch.sh
+  licence TEXT,
+  url TEXT,
+  commercial_ok INT,      -- 0: non-commercial licence, only in `make db-nc` (vi-nc.db)
+  fixture INT DEFAULT 0   -- 1: the invented test fixture (tools/fixtures/dict.yaml), never course content
+);
+
+-- one row per headword (and sense group) per source
 CREATE TABLE entry(
   id INTEGER PRIMARY KEY,
   source TEXT REFERENCES source(id),
   src_id TEXT,
-  hanji TEXT,             -- Hàn-jī as written by the source (MOE recommended characters for source='moe')
-  tailo TEXT,             -- Tâi-lô with tone diacritics
-  tailo_alt TEXT,         -- full alternative readings string if the source gave several
-  tkey TEXT,              -- normalised numeric key, tones 1/4 unmarked: 'tsit8-e5'
-  toneless TEXT,
-  kind TEXT,              -- word | shared (臺華共同詞) | other (MOE appendices) | xref (MOE, no reading)
-  wenbai TEXT,            -- MOE single-character reading layer: literary | colloquial | vulgar/common | substitute-char
-  moe_type INT,
-  added INT,              -- MOE: 1 if the headword (or its reading) comes from the ministry's current table, not the older export
+  word TEXT,              -- as the source writes it (NFC)
+  key TEXT,               -- tools/vi.py key(): 'học sinh'
+  tkey TEXT,              -- tools/vi.py tkey(): 'hoc6 sinh1' (tone-mark placement ignored)
+  toneless TEXT,          -- 'hoc sinh'
+  tag TEXT,               -- homograph tag when the course needs one ('road', 'sugar'); '' otherwise
+  pos TEXT,
   english TEXT,
-  -- learner layers (filled by enrich.py)
-  freq INT,               -- token count in 2009 MOE written corpus (by tkey)
-  freq_rank INT,
-  mandarin_best TEXT,     -- most HSK-relevant Mandarin equivalent
-  hsk_old INT, hsk_new INT,
-  cognate TEXT,           -- same | partial | different | n/a (Hàn-jī vs Mandarin equivalent)
-  core INT                -- 1 if in core learner list
+  chars TEXT,             -- chữ Hán of a Sino-Vietnamese (Hán-Việt) word, '' for native words
+  label TEXT,             -- same | false-friend | native | '' (unknown)
+  freq INT,
+  freq_rank INT
 );
+CREATE INDEX entry_key ON entry(key);
 CREATE INDEX entry_tkey ON entry(tkey);
-CREATE INDEX entry_hanji ON entry(hanji);
 CREATE INDEX entry_toneless ON entry(toneless);
 
-CREATE TABLE sense(id INTEGER PRIMARY KEY, entry_id INT, ord INT, pos TEXT, definition_zh TEXT);
-CREATE INDEX sense_entry ON sense(entry_id);
-
-CREATE TABLE example(id INTEGER PRIMARY KEY, entry_id INT, sense_id INT, source TEXT,
-  hanji TEXT, tailo TEXT, poj TEXT, mandarin TEXT, english TEXT);
+CREATE TABLE example(id INTEGER PRIMARY KEY, entry_id INT, source TEXT, vi TEXT, en TEXT);
 CREATE INDEX example_entry ON example(entry_id);
 
-CREATE TABLE mandarin(entry_id INT, word TEXT, source TEXT);
-CREATE INDEX mandarin_word ON mandarin(word);
-CREATE INDEX mandarin_entry ON mandarin(entry_id);
+-- Hán-Việt reading of one character (e.g. Unihan kVietnamese, once its licence is checked)
+CREATE TABLE hanviet(char TEXT, reading TEXT, source TEXT);
+CREATE INDEX hanviet_char ON hanviet(char);
 
-CREATE TABLE variant(entry_id INT, tailo TEXT, tkey TEXT, kind TEXT);
--- MOE 異用字: other characters the ministry lists for the same word (蜀 for 一 tsi̍t); not readings
-CREATE TABLE alt_hanji(entry_id INT, hanji TEXT, source TEXT);
-CREATE INDEX alt_hanji_hanji ON alt_hanji(hanji);
-CREATE TABLE relation(entry_id INT, other_id INT, rel TEXT);
-CREATE TABLE dialect(hanji TEXT, place TEXT, tailo TEXT, kind TEXT);
-
-CREATE TABLE corpus_freq(tkey TEXT PRIMARY KEY, count INT, docs INT);
-CREATE TABLE syllable_freq(syllable TEXT PRIMARY KEY, count INT);
-
-CREATE TABLE hsk(trad TEXT, simp TEXT, pinyin TEXT, old_level INT, new_level INT, english TEXT,
-  PRIMARY KEY(trad, pinyin));
-CREATE INDEX hsk_trad ON hsk(trad);
+-- the Chinese side of the bridge, joined on the characters: lang = yue (Cantonese, Jyutping), nan (Taigi, Tâi-lô
+-- literary reading), cmn (Mandarin, pinyin)
+CREATE TABLE chinese(chars TEXT, lang TEXT, reading TEXT, source TEXT);
+CREATE INDEX chinese_chars ON chinese(chars);

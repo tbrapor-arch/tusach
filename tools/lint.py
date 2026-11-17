@@ -1,19 +1,27 @@
-"""Check lesson files against the vocabulary database.
+"""Check the lesson files: content rules and every word against the database.
 
-  python3 tools/lint.py [lesson.yaml ...]      (default: course/lessons/[0-9]*.yaml)
+  python3 -I tools/lint.py [lesson.yaml ...]      (default: course/lessons/NN.yaml, or the test fixture while there is none)
 
-Checks
-  E  invalid Tâi-lô syllable or impossible tone (e.g. a -p/-t/-k/-h syllable with tone 2)
-  E  word not found in any dictionary (MOE, iTaigi, 台華線頂, 1956 basic sentences)
-  W  compound not in a dictionary, but every syllable is a known word
-  W  Hàn-jī differ from the MOE dictionary's spelling for that reading
-  W  Hàn-jī and Tâi-lô have different syllable counts (cannot align)
-  E  line marked `source: moe` is not an exact MOE example sentence
-  E  new_words entry not in the MOE dictionary with that Hàn-jī + reading
-  E  missing required fields
-Exit code 1 if any E.
+Checks (E = error, exit 1; W = warning; I = information)
+  E  a lesson exists while the syllabus or the first word list is not approved by the owner (course/syllabus.yaml)
+  E  YAML error, missing field, file name not the lesson id, two lessons with one id
+  E  text not in Unicode NFC (every string of the file)
+  E  chữ Hán in a lesson line, a title or an exercise sentence (characters belong on cards and in the bridge)
+  E  impossible quốc ngữ syllable (tools/vi.py): letters, c/k, g/gh, ng/ngh, -c -ch -p -t with a tone other than sắc/nặng
+  E  word in no dictionary of the database and not declared as a name in new_words
+  E  word that only the test fixture has, in a real lesson
+  E  `~tag` that no dictionary entry and no new_words entry defines
+  E  new_words entry without English (English on every card), or not used in the lesson
+  E  exercise sentence equal to a dialogue line of the same lesson (exercises use new sentences)
+  E  note pointing to a line the dialogue does not have
+  E  fill exercise without ___ or answer
+  W  a syllable written two ways across the course (tone mark placement: hoà / hòa)
+  W  lines per lesson do not grow smoothly (owner's choice: a smooth growth; checked over the non-review lessons)
+  W  review flag not on every 7th lesson
+  I  lesson not checked by a native speaker (no native_check: {by, date}); the app labels it
+The words of the lines are also checked by tools/verify_words.py (`make lint` runs both).
 """
-import glob
+import collections
 import os
 import re
 import sqlite3
@@ -22,225 +30,184 @@ import sys
 import yaml
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, HERE)
-from tailo import key  # noqa: E402
-
 ROOT = os.path.dirname(HERE)
-DB = os.path.join(ROOT, 'data/build/taigi.db')
-CJK = r'[㐀-鿿\U00020000-\U0003ffff豈-﫿]'
-UNIT_RE = re.compile(CJK + r"|[A-Za-zÀ-ɏ̀-ͯḀ-ỿⁿ]+[0-9]?")
-INITIALS = ['tsh', 'ts', 'ph', 'th', 'kh', 'ng', 'p', 'b', 'm', 't', 'n', 'l', 'k', 'g', 'h', 's', 'j', '']
-FINALS = set('''a ah ai aih ainn ainnh ak am an ang ann annh ap at au auh aunn aunnh e eh en enn ennh i ia iah iak
-iam ian iang iann iannh iap iat iau iauh iaunn ih ik im in ing inn innh io ioh iok iong ionn ip it iu iuh iunn iunnh
-m mh ng ngh o oh ok om ong onn onnh oo ooh op u ua uah uai uainn uainnh uan uang uann uat ue ueh uh ui uinn uinnh
-un ut'''.split())
-PUNCT = ".,!?;:'\"「」『』、。，！？；：()（）…—–“”‘’"
+sys.path.insert(0, HERE)
+import course  # noqa: E402
+import vi  # noqa: E402
+
+DB = os.environ.get('TUSACH_DB') or os.path.join(ROOT, 'data/build/vi.db')
+REQUIRED = ('id', 'title', 'dialogue', 'notes', 'new_words')
 
 
 def load_db():
     con = sqlite3.connect(DB)
-    keys = set()
-    pairs = {}
-    for h, k, src in con.execute("SELECT hanji, tkey, source FROM entry WHERE source IN ('moe','itaigi','taihoa','tgb') "
-                                 "AND tkey != ''"):
-        keys.add(k)
-        if src == 'moe' and h:
-            pairs.setdefault(k, set()).add(h)
-    for (k,) in con.execute('SELECT tkey FROM variant'):
-        keys.add(k)
-    moe_ex = {(h, t) for h, t in con.execute("SELECT hanji, tailo FROM example WHERE source='moe'")}
-    return keys, pairs, moe_ex
+    keys = collections.defaultdict(set)     # key -> {(source is fixture)}
+    tags = collections.defaultdict(set)
+    for k, tag, fx in con.execute('SELECT e.key, e.tag, s.fixture FROM entry e JOIN source s ON s.id = e.source'):
+        keys[k].add(bool(fx))
+        if tag:
+            tags[k].add(tag)
+    return keys, tags
 
 
-def valid_syllable(s):
-    """s: numeric syllable as produced by key(), e.g. 'tsit8'."""
-    m = re.match(r'^([a-z]+?)([0-9]?)$', s)
-    body, tone = m.group(1), m.group(2)
-    for ini in INITIALS:
-        if body.startswith(ini):
-            fin = body[len(ini):]
-            if fin in FINALS or (ini in ('m', 'ng') and fin == ''):
-                break
-    else:
-        return f'not a Tâi-lô syllable: {s}'
-    checked = body[-1] in 'ptkh' and not body.endswith('ng')
-    if checked and tone not in ('', '8', '9'):
-        return f'{s}: a syllable ending in -{body[-1]} can only have tone 4 or 8'
-    if not checked and tone == '8':
-        return f'{s}: tone 8 is only for syllables ending in -p/-t/-k/-h'
-    return None
+def strings(o, path=''):
+    if isinstance(o, str):
+        yield path, o
+    elif isinstance(o, dict):
+        for k, v in o.items():
+            yield from strings(k, path) if isinstance(k, str) else ()
+            yield from strings(v, f'{path}.{k}' if path else str(k))
+    elif isinstance(o, list):
+        for i, v in enumerate(o):
+            yield from strings(v, f'{path}[{i}]')
 
 
-def words(tailo):
-    """Split a Tâi-lô line into (surface, key, neutral) word parts. 'khì--bô' -> khì, bô(neutral)."""
-    out = []
-    sentence_start = True
-    for raw in tailo.split():
-        w = raw.strip(PUNCT)
-        first = sentence_start
-        sentence_start = bool(re.search(r'[.!?。！？：:]["」』”]*$', raw))
-        if not w:
-            sentence_start = sentence_start or first
-            continue
-        parts = w.split('--')
-        for j, p in enumerate(parts):
-            p = p.strip('-' + PUNCT)
-            if p:
-                out.append((p, key(p), j > 0, first and j == 0))
-    return out
-
-
-def units(text):
-    return UNIT_RE.findall(text.replace('-', ' '))
-
-
-def lint(path, keys, pairs, moe_ex):
-    msgs = []
-
+def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
     def m(level, where, text):
         msgs.append((level, f'{os.path.relpath(path, ROOT)}:{where}: {level} {text}'))
 
-    try:
-        d = yaml.safe_load(open(path, encoding='utf-8'))
-    except yaml.YAMLError as e:
-        m('E', 0, f'YAML error: {e}')
-        return msgs
-    for f in ('id', 'title', 'dialogue', 'notes', 'new_words'):
+    for f in REQUIRED:
         if f not in d:
             m('E', 0, f'missing field: {f}')
-    _ns = {l.get('n') for l in (d.get('dialogue') or [])}
-    for _i, _n in enumerate(d.get('notes') or []):
-        if _n.get('ref') != 0 and _n.get('ref') not in _ns:
-            m('E', f'notes[{_i}]', f"note ref {_n.get('ref')} is not a line of the dialogue (use 0 for a recap note)")
+    real = not d.get('fixture')
+    name = os.path.basename(path)
+    if not re.fullmatch(r'\d\d+\.yaml', name) or int(name.split('.')[0]) != d.get('id'):
+        m('E', 0, f'file name {name} does not match id {d.get("id")} (NN.yaml)')
+    for where, s in strings(d):
+        if not vi.is_nfc(s):
+            m('E', where, f'not in Unicode NFC: "{s[:40]}"')
+    title = d.get('title') or {}
+    if not title.get('vi') or not title.get('en'):
+        m('E', 'title', 'title needs vi and en')
+    if vi.CJK.search(str(title.get('vi', ''))):
+        m('E', 'title', 'chữ Hán in the title')
+    nc = d.get('native_check')
+    if nc and not (isinstance(nc, dict) and nc.get('by') and nc.get('date')):
+        m('E', 'native_check', 'native_check needs {by, date}')
+    if real and not nc:
+        m('I', 0, 'not checked by a native speaker (the app says so)')
+    lesson_names = {vi.nfc(w['w']).replace('_', ' ') for w in d.get('new_words') or [] if w.get('name')}
+    used = set()
 
-    def check_line(where, hanji, tailo, sentence_start=True):
-        ws = words(tailo)
-        for surf, k, neutral, first in ws:
-            if not k:
-                if re.search(r'[A-Za-z]', surf):
-                    m('E', where, f'cannot read "{surf}"')
+    def check_line(where, text):
+        if vi.CJK.search(text):
+            m('E', where, 'chữ Hán in a lesson line (characters go on cards and in the bridge only)')
+        for t in vi.words(text):
+            if t[0] != 'w':
                 continue
-            for s in k.split('-'):
-                err = valid_syllable(s)
-                if err:
-                    m('E', where, err)
-            if k in keys:
+            _, surf, k, tag, start = t
+            shown = surf.replace('_', ' ')
+            used.add(vi.card_id(k, tag))
+            if shown in names or shown in lesson_names:
+                used.add('name:' + shown)
                 continue
-            if surf[0].isupper() and not first:
-                m('I', where, f'"{surf}" treated as a name')
-                continue
-            if all(s in keys for s in k.split('-')):
-                m('W', where, f'"{surf}" not a dictionary word (each syllable is)')
-            else:
-                m('E', where, f'"{surf}" not found in any dictionary')
-        if not hanji:
-            return
-        u = units(hanji)
-        nsyl = sum(len(k.split('-')) for _, k, _, _ in ws if k)
-        if len(u) != nsyl:
-            m('W', where, f'Hàn-jī has {len(u)} syllables, Tâi-lô has {nsyl}: cannot align')
-            return
-        i = 0
-        for surf, k, _, _ in ws:
-            if not k:
-                continue
-            n = len(k.split('-'))
-            seg = ''.join(u[i:i + n])
-            i += n
-            if not re.match(CJK, seg[:1]) or k not in pairs:
-                continue
-            if seg not in pairs[k]:
-                m('W', where, f'{seg} {surf}: MOE writes this reading as {"/".join(sorted(pairs[k]))}')
+            for s in k.split():
+                for p in vi.syllable_problems(s):
+                    m('E', where, p)
+                spellings[vi.tkey(s)].add(s)
+            if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()):
+                m('E', where, f'"{surf}": tag ~{tag} is defined by no dictionary entry and no new_words entry')
+            if k not in keys:
+                hint = ' (a name? declare it in new_words with name: true)' if surf[:1].isupper() and not start else ''
+                m('E', where, f'"{shown}" is in no dictionary{hint}')
+            elif real and keys[k] == {True}:
+                m('E', where, f'"{shown}" is only in the test fixture, not in a real source')
 
-    for line in d.get('dialogue', []) or []:
-        n = line.get('n', '?')
-        for f in ('hanji', 'tailo', 'en'):
-            if not line.get(f):
+    lines = d.get('dialogue') or []
+    ns = set()
+    norm_lines = set()
+    for ln in lines:
+        n = ln.get('n', '?')
+        ns.add(n)
+        for f in ('vi', 'en'):
+            if not ln.get(f):
                 m('E', f'line {n}', f'missing {f}')
-        check_line(f'line {n}', line.get('hanji', ''), line.get('tailo', ''))
-        g = line.get('groups')
-        if g and re.sub(r'\s*\|\s*', ' ', g).strip() != (line.get('tailo') or '').strip():
-            m('E', f'line {n}', 'groups must equal tailo with | added between tone groups')
-        if line.get('source') == 'moe' and (line.get('hanji'), line.get('tailo')) not in moe_ex:
-            m('E', f'line {n}', 'marked source: moe but not an exact MOE example')
-    for w in d.get('new_words', []) or []:
-        k = key(w.get('tailo', ''))
-        h = w.get('hanji')
-        if k not in pairs or (h and h not in pairs[k]):
-            alt = '/'.join(sorted(pairs.get(k, []))) or 'none'
-            lvl = 'W' if k in keys else 'E'
-            m(lvl, 'new_words', f'{h} {w.get("tailo")} not in MOE with these Hàn-jī (MOE: {alt})')
-    # exercises: any item with a `tailo` field is checked; `___` is filled with `answer`
+        check_line(f'line {n}', ln.get('vi') or '')
+        norm_lines.add(vi.key(vi.display(ln.get('vi') or '')).strip(' .!?…'))
+    for i, note in enumerate(d.get('notes') or []):
+        if note.get('ref') != 0 and note.get('ref') not in ns:
+            m('E', f'notes[{i}]', f"note ref {note.get('ref')} is not a line of the dialogue (use 0 for a recap note)")
+        if not note.get('text'):
+            m('E', f'notes[{i}]', 'empty note')
     for kind, items in (d.get('exercises') or {}).items():
+        if kind not in ('translate', 'fill'):
+            m('E', f'exercises.{kind}', 'unknown exercise kind (translate, fill)')
         for j, it in enumerate(items or []):
-            t = it.get('tailo')
-            if t:
-                full = t.replace('___', it.get('answer', '')) if '___' in t else t
-                h = it.get('hanji')
-                if h and '___' in h:
-                    h = h.replace('___', it.get('answer_hanji', ''))
-                check_line(f'exercises.{kind}[{j}]', h, full)
-    return msgs
-
-
-_CACHE = {}
-
-
-def itaigi_pairs():
-    if 'it' not in _CACHE:
-        con = sqlite3.connect(DB)
-        _CACHE['it'] = {(h, k) for h, k in con.execute("SELECT hanji, tkey FROM entry WHERE source='itaigi'")}
-    return _CACHE['it']
-
-
-def moe_hanji():
-    if 'moe' not in _CACHE:
-        con = sqlite3.connect(DB)
-        _CACHE['moe'] = {h for (h,) in con.execute("SELECT hanji FROM entry WHERE source='moe'")}
-    return _CACHE['moe']
-
-
-def lint_theme(path, keys, pairs, moe_ex):
-    """Theme files: every word and every text sentence is checked like a dialogue line. A word is checked against MOE,
-    or against iTaigi when it carries `source: itaigi` (a modern word MOE lacks)."""
-    d = yaml.safe_load(open(path, encoding='utf-8'))
-    fake = {'id': d.get('id'), 'title': d.get('title'), 'notes': [], 'new_words': [], 'dialogue': []}
-    extra = []
-    for sec in d.get('sections', []):
-        for j, w in enumerate(sec.get('words', [])):
-            fake['dialogue'].append({'n': f"{sec['n']}.w{j + 1}", 'hanji': w['hanji'], 'tailo': w['tailo'], 'en': w.get('en')})
-            src = w.get('source', 'moe')
-            if src == 'moe':
-                fake['new_words'].append({'tailo': w['tailo'], 'hanji': w['hanji']})
-            elif src == 'itaigi':
-                # a word MOE lacks, taken from iTaigi: that Hàn-jī + reading must be an iTaigi entry, and MOE must not have the Hàn-jī
-                if (w['hanji'], key(w['tailo'])) not in itaigi_pairs():
-                    extra.append(('E', f"{os.path.relpath(path, ROOT)}:{sec['n']}.w{j + 1}: E {w['hanji']} {w['tailo']} marked source: itaigi but not an iTaigi entry"))
-                if w['hanji'] in moe_hanji():
-                    extra.append(('W', f"{os.path.relpath(path, ROOT)}:{sec['n']}.w{j + 1}: W {w['hanji']} marked source: itaigi but MOE has this word"))
-            else:
-                extra.append(('E', f"{os.path.relpath(path, ROOT)}:{sec['n']}.w{j + 1}: E unknown source: {src}"))
-        for j, t in enumerate(sec.get('text', [])):
-            fake['dialogue'].append({'n': f"{sec['n']}.t{j + 1}", **t})
-    tmp = path + '.lint.tmp'
-    yaml.safe_dump(fake, open(tmp, 'w', encoding='utf-8'), allow_unicode=True)
-    try:
-        return extra + [(lv, t.replace(os.path.basename(tmp), os.path.basename(path))) for lv, t in lint(tmp, keys, pairs, moe_ex)]
-    finally:
-        os.remove(tmp)
+            where = f'exercises.{kind}[{j}]'
+            text = it.get('vi') or ''
+            if not it.get('en'):
+                m('E', where, 'missing en')
+            if kind == 'fill':
+                if '___' not in text or not it.get('answer'):
+                    m('E', where, 'a fill item needs ___ in vi and an answer')
+                text = text.replace('___', str(it.get('answer', '')).replace(' ', '_'))
+            check_line(where, text)
+            if vi.key(vi.display(text)).strip(' .!?…') in norm_lines:
+                m('E', where, 'exercise sentence taken from the dialogue: write a new one')
+    for j, w in enumerate(d.get('new_words') or []):
+        if not w.get('w'):
+            m('E', f'new_words[{j}]', 'missing w')
+            continue
+        if not (w.get('en') or '').strip():
+            m('E', f'new_words[{j}]', f'{w["w"]}: no English (English on every card)')
+        cid = ('name:' + vi.nfc(w['w']).replace('_', ' ')) if w.get('name') else vi.card_id(vi.key(w['w']), w.get('tag'))
+        if cid not in used:
+            m('E', f'new_words[{j}]', f'{w["w"]} is not used in the dialogue or the exercises')
+        if w.get('chars') and not vi.CJK.search(w['chars']):
+            m('E', f'new_words[{j}]', f'{w["w"]}: chars must be chữ Hán')
+        if w.get('label') and w['label'] not in ('same', 'false-friend', 'native'):
+            m('E', f'new_words[{j}]', f'{w["w"]}: label must be same, false-friend or native')
 
 
 def main():
-    files = sys.argv[1:] or ((sorted(glob.glob(os.path.join(ROOT, 'course/lessons/[0-9]*.yaml'))) + sorted(glob.glob(os.path.join(ROOT, 'course/perfectionnement/[0-9]*.yaml')))
-                             + sorted(glob.glob(os.path.join(ROOT, 'course/literature/[0-9]*.yaml'))))
-                             + sorted(glob.glob(os.path.join(ROOT, 'course/themes/*.yaml'))))
-    keys, pairs, moe_ex = load_db()
-    errors = 0
+    files = sys.argv[1:] or course.lesson_files()
+    keys, tags = load_db()
+    msgs = []
+    syl = course.syllabus().get('approved') or {}
+    reals = [f for f in files if not course.load(f).get('fixture')] if files else []
+    if reals and not (syl.get('syllabus') and syl.get('word_list')):
+        msgs.append(('E', f'course/syllabus.yaml: E {len(reals)} lesson(s) drafted before the owner approved the '
+                          'syllabus and the first word list (fixed decision): approve them first'))
+    if not course.real_files():
+        print('lint: no lesson in course/lessons yet: checking the test fixture (tools/fixtures/lessons)')
+    loaded = []
     for f in files:
-        fn = lint_theme if 'themes' in os.path.normpath(f).split(os.sep) else lint
-        for level, text in fn(f, keys, pairs, moe_ex):
-            print(text)
-            errors += level == 'E'
+        try:
+            loaded.append((f, course.load(f)))
+        except yaml.YAMLError as e:
+            msgs.append(('E', f'{os.path.relpath(f, ROOT)}:0: E YAML error: {e}'))
+    # names and tags declared anywhere in the course count everywhere
+    all_tags = collections.defaultdict(set)
+    names = set()
+    for _, d in loaded:
+        for w in d.get('new_words') or []:
+            if w.get('name'):
+                names.add(vi.nfc(w['w']).replace('_', ' '))
+            elif w.get('tag'):
+                all_tags[vi.key(w['w'])].add(w['tag'])
+    spellings = collections.defaultdict(set)
+    seen = {}
+    for f, d in loaded:
+        if d.get('id') in seen:
+            msgs.append(('E', f'{os.path.relpath(f, ROOT)}:0: E id {d.get("id")} already used by {seen[d.get("id")]}'))
+        seen[d.get('id')] = os.path.basename(f)
+        lint(f, d, keys, tags, all_tags, names, msgs, spellings)
+    for tk, forms in sorted(spellings.items()):
+        if len(forms) > 1:
+            msgs.append(('W', f'course: W one syllable written two ways: {" / ".join(sorted(forms))} (pick one placement)'))
+    # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
+    real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded
+                  if not d.get('fixture') and not d.get('review') and isinstance(d.get('id'), int))
+    for (a, na, _), (b, nb, fb) in zip(real, real[1:]):
+        if nb < na - 1 or nb > na + 2:
+            msgs.append(('W', f'{fb}: W {nb} lines after {na} in lesson {a}: lines per lesson should grow smoothly'))
+    for f, d in loaded:
+        if isinstance(d.get('id'), int) and d['id'] > 0 and not d.get('fixture') and bool(d.get('review')) != (d['id'] % 7 == 0):
+            msgs.append(('W', f'{os.path.basename(f)}: W review lessons are every 7th (7, 14, …)'))
+    errors = 0
+    for level, text in msgs:
+        print(text)
+        errors += level == 'E'
     print(f'{len(files)} file(s), {errors} error(s)')
     sys.exit(1 if errors else 0)
 
