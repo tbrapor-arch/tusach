@@ -1,0 +1,16 @@
+# Lesson template (copy to NN.yaml; the file name is the id). Format and rules: docs/REFERENCE.md.
+id: 1
+title: {vi: "", en: ""}
+review: false
+setting: ""
+dialogue:
+- {n: 1, speaker: "", vi: "", en: ""}
+notes:
+- {ref: 1, topic: "", text: ""}
+new_words:
+- {w: "", en: ""}
+exercises:
+  translate:
+  - {vi: "", en: ""}
+  fill:
+  - {vi: "___", answer: "", en: ""}

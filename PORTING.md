@@ -1,5 +1,10 @@
 # Porting ledger
 
+(Copied from Tsheh-tû at df02bfe on 17 Nov 2026. Tủ sách is a target app: ports arrive from tsehtu with
+`PORTING_PROMPT.md`; record their status in tsehtu's ledger, where Tủ sách needs its own column. Its structural
+differences: one script (quốc ngữ, no ruby), word boundaries in the source, Vietnamese card model, no podcast/video/music
+modules yet; `DATA.dict` ids are word keys, not `Hàn-jī|key`.)
+
 tsehtu is the lead app. Fixes and improvements land here first, then get ported to the other apps one by one.
 
 ## Rules
