@@ -649,10 +649,15 @@ def word_checks(con):
 def freq_key(k):
     """The key a word is ranked under: hyphens are syllable breaks (Wiktionary keeps old hyphenated spellings such as
     thế-giới, công-nhân, việt-nam as entries; wordfreq read each as one phrase with no competitor, which put 20 of them
-    in the top 300 on the first real build). None for a key that is not made of letters only (3, "m*", "cung,"): such a
-    key is not ranked."""
+    in the top 300 on the first real build). None for a key that is not made of letters only (3, "m*", "cung,") or is
+    a one- or two-letter non-syllable (m, c, l: ranked 367, 386, 403 by the counts of letters): such a key is not
+    ranked."""
     f = ' '.join(k.replace('-', ' ').split())
-    return f if f and all(re.fullmatch(r'[^\W\d_]+', x) for x in f.split()) else None
+    if not f or not all(re.fullmatch(r'[^\W\d_]+', x) for x in f.split()):
+        return None
+    if len(f) <= 2 and vi.syllable_problems(f):
+        return None        # a letter or texting abbreviation (m, c, l, ko): its count is that of the letter in text
+    return f
 
 
 def frequencies(con, raw, corpus):
