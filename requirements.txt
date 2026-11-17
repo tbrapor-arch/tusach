@@ -1,2 +1,2 @@
 pyyaml>=6
-fonttools[woff]>=4.40
+fonttools[woff]>=4.68.0
