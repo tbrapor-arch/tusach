@@ -1,7 +1,7 @@
 {
-  "name": "冊櫥 Tsheh-tû · Taigi",
-  "short_name": "冊櫥",
-  "description": "A Taiwanese (Taigi) course in English for people who speak Mandarin.",
+  "name": "Tủ sách · Vietnamese",
+  "short_name": "Tủ sách",
+  "description": "A Vietnamese (Hà Nội) course in English that uses Cantonese, Mandarin and Taigi as a bridge.",
   "id": "./",
   "start_url": "./",
   "scope": "./",

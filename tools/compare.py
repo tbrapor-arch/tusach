@@ -1,0 +1,149 @@
+"""Measure before and after: compare two builds of the page by script, not by eye (handover section 4.6). Run it for any
+change to the dictionary (sources, build_db.py), the cutter (tools/vi.py cut) or the word pipeline (tools/cards.py,
+english.py), before publishing. For anything risky, a second agent that did not do the work reads the result.
+
+  python3 -I tools/compare.py run [--ref origin/main] [--before-db PATH] [--after-db PATH] [--max 20]
+      builds REF (default: origin/main if it exists, else HEAD) in a temporary git worktree and the working tree, each
+      with its own database (default: data/build/vi.db for both), then compares them
+  python3 -I tools/compare.py snapshot [app/dist/index.html] OUT.json
+  python3 -I tools/compare.py diff BEFORE.json AFTER.json [--max 20]
+
+What is compared: every lesson line and exercise (the text shown, the cut into words, the card id of each word) and
+every card (English and its source, chữ Hán, Cantonese / Taigi / Mandarin readings, label, example).
+Exit 1 when a line's text changed, a card was lost, or a card's English rank went down; other changes are listed.
+"""
+import json
+import os
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+sys.path.insert(0, HERE)
+import english  # noqa: E402
+
+FIELDS = ('en', 'en_src', 'chars', 'yue', 'nan', 'cmn', 'label', 'ex')
+
+
+def page_data(page):
+    s = open(page, encoding='utf-8').read()
+    m = re.search(r'<script[^>]*type="application/json"[^>]*>(.*?)</script>', s, re.S)
+    return json.loads(m.group(1))
+
+
+def snapshot(page):
+    d = page_data(page)
+    lines = {}
+    for L in d['lessons']:
+        for ln in L['lines']:
+            lines[f"L{L['id']}.{ln['n']}"] = {'text': ln['vi'], 'cut': [[t['w']['t'], t['w']['id']] for t in ln['tokens'] if 'w' in t]}
+        for i, e in enumerate(L.get('exercises') or []):
+            lines[f"L{L['id']}.ex{i + 1}"] = {'text': e['vi'], 'cut': [[t['w']['t'], t['w']['id']] for t in e.get('tokens') or [] if 'w' in t]}
+    cards = {i: {f: c.get(f) for f in FIELDS if c.get(f) is not None} for i, c in d['dict'].items()}
+    return {'lines': lines, 'cards': cards}
+
+
+def diff(a, b, limit=20):
+    """Prints the differences; returns the number of blocking ones."""
+    out = {}
+
+    def add(cls, item):
+        out.setdefault(cls, []).append(item)
+
+    for k in sorted(set(a['lines']) | set(b['lines'])):
+        x, y = a['lines'].get(k), b['lines'].get(k)
+        if x is None:
+            add('line added', f'{k}: {y["text"]}')
+        elif y is None:
+            add('line removed', f'{k}: {x["text"]}')
+        else:
+            if x['text'] != y['text']:
+                add('LINE TEXT CHANGED', f'{k}: "{x["text"]}" -> "{y["text"]}"')
+            if x['cut'] != y['cut']:
+                add('cut or card id changed', f'{k}: {" | ".join(w for w, _ in x["cut"])}  ->  {" | ".join(w for w, _ in y["cut"])}'
+                    + ('' if [w for w, _ in x['cut']] != [w for w, _ in y['cut']] else
+                       '  ids: ' + ', '.join(f'{p}->{q}' for (_, p), (_, q) in zip(x['cut'], y['cut']) if p != q)))
+    for i in sorted(set(a['cards']) | set(b['cards'])):
+        x, y = a['cards'].get(i), b['cards'].get(i)
+        if y is None:
+            add('CARD LOST', i)
+        elif x is None:
+            add('card added', i)
+        else:
+            if english.rank(y.get('en_src')) < english.rank(x.get('en_src')):
+                add('ENGLISH POORER', f'{i}: "{x.get("en")}" ({x.get("en_src")}) -> "{y.get("en")}" ({y.get("en_src")})')
+            for f in FIELDS:
+                if x.get(f) != y.get(f) and f != 'en_src':
+                    add(f'card {f} changed', f'{i}: {json.dumps(x.get(f), ensure_ascii=False)} -> {json.dumps(y.get(f), ensure_ascii=False)}')
+    blocking = 0
+    for cls in sorted(out, key=lambda c: (not c.isupper(), c)):
+        items = out[cls]
+        blocking += len(items) if cls.isupper() else 0
+        print(f'== {cls}: {len(items)}')
+        for it in items[:limit]:
+            print('  ' + it)
+        if len(items) > limit:
+            print(f'  … {len(items) - limit} more')
+    print(f"compare: {len(a['lines'])} -> {len(b['lines'])} lines, {len(a['cards'])} -> {len(b['cards'])} cards; "
+          f'{sum(len(v) for v in out.values())} difference(s), {blocking} blocking')
+    return blocking
+
+
+def build(src_root, db, out_dir):
+    env = dict(os.environ, TUSACH_DB=os.path.abspath(db), TUSACH_OUT=out_dir,
+               TUSACH_STORE=os.path.join(out_dir, 'cards.json'))
+    r = subprocess.run([sys.executable, '-I', os.path.join(src_root, 'tools/build_app.py')], env=env, cwd=src_root,
+                       capture_output=True, text=True)
+    page = os.path.join(out_dir, 'index.html')
+    if not os.path.exists(page):
+        sys.exit(f'compare: the build in {src_root} failed:\n{r.stdout[-2000:]}\n{r.stderr[-2000:]}')
+    if r.returncode:
+        print(f'compare: note: the build in {src_root} ended with errors (card check?):\n{r.stdout[-800:]}')
+    return page
+
+
+def run():
+    arg = lambda n, d: sys.argv[sys.argv.index(n) + 1] if n in sys.argv else d   # noqa: E731
+    ref = arg('--ref', None)
+    if ref is None:
+        ok = subprocess.run(['git', 'rev-parse', '--verify', '-q', 'origin/main'], cwd=ROOT, capture_output=True).returncode == 0
+        ref = 'origin/main' if ok else 'HEAD'
+    db = os.path.join(ROOT, 'data/build/vi.db')
+    before_db, after_db = arg('--before-db', db), arg('--after-db', db)
+    tmp = tempfile.mkdtemp(prefix='tusach-compare-')
+    wt = os.path.join(tmp, 'src')
+    try:
+        subprocess.run(['git', 'worktree', 'add', '--detach', '-q', wt, ref], cwd=ROOT, check=True)
+        print(f'before: {ref} with {before_db}\nafter:  working tree with {after_db}')
+        a = snapshot(build(wt, before_db, os.path.join(tmp, 'before')))
+        b = snapshot(build(ROOT, after_db, os.path.join(tmp, 'after')))
+        return diff(a, b, int(arg('--max', 20)))
+    finally:
+        subprocess.run(['git', 'worktree', 'remove', '--force', wt], cwd=ROOT, capture_output=True)
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit(__doc__)
+    cmd = sys.argv[1]
+    limit = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 20
+    pos = [a for i, a in enumerate(sys.argv[2:], 2) if not a.startswith('--') and sys.argv[i - 1] != '--max']
+    if cmd == 'snapshot':
+        page, out = (pos if len(pos) == 2 else [os.path.join(ROOT, 'app/dist/index.html')] + pos)
+        json.dump(snapshot(page), open(out, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+        print(f'{out}: snapshot of {page}')
+        return
+    if cmd == 'diff':
+        a, b = (json.load(open(p, encoding='utf-8')) for p in pos[:2])
+        sys.exit(1 if diff(a, b, limit) else 0)
+    if cmd == 'run':
+        sys.exit(1 if run() else 0)
+    sys.exit(__doc__)
+
+
+if __name__ == '__main__':
+    main()

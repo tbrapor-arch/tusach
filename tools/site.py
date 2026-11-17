@@ -51,25 +51,22 @@ def csp(html, extra):
 
 
 APP_CSP = csp(body, {
-    # the private module is run from a blob: URL; the video and music tabs use YouTube's player API
-    'script-src': 'blob: https://www.youtube.com https://s.ytimg.com',
-    'frame-src': 'https://www.youtube-nocookie.com https://www.youtube.com',
+    # the private module is run from a blob: URL
+    'script-src': 'blob:',
     'connect-src': 'https://api.github.com https://gist.githubusercontent.com',
-    'img-src': 'https:',      # podcast and video artwork
-    'media-src': 'https:',    # podcast audio, streamed from the host's servers
     'worker-src': "'self'",
     'manifest-src': "'self'",
 })
 head = '''<!doctype html><html lang="en"><head><meta charset="utf-8">
 ''' + APP_CSP + '''<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="A Taiwanese (Taigi) course in English for people who speak Mandarin.">
+<meta name="description" content="A Vietnamese (Hà Nội) course in English that uses Cantonese, Mandarin and Taigi as a bridge.">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <meta name="theme-color" content="#FCFCF8">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="冊櫥">
+<meta name="apple-mobile-web-app-title" content="Tủ sách">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>html,body{margin:0;padding:0}*{box-sizing:border-box}</style>
 </head><body>

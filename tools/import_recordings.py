@@ -1,6 +1,6 @@
 """Import a zip sent from the recording page (record.html) into the course.
 
-  python3 tools/import_recordings.py tshehtu-recordings-….zip [--force]
+  python3 tools/import_recordings.py tusach-recordings-….zip [--force]
 
 For each clip: trims the silence at both ends, evens out the loudness, converts to mono MP3
 -> course/audio/lessons/L057-03.mp3, and records speaker and date in course/audio/recordings.yaml.
@@ -51,13 +51,13 @@ def main():
     for path in args:
         with zipfile.ZipFile(path) as z, tempfile.TemporaryDirectory() as tmp:
             man = json.loads(z.read('manifest.json'))
-            if man.get('app') != 'tshehtu-recordings':
-                sys.exit(f'{path}: not a Tsheh-tû recordings zip')
+            if man.get('app') != 'tusach-recordings':
+                sys.exit(f'{path}: not a Tủ sách recordings zip')
             sp = man['speaker']
             meta['speakers'][sp] = {'use': man.get('use') or man.get('consent'), 'since': man.get('startedAt') or man.get('consentAt')}
             for c in man['clips']:
                 if c.get('flag'):
-                    flags[c['id']] = {'speaker': sp, 'hanji': c.get('hanji'), 'tailo': c.get('tailo'), 'note': c['flag']}
+                    flags[c['id']] = {'speaker': sp, 'vi': c.get('vi'), 'note': c['flag']}
                 if not c.get('file'):
                     continue
                 if not SAFE_ID.fullmatch(str(c.get('id', ''))) or not SAFE_FILE.fullmatch(str(c['file'])):
@@ -77,7 +77,7 @@ def main():
         yaml.safe_dump(flags, open(FLAGS, 'w', encoding='utf-8'), allow_unicode=True, sort_keys=True)
     print(f'{done} clip(s) imported, {kept} already there (use --force to replace)')
     for k, v in sorted(flags.items()):
-        print(f'  ⚑ {k}  {v["hanji"]}  —  {v["note"]}')
+        print(f'  ⚑ {k}  {v["vi"]}  —  {v["note"]}')
 
 
 if __name__ == '__main__':

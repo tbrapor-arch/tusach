@@ -1,7 +1,7 @@
 // Offline support for the installed app. The page itself: network first (new lessons arrive as soon as you are
 // online), the copy in the cache when offline. Recordings, icons and fonts: cache first, kept once played or loaded.
 const VERSION = '__BUILD__';
-const SHELL = 'tshehtu-shell-' + VERSION, MEDIA = 'tshehtu-media-2';
+const SHELL = 'tusach-shell-' + VERSION, MEDIA = 'tusach-media-2';
 const PRECACHE = ['./', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 const ROOT = new URL('./', self.registration.scope).pathname;
 
@@ -9,7 +9,7 @@ self.addEventListener('install', e => {
   e.waitUntil(caches.open(SHELL).then(c => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => (k.startsWith('tshehtu-shell-') && k !== SHELL) || (k.startsWith('tshehtu-media-') && k !== MEDIA)).map(k => caches.delete(k))))
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => (k.startsWith('tusach-shell-') && k !== SHELL) || (k.startsWith('tusach-media-') && k !== MEDIA)).map(k => caches.delete(k))))
     .then(() => self.clients.claim()));
 });
 
@@ -39,7 +39,7 @@ self.addEventListener('fetch', e => {
     }).catch(() => caches.match(app ? './' : req).then(hit => hit || caches.match('./'))));
     return;
   }
-  if (url.hostname === 'api.github.com') return;   // private exam files: the page caches those itself
+  if (url.hostname === 'api.github.com') return;   // private module files: the page caches those itself
   const audio = url.origin === location.origin && /\/audio\/.*\.mp3$/.test(url.pathname);
   if (audio) {   // kept whole under its URL (a range request would only give part of it), then cut to the range asked
     e.respondWith(caches.open(MEDIA).then(async c => {

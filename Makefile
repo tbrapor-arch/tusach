@@ -33,7 +33,7 @@ lint:
 	$(PY) tools/lint.py
 	$(PY) tools/verify_words.py --lessons
 
-test:
+test: db db-nc
 	$(PY) tools/vi.py
 	$(PY) tools/test_pipeline.py
 
