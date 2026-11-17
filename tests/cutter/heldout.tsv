@@ -1,0 +1,111 @@
+# Cutter HELD-OUT set: 100 real Tatoeba sentences cut into words, for tools/cutter_test.py --set heldout (`make cutter`).
+#
+# CUT BY CLAUDE, NOT CHECKED BY A NATIVE SPEAKER. Sentences: Tatoeba (https://tatoeba.org), CC BY 2.0 FR, each credited
+# below by its sentence id and author (https://tatoeba.org/en/sentences/show/ID), from our snapshot data-2026-11-17;
+# drawn at random (seed 20261118) among the sentences with an English translation, 6-18 syllables, no digits, not
+# refused by tools/build_db.py tatoeba_problem(). Cut by hand on 18 Nov 2026 following docs/SEGMENTATION.md WITHOUT
+# running any cutter on them first, and no cutter rule has been tuned on them afterwards: keep it so (a rule changed
+# because of this file makes it a tuning set; then draw a new held-out set). The text is Tatoeba's, unchanged (typos
+# such as "sẫn sàng" kept); only underscores were added.
+#
+# Format: n <TAB> Tatoeba sentence id <TAB> author <TAB> the sentence with underscores inside words
+1	5763	khoaharp	Sếp à, không phải tôi đâu!
+2	5833	khoaharp	"Chào buổi_sáng" Tom mỉm_cười và nói.
+3	510408	autuno	Nhóm_máu của ông là nhóm nào?
+4	1542130	Aomori	Anh ta né_tránh mọi nhiệm_vụ vất_vả.
+5	1542991	Aomori	Nghe nói cha anh ta đang ở trong bệnh_viện.
+6	1543720	Aomori	Một năm có bốn mùa: xuân, hạ, thu, đông.
+7	1547578	trieuho	Mày đã hết đánh vợ mày chưa?
+8	1550250	trieuho	Tôi muốn nhận cậu trở_thành thành_viên của câu_lạc_bộ của chúng_tôi.
+9	1554987	trieuho	Mày có về nhà bây_giờ không?
+10	1581155	ngdongit	Thỉnh_thoảng sáng chủ_nhật, tôi thích ngủ_nướng đến tận trưa.
+11	3109199	trieuho	Tao có_thể sờ râu của mày được không?
+12	3304640	trieuho	Tôi sẽ nhờ nó sửa cái đồng_hồ này.
+13	3680909	tucm	Bạn có_thể đánh_vần họ của bạn dùm tôi?
+14	3780727	bluesapphjre	Chàng_trai đó đã nhuộm tóc vì muốn được chú_ý.
+15	4255257	phuc	Bạn phát_âm từ "WiFi" trong tiếng_Pháp như thế_nào?
+16	4302189	trieuho	Xe_gắn_máy của tôi ngốn rất nhiều xăng.
+17	4608353	khoaharp	Bài thứ hai thì rất đơn_giản.
+18	5145618	truongap	Anh không được phép cắm_trại ở đây.
+19	5159044	truongap	Tom nói anh ấy ước có_thể đi cùng với chúng_tôi.
+20	5161441	truongap	Ở đây bạn có hạnh_phúc?
+21	5209021	truongap	Tôi không biết Tom ở đâu và tôi cũng không muốn hỏi anh ấy.
+22	5309122	truongap	Tôi sẽ không để cậu tự_mình đến đó đâu.
+23	5754809	yippe	Một ý_tưởng kỳ_lạ lóe lên trong đầu tôi.
+24	5758835	yippe	"Những ai sẽ đến dự tiệc?" "Một vài người bạn và bốn hoặc năm đồng_nghiệp."
+25	5758963	yippe	Tôi xin_lỗi nếu làm bạn cảm_thấy không được chào_đón.
+26	5767716	yippe	Chủ_đề đó không nên được đem ra bàn_luận.
+27	5772413	yippe	Tom ăn một phần giăm_bông, rồi cắt phần còn_lại vào tủ_lạnh.
+28	5911220	khoaharp	Tôi chưa bao_giờ phải lo_lắng về anh ta.
+29	8833026	dotheduyet1999	Tôi đã không_thể hoàn_thành công_việc nếu không có sự giúp_đỡ của bạn.
+30	8956605	dotheduyet1999	Mary nói là cô ấy nấu_ăn giỏi.
+31	8958609	dotheduyet1999	Nếu Mary chạy, cô ấy có_thể đến kịp.
+32	8958642	dotheduyet1999	John là một người bất_cẩn. Anh ấy gây ra nhiều sai_sót.
+33	8976361	dotheduyet1999	Tôi mong_đợi đến ngày_mai quá.
+34	8992576	dotheduyet1999	Hôm_nay là ngày phát lương có đúng không?
+35	9000633	dotheduyet1999	Tôi là một người rất kén_chọn.
+36	9004384	dotheduyet1999	Đó có phải là tất_cả những gì bạn muốn không?
+37	9004441	dotheduyet1999	Bạn phải cẩn_thận khi băng qua đường.
+38	9010523	dotheduyet1999	Bạn có nhìn rõ kẻ đột_nhập không?
+39	9010672	dotheduyet1999	Tôi phải ngừng việc trì_hoãn lại thôi.
+40	9015876	dotheduyet1999	Tất_cả chúng_tôi đều đã im_lặng.
+41	9018813	dotheduyet1999	Hai bạn có rất nhiều điểm tương_đồng.
+42	9019774	dotheduyet1999	Mặc_dù đồ_ăn ở đó không ngon, nhưng ít_ra thì nó cũng rẻ.
+43	9027867	dotheduyet1999	Điều đó không làm tôi ngạc_nhiên.
+44	9034874	dotheduyet1999	Hồi nhỏ, tôi rất hay bơi ở cái ao đó.
+45	9056971	dotheduyet1999	Tôi muốn bạn nói cho tôi biết ai đã làm chuyện này.
+46	9066059	dotheduyet1999	Tôi không hiểu vì_sao cô ấy phản_đối ý_kiến của tôi.
+47	9143868	dotheduyet1999	Tôi tin là Elvis vẫn còn sống.
+48	9171831	dotheduyet1999	Năm sau tôi sẽ dạy_học ở Úc.
+49	9415824	dotheduyet1999	Vào vị_trí, sẵn_sàng, bơi!
+50	9733948	dotheduyet1999	Thói_quen ăn_uống là nguyên_nhân tử_vong của hơn một triệu người.
+51	9735747	dotheduyet1999	Câu_chuyện bắt_đầu từ rất lâu rồi.
+52	9815412	dotheduyet1999	Xin_chào, bạn có còn đó không?
+53	9815441	dotheduyet1999	Tôi nói với Tom là tôi muốn gặp bố_mẹ anh ấy.
+54	10266667	Alex_do	Cô ấy đã sẫn_sàng cho bữa chưa.
+55	10708468	MrOhno	Dùng Tatoeba khó quá đi mất!
+56	11267984	chaule3	Tom là một người rất thẳng_thắn.
+57	11273097	chaule3	Tom đã quyết_định không đi đến đó.
+58	11276744	chaule3	Chiếc quần_tây màu vàng này rất đẹp.
+59	11314575	chaule3	Bạn có thích mua_sắm quần_áo không?
+60	11352218	chaule3	Tôi cảm_thấy sạch_sẽ sau_khi tắm xong.
+61	11353500	chaule3	Tôi nhớ mẹ và cha mình rất nhiều.
+62	11395570	chaule3	Có một đạo_luật cấm hành_vi như_vậy.
+63	11413955	chaule3	Các nhà_báo cần phải cẩn_thận để không xuyên_tạc thông_tin.
+64	11414004	chaule3	Thường có sáu chai trong một lốc nước.
+65	11450808	chaule3	Mẹ tôi nấu_ăn ngon hơn tôi.
+66	11534473	OneJanuary	Tui biết là mình không nên cảm_thấy như_thế này.
+67	12007223	dotheduyet1999	Mary là một cô_gái tốt, nhưng bạn này nói nhiều quá.
+68	12529249	thanhcona40	Người cuối_cùng tôi nói ý_tưởng của tôi nghĩ rằng tôi mất_trí
+69	12538220	thanhcona40	Tôi có những lựa_chọn nào khác
+70	12538229	thanhcona40	Tôi cũng không_thể giải_thích nó
+71	13249703	leucammieuvu	Một năm có mười hai tháng.
+72	13249735	leucammieuvu	Khi_nào thì bạn sẽ đi đến thư_viện?
+73	13249772	leucammieuvu	Mẹ tôi không biết tiếng_Pháp.
+74	13344024	leucammieuvu	Bạn dành hầu_hết thời_gian của mình để làm gì?
+75	13344029	leucammieuvu	Nhân_tiện, tuần sau sẽ là lễ tốt_nghiệp trường đại_học của chúng_tôi.
+76	13426373	leucammieuvu	Alberto đang làm bài_tập về nhà.
+77	13441050	leucammieuvu	Có hàng triệu động_vật hoang_dã sống ở Alaska.
+78	13472363	leucammieuvu	Đó là tình_yêu sét_đánh.
+79	13485337	leucammieuvu	Cô ấy đang đọc Đôn_Ki-hô-tê lần đầu_tiên.
+80	13522891	leucammieuvu	Xin_lỗi ngài, nhưng khi_nào thì phi_thuyền sẽ đến cảng không_gian ạ?
+81	13551006	leucammieuvu	Những người phản_sinh đã đúng, loài_người xứng_đáng bị tuyệt_diệt.
+82	13603290	leucammieuvu	Cây đàn piano của tôi đã cũ.
+83	13634485	leucammieuvu	Tiếng_Đức là ngôn_ngữ chính_thức của Đức.
+84	13695949	leucammieuvu	Berlin là thành_phố có nhiều bảo_tàng nhất nước Đức.
+85	13734554	leucammieuvu	Tao không kì_vọng gì nhiều từ một thằng wibu như mày đâu Tom.
+86	13769925	leucammieuvu	Tôi thích xem đá_bóng trên ti_vi.
+87	13787585	leucammieuvu	Sau bữa_trưa, tôi sẽ học tiếng_Anh.
+88	13855652	leucammieuvu	World_Cup bóng_đá là sự_kiện thể_thao không_thể bỏ_lỡ.
+89	13859182	leucammieuvu	Tôi là giáo_sư toán_học.
+90	13880871	leucammieuvu	Thành_phố mọc lên từ tro_tàn.
+91	13888080	leucammieuvu	Cô ấy đã trở_thành trẻ mồ_côi.
+92	13896200	leucammieuvu	Em_gái tôi là giáo_viên tiếng_Anh.
+93	13901237	leucammieuvu	Có_lẽ sẽ không ai để_ý đâu.
+94	13909326	leucammieuvu	Tôi nghĩ anh ấy là một hoạ_sĩ người Áo.
+95	13915383	leucammieuvu	Chiếc ô_tô này không mới. Nó cũ.
+96	14026254	leucammieuvu	Đấy là một chiếc xe chạy nhanh.
+97	14028884	leucammieuvu	Tôi không có khả_năng chần_chừ.
+98	14039319	leucammieuvu	Một năm_học mới lại sắp bắt_đầu.
+99	14109379	leucammieuvu	Xin hãy dọn phòng của tôi.
+100	14109961	leucammieuvu	Tôi không ở đó vì tôi ở đây.

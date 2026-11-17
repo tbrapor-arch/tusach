@@ -2,7 +2,7 @@
 A report, not a gate (`make test` prints it; it never fails the build). The reference is NOT checked by a native
 speaker (see its header).
 
-  python3 -I tools/cutter_test.py [--known db|viet74k] [--max 15]
+  python3 -I tools/cutter_test.py [--set reference|heldout] [--known db|viet74k] [--max 15]
 
 --known db (default): vi.cut() with every key of data/build/vi.db (what tools/cards.py tokenize_text() uses).
 --known viet74k: vi.cut() with underthesea's bundled word list Viet74K.txt instead, a stand-in when the database has
@@ -24,15 +24,20 @@ sys.path.insert(0, HERE)
 import vi  # noqa: E402
 
 REF = os.path.join(ROOT, 'tests/cutter/reference.tsv')
+SETS = {'reference': (REF, '200 sentences written and cut by Claude by docs/SEGMENTATION.md (the rules were tuned on '
+                           'them)'),
+        'heldout': (os.path.join(ROOT, 'tests/cutter/heldout.tsv'), '100 real Tatoeba sentences cut by Claude by '
+                    'docs/SEGMENTATION.md, held out: no rule tuned on them')}
 
 
 def load_reference(path=REF):
+    """[(n, cut line)]: the first field is the number, the last the cut (heldout.tsv has id and author between)."""
     out = []
     for line in open(path, encoding='utf-8'):
         if line.startswith('#') or not line.strip():
             continue
-        n, cut = line.rstrip('\n').split('\t')
-        out.append((int(n), vi.nfc(cut)))
+        p = line.rstrip('\n').split('\t')
+        out.append((int(p[0]), vi.nfc(p[-1])))
     return out
 
 
@@ -122,10 +127,11 @@ def disagreements(ref, a, b):
 def main():
     kind = sys.argv[sys.argv.index('--known') + 1] if '--known' in sys.argv else 'db'
     limit = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 15
-    ref = load_reference()
-    print(f'cutter test: {len(ref)} reference sentences (tests/cutter/reference.tsv), written and cut by Claude by '
-          'docs/SEGMENTATION.md, NOT checked by a native speaker: the scores measure agreement with one non-native '
-          "model's judgement")
+    which = sys.argv[sys.argv.index('--set') + 1] if '--set' in sys.argv else 'reference'
+    path, desc = SETS[which]
+    ref = load_reference(path)
+    print(f'cutter test, {which} set ({os.path.relpath(path, ROOT)}): {desc}; NOT checked by a native speaker: the '
+          "scores measure agreement with one non-native model's judgement")
     raw = [c.replace('_', ' ') for _, c in ref]
     ref_w = [words_of_line(c) for _, c in ref]
     known, kdesc = known_words(kind)

@@ -42,8 +42,8 @@ test: db db-nc
 	$(PY) tools/test_pipeline.py
 	$(PY) tools/test_db.py
 	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'
-	-$(PY) tools/cutter_test.py
-	-$(PY) tools/cutter_test.py --known viet74k --max 5
+	-$(PY) tools/cutter_test.py --max 5
+	-$(PY) tools/cutter_test.py --set heldout --max 5
 
 app:
 	$(PY) tools/build_app.py
@@ -59,4 +59,5 @@ coverage:
 
 cutter:
 	$(PY) tools/cutter_test.py --max 30
+	$(PY) tools/cutter_test.py --set heldout --max 30
 	$(PY) tools/cutter_test.py --known viet74k --max 30
