@@ -37,6 +37,7 @@ lint:
 
 test: db db-nc
 	$(PY) tools/vi.py
+	$(PY) tools/hanviet.py
 	$(PY) tools/test_fetch.py
 	$(PY) tools/test_pipeline.py
 	$(PY) tools/test_db.py

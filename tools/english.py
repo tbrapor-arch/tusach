@@ -57,14 +57,15 @@ class English:
         rows.sort(key=lambda r: (r[2], order.get(r[1], len(order))))
         return rows[0][0], f'dict:{rows[0][1]}'
 
-    def gloss(self, cid, k, tag=None, parts=()):
+    def gloss(self, cid, k, tag=None, parts=(), dict_entry=None):
         """(English, source) for card `cid` (key `k`, homograph tag `tag`). `parts`: [(English, source)] of its
-        syllables, for the last resort."""
+        syllables, for the last resort. `dict_entry`: (English, 'dict:SOURCE') of the etymology the card shows
+        (tools/cards.py senses), so the English and the characters come from the same entry."""
         if cid in self.course:
             return self.course[cid], 'course'
         if cid in self.written:
             return self.written[cid], 'written'
-        en, src = self.dict_en(k, tag)
+        en, src = dict_entry if dict_entry else self.dict_en(k, tag)
         if en:
             return en, src
         if parts and all(p[0] for p in parts) and len(parts) > 1:

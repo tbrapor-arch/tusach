@@ -14,6 +14,10 @@ Classes, most serious first:
                     two words): the line's boundaries may be wrong
   5 chars           chữ Hán given for the word whose Hán-Việt readings (table hanviet) do not give its syllables
   6 fixture         a word only the test fixture has, outside the fixture
+  7 hv_suspect      (whole database, --lessons) a Sino-Vietnamese analysis whose characters do not match the word's
+                    syllables (number or Hán-Việt readings): not shown as "same word" on the card
+  8 hv_none         (whole database, --lessons) a character of a Sino-Vietnamese entry that no source reads in
+                    Hán-Việt (the card shows "—", never "?")
 Nothing here changes any file: it only prints (Tsheh-tû's verifier found 27 misread characters this way).
 """
 import collections
@@ -29,7 +33,9 @@ import vi  # noqa: E402
 
 CLASSES = [('spelling', 'spelling (NFC, impossible syllable)'), ('tone', 'only the tones differ from a dictionary word'),
            ('nodict', 'in no dictionary'), ('join', 'the dictionary has these neighbouring words as one word'),
-           ('chars', 'chữ Hán whose Hán-Việt readings do not give the word'), ('fixture', 'only in the test fixture')]
+           ('chars', 'chữ Hán whose Hán-Việt readings do not give the word'), ('fixture', 'only in the test fixture'),
+           ('hv_suspect', 'dictionary: Sino-Vietnamese analysis not matching the syllables (not shown as same word)'),
+           ('hv_none', 'dictionary: character with no Hán-Việt reading')]
 
 
 class Dict:
@@ -110,6 +116,24 @@ def lessons(D, out):
     return n
 
 
+def database_suspects(db, out):
+    """Classes 7 and 8: suspects of the dictionary itself (tools/build_db.py word_checks)."""
+    import bridge
+    con = sqlite3.connect(db)
+    for src, word, chars, chk in con.execute("SELECT source, word, chars, hv_check FROM entry WHERE hv_check IN "
+                                             "('differs', 'length') ORDER BY freq_rank IS NULL, freq_rank"):
+        why = (f'{len(chars)} characters for {len(word.split())} syllables' if chk == 'length' else
+               '; '.join(f'{c} {"/".join(bridge.hv_readings(con, c)) or "—"}' for c in chars))
+        out['hv_suspect'].append((src, f'{word} {chars}', why))
+    seen = set()
+    for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != '' AND hv_check NOT IN "
+                                "('differs', 'length')"):
+        for c in chars:
+            if c not in seen and not bridge.hv_readings(con, c):
+                seen.add(c)
+                out['hv_none'].append(('dictionary', c, f'in {chars}'))
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     db = sys.argv[sys.argv.index('--db') + 1] if '--db' in sys.argv else (
@@ -120,6 +144,7 @@ def main():
     out = collections.defaultdict(list)
     if '--lessons' in sys.argv:
         n = lessons(D, out)
+        database_suspects(db, out)
         what = f'{n} lesson lines and exercises'
     else:
         src = open(args[0], encoding='utf-8') if args else sys.stdin

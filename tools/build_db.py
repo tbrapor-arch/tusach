@@ -35,6 +35,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import bridge  # noqa: E402
 import freq  # noqa: E402
+import hanviet  # noqa: E402
 import vi  # noqa: E402
 
 FIXTURE = os.path.join(HERE, 'fixtures', 'dict.yaml')
@@ -168,15 +169,37 @@ def load_thieuchuu(raw, add):
         ch = ch.strip()
         if len(ch) != 1 or not is_cjk_word(ch):
             continue
-        head = body.split('<br>')[0].replace('Ð', 'Đ')     # 1,350 lines use the Icelandic Ð (U+00D0) for Đ
-        for i, r in enumerate(x.strip() for x in head.split('|')):
-            if r and re.fullmatch(r'[^\W\d_]+', r):
-                add.hanviet(ch, r, 'hv', i)
-                add.n += 1
+        for i, r in enumerate(thieuchuu_head(body)):
+            add.hanviet(ch, r, 'hv', i)
+            add.n += 1
+
+
+def thieuchuu_head(body):
+    """The readings at the head of a Thiều Chửu article: 'sanh|sinh<br>…' -> ['sanh', 'sinh']. A head may carry the
+    stroke count ('đại (5 n)') or a full stop ('nảm.'); 1,350 lines use the Icelandic Ð (U+00D0) for Đ. A piece that
+    is still not one word is reported, never dropped silently."""
+    head = body.split('<br>')[0].replace('Ð', 'Đ')
+    out = []
+    for x in head.split('|'):
+        x = re.sub(r'\s*\(\s*\d+\s*n\s*\)\s*$', '', x.strip()).rstrip('.').strip()
+        if re.fullmatch(r'[^\W\d_]+', x):
+            out.append(x)
+        elif x:
+            print(f'  thieuchuu: head piece not read: {x!r}')
+    return out
 
 
 # ---------------------------------------------------------------------------------------------- Unihan kVietnamese
 def load_unihan(raw, add):
+    kmandarin = need(raw, 'unihan', 'kMandarin.txt')
+    for line in open(kmandarin, encoding='utf-8'):
+        if line.startswith('#') or '\t' not in line:
+            continue
+        cp, val = line.rstrip('\n').split('\t')
+        a, _, b = cp.partition('..')
+        for c in range(int(a, 16), int(b or a, 16) + 1):
+            add.con.executemany('INSERT INTO mandarin_pref VALUES (?,?,?)',
+                                [(chr(c), vi.nfc(r), i) for i, r in enumerate(val.split())])
     for line in open(need(raw, 'unihan', 'kVietnamese.txt'), encoding='utf-8'):
         if line.startswith('#') or '\t' not in line:
             continue
@@ -224,22 +247,31 @@ def load_moe(raw, add):
         h, t, wb = vi.nfc(r['詞目']), vi.nfc(r['音讀']), r['文白屬性']
         if not is_cjk_word(h) or not t:
             continue
-        if len(h) == 1:
-            if wb in ('1', '0'):                  # 1 literary (文讀), 0 no literary/colloquial split
-                add.chinese(h, 'nan', t, 'char', note='literary' if wb == '1' else 'unmarked')
-        elif wb in ('0', '1'):
-            add.chinese(h, 'nan', t, 'word', note='literary' if wb == '1' else '')
+        # 'ji̍t/li̍t': the main reading, then the accent variants, each its own row in the MOE's order
+        for v in [x.strip() for x in t.split('/') if x.strip()]:
+            if len(h) == 1:
+                if wb in ('1', '0'):              # 1 literary (文讀), 0 no literary/colloquial split
+                    add.chinese(h, 'nan', v, 'char', note='literary' if wb == '1' else 'unmarked')
+            elif wb in ('0', '1'):                # the word's own reading (often colloquial: 生日 senn-ji̍t)
+                add.chinese(h, 'nan', v, 'word', note='literary' if wb == '1' else '')
 
 
 # ---------------------------------------------------------------------------------------------- CC-CEDICT
 def load_cedict(raw, add):
+    """Keyed on the TRADITIONAL form only (Vietnamese chữ Hán are traditional): the readings of a simplified form never
+    reach a traditional character (只 is not read zhī because 隻 simplifies to 只). Capitalised pinyin = a name."""
+    use = Counter()
     for e in json.load(open(need(raw, 'cedict', 'package', 'cedict.json'), encoding='utf-8')):
-        t, s, p = e.get('traditional') or '', e.get('simplified') or '', e.get('pinyin') or ''
+        t, p = e.get('traditional') or '', e.get('pinyin') or ''
         if not is_cjk_word(t) or not p:
             continue
         note = 'name' if p[:1].isupper() else ''
-        for chars in {t, s}:
-            add.chinese(chars, 'cmn', bridge.pinyin_marks(p), 'char' if len(chars) == 1 else 'word', note=note)
+        add.chinese(t, 'cmn', bridge.pinyin_marks(p), 'char' if len(t) == 1 else 'word', note=note)
+        syl = p.split()
+        if len(t) > 1 and len(syl) == len(t) and not note:
+            for c, x in zip(t, syl):
+                use[(c, bridge.pinyin_marks(x).lower())] += 1
+    add.con.executemany('INSERT INTO cmn_use VALUES (?,?,?)', [(c, r, n) for (c, r), n in sorted(use.items())])
 
 
 # ---------------------------------------------------------------------------------------------- Tatoeba
@@ -329,15 +361,15 @@ class Adder:
         self.n += 1
         return cur.lastrowid
 
-    def hanviet(self, char, reading, kind='hv', ord_=None):
-        self.con.execute('INSERT INTO hanviet(char, reading, kind, source, ord) VALUES (?,?,?,?,?)',
-                         (char, vi.nfc(reading).lower(), kind, self.source, ord_))
+    def hanviet(self, char, reading, kind='hv', ord_=None, label=''):
+        self.con.execute('INSERT INTO hanviet(char, reading, kind, source, ord, label) VALUES (?,?,?,?,?,?)',
+                         (char, vi.nfc(reading).lower(), kind, self.source, ord_, label))
 
     def chinese(self, chars, lang, reading, level=None, share=None, note=''):
         assert lang in bridge.LANGS, lang
         level = level or ('char' if len(chars) == 1 else 'word')
         self._ord[(chars, lang)] += 1
-        self.con.execute('INSERT INTO chinese VALUES (?,?,?,?,?,?,?,?)',
+        self.con.execute('INSERT INTO chinese VALUES (?,?,?,?,?,?,?,?,NULL)',
                          (chars, lang, vi.nfc(reading), self.source, level, share, note, self._ord[(chars, lang)]))
         self.n += 1
 
@@ -374,11 +406,80 @@ def hv_crosscheck(con):
               f'{st[None]} for characters Thiều Chửu lacks')
 
 
+def southern_variants(con):
+    """Northern standard first (tools/hanviet.py SOUTHERN): a Southern form gets label 'southern'; where the character
+    has no Northern form in any Hán-Việt source, the Northern form is derived (source 'derived', label 'derived').
+    Returns the characters affected, printed by the build."""
+    mand = defaultdict(set)
+    for ch, r in con.execute("SELECT chars, reading FROM chinese WHERE lang='cmn' AND level='char' AND note != 'name'"):
+        mand[ch].add(r)
+    con.execute("INSERT INTO source VALUES ('derived', 'Northern Hán-Việt forms derived from Southern ones (tools/hanviet.py "
+                "SOUTHERN)', '', 'MIT (this repository)', '', 1, 0)")
+    rows = con.execute("SELECT rowid, char, reading FROM hanviet WHERE kind='hv' AND source != 'fixture'").fetchall()
+    have = defaultdict(set)
+    for _, ch, r in rows:
+        have[ch].add(vi.key(r))
+    affected = []
+    for rid, ch, r in rows:
+        north = hanviet.southern(r, mand.get(ch, ()))
+        if not north:
+            continue
+        con.execute("UPDATE hanviet SET label='southern' WHERE rowid=?", (rid,))
+        if north in have[ch]:
+            affected.append((ch, r, north, 'both given'))
+        else:
+            con.execute("INSERT INTO hanviet(char, reading, kind, source, ord, label) VALUES (?,?,'hv','derived',-1,"
+                        "'derived')", (ch, north))
+            have[ch].add(north)
+            affected.append((ch, r, north, 'derived'))
+    if affected:
+        print(f'Hán-Việt Southern variants (tools/hanviet.py): {len(affected)}: '
+              + ', '.join(f'{c} {r}->{n} ({how})' for c, r, n, how in affected))
+    return affected
+
+
+def unihan_fallback(con):
+    """A character no Hán-Việt source reads (Wiktionary, Thiều Chửu) gets its Unihan kVietnamese readings of Hán-Việt
+    shape (tools/hanviet.py hv_shaped), labelled 'fallback' and shown as "unchecked (Unihan)"."""
+    inv = hanviet.inventory([r for (r,) in con.execute("SELECT reading FROM hanviet WHERE source='thieuchuu'")])
+    if not inv[1]:
+        return
+    rows = con.execute("SELECT rowid, char, reading FROM hanviet h WHERE source='unihan' AND NOT EXISTS (SELECT 1 FROM "
+                       "hanviet x WHERE x.char = h.char AND x.kind = 'hv' AND x.source != 'fixture')").fetchall()
+    ok = [(rid,) for rid, ch, r in rows if hanviet.hv_shaped(r, inv)]
+    con.executemany("UPDATE hanviet SET label='fallback' WHERE rowid=?", ok)
+    print(f'Unihan fallback: {len(ok)} readings of Hán-Việt shape for characters no Hán-Việt source reads '
+          f'({len(rows) - len(ok)} others, Nôm-shaped or invalid, not used)')
+
+
+def rank_chinese(con):
+    """chinese.rank: the display order of a character's or word's readings (schema.sql). Mandarin: Unihan kMandarin's
+    customary reading first, then by the number of CC-CEDICT words that use the reading, then by reading (stable)."""
+    pref = {(c, r): o for c, r, o in con.execute('SELECT char, reading, ord FROM mandarin_pref')}
+    use = Counter({(c, r): n for c, r, n in con.execute('SELECT char, reading, n FROM cmn_use')})
+    rows = con.execute('SELECT rowid, chars, lang, level, reading, share, ord, note FROM chinese').fetchall()
+    groups = defaultdict(list)
+    for r in rows:
+        groups[(r[1], r[2], r[3])].append(r)
+    upd = []
+    for (chars, lang, level), rs in groups.items():
+        if lang == 'cmn':
+            k = lambda r: (r[7] == 'name', pref.get((chars, r[4]), 99), -use[(chars, r[4].lower())], r[6], r[4])  # noqa: E731
+        elif lang == 'yue':
+            k = lambda r: (r[5] is not None, -(r[5] or 0), r[6], r[4])  # noqa: E731
+        else:
+            k = lambda r: (r[6], r[4])  # noqa: E731
+        upd += [(i, r[0]) for i, r in enumerate(sorted(rs, key=k))]
+    con.executemany('UPDATE chinese SET rank=? WHERE rowid=?', upd)
+
+
 def word_checks(con):
-    """entry.hv_check, and the computed labels: same (Sino-Vietnamese) and native (inherited from Vietic). False friends
+    """entry.hv_check, and the computed labels: same (Sino-Vietnamese) and native (inherited from Vietic). A Sino-
+    Vietnamese analysis whose characters do not match the syllables (number, or readings) is not labelled same and its
+    characters are not shown (cards.py); `make lint` prints these suspects (tools/verify_words.py). False friends
     cannot be detected: they come from course/false_friends.tsv, on the card (tools/cards.py)."""
     hv = defaultdict(set)
-    for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind IN ('hv', 'hannom')"):
+    for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind IN ('hv', 'hannom') OR label = 'fallback'"):
         hv[ch].add(vi.tkey(r))
     rows = []
     for eid, k, chars in con.execute("SELECT id, key, chars FROM entry WHERE chars != ''").fetchall():
@@ -390,12 +491,17 @@ def word_checks(con):
         else:
             rows.append(('', eid))
     con.executemany('UPDATE entry SET hv_check=? WHERE id=?', rows)
-    con.execute("UPDATE entry SET label='same' WHERE label='' AND origin='sino'")
+    con.execute("UPDATE entry SET label='same' WHERE label='' AND origin='sino' AND hv_check NOT IN ('differs', 'length')")
     con.execute("UPDATE entry SET label='native' WHERE label='' AND origin='vietic'")
     c = Counter(r for r, _ in rows)
     if rows:
         print(f"Sino-Vietnamese entries vs the Hán-Việt readings: {c['ok']} ok, {c['differs']} differ, "
-              f"{c['length']} with characters and syllables of different number, {c['']} not checkable")
+              f"{c['length']} with characters and syllables of different number (these two: suspects, `make lint`), "
+              f"{c['']} not checkable")
+    none = sorted({ch for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != ''") for ch in chars
+                   if not bridge.hv_readings(con, ch)})
+    if none:
+        print(f'characters of Sino-Vietnamese entries with NO Hán-Việt reading: {len(none)}: {" ".join(none[:80])}')
 
 
 def frequencies(con, raw, corpus):
@@ -465,11 +571,13 @@ def validate_syllables(con, raw):
 
 def build_bridge(con):
     rows = []
-    for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != ''").fetchall():
+    for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != '' AND hv_check NOT IN ('differs', "
+                                "'length')").fetchall():
         j = bridge.join(con, chars)
-        rows.append((chars, j['hv'], j['yue'], j['yue_by'], j['nan'], j['nan_by'], j['cmn'], j['cmn_by'], j['n']))
-    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?)', rows)
-    c = Counter(r[-1] for r in rows)
+        rows.append((chars, j['hv'], j['yue'], j['yue_by'], j['nan'], j['nan_by'], j['cmn'], j['cmn_by'], j['n'],
+                     j['nan_coll']))
+    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?)', rows)
+    c = Counter(r[-2] for r in rows)
     print(f'bridge: {len(rows)} distinct chữ Hán spellings; with 3 Chinese readings {c[3]}, 2 {c[2]}, 1 {c[1]}, 0 {c[0]}')
 
 
@@ -520,6 +628,9 @@ def main():
     print(f'fixture: {add.n} rows (test fixture, tools/fixtures/dict.yaml)')
     hv_crosscheck(con)
     validate_syllables(con, raw)
+    rank_chinese(con)
+    southern_variants(con)
+    unihan_fallback(con)
     word_checks(con)
     known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
     if sentences:

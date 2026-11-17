@@ -53,9 +53,11 @@ Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge note
 
 ## Word card (`DATA.dict[id]`, built only by `tools/cards.py`)
 Id: the word's key (lower-case NFC, spaces between syllables), `~tag` for a homograph, `name:` + surface for a name.
-Fields: `w`, `k`, `en`, `en_src` (course | written | dict:SOURCE | parts), `en_rank` (3/2/1/0), `chars`, `yue`
-(Jyutping), `nan` (Tâi-lô, literary reading), `cmn` (pinyin), `label`, `ex {vi, en}`, `parts` (syllable cards),
-`rank`, `audio`, `name`, `fixture`, `src`. Shown top to bottom: word and ▶, English (+ its source, and "not checked by
+Fields: `w`, `k`, `en`, `en_src` (course | written | dict:SOURCE | parts), `en_rank` (3/2/1/0), `chars`, `hv`
+(Hán-Việt per character, labelled), `yue` (Jyutping), `nan` (Tâi-lô LITERARY reading), `nan_coll` (the MOE word
+reading when it is not the literary one: "colloquial / everyday"), `cmn` (pinyin), `by_char`, `label`, `ex {vi, en}`,
+`other` (other etymologies of the spelling: en, chars), `parts` (syllable cards), `rank`, `audio`, `name`, `fixture`,
+`src`. English, characters, label and example of a card come from ONE etymology (`cards.senses`). Shown top to bottom: word and ▶, English (+ its source, and "not checked by
 a native speaker" for course English), chữ Hán with Cantonese / Taigi / Mandarin side by side, the label, the example.
 
 ## Database (`tools/schema.sql`, built by `tools/build_db.py`)
@@ -64,14 +66,26 @@ hv_check, label same|native|'', freq per billion, freq_rank), `example` (ref: Ta
 reading, kind hv|nom|hannom|unchecked, source, checked against the other Hán-Việt source), `chinese` (chars, lang
 yue|nan|cmn, reading, level word|char, share, note), `bridge` (one row per chữ Hán spelling of the entries).
 Loaders (`SOURCES`): wiktionary (kaikki: words, English, `vi-etym-sino` → chars, character readings by tag),
-thieuchuu (Hán-Việt per character; `Ð`→`Đ`), unihan (kVietnamese, `unchecked`), rime (Jyutping; chars with rime's %,
-words), moe (Tâi-lô: characters read literary 文讀=1 or unmarked 0, words 0/1; appendix types skipped), cedict (pinyin,
-numbers → marks; capitalised = `name`), tatoeba (examples, attached to the words vi.cut() finds, 2 per word), and the
+thieuchuu (Hán-Việt per character; `Ð`→`Đ`; heads with a stroke count `đại (5 n)` read), unihan (kVietnamese,
+`unchecked`; kMandarin → `mandarin_pref`), rime (Jyutping; chars with rime's %, words), moe (Tâi-lô: characters'
+literary 文讀=1 or unmarked 0 readings, words' own readings; accent variants `a/b` split; appendix types skipped),
+cedict (pinyin, traditional forms only, numbers → marks with the apostrophe and syllabic m/n/ng; capitalised =
+`name`), tatoeba (examples, attached to the words vi.cut() finds, 2 per word), and the
 Tatoeba Challenge test set (corpus for the counts only). A missing file: "source X not fetched", `meta.missing`.
-- **Bridge join** (`tools/bridge.py join()`, the same for cards, the `bridge` table and coverage): per language, the
-  whole word if the source has it, else character by character with every reading in brackets, main first
-  (`hok6 (saang1/sang1)`, `by_char` on the card, `*` in the Bridge tab), else missing. Nothing is chosen silently.
-- **Labels**: `same` = Wiktionary `vi-etym-sino`; `native` = inherited (`inh`) from Proto-Vietic/Mon-Khmer/
+- **Bridge join** (`tools/bridge.py join()`, the same for cards, the `bridge` table and coverage): Cantonese and
+  Mandarin: the whole word if the source has it, else character by character with every reading in brackets, main
+  first (`hok6 (saang1/sang1)`, `by_char` on the card, `*` in the Bridge tab), else missing. Taigi: the column is the
+  LITERARY reading (the layer that matches Hán-Việt), composed from the characters' literary readings; it is
+  "attested" when the MOE word entry reads the same; a different MOE word reading (生日 senn-ji̍t, 先生 sian-sinn) is
+  shown apart as "colloquial / everyday", never as literary. Mandarin order: Unihan kMandarin's reading first, then
+  the number of CC-CEDICT words using the reading; surname/place readings dropped when there are others.
+- **Hán-Việt** (`tools/hanviet.py`): Northern standard first; Thiều Chửu's Southern forms (sanh, chánh, võ…) come
+  after, labelled "Southern variant"; where only the Southern form exists the Northern one is derived by the rule
+  table (label "derived"); a character no Hán-Việt source reads gets Unihan's readings of Hán-Việt shape, labelled
+  "unchecked, Unihan"; else "— (no Hán-Việt reading)", listed by `make lint` and `make coverage`. A Wiktionary
+  analysis whose characters do not match the syllables (`hv_check` differs/length) is not shown as "same word";
+  `make lint` lists it.
+- **Labels**: `same` = Wiktionary `vi-etym-sino` whose characters match the syllables; `native` = inherited (`inh`) from Proto-Vietic/Mon-Khmer/
   Austroasiatic; `false-friend` only from `course/false_friends.tsv` (cards.py); borrowings and unknown: no label.
 - **Frequency** (`tools/freq.py`): each syllable's frequency (wordfreq, else FrequencyWords) is divided among the
   dictionary words containing it in the proportions seen in a corpus cut by underthesea (Tatoeba, Wiktionary

@@ -55,6 +55,13 @@ for top in (100, 300, 1000):
     print(f'  top {top:>4}: Hán-Việt {sum(1 for r in part if r[3])}, all three readings '
           f'{sum(1 for r in part if r[3] and r[5] == 3)}, English {sum(r[2] for r in part)}')
 
+# characters of the frequent Hán-Việt words that no source reads in Hán-Việt (shown "—" on the card, never "?")
+sys.path.insert(0, HERE)
+import bridge  # noqa: E402
+none = sorted({c for r in hv for (ch,) in con.execute("SELECT DISTINCT chars FROM entry WHERE key=? AND chars != ''",
+                                                     (r[0],)) for c in ch if not bridge.hv_readings(con, c)})
+print(f"  characters with no Hán-Việt reading: {len(none)}{': ' + ' '.join(none) if none else ''}")
+
 # the lessons
 seen = set()
 for d in course.lessons():

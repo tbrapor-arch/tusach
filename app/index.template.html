@@ -583,7 +583,8 @@ function wireExercises(ex, root) {
 }
 
 // ---------- word card, top to bottom (handover section 5): the word and its audio; English; for a Hán-Việt word the
-// characters, then Cantonese (Jyutping), Taigi (Tâi-lô, literary) and Mandarin (pinyin); the label; an example
+// characters, then Cantonese (Jyutping), Taigi (Tâi-lô: the literary reading, the colloquial word reading apart) and
+// Mandarin (pinyin); the label; an example; other words of the same spelling (other etymologies)
 function enSrc(c) {
   const s = c.en_src || '';
   if (s === 'course' || s === 'written') return 'Written for the course · not checked by a native speaker';
@@ -600,13 +601,15 @@ function openCard(id, w) {
     const lk = listHere(), onL = inList(lk, id), alsoL = Object.keys(lists).filter(k => k !== lk && inList(k, id));
     const addBtn = `<button class="wc-add ${onL ? 'on' : ''}" id="add-card" data-list="${esc(lk)}" aria-pressed="${onL}" aria-label="${onL ? `In ${esc(listTitle(lk))}: tap to remove` : `Add to ${esc(listTitle(lk))}`}"><svg viewBox="0 0 24 24" fill="${onL ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>${esc(listTitle(lk))}</span></button>`;
     const audio = c.name ? '' : c.audio ? `<button class="btn small line wc-play" id="play" aria-label="Play the recording">▶ Listen</button>` : `<button class="btn small line wc-play" disabled title="No recording source yet">▶ No recording yet</button>`;
-    const zh = [['yue', 'Cantonese'], ['nan', 'Taigi'], ['cmn', 'Mandarin']];
+    const zh = [['yue', 'Cantonese'], ['nan', 'Taigi (literary)'], ['cmn', 'Mandarin']];
     sh.innerHTML = top(c.w, audio, addBtn) + `
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>
       ${c.chars ? `<div class="wc-sec"><h3>Hán-Việt · the Chinese word</h3><div class="wc-chars">${esc(c.chars)}</div>
         ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
-        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div></div>` : ''}
+        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div>
+        ${c.nan_coll ? `<div class="wc-src">Taigi, colloquial / everyday (the MOE's reading of the word): ${esc(c.nan_coll)}</div>` : ''}</div>` : ''}
+      ${c.other && c.other.length ? `<div class="wc-sec"><h3>Same spelling, another word</h3>${c.other.map(o => `<div class="wc-src">${esc(o.en || '')}${o.chars ? ` <span class="han">${esc(o.chars)}</span>` : ''}</div>`).join('')}</div>` : ''}
       ${c.ff ? `<div class="wc-src">False friend: ${esc(c.ff)}</div>` : ''}
       ${pt ? `<div class="row"><span class="pill ${pc}">${pt}</span>${c.rank ? `<span class="sub" style="font-size:.8rem">#${c.rank} most common</span>` : ''}</div>` : c.name ? '<div class="row"><span class="pill p-native">Name</span></div>' : ''}
       ${c.ex ? `<div class="wc-sec wc-ex"><h3>Example</h3><div class="v">${esc(c.ex.vi)}</div><div class="e">${esc(c.ex.en || '')}</div>${c.ex.src ? `<div class="wc-src">${esc(c.ex.src)}</div>` : ''}</div>` : ''}
@@ -782,7 +785,7 @@ function showBridge() {
   const ids = DATA.bridge.filter(id => DATA.dict[id]), m = $('#main');
   m.innerHTML = `<div class="col">${pracHead('bridge', 'Hán-Việt words and the Chinese you already know')}
     <div class="banner">The sound-correspondence drills are not built yet. Readings marked * are built character by character (the source lacks the whole word).</div>
-    ${ids.length ? `<div class="vwrap"><table class="vtable"><thead><tr><th>Word</th><th>Chữ Hán</th><th>Cantonese</th><th>Taigi</th><th>Mandarin</th></tr></thead><tbody>
+    ${ids.length ? `<div class="vwrap"><table class="vtable"><thead><tr><th>Word</th><th>Chữ Hán</th><th>Cantonese</th><th>Taigi (literary)</th><th>Mandarin</th></tr></thead><tbody>
       ${ids.map(id => { const c = DATA.dict[id]; return `<tr data-word="${esc(id)}" tabindex="0"><td class="vw">${esc(c.w)}${c.fixture ? ' <span class="pill p-fx">fixture</span>' : ''}</td><td class="vh">${esc(c.chars)}</td>${['yue', 'nan', 'cmn'].map(k => `<td class="vr">${esc(c[k] || '')}${(c.by_char || []).includes(k) ? '*' : ''}</td>`).join('')}</tr>`; }).join('')}</tbody></table></div>`
       : '<p class="sub">No Hán-Việt word in the cards yet.</p>'}</div>`;
   wireGo(m);

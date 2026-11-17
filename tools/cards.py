@@ -18,7 +18,9 @@ A token is {'p': text} (punctuation, spaces, numbers) or {'w': {'t': surface, 'i
 card is kept in the store's `missing` list and fails tools/check_cards.py: "no word without a card".
 
 Card (JSON, in the page's DATA.dict): w (the word), k (key), en, en_src, en_rank, chars (chữ Hán, Hán-Việt words only),
-yue / nan / cmn (Jyutping, Tâi-lô literary, pinyin; tools/bridge.py), hv (Hán-Việt readings per character), by_char
+yue / nan / cmn (Jyutping, Tâi-lô LITERARY reading, pinyin; tools/bridge.py), nan_coll (the MOE word reading when it is
+not the literary one: colloquial / everyday), hv (Hán-Việt readings per character, labelled), other (the other
+etymologies of the spelling: en, chars), by_char
 (languages built character by character), label (same | false-friend | native | ''), ff (false-friend note), ex {vi, en},
 parts (syllable card ids), name (1 for a person or place name), fixture (1 if only the test fixture has it), src.
 """
@@ -115,10 +117,49 @@ def _bridge(chars):
     j = bridge.join(con, chars)
     out = {lang: j[lang] for lang in bridge.LANGS if j[lang]}
     out['hv'] = j['hv']
+    if j['nan_coll']:
+        out['nan_coll'] = j['nan_coll']          # the MOE word reading, colloquial / everyday (never as literary)
     by_char = [lang for lang in bridge.LANGS if j[lang] and j[lang + '_by'] == 'char' and len(chars) > 1]
     if by_char:
         out['by_char'] = by_char
     return out
+
+
+def senses(rows):
+    """The dictionary rows of one key grouped by etymology (source + Wiktionary etymology number), main one first: real
+    sources before the fixture, then the English source order (english.SOURCE_RANK), then the etymology number. The
+    characters, label, English and example of a card all come from ONE group, so two homographs are never mixed
+    (sung 'cluster fig' never gets the 充 of sung 'to fill')."""
+    groups = {}
+    for r in rows:
+        groups.setdefault((r['source'], r['src_id']), []).append(r)
+    order = {s: i for i, s in enumerate(english.SOURCE_RANK)}
+
+    def k(item):
+        (src, sid), rs = item
+        return (rs[0]['fixture'], order.get(src, len(order)), int(sid) if str(sid).isdigit() else 0, rs[0]['id'])
+    return [rs for _, rs in sorted(groups.items(), key=k)]
+
+
+def _group_en(rs):
+    gl = []
+    for r in rs:
+        for g in (r['english'] or '').split('; '):
+            if g and g not in gl:
+                gl.append(g)
+    return '; '.join(gl[:4])
+
+
+def _group_chars(rs):
+    """(chars, label) of one etymology; an analysis that does not match the syllables (hv_check differs or length) is
+    not shown (build_db word_checks; `make lint` lists it)."""
+    for r in rs:
+        if r['chars'] and r['hv_check'] not in ('differs', 'length'):
+            return r['chars'], r['label']
+    return '', next((r['label'] for r in rs if r['label'] and not r['chars']), '')
+
+
+COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_rank', 'src_id', 'hv_check')
 
 
 def lookup(k, tag=None, surface=None):
@@ -126,17 +167,23 @@ def lookup(k, tag=None, surface=None):
     cid = vi.card_id(k, tag)
     if cid in dictionary:
         return cid
-    rows = con.execute("SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank "
-                       "FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? AND (?='' OR e.tag=?) "
-                       "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k, tag or '', tag or '')).fetchall()
+    rows = [dict(zip(COLS, r)) for r in con.execute(
+        "SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank, e.src_id, e.hv_check "
+        "FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? AND (?='' OR e.tag=?) "
+        "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k, tag or '', tag or '')).fetchall()]
     course = COURSE.get(cid, {})
     if not rows and not course:
         return None
-    card = {'w': course.get('w') or (rows[0][0] if rows else (surface or k).replace('_', ' ')), 'k': k}
+    groups = senses(rows)
+    if course.get('chars'):          # the course names the etymology by its characters
+        groups.sort(key=lambda g: not any(r['chars'] == course['chars'] for r in g))
+    main = groups[0] if groups else []
+    card = {'w': course.get('w') or (main[0]['word'] if main else (surface or k).replace('_', ' ')), 'k': k}
     if tag:
         card['tag'] = tag
-    chars = course.get('chars') or next((r[2] for r in rows if r[2]), '')
-    label = course.get('label') or next((r[3] for r in rows if r[3]), '')
+    gchars, glabel = _group_chars(main)
+    chars = course.get('chars') or gchars
+    label = course.get('label') or (glabel if not course.get('chars') or chars == gchars else '')
     if chars:
         card['chars'] = chars
         card.update(_bridge(chars))
@@ -147,24 +194,29 @@ def lookup(k, tag=None, surface=None):
             card['ff'] = ff
     if label:
         card['label'] = label
-    if rows and all(r[5] for r in rows):     # only the test fixture has the word: the card says so
+    if rows and all(r['fixture'] for r in rows):     # only the test fixture has the word: the card says so
         card['fixture'] = 1
     if rows:
-        card['src'] = sorted({r[4] for r in rows})
-        rank = next((r[7] for r in rows if r[7]), None)
+        card['src'] = sorted({r['source'] for r in rows})
+        rank = next((r['freq_rank'] for r in rows if r['freq_rank']), None)
         if rank:
             card['rank'] = rank
-        ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE entry_id IN ({','.join('?' * len(rows))}) "
-                         "ORDER BY id LIMIT 1", [r[6] for r in rows]).fetchone()
+        ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE entry_id IN ({','.join('?' * len(main))}) "
+                         "ORDER BY id LIMIT 1", [r['id'] for r in main]).fetchone()
         if ex:
             card['ex'] = {'vi': ex[0], 'en': ex[1]}
             if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
                 card['ex']['src'] = ex[2] + (' ' + ex[3] if ex[3] else '')
+        other = [{'en': _group_en(g), **({'chars': _group_chars(g)[0]} if _group_chars(g)[0] else {})}
+                 for g in groups[1:] if _group_en(g) and not g[0]['fixture']]
+        if other:
+            card['other'] = other         # the other etymologies of this spelling, each with its own English and chars
     syls = k.split()
     if len(syls) > 1:
         card['parts'] = [p for p in (lookup(s) for s in syls) if p]
     parts = [(dictionary[p].get('en'), dictionary[p].get('en_src')) for p in card.get('parts', [])]
-    en, src = ENGLISH.gloss(cid, k, tag, parts if len(parts) == len(syls) else ())
+    den = (_group_en(main), f"dict:{main[0]['source']}") if main and _group_en(main) else None
+    en, src = ENGLISH.gloss(cid, k, tag, parts if len(parts) == len(syls) else (), dict_entry=den)
     card['en'], card['en_src'], card['en_rank'] = en, src, english.rank(src)
     dictionary[cid] = card
     return cid

@@ -30,6 +30,10 @@ get thieuchuu thieuchuu/TudienThienChuu.tab \
 get unihan unihan/kVietnamese.txt \
   https://raw.githubusercontent.com/unicode-org/unicodetools/ccc86e576dcadf94ef9f86969e7b5cb51e432ddc/unicodetools/data/ucd/18.0.0/Unihan/kVietnamese.txt \
   d1214bfda23e7e6d8a581157655ca3769cdfbb6fd6829ae22261f9796e915789
+# Unihan kMandarin (same commit): the customary Mandarin reading of a character, the first key of the pinyin order.
+get unihan unihan/kMandarin.txt \
+  https://raw.githubusercontent.com/unicode-org/unicodetools/ccc86e576dcadf94ef9f86969e7b5cb51e432ddc/unicodetools/data/ucd/18.0.0/Unihan/kMandarin.txt \
+  9ad8daabbc1ce618eed4be08476c0d0d68ad8955576ab38cf31b4305ab31706f
 
 # --- Cantonese: rime-cantonese (CC BY 4.0 for the files used; jyut6ping3.maps is ODbL and not read). Same commit as
 # the Cantonese app (pyue).
