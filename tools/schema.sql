@@ -52,10 +52,14 @@ CREATE INDEX example_entry ON example(entry_id);
 -- Hán-Việt and Nôm not told apart) | unchecked (Unihan kVietnamese: mixes both, last resort). ord: the source's order.
 -- checked (hv rows): 1 the other Hán-Việt source (Wiktionary <-> Thiều Chửu) has the same reading, 0 it has the
 -- character without this reading, NULL it lacks the character.
--- label: '' | southern (a Southern form, e.g. sanh, chánh: shown after the Northern one) | derived (the Northern form
+-- label: '' | attested (read so by Wiktionary's Sino-Vietnamese words, tools/build_db.py hannom_attested) | romanization
+-- (a Wiktionary entry "Sino-Vietnamese reading of X") | southern (a Southern form, e.g. sanh, chánh: shown after the Northern one) | derived (the Northern form
 -- derived from a Southern one by tools/hanviet.py SOUTHERN; source 'derived') | fallback (a Unihan reading of the right
 -- shape for a character no Hán-Việt source reads; shown as "unchecked (Unihan)").
-CREATE TABLE hanviet(char TEXT, reading TEXT, kind TEXT, source TEXT, ord INT, checked INT, label TEXT DEFAULT '');
+-- use: how many Wiktionary Sino-Vietnamese words (hv_check ok) read the character so (tone-mark placement and i/y
+-- ignored): the display order of a character's Northern readings (Wiktionary lists them alphabetically: 員 vân/viên).
+CREATE TABLE hanviet(char TEXT, reading TEXT, kind TEXT, source TEXT, ord INT, checked INT, label TEXT DEFAULT '',
+                     use INT DEFAULT 0);
 CREATE INDEX hanviet_char ON hanviet(char);
 
 -- the Chinese side of the bridge. lang = yue (Cantonese, Jyutping), nan (Taigi, Tâi-lô), cmn (Mandarin, pinyin).
@@ -74,11 +78,15 @@ CREATE TABLE mandarin_pref(char TEXT, reading TEXT, ord INT);
 -- how many CC-CEDICT words (traditional) read the character so: the second key of the Mandarin order
 CREATE TABLE cmn_use(char TEXT, reading TEXT, n INT);
 CREATE INDEX chinese_chars ON chinese(chars);
+-- Unihan kSemanticVariant / kZVariant: variant forms of a character (爲 為), both directions (tools/bridge.py spellings)
+CREATE TABLE variant(char TEXT, var TEXT);
+CREATE INDEX variant_char ON variant(char);
 
 -- the bridge join on characters (tools/bridge.py join()), one row per distinct chars of the entries: the readings shown
 -- on the card, and how each was obtained: word (the whole word in the source) | char (built character by character) |
 -- '' (missing: the source lacks the word and at least one of its characters). n: languages present (0-3).
 -- nan is the LITERARY (文讀) reading, composed from the characters' literary readings; nan_by = word when the MOE word
 -- entry reads the word exactly so (attested); nan_coll = the MOE word reading when it differs (colloquial / everyday).
+-- via: the variant spelling under which some Chinese reading was found ('' when the word's own characters gave all)
 CREATE TABLE bridge(chars TEXT PRIMARY KEY, hv TEXT, yue TEXT, yue_by TEXT, nan TEXT, nan_by TEXT, cmn TEXT,
-                    cmn_by TEXT, n INT, nan_coll TEXT);
+                    cmn_by TEXT, n INT, nan_coll TEXT, via TEXT);

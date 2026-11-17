@@ -257,6 +257,18 @@ def load_unihan(raw, add):
         for c in range(int(a, 16), int(b or a, 16) + 1):
             add.con.executemany('INSERT INTO mandarin_pref VALUES (?,?,?)',
                                 [(chr(c), vi.nfc(r), i) for i, r in enumerate(val.split())])
+    pairs = set()
+    for name in ('kSemanticVariant.txt', 'kZVariant.txt'):
+        for line in open(need(raw, 'unihan', name), encoding='utf-8'):
+            if line.startswith('#') or '\t' not in line:
+                continue
+            cp, val = line.rstrip('\n').split('\t')
+            a = chr(int(cp.split('..')[0], 16))
+            for m in re.finditer(r'U\+([0-9A-F]+)', val):
+                b = chr(int(m.group(1), 16))
+                if a != b:
+                    pairs |= {(a, b), (b, a)}
+    add.con.executemany('INSERT INTO variant VALUES (?,?)', sorted(pairs))
     for line in open(need(raw, 'unihan', 'kVietnamese.txt'), encoding='utf-8'):
         if line.startswith('#') or '\t' not in line:
             continue
@@ -297,7 +309,11 @@ MOE_WORD_TYPES = {'1', '2', '3', '5'}       # 屬性: main entries, single chara
 
 
 def load_moe(raw, add):
+    """Taigi readings. A character's literary layer: its readings marked literary (文白屬性 1); only when it has none, its
+    unmarked ones (0). On the first real build the unmarked readings of characters that also have a literary one were
+    colloquial words: 共 kā "with" beside 共 kiōng, 過 koh "again" beside 過 kò, which made 黨共產 tóng-(kā/kiōng)-sán."""
     path = need(raw, 'moedict-data-twblg', 'uni', '詞目總檔.csv')
+    chars = defaultdict(list)                 # char -> [(reading, wb)] in the MOE's order
     for r in csv.DictReader(open(path, encoding='utf-8')):
         if r['屬性'] not in MOE_WORD_TYPES:
             continue
@@ -308,9 +324,13 @@ def load_moe(raw, add):
         for v in [x.strip() for x in t.split('/') if x.strip()]:
             if len(h) == 1:
                 if wb in ('1', '0'):              # 1 literary (文讀), 0 no literary/colloquial split
-                    add.chinese(h, 'nan', v, 'char', note='literary' if wb == '1' else 'unmarked')
+                    chars[h].append((v, wb))
             elif wb in ('0', '1'):                # the word's own reading (often colloquial: 生日 senn-ji̍t)
                 add.chinese(h, 'nan', v, 'word', note='literary' if wb == '1' else '')
+    for h, rs in chars.items():
+        lit = [x for x in rs if x[1] == '1']
+        for v, wb in (lit or rs):
+            add.chinese(h, 'nan', v, 'char', note='literary' if wb == '1' else 'unmarked')
 
 
 # ---------------------------------------------------------------------------------------------- CC-CEDICT
@@ -403,7 +423,7 @@ SOURCES = [
     {'id': 'thieuchuu', 'name': 'Thiều Chửu, Hán Việt tự điển (catusf/tudien)', 'version': 'a7dd918',
      'licence': 'public domain in Vietnam; repository CC0 1.0', 'url': 'https://github.com/catusf/tudien',
      'commercial_ok': True, 'load': load_thieuchuu},
-    {'id': 'unihan', 'name': 'Unihan kVietnamese (Unicode 18.0.0)', 'version': 'unicodetools ccc86e5',
+    {'id': 'unihan', 'name': 'Unihan kVietnamese, kMandarin, kSemanticVariant, kZVariant (Unicode 18.0.0)', 'version': 'unicodetools ccc86e5',
      'licence': 'Unicode License v3', 'url': 'https://github.com/unicode-org/unicodetools', 'commercial_ok': True,
      'load': load_unihan},
     {'id': 'rime', 'name': 'rime-cantonese (CanCLID)', 'version': '259f0e4', 'licence': 'CC BY 4.0',
@@ -513,7 +533,7 @@ def southern_variants(con):
     affected = []
     for rid, ch, r in rows:
         north = hanviet.southern(r, mand.get(ch, ()))
-        if not north:
+        if not north or (north not in have[ch] and vi.key(r) in hanviet.NO_DERIVE):
             continue
         con.execute("UPDATE hanviet SET label='southern' WHERE rowid=?", (rid,))
         if north in have[ch]:
@@ -660,6 +680,19 @@ def freq_key(k):
     return f
 
 
+def hv_usage(con):
+    """hanviet.use: how many Wiktionary Sino-Vietnamese words whose syllables match their characters (hv_check ok) read
+    each character with each reading. It orders a character's readings (tools/bridge.py hv_readings): Wiktionary lists
+    them alphabetically (員 vân/viên, 義 ngãi/nghì/nghĩa), Thiều Chửu by its own order."""
+    use = Counter()
+    for k, chars in con.execute("SELECT DISTINCT key, chars FROM entry WHERE hv_check='ok'"):
+        for s, c in zip(check_syllables(k), chars):
+            use[(c, rkey(s))] += 1
+    rows = [(use[(c, rkey(r))], rid) for rid, c, r in con.execute("SELECT rowid, char, reading FROM hanviet WHERE kind='hv'")
+            if use[(c, rkey(r))]]
+    con.executemany('UPDATE hanviet SET use=? WHERE rowid=?', rows)
+
+
 def frequencies(con, raw, corpus):
     """entry.freq and freq_rank (tools/freq.py). A key is ranked under freq_key(); a hyphenated spelling whose spaced
     form is also a key (thế-giới / thế giới) gets the same freq but no rank of its own, so a word is counted once."""
@@ -747,10 +780,11 @@ def build_bridge(con):
                                 "'length')").fetchall():
         j = bridge.join(con, chars)
         rows.append((chars, j['hv'], j['yue'], j['yue_by'], j['nan'], j['nan_by'], j['cmn'], j['cmn_by'], j['n'],
-                     j['nan_coll']))
-    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?)', rows)
-    c = Counter(r[-2] for r in rows)
-    print(f'bridge: {len(rows)} distinct chữ Hán spellings; with 3 Chinese readings {c[3]}, 2 {c[2]}, 1 {c[1]}, 0 {c[0]}')
+                     j['nan_coll'], j.get('via', '')))
+    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?,?)', rows)
+    c = Counter(r[8] for r in rows)
+    print(f'bridge: {len(rows)} distinct chữ Hán spellings; with 3 Chinese readings {c[3]}, 2 {c[2]}, 1 {c[1]}, 0 {c[0]}; '
+          f'{sum(1 for r in rows if r[-1])} found partly under a variant spelling (Unihan)')
 
 
 def main():
@@ -805,6 +839,7 @@ def main():
     southern_variants(con)
     unihan_fallback(con)
     word_checks(con)
+    hv_usage(con)
     known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
     if sentences:
         attach_examples(con, sentences, known)

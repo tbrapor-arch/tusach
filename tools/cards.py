@@ -119,6 +119,8 @@ def _bridge(chars):
     out['hv'] = j['hv']
     if j['nan_coll']:
         out['nan_coll'] = j['nan_coll']          # the MOE word reading, colloquial / everyday (never as literary)
+    if j.get('via'):
+        out['via'] = j['via']                    # readings found under a variant spelling (Unihan): 行爲 -> 行為
     by_char = [lang for lang in bridge.LANGS if j[lang] and j[lang + '_by'] == 'char' and len(chars) > 1]
     if by_char:
         out['by_char'] = by_char

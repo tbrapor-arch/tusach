@@ -94,48 +94,84 @@ def _by_char(per, lang, n):
                           for rs in per)
 
 
+def variants(con, ch):
+    """Variant forms of a character (Unihan kSemanticVariant / kZVariant, both directions): 爲 -> 為."""
+    try:
+        return [v for (v,) in con.execute('SELECT var FROM variant WHERE char=? ORDER BY var', (ch,))]
+    except Exception:                                   # a database built before the table existed
+        return []
+
+
+def spellings(con, chars, limit=8):
+    """The word's own characters first, then the same word with characters replaced by their variant forms (Wiktionary
+    writes 行爲, 祕密, 墻; the Chinese sources 行為, 秘密, 牆): at most `limit` spellings."""
+    opts = [[c] + variants(con, c) for c in chars]
+    return [''.join(p) for p in itertools.islice(itertools.product(*opts), limit)]
+
+
+def _char_rows(con, ch, lang, level_first, names=False):
+    """(readings, the form they were found under) of one character: its own, else a variant's."""
+    for form in [ch] + variants(con, ch):
+        rs = _uniq(_rows(con, form, lang, level_first, names) or
+                   (_rows(con, form, lang, 'word', names) if level_first == 'char' and lang != 'nan' else []))
+        if rs:
+            return rs, form
+    return [], ch
+
+
 def lang_reading(con, chars, lang, names=False):
-    """(reading shown, how: 'word' | 'char' | '') for Cantonese and Mandarin."""
+    """(reading shown, how: 'word' | 'char' | '', the spelling it was found under) for Cantonese and Mandarin."""
     if len(chars) > 1:
-        w = _uniq(_rows(con, chars, lang, 'word', names))
-        if w:
-            return ' / '.join(w), 'word'
-    per = []
+        for sp in spellings(con, chars):
+            w = _uniq(_rows(con, sp, lang, 'word', names))
+            if w:
+                return ' / '.join(w), 'word', sp
+    per, forms = [], ''
     for ch in chars:
-        rs = _uniq(_rows(con, ch, lang, 'char', names) or _rows(con, ch, lang, 'word', names))
+        rs, form = _char_rows(con, ch, lang, 'char', names)
         if not rs:
-            return '', ''
+            return '', '', chars
         per.append(rs)
-    return _by_char(per, lang, len(chars)), 'char'
+        forms += form
+    return _by_char(per, lang, len(chars)), 'char', forms
 
 
 def taigi(con, chars):
-    """(literary reading, how: 'word' attested | 'char' composed | '', colloquial / everyday word reading or '')."""
-    per = []
+    """(literary reading, how: 'word' attested | 'char' composed | '', colloquial / everyday word reading or '', the
+    spelling it was found under)."""
+    per, forms = [], ''
     for ch in chars:
-        rs = _uniq(_rows(con, ch, 'nan', 'char'))
+        rs, form = _char_rows(con, ch, 'nan', 'char')
         if not rs:
             per = None
             break
         per.append(rs)
-    word = _uniq(_rows(con, chars, 'nan', 'word')) if len(chars) > 1 else []
+        forms += form
+    word, wsp = [], chars
+    if len(chars) > 1:
+        for sp in spellings(con, chars):
+            word = _uniq(_rows(con, sp, 'nan', 'word'))
+            if word:
+                wsp = sp
+                break
     if per is None:
-        return '', '', ' / '.join(word)
+        return '', '', ' / '.join(word), wsp
     combos = {'-'.join(c).lower() for c in itertools.product(*per)} if len(chars) > 1 else set()
     attested = [w for w in word if w.lower() in combos]
     if attested:
         coll = [w for w in word if w.lower() not in combos]
-        return attested[0], 'word', ' / '.join(coll)
-    return _by_char(per, 'nan', len(chars)), 'char', ' / '.join(word)
+        return attested[0], 'word', ' / '.join(coll), wsp
+    return _by_char(per, 'nan', len(chars)), 'char', ' / '.join(word), forms
 
 
 def hv_readings(con, ch, labels=False):
-    """Hán-Việt readings of one character in display order: the Northern standard first (Wiktionary, then Thiều Chửu,
-    or the Northern form derived from a Southern one), Southern variants after; when no Hán-Việt source reads the
+    """Hán-Việt readings of one character in display order: the Northern standard first, the most used first (hanviet.use:
+    how many Sino-Vietnamese words read it so; then Wiktionary, Thiều Chửu or the Northern form derived from a Southern
+    one), Southern variants after; when no Hán-Việt source reads the
     character, Unihan's readings of Hán-Việt shape. labels=True: [(reading, label)]."""
     rows = con.execute(
         "SELECT h.reading, s.fixture, h.label FROM hanviet h JOIN source s ON s.id = h.source WHERE h.char=? "
-        "AND (h.kind='hv' OR h.label='fallback') ORDER BY h.label='fallback', h.label='southern', "
+        "AND (h.kind='hv' OR h.label='fallback') ORDER BY h.label='fallback', h.label='southern', h.use DESC, "
         "CASE h.source WHEN 'wiktionary' THEN 0 WHEN 'derived' THEN 1 ELSE 2 END, h.ord, h.reading", (ch,)).fetchall()
     real = [(r, lb) for r, fx, lb in rows if not fx]
     rows = real or [(r, lb) for r, _, lb in rows]
@@ -159,12 +195,18 @@ def hv_text(con, chars):
 
 
 def join(con, chars, names=False):
+    """The bridge row of a chữ Hán spelling. `via`: the variant spelling under which a reading was found, when the
+    word's own characters did not give it ('' otherwise)."""
     out = {'hv': hv_text(con, chars), 'hv_missing': [c for c in chars if not hv_readings(con, c)], 'n': 0}
+    via = []
     for lang in LANGS:
         if lang == 'nan':
-            r, by, out['nan_coll'] = taigi(con, chars)
+            r, by, out['nan_coll'], sp = taigi(con, chars)
         else:
-            r, by = lang_reading(con, chars, lang, names)
+            r, by, sp = lang_reading(con, chars, lang, names)
         out[lang], out[lang + '_by'] = r, by
         out['n'] += bool(r)
+        if r and sp != chars and sp not in via:
+            via.append(sp)
+    out['via'] = ' / '.join(via)
     return out

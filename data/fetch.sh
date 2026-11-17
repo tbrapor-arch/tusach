@@ -36,6 +36,15 @@ get unihan unihan/kMandarin.txt \
   https://raw.githubusercontent.com/unicode-org/unicodetools/ccc86e576dcadf94ef9f86969e7b5cb51e432ddc/unicodetools/data/ucd/18.0.0/Unihan/kMandarin.txt \
   9ad8daabbc1ce618eed4be08476c0d0d68ad8955576ab38cf31b4305ab31706f
 
+# Unihan kSemanticVariant and kZVariant (same commit): a character's variant forms (爲/為, 祕/秘, 墻/牆), so that a word
+# written with one form in Wiktionary finds its Chinese readings under the other (tools/bridge.py spellings()).
+get unihan unihan/kSemanticVariant.txt \
+  https://raw.githubusercontent.com/unicode-org/unicodetools/ccc86e576dcadf94ef9f86969e7b5cb51e432ddc/unicodetools/data/ucd/18.0.0/Unihan/kSemanticVariant.txt \
+  cfb96b0f8eba6adfeccfedba9fab41e0a2b6656bbe205e21ba4b37c20b92f025
+get unihan unihan/kZVariant.txt \
+  https://raw.githubusercontent.com/unicode-org/unicodetools/ccc86e576dcadf94ef9f86969e7b5cb51e432ddc/unicodetools/data/ucd/18.0.0/Unihan/kZVariant.txt \
+  d9c00343416f50c5af81765e36f2d0890bc1fe00804c913135dd0aef34b2c3df
+
 # --- Cantonese: rime-cantonese (CC BY 4.0 for the files used; jyut6ping3.maps is ODbL and not read). Same commit as
 # the Cantonese app (pyue).
 fetch rime rime-cantonese https://github.com/rime/rime-cantonese.git 259f0e48bba840c3a2e0d117539e96937f3d89bc

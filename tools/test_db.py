@@ -126,7 +126,7 @@ con.executemany("INSERT INTO chinese VALUES (?,?,?,'s',?,?,?,?,NULL)", [
     ('行', 'yue', 'hang4', 'char', None, '', 1), ('行', 'yue', 'haang4', 'char', 5, '', 3),
     ('銀行', 'cmn', 'yínháng', 'word', None, '', 1), ('銀', 'cmn', 'yín', 'char', None, '', 1),
     ('行', 'cmn', 'Háng', 'char', None, 'name', 1), ('行', 'cmn', 'xíng', 'char', None, '', 2)])
-con.executemany("INSERT INTO hanviet VALUES (?,?,'hv','s',?,NULL,'')", [('銀', 'ngân', 0), ('行', 'hành', 0), ('行', 'hàng', 1)])
+con.executemany("INSERT INTO hanviet VALUES (?,?,'hv','s',?,NULL,'',0)", [('銀', 'ngân', 0), ('行', 'hành', 0), ('行', 'hàng', 1)])
 j = bridge.join(con, '銀行')
 ok(j['yue'] == 'ngan4 (hang4/hong4/haang4)' and j['yue_by'] == 'char',
    'built by character: every reading kept, main reading first, then by share')
@@ -135,6 +135,16 @@ ok(j['nan'] == '' and j['nan_by'] == '' and j['n'] == 2, 'a missing language sta
 ok(j['hv'] == '銀 ngân · 行 hành/hàng', 'Hán-Việt readings per character')
 ok(bridge.join(con, '行')['cmn'] == 'xíng', 'a surname reading is dropped when there are others')
 ok('Háng' in bridge.join(con, '行', names=True)['cmn'], '… and kept for a name')
+
+# 3a. a variant spelling (Unihan kSemanticVariant): Wiktionary's 行爲 finds CC-CEDICT's 行為, and says so; usage order
+con.executemany("INSERT INTO variant VALUES (?,?)", [('爲', '為'), ('為', '爲')])
+con.execute("INSERT INTO chinese VALUES ('行為', 'cmn', 'xíngwéi', 's', 'word', NULL, '', 1, NULL)")
+j = bridge.join(con, '行爲')
+ok(j['cmn'] == 'xíngwéi' and j['cmn_by'] == 'word' and j['via'] == '行為', 'a variant spelling finds the word, via 行為')
+ok(bridge.join(con, '銀行')['via'] == '', 'no variant needed: via empty')
+con.execute("UPDATE hanviet SET use=5 WHERE char='行' AND reading='hàng'")
+ok(bridge.hv_readings(con, '行') == ['hàng', 'hành'], 'Hán-Việt readings: the one more Sino-Vietnamese words use first')
+con.execute("UPDATE hanviet SET use=0")
 
 # 3b. Taigi: the literary reading composed from the characters; the MOE word reading, if different, is colloquial
 con.executemany("INSERT INTO chinese VALUES (?,'nan',?,'s',?,NULL,?,?,NULL)", [
@@ -149,15 +159,30 @@ ok(j['nan'] == 'sian-sing' and j['nan_coll'] == 'sian-sinn', 'Taigi 先生: sian
 j = bridge.join(con, '學生')
 ok(j['nan'] == 'ha̍k-sing' and j['nan_by'] == 'word' and j['nan_coll'] == '', 'Taigi 學生: the word reading attests the literary one')
 
+# 3b'. MOE loader: a character's unmarked readings are used only when it has no literary one (rows copied from the
+# MOE dictionary, 詞目總檔.csv, CC BY-ND 3.0 TW: 共 kā 0 / kiōng 1, 高 ko 0, 過 kò 1 / koh 0)
+import build_db  # noqa: E402
+with tempfile.TemporaryDirectory() as tmp:
+    os.makedirs(os.path.join(tmp, 'moedict-data-twblg', 'uni'))
+    open(os.path.join(tmp, 'moedict-data-twblg', 'uni', '詞目總檔.csv'), 'w', encoding='utf-8').write(
+        '主編碼,屬性,詞目,音讀,文白屬性,部首\n1,1,共,kā,0,八\n2,1,共,kiōng,1,八\n3,1,高,ko,0,高\n4,1,過,kò,1,辵\n'
+        '5,2,過,koh,0,辵\n')
+    mc = sqlite3.connect(':memory:')
+    mc.executescript(open(os.path.join(HERE, 'schema.sql'), encoding='utf-8').read())
+    build_db.load_moe(tmp, build_db.Adder(mc, 'moe'))
+    got = {(c, r) for c, r in mc.execute("SELECT chars, reading FROM chinese WHERE level='char'")}
+    ok(got == {('共', 'kiōng'), ('高', 'ko'), ('過', 'kò')},
+       'MOE: literary readings only when a character has one (共 kiōng, not kā); else the unmarked one (高 ko)')
+
 # 3c. Hán-Việt: Northern first, Southern variant labelled, the Northern form derived where only a Southern one exists;
 # the Unihan fallback; no silent "?"
 import build_db  # noqa: E402
 import hanviet  # noqa: E402
 con.execute("INSERT INTO source VALUES ('thieuchuu', '', '', '', '', 1, 0)")
 con.execute("INSERT INTO source VALUES ('unihan', '', '', '', '', 1, 0)")
-con.executemany("INSERT INTO hanviet VALUES (?,?,'hv','thieuchuu',?,NULL,'')", [('生', 'sanh', 0), ('生', 'sinh', 1),
+con.executemany("INSERT INTO hanviet VALUES (?,?,'hv','thieuchuu',?,NULL,'',0)", [('生', 'sanh', 0), ('生', 'sinh', 1),
                                                                                ('政', 'chánh', 0), ('學', 'học', 0), ('日', 'nhật', 0)])
-con.executemany("INSERT INTO hanviet VALUES (?,?,'unchecked','unihan',0,NULL,'')", [('一', 'nhất'), ('步', 'mắt')])
+con.executemany("INSERT INTO hanviet VALUES (?,?,'unchecked','unihan',0,NULL,'',0)", [('一', 'nhất'), ('步', 'mắt')])
 con.executemany("INSERT INTO chinese VALUES (?,'cmn',?,'s','char',NULL,'',1,NULL)", [('生', 'shēng'), ('政', 'zhèng')])
 aff = build_db.southern_variants(con)
 build_db.unihan_fallback(con)

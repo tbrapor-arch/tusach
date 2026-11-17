@@ -608,7 +608,8 @@ function openCard(id, w) {
       ${c.chars ? `<div class="wc-sec"><h3>Hán-Việt · the Chinese word</h3><div class="wc-chars">${esc(c.chars)}</div>
         ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
         <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div>
-        ${c.nan_coll ? `<div class="wc-src">Taigi, colloquial / everyday (the MOE's reading of the word): ${esc(c.nan_coll)}</div>` : ''}</div>` : ''}
+        ${c.nan_coll ? `<div class="wc-src">Taigi, colloquial / everyday (the MOE's reading of the word): ${esc(c.nan_coll)}</div>` : ''}
+        ${c.via ? `<div class="wc-src">Chinese readings found under the variant spelling ${esc(c.via)}</div>` : ''}</div>` : ''}
       ${c.other && c.other.length ? `<div class="wc-sec"><h3>Same spelling, another word</h3>${c.other.map(o => `<div class="wc-src">${esc(o.en || '')}${o.chars ? ` <span class="han">${esc(o.chars)}</span>` : ''}</div>`).join('')}</div>` : ''}
       ${c.ff ? `<div class="wc-src">False friend: ${esc(c.ff)}</div>` : ''}
       ${pt ? `<div class="row"><span class="pill ${pc}">${pt}</span>${c.rank ? `<span class="sub" style="font-size:.8rem">#${c.rank} most common</span>` : ''}</div>` : c.name ? '<div class="row"><span class="pill p-native">Name</span></div>' : ''}

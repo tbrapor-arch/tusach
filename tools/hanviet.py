@@ -31,7 +31,11 @@ SOUTHERN = [
     ('phước', 'phúc', {'fú'}),                   # 福
     ('nhứt', 'nhất', {'yī'}),                    # 一
     ('võ', 'vũ', {'wǔ'}),                        # 武 (võ is also used in Northern fixed words: võ thuật)
+    ('nhựt', 'nhật', {'rì'}),                    # 日 (added 18 Nov 2026, bridge review of real words)
+    ('bổn', 'bản', {'běn'}),                     # 本 (Thiều Chửu: bổn|bản); reorder only, never derived (苯 bổn)
+    ('ngãi', 'nghĩa', {'yì'}),                   # 義 (nhân ngãi); reorder only: 刈 ngải/ngãi (yì) has no nghĩa
 ]
+NO_DERIVE = {'bổn', 'ngãi'}      # a rule that only labels and reorders: the Northern form is not derived where it is missing
 _RULE = {vi.key(s): (vi.key(n), m) for s, n, m in SOUTHERN}
 
 
@@ -75,6 +79,7 @@ def _test():
     assert southern('sanh', {'shēng'}) == 'sinh' and southern('chánh', {'zhèng'}) == 'chính'
     assert southern('huỳnh', {'yíng'}) is None and southern('huỳnh', {'huáng'}) == 'hoàng'
     assert southern('sinh', {'shēng'}) is None
+    assert southern('bổn', {'běn'}) == 'bản' and 'bổn' in NO_DERIVE and southern('nhựt', {'rì'}) == 'nhật'
     inv = inventory(['nhất', 'bộ', 'đại', 'học'])
     assert hv_shaped('nhất', inv) and hv_shaped('bộ', inv) and not hv_shaped('mắt', inv) and not hv_shaped('xyz', inv)
     print('hanviet.py: all tests passed')
