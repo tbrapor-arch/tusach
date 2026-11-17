@@ -646,24 +646,43 @@ def word_checks(con):
         print(f'characters of Sino-Vietnamese entries with NO Hán-Việt reading: {len(none)}: {" ".join(none[:80])}')
 
 
+def freq_key(k):
+    """The key a word is ranked under: hyphens are syllable breaks (Wiktionary keeps old hyphenated spellings such as
+    thế-giới, công-nhân, việt-nam as entries; wordfreq read each as one phrase with no competitor, which put 20 of them
+    in the top 300 on the first real build). None for a key that is not made of letters only (3, "m*", "cung,"): such a
+    key is not ranked."""
+    f = ' '.join(k.replace('-', ' ').split())
+    return f if f and all(re.fullmatch(r'[^\W\d_]+', x) for x in f.split()) else None
+
+
 def frequencies(con, raw, corpus):
+    """entry.freq and freq_rank (tools/freq.py). A key is ranked under freq_key(); a hyphenated spelling whose spaced
+    form is also a key (thế-giới / thế giới) gets the same freq but no rank of its own, so a word is counted once."""
     keys = [k for (k,) in con.execute("SELECT DISTINCT e.key FROM entry e JOIN source s ON s.id = e.source "
                                       "WHERE s.fixture = 0 OR NOT EXISTS (SELECT 1 FROM entry x JOIN source y ON "
                                       "y.id = x.source WHERE y.fixture = 0)")]
-    syls = {s for k in keys for s in k.split()}
+    fk = {k: freq_key(k) for k in keys}
+    fkeys = sorted({f for f in fk.values() if f})
+    syls = {s for k in fkeys for s in k.split()}
     F, fdesc = freq.syllable_freqs(raw, syls)
     if not F:
         print('frequency: no syllable frequency source (wordfreq not installed, FrequencyWords not fetched)')
         return ''
     cut, cdesc = freq.segmenter(set(keys))
-    tokens = [t for s in corpus for t in cut(s)]
-    est = freq.estimate(keys, F, tokens)
-    ranked = sorted(est, key=lambda k: -est[k])
-    con.executemany('UPDATE entry SET freq=?, freq_rank=? WHERE key=?',
-                    [(round(est[k] * 1e9), i + 1, k) for i, k in enumerate(ranked)])
+    tokens = [fk.get(t) or t for s in corpus for t in cut(s)]
+    est = freq.estimate(fkeys, F, tokens)
+    ranked = sorted(est, key=lambda k: (-est[k], k))
+    rank = {k: i + 1 for i, k in enumerate(ranked)}
+    rows = []
+    for k, f in fk.items():
+        if f in est:
+            variant = f != k and f in fk           # the spaced spelling is a key of its own: it carries the rank
+            rows.append((round(est[f] * 1e9), None if variant else rank[f], k))
+    con.executemany('UPDATE entry SET freq=?, freq_rank=? WHERE key=?', rows)
     desc = (f'{fdesc}, divided among the dictionary words by their shares in a corpus of {len(corpus)} sentences '
-            f'({len(tokens)} words) cut by {cdesc} (tools/freq.py)')
-    print(f'frequency: {len(ranked)} words ranked: {desc}')
+            f'({len(tokens)} words) cut by {cdesc} (tools/freq.py); hyphenated spellings ranked as spaced ones')
+    print(f'frequency: {len(ranked)} words ranked ({sum(1 for k in keys if not fk[k])} keys not made of letters, '
+          f'not ranked): {desc}')
     return desc
 
 

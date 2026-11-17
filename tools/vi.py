@@ -287,7 +287,10 @@ def card_id(k, tag=None):
 #  5. a verb + a direction or result complement (đứng lên, làm xong, tìm thấy, nhắc lại), except LEXICALISED
 #     (trở lại, thông qua); qua, sang, được, mất are left out: they end too many real compounds;
 #  6. a word + a personal pronoun (nhà tôi), except LEXICALISED (chúng tôi, chúng mình);
-#  7. numerals together (hai mươi, năm năm): each numeral is a word (numerals count as grammatical words in rule 3).
+#  7. numerals together (hai mươi, năm năm): each numeral is a word (numerals count as grammatical words in rule 3);
+#  8. a person term + ấy / ta / này / kia / đó (anh ấy, cô ta): a pronoun phrase, two words (added 18 Nov 2026 on the
+#     first real build: Wiktionary lists anh ấy, cô ấy, ông ấy, which put them in the frequency top 300);
+#  9. mọi / mỗi + what follows (mọi người, mọi lúc, mỗi ngày): quantifier + noun, two words, except LEXICALISED (mọi rợ).
 MAX = 4
 QUESTION = {'gì', 'ai', 'đâu'}
 CLASSIFIERS = set('con cái chiếc căn cây quyển cuốn tờ bức ngôi tấm đứa trận tòa ngọn sợi hòn'.split())
@@ -300,11 +303,15 @@ COMPLEMENTS = set('ra vào lên xuống về lại xong thấy hết'.split())
 PRONOUNS = set('tôi tao mày nó mình hắn'.split())
 TIME_NOUNS = set('năm tuần tháng sáng trưa chiều tối đêm hôm ngày'.split())
 DEICTIC = set('nay qua ngoái sau trước tới kia'.split())
+PERSON = set('anh chị em cô chú bác ông bà cậu mợ dì thím thằng con nó hắn bạn'.split())
+POST_PERSON = set('ấy ta này kia đó'.split())
+QUANT = {'mọi', 'mỗi'}
 LEXICALISED = {key(x) for x in '''con người|con cái|con trai|con gái|con số|con tin|con dấu|con đường mòn|cây cối|cây số|
 cái chết|vì vậy|vì thế|cho nên|bởi vì|như vậy|như thế|tại sao|vì sao|thế nào|trước khi|sau khi|trong khi|khi nào|
 nhưng mà|hay là|có khi|đôi khi|cho đến|từ khi|hôm nay|hôm qua|hôm kia|ngày nay|bây giờ|sau này|trước đây|lúc này|
 trở lại|trở về|trở ra|trở lên|trở xuống|thông qua|trải qua|bỏ qua|vượt qua|đi lại|qua lại|ra vào|lên xuống|
-chúng tôi|chúng mình|chúng nó|chúng mày|chúng tao|bọn tôi|bọn mình|bọn nó|tụi tôi|tụi mình|tụi nó|một mình'''
+chúng tôi|chúng mình|chúng nó|chúng mày|chúng tao|bọn tôi|bọn mình|bọn nó|tụi tôi|tụi mình|tụi nó|một mình|
+chúng ta|người ta|mọi rợ|mọi đen'''
                 .replace('\n', '').split('|')}
 
 
@@ -315,7 +322,10 @@ def joinable(k):
     syl = k.split()
     if any(s in QUESTION for s in syl) or syl[0] in CLASSIFIERS or all(s in FUNCTION or s in NUMERALS for s in syl):
         return False
-    if len(syl) == 2 and ((syl[0] in TIME_NOUNS and syl[1] in DEICTIC) or syl[1] in COMPLEMENTS or syl[1] in PRONOUNS):
+    if len(syl) == 2 and ((syl[0] in TIME_NOUNS and syl[1] in DEICTIC) or syl[1] in COMPLEMENTS or syl[1] in PRONOUNS
+                          or (syl[0] in PERSON and syl[1] in POST_PERSON)):
+        return False
+    if syl[0] in QUANT:
         return False
     return True
 
@@ -391,6 +401,8 @@ def _test():
     assert cut('con người có thể, vì vậy hôm nay', K) == 'con_người có_thể, vì_vậy hôm_nay'
     assert cut('đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi', {'đứng lên', 'làm xong', 'tìm thấy', 'nhà tôi',
                                                                 'hai mươi'}) == 'đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi'
+    assert cut('Anh ấy và cô ta gặp mọi người.', {'anh ấy', 'cô ta', 'mọi người'}) == 'Anh ấy và cô ta gặp mọi người.'
+    assert cut('Người ta nói chúng ta mọi rợ.', {'người ta', 'chúng ta', 'mọi rợ'}) == 'Người_ta nói chúng_ta mọi_rợ.'
     print('vi.py: all tests passed')
 
 

@@ -28,6 +28,10 @@ Biases, stated plainly:
   common syllables (an upper bound rather than an estimate). With no corpus (sandbox build without Tatoeba and
   Wiktionary) every share is the prior.
 - A monosyllable used mostly inside compounds (quốc, học) is pushed down only as far as the corpus shows it.
+- English in the Vietnamese web and subtitle text: `the` (Vietnamese "gauze") and `in` ("to print") rank near 250 on
+  the syllable counts of English text; wordfreq's Wikipedia share lifts administrative words (huyện, quận, tỉnh,
+  Nguyễn). Not corrected: no automatic rule separates them from real formal vocabulary (18 Nov 2026, HISTORY).
+- Names are ranked like words (Việt Nam, Mỹ, Pháp, Nguyễn); the Tatoeba corpus favours its own topics (tiếng Pháp).
 """
 import math
 from collections import Counter, defaultdict

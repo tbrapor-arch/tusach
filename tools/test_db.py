@@ -102,6 +102,11 @@ with tempfile.TemporaryDirectory() as tmp:
     ok(('平', 'bằng', 'hv', 'attested') in hv, 'real: a Nôm reading read so by 2+ Sino-Vietnamese words (bằng, công bằng)')
     chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
     ok(chk.get('bằng') == 'ok' and chk.get('học sinh') == 'ok', 'real: the check accepts the attested reading')
+    import cards  # noqa: E402
+    cards.init(cards.open_db('public', db))
+    lai, thich = (cards.dictionary[cards.lookup(k)] for k in ('lại', 'thích'))
+    ok('chars' not in lai and lai['en'].startswith('once more') and thich.get('chars') == '適',
+       'real: a card takes its characters from its own etymology (lại "again" not 賴 of the surname; thích 適 not 釋)')
 
 # 2c. Tatoeba: lines that are not Vietnamese (real sentences of the snapshot: #451795 by GrizaLeono, #13958199 by
 # TanukiKun, #8854364 by dotheduyet1999, #13594913 by leucammieuvu; CC BY 2.0 FR)

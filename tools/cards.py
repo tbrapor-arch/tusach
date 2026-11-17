@@ -126,18 +126,24 @@ def _bridge(chars):
 
 
 def senses(rows):
-    """The dictionary rows of one key grouped by etymology (source + Wiktionary etymology number), main one first: real
-    sources before the fixture, then the English source order (english.SOURCE_RANK), then the etymology number. The
-    characters, label, English and example of a card all come from ONE group, so two homographs are never mixed
-    (sung 'cluster fig' never gets the 充 of sung 'to fill')."""
+    """The dictionary rows of one key grouped by etymology, main one first: real sources before the fixture, then the
+    English source order (english.SOURCE_RANK), then the etymology number, then a group that is not only names, then the
+    source order. The characters, label, English and example of a card all come from ONE group, so two homographs are
+    never mixed (sung 'cluster fig' never gets the 充 of sung 'to fill').
+    An etymology is (source, Wiktionary etymology number, characters, origin): kaikki gives the number only on pages
+    with several etymologies, and gives the same number (or none) to parts of speech with etymologies of their own, so
+    on the first real build lại "again" (no number) took 賴 from the surname entry and anh "elder brother" took 英 from
+    the name/adjective entry under Etymology 1."""
     groups = {}
     for r in rows:
-        groups.setdefault((r['source'], r['src_id']), []).append(r)
+        groups.setdefault((r['source'], r['src_id'], r['chars'], r.get('origin') or ''), []).append(r)
     order = {s: i for i, s in enumerate(english.SOURCE_RANK)}
 
     def k(item):
-        (src, sid), rs = item
-        return (rs[0]['fixture'], order.get(src, len(order)), int(sid) if str(sid).isdigit() else 0, rs[0]['id'])
+        (src, sid, _, _), rs = item
+        # an entry with no etymology number on a page that has numbered ones (thích 釋, a surname) comes after them
+        return (rs[0]['fixture'], order.get(src, len(order)), int(sid) if str(sid).isdigit() else 10 ** 6,
+                all(r.get('pos') == 'name' for r in rs), rs[0]['id'])
     return [rs for _, rs in sorted(groups.items(), key=k)]
 
 
@@ -159,7 +165,7 @@ def _group_chars(rs):
     return '', next((r['label'] for r in rs if r['label'] and not r['chars']), '')
 
 
-COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_rank', 'src_id', 'hv_check')
+COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_rank', 'src_id', 'hv_check', 'origin', 'pos')
 
 
 def lookup(k, tag=None, surface=None):
@@ -168,7 +174,8 @@ def lookup(k, tag=None, surface=None):
     if cid in dictionary:
         return cid
     rows = [dict(zip(COLS, r)) for r in con.execute(
-        "SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank, e.src_id, e.hv_check "
+        "SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank, e.src_id, e.hv_check, "
+        "e.origin, e.pos "
         "FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? AND (?='' OR e.tag=?) "
         "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k, tag or '', tag or '')).fetchall()]
     course = COURSE.get(cid, {})

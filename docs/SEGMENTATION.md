@@ -30,4 +30,6 @@ buổi_sáng); `sáng nay`, `tối qua` (noun + deictic) are two.
 
 How the cutter follows it (`tools/vi.py cut()`): longest dictionary match, except that it never joins (1) a classifier
 with what follows unless the pair is in `LEXICALISED`, (2) a sequence made only of free grammatical words unless it is
-in `LEXICALISED`, (3) a question word gì / ai / đâu with anything. The lists are in `tools/vi.py`, next to this rule.
+in `LEXICALISED`, (3) a question word gì / ai / đâu with anything, (4) a time noun + deictic, (5) a verb + direction or
+result, (6) a word + personal pronoun, (7) numerals, (8) a person term + ấy / ta / này / kia / đó (anh ấy, cô ta), (9)
+mọi / mỗi + noun (mọi người). The lists are in `tools/vi.py`, next to this rule.
