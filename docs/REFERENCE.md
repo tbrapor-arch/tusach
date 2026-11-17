@@ -2,12 +2,13 @@
 
 ## Layout
 ```
-course/lessons/NN.yaml   lessons (none yet: the syllabus and word list wait for the owner's approval)
+course/lessons/NN.yaml   lessons (none yet: the syllabus and word list wait for the owner's approval); nothing else
+                         may be there (lint); the template is course/lesson_template.yaml
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them)
 course/glosses_en.tsv    English written for words that are not in a lesson's new_words
 course/false_friends.tsv hand-curated false friends (word, chữ Hán, note); empty; format in its header
 tools/                   build, pipeline, checks (MIT)
-tools/fixtures/          TEST FIXTURE: dict.yaml (9 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
+tools/fixtures/          TEST FIXTURE: dict.yaml (10 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
                          file for tools/test_db.py); not content
 tests/cutter/            reference.tsv: 200 sentences written and cut by Claude (docs/SEGMENTATION.md), NOT native-checked
 docs/SEGMENTATION.md     the word-boundary convention (lessons, the cutter reference, vi.cut()'s rules)
@@ -17,7 +18,8 @@ data/snapshot-request.txt  a commit changing it runs .github/workflows/snapshot.
 data/build/              generated, never committed: vi.db, vi-nc.db, cards.json
 requirements-build*.txt  build/test packages (wordfreq; underthesea only for the cutter report), locked with hashes
 app/                     page template, recording page, PWA files, embedded font; app/dist/ is generated
-app/published-*.{txt,tsv}  card ids and English ranks of published pages (committed, only ever grow)
+app/published-*.{txt,tsv}  card ids and English (rank and text) of published pages (committed, only ever grow)
+app/english-changes.tsv  a published gloss shortened on purpose: card id, new English, reason (else an error)
 ```
 
 ## Lesson format (`course/lessons/NN.yaml`, file name = id)
@@ -50,7 +52,10 @@ spelling on screen; lint asks for the house style (error). quí/quý are differe
 **Syllable table** (`tools/vi.py`, finding 10): built from a stated description of the phonotactics (nuclei with
 their codas, the medial /w/, qu and gi), not a word list; checked at each build against every Thiều Chửu reading and
 the FrequencyWords syllables seen 200+ times (`build_db.py validate_syllables`, result in HISTORY).
-Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes).
+Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes). Quote any text with a comma in a
+flow mapping (`{w: tôi, en: "I, me"}`): lint refuses unknown keys, which is what an unquoted comma makes. Exercises
+must be new: lint refuses one equal to, contained in, or equal after a greeting/first clause to a dialogue line, and
+warns at a similarity of 0.8.
 
 ## Word card (`DATA.dict[id]`, built only by `tools/cards.py`)
 Id: the word's key (lower-case NFC, spaces between syllables), `~tag` for a homograph, `name:` + surface for a name.
@@ -104,13 +109,13 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 |---|---|
 | `make db` / `make db-nc` | `tools/build_db.py`: vi.db (public) / vi-nc.db (`--nc`, private); refuses a wrong path |
 | `make lint` | `tools/lint.py` (rules, see its docstring) + `tools/verify_words.py --lessons` (suspects by class) |
-| `make test` | `tools/vi.py` self-test + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, missing sources, labels, bridge, frequency, cutter scoring), then the cutter report |
+| `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences), then the cutter report |
 | `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary, a stand-in while Wiktionary is not fetched) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
-| `make check` | the card check alone |
+| `make check` | the card check alone: no word without a card, no card lost, no card without English, no lower English rank, no published gloss that drops senses (unless in `app/english-changes.tsv`); a changed gloss within its rank is a warning |
 | `make smoke` | `tools/smoke.py`: phone-sized click-through (Playwright) |
 | `make lookup W=…` | `tools/lookup.py`: Vietnamese (tones optional), chữ Hán or `-e` English |
-| `tools/compare.py run` | before/after: builds a git ref and the working tree, diffs lines, cuts, ids, card fields |
+| `tools/compare.py run` | before/after: builds a git ref and the working tree, each with its own database built by its own `build_db.py` (`--before-db/--after-db` to reuse one), diffs lines, cuts, ids, card fields |
 | `tools/published_ids.py` | after publishing: records card ids and English ranks |
 | `tools/verify_words.py FILE.tsv` | checks a word list (word, English, chữ Hán) |
 | `make coverage` | `tools/coverage.py [TOP]`: of the TOP (3000) most frequent dictionary words, how many have English, a Hán-Việt analysis, and 3/2/1/0 Chinese readings; then lesson coverage |

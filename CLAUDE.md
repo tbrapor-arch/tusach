@@ -27,13 +27,17 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
    `cards.open_db()` refuses the wrong one. A non-commercial source has `commercial_ok: False`.
 4. A partial build adds to the shared card file (`cards.Store.replace_module`). Never restore generated files.
 5. The card check ends every build and runs on every push: no word without a card, no card lost, no card
-   with poorer English. After publishing: `python3 tools/published_ids.py`, commit both `app/published-*` files.
+   with poorer English (lower rank, or a gloss that drops senses unless recorded in `app/english-changes.tsv`).
+   The private module never replaces a public card unless its English rank is strictly better.
+   After publishing: `python3 tools/published_ids.py`, commit both `app/published-*` files.
 6. Any change to the dictionary, the cutter or the pipeline: `python3 -I tools/compare.py run` before publishing.
    For anything risky, a second agent that did not do the work checks the result.
 7. Data sources: pinned by content in `data/fetch.sh` (unversioned ones through our snapshot release), licence row
    in `ATTRIBUTION.md`, loader in `tools/build_db.py` (`SOURCES`), licence checked on its own page first. A missing
    source fails `make db`; `TUSACH_ALLOW_MISSING=id,…` is for sandboxes only and makes the page unpublishable.
-8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word.
+8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word;
+   `fixture: true` counts only there. Only `NN.yaml` files in `course/lessons/`.
+9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks follow the house style (lint).
 
 ## Repository rules
 - Public repo: code and Claude's own lessons. Copyrighted material (books, transcripts, recordings he owns) lives

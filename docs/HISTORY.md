@@ -54,3 +54,12 @@
   (stand-in, Wiktionary not fetched): F1 0.893 before the rules, 0.942 after; underthesea 0.930. Caveat: the rules
   were chosen by the convention but tuned while reading the differences on this same reference: no held-out set, so
   0.942 is optimistic; and the reference is one non-native model's judgement.
+- Private module: the page used to `Object.assign` the module's cards over its own, so a private card with poorer
+  English replaced a public one (reviewer: "Tôi là học sinh."). Now one merge rule (`Priv.mergeCards`), the private
+  build uses the course words, and its card check compares with the public published English. The internal names
+  Exam/exam (inherited from Tsheh-tû's exam-preparation module) became neutral in both repositories: `Priv`,
+  `window.PrivateModule`, `module/`, `#private`.
+- Lint: `fixture: true` only under tools/fixtures/; only NN.yaml in course/lessons/ (the template moved to
+  course/lesson_template.yaml); exercise copies caught by normalised containment; flow mappings cut at a comma
+  (the fixture's "pupil, student" and "I, me" had been read as "pupil" and "I"). The card check compares the English
+  text, not only its rank. compare.py run builds both databases.

@@ -10,6 +10,9 @@ Errors (exit 1):
   - a card without English (owner's rule: English on every card)
   - poorer English than before: a card whose English rank (tools/english.py RANK) is lower than the rank recorded when
     it was last published (app/published-english.tsv, written by tools/published_ids.py)
+  - English that drops senses: a gloss shorter than the published one that lacks one of its senses (split at ; and ,),
+    unless the change is recorded in app/english-changes.tsv (card id <TAB> new English <TAB> reason)
+Warnings (printed, for review): a published card whose gloss changed within the same rank.
 """
 import json
 import os
@@ -43,14 +46,32 @@ def read_english(path):
     return out
 
 
+CHANGES = os.path.join(ROOT, 'app/english-changes.tsv')
+
+
+def senses(en):
+    return [x.strip().lower() for x in re.split(r'[;,]', en or '') if x.strip()]
+
+
+def read_changes(path):
+    """{(card id, new English)}: gloss changes recorded on purpose (app/english-changes.tsv)."""
+    out = set()
+    if path and os.path.exists(path):
+        for l in open(path, encoding='utf-8'):
+            if l.strip() and not l.startswith('#'):
+                p = (l.rstrip('\n').split('\t') + ['', ''])[:3]
+                out.add((p[0], p[1]))
+    return out
+
+
 def page_dict(page):
     s = open(page, encoding='utf-8').read()
     m = re.search(r'<script[^>]*type="application/json"[^>]*>(.*?)</script>', s, re.S)
     return json.loads(m.group(1))['dict']
 
 
-def check(store_path, page=None, published=None, english_tsv=None, modules=None):
-    """Returns a list of error strings (empty: all good)."""
+def check(store_path, page=None, published=None, english_tsv=None, modules=None, warn=None, changes=CHANGES):
+    """Returns a list of error strings (empty: all good); warnings are appended to `warn` (a list) when given."""
     errs = []
     st = json.load(open(store_path, encoding='utf-8'))
     cards, mods = st.get('cards', {}), st.get('modules', {})
@@ -72,18 +93,31 @@ def check(store_path, page=None, published=None, english_tsv=None, modules=None)
     before = read_english(english_tsv) if english_tsv else {}
     for i, (r, en) in sorted(before.items()):
         c = shown.get(i)
-        if c is not None and english.rank(c.get('en_src')) < r:
-            errs.append(f'poorer English than before: {i}: "{c.get("en")}" ({c.get("en_src") or "none"}) '
+        if c is None:
+            continue
+        new = c.get('en') or ''
+        if english.rank(c.get('en_src')) < r:
+            errs.append(f'poorer English than before: {i}: "{new}" ({c.get("en_src") or "none"}) '
                         f'was "{en}" (rank {r})')
+        elif en and new != en:
+            lost = [x for x in senses(en) if x not in senses(new)]
+            if len(new) < len(en) and lost and (i, new) not in read_changes(changes):
+                errs.append(f'English drops senses: {i}: "{new}" was "{en}" (lost: {"; ".join(lost)}); record it in '
+                            'app/english-changes.tsv if meant')
+            elif warn is not None:
+                warn.append(f'gloss changed within the same rank (review): {i}: "{en}" -> "{new}"')
     return errs
 
 
 def main():
     store = arg('--store', os.path.join(ROOT, 'data/build/cards.json'))
     page = arg('--page', os.path.join(ROOT, 'app/dist/index.html'))
+    warn = []
     errs = check(store, page if os.path.exists(page) else None,
                  arg('--published', os.path.join(ROOT, 'app/published-card-ids.txt')),
-                 arg('--english', os.path.join(ROOT, 'app/published-english.tsv')))
+                 arg('--english', os.path.join(ROOT, 'app/published-english.tsv')), warn=warn)
+    for w in warn[:200]:
+        print('W', w)
     for e in errs[:200]:
         print('E', e)
     print(f'card check: {len(errs)} error(s)')

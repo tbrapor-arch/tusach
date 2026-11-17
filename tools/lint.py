@@ -5,6 +5,9 @@
 Checks (E = error, exit 1; W = warning; I = information)
   E  a lesson exists while the syllabus or the first word list is not approved by the owner (course/syllabus.yaml)
   E  YAML error, missing field, file name not the lesson id, two lessons with one id
+  E  a file in course/lessons/ not named NN.yaml; `fixture: true` outside tools/fixtures/
+  E  an unknown key or a key with no value in a lesson item: a YAML flow mapping cut at an unquoted comma
+     ({w: tôi, en: I, me} reads as en: I plus a key "me"): quote the text
   E  text not in Unicode NFC (every string of the file)
   E  chữ Hán in a lesson line, a title or an exercise sentence (characters belong on cards and in the bridge)
   E  impossible quốc ngữ syllable (tools/vi.py): letters, c/k, g/gh, ng/ngh, -c -ch -p -t with a tone other than sắc/nặng
@@ -13,7 +16,9 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  word that only the test fixture has, in a real lesson
   E  `~tag` that no dictionary entry and no new_words entry defines
   E  new_words entry without English (English on every card), or not used in the lesson
-  E  exercise sentence equal to a dialogue line of the same lesson (exercises use new sentences)
+  E  exercise sentence taken from the dialogue: equal to a line, contained in a line, or equal to one after removing a
+     greeting / first clause (normalised: case, punctuation, word boundaries)
+  W  exercise sentence very similar to a dialogue line (similarity >= SIMILAR): check it is a new sentence
   E  note pointing to a line the dialogue does not have
   E  fill exercise without ___ or answer
   W  lines per lesson do not grow smoothly (owner's choice: a smooth growth; checked over the non-review lessons)
@@ -37,6 +42,51 @@ import vi  # noqa: E402
 
 DB = os.environ.get('TUSACH_DB') or os.path.join(ROOT, 'data/build/vi.db')
 REQUIRED = ('id', 'title', 'dialogue', 'notes', 'new_words')
+KEYS = {'top': {'id', 'title', 'review', 'setting', 'native_check', 'dialogue', 'notes', 'new_words', 'exercises',
+                'fixture'},
+        'title': {'vi', 'en'}, 'dialogue': {'n', 'speaker', 'vi', 'en'}, 'notes': {'ref', 'topic', 'text'},
+        'new_words': {'w', 'en', 'tag', 'chars', 'label', 'name'}, 'translate': {'vi', 'en'},
+        'fill': {'vi', 'answer', 'en'}, 'native_check': {'by', 'date'}}
+SIMILAR = 0.8
+
+
+def norm_tokens(text):
+    """Word keys of a line, without punctuation or case: the unit of the exercise-copy check."""
+    return [t[2] for t in vi.words(text) if t[0] == 'w']
+
+
+def clauses(text):
+    """The clauses of a line (split at , ; : ! ? . …), each as a token list."""
+    return [c for c in (norm_tokens(x) for x in re.split(r'[,;:!?.…]+', vi.display(text))) if c]
+
+
+def copied(ex, line):
+    """'copy' when the exercise is a dialogue line, part of one, or one without its first clause (or the other way
+    round); a similarity ratio otherwise."""
+    import difflib
+    e, l_ = norm_tokens(vi.display(ex)), norm_tokens(vi.display(line))
+    if not e or not l_:
+        return 0.0
+
+    def inside(a, b):
+        return len(a) >= 2 and any(b[i:i + len(a)] == a for i in range(len(b) - len(a) + 1))
+    ec, lc = clauses(ex), clauses(line)
+    e_rest = [t for c in ec[1:] for t in c]
+    l_rest = [t for c in lc[1:] for t in c]
+    if e == l_ or inside(e, l_) or (e_rest and (e_rest == l_ or inside(e_rest, l_))) or (l_rest and e == l_rest):
+        return 'copy'
+    return difflib.SequenceMatcher(None, e, l_).ratio()
+
+
+def check_keys(m, where, item, kind):
+    if not isinstance(item, dict):
+        return
+    for k, v in item.items():
+        if k not in KEYS[kind]:
+            m('E', where, f'unknown key "{k}"' + (' (an unquoted comma in a flow mapping cut the text before it: '
+                                                   'quote the value)' if v is None else ''))
+        elif v is None and k != 'native_check':
+            m('E', where, f'"{k}" has no value')
 
 
 def load_db():
@@ -69,6 +119,20 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
     for f in REQUIRED:
         if f not in d:
             m('E', 0, f'missing field: {f}')
+    if d.get('fixture_claimed'):
+        m('E', 0, '`fixture: true` is accepted only under tools/fixtures/, never in course/lessons/')
+    check_keys(m, 0, {k: v for k, v in d.items() if k != 'fixture_claimed'}, 'top')
+    if isinstance(d.get('title'), dict):
+        check_keys(m, 'title', d['title'], 'title')
+    if isinstance(d.get('native_check'), dict):
+        check_keys(m, 'native_check', d['native_check'], 'native_check')
+    for kind in ('dialogue', 'notes', 'new_words'):
+        for i, it in enumerate(d.get(kind) or []):
+            check_keys(m, f'{kind}[{i}]', it, kind)
+    for kind, items in (d.get('exercises') or {}).items():
+        if kind in KEYS:
+            for i, it in enumerate(items or []):
+                check_keys(m, f'exercises.{kind}[{i}]', it, kind)
     real = not d.get('fixture')
     name = os.path.basename(path)
     if not re.fullmatch(r'\d\d+\.yaml', name) or int(name.split('.')[0]) != d.get('id'):
@@ -114,7 +178,6 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
 
     lines = d.get('dialogue') or []
     ns = set()
-    norm_lines = set()
     for ln in lines:
         n = ln.get('n', '?')
         ns.add(n)
@@ -122,7 +185,6 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
             if not ln.get(f):
                 m('E', f'line {n}', f'missing {f}')
         check_line(f'line {n}', ln.get('vi') or '')
-        norm_lines.add(vi.key(vi.display(ln.get('vi') or '')).strip(' .!?…'))
     for i, note in enumerate(d.get('notes') or []):
         if note.get('ref') != 0 and note.get('ref') not in ns:
             m('E', f'notes[{i}]', f"note ref {note.get('ref')} is not a line of the dialogue (use 0 for a recap note)")
@@ -141,8 +203,16 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
                     m('E', where, 'a fill item needs ___ in vi and an answer')
                 text = text.replace('___', str(it.get('answer', '')).replace(' ', '_'))
             check_line(where, text)
-            if vi.key(vi.display(text)).strip(' .!?…') in norm_lines:
-                m('E', where, 'exercise sentence taken from the dialogue: write a new one')
+            best = 0.0
+            for ln in lines:
+                c = copied(text, ln.get('vi') or '')
+                if c == 'copy':
+                    m('E', where, f'exercise sentence taken from the dialogue (line {ln.get("n")}): write a new one')
+                    break
+                best = max(best, c)
+            else:
+                if best >= SIMILAR:
+                    m('W', where, f'exercise sentence very similar to a dialogue line ({best:.2f}): is it new?')
     for j, w in enumerate(d.get('new_words') or []):
         if not w.get('w'):
             m('E', f'new_words[{j}]', 'missing w')
@@ -167,6 +237,9 @@ def main():
     if reals and not (syl.get('syllabus') and syl.get('word_list')):
         msgs.append(('E', f'course/syllabus.yaml: E {len(reals)} lesson(s) drafted before the owner approved the '
                           'syllabus and the first word list (fixed decision): approve them first'))
+    for f in course.stray_files():
+        msgs.append(('E', f'{os.path.relpath(f, ROOT)}:0: E not a lesson file: only NN.yaml may be in the lesson '
+                          'directory (the template is course/lesson_template.yaml)'))
     if not course.real_files():
         print('lint: no lesson in course/lessons yet: checking the test fixture (tools/fixtures/lessons)')
     loaded = []

@@ -32,13 +32,13 @@ notes:
   text: >-
     anh and chị are "older brother" and "older sister", used as "you" to someone a little older than you.
 new_words:
-- {w: chào, en: hello; to greet}
+- {w: chào, en: "hello; to greet"}
 - {w: anh, en: you (to a man a little older)}
 - {w: chị, en: you (to a woman a little older)}
-- {w: tôi, en: I, me}
+- {w: tôi, en: "I, me"}
 - {w: là, en: to be (X is Y)}
-- {w: học_sinh, en: pupil, student}
-- {w: cũng, en: also, too}
+- {w: học_sinh, en: "pupil, student"}
+- {w: cũng, en: "also, too"}
 - {w: Lan, en: Lan (a woman's name), name: true}
 exercises:
   translate:

@@ -175,7 +175,10 @@ print(f'{out}: {len(lessons)} lessons, {len(dictionary)} cards ({sum(1 for c in 
       f'{n_letters} letters checked in the font, {os.path.getsize(out) // 1024} KB')
 
 # ---- the card check, at the end of every build: no word without a card, no card lost, no poorer English
-errs = check_cards.check(STORE, out, PUBLISHED_IDS, PUBLISHED_EN, modules=cards.PUBLIC_MODULES)
+warn = []
+errs = check_cards.check(STORE, out, PUBLISHED_IDS, PUBLISHED_EN, modules=cards.PUBLIC_MODULES, warn=warn)
+for w in warn[:100]:
+    print('W', w)
 for e in errs[:100]:
     print('E', e)
 print(f'card check: {len(errs)} error(s)')

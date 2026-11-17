@@ -6,6 +6,7 @@ lessons (for tests). TUSACH_COURSE=DIR reads lessons from another directory (too
 """
 import glob
 import os
+import re
 
 import yaml
 
@@ -32,8 +33,25 @@ def lesson_files():
     return real
 
 
+def is_fixture_path(path):
+    return os.path.abspath(path).startswith(os.path.abspath(FIXTURE_DIR) + os.sep)
+
+
+def stray_files():
+    """Files in the lesson directory that are not NN.yaml lessons (tools/lint.py reports them as errors)."""
+    d = lesson_dir()
+    if not os.path.isdir(d):
+        return []
+    return sorted(os.path.join(d, f) for f in os.listdir(d) if not re.fullmatch(r'\d\d+\.yaml', f))
+
+
 def load(path):
-    return yaml.safe_load(open(path, encoding='utf-8'))
+    """A lesson file. `fixture: true` counts only under tools/fixtures/: anywhere else it is dropped (the lesson is
+    treated as real) and tools/lint.py reports it."""
+    d = yaml.safe_load(open(path, encoding='utf-8'))
+    if isinstance(d, dict) and d.get('fixture') and not is_fixture_path(path):
+        d = dict(d, fixture=False, fixture_claimed=True)
+    return d
 
 
 def lessons():

@@ -254,7 +254,8 @@ def tokenize(line):
 
 def tokenize_text(text):
     """A text with no boundaries of its own (books, transcripts, subtitles): cut by the dictionary (tools/vi.py cut()),
-    then exactly as a course line. TODO(cutter): measure the cut against a hand-cut reference (handover step 5)."""
+    then exactly as a course line. The cut follows docs/SEGMENTATION.md; measured by `make cutter` on
+    tests/cutter/reference.tsv (written and cut by Claude, not native-checked)."""
     return tokenize(vi.cut(text, KNOWN | {vi.key(n) for n in NAMES}))
 
 

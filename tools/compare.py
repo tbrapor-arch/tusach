@@ -4,7 +4,8 @@ english.py), before publishing. For anything risky, a second agent that did not 
 
   python3 -I tools/compare.py run [--ref origin/main] [--before-db PATH] [--after-db PATH] [--max 20]
       builds REF (default: origin/main if it exists, else HEAD) in a temporary git worktree and the working tree, each
-      with its own database (default: data/build/vi.db for both), then compares them
+      with its OWN database built by its own tools/build_db.py from data/raw (so a change to the database build shows),
+      then compares the pages. --before-db / --after-db use an existing database instead.
   python3 -I tools/compare.py snapshot [app/dist/index.html] OUT.json
   python3 -I tools/compare.py diff BEFORE.json AFTER.json [--max 20]
 
@@ -105,19 +106,37 @@ def build(src_root, db, out_dir):
     return page
 
 
+def db_plan(wt, tmp, before_db=None, after_db=None):
+    """[(side, source tree, database path, build it?)]: by default each side builds its own database."""
+    return [('before', wt, before_db or os.path.join(tmp, 'before-db', 'vi.db'), before_db is None),
+            ('after', ROOT, after_db or os.path.join(tmp, 'after-db', 'vi.db'), after_db is None)]
+
+
+def build_db(src_root, db):
+    os.makedirs(os.path.dirname(db), exist_ok=True)
+    r = subprocess.run([sys.executable, '-I', os.path.join(src_root, 'tools/build_db.py'), os.path.join(ROOT, 'data/raw'),
+                        db], cwd=src_root, capture_output=True, text=True)
+    if r.returncode or not os.path.exists(db):
+        sys.exit(f'compare: the database build in {src_root} failed:\n{r.stdout[-1500:]}\n{r.stderr[-1500:]}')
+
+
 def run():
     arg = lambda n, d: sys.argv[sys.argv.index(n) + 1] if n in sys.argv else d   # noqa: E731
     ref = arg('--ref', None)
     if ref is None:
         ok = subprocess.run(['git', 'rev-parse', '--verify', '-q', 'origin/main'], cwd=ROOT, capture_output=True).returncode == 0
         ref = 'origin/main' if ok else 'HEAD'
-    db = os.path.join(ROOT, 'data/build/vi.db')
-    before_db, after_db = arg('--before-db', db), arg('--after-db', db)
     tmp = tempfile.mkdtemp(prefix='tusach-compare-')
     wt = os.path.join(tmp, 'src')
     try:
         subprocess.run(['git', 'worktree', 'add', '--detach', '-q', wt, ref], cwd=ROOT, check=True)
-        print(f'before: {ref} with {before_db}\nafter:  working tree with {after_db}')
+        plan = db_plan(wt, tmp, arg('--before-db', None), arg('--after-db', None))
+        for side, src, db, fresh in plan:
+            if fresh:
+                build_db(src, db)
+            print(f'{side}: {"working tree" if src == ROOT else ref} with {"its own new" if fresh else "the given"} '
+                  f'database {db}')
+        (_, _, before_db, _), (_, _, after_db, _) = plan
         a = snapshot(build(wt, before_db, os.path.join(tmp, 'before')))
         b = snapshot(build(ROOT, after_db, os.path.join(tmp, 'after')))
         return diff(a, b, int(arg('--max', 20)))
