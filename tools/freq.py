@@ -13,12 +13,20 @@ words, and estimates a word's frequency from each of its syllables:
 c(s) counts every use of s in the corpus, also inside tokens that are not dictionary words, so the share left to the
 dictionary words is not inflated. With no corpus, share = prior (the estimate rests on F alone).
 
+The corpus is cut by the project's own cutter (tools/vi.py cut(), with the dictionary's keys and the rules of
+docs/SEGMENTATION.md): one cutter (CLAUDE.md rule 1), so the counts use the same word boundaries as the cards.
+underthesea decides nothing here; it appears only as a comparison in the cutter report (tools/cutter_test.py).
+
 Biases, stated plainly:
 - F: wordfreq 3.1.1 (Wikipedia, OpenSubtitles 2018, web text; frozen around 2021), else FrequencyWords (subtitles).
-- The shares come from a small corpus (example sentences: Tatoeba, Wiktionary's examples) cut by underthesea, whose
-  model follows the VLSP 2013 news conventions; the dictionary's headwords and underthesea's words do not always agree.
-  Words the corpus never shows keep the prior split, which favours compounds of frequent syllables and long words of
-  common syllables (an upper bound rather than an estimate).
+- The shares come from a small corpus of example sentences (our Tatoeba snapshot and Wiktionary's examples; the
+  private build also has the Tatoeba Challenge copy), short and conversational, translated from English by volunteers.
+- vi.cut() is a longest match: where the dictionary lists a free phrase that its rules do not catch, the phrase takes
+  the count from its syllables (đi học); where the dictionary lacks a word, its syllables keep it. Its rules split
+  function-word sequences and classifier + noun, so those pairs lose counts they would get from a longest match.
+- Words the corpus never shows keep the prior split, which favours compounds of frequent syllables and long words of
+  common syllables (an upper bound rather than an estimate). With no corpus (sandbox build without Tatoeba and
+  Wiktionary) every share is the prior.
 - A monosyllable used mostly inside compounds (quốc, học) is pushed down only as far as the corpus shows it.
 """
 import math
@@ -51,18 +59,10 @@ def syllable_freqs(raw_dir, syllables):
 
 
 def segmenter(known):
-    """(function text -> list of word keys, description). underthesea when installed, else the dictionary cutter."""
-    try:
-        from underthesea import word_tokenize
-        import underthesea
-
-        def cut(text):
-            return [vi.key(t) for t in word_tokenize(vi.nfc(text)) if any(c.isalpha() for c in t)]
-        return cut, f'underthesea {underthesea.__version__} word_tokenize'
-    except ImportError:
-        def cut(text):
-            return [w[2] for w in vi.words(vi.cut(text, known)) if w[0] == 'w']
-        return cut, 'tools/vi.py cut() (longest dictionary match; underthesea not installed)'
+    """(function text -> list of word keys, description): the project's own cutter, tools/vi.py cut()."""
+    def cut(text):
+        return [w[2] for w in vi.words(vi.cut(text, known)) if w[0] == 'w']
+    return cut, 'tools/vi.py cut() (longest dictionary match with the rules of docs/SEGMENTATION.md)'
 
 
 def estimate(keys, F, corpus_tokens):

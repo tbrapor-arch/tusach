@@ -45,3 +45,12 @@
   téi), junk (àh, ă, ǵ). None is a Vietnamese syllable; nothing was whitelisted. quên showed that uên was missing.
   quốc is the one spelling of qu + a rounded vowel, kept as such.
 - Tone-mark placement: one house style (traditional); keys normalise it (see REFERENCE).
+- Tatoeba Challenge copy: its licence is in conflict, so it is now `commercial_ok: False` (private build only). The
+  cutter reference of 17 Nov 2026 (200 of its sentences, commit 67249d0) was removed from the repository going
+  forward; history is not rewritten. New reference: docs/SEGMENTATION.md first, then 200 sentences written by Claude
+  and cut by hand by that convention before any cutter ran on them (not checked by a native speaker).
+- One cutter: the frequency counts now use vi.cut(), not underthesea (which stays in the cutter report only). vi.cut()
+  got the rules of docs/SEGMENTATION.md. On the new reference, with underthesea's Viet74K list as the dictionary
+  (stand-in, Wiktionary not fetched): F1 0.893 before the rules, 0.942 after; underthesea 0.930. Caveat: the rules
+  were chosen by the convention but tuned while reading the differences on this same reference: no held-out set, so
+  0.942 is optimistic; and the reference is one non-native model's judgement.

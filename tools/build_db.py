@@ -327,10 +327,12 @@ SOURCES = [
     {'id': 'tatoeba', 'name': 'Tatoeba, Vietnamese-English sentences', 'version': snapshot_pin('tatoeba'),
      'licence': 'CC BY 2.0 FR (some CC0 1.0)', 'url': 'https://tatoeba.org/en/downloads', 'commercial_ok': True,
      'load': load_tatoeba},
+    # licence in conflict (README CC BY 2.0 FR, LICENSE CC BY-NC-SA 4.0): treated as non-commercial, so it never
+    # reaches the public database (vi.db), only the private build's word counts
     {'id': 'tatoeba-challenge', 'name': 'Tatoeba sentences, Helsinki-NLP Tatoeba Challenge eng-vie test set (corpus '
      'for word counts only, not stored)', 'version': 'bd05f08', 'licence': 'CC BY 2.0 FR per README; repo LICENSE '
      'CC BY-NC-SA 4.0 (conflict, see ATTRIBUTION.md)', 'url': 'https://github.com/Helsinki-NLP/Tatoeba-Challenge',
-     'commercial_ok': True, 'load': load_tatoeba_challenge},
+     'commercial_ok': False, 'load': load_tatoeba_challenge},
     {'id': 'frequencywords', 'name': 'FrequencyWords, OpenSubtitles 2018 vi_50k (syllable counts)', 'version': '525f9b5',
      'licence': 'CC BY-SA 4.0 (content)', 'url': 'https://github.com/hermitdave/FrequencyWords', 'commercial_ok': True,
      'load': load_frequencywords},
@@ -635,7 +637,7 @@ def main():
     known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
     if sentences:
         attach_examples(con, sentences, known)
-    # the corpus for word counts: Tatoeba, Wiktionary's examples, the Tatoeba Challenge test set (build time only)
+    # the corpus for word counts: Tatoeba, Wiktionary's examples (+ the Tatoeba Challenge copy in the private build)
     corpus = [v for v, _, _ in sentences] + [v for (v,) in con.execute(
         "SELECT vi FROM example WHERE source = 'wiktionary'")] + corpus
     fdesc = frequencies(con, raw, corpus)

@@ -1,218 +1,213 @@
-# Cutter reference: 200 Vietnamese sentences cut into words, for tools/cutter_test.py (`make test`, a report, not a gate).
+# Cutter reference: 200 Vietnamese sentences cut into words, for tools/cutter_test.py (`make cutter`; a report, not a gate).
 #
-# NOT CHECKED BY A NATIVE SPEAKER. Cut by Claude's own judgement on 17 Nov 2026, as a starting reference; a native
-# speaker should correct it before its scores are trusted. Not course content.
-#
-# Sentences: the Vietnamese side of lines of the Helsinki-NLP Tatoeba Challenge eng-vie test set
-# (data/test/eng-vie/test.txt at commit bd05f08; Tatoeba contributors, CC BY 2.0 FR per that repository's README, whose
-# LICENSE file says CC BY-NC-SA 4.0: see ATTRIBUTION.md). Text unchanged except for the underscores; sentences with
-# obvious typos or broken encoding were skipped.
+# WRITTEN AND CUT BY CLAUDE, NOT CHECKED BY A NATIVE SPEAKER. The sentences are Claude's own writing (18 Nov 2026):
+# everyday Northern usage, taken from no source, CC0. They were cut by hand following docs/SEGMENTATION.md, without
+# running any cutter on them first. The reference is one non-native model's judgement: its scores measure agreement
+# with that judgement, not correctness. A native speaker should check it; attributed real sentences (Tatoeba) are to
+# be added once our Tatoeba snapshot exists.
+# (The earlier reference of 17 Nov 2026 used sentences of the Tatoeba Challenge copy, whose licence is in conflict:
+# removed from the repository on 18 Nov 2026, see docs/HISTORY.md.)
 #
 # Format: one sentence per line, two tab-separated fields:
-#   line   0-based line number in eng-vie-test.txt (tools/cutter_test.py checks the text against it when present)
+#   n      sentence number (1-200)
 #   cut    the sentence with an underscore between the syllables of one word, spaces between words (as in lessons)
-# Conventions: a word is a dictionary-style lexical unit: compounds (hy_vọng, xe_buýt), lexicalised function words
-# (có_thể, không_thể, bao_giờ, tất_cả, sau_khi, trước_khi, tại_sao, chúng_tôi, người_ta), names of more than one
-# syllable (Nam_Mỹ, Flappy_Bird), language names with tiếng (tiếng_Anh). Kept apart: classifier + noun (cái mũ,
-# con chó), pronoun + ấy/ta (anh ấy, cô ta), verb + direction or result (đi ngủ, tìm thấy, lớn lên), numerals
-# (mười một), "không" before a word (không bao_giờ), phrases such as màu xanh, mọi người, nhà khoa_học.
-0	Hãy từ_bỏ hy_vọng, hỡi những người vào đây.
-8	Sau_khi ăn, tụi tao đi ngủ.
-19	Bạn chỉ toàn than_phiền.
-57	Hiện_giờ bạn có đau không?
-66	Theo mình nhớ thì nhà của Tom hơi xa đường_cái.
-92	Brazil là quốc_gia lớn nhất ở Nam_Mỹ.
-105	Con đi bơi được không mẹ?
-110	Có_thể nói cách khác được không?
-112	Tôi có_thể đợi Tom ở đây được không?
-123	Bạn có_thể kể cho tôi Tom đã làm gì không?
-130	Đức Giêxu chủ_trương khoan_dung.
-134	Đến gặp tôi bất_cứ lúc nào bạn rảnh.
-136	Hãy đến gần hơn và xem kỹ bức tranh này.
-143	Bạn có_thể nhắc lại lời bạn vừa nói được không?
-184	Đừng để tôi ngủ mất.
-195	Họ có vũ_khí không?
-230	Cuộc_sống dễ_dãi băng_hoại tinh_thần binh_sĩ.
-237	Ai cũng ít_nhiều có chút quan_tâm đến nghệ_thuật.
-244	Tất_cả đều đang hoạt_động.
-261	Thực_phẩm nhanh ôi_thiu trong thời_tiết nóng.
-268	Vui_lòng cho tôi một lon bia.
-290	"Xong chưa vậy?" "Tôi còn chưa bắt_đầu nữa mà."
-294	Mày đã ngừng đánh vợ mày rồi hả ?
-295	Mày ngưng đánh vợ mày chưa?
-298	Anh ấy nhận tội_lỗi của mình.
-303	Anh ấy yêu_cầu tôi giữ bí_mật.
-304	Anh ta đã ăn hết tất_cả táo.
-308	Thuế cao được áp cho mặt_hàng rượu.
-309	Anh ấy đã mua cho cô ấy một món quà nhỏ.
-312	Anh ta có_thể bơi được 1 dặm.
-321	Anh ấy qua_đời trước_khi nhìn ra ước_mơ của mình.
-330	Anh ấy đi bằng xe_đạp.
-336	Anh ta vừa về nhà.
-342	Anh ta giấu khuôn_mặt xấu_xí của mình.
-344	Anh ấy là một luật_sư giỏi.
-352	Cậu ta đang tận_hưởng cuộc_sống học_đường.
-355	hiện_tại, anh ấy đang ở trong bệnh_viện
-373	Anh ta rất sẵn_lòng cho tôi vay tiền.
-389	Anh ấy gặp được một người trẻ_tuổi tốt_bụng.
-390	Nó không bao_giờ nói xạo.
-395	Cậu ta đặt cuốn sách lên giá.
-400	Nó hối_tiếc lỗi_lầm của nó.
-409	Ngón_chân của nó chảy_máu.
-413	Anh ấy ở nước_ngoài đã sáu năm nay.
-414	Anh ấy gửi một chiếc váy cho con_gái anh ấy.
-417	Anh ta ngồi xuống ghế_bành để nghe nhạc.
-433	Anh kể tôi nghe chuyện đời của mình
-434	Anh ấy nói với tôi chuyện đời của anh.
-448	Cậu ta rất nghèo lúc còn trẻ.
-464	Con_trai ông ấy muốn trở_thành luật_sư.
-484	Hôm_bữa đi chơi chụp được bao_nhiêu tấm hình vậy?
-485	Các bạn có bao_nhiêu cây vợt?
-486	Tụi bây có mấy cây vợt?
-488	Còn lại bao_nhiêu tiền?
-490	Bạn nghĩ là trong ba năm tới con_gái tôi sẽ cao đến đâu?
-526	Tôi đã làm hỏng điện_thoại.
-551	Tôi không_thể kết_nối vào mạng.
-558	Tôi chơi được Flappy_Bird.
-561	Tôi không chịu được lâu.
-562	Tôi không chịu được lâu đâu.
-571	Ichiro là một tuyển_thủ bóng_chày nổi_bật.
-586	Tôi không muốn bạn lỡ chuyến xe_bus.
-591	Tôi muốn bạn xem nhanh qua những tài_liệu này.
-599	Tôi không có thêm ý_tưởng nào nữa.
-605	Tôi không biết nên đi đâu hay làm gì.
-616	Tôi không thấy có gì giống_nhau hết.
-622	Tôi không muốn bị ngộ_độc.
-623	Tôi không muốn bị trúng_độc.
-632	Tôi không muốn nói_chuyện về nó ngay lúc này.
-650	Nếu trời mưa, chuyến đi sẽ bị hủy.
-666	Nếu bạn thích đồ biển, bạn đã đến đúng nơi rồi đó!
-694	Tôi có một vết_thương ở ngón_chân út.
-701	Tôi có rất nhiều sách học tiếng Việt_Nam.
-703	Tao chẳng biết nó sống ở đâu nữa.
-705	Tôi không có ký_ức nào về chuyện đã xảy_ra.
-714	Tôi phải viết một lá thư. Bạn có tờ giấy nào không?
-719	Tớ nghe tất_cả những điều cậu nói.
-724	Tôi hy_vọng mình đã làm điều đúng_đắn.
-725	Tôi hy_vọng là chuyến đi xe_buýt không quá chán.
-726	Hy_vọng bạn thích nó.
-728	Hy_vọng bạn không quên bất_cứ thứ gì.
-729	Tôi hi_vọng bạn tiếp_tục luyện_tập Tiếng_Việt.
-746	Tôi biết bạn sẽ nói gì.
-762	Tôi sống từ năm này qua năm khác.
-774	Tôi sẽ chú_ý. Tôi hứa
-777	Tôi sẽ cho nó vào hóa_đơn của bạn.
-789	Tôi yêu căn nhà đó.
-798	Tôi đã khiến cho Tom bỏ vali của nó lại.
-802	Tôi sợ là Tom sẽ nói không.
-814	Tôi tính ngày_mai đi nếu thời_tiết tốt.
-827	Tôi và Tom sẽ nói một câu_chuyện nhỏ.
-847	Tôi sẽ không nói cho bạn biết phải làm gì.
-864	Tôi rất buồn là bạn đã bị_thương nặng.
-869	Tôi vẫn đang bị sốc.
-873	Tôi chắc_chắn Tom đã nói thật với bạn.
-880	Tôi đang cố_gắng học tiếng_Anh.
-884	Tôi đang làm_việc với trường_hợp khác.
-907	Ở Saudia, phụ_nữ không được lái_xe.
-920	Tao nợ nó 100 đô_la.
-934	Tôi nợ bạn một lời xin_lỗi.
-939	Tôi đã nói là tôi sẽ làm mà.
-941	Tôi đã gặp cô ta tại bữa_tiệc.
-948	Tới lúc tôi nên quay_lại khách_sạn rồi.
-959	Không phải điều này trái luật sao?
-961	Có phải cô ấy đang hẹn_hò với ai đó?
-987	Tôi sẽ đi xe_buýt để đến trường.
-991	Cái đó không có ý_nghĩa gì hết mà!
-994	Anh ấy mất được 10 năm rồi.
-1003	Tôi nghĩ đôi mắt đã đánh_lừa tôi.
-1007	Đã mười một giờ rồi.
-1017	Tại_vì tôi nhầm hay là điều đó sai vậy?
-1038	Tôi đã cố thuyết_phục cô ấy mà không thành_công.
-1057	Đó là cái CD của tôi phải không?
-1072	Ở đây ngột_ngạt quá.
-1074	Tôi tốn hơn hai tiếng để dịch vài trang tiếng_Anh.
-1081	Nó chính là con gấu đói mà dân_làng sợ_hãi.
-1084	Tôi từng làm_việc cho họ.
-1085	Sẽ rất tuyệt nếu các chú tôi đều rất giàu.
-1100	Tôi vẫn chưa đọc báo của ngày hôm_nay.
-1101	Tôi từng tận_mắt thấy nó.
-1117	Mình muốn nghe toàn_bộ câu_chuyện.
-1123	Tôi muốn chuyển đến châu Nam_cực
-1129	Tôi muốn bạn biết rằng bạn không có gì phải sợ.
-1160	Anh ước gì chúng_ta có_thể có nhiều thời_gian bên nhau.
-1165	Tôi muốn biết người mà Tom đã nói_chuyện cùng.
-1182	Nhật_bản không lớn bằng Gia_nã_đại.
-1209	Bạn hãy cho tôi biết những ngày bạn có_thể đến được.
-1213	Chúng_ta hãy vào trong nào.
-1234	London chẳng còn là thành_phố sương_mù nữa.
-1236	Coi kìa, người_ta bảo nghe nhạc Mozart làm cho cà_chua lớn lên.
-1272	Mẹ đã làm cho tôi một ổ bánh cho sinh_nhật của tôi.
-1273	Những người thuê nhà trong tòa_nhà này hầu_hết là nghệ_sỹ.
-1282	Bé nhà tôi muốn nói_chuyện.
-1290	Mắt tôi đang bị đau.
-1299	Cha tôi sẽ đi du_lịch nước_ngoài vào năm sau.
-1364	Số_phận chúng_mình đan vào nhau.
-1367	Sự kiên_nhẫn của chúng_tôi cũng trong tình_trạng như hôm_qua.
-1371	Giáo_viên của chúng_tôi yêu_cầu chúng_tôi giữ im_lặng.
-1382	Làm_ơn nghiêm_túc đi.
-1394	Làm_ơn báo cho tôi biết.
-1408	Nhấn nút màu xanh và đèn sẽ tiếp_tục sáng.
-1410	Thôi hành_động như là một đứa trẻ đi.
-1418	Rock là loại nhạc của giới trẻ.
-1431	Cô ấy đã chọn một cái mũ.
-1462	Cô ấy độc_lập khỏi ba mẹ của cô ấy.
-1464	Nó không bì được với tôi.
-1502	Cô ấy đã cố tự_sát rất nhiều lần.
-1507	Cô ấy chuẩn_bị đi ngủ khi thì có ai đó gõ cửa.
-1517	Nó sẽ không thích việc này.
-1525	Này Betty, bạn đã quyết_định về căn nhà mơ_ước chưa?
-1526	Chúng_ta đã thua 3 trận cho đến thời_điểm hiện_tại.
-1549	Bạn hãy mang đồ_ăn dư về nhà
-1575	Điều đó xảy_ra vào ba ngày trước.
-1585	Đó là lỗi chính_tả. Xin_lỗi.
-1600	Chắc là sẽ đủ đó.
-1613	Bọn con_trai đang leo lên khắp các tảng đá.
-1640	Con chó cứ sủa tôi ngay ở cổng và không cho tôi vào.
-1650	Cựu bộ_trưởng bộ năng_lượng được bầu làm tổng_thống hôm chủ_nhật.
-1651	mặt_tiền các ngôi nhà đều đã được treo cờ.
-1659	Người Nhật có mắt đen.
-1661	Đức vua trị_vì vương_quốc.
-1664	Tuổi kết_hôn hợp_pháp ở Úc là 18.
-1668	Những người nghe đã bắt_đầu ngáp.
-1680	Loại thuốc mới phô_bày hiệu_ứng tức_thời.
-1681	Tin_tức khiến nó rất vui.
-1692	Mọi người từng nghĩ rằng anh ta là một nhà khoa_học thành_công.
-1696	Cuộc chơi chấm_dứt quá sớm.
-1697	Cảnh_sát buộc_tội anh ta ăn_cướp.
-1711	Vùng lân_cận xung_quanh nhà anh ấy chẳng có cái bệnh_viện nào.
-1718	Không_thể có sự thỏa_hiệp nào.
-1719	Vì_vậy nhiều người đã qua_đời.
-1733	Ở đó dường_như không cần phải vội đâu.
-1746	Có vài người khách đang đợi trong phòng vẽ.
-1755	Đó không phải là ý của tôi.
-1757	Bài thứ hai thì rất đơn_giản.
-1759	Tuyết tan hết trong một ngày.
-1764	Những ngôi sao ở quá xa.
-1769	Các sinh_viên đã học thuộc_lòng bài thơ này.
-1784	Tất_cả họ đều đã rời đi.
-1801	Họ đang ăn bánh_mì xăng-uých.
-1818	Cái đèn_pin này ngày_càng mờ.
-1836	Điều này rất khó cho Tom.
-1874	Cả Tom và tôi đều rất tự_hào về bạn.
-1884	Tom có_vẻ bối_rối.
-1890	Tom đoán là Mary sẽ tới muộn.
-1898	Tom kiểm_tra danh_sách.
-1901	Tom phàn_nàn rằng món súp không đủ nóng.
-1905	Tom đã không_thể nào hoàn_thành nếu thiếu sự giúp_đỡ của Mary.
-1908	Tom chối_bỏ mọi lời cáo_buộc.
-1914	Tom đã không biết rằng Mary thích nấu_ăn.
-1915	Hình_như Tom không hiểu những điều bạn nói.
-1920	Tom không phải nói về điều đó nếu anh ta không muốn.
-1926	Tom chạy xe màu trắng.
-1928	Đối_với tôi, nó quan_trọng.
-1931	Tom đã tìm thấy một con heo_rừng.
-1932	Tom đã đưa cái gì đó cho Mary.
-1992	Tom sống ở một ngôi nhà trên cây.
-2004	Tom chả bao_giờ đi ngủ trước nửa_đêm.
-2008	Tom chỉ ăn thực_phẩm hữu_cơ.
-2014	Tom cầu_xin Mary cho anh ấy một cơ_hội khác.
+1	Sáng nay tôi dậy muộn nên không kịp ăn_sáng.
+2	Mẹ tôi đang nấu cơm trong bếp.
+3	Anh có biết bưu_điện ở đâu không?
+4	Chúng_tôi đi xe_buýt đến trường.
+5	Hôm_qua trời mưa to quá.
+6	Em_gái tôi học lớp ba.
+7	Cái áo này giá bao_nhiêu tiền?
+8	Tôi không phải là người Hà_Nội.
+9	Ông ấy làm bác_sĩ ở bệnh_viện Bạch_Mai.
+10	Bạn muốn uống trà hay cà_phê?
+11	Cuối_tuần này chúng_mình đi Hạ_Long nhé.
+12	Con mèo đang ngủ trên ghế.
+13	Tôi đã từng sống ở Sài_Gòn hai năm.
+14	Làm_ơn nói chậm một chút.
+15	Hôm_nay là thứ_hai.
+16	Chị ấy mua ba quả cam ở chợ.
+17	Cậu làm gì vậy?
+18	Bố tôi thích đọc báo vào buổi_sáng.
+19	Nhà tôi có hai phòng_ngủ.
+20	Tại_sao em không đến lớp hôm_qua?
+21	Trời lạnh, nhớ mặc áo ấm nhé.
+22	Anh ấy chạy vào nhà rồi đóng cửa lại.
+23	Tôi tìm thấy chìa_khóa dưới gầm giường.
+24	Quyển sách này rất hay.
+25	Chiếc xe_đạp của tôi bị hỏng rồi.
+26	Bao_giờ anh về quê?
+27	Cô_giáo khen cả lớp.
+28	Tôi đói_bụng quá, đi ăn phở đi.
+29	Ở đây có wifi không em?
+30	Họ đã làm xong bài_tập chưa?
+31	Tôi nghe thấy tiếng chó sủa ngoài sân.
+32	Ngày_mai là sinh_nhật của mẹ tôi.
+33	Anh_trai tôi đang học tiếng_Anh.
+34	Đừng quên mang ô nhé, trời sắp mưa.
+35	Tôi rất là mệt sau một ngày làm_việc.
+36	Cái gì ở trong hộp này thế?
+37	Chúng_ta nên đi_bộ hay đi xe_máy?
+38	Con đường này dẫn đến hồ Hoàn_Kiếm.
+39	Bà tôi năm nay tám mươi tuổi.
+40	Mình không biết làm thế_nào cả.
+41	Bạn có_thể giúp tôi một chút được không?
+42	Tôi đặt hai vé máy_bay đi Đà_Nẵng.
+43	Em ấy hay đi học muộn.
+44	Hôm_nay trời nắng đẹp.
+45	Căn nhà ấy đã được bán rồi.
+46	Tôi làm cho công_ty này năm năm rồi.
+47	Cái điện_thoại này pin rất yếu.
+48	Anh đi đâu mà vội thế?
+49	Tôi thường dậy lúc sáu giờ sáng.
+50	Bộ phim tối qua hay lắm.
+51	Chị có muốn ngồi xuống không?
+52	Nó ăn hết cả nồi cơm.
+53	Ai để quên cái túi ở đây?
+54	Tôi chưa bao_giờ đi Huế.
+55	Cây vợt cầu_lông này của ai?
+56	Trẻ_con thích ăn kẹo.
+57	Chúng_tôi sẽ gặp nhau ở quán cà_phê đầu ngõ.
+58	Anh ấy nói tiếng_Việt rất giỏi.
+59	Tuần sau tôi phải đi công_tác.
+60	Ông_bà tôi sống ở nông_thôn.
+61	Hãy tắt điện trước_khi đi ngủ.
+62	Đi thẳng rồi rẽ trái ở ngã_tư.
+63	Tôi bị đau_đầu từ sáng.
+64	Em có thích nghe nhạc không?
+65	Bác_sĩ bảo tôi phải nghỉ_ngơi.
+66	Chiều nay mình đi bơi đi.
+67	Lan đang đợi xe_buýt ở bến.
+68	Quần_áo phơi ngoài sân đã khô chưa?
+69	Thời_tiết hôm_nay thế_nào?
+70	Tôi muốn đổi tiền ở ngân_hàng.
+71	Ăn xong nhớ rửa bát nhé.
+72	Hai mươi lăm nghìn một cân.
+73	Phòng này sạch_sẽ quá.
+74	Cô ấy có đôi mắt rất đẹp.
+75	Vì_vậy chúng_tôi quyết_định ở nhà.
+76	Bạn đã ăn_tối chưa?
+77	Đường_phố Hà_Nội rất đông vào giờ cao_điểm.
+78	Con chó nhà hàng_xóm sủa suốt đêm.
+79	Tôi không hiểu anh nói gì.
+80	Mẹ bảo con đi chợ mua rau.
+81	Từ nhà tôi đến trường mất mười lăm phút.
+82	Chúng_nó đang chơi bóng_đá ngoài công_viên.
+83	Anh có_thể nhắc lại được không?
+84	Tuy_nhiên, giá vé hơi đắt.
+85	Mùa_hè ở đây rất nóng.
+86	Mình mới mua một chiếc áo_khoác mới.
+87	Hôm_qua tôi gặp lại một người bạn cũ.
+88	Xin_lỗi, tôi đến muộn.
+89	Bố đang sửa cái quạt_điện.
+90	Bạn sinh năm bao_nhiêu?
+91	Nhà_hàng này nổi_tiếng với món chả_cá.
+92	Tôi để quên ví ở nhà rồi.
+93	Ngày_mai có_thể trời sẽ mưa.
+94	Cái bàn này làm bằng gỗ.
+95	Em_bé đang khóc vì đói.
+96	Anh ấy cao hơn tôi một chút.
+97	Đừng lo, mọi việc sẽ ổn thôi.
+98	Tôi thích mùa_thu ở Hà_Nội nhất.
+99	Hai đứa trẻ đang chơi trốn_tìm.
+100	Chị ơi, cho em một bát phở bò.
+101	Bạn làm nghề gì?
+102	Tôi là kỹ_sư.
+103	Trường tôi có một thư_viện rất lớn.
+104	Cuốn từ_điển này dày quá.
+105	Họ cưới nhau năm ngoái.
+106	Hôm_nay tôi không muốn ra ngoài.
+107	Chúng_ta phải học_hành chăm_chỉ.
+108	Anh có nhìn thấy cái kính của em không?
+109	Ở Việt_Nam người_ta ăn cơm bằng đũa.
+110	Mời anh vào nhà uống nước.
+111	Nước sông lên cao sau trận mưa.
+112	Tôi rất vui được gặp chị.
+113	Đồng_hồ của tôi chạy chậm năm phút.
+114	Bà ấy bán hoa_quả ở đầu chợ.
+115	Lúc nào rảnh thì gọi cho mình nhé.
+116	Đây là lần đầu_tiên tôi đi máy_bay.
+117	Con_trai chị mấy tuổi rồi?
+118	Tôi không ăn được đồ cay.
+119	Cửa_hàng mở cửa từ tám giờ sáng.
+120	Tối nay mình đi xem phim không?
+121	Anh ấy đứng lên chào mọi người.
+122	Bức tranh trên tường do ông tôi vẽ.
+123	Tôi đã gửi thư cho anh hôm thứ_sáu.
+124	Bạn nên uống nhiều nước hơn.
+125	Thành_phố này có nhiều cây xanh.
+126	Đi chậm thôi, đường trơn lắm.
+127	Ngôi chùa này đã có hơn ba trăm năm.
+128	Em ơi, tính tiền cho anh.
+129	Tôi bận quá, không có thời_gian nghỉ.
+130	Họ đang xây một cây cầu mới.
+131	Tôi cần mua một tấm vé tàu đi Lào_Cai.
+132	Sao anh không nói với em trước?
+133	Bên_ngoài trời tối rồi.
+134	Món này ngon nhưng hơi mặn.
+135	Chị ấy vừa mới tốt_nghiệp đại_học.
+136	Chúng_tôi ngồi nói_chuyện đến tận khuya.
+137	Đừng mở cửa_sổ, gió lắm.
+138	Tôi không chắc là anh ấy sẽ đến.
+139	Năm nay con tôi vào lớp một.
+140	Bạn có hay đi du_lịch không?
+141	Mình đánh_rơi điện_thoại xuống nước.
+142	Tôi quen chị ấy từ hồi còn đi học.
+143	Ông Nguyễn_Văn_Bình là giám_đốc công_ty.
+144	Ăn chậm thôi kẻo nghẹn.
+145	Bạn thích màu nào nhất?
+146	Ở quê tôi mùa_đông rất lạnh.
+147	Cái ghế kia bị gãy một chân.
+148	Chúng_mình chụp một tấm ảnh nhé.
+149	Tôi thấy hơi mệt, chắc tôi bị cảm.
+150	Bọn trẻ chạy ra sân chơi.
+151	Anh ấy làm_việc ở Hải_Phòng.
+152	Hôm nào rảnh mình đến thăm bạn.
+153	Mẹ đưa cho tôi một quả trứng luộc.
+154	Đây không phải là lỗi của em.
+155	Tôi có hai anh_em, một trai một gái.
+156	Anh lấy giúp em cái cốc trên bàn với.
+157	Lớp chúng_tôi có ba mươi học_sinh.
+158	Chị làm_ơn chỉ đường cho tôi.
+159	Nhà_ga cách đây bao xa?
+160	Tôi đã đọc hết cuốn tiểu_thuyết đó.
+161	Mưa to quá, chúng_ta về thôi.
+162	Bạn có anh_chị_em không?
+163	Ông ấy về_hưu năm ngoái.
+164	Đèn đỏ rồi, dừng lại đi!
+165	Em_gái tôi rất thích vẽ.
+166	Tôi phải dậy sớm để đi làm.
+167	Chiếc đồng_hồ này là quà của bố.
+168	Đi qua cầu rồi rẽ phải.
+169	Anh có biết chơi cờ_tướng không?
+170	Bữa_tối hôm_nay có cá kho.
+171	Tôi rất tiếc khi nghe tin đó.
+172	Mọi người đều đã đến đủ.
+173	Hôm_kia tôi gặp cô ấy ở siêu_thị.
+174	Mùa_xuân hoa_đào nở khắp nơi.
+175	Đừng nói to, em_bé đang ngủ.
+176	Tôi đổi ý rồi, không đi nữa.
+177	Cái túi_xách này của chị à?
+178	Anh ấy vừa ra khỏi phòng.
+179	Chúng_tôi mang về rất nhiều quà.
+180	Bác ơi, xe này có đi Hồ_Tây không?
+181	Tôi đọc báo mỗi sáng.
+182	Ở đây cấm hút_thuốc.
+183	Hai năm nữa tôi sẽ tốt_nghiệp.
+184	Bạn có_thể gọi taxi giúp tôi không?
+185	Con mèo nhảy lên bàn.
+186	Tôi không biết bơi.
+187	Nhà chị ấy ở tầng năm.
+188	Sinh_viên năm nhất phải ở ký_túc_xá.
+189	Trời ơi, muộn quá rồi!
+190	Ông ấy nói_chuyện rất vui_tính.
+191	Chúng_ta gặp nhau lúc bảy giờ tối nhé.
+192	Bánh_mì ở đây ngon và rẻ.
+193	Tôi làm mất chìa_khóa xe_máy rồi.
+194	Học tiếng_Việt có khó không?
+195	Em đã làm xong việc_nhà chưa?
+196	Bởi_vì trời mưa nên trận đấu bị hoãn.
+197	Ngày 2 tháng 9 là ngày Quốc_khánh.
+198	Anh ấy cho tôi mượn cuốn sách.
+199	Cảm_ơn bạn đã đến dự tiệc.
+200	Đi ngủ sớm đi, mai còn đi học.

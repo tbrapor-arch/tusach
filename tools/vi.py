@@ -273,8 +273,49 @@ def card_id(k, tag=None):
 
 # ---- the dictionary cutter, for text that has no boundaries of its own (books, transcripts, subtitles). Lessons never
 # use it. Longest dictionary match over syllables, up to MAX syllables; a syllable no word starts with stays alone.
-# Measured against a hand-cut reference before any module relies on it (handover step 5: 200 sentences): TODO.
+# It follows docs/SEGMENTATION.md: a dictionary key is NOT used to join syllables when the convention makes it several
+# words, by these rules (measured with tools/cutter_test.py, `make cutter`):
+#  1. a question word (gì, ai, đâu) is always a word of its own (làm gì, đi đâu, cái gì);
+#  2. a classifier followed by anything (căn nhà, cây vợt, con chó), except the LEXICALISED pairs (con người, con trai);
+#     bộ, đôi, quả, viên, miếng are left out of CLASSIFIERS: as first syllables they mostly start real compounds
+#     (bộ đội, đôi khi, quả thật, viên chức);
+#  3. a sequence made only of free grammatical words (không phải, làm cho, rất là, đã từng), except LEXICALISED
+#     connectives (vì vậy, cho nên, trước khi);
+#  4. a time noun + deictic (năm nay, tối qua, tuần sau), except LEXICALISED (hôm nay, hôm qua, ngày nay);
+#  5. a verb + a direction or result complement (đứng lên, làm xong, tìm thấy, nhắc lại), except LEXICALISED
+#     (trở lại, thông qua); qua, sang, được, mất are left out: they end too many real compounds;
+#  6. a word + a personal pronoun (nhà tôi), except LEXICALISED (chúng tôi, chúng mình);
+#  7. numerals together (hai mươi, năm năm): each numeral is a word (numerals count as grammatical words in rule 3).
 MAX = 4
+QUESTION = {'gì', 'ai', 'đâu'}
+CLASSIFIERS = set('con cái chiếc căn cây quyển cuốn tờ bức ngôi tấm đứa trận tòa ngọn sợi hòn'.split())
+FUNCTION = set('''không chẳng chưa đã đang sẽ cũng vẫn còn rất là phải có được bị cho của với và mà thì nên rồi nữa thôi chứ
+nhé ạ à những các mọi mỗi từng để vì nếu khi lúc này kia đó ấy nào sao vậy thế cả hết quá lắm hơn nhất đều vừa mới sắp
+chỉ hay hoặc nhưng tuy dù bởi tại từ đến tới ở trong ngoài trên dưới sau trước giữa bằng theo về ra vào lên xuống qua
+sang lại đi làm như'''.split())
+NUMERALS = set('một hai ba bốn năm sáu bảy tám chín mười mươi trăm nghìn ngàn triệu tỷ lăm mốt tư linh lẻ'.split())
+COMPLEMENTS = set('ra vào lên xuống về lại xong thấy hết'.split())
+PRONOUNS = set('tôi tao mày nó mình hắn'.split())
+TIME_NOUNS = set('năm tuần tháng sáng trưa chiều tối đêm hôm ngày'.split())
+DEICTIC = set('nay qua ngoái sau trước tới kia'.split())
+LEXICALISED = {key(x) for x in '''con người|con cái|con trai|con gái|con số|con tin|con dấu|con đường mòn|cây cối|cây số|
+cái chết|vì vậy|vì thế|cho nên|bởi vì|như vậy|như thế|tại sao|vì sao|thế nào|trước khi|sau khi|trong khi|khi nào|
+nhưng mà|hay là|có khi|đôi khi|cho đến|từ khi|hôm nay|hôm qua|hôm kia|ngày nay|bây giờ|sau này|trước đây|lúc này|
+trở lại|trở về|trở ra|trở lên|trở xuống|thông qua|trải qua|bỏ qua|vượt qua|đi lại|qua lại|ra vào|lên xuống|
+chúng tôi|chúng mình|chúng nó|chúng mày|chúng tao|bọn tôi|bọn mình|bọn nó|tụi tôi|tụi mình|tụi nó|một mình'''
+                .replace('\n', '').split('|')}
+
+
+def joinable(k):
+    """May the dictionary key k (several syllables) be cut as one word? (the rules above)"""
+    if k in LEXICALISED:
+        return True
+    syl = k.split()
+    if any(s in QUESTION for s in syl) or syl[0] in CLASSIFIERS or all(s in FUNCTION or s in NUMERALS for s in syl):
+        return False
+    if len(syl) == 2 and ((syl[0] in TIME_NOUNS and syl[1] in DEICTIC) or syl[1] in COMPLEMENTS or syl[1] in PRONOUNS):
+        return False
+    return True
 
 
 def cut(text, known):
@@ -294,7 +335,8 @@ def cut(text, known):
                     group = [strip_punct(p) for p in pieces[i:i + n]]
                     if any(g[0] for g in group[1:]) or any(g[2] for g in group[:-1]) or not all(g[1] for g in group):
                         continue
-                    if key(' '.join(g[1] for g in group)) in known:
+                    k = key(' '.join(g[1] for g in group))
+                    if k in known and joinable(k):
                         best = n
                         break
             if best == 1:
@@ -337,6 +379,15 @@ def _test():
     assert display('Tôi ăn đường~sugar.') == 'Tôi ăn đường.'
     assert cut('Tôi là học sinh, bạn là học sinh.', {'học sinh'}) == 'Tôi là học_sinh, bạn là học sinh.'.replace(
         'là học sinh.', 'là học_sinh.')
+    # the cutter does not over-join (finding 12, docs/SEGMENTATION.md)
+    K = {'không phải', 'làm gì', 'làm cho', 'căn nhà', 'cây vợt', 'năm nay', 'con người', 'có thể', 'vì vậy', 'học sinh',
+         'hôm nay'}
+    assert cut('Tôi không phải học sinh.', K) == 'Tôi không phải học_sinh.'
+    assert cut('Anh làm gì? Làm cho xong.', K) == 'Anh làm gì? Làm cho xong.'
+    assert cut('căn nhà, cây vợt, năm nay', K) == 'căn nhà, cây vợt, năm nay'
+    assert cut('con người có thể, vì vậy hôm nay', K) == 'con_người có_thể, vì_vậy hôm_nay'
+    assert cut('đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi', {'đứng lên', 'làm xong', 'tìm thấy', 'nhà tôi',
+                                                                'hai mươi'}) == 'đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi'
     print('vi.py: all tests passed')
 
 

@@ -9,12 +9,13 @@ course/false_friends.tsv hand-curated false friends (word, chữ Hán, note); em
 tools/                   build, pipeline, checks (MIT)
 tools/fixtures/          TEST FIXTURE: dict.yaml (9 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
                          file for tools/test_db.py); not content
-tests/cutter/            reference.tsv: 200 sentences cut by hand, NOT checked by a native speaker
+tests/cutter/            reference.tsv: 200 sentences written and cut by Claude (docs/SEGMENTATION.md), NOT native-checked
+docs/SEGMENTATION.md     the word-boundary convention (lessons, the cutter reference, vi.cut()'s rules)
 data/fetch.sh            open sources pinned by content (ATTRIBUTION.md); a missing one fails (TUSACH_ALLOW_MISSING)
 data/fetch-lib.sh        its functions: fetch (clean git checkout), get (SHA-256), snap (our release), npmpkg
 data/snapshot-request.txt  a commit changing it runs .github/workflows/snapshot.yml (tools/pin_snapshot.py TAG)
 data/build/              generated, never committed: vi.db, vi-nc.db, cards.json
-requirements-build*.txt  build-time packages (wordfreq, underthesea), locked with hashes; CI installs them
+requirements-build*.txt  build/test packages (wordfreq; underthesea only for the cutter report), locked with hashes
 app/                     page template, recording page, PWA files, embedded font; app/dist/ is generated
 app/published-*.{txt,tsv}  card ids and English ranks of published pages (committed, only ever grow)
 ```
@@ -88,9 +89,15 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 - **Labels**: `same` = Wiktionary `vi-etym-sino` whose characters match the syllables; `native` = inherited (`inh`) from Proto-Vietic/Mon-Khmer/
   Austroasiatic; `false-friend` only from `course/false_friends.tsv` (cards.py); borrowings and unknown: no label.
 - **Frequency** (`tools/freq.py`): each syllable's frequency (wordfreq, else FrequencyWords) is divided among the
-  dictionary words containing it in the proportions seen in a corpus cut by underthesea (Tatoeba, Wiktionary
-  examples, Tatoeba Challenge), smoothed towards wordfreq's own phrase estimate; a word's frequency is the geometric
-  mean over its syllables. Biases in the module docstring.
+  dictionary words containing it in the proportions counted in a corpus cut by the project's own cutter (`vi.cut()`
+  with the dictionary's keys: Tatoeba snapshot, Wiktionary examples; + the Tatoeba Challenge copy in the private build
+  only), smoothed towards wordfreq's own phrase estimate (the syllable prior); a word's frequency is the geometric mean
+  over its syllables. underthesea decides nothing (cutter report only). Biases in the module docstring: a small,
+  conversational, translated corpus; vi.cut()'s longest match gives a listed free phrase its syllables' counts; with
+  no corpus (sandbox) the prior alone.
+- **Cutter** (`tools/vi.py cut()`): longest dictionary match, with the rules of docs/SEGMENTATION.md (no join of
+  question words, classifier + noun, free function-word sequences, time noun + deictic, verb + complement, word +
+  pronoun, numerals; `LEXICALISED` exceptions).
 
 ## Tools
 | Command | What |
@@ -98,7 +105,7 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 | `make db` / `make db-nc` | `tools/build_db.py`: vi.db (public) / vi-nc.db (`--nc`, private); refuses a wrong path |
 | `make lint` | `tools/lint.py` (rules, see its docstring) + `tools/verify_words.py --lessons` (suspects by class) |
 | `make test` | `tools/vi.py` self-test + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, missing sources, labels, bridge, frequency, cutter scoring), then the cutter report |
-| `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea on `tests/cutter/reference.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary) |
+| `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary, a stand-in while Wiktionary is not fetched) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
 | `make check` | the card check alone |
 | `make smoke` | `tools/smoke.py`: phone-sized click-through (Playwright) |

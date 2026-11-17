@@ -59,3 +59,4 @@ coverage:
 
 cutter:
 	$(PY) tools/cutter_test.py --max 30
+	$(PY) tools/cutter_test.py --known viet74k --max 30

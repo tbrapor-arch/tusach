@@ -174,5 +174,23 @@ d = cutter_test.disagreements(ref, [cutter_test.words_of_line('Tôi là học si
 ok(d == [('học | sinh', 'học sinh', 'b joins more', 'b')], 'a disagreement is one stretch, with the reference side')
 ok(len(cutter_test.load_reference()) == 200, 'the cutter reference has 200 sentences')
 
+# 6. licences and the one cutter (findings 11, 12, 13)
+import build_db  # noqa: E402,F811
+src = {x['id']: x for x in build_db.SOURCES}
+ok(src['tatoeba-challenge']['commercial_ok'] is False, 'the Tatoeba Challenge copy is commercial_ok False (private build only)')
+pub = os.path.join(ROOT, 'data/build/vi.db')
+if os.path.exists(pub):
+    m = dict(sqlite3.connect(pub).execute('SELECT key, value FROM meta'))
+    ok('tatoeba-challenge' not in (m.get('sources') or '').split(), 'the public database has nothing from it')
+ref_text = {c.replace('_', ' ') for _, c in cutter_test.load_reference()}
+ch = os.path.join(ROOT, 'data/raw/tatoeba-challenge/eng-vie-test.txt')
+if os.path.exists(ch):
+    chs = {x.rstrip('\n').split('\t')[3] for x in open(ch, encoding='utf-8') if x.count('\t') >= 3}
+    ok(not (ref_text & chs), 'no cutter reference sentence comes from the Tatoeba Challenge copy')
+head = open(cutter_test.REF, encoding='utf-8').read(800)
+ok('WRITTEN AND CUT BY CLAUDE, NOT CHECKED BY A NATIVE SPEAKER' in head, 'the reference says who wrote and cut it')
+ok(freq.segmenter({'học sinh'})[1].startswith('tools/vi.py cut()') and freq.segmenter({'học sinh'})[0]('Tôi là học sinh.')
+   == ['tôi', 'là', 'học sinh'], 'the frequency counts use the project\'s own cutter, not underthesea')
+
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

@@ -24,7 +24,6 @@ sys.path.insert(0, HERE)
 import vi  # noqa: E402
 
 REF = os.path.join(ROOT, 'tests/cutter/reference.tsv')
-SRC = os.path.join(ROOT, 'data/raw/tatoeba-challenge/eng-vie-test.txt')
 
 
 def load_reference(path=REF):
@@ -124,11 +123,9 @@ def main():
     kind = sys.argv[sys.argv.index('--known') + 1] if '--known' in sys.argv else 'db'
     limit = int(sys.argv[sys.argv.index('--max') + 1]) if '--max' in sys.argv else 15
     ref = load_reference()
-    print(f'cutter test: {len(ref)} reference sentences (tests/cutter/reference.tsv), NOT checked by a native speaker')
-    if os.path.exists(SRC):
-        src = [x.rstrip('\n').split('\t')[3] for x in open(SRC, encoding='utf-8')]
-        bad = [n for n, c in ref if vi.nfc(src[n]) != c.replace('_', ' ')]
-        print(f'  reference text matches the source sentences: {len(ref) - len(bad)}/{len(ref)}' + (f' (differ: {bad[:10]})' if bad else ''))
+    print(f'cutter test: {len(ref)} reference sentences (tests/cutter/reference.tsv), written and cut by Claude by '
+          'docs/SEGMENTATION.md, NOT checked by a native speaker: the scores measure agreement with one non-native '
+          "model's judgement")
     raw = [c.replace('_', ' ') for _, c in ref]
     ref_w = [words_of_line(c) for _, c in ref]
     known, kdesc = known_words(kind)
