@@ -14,7 +14,7 @@ release `data-2026-11-17` (NOTES.md: upstream URLs, workflow run). Unihan adds k
 Wiktionary: 35,526 entries (29,349 keys; 3,025 names), 10,793 keys with chữ Hán (10,674 matching their syllables),
 905 older borrowings read the non-Hán-Việt way (origin nonhv). Hán-Việt readings for 10,618 characters (2,099 tagged by
 Wiktionary). Suspects in `make lint`: 115 analyses not matching the syllables, 16 characters with no reading. Tatoeba:
-22,181 sentence pairs used, 10,055 examples on 6,146 words.
+22,181 sentence pairs used, 10,040 examples on 6,138 words.
 
 ## Bridge and labels
 Join on characters in `tools/bridge.py`: Taigi literary reading (literary MOE readings only when a character has one)
