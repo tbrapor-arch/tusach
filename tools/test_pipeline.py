@@ -69,7 +69,7 @@ with tempfile.TemporaryDirectory() as tmp:
     path = os.path.join(tmp, 'cards.json')
     st = cards.Store(path)
     st.replace_module('lessons', cards.tokenize('Tôi là học_sinh.'))
-    st.replace_module('book:a', cards.tokenize('Chào chị.') + cards.tokenize('Xin chào.'))
+    st.replace_module('book:a', cards.tokenize('Chào chị.') + cards.tokenize('Thớp chào.'))
     st.save()
     st = cards.Store(path)
     st.replace_module('lessons', cards.tokenize('Chào anh.'))       # rebuild one module only
@@ -77,9 +77,9 @@ with tempfile.TemporaryDirectory() as tmp:
     d = json.load(open(path, encoding='utf-8'))
     ok('chị' in d['cards'] and 'chào' in d['cards'], "rebuilding one module keeps the other module's cards")
     ok('học sinh' not in d['cards'], 'a card no module uses any more leaves the file')
-    ok(d['modules']['book:a']['missing'] == ['Xin'], 'a word without a card is recorded as missing')
+    ok(d['modules']['book:a']['missing'] == ['Thớp'], 'a word without a card is recorded as missing')
     errs = check_cards.check(path)
-    ok(any('word without a card: "Xin"' in e for e in errs), 'the card check fails on a word without a card')
+    ok(any('word without a card: "Thớp"' in e for e in errs), 'the card check fails on a word without a card')
     # card lost / English poorer / no English
     pub = os.path.join(tmp, 'ids.txt')
     open(pub, 'w').write('gone\n')
@@ -117,6 +117,7 @@ dialogue:
 - {n: 3, speaker: B, vi: "Tôi là hoc_sinh.", en: x}
 - {n: 4, speaker: B, vi: "Chị khoẻ.", en: x}
 - {n: 5, speaker: A, vi: "Chào anh! Tôi cũng là học_sinh.", en: x}
+- {n: 6, speaker: A, vi: "Tôi gơm_thớp.", en: x}
 notes: [{ref: 9, text: x}]
 new_words: [{w: cũng}, {w: tôi, en: I, me}]
 exercises:

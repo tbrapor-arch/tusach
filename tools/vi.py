@@ -232,9 +232,11 @@ def words(line):
     punctuation-like tokens ('n', text)."""
     out = []
     start = True
-    for i, piece in enumerate(nfc(line).split(' ')):
-        if i:
-            out.append(('p', ' '))
+    parts = re.split(r'(\s+)', nfc(line))       # any whitespace (a newline in a cut text, a tab) separates words
+    for i, piece in enumerate(parts):
+        if i % 2:
+            out.append(('p', piece))
+            continue
         if not piece:
             continue
         pre, core, post = strip_punct(piece)
@@ -377,6 +379,7 @@ def _test():
     assert [w[2] for w in ws if w[0] == 'w'] == ['chào', 'anh nam', 'tôi', 'là', 'học sinh'], ws
     assert [w[4] for w in ws if w[0] == 'w'] == [True, False, True, False, False]
     assert display('Tôi ăn đường~sugar.') == 'Tôi ăn đường.'
+    assert [w[2] for w in words('Một.\nHai\tba') if w[0] == 'w'] == ['một', 'hai', 'ba']   # newline/tab separate
     assert cut('Tôi là học sinh, bạn là học sinh.', {'học sinh'}) == 'Tôi là học_sinh, bạn là học sinh.'.replace(
         'là học sinh.', 'là học_sinh.')
     # the cutter does not over-join (finding 12, docs/SEGMENTATION.md)

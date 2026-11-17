@@ -39,6 +39,8 @@ entries:
     en: to be born; life
     chars: 生
     label: same
+  - word: gơm thớp
+    en: INVENTED test word (no real dictionary has it; tools/test_pipeline.py checks lint refuses it in a real lesson)
 hanviet:
   學: học
   生: sinh

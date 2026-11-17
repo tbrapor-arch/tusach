@@ -7,6 +7,7 @@ Network-free: the git source is a local repository, the files are file:// URLs, 
 """
 import hashlib
 import os
+import re
 import sqlite3
 import subprocess
 import sys
@@ -44,16 +45,21 @@ def sha(p):
 
 with tempfile.TemporaryDirectory() as tmp:
     raw = os.path.join(tmp, 'raw')
-    # 1. the real fetch.sh: a PENDING snapshot is a missing source, and a missing source fails the script
-    code, out = sh('sh data/fetch.sh', {'TUSACH_RAW': raw, 'TUSACH_FETCH_ONLY': 'wiktionary'})
+    # 1. a PENDING snapshot is a missing source, and a missing source fails the script; only the list lets it go on
+    code, out = lib('snap wiktionary k/k.jsonl k.jsonl PENDING PENDING', raw)
     ok(code == 1 and 'MISSING wiktionary' in out and 'PENDING' in out, 'fetch.sh exits 1 on a PENDING snapshot')
-    code, out = sh('sh data/fetch.sh', {'TUSACH_RAW': raw, 'TUSACH_FETCH_ONLY': 'wiktionary',
-                                       'TUSACH_ALLOW_MISSING': 'tatoeba,wiktionary'})
+    code, out = lib('snap wiktionary k/k.jsonl k.jsonl PENDING PENDING', raw,
+                    {'TUSACH_ALLOW_MISSING': 'tatoeba,wiktionary'})
     ok(code == 0 and 'allowed by TUSACH_ALLOW_MISSING' in out, 'only TUSACH_ALLOW_MISSING lets it go on')
+    # the real fetch.sh: every snapshot source pinned to a release of ours by SHA-256, none PENDING, and never
+    # fetched from the moving upstream URL
     fetch_sh = open(os.path.join(ROOT, 'data/fetch.sh'), encoding='utf-8').read()
     code_lines = [x for x in fetch_sh.splitlines() if x.strip() and not x.lstrip().startswith('#')]
-    ok('186cd0a6' not in fetch_sh and not any('://kaikki.org' in x or 'tatoeba.org/' in x for x in code_lines),
-       'no third-party hash, and the snapshot sources are never fetched from the moving upstream URL')
+    snaps = [x.split() for x in code_lines if x.split()[0] == 'snap']
+    ok(len(snaps) == 4 and all(len(p) == 6 and re.fullmatch(r'data-\d{4}-\d\d-\d\d', p[4])
+                               and re.fullmatch(r'[0-9a-f]{64}', p[5]) for p in snaps)
+       and not any('://kaikki.org' in x or 'tatoeba.org/' in x for x in code_lines),
+       'every snapshot source is pinned to a release tag and a SHA-256, never to the moving upstream URL')
 
     # 2. a file whose SHA-256 differs is refused and fails the script
     src = os.path.join(tmp, 'f.txt')
