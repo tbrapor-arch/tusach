@@ -1,0 +1,218 @@
+# Cutter reference: 200 Vietnamese sentences cut into words, for tools/cutter_test.py (`make test`, a report, not a gate).
+#
+# NOT CHECKED BY A NATIVE SPEAKER. Cut by Claude's own judgement on 17 Nov 2026, as a starting reference; a native
+# speaker should correct it before its scores are trusted. Not course content.
+#
+# Sentences: the Vietnamese side of lines of the Helsinki-NLP Tatoeba Challenge eng-vie test set
+# (data/test/eng-vie/test.txt at commit bd05f08; Tatoeba contributors, CC BY 2.0 FR per that repository's README, whose
+# LICENSE file says CC BY-NC-SA 4.0: see ATTRIBUTION.md). Text unchanged except for the underscores; sentences with
+# obvious typos or broken encoding were skipped.
+#
+# Format: one sentence per line, two tab-separated fields:
+#   line   0-based line number in eng-vie-test.txt (tools/cutter_test.py checks the text against it when present)
+#   cut    the sentence with an underscore between the syllables of one word, spaces between words (as in lessons)
+# Conventions: a word is a dictionary-style lexical unit: compounds (hy_vọng, xe_buýt), lexicalised function words
+# (có_thể, không_thể, bao_giờ, tất_cả, sau_khi, trước_khi, tại_sao, chúng_tôi, người_ta), names of more than one
+# syllable (Nam_Mỹ, Flappy_Bird), language names with tiếng (tiếng_Anh). Kept apart: classifier + noun (cái mũ,
+# con chó), pronoun + ấy/ta (anh ấy, cô ta), verb + direction or result (đi ngủ, tìm thấy, lớn lên), numerals
+# (mười một), "không" before a word (không bao_giờ), phrases such as màu xanh, mọi người, nhà khoa_học.
+0	Hãy từ_bỏ hy_vọng, hỡi những người vào đây.
+8	Sau_khi ăn, tụi tao đi ngủ.
+19	Bạn chỉ toàn than_phiền.
+57	Hiện_giờ bạn có đau không?
+66	Theo mình nhớ thì nhà của Tom hơi xa đường_cái.
+92	Brazil là quốc_gia lớn nhất ở Nam_Mỹ.
+105	Con đi bơi được không mẹ?
+110	Có_thể nói cách khác được không?
+112	Tôi có_thể đợi Tom ở đây được không?
+123	Bạn có_thể kể cho tôi Tom đã làm gì không?
+130	Đức Giêxu chủ_trương khoan_dung.
+134	Đến gặp tôi bất_cứ lúc nào bạn rảnh.
+136	Hãy đến gần hơn và xem kỹ bức tranh này.
+143	Bạn có_thể nhắc lại lời bạn vừa nói được không?
+184	Đừng để tôi ngủ mất.
+195	Họ có vũ_khí không?
+230	Cuộc_sống dễ_dãi băng_hoại tinh_thần binh_sĩ.
+237	Ai cũng ít_nhiều có chút quan_tâm đến nghệ_thuật.
+244	Tất_cả đều đang hoạt_động.
+261	Thực_phẩm nhanh ôi_thiu trong thời_tiết nóng.
+268	Vui_lòng cho tôi một lon bia.
+290	"Xong chưa vậy?" "Tôi còn chưa bắt_đầu nữa mà."
+294	Mày đã ngừng đánh vợ mày rồi hả ?
+295	Mày ngưng đánh vợ mày chưa?
+298	Anh ấy nhận tội_lỗi của mình.
+303	Anh ấy yêu_cầu tôi giữ bí_mật.
+304	Anh ta đã ăn hết tất_cả táo.
+308	Thuế cao được áp cho mặt_hàng rượu.
+309	Anh ấy đã mua cho cô ấy một món quà nhỏ.
+312	Anh ta có_thể bơi được 1 dặm.
+321	Anh ấy qua_đời trước_khi nhìn ra ước_mơ của mình.
+330	Anh ấy đi bằng xe_đạp.
+336	Anh ta vừa về nhà.
+342	Anh ta giấu khuôn_mặt xấu_xí của mình.
+344	Anh ấy là một luật_sư giỏi.
+352	Cậu ta đang tận_hưởng cuộc_sống học_đường.
+355	hiện_tại, anh ấy đang ở trong bệnh_viện
+373	Anh ta rất sẵn_lòng cho tôi vay tiền.
+389	Anh ấy gặp được một người trẻ_tuổi tốt_bụng.
+390	Nó không bao_giờ nói xạo.
+395	Cậu ta đặt cuốn sách lên giá.
+400	Nó hối_tiếc lỗi_lầm của nó.
+409	Ngón_chân của nó chảy_máu.
+413	Anh ấy ở nước_ngoài đã sáu năm nay.
+414	Anh ấy gửi một chiếc váy cho con_gái anh ấy.
+417	Anh ta ngồi xuống ghế_bành để nghe nhạc.
+433	Anh kể tôi nghe chuyện đời của mình
+434	Anh ấy nói với tôi chuyện đời của anh.
+448	Cậu ta rất nghèo lúc còn trẻ.
+464	Con_trai ông ấy muốn trở_thành luật_sư.
+484	Hôm_bữa đi chơi chụp được bao_nhiêu tấm hình vậy?
+485	Các bạn có bao_nhiêu cây vợt?
+486	Tụi bây có mấy cây vợt?
+488	Còn lại bao_nhiêu tiền?
+490	Bạn nghĩ là trong ba năm tới con_gái tôi sẽ cao đến đâu?
+526	Tôi đã làm hỏng điện_thoại.
+551	Tôi không_thể kết_nối vào mạng.
+558	Tôi chơi được Flappy_Bird.
+561	Tôi không chịu được lâu.
+562	Tôi không chịu được lâu đâu.
+571	Ichiro là một tuyển_thủ bóng_chày nổi_bật.
+586	Tôi không muốn bạn lỡ chuyến xe_bus.
+591	Tôi muốn bạn xem nhanh qua những tài_liệu này.
+599	Tôi không có thêm ý_tưởng nào nữa.
+605	Tôi không biết nên đi đâu hay làm gì.
+616	Tôi không thấy có gì giống_nhau hết.
+622	Tôi không muốn bị ngộ_độc.
+623	Tôi không muốn bị trúng_độc.
+632	Tôi không muốn nói_chuyện về nó ngay lúc này.
+650	Nếu trời mưa, chuyến đi sẽ bị hủy.
+666	Nếu bạn thích đồ biển, bạn đã đến đúng nơi rồi đó!
+694	Tôi có một vết_thương ở ngón_chân út.
+701	Tôi có rất nhiều sách học tiếng Việt_Nam.
+703	Tao chẳng biết nó sống ở đâu nữa.
+705	Tôi không có ký_ức nào về chuyện đã xảy_ra.
+714	Tôi phải viết một lá thư. Bạn có tờ giấy nào không?
+719	Tớ nghe tất_cả những điều cậu nói.
+724	Tôi hy_vọng mình đã làm điều đúng_đắn.
+725	Tôi hy_vọng là chuyến đi xe_buýt không quá chán.
+726	Hy_vọng bạn thích nó.
+728	Hy_vọng bạn không quên bất_cứ thứ gì.
+729	Tôi hi_vọng bạn tiếp_tục luyện_tập Tiếng_Việt.
+746	Tôi biết bạn sẽ nói gì.
+762	Tôi sống từ năm này qua năm khác.
+774	Tôi sẽ chú_ý. Tôi hứa
+777	Tôi sẽ cho nó vào hóa_đơn của bạn.
+789	Tôi yêu căn nhà đó.
+798	Tôi đã khiến cho Tom bỏ vali của nó lại.
+802	Tôi sợ là Tom sẽ nói không.
+814	Tôi tính ngày_mai đi nếu thời_tiết tốt.
+827	Tôi và Tom sẽ nói một câu_chuyện nhỏ.
+847	Tôi sẽ không nói cho bạn biết phải làm gì.
+864	Tôi rất buồn là bạn đã bị_thương nặng.
+869	Tôi vẫn đang bị sốc.
+873	Tôi chắc_chắn Tom đã nói thật với bạn.
+880	Tôi đang cố_gắng học tiếng_Anh.
+884	Tôi đang làm_việc với trường_hợp khác.
+907	Ở Saudia, phụ_nữ không được lái_xe.
+920	Tao nợ nó 100 đô_la.
+934	Tôi nợ bạn một lời xin_lỗi.
+939	Tôi đã nói là tôi sẽ làm mà.
+941	Tôi đã gặp cô ta tại bữa_tiệc.
+948	Tới lúc tôi nên quay_lại khách_sạn rồi.
+959	Không phải điều này trái luật sao?
+961	Có phải cô ấy đang hẹn_hò với ai đó?
+987	Tôi sẽ đi xe_buýt để đến trường.
+991	Cái đó không có ý_nghĩa gì hết mà!
+994	Anh ấy mất được 10 năm rồi.
+1003	Tôi nghĩ đôi mắt đã đánh_lừa tôi.
+1007	Đã mười một giờ rồi.
+1017	Tại_vì tôi nhầm hay là điều đó sai vậy?
+1038	Tôi đã cố thuyết_phục cô ấy mà không thành_công.
+1057	Đó là cái CD của tôi phải không?
+1072	Ở đây ngột_ngạt quá.
+1074	Tôi tốn hơn hai tiếng để dịch vài trang tiếng_Anh.
+1081	Nó chính là con gấu đói mà dân_làng sợ_hãi.
+1084	Tôi từng làm_việc cho họ.
+1085	Sẽ rất tuyệt nếu các chú tôi đều rất giàu.
+1100	Tôi vẫn chưa đọc báo của ngày hôm_nay.
+1101	Tôi từng tận_mắt thấy nó.
+1117	Mình muốn nghe toàn_bộ câu_chuyện.
+1123	Tôi muốn chuyển đến châu Nam_cực
+1129	Tôi muốn bạn biết rằng bạn không có gì phải sợ.
+1160	Anh ước gì chúng_ta có_thể có nhiều thời_gian bên nhau.
+1165	Tôi muốn biết người mà Tom đã nói_chuyện cùng.
+1182	Nhật_bản không lớn bằng Gia_nã_đại.
+1209	Bạn hãy cho tôi biết những ngày bạn có_thể đến được.
+1213	Chúng_ta hãy vào trong nào.
+1234	London chẳng còn là thành_phố sương_mù nữa.
+1236	Coi kìa, người_ta bảo nghe nhạc Mozart làm cho cà_chua lớn lên.
+1272	Mẹ đã làm cho tôi một ổ bánh cho sinh_nhật của tôi.
+1273	Những người thuê nhà trong tòa_nhà này hầu_hết là nghệ_sỹ.
+1282	Bé nhà tôi muốn nói_chuyện.
+1290	Mắt tôi đang bị đau.
+1299	Cha tôi sẽ đi du_lịch nước_ngoài vào năm sau.
+1364	Số_phận chúng_mình đan vào nhau.
+1367	Sự kiên_nhẫn của chúng_tôi cũng trong tình_trạng như hôm_qua.
+1371	Giáo_viên của chúng_tôi yêu_cầu chúng_tôi giữ im_lặng.
+1382	Làm_ơn nghiêm_túc đi.
+1394	Làm_ơn báo cho tôi biết.
+1408	Nhấn nút màu xanh và đèn sẽ tiếp_tục sáng.
+1410	Thôi hành_động như là một đứa trẻ đi.
+1418	Rock là loại nhạc của giới trẻ.
+1431	Cô ấy đã chọn một cái mũ.
+1462	Cô ấy độc_lập khỏi ba mẹ của cô ấy.
+1464	Nó không bì được với tôi.
+1502	Cô ấy đã cố tự_sát rất nhiều lần.
+1507	Cô ấy chuẩn_bị đi ngủ khi thì có ai đó gõ cửa.
+1517	Nó sẽ không thích việc này.
+1525	Này Betty, bạn đã quyết_định về căn nhà mơ_ước chưa?
+1526	Chúng_ta đã thua 3 trận cho đến thời_điểm hiện_tại.
+1549	Bạn hãy mang đồ_ăn dư về nhà
+1575	Điều đó xảy_ra vào ba ngày trước.
+1585	Đó là lỗi chính_tả. Xin_lỗi.
+1600	Chắc là sẽ đủ đó.
+1613	Bọn con_trai đang leo lên khắp các tảng đá.
+1640	Con chó cứ sủa tôi ngay ở cổng và không cho tôi vào.
+1650	Cựu bộ_trưởng bộ năng_lượng được bầu làm tổng_thống hôm chủ_nhật.
+1651	mặt_tiền các ngôi nhà đều đã được treo cờ.
+1659	Người Nhật có mắt đen.
+1661	Đức vua trị_vì vương_quốc.
+1664	Tuổi kết_hôn hợp_pháp ở Úc là 18.
+1668	Những người nghe đã bắt_đầu ngáp.
+1680	Loại thuốc mới phô_bày hiệu_ứng tức_thời.
+1681	Tin_tức khiến nó rất vui.
+1692	Mọi người từng nghĩ rằng anh ta là một nhà khoa_học thành_công.
+1696	Cuộc chơi chấm_dứt quá sớm.
+1697	Cảnh_sát buộc_tội anh ta ăn_cướp.
+1711	Vùng lân_cận xung_quanh nhà anh ấy chẳng có cái bệnh_viện nào.
+1718	Không_thể có sự thỏa_hiệp nào.
+1719	Vì_vậy nhiều người đã qua_đời.
+1733	Ở đó dường_như không cần phải vội đâu.
+1746	Có vài người khách đang đợi trong phòng vẽ.
+1755	Đó không phải là ý của tôi.
+1757	Bài thứ hai thì rất đơn_giản.
+1759	Tuyết tan hết trong một ngày.
+1764	Những ngôi sao ở quá xa.
+1769	Các sinh_viên đã học thuộc_lòng bài thơ này.
+1784	Tất_cả họ đều đã rời đi.
+1801	Họ đang ăn bánh_mì xăng-uých.
+1818	Cái đèn_pin này ngày_càng mờ.
+1836	Điều này rất khó cho Tom.
+1874	Cả Tom và tôi đều rất tự_hào về bạn.
+1884	Tom có_vẻ bối_rối.
+1890	Tom đoán là Mary sẽ tới muộn.
+1898	Tom kiểm_tra danh_sách.
+1901	Tom phàn_nàn rằng món súp không đủ nóng.
+1905	Tom đã không_thể nào hoàn_thành nếu thiếu sự giúp_đỡ của Mary.
+1908	Tom chối_bỏ mọi lời cáo_buộc.
+1914	Tom đã không biết rằng Mary thích nấu_ăn.
+1915	Hình_như Tom không hiểu những điều bạn nói.
+1920	Tom không phải nói về điều đó nếu anh ta không muốn.
+1926	Tom chạy xe màu trắng.
+1928	Đối_với tôi, nó quan_trọng.
+1931	Tom đã tìm thấy một con heo_rừng.
+1932	Tom đã đưa cái gì đó cho Mary.
+1992	Tom sống ở một ngôi nhà trên cây.
+2004	Tom chả bao_giờ đi ngủ trước nửa_đêm.
+2008	Tom chỉ ăn thực_phẩm hữu_cơ.
+2014	Tom cầu_xin Mary cho anh ấy một cơ_hội khác.

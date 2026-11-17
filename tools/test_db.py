@@ -88,5 +88,15 @@ ok(est['học sinh'] > est['học'] and est['học sinh'] > est0['học sinh'],
    'a corpus that shows học mostly inside học sinh moves the count to học sinh')
 ok('quốc' in est and est['quốc'] == freq.estimate(['quốc'], F, [])['quốc'], 'a word alone with its syllable keeps F')
 
+# 5. the cutter test's scoring
+import cutter_test  # noqa: E402
+ref = [cutter_test.words_of_line('Tôi là học_sinh.')]
+p_, r_, f_ = cutter_test.score([(ref[0], cutter_test.words_of_line('Tôi là học sinh.'))])[:3]
+ok(p_ == 0.5 and abs(r_ - 2 / 3) < 1e-9, 'cutter score: precision 2 of 4 words, recall 2 of 3')
+ok(cutter_test.words_of_tokens(['Tôi', 'là', 'học sinh', '.']) == ref[0], 'underthesea tokens become syllable lists')
+d = cutter_test.disagreements(ref, [cutter_test.words_of_line('Tôi là học sinh.')], ref)
+ok(d == [('học | sinh', 'học sinh', 'b joins more', 'b')], 'a disagreement is one stretch, with the reference side')
+ok(len(cutter_test.load_reference()) == 200, 'the cutter reference has 200 sentences')
+
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

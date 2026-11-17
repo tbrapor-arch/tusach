@@ -12,7 +12,7 @@ PY = python3 -I
 RAW = data/raw
 OUT = data/build
 
-.PHONY: data db db-nc lookup clean lint test app check smoke coverage
+.PHONY: data db db-nc lookup clean lint test app check smoke coverage cutter
 data:
 	sh data/fetch.sh
 
@@ -38,6 +38,9 @@ test: db db-nc
 	$(PY) tools/vi.py
 	$(PY) tools/test_pipeline.py
 	$(PY) tools/test_db.py
+	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'
+	-$(PY) tools/cutter_test.py
+	-$(PY) tools/cutter_test.py --known viet74k --max 5
 
 app:
 	$(PY) tools/build_app.py
@@ -50,3 +53,6 @@ smoke:
 
 coverage:
 	$(PY) tools/coverage.py
+
+cutter:
+	$(PY) tools/cutter_test.py --max 30
