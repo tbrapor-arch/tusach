@@ -436,6 +436,33 @@ def attach_examples(con, sentences, known, per_word=2):
     print(f'tatoeba: {len(rows)} examples on {len(have)} words')
 
 
+FW_MIN = 200     # FrequencyWords syllables seen at least this often (3,588 syllables in vi_50k) validate the table
+
+
+def validate_syllables(con, raw):
+    """tools/vi.py's syllable table against real syllables: every Thiều Chửu reading and the FrequencyWords syllables
+    seen at least FW_MIN times. Prints what it rejects; a rejected Thiều Chửu reading is listed one by one, as is any
+    rejected subtitle syllable with a Vietnamese letter or tone mark (plain-ASCII ones are counted: foreign words,
+    names, abbreviations). Investigated on 18 Nov 2026: docs/HISTORY.md."""
+    tc = Counter(r for (r,) in con.execute("SELECT reading FROM hanviet WHERE source='thieuchuu'"))
+    fw = Counter()
+    p = os.path.join(raw, 'frequencywords', 'vi_50k.txt')
+    if os.path.exists(p):
+        for line in open(p, encoding='utf-8'):
+            x = line.split()
+            if len(x) == 2 and x[1].isdigit():
+                fw[vi.nfc(x[0]).lower()] += int(x[1])
+    fw = Counter({w: c for w, c in fw.items() if c >= FW_MIN})
+    for name, sylls in (('Thiều Chửu readings', tc), (f'FrequencyWords syllables (count >= {FW_MIN})', fw)):
+        if not sylls:
+            continue
+        acc, viet, n_ascii, ex = vi.validate_syllables(sylls)
+        print(f'syllable table vs {len(sylls)} {name}: {acc} accepted; rejected: {len(viet)} with Vietnamese letters'
+              + (f', {n_ascii} plain ASCII or with digits/punctuation (e.g. {", ".join(ex[:8])})' if n_ascii else ''))
+        for w, c, why in viet:
+            print(f'  rejected {w} ({c}): {why}')
+
+
 def build_bridge(con):
     rows = []
     for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != ''").fetchall():
@@ -492,6 +519,7 @@ def main():
     load_fixture(add)
     print(f'fixture: {add.n} rows (test fixture, tools/fixtures/dict.yaml)')
     hv_crosscheck(con)
+    validate_syllables(con, raw)
     word_checks(con)
     known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
     if sentences:

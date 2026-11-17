@@ -23,6 +23,9 @@ entries:
   - word: cũng
     en: also, too
     label: native
+  - word: khỏe
+    en: healthy, well
+    label: native
   - word: học sinh
     en: pupil, school student
     chars: 學生

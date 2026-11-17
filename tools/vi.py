@@ -23,30 +23,54 @@ CJK = re.compile(r'[㐀-鿿豈-﫿\U00020000-\U0003ffff]')
 PUNCT = '.,!?;:…"\'“”‘’()[]«»—–-'
 WORD_RE = re.compile(r'^([^\s~]+?)(?:~([A-Za-z0-9-]+))?$')
 
+# ---- the syllable table, built from a description of Vietnamese phonotactics and its spelling (not a word list).
+# A syllable is (initial) + (medial /w/) + nucleus + (coda) + tone.
+#  * Nuclei and the codas each takes, written as quốc ngữ spells them (PLAIN): the short vowels ă and â never stand
+#    open; ng/c are written nh/ch after a (anh, ach), ê and i; the diphthong iê is written ia when open, ua for uô and
+#    ưa for ươ; the off-glides are written i/y and u/o (ai, ay, ao, au; oi, ôi, ơi, ui, ưi; iu, êu, ưu, eo).
+#    Long o before ng/c is written oo (xoong, soóc). ưm (ừm, hừm) and eng/ec (xẻng, éc) are rare but standard.
+#  * The medial /w/ (WRHYMES) is written o before a, ă, e and u before â, ê, i (spelled y), iê (spelled yê, open ya) and
+#    ơ. It never comes before a rounded nucleus (o, ô, u, ư, uô, ươ). After /k/ the medial is written with the initial:
+#    qu + the w-rhyme without its first letter (qua, quân, quý, quỳnh, quyết, quơ); c/k never take a w-rhyme (cuơ).
+#    One spelling breaks the rounding rule: quốc (qu + ôc); quô, quu, quư are impossible. Open qu + y may be written
+#    qu + i (quí, quĩ: Thiều Chửu's spelling of quý, quỹ), as open i may be y or i elsewhere.
+#  * Spelling of iê at the start of a syllable: yê (yêu, yên, yểng, yết); open i may be written i or y (kí/ký).
+#  * gi is the initial /z/: a rhyme beginning with i loses that i after it (gì, gìn, giếng = gi + iêng), so gii and
+#    giiêng are impossible.
+#  * Tones: a syllable ending in -p -t -c -ch takes only sắc or nặng (checked in syllable_problems).
+# The table is validated at build time against real syllables (validate_syllables: FrequencyWords and Thiều Chửu).
 INITIALS = sorted('b c ch d đ g gh gi h k kh l m n ng ngh nh p ph qu r s t th tr v x'.split() + [''],
                   key=len, reverse=True)
-RHYMES = set('''
-a ai ao au ay an am ang anh ac ach ap at
-ăn ăm ăng ăc ăp ăt
-âu ây ân âm âng âc âp ât
-e eo en em eng ec ep et
-ê êu ên êm ênh êch êp êt
-i ia iu in im inh ich ip it
-iêu iên iêm iêng iêc iêp iêt
-o oi on om ong oc op ot oong ooc
-ô ôi ôn ôm ông ôc ôp ôt
-ơ ơi ơn ơm ơp ơt
-u ua ui un um ung uc up ut uy uya uyu uân uât uyên uyêt uynh uych uơ
-ư ưa ưi ưu ưn ưng ưc ưt ươi ươu ươn ươm ương ươc ươp ươt
-uôi uôn uôm uông uôc uôt
-y yêu yên yêm yêt
-oa oai oao oay oan oam oang oanh oac oach oap oat oăn oăm oăng oăc oăt
-oe oeo oen oem oet
-uê uênh uêch
-'''.split())
+PLAIN = {
+    'a': 'a ai ao am an ang anh ap at ac ach', 'ă': 'au ay ăm ăn ăng ăp ăt ăc', 'â': 'âu ây âm ân âng âp ât âc',
+    'e': 'e eo em en eng ep et ec', 'ê': 'ê êu êm ên ênh êp êt êch', 'i': 'i y iu im in inh ip it ich',
+    'o': 'o oi om on ong op ot oc oong ooc', 'ô': 'ô ôi ôm ôn ông ôp ôt ôc', 'ơ': 'ơ ơi ơm ơn ơp ơt',
+    'u': 'u ui um un ung up ut uc', 'ư': 'ư ưi ưu ưm ưng ưt ưc',
+    'iê': 'ia iêu iêm iên iêng iêp iêt iêc', 'uô': 'ua uôi uôm uôn uông uôt uôc',
+    'ươ': 'ưa ươi ươu ươm ươn ương ươp ươt ươc',
+}
+WRHYMES = set('''oa oai oay oao oam oan oang oanh oap oat oac oach  oăm oăn oăng oăt oăc  oe oeo oen oet
+uân uâng uât uây  uê uên uênh uêch  uy uyu uynh uyt uych  uya uyên uyêt  uơ'''.split())
+PLAIN_RHYMES = {r for v in PLAIN.values() for r in v.split()}
+_IE = {r for r in PLAIN['iê'].split() if r.startswith('iê')}
+RHYMES = PLAIN_RHYMES | WRHYMES                                       # after an ordinary initial
+RHYMES_NONE = (RHYMES - _IE) | {'y' + r[1:] for r in _IE}              # no initial: yêu, yên (not iêu, iên)
+RHYMES_QU = {r[1:] for r in WRHYMES} | {'ôc', 'i'}                     # qu + a, â, ê, y, yên, ơ…; quốc; quí
+RHYMES_GI = {r for r in RHYMES if r[:1] not in ('i', 'y')} | {r[1:] for r in PLAIN_RHYMES if r[:1] == 'i'}
+
+
+def rhymes_after(initial):
+    return {'': RHYMES_NONE, 'qu': RHYMES_QU, 'gi': RHYMES_GI}.get(initial, RHYMES)
+
+
 CHECKED = ('c', 'ch', 'p', 't')     # a syllable ending in -c -ch -p -t takes only sắc or nặng
-
-
+VOWELS = set('aăâeêioôơuưy')
+MARKED = set('ăâêôơư')
+# House style for the tone mark (decided 18 Nov 2026, docs/REFERENCE.md): the traditional placement, as in most
+# Vietnamese print and Wikipedia: in an open rhyme of two vowels the mark sits on the first (hòa, khỏe, thủy, mùa);
+# otherwise on the vowel with a diacritic (ơ in ươ), else on the last vowel before a coda (hoàn, toán), else on the
+# middle one of three (ngoái, khuỷu). Keys ignore the placement (key() writes every syllable in the house style),
+# so hoà and hòa are one word; lesson text keeps its own spelling, and lint asks for the house style.
 def nfc(s):
     return unicodedata.normalize('NFC', str(s or ''))
 
@@ -71,9 +95,57 @@ def toneless(s):
     return ' '.join(_split_tone(x)[0] for x in nfc(s).split())
 
 
+def parses(base):
+    """Every (initial, rhyme) reading of a toneless lower-case syllable allowed by the table (longest initial first)."""
+    return [(i, base[len(i):]) for i in INITIALS if base.startswith(i) and base[len(i):] in rhymes_after(i)]
+
+
+def _mark_index(base):
+    """Index in `base` of the letter that carries the tone mark in the house style, or None (not a syllable)."""
+    ps = parses(base)
+    if not ps:
+        return None
+    ini, rhyme = ps[0]
+    off = len(ini)
+    vs = [i for i, c in enumerate(rhyme) if c in VOWELS]
+    if not vs:                                   # gì, gìn: the i of gi carries it
+        return off - 1 if ini == 'gi' else None
+    marked = [i for i in vs if rhyme[i] in MARKED]
+    if marked:
+        j = marked[-1]                           # ơ of ươ, ô of uô, ê of iê/yê, â of uâ
+    elif rhyme[-1] not in VOWELS:
+        j = vs[-1]                               # closed: hoàn, toán, huỳnh, quýt
+    elif len(vs) == 3:
+        j = vs[1]                                # ngoái, khuỷu
+    else:
+        j = vs[0]                                # hòa, khỏe, thủy, mùa, mía, mái (one vowel: itself)
+    return off + j
+
+
+def place_tone(base, t):
+    """The syllable `base` (toneless, lower case) with tone t written in the house style; None if not a syllable."""
+    i = _mark_index(base)
+    if i is None:
+        return None
+    if t == 1:
+        return base
+    mark = {v: k for k, v in TONE_MARKS.items()}[t]
+    return unicodedata.normalize('NFC', base[:i + 1] + mark + base[i + 1:])
+
+
+def canon(syl):
+    """One syllable (lower case) in the house style of tone-mark placement: canon('hoà') == 'hòa'. Anything that is not
+    a possible syllable (a loanword, two tone marks) is returned unchanged."""
+    base, t, n = _split_tone(syl)
+    if n != 1:
+        return syl
+    return place_tone(base, t) or syl
+
+
 def key(word):
-    """Card key of a word as written in a lesson: underscores and spaces alike, NFC, lower case."""
-    return ' '.join(nfc(word).replace('_', ' ').lower().split())
+    """Card key of a word as written in a lesson: underscores and spaces alike, NFC, lower case, every syllable in the
+    house style of tone-mark placement (hoà and hòa have one key)."""
+    return ' '.join(canon(s) for s in nfc(word).replace('_', ' ').lower().split())
 
 
 def tkey(word):
@@ -89,26 +161,31 @@ def syllables(word):
     return key(word).split()
 
 
-def syllable_problems(syl):
-    """Spelling problems of one lower-case syllable (empty list when it is a possible quốc ngữ syllable)."""
+def syllable_problems(syl, style=False):
+    """Spelling problems of one syllable (empty list when it is a possible quốc ngữ syllable). style=True also reports
+    a tone mark not placed in the house style (tools/lint.py)."""
     if not syl:
         return ['empty syllable']
-    base, t, n = _split_tone(syl.lower())
+    syl = syl.lower()
+    base, t, n = _split_tone(syl)
     out = []
     if n > 1:
         out.append(f'{syl}: two tone marks')
+    d = unicodedata.normalize('NFD', syl).replace('\u0302', '').replace('\u0306', '').replace('\u031b', '')
+    if any(c in TONE_MARKS and (i == 0 or d[i - 1] not in 'aeiouy') for i, c in enumerate(d)):
+        out.append(f'{syl}: tone mark on a consonant')
     if not re.fullmatch(r'[a-zăâêôơưđ]+', base):
         return out + [f'{syl}: letters outside quốc ngữ']
-    parses = [(i, base[len(i):]) for i in INITIALS if base.startswith(i) and base[len(i):] in RHYMES]
-    if base == 'gi':                        # gì, gỉ: gi + an empty rhyme
-        parses.insert(0, ('gi', ''))
-    if not parses:
+    ps = parses(base)
+    if not ps:
         return out + [f'{syl}: not a Vietnamese syllable']
-    ini, rhyme = parses[0]
+    ini, rhyme = ps[0]
     front = rhyme[:1] in ('i', 'e', 'ê', 'y')
-    if ini == 'c' and front:
+    if ini in ('c', 'k') and rhyme in WRHYMES:
+        out.append(f'{syl}: /k/ + medial w is written qu')
+    elif ini == 'c' and front:
         out.append(f'{syl}: c before e/ê/i/y is written k')
-    if ini == 'k' and rhyme and not front:
+    if ini == 'k' and rhyme and not front and rhyme not in WRHYMES:
         out.append(f'{syl}: k is only written before e/ê/i/y (else c)')
     if ini == 'g' and rhyme[:1] in ('e', 'ê'):          # (g + i… is the initial gi: gìn, gì)
         out.append(f'{syl}: g before e/ê is written gh')
@@ -119,7 +196,28 @@ def syllable_problems(syl):
     if rhyme.endswith(CHECKED) and t not in (3, 6):
         out.append(f'{syl}: a syllable ending in -{next(c for c in ("ch", "c", "p", "t") if rhyme.endswith(c))} '
                    f'takes only sắc or nặng, not {TONE_NAMES[t]}')
+    if style and n == 1 and not out and canon(syl) != syl:
+        out.append(f'{syl}: tone mark placement: write {canon(syl)} (house style, docs/REFERENCE.md)')
     return out
+
+
+def validate_syllables(sylls):
+    """Check the syllable table against real syllables: {syllable: count}. Returns (accepted, rejected with a
+    Vietnamese letter or tone mark [(syllable, count, problem)], count of the other rejects, examples). The other rejects
+    are plain ASCII (foreign words, names, abbreviations: ok, ko, john) or contain digits, dots or hyphens (subtitle
+    markup, mr., cà-phê); the ones with Vietnamese letters only are read one by one (build_db prints them)."""
+    acc, viet, ascii_n, ascii_ex = 0, [], 0, []
+    for w, c in sorted(sylls.items(), key=lambda x: -x[1]):
+        probs = syllable_problems(w)
+        if not probs:
+            acc += 1
+        elif re.fullmatch(r'[a-z]+', w) or not re.fullmatch(r'[a-zăâêôơưđ]+', _split_tone(w)[0]):
+            ascii_n += 1
+            if len(ascii_ex) < 12:
+                ascii_ex.append(w)
+        else:
+            viet.append((w, c, probs[0].split(': ', 1)[-1]))
+    return acc, viet, ascii_n, ascii_ex
 
 
 def strip_punct(piece):
@@ -219,6 +317,19 @@ def _test():
         assert not syllable_problems(ok.lower()), (ok, syllable_problems(ok.lower()))
     for bad in ('cết', 'kan', 'ngi', 'ge', 'ghá', 'hoc', 'mắt̀', 'xyz', 'họcs'):
         assert syllable_problems(bad), bad
+    # the syllable table (finding 10): rhymes uyt, uâng, ưm, qu + y…; no qu + rounded vowel, no gi + i
+    for ok in ('quýt', 'huýt', 'xuýt', 'nguýt', 'huỵt', 'khuâng', 'ừm', 'hừm', 'quỳnh', 'quýnh', 'yểng', 'quên',
+               'quốc', 'giếng', 'gìn', 'khuỷu', 'ngoẹo', 'xoong', 'xẻng', 'huỵch', 'khuây', 'ỉa', 'yết', 'thuở', 'quí'):
+        assert not syllable_problems(ok), (ok, syllable_problems(ok))
+    for bad in ('quu', 'quuy', 'quô', 'quư', 'cuơ', 'gii', 'giiêng', 'iêu', 'ăn̉', 'coa', 'kuy'):
+        assert syllable_problems(bad), bad
+    # one house style for the tone mark; keys ignore the placement (finding 9)
+    for a, b in (('hoà', 'hòa'), ('thuỷ', 'thủy'), ('khoẻ', 'khỏe'), ('ngòai', 'ngoài'), ('tòan', 'toàn'),
+                 ('qúa', 'quá'), ('đựơc', 'được'), ('gìn', 'gìn'), ('giếng', 'giếng'), ('quỳnh', 'quỳnh'),
+                 ('khuỷu', 'khuỷu'), ('mùa', 'mùa'), ('uỷ', 'ủy'), ('oái', 'oái'), ('soóc', 'soóc')):
+        assert canon(a) == b, (a, canon(a), b)
+    assert key('Hoà_bình') == key('hòa bình') == 'hòa bình' and key('quí') != key('quý')
+    assert syllable_problems('hoà', style=True) and not syllable_problems('hòa', style=True)
     assert syllable_problems('học')[0:] == [] and 'sắc or nặng' in syllable_problems('hoc')[0]
     ws = words('Chào anh_Nam! Tôi là học_sinh.')
     assert [w[2] for w in ws if w[0] == 'w'] == ['chào', 'anh nam', 'tôi', 'là', 'học sinh'], ws

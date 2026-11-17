@@ -8,6 +8,7 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  text not in Unicode NFC (every string of the file)
   E  chữ Hán in a lesson line, a title or an exercise sentence (characters belong on cards and in the bridge)
   E  impossible quốc ngữ syllable (tools/vi.py): letters, c/k, g/gh, ng/ngh, -c -ch -p -t with a tone other than sắc/nặng
+  E  tone mark not placed in the house style (hòa, khỏe, thủy: docs/REFERENCE.md); keys ignore the placement
   E  word in no dictionary of the database and not declared as a name in new_words
   E  word that only the test fixture has, in a real lesson
   E  `~tag` that no dictionary entry and no new_words entry defines
@@ -15,7 +16,6 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  exercise sentence equal to a dialogue line of the same lesson (exercises use new sentences)
   E  note pointing to a line the dialogue does not have
   E  fill exercise without ___ or answer
-  W  a syllable written two ways across the course (tone mark placement: hoà / hòa)
   W  lines per lesson do not grow smoothly (owner's choice: a smooth growth; checked over the non-review lessons)
   W  review flag not on every 7th lesson
   I  lesson not checked by a native speaker (no native_check: {by, date}); the app labels it
@@ -101,10 +101,9 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
             if shown in names or shown in lesson_names:
                 used.add('name:' + shown)
                 continue
-            for s in k.split():
-                for p in vi.syllable_problems(s):
+            for s in shown.lower().split():
+                for p in vi.syllable_problems(s, style=True):
                     m('E', where, p)
-                spellings[vi.tkey(s)].add(s)
             if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()):
                 m('E', where, f'"{surf}": tag ~{tag} is defined by no dictionary entry and no new_words entry')
             if k not in keys:
@@ -192,9 +191,6 @@ def main():
             msgs.append(('E', f'{os.path.relpath(f, ROOT)}:0: E id {d.get("id")} already used by {seen[d.get("id")]}'))
         seen[d.get('id')] = os.path.basename(f)
         lint(f, d, keys, tags, all_tags, names, msgs, spellings)
-    for tk, forms in sorted(spellings.items()):
-        if len(forms) > 1:
-            msgs.append(('W', f'course: W one syllable written two ways: {" / ".join(sorted(forms))} (pick one placement)'))
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded
                   if not d.get('fixture') and not d.get('review') and isinstance(d.get('id'), int))

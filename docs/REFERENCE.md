@@ -41,6 +41,14 @@ exercises:
 separate words. Every space-separated piece is one word, so the course never depends on the cutter. A homograph takes
 `~tag` (`đường~road`), defined by a dictionary entry's tag or a `new_words` entry with that tag; the tag is not shown.
 Numbers are not words. Names are declared once in any lesson's `new_words` with `name: true`.
+**Tone-mark placement** (house style, decided 18 Nov 2026): the traditional one, as in most print and in the subtitle
+counts (khỏe 5,853 against khoẻ 957 in FrequencyWords): in an open rhyme of two vowels the mark sits on the first
+(hòa, khỏe, thủy, mùa), else on the vowel with a diacritic, else on the last vowel before a coda (hoàn), else the middle
+of three (ngoái). `vi.key()` writes every syllable this way, so hoà and hòa find the same card; the line keeps its own
+spelling on screen; lint asks for the house style (error). quí/quý are different spellings, not placements.
+**Syllable table** (`tools/vi.py`, finding 10): built from a stated description of the phonotactics (nuclei with
+their codas, the medial /w/, qu and gi), not a word list; checked at each build against every Thiều Chửu reading and
+the FrequencyWords syllables seen 200+ times (`build_db.py validate_syllables`, result in HISTORY).
 Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes).
 
 ## Word card (`DATA.dict[id]`, built only by `tools/cards.py`)

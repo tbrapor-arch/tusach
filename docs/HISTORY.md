@@ -34,3 +34,14 @@
   stretches of syllables cut differently.
 - Tatoeba and kaikki are refused from the sandbox. Tatoeba sentences were found on GitHub in Helsinki-NLP's Tatoeba
   Challenge (licence conflict noted in ATTRIBUTION.md): used for the cutter reference and corpus counts only.
+
+## 2026-11-18 — review fixes
+- Syllable table rebuilt from a description of the phonotactics (tools/vi.py): it rejected quýt, huýt, khuâng, ừm,
+  quỳnh, yểng and accepted quu, quô, cuơ, gii, giiêng. Validation at build time: all 2,069 distinct Thiều Chửu
+  readings accepted (two needed it: quí, quĩ, Thiều Chửu's spelling of quý, quỹ: qu + i accepted as the i/y variant);
+  of the 3,588 FrequencyWords syllables seen 200+ times, 2,768 accepted, 809 rejects are plain ASCII or carry digits
+  or punctuation (English words, names, ko, subtitle markup, cà-phê with a hyphen), and the 11 with Vietnamese letters
+  were read one by one: abbreviations (đc, đm, đ), loans written as one syllable (alô, đôla), typos (đươc, kông,
+  téi), junk (àh, ă, ǵ). None is a Vietnamese syllable; nothing was whitelisted. quên showed that uên was missing.
+  quốc is the one spelling of qu + a rounded vowel, kept as such.
+- Tone-mark placement: one house style (traditional); keys normalise it (see REFERENCE).

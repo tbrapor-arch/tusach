@@ -58,6 +58,12 @@ ok(hs.get('chars') == '學生' and all(hs.get(k) for k in ('yue', 'nan', 'cmn', 
    'a Hán-Việt card carries its characters, Hán-Việt readings and the three Chinese readings')
 ok(all(cards.dictionary[i]['en'] for i in cards.dictionary), 'every card from the pipeline has English')
 
+# 2b. tone-mark placement: one key for hoà / hòa, the lesson keeps its spelling (finding 9)
+toks3 = cards.tokenize('Chị khoẻ.')
+w3 = [t['w'] for t in toks3 if 'w' in t][1]
+ok(w3['id'] == 'khỏe' and w3['t'] == 'khoẻ', 'khoẻ finds the card of khỏe and is shown as written')
+ok([t['w']['id'] for t in cards.tokenize_text('Chị khoẻ.') if 'w' in t] == ['chị', 'khỏe'], 'the cutter finds it too')
+
 # 3. partial builds add to the shared card file; nothing has to be restored
 with tempfile.TemporaryDirectory() as tmp:
     path = os.path.join(tmp, 'cards.json')
@@ -93,6 +99,7 @@ dialogue:
 - {n: 1, speaker: A, vi: "Tôi là 學生.", en: x}
 - {n: 2, speaker: B, vi: "Tôi là học_sinh.", en: x}
 - {n: 3, speaker: B, vi: "Tôi là hoc_sinh.", en: x}
+- {n: 4, speaker: B, vi: "Chị khoẻ.", en: x}
 notes: [{ref: 9, text: x}]
 new_words: [{w: cũng}]
 exercises:
@@ -106,6 +113,7 @@ with tempfile.TemporaryDirectory() as tmp:
     for needle, what in [('before the owner approved', 'a lesson before the syllabus and word list are approved'),
                          ('not in Unicode NFC', 'text not in NFC'), ('chữ Hán in a lesson line', 'characters in a line'),
                          ('takes only sắc or nặng', 'an impossible tone on -c'),
+                         ('khoẻ: tone mark placement: write khỏe', 'a tone mark outside the house style'),
                          ('exercise sentence taken from the dialogue', 'an exercise copied from the dialogue'),
                          ('is not a line of the dialogue', 'a note on a missing line'),
                          ('no English (English on every card)', 'a new word without English'),
