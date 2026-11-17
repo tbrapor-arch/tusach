@@ -120,9 +120,13 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 Text helpers for every tool: `tools/vi.py` (NFC, tones 1–6, `key`, `tkey`, syllable checks, `words`, `cut`).
 
 ## The private companion (`tusach-private`)
-Same contract as Tsheh-tû's: the app's `Exam` loader reads `exam/index.json` (`{"files": {path: sha}}`) through the
-GitHub API with the sync token (Contents: Read on the private repo), fetches `exam/app.css` and `exam/app.js`, caches
-them by hash, and calls `window.ExamModule.init(loader)`, `.route(hash)` (`#exam…`, `#books`) and `.fill(root)`.
-The module may call the page's globals (`openCard`, `closeSheet`, `esc`, `DATA`, `listSet`, `LIST_TITLES`). Its builds
-use this repository's `tools/cards.py` with `open_db('private')` and their own `cards.Store`, and end with
-`check_cards.check()`. The CSP (`tools/site.py`) allows only `blob:` scripts besides the page's own.
+Same contract as Tsheh-tû's, with neutral names: the app's private-module loader (`Priv` in the page) reads
+`module/index.json` (`{"files": {path: sha}}`) through the GitHub API with the sync token (Contents: Read on the
+private repo), fetches `module/app.css` and `module/app.js`, caches them by hash, and calls
+`window.PrivateModule.init(loader)`, `.route(hash)` (`#private…`, `#books`) and `.fill(root)`. The module adds its
+cards with `loader.mergeCards(cards)`: a public card is kept unless the private one has a strictly better English rank
+(tested by `tools/smoke.py` against a mocked API). The module may call the page's globals (`openCard`, `closeSheet`,
+`esc`, `DATA`, `listSet`, `LIST_TITLES`). Its builds use this repository's `tools/cards.py` with `open_db('private')`,
+initialised with the public lessons' `new_words` (same English as the page), their own `cards.Store`, and end with
+`check_cards.check()` against their own published files and this repository's `app/published-english.tsv`. The CSP
+(`tools/site.py`) allows only `blob:` scripts besides the page's own.

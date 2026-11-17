@@ -174,6 +174,50 @@ with sync_playwright() as pw:
         if page.evaluate("[...document.querySelectorAll('#sheet.open .zhgrid b')].length") != 3:
             p('bridge: the card does not show Cantonese, Taigi and Mandarin side by side')
         shot(page, 'bridge-card')
+    # the private-module loader, against a mocked GitHub API serving the private repository's module/ files
+    # (TUSACH_PRIVATE, default ../tusach-private) and a test cards.json: the merge rule keeps a public card unless the
+    # private one has a strictly better English rank, and adds the cards the page lacks
+    priv = os.path.abspath(os.environ.get('TUSACH_PRIVATE') or os.path.join(ROOT, '..', 'tusach-private'))
+    if os.path.isdir(os.path.join(priv, 'module')):
+        import json
+        pg = b.new_page(viewport={'width': 390, 'height': 844})
+        pg.on('pageerror', lambda e: p(f'private module: JS error: {e}'))
+        pg.goto('file://' + PAGE)
+        pg.wait_for_selector('.lgrid')
+        pub_id = pg.evaluate("Object.keys(DATA.dict).find(i => DATA.dict[i].en_rank === 3)")
+        pub_en = pg.evaluate(f"DATA.dict[{json.dumps(pub_id)}].en")
+        test_cards = {pub_id: {'w': 'x', 'k': pub_id, 'en': 'POORER', 'en_src': 'parts', 'en_rank': 1},
+                      'private-only': {'w': 'private only', 'k': 'private-only', 'en': 'from the private module',
+                                       'en_src': 'dict:x', 'en_rank': 2}}
+
+        def api(route):
+            url = route.request.url
+            if '/contents/module/' in url:
+                name = url.split('/contents/module/')[1].split('?')[0]
+                if name == 'cards.json':
+                    return route.fulfill(status=200, body=json.dumps(test_cards))
+                path = os.path.join(priv, 'module', name)
+                return route.fulfill(status=200, body=open(path, 'rb').read()) if os.path.exists(path) else route.fulfill(status=404)
+            if url.rstrip('/').endswith('/repos/tbrapor-arch/tusach-private'):
+                return route.fulfill(status=200, body='{}')
+            return route.fulfill(status=404, body='{}')
+        pg.route('https://api.github.com/**', api)
+        pg.evaluate("store.set('gistToken', 'test-token')")
+        pg.reload()
+        pg.wait_for_selector('.lgrid')
+        pg.evaluate("location.hash = 'private'")
+        try:
+            pg.wait_for_function("!!window.PrivateModule && document.querySelector('#main .xm-empty') !== null", timeout=8000)
+        except Exception:
+            p('private module: the loader did not load module/app.js and route #private')
+        got = pg.evaluate(f"[DATA.dict[{json.dumps(pub_id)}].en, (DATA.dict['private-only'] || {{}}).en]")
+        if got[0] != pub_en:
+            p(f'private module: the public card {pub_id} was replaced by a poorer one ("{got[0]}")')
+        if got[1] != 'from the private module':
+            p('private module: a card the page lacks was not added')
+        pg.close()
+    else:
+        print(f'note: {priv}/module not found: the private-module loader is not tested')
     b.close()
 
 print(f'\n{len(problems)} problem(s)')

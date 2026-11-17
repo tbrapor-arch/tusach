@@ -327,14 +327,14 @@ const listIds = k => Object.entries((lists[k] || {}).w || {}).filter(([, t]) => 
 const inList = (k, id) => (((lists[k] || {}).w || {})[id] || 0) > 0;
 const LIST_TITLES = {};   // titles only the private module knows (its books)
 function listTitle(k) { return (lists[k] && lists[k].nm) || listBase(k); }
-function listBase(k) { const [kind, id] = k.split(':'); if (k === 'lessons') return 'Lessons'; if (k === 'exam') return 'Private'; if (kind === 'book') return LIST_TITLES[k] || (lists[k] && lists[k].t) || id; return k; }
-const LIST_KIND = { lessons: ['Bài', 'Lessons'], book: ['Sách', 'Book'], exam: ['Riêng', 'Private'] };
+function listBase(k) { const [kind, id] = k.split(':'); if (k === 'lessons') return 'Lessons'; if (k === 'private') return 'Private'; if (kind === 'book') return LIST_TITLES[k] || (lists[k] && lists[k].t) || id; return k; }
+const LIST_KIND = { lessons: ['Bài', 'Lessons'], book: ['Sách', 'Book'], private: ['Riêng', 'Private'] };
 const listKind = k => LIST_KIND[k.split(':')[0]] || ['Từ', ''];
 function listHere() {
   const h = location.hash.slice(1) || 'lessons'; let m;
   if ((m = h.match(/^list-(.+)$/))) return decodeURIComponent(m[1]);
-  if ((m = h.match(/^exam-book-([a-z0-9]+)/))) return 'book:' + m[1];
-  if (/^exam/.test(h)) return 'exam';
+  if ((m = h.match(/^private-book-([a-z0-9]+)/))) return 'book:' + m[1];
+  if (/^private/.test(h)) return 'private';
   return 'lessons';
 }
 function listSet(k, ids, on) {
@@ -394,8 +394,8 @@ function route() {
   if (h === 'lists') return showLists();
   if ((m = h.match(/^list-(.+)$/))) return showList(decodeURIComponent(m[1]));
   if (h === 'bridge') return showBridge();
-  if (h === 'books') return Exam.show('exam-books');
-  if (/^exam/.test(h)) return Exam.show(h);
+  if (h === 'books') return Priv.show('private-books');
+  if (/^private/.test(h)) return Priv.show(h);
   if (h === 'settings') return showSettings();
   showLessons();
 }
@@ -410,11 +410,11 @@ window.addEventListener('hashchange', () => {
 });
 function wireGo(root) { $$('[data-go]', root).forEach(b => b.onclick = () => go(b.dataset.go)); }
 function renderTabs(cur) {
-  const tabs = [['lessons', 'Lessons'], ['review', 'Practice'], ...(Exam.on ? [['books', 'Books']] : []), ['settings', 'Settings']];
+  const tabs = [['lessons', 'Lessons'], ['review', 'Practice'], ...(Priv.on ? [['books', 'Books']] : []), ['settings', 'Settings']];
   $('#tabs').innerHTML = tabs.map(([k, t]) => `<button class="tab" data-tab="${k}" aria-current="${cur === k}">${ICONS[k]}<span>${t}</span></button>`).join('');
   $$('[data-tab]', $('#tabs')).forEach(b => b.onclick = () => { const k = b.dataset.tab; if (k === 'review') { sess = null; const sec = store.get('pracSec', 'lists'); go(sec === 'review' ? 'lists' : sec); return; } if (k === 'lessons') resetHome = true; go(k); });
 }
-function currentTab() { const h = location.hash.slice(1) || 'lessons'; return /^(lesson|wave)/.test(h) ? 'lessons' : /^(review|bridge|lists?$|list-)/.test(h) ? 'review' : /^(books|exam-book)/.test(h) ? 'books' : h.startsWith('exam') ? 'review' : h; }
+function currentTab() { const h = location.hash.slice(1) || 'lessons'; return /^(lesson|wave)/.test(h) ? 'lessons' : /^(review|bridge|lists?$|list-)/.test(h) ? 'review' : /^(books|private-book)/.test(h) ? 'books' : h.startsWith('private') ? 'review' : h; }
 
 // ---------- lessons home
 const TOTAL = 100;
@@ -673,7 +673,7 @@ document.addEventListener('click', e => {
 });
 
 // ---------- Practice: my lists, word cards (Leitner boxes), the bridge
-const PRAC = () => [['lists', 'My lists'], ['review', 'Cards'], ['bridge', 'Bridge'], ...(Exam.on ? [['exam', 'Private']] : [])];
+const PRAC = () => [['lists', 'My lists'], ['review', 'Cards'], ['bridge', 'Bridge'], ...(Priv.on ? [['private', 'Private']] : [])];
 function pracHead(sec, what) {
   store.set('pracSec', sec);
   return `<div class="head"><span class="eyebrow">Practice</span><h1>Ôn tập</h1><span class="sub">${what}</span></div>
@@ -825,9 +825,9 @@ function showSettings() {
   $('#exp', m).onclick = () => { const blob = new Blob([JSON.stringify(progressData(), null, 1)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `${APP}-progress-${today()}.json`; document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 5000); };
   $('#imp', m).onclick = () => $('#imp-file', m).click();
   $('#imp-file', m).onchange = async e => { const f = e.target.files[0]; if (!f) return; try { mergeProgress(JSON.parse(await f.text())); toast('Progress loaded'); showSettings(); } catch { toast('Could not read this file'); } };
-  const sf = $('#sync-form', m); if (sf) sf.onsubmit = async e => { e.preventDefault(); const t = $('#sync-token', m).value.trim(); if (!t) return; store.set('gistToken', t); store.set('gistId', ''); await Sync.run(); if (store.get('syncErr', '')) store.set('gistToken', ''); await Exam.check(); showSettings(); };
+  const sf = $('#sync-form', m); if (sf) sf.onsubmit = async e => { e.preventDefault(); const t = $('#sync-token', m).value.trim(); if (!t) return; store.set('gistToken', t); store.set('gistId', ''); await Sync.run(); if (store.get('syncErr', '')) store.set('gistToken', ''); await Priv.check(); showSettings(); };
   const sn = $('#sync-now', m); if (sn) sn.onclick = async () => { sn.disabled = true; await Sync.run(); if (currentTab() === 'settings') showSettings(); };
-  const so = $('#sync-off', m); if (so) so.onclick = () => { store.set('gistToken', ''); store.set('gistId', ''); store.set('examOn', false); toast('Sync stopped on this device'); showSettings(); };
+  const so = $('#sync-off', m); if (so) so.onclick = () => { store.set('gistToken', ''); store.set('gistId', ''); store.set('privateOn', false); toast('Sync stopped on this device'); showSettings(); };
   $$('[data-set]', m).forEach(b => b.onclick = () => { const k = b.dataset.set, v = b.dataset.val; if (k === 'night') prefs.night = v === 'on'; else if (k === 'autoplay') prefs.autoplay = v === 'on'; else prefs[k] = v; store.set('prefs', prefs); applySkin(); showSettings(); });
 }
 
@@ -885,15 +885,26 @@ document.addEventListener('visibilitychange', () => {
 });
 // ---------- the private companion module (contract in docs/REFERENCE.md, same as Tsheh-tû's): nothing of it is in this
 // public page. The tab appears only on a device whose GitHub token can read the private repository; its app.css and
-// app.js (listed with content hashes in exam/index.json) are fetched through the GitHub API, cached by hash, and
-// window.ExamModule.init(loader) / .route(hash) / .fill(root) are called.
-const Exam = {
-  REPO: 'tbrapor-arch/tusach-private',   // TODO(repo): the owner and name of the private repository once it is created
-  CACHE: APP + '-exam', index: null, loaded: null,
-  get on() { return !!Sync.token && store.get('examOn', false); },
+// app.js (listed with content hashes in module/index.json) are fetched through the GitHub API, cached by hash, and
+// window.PrivateModule.init(loader) / .route(hash) / .fill(root) are called; the module adds its cards with
+// loader.mergeCards(cards).
+const Priv = {
+  REPO: 'tbrapor-arch/tusach-private',
+  // the private module's cards join the page's by one rule: a public card is kept unless the private one has a strictly
+  // better English rank (tools/english.py RANK); a card the page lacks is added. Returns the number taken.
+  mergeCards(cards) {
+    let n = 0;
+    for (const [id, c] of Object.entries(cards || {})) {
+      const p = DATA.dict[id];
+      if (!p || (c.en_rank || 0) > (p.en_rank || 0)) { DATA.dict[id] = c; n++; }
+    }
+    return n;
+  },
+  CACHE: APP + '-private', index: null, loaded: null,
+  get on() { return !!Sync.token && store.get('privateOn', false); },
   async check() {
-    if (!Sync.token) { store.set('examOn', false); return false; }
-    try { const r = await fetch(`https://api.github.com/repos/${this.REPO}`, { headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + Sync.token }, cache: 'no-store' }); if (r.ok || [401, 403, 404].includes(r.status)) store.set('examOn', r.ok); } catch {}
+    if (!Sync.token) { store.set('privateOn', false); return false; }
+    try { const r = await fetch(`https://api.github.com/repos/${this.REPO}`, { headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + Sync.token }, cache: 'no-store' }); if (r.ok || [401, 403, 404].includes(r.status)) store.set('privateOn', r.ok); } catch {}
     return this.on;
   },
   async raw(path) {
@@ -902,10 +913,10 @@ const Exam = {
     return r;
   },
   async file(path) {
-    const sha = this.index && this.index.files && this.index.files[path], key = `https://exam.invalid/${path}?${sha || 'x'}`;
+    const sha = this.index && this.index.files && this.index.files[path], key = `https://private.invalid/${path}?${sha || 'x'}`;
     let c = null; try { c = await caches.open(this.CACHE); } catch {}
     const hit = c && sha && await c.match(key); if (hit) return hit;
-    const r = await this.raw('exam/' + path); if (c && sha) { try { await c.put(key, r.clone()); } catch {} }
+    const r = await this.raw('module/' + path); if (c && sha) { try { await c.put(key, r.clone()); } catch {} }
     return r;
   },
   urls: {},
@@ -914,21 +925,21 @@ const Exam = {
     if (this.loaded) return this.loaded;
     return this.loaded = (async () => {
       let c = null; try { c = await caches.open(this.CACHE); } catch {}
-      try { const r = await this.raw('exam/index.json'); this.index = await r.clone().json(); if (c) await c.put('https://exam.invalid/index.json', r); }
-      catch (e) { const hit = c && await c.match('https://exam.invalid/index.json'); if (!hit) throw e; this.index = await hit.json(); }
+      try { const r = await this.raw('module/index.json'); this.index = await r.clone().json(); if (c) await c.put('https://private.invalid/index.json', r); }
+      catch (e) { const hit = c && await c.match('https://private.invalid/index.json'); if (!hit) throw e; this.index = await hit.json(); }
       const css = document.createElement('style'); css.textContent = await (await this.file('app.css')).text(); document.head.append(css);
       const js = await (await this.file('app.js')).text();
       await new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = URL.createObjectURL(new Blob([js], { type: 'text/javascript' })); sc.onload = res; sc.onerror = rej; document.head.append(sc); });
-      if (window.ExamModule) await window.ExamModule.init(this);
+      if (window.PrivateModule) await window.PrivateModule.init(this);
     })().catch(e => { this.loaded = null; throw e; });
   },
-  fill(root) { if (this.on) this.load().then(() => window.ExamModule && window.ExamModule.fill && window.ExamModule.fill(root)).catch(() => {}); },
+  fill(root) { if (this.on) this.load().then(() => window.PrivateModule && window.PrivateModule.fill && window.PrivateModule.fill(root)).catch(() => {}); },
   async show(h) {
     renderTabs(currentTab());
-    const here = location.hash, ti = /^exam-book/.test(h) ? 'Books' : 'Private';
+    const here = location.hash, ti = /^private-book/.test(h) ? 'Books' : 'Private';
     if (!this.on) { $('#main').innerHTML = `<div class="col"><div class="head"><span class="eyebrow">${ti}</span><h1>${ti}</h1></div><p class="sub">Not available on this device.</p></div>`; return; }
-    if (!window.ExamModule) $('#main').innerHTML = `<div class="col"><div class="head"><span class="eyebrow">${ti}</span><h1>${ti}</h1></div><p class="sub">Loading…</p></div>`;
-    try { await this.load(); if (location.hash === here) window.ExamModule.route(h); }
+    if (!window.PrivateModule) $('#main').innerHTML = `<div class="col"><div class="head"><span class="eyebrow">${ti}</span><h1>${ti}</h1></div><p class="sub">Loading…</p></div>`;
+    try { await this.load(); if (location.hash === here) window.PrivateModule.route(h); }
     catch (e) { $('#main').innerHTML = `<div class="col"><div class="head"><span class="eyebrow">${ti}</span><h1>${ti}</h1></div><div class="card raised"><b>Could not load the private module</b><span class="sub">${esc(e.message || e)}. It needs the internet the first time; after that it works offline.</span></div></div>`; }
   },
 };
@@ -936,6 +947,6 @@ let toastT;
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2200); }
 applySkin();
 route();
-if (Sync.token) { const was = Exam.on; Exam.check().then(on => { if (on !== was) { if (/^exam/.test(location.hash.slice(1))) route(); else renderTabs(currentTab()); } if (on) Exam.load().then(() => renderTabs(currentTab())).catch(() => {}); }); }
+if (Sync.token) { const was = Priv.on; Priv.check().then(on => { if (on !== was) { if (/^private/.test(location.hash.slice(1))) route(); else renderTabs(currentTab()); } if (on) Priv.load().then(() => renderTabs(currentTab())).catch(() => {}); }); }
 if (Sync.on) Sync.run(true).then(ch => { if (ch) refreshAfterSync(); });
 </script>
