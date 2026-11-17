@@ -41,7 +41,7 @@ class Dict:
             self.keys[k].add(bool(fx))
             self.by_toneless[tl].add(k)
         self.hv = collections.defaultdict(set)
-        for ch, r in con.execute('SELECT char, reading FROM hanviet'):
+        for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind IN ('hv', 'hannom')"):
             self.hv[ch].add(vi.tkey(r))
 
 

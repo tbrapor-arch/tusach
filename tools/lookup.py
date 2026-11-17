@@ -12,6 +12,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+import bridge  # noqa: E402
 import vi  # noqa: E402
 
 args = sys.argv[1:]
@@ -37,8 +38,12 @@ else:
 for eid, src, w, en, chars, label, rank in rows:
     print(f'{w}  {chars or ""}  [{src}{", " + label if label else ""}{f", #{rank}" if rank else ""}]  {en or ""}')
     if chars:
-        for lang, r in con.execute('SELECT lang, reading FROM chinese WHERE chars = ?', (chars,)):
-            print(f'    {dict(yue="Cantonese", nan="Taigi", cmn="Mandarin")[lang]}: {r}')
+        j = bridge.join(con, chars)
+        print(f'    Hán-Việt: {j["hv"]}')
+        for lang in bridge.LANGS:
+            if j[lang]:
+                print(f'    {dict(yue="Cantonese", nan="Taigi", cmn="Mandarin")[lang]}: {j[lang]}'
+                      + (' (by character)' if j[lang + "_by"] == 'char' and len(chars) > 1 else ''))
     for v, e in con.execute('SELECT vi, en FROM example WHERE entry_id = ? LIMIT 2', (eid,)):
         print(f'    e.g. {v} / {e}')
 if not rows:

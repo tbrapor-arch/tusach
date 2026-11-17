@@ -605,9 +605,11 @@ function openCard(id, w) {
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>
       ${c.chars ? `<div class="wc-sec"><h3>Hán-Việt · the Chinese word</h3><div class="wc-chars">${esc(c.chars)}</div>
-        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div></div>` : ''}
+        ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
+        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div></div>` : ''}
+      ${c.ff ? `<div class="wc-src">False friend: ${esc(c.ff)}</div>` : ''}
       ${pt ? `<div class="row"><span class="pill ${pc}">${pt}</span>${c.rank ? `<span class="sub" style="font-size:.8rem">#${c.rank} most common</span>` : ''}</div>` : c.name ? '<div class="row"><span class="pill p-native">Name</span></div>' : ''}
-      ${c.ex ? `<div class="wc-sec wc-ex"><h3>Example</h3><div class="v">${esc(c.ex.vi)}</div><div class="e">${esc(c.ex.en || '')}</div></div>` : ''}
+      ${c.ex ? `<div class="wc-sec wc-ex"><h3>Example</h3><div class="v">${esc(c.ex.vi)}</div><div class="e">${esc(c.ex.en || '')}</div>${c.ex.src ? `<div class="wc-src">${esc(c.ex.src)}</div>` : ''}</div>` : ''}
       ${c.parts && c.parts.length ? `<div class="wc-sec"><h3>Syllables</h3><div class="parts">${c.parts.filter(p => DATA.dict[p]).map(p => `<button data-part="${esc(p)}">${esc(DATA.dict[p].w)}${DATA.dict[p].chars ? ` <span class="han">${esc(DATA.dict[p].chars)}</span>` : ''}</button>`).join('')}</div></div>` : ''}
       ${alsoL.length ? `<span class="sub" style="font-size:.85rem">Also in your lists: ${alsoL.map(k => esc(listTitle(k))).join(', ')}</span>` : ''}
       ${c.src && c.src.length ? `<div class="wc-src">Source: ${c.src.map(s => s === 'fixture' ? 'test fixture' : esc(s)).join(', ')}</div>` : ''}`;
@@ -773,15 +775,15 @@ function grade(ok) {
   if (!ok) { sess.missed.add(id); sess.queue.push(id); }
   sess.i++; sess.flipped = false; showCard();
 }
-// ---------- the bridge: Hán-Việt words with their Chinese counterparts. TODO(bridge): the sound-correspondence drills
-// (final consonants, tone classes, initials) of handover section 5, once the Hán-Việt and Chinese readings are built.
+// ---------- the bridge: Hán-Việt words with their Chinese counterparts (tools/bridge.py). TODO(bridge): the
+// sound-correspondence drills (final consonants, tone classes, initials) of handover section 5.
 function showBridge() {
   renderTabs('review');
   const ids = DATA.bridge.filter(id => DATA.dict[id]), m = $('#main');
   m.innerHTML = `<div class="col">${pracHead('bridge', 'Hán-Việt words and the Chinese you already know')}
-    <div class="banner">The sound-correspondence drills are not built yet: they need the Hán-Việt and Chinese readings (data sources being checked).</div>
+    <div class="banner">The sound-correspondence drills are not built yet. Readings marked * are built character by character (the source lacks the whole word).</div>
     ${ids.length ? `<div class="vwrap"><table class="vtable"><thead><tr><th>Word</th><th>Chữ Hán</th><th>Cantonese</th><th>Taigi</th><th>Mandarin</th></tr></thead><tbody>
-      ${ids.map(id => { const c = DATA.dict[id]; return `<tr data-word="${esc(id)}" tabindex="0"><td class="vw">${esc(c.w)}${c.fixture ? ' <span class="pill p-fx">fixture</span>' : ''}</td><td class="vh">${esc(c.chars)}</td><td class="vr">${esc(c.yue || '')}</td><td class="vr">${esc(c.nan || '')}</td><td class="vr">${esc(c.cmn || '')}</td></tr>`; }).join('')}</tbody></table></div>`
+      ${ids.map(id => { const c = DATA.dict[id]; return `<tr data-word="${esc(id)}" tabindex="0"><td class="vw">${esc(c.w)}${c.fixture ? ' <span class="pill p-fx">fixture</span>' : ''}</td><td class="vh">${esc(c.chars)}</td>${['yue', 'nan', 'cmn'].map(k => `<td class="vr">${esc(c[k] || '')}${(c.by_char || []).includes(k) ? '*' : ''}</td>`).join('')}</tr>`; }).join('')}</tbody></table></div>`
       : '<p class="sub">No Hán-Việt word in the cards yet.</p>'}</div>`;
   wireGo(m);
   $$('[data-word]', m).forEach(r => { r.onclick = () => openCard(r.dataset.word); r.onkeydown = e => { if (e.key === 'Enter') openCard(r.dataset.word); }; });

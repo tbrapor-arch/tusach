@@ -53,8 +53,9 @@ toks = cards.tokenize('Tôi là học_sinh, Lan.')
 ok([t['w']['id'] for t in toks if 'w' in t] == ['tôi', 'là', 'học sinh', 'name:Lan'], 'a course line keeps its boundaries')
 toks2 = cards.tokenize_text('Tôi là học sinh.')
 ok([t['w']['id'] for t in toks2 if 'w' in t] == ['tôi', 'là', 'học sinh'], 'the dictionary cutter joins học sinh')
-ok(cards.dictionary['học sinh'].get('cmn') == 'xuéshēng' and cards.dictionary['học sinh'].get('chars') == '學生',
-   'a Hán-Việt card carries its characters and the Chinese readings')
+hs = cards.dictionary['học sinh']
+ok(hs.get('chars') == '學生' and all(hs.get(k) for k in ('yue', 'nan', 'cmn', 'hv')),
+   'a Hán-Việt card carries its characters, Hán-Việt readings and the three Chinese readings')
 ok(all(cards.dictionary[i]['en'] for i in cards.dictionary), 'every card from the pipeline has English')
 
 # 3. partial builds add to the shared card file; nothing has to be restored

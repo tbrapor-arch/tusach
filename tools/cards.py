@@ -18,7 +18,8 @@ A token is {'p': text} (punctuation, spaces, numbers) or {'w': {'t': surface, 'i
 card is kept in the store's `missing` list and fails tools/check_cards.py: "no word without a card".
 
 Card (JSON, in the page's DATA.dict): w (the word), k (key), en, en_src, en_rank, chars (chữ Hán, Hán-Việt words only),
-yue / nan / cmn (Jyutping, Tâi-lô literary, pinyin), label (same | false-friend | native | ''), ex {vi, en},
+yue / nan / cmn (Jyutping, Tâi-lô literary, pinyin; tools/bridge.py), hv (Hán-Việt readings per character), by_char
+(languages built character by character), label (same | false-friend | native | ''), ff (false-friend note), ex {vi, en},
 parts (syllable card ids), name (1 for a person or place name), fixture (1 if only the test fixture has it), src.
 """
 import datetime
@@ -30,11 +31,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+import bridge  # noqa: E402
 import english  # noqa: E402
 import vi  # noqa: E402
 
 DB = {'public': os.path.join(ROOT, 'data/build/vi.db'), 'private': os.path.join(ROOT, 'data/build/vi-nc.db')}
 STORE = os.path.join(ROOT, 'data/build/cards.json')
+FALSE_FRIENDS = os.path.join(ROOT, 'course/false_friends.tsv')
 PUBLIC_MODULES = ('lessons',)
 
 dictionary = {}
@@ -91,13 +94,31 @@ def init(connection, course=None, written=None):
     KNOWN.update(k for (k,) in con.execute('SELECT DISTINCT key FROM entry'))
 
 
-def _bridge(chars):
+def load_false_friends(path=FALSE_FRIENDS):
+    """{(word key, chữ Hán or ''): note} from course/false_friends.tsv (hand-curated: false friends cannot be detected
+    automatically). Format in the file's header: word <TAB> chữ Hán <TAB> note in English; # starts a comment."""
     out = {}
-    for lang, r in con.execute('SELECT lang, reading FROM chinese WHERE chars=? ORDER BY rowid', (chars,)):
-        out.setdefault(lang, [])
-        if r not in out[lang]:
-            out[lang].append(r)
-    return {lang: ' / '.join(v) for lang, v in out.items()}
+    if os.path.exists(path):
+        for line in open(path, encoding='utf-8'):
+            if not line.strip() or line.startswith('#'):
+                continue
+            p = (line.rstrip('\n').split('\t') + ['', ''])[:3]
+            out[(vi.key(p[0]), p[1].strip())] = p[2].strip()
+    return out
+
+
+FF = load_false_friends()
+
+
+def _bridge(chars):
+    """The Chinese side of a Hán-Việt card, from tools/bridge.py (the same join the database and coverage use)."""
+    j = bridge.join(con, chars)
+    out = {lang: j[lang] for lang in bridge.LANGS if j[lang]}
+    out['hv'] = j['hv']
+    by_char = [lang for lang in bridge.LANGS if j[lang] and j[lang + '_by'] == 'char' and len(chars) > 1]
+    if by_char:
+        out['by_char'] = by_char
+    return out
 
 
 def lookup(k, tag=None, surface=None):
@@ -119,6 +140,11 @@ def lookup(k, tag=None, surface=None):
     if chars:
         card['chars'] = chars
         card.update(_bridge(chars))
+    ff = FF.get((k, chars)) if (k, chars) in FF else FF.get((k, ''))
+    if ff is not None and not course.get('label'):
+        label = 'false-friend'
+        if ff:
+            card['ff'] = ff
     if label:
         card['label'] = label
     if rows and all(r[5] for r in rows):     # only the test fixture has the word: the card says so
@@ -128,10 +154,12 @@ def lookup(k, tag=None, surface=None):
         rank = next((r[7] for r in rows if r[7]), None)
         if rank:
             card['rank'] = rank
-        ex = con.execute(f"SELECT vi, en FROM example WHERE entry_id IN ({','.join('?' * len(rows))}) ORDER BY id LIMIT 1",
-                         [r[6] for r in rows]).fetchone()
+        ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE entry_id IN ({','.join('?' * len(rows))}) "
+                         "ORDER BY id LIMIT 1", [r[6] for r in rows]).fetchone()
         if ex:
             card['ex'] = {'vi': ex[0], 'en': ex[1]}
+            if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
+                card['ex']['src'] = ex[2] + (' ' + ex[3] if ex[3] else '')
     syls = k.split()
     if len(syls) > 1:
         card['parts'] = [p for p in (lookup(s) for s in syls) if p]

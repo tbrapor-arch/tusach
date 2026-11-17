@@ -1,0 +1,4 @@
+# Build-time Python packages (see ATTRIBUTION.md): word frequency and the cutter comparison. Not needed by the app.
+# Locked with hashes in requirements-build-lock.txt (same command as requirements-lock.txt, with this file).
+wordfreq==3.1.1
+underthesea==9.5.0

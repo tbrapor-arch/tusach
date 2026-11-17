@@ -1,0 +1,11 @@
+{"word": "學", "pos": "character", "lang": "Vietnamese", "lang_code": "vi", "senses": [{"tags": ["no-gloss"], "related": [{"word": "học", "tags": ["han-viet-reading"]}, {"word": "học", "tags": ["nom-reading"]}, {"word": "học", "tags": ["nom-reading"]}]}]}
+{"word": "生", "pos": "character", "lang": "Vietnamese", "lang_code": "vi", "related": [{"word": "sinh", "tags": ["han-viet-reading"]}], "senses": [{"glosses": ["chữ Hán form of sinh (“to be born”)"]}]}
+{"word": "犭", "pos": "character", "lang": "Vietnamese", "lang_code": "vi", "forms": [{"form": "khuyển", "tags": ["Hán-Nôm"]}], "senses": [{"tags": ["no-gloss"]}]}
+{"word": "馬", "pos": "noun", "lang": "Vietnamese", "lang_code": "vi", "senses": [{"glosses": ["chữ Hán form of mã (“horse”)"]}]}
+{"word": "học sinh", "pos": "noun", "lang": "Vietnamese", "lang_code": "vi", "etymology_templates": [{"name": "etymid", "args": {"1": "vi", "2": "學生"}}, {"name": "vi-etym-sino", "args": {"1": "學", "2": "to learn", "3": "生", "4": "student"}}], "senses": [{"glosses": ["pupil, student"], "examples": [{"text": "Tôi là học sinh.", "english": "I am a pupil.", "type": "example"}]}]}
+{"word": "sung", "pos": "adj", "lang": "Vietnamese", "lang_code": "vi", "etymology_templates": [{"name": "vi-etym-sino", "args": {"1": "充"}}], "etymology_text": "Sino-Vietnamese word from 充.", "senses": [{"tags": ["no-gloss"]}]}
+{"word": "đại học", "pos": "noun", "lang": "Vietnamese", "lang_code": "vi", "etymology_templates": [{"name": "vi-etym-sino", "args": {"1": "大學"}}], "senses": [{"glosses": ["university"]}]}
+{"word": "chó", "pos": "noun", "lang": "Vietnamese", "lang_code": "vi", "etymology_templates": [{"name": "inh", "args": {"1": "vi", "2": "mkh-vie-pro", "3": "*ʔa-cɔːʔ"}}], "forms": [{"form": "犬", "tags": ["CJK"]}], "senses": [{"glosses": ["dog"], "examples": [{"text": "Con chó chạy.", "translation": "The dog runs."}]}]}
+{"word": "cà phê", "pos": "noun", "lang": "Vietnamese", "lang_code": "vi", "etymology_templates": [{"name": "bor", "args": {"1": "vi", "2": "fr", "3": "café"}}], "senses": [{"glosses": ["coffee"]}]}
+{"word": "ken", "pos": "adj", "lang": "Vietnamese", "lang_code": "vi", "senses": [{"tags": ["no-gloss"]}]}
+{"word": "dog", "pos": "noun", "lang": "English", "lang_code": "en", "senses": [{"glosses": ["chó"]}]}
