@@ -5,10 +5,14 @@
 course/lessons/NN.yaml   lessons (none yet: the syllabus and word list wait for the owner's approval)
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them)
 course/glosses_en.tsv    English written for words that are not in a lesson's new_words
+course/false_friends.tsv hand-curated false friends (word, chữ Hán, note); empty; format in its header
 tools/                   build, pipeline, checks (MIT)
-tools/fixtures/          TEST FIXTURE: dict.yaml (9 invented entries) and lessons/00.yaml (3 lines); not content
-data/fetch.sh            open sources at pinned versions (none yet: TODO(sources))
+tools/fixtures/          TEST FIXTURE: dict.yaml (9 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
+                         file for tools/test_db.py); not content
+tests/cutter/            reference.tsv: 200 sentences cut by hand, NOT checked by a native speaker
+data/fetch.sh            open sources at pinned versions (ATTRIBUTION.md); a missing one is reported, not fatal
 data/build/              generated, never committed: vi.db, vi-nc.db, cards.json
+requirements-build*.txt  build-time packages (wordfreq, underthesea), locked with hashes; CI installs them
 app/                     page template, recording page, PWA files, embedded font; app/dist/ is generated
 app/published-*.{txt,tsv}  card ids and English ranks of published pages (committed, only ever grow)
 ```
@@ -44,18 +48,33 @@ Fields: `w`, `k`, `en`, `en_src` (course | written | dict:SOURCE | parts), `en_r
 `rank`, `audio`, `name`, `fixture`, `src`. Shown top to bottom: word and ▶, English (+ its source, and "not checked by
 a native speaker" for course English), chữ Hán with Cantonese / Taigi / Mandarin side by side, the label, the example.
 
-## Database (`tools/schema.sql`)
-`meta` (nc = 0 public / 1 non-commercial), `source` (licence, commercial_ok, fixture), `entry` (word, key, tkey,
-toneless, tag, english, chars, label, freq), `example`, `hanviet` (char → reading), `chinese` (chars, lang yue|nan|cmn,
-reading). Bridge data is joined on the characters (handover section 5): Hán-Việt + Jyutping (the Cantonese app's
-rime-cantonese data) + Tâi-lô literary (Tsheh-tû's `taigi.db`, `wenbai = literary`) + pinyin (CC-CEDICT). TODO(sources).
+## Database (`tools/schema.sql`, built by `tools/build_db.py`)
+`meta` (nc, sources, missing, freq_method), `source`, `entry` (word, key, english, chars, origin sino|vietic|'',
+hv_check, label same|native|'', freq per billion, freq_rank), `example` (ref: Tatoeba id and author), `hanviet` (char,
+reading, kind hv|nom|hannom|unchecked, source, checked against the other Hán-Việt source), `chinese` (chars, lang
+yue|nan|cmn, reading, level word|char, share, note), `bridge` (one row per chữ Hán spelling of the entries).
+Loaders (`SOURCES`): wiktionary (kaikki: words, English, `vi-etym-sino` → chars, character readings by tag),
+thieuchuu (Hán-Việt per character; `Ð`→`Đ`), unihan (kVietnamese, `unchecked`), rime (Jyutping; chars with rime's %,
+words), moe (Tâi-lô: characters read literary 文讀=1 or unmarked 0, words 0/1; appendix types skipped), cedict (pinyin,
+numbers → marks; capitalised = `name`), tatoeba (examples, attached to the words vi.cut() finds, 2 per word), and the
+Tatoeba Challenge test set (corpus for the counts only). A missing file: "source X not fetched", `meta.missing`.
+- **Bridge join** (`tools/bridge.py join()`, the same for cards, the `bridge` table and coverage): per language, the
+  whole word if the source has it, else character by character with every reading in brackets, main first
+  (`hok6 (saang1/sang1)`, `by_char` on the card, `*` in the Bridge tab), else missing. Nothing is chosen silently.
+- **Labels**: `same` = Wiktionary `vi-etym-sino`; `native` = inherited (`inh`) from Proto-Vietic/Mon-Khmer/
+  Austroasiatic; `false-friend` only from `course/false_friends.tsv` (cards.py); borrowings and unknown: no label.
+- **Frequency** (`tools/freq.py`): each syllable's frequency (wordfreq, else FrequencyWords) is divided among the
+  dictionary words containing it in the proportions seen in a corpus cut by underthesea (Tatoeba, Wiktionary
+  examples, Tatoeba Challenge), smoothed towards wordfreq's own phrase estimate; a word's frequency is the geometric
+  mean over its syllables. Biases in the module docstring.
 
 ## Tools
 | Command | What |
 |---|---|
 | `make db` / `make db-nc` | `tools/build_db.py`: vi.db (public) / vi-nc.db (`--nc`, private); refuses a wrong path |
 | `make lint` | `tools/lint.py` (rules, see its docstring) + `tools/verify_words.py --lessons` (suspects by class) |
-| `make test` | `tools/vi.py` self-test + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) |
+| `make test` | `tools/vi.py` self-test + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, missing sources, labels, bridge, frequency, cutter scoring), then the cutter report |
+| `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea on `tests/cutter/reference.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
 | `make check` | the card check alone |
 | `make smoke` | `tools/smoke.py`: phone-sized click-through (Playwright) |
@@ -63,7 +82,7 @@ rime-cantonese data) + Tâi-lô literary (Tsheh-tû's `taigi.db`, `wenbai = lite
 | `tools/compare.py run` | before/after: builds a git ref and the working tree, diffs lines, cuts, ids, card fields |
 | `tools/published_ids.py` | after publishing: records card ids and English ranks |
 | `tools/verify_words.py FILE.tsv` | checks a word list (word, English, chữ Hán) |
-| `tools/coverage.py` | lesson coverage of the frequent words (needs a frequency source) |
+| `make coverage` | `tools/coverage.py [TOP]`: of the TOP (3000) most frequent dictionary words, how many have English, a Hán-Việt analysis, and 3/2/1/0 Chinese readings; then lesson coverage |
 | `tools/import_recordings.py` | imports a native speaker's zip from `record.html` into `course/audio/lessons/` |
 | `tools/site.py`, `tools/make_icons.py` | installable site (CSP, PWA) for Pages; app icons |
 

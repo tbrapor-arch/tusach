@@ -20,9 +20,9 @@ import vi
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WRITTEN = os.path.join(ROOT, 'course/glosses_en.tsv')
 RANK = {'course': 3, 'written': 3, 'dict': 2, 'parts': 1, '': 0}
-# TODO(sources): order of the dictionary sources for English, best first, once they exist (e.g. a checked
-# Vietnamese-English dictionary before Wiktionary). Sources not listed come after, the fixture last.
-SOURCE_RANK = []
+# Order of the dictionary sources for English, best first. Wiktionary is the only open, compatible Vietnamese-English
+# source (ATTRIBUTION.md: the GPL dictionaries are not used); a checked source would go before it. The fixture is last.
+SOURCE_RANK = ['wiktionary']
 
 
 def rank(src):
