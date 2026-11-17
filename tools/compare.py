@@ -4,13 +4,14 @@ english.py), before publishing. For anything risky, a second agent that did not 
 
   python3 -I tools/compare.py run [--ref origin/main] [--before-db PATH] [--after-db PATH] [--max 20]
       builds REF (default: origin/main if it exists, else HEAD) in a temporary git worktree and the working tree, each
-      with its OWN database built by its own tools/build_db.py from data/raw (so a change to the database build shows),
-      then compares the pages. --before-db / --after-db use an existing database instead.
+      with its OWN database built by its own tools/build_db.py from data/raw (so a change to the database build shows;
+      a source the ref's data/fetch.sh leaves PENDING is left out of its build, as it was then), then compares the pages. --before-db / --after-db use an existing database instead.
   python3 -I tools/compare.py snapshot [app/dist/index.html] OUT.json
   python3 -I tools/compare.py diff BEFORE.json AFTER.json [--max 20]
 
 What is compared: every lesson line and exercise (the text shown, the cut into words, the card id of each word) and
-every card (English and its source, chữ Hán, Cantonese / Taigi / Mandarin readings, label, example).
+every card (English and its source, chữ Hán, Hán-Việt readings, Cantonese / Taigi (literary, colloquial) / Mandarin
+readings, variant spelling, label, example, the other etymologies of the spelling).
 Exit 1 when a line's text changed, a card was lost, or a card's English rank went down; other changes are listed.
 """
 import json
@@ -26,7 +27,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import english  # noqa: E402
 
-FIELDS = ('en', 'en_src', 'chars', 'yue', 'nan', 'cmn', 'label', 'ex')
+FIELDS = ('en', 'en_src', 'chars', 'hv', 'yue', 'nan', 'nan_coll', 'cmn', 'via', 'label', 'ex', 'other')
 
 
 def page_data(page):
@@ -96,6 +97,10 @@ def diff(a, b, limit=20):
 def build(src_root, db, out_dir):
     env = dict(os.environ, TUSACH_DB=os.path.abspath(db), TUSACH_OUT=out_dir,
                TUSACH_STORE=os.path.join(out_dir, 'cards.json'))
+    import sqlite3
+    missing = dict(sqlite3.connect(db).execute('SELECT key, value FROM meta')).get('missing') or ''
+    if missing:                  # an older tree built without its PENDING sources: a comparison page, never published
+        env['TUSACH_ALLOW_MISSING'] = ','.join(missing.split())
     r = subprocess.run([sys.executable, '-I', os.path.join(src_root, 'tools/build_app.py')], env=env, cwd=src_root,
                        capture_output=True, text=True)
     page = os.path.join(out_dir, 'index.html')
@@ -112,10 +117,33 @@ def db_plan(wt, tmp, before_db=None, after_db=None):
             ('after', ROOT, after_db or os.path.join(tmp, 'after-db', 'vi.db'), after_db is None)]
 
 
+def pending_sources(fetch_sh):
+    """{source id: data/raw subdirectory} of the snapshot sources that a data/fetch.sh text leaves PENDING (not pinned
+    yet): that tree was built without them, so its database is built without them here too."""
+    out = {}
+    for line in fetch_sh.splitlines():
+        p = line.split()
+        if len(p) == 6 and p[0] == 'snap' and p[4] == 'PENDING':
+            out[p[1]] = p[2].split('/')[0]
+    return out
+
+
 def build_db(src_root, db):
+    """Builds `db` with the tools of `src_root` from data/raw, restricted to the sources that tree's data/fetch.sh pins:
+    a source it leaves PENDING is hidden and allowed missing (TUSACH_ALLOW_MISSING), as that tree's own build had it."""
     os.makedirs(os.path.dirname(db), exist_ok=True)
-    r = subprocess.run([sys.executable, '-I', os.path.join(src_root, 'tools/build_db.py'), os.path.join(ROOT, 'data/raw'),
-                        db], cwd=src_root, capture_output=True, text=True)
+    raw, env = os.path.join(ROOT, 'data/raw'), dict(os.environ)
+    pend = pending_sources(open(os.path.join(src_root, 'data/fetch.sh'), encoding='utf-8').read())
+    if pend:
+        raw = os.path.join(os.path.dirname(db), 'raw')
+        os.makedirs(raw, exist_ok=True)
+        for name in os.listdir(os.path.join(ROOT, 'data/raw')):
+            if name not in pend.values():
+                os.symlink(os.path.join(ROOT, 'data/raw', name), os.path.join(raw, name))
+        env['TUSACH_ALLOW_MISSING'] = ','.join(sorted(pend))
+        print(f'compare: {src_root}: its data/fetch.sh leaves {", ".join(sorted(pend))} PENDING: built without them')
+    r = subprocess.run([sys.executable, '-I', os.path.join(src_root, 'tools/build_db.py'), raw, db], cwd=src_root,
+                       capture_output=True, text=True, env=env)
     if r.returncode or not os.path.exists(db):
         sys.exit(f'compare: the database build in {src_root} failed:\n{r.stdout[-1500:]}\n{r.stderr[-1500:]}')
 

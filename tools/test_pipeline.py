@@ -152,6 +152,17 @@ a = {'lines': {'L1.1': {'text': 'Tôi là học sinh.', 'cut': [['Tôi', 'tôi']
 b = {'lines': {'L1.1': {'text': 'Tôi là học sinh.', 'cut': [['Tôi', 'tôi'], ['là', 'là'], ['học', 'học'], ['sinh', 'sinh']]}},
      'cards': {'tôi': {'en': 'I', 'en_src': 'parts'}}}
 ok(compare.diff(a, b) == 2, 'compare blocks on a lost card and poorer English, and lists the changed cut')
+ok(compare.pending_sources('snap wiktionary kaikki/k.jsonl k.jsonl PENDING PENDING\nsnap tatoeba tatoeba/v.bz2 v.bz2 '
+                           'data-2026-11-17 ' + 'a' * 64) == {'wiktionary': 'kaikki'},
+   'compare builds an older tree without the snapshot sources its fetch.sh left PENDING')
+import io, contextlib  # noqa: E401,E402
+c1 = {'lines': {}, 'cards': {'x': {'en': 'a', 'en_src': 'dict:wiktionary', 'hv': '學 học', 'other': [{'en': 'b'}]}}}
+c2 = {'lines': {}, 'cards': {'x': {'en': 'a', 'en_src': 'dict:wiktionary', 'hv': '學 hục', 'other': [{'en': 'c'}]}}}
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    nb = compare.diff(c1, c2)
+ok(nb == 0 and 'card hv changed' in buf.getvalue() and 'card other changed' in buf.getvalue(),
+   'compare lists a changed Hán-Việt field and changed other etymologies (not blocking)')
 plan = compare.db_plan('/wt', '/tmp/x')
 ok(plan[0][1] == '/wt' and plan[1][1] == compare.ROOT and plan[0][2] != plan[1][2] and plan[0][3] and plan[1][3],
    'compare run builds the before and after databases separately, each with its own build_db.py')

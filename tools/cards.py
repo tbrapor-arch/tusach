@@ -210,8 +210,11 @@ def lookup(k, tag=None, surface=None):
         rank = next((r['freq_rank'] for r in rows if r['freq_rank']), None)
         if rank:
             card['rank'] = rank
+        # a whole sentence first (Tatoeba, chosen by build_db attach_examples), then Wiktionary's own examples, short
+        # ones first; one over 200 characters is not shown (a usage note of Wiktionary's, 32 lines on chị)
         ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE entry_id IN ({','.join('?' * len(main))}) "
-                         "ORDER BY id LIMIT 1", [r['id'] for r in main]).fetchone()
+                         "AND length(vi) <= 200 ORDER BY source != 'tatoeba', length(vi), id LIMIT 1",
+                         [r['id'] for r in main]).fetchone()
         if ex:
             card['ex'] = {'vi': ex[0], 'en': ex[1]}
             if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
