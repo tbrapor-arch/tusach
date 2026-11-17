@@ -28,13 +28,16 @@ CREATE TABLE entry(
   pos TEXT,
   english TEXT,
   chars TEXT,             -- chữ Hán of a Sino-Vietnamese (Hán-Việt) word (Wiktionary vi-etym-sino), '' otherwise
-  origin TEXT,            -- sino (vi-etym-sino) | vietic (inherited from Proto-Vietic / Austroasiatic) | '' (unknown)
+  origin TEXT,            -- sino (vi-etym-sino, a Hán-Việt word) | nonhv (vi-etym-sino rendering "Non-Sino-Vietnamese
+                          -- reading of Chinese X": an older/colloquial borrowing, e.g. giấy 紙; chars '', see etymon) |
+                          -- vietic (inherited from Proto-Vietic / Austroasiatic) | '' (unknown)
   hv_check TEXT,          -- for a word with chars: ok (each syllable is a Hán-Việt reading of its character in Wiktionary
                           -- or Thiều Chửu) | differs (at least one is not) | length (chars and syllables differ) | ''
                           -- differs/length: not shown as "same word" (no chars, no label); `make lint` lists them
   label TEXT,             -- same | native | '' (computed from origin); false-friend comes from course/false_friends.tsv
   freq INT,               -- estimated occurrences per billion words (tools/freq.py; method in meta.freq_method)
-  freq_rank INT           -- 1 = most frequent key; entries of one key share its rank
+  freq_rank INT,          -- 1 = most frequent key; entries of one key share its rank
+  etymon TEXT             -- origin nonhv: the Chinese etymon and its Hán-Việt reading ('紙 chỉ'); not a Hán-Việt analysis
 );
 CREATE INDEX entry_key ON entry(key);
 CREATE INDEX entry_tkey ON entry(tkey);

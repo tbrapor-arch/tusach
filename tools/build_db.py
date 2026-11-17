@@ -77,28 +77,62 @@ VIETIC = ('mkh-vie-pro', 'mkh-pro', 'aav-pro', 'mkh-vie')   # Proto-Vietic, Prot
 READING_TAGS = {'han-viet-reading': 'hv', 'nom-reading': 'nom', 'han-nom-reading': 'hannom'}
 
 
-def sino_chars(entry):
-    """Characters of a Sino-Vietnamese word: the odd arguments of {{vi-etym-sino}} (the even ones are glosses), else the
-    word given to {{etymid}} next to it. '' when the entry has no vi-etym-sino."""
-    tpls = entry.get('etymology_templates') or []
-    sino = [t for t in tpls if t.get('name') == 'vi-etym-sino']
-    if not sino:
-        return None
-    args = sino[0].get('args') or {}
+def _sino_parse(t):
+    """(chars, kind, sv) of one {{vi-etym-sino}}. Argument layouts seen in the snapshot of 17 Nov 2026 (tools/fixtures/
+    kaikki-real.jsonl): the whole word in 1 (`1=詞典`, 5,138 uses), or characters and glosses alternating (`1=飛 2=to fly
+    3=場 4=field`, also with groups of several characters: `1=不動 2=… 3=產`), with optional lit=, suffix=, tr=, t=.
+    kind 'hv': a Sino-Vietnamese (Hán-Việt) word. kind 'nonhv': the template renders "Non-Sino-Vietnamese reading of
+    Chinese X (SV: …)" (parameters hv= or preMC= with any value; ~880 uses: và 和, giấy 紙, chào 朝, đũa 箸): a word
+    borrowed from Chinese in an older or colloquial layer, NOT read the Hán-Việt way; argument 3 is then the Hán-Việt
+    reading (sv), not a character, and the word is not a Hán-Việt analysis."""
+    args = t.get('args') or {}
+    exp = (t.get('expansion') or '').lower()
+    nonhv = exp.startswith('non-sino-vietnamese') or any(args.get(k) for k in ('hv', 'preMC'))
+    if nonhv:
+        return (args.get('1', '') if is_cjk_word(args.get('1', '')) else ''), 'nonhv', vi.nfc(args.get('3', ''))
     chars = ''.join(v for k, v in sorted(((int(k), v) for k, v in args.items() if k.isdigit()), key=lambda x: x[0])
                     if k % 2 == 1 and is_cjk_word(v))
-    if not chars:
+    return chars, 'hv', ''
+
+
+BORROWING = ('bor', 'bor+', 'obor', 'der', 'der+', 'cal', 'calque', 'lbor')
+
+
+def sino_analysis(entry):
+    """(chars, kind, sv) of a word's Sino-Vietnamese etymology, None without {{vi-etym-sino}}. Several templates in one
+    etymology (36 entries) are alternatives ("from 薦 or from 進", 月食 / 月蝕): the first Hán-Việt one whose characters
+    are as many as the syllables wins, else the first. No characters in the arguments (40 entries, `câu lạc bộ`): the
+    word given to {{etymid}} next to it."""
+    tpls = entry.get('etymology_templates') or []
+    found = [_sino_parse(t) for t in tpls if t.get('name') == 'vi-etym-sino']
+    if not found:
+        return None
+    n = len(vi.key(entry.get('word', '')).split())
+    best = next((f for f in found if f[1] == 'hv' and len(f[0]) == n), found[0])
+    if not best[0]:
         for t in tpls:
             a = t.get('args') or {}
             if t.get('name') == 'etymid' and is_cjk_word(a.get('2', '')):
-                chars = a['2']
-                break
-    return chars
+                return a['2'], best[1], best[2]
+        # `{{vi-etym-sino}}` with no argument, then the borrowing itself: "Sino-Vietnamese, orthographic borrowing from
+        # Japanese 俱樂部" (câu lạc bộ): a bor/obor/der/cal template whose argument 3 has one character per syllable
+        for t in tpls:
+            a = t.get('args') or {}
+            if t.get('name') in BORROWING and is_cjk_word(a.get('3', '')) and len(a['3']) == n:
+                return a['3'], best[1], best[2]
+    return best
 
 
-def origin_of(entry, chars):
-    if chars is not None:
-        return 'sino'
+def sino_chars(entry):
+    """Characters of a Sino-Vietnamese (Hán-Việt) word; '' for a borrowing that is not read the Hán-Việt way or has no
+    characters; None without {{vi-etym-sino}}."""
+    a = sino_analysis(entry)
+    return None if a is None else (a[0] if a[1] == 'hv' else '')
+
+
+def origin_of(entry, analysis):
+    if analysis is not None:
+        return 'sino' if analysis[1] == 'hv' else 'nonhv'
     for t in entry.get('etymology_templates') or []:
         a = t.get('args') or {}
         if t.get('name') in ('inh', 'inh+', 'inh-lite') and a.get('2', '').startswith(VIETIC):
@@ -106,14 +140,25 @@ def origin_of(entry, chars):
     return ''
 
 
+# senses never used for English: a misspelling ("chuyện: misspelling of truyện"), an empty sense; senses with these
+# tags come after the ordinary ones (học sinh: "a student" is archaic, "a pupil" is today's sense)
+SKIP_SENSE = {'misspelling', 'no-gloss'}
+LATE_SENSE = {'archaic', 'obsolete', 'rare', 'dialectal', 'Southern', 'Central', 'historical', 'dated', 'uncommon'}
+
+
 def english_of(entry):
+    ss = [s for s in entry.get('senses') or [] if not SKIP_SENSE & set(s.get('tags') or [])]
+    ss = sorted(ss, key=lambda s: bool(LATE_SENSE & set(s.get('tags') or [])))      # stable: the source order otherwise
     gl = []
-    for s in entry.get('senses') or []:
+    for s in ss:
         for g in s.get('glosses') or []:
             g = g.strip()
             if g and g not in gl:
                 gl.append(g)
     return '; '.join(gl[:4])
+
+
+SV_READING = re.compile(r'^Sino-Vietnamese reading of ([㐀-鿿豈-﫿\U00020000-\U0003ffff])')
 
 
 def load_kaikki(raw, add):
@@ -145,19 +190,30 @@ def load_kaikki(raw, add):
             continue
         if vi.CJK.search(word) or e.get('pos') == 'character':
             continue
+        if e.get('pos') == 'romanization':
+            # 786 entries "y: Sino-Vietnamese reading of 衣": a Hán-Việt reading of a character (kind hv), not a word
+            for s in e.get('senses') or []:
+                m = SV_READING.match((s.get('glosses') or [''])[0])
+                if m and len(word.split()) == 1:
+                    add.hanviet(m.group(1), word, 'hv', 99, label='romanization')
+                    n_chars['hv-rom'] += 1
+            continue
         en = english_of(e)
-        chars = sino_chars(e)
-        if not en and chars is None and not e.get('etymology_text'):
+        ana = sino_analysis(e)
+        if not en and ana is None and not e.get('etymology_text'):
             continue                                       # an empty stub
         examples = []
         for s in e.get('senses') or []:
             for x in s.get('examples') or []:
                 if x.get('text') and (x.get('english') or x.get('translation')) and not vi.CJK.search(x['text']):
                     examples.append({'vi': x['text'], 'en': x.get('english') or x.get('translation')})
-        add.entry(word, en, chars or '', pos=e.get('pos', ''), src_id=str(e.get('etymology_number') or ''),
-                  origin=origin_of(e, chars), examples=examples[:3])
+        chars = ana[0] if ana and ana[1] == 'hv' else ''
+        etymon = f'{ana[0]} {ana[2]}'.strip() if ana and ana[1] == 'nonhv' and ana[0] else ''
+        add.entry(word, en, chars, pos=e.get('pos', ''), src_id=str(e.get('etymology_number') or ''),
+                  origin=origin_of(e, ana), examples=examples[:3], etymon=etymon)
     print(f"  wiktionary character readings: {n_chars['hv']} Hán-Việt, {n_chars['nom']} Nôm, "
-          f"{n_chars['hannom']} Hán-Nôm (not told apart)")
+          f"{n_chars['hannom']} Hán-Nôm (not told apart), {n_chars['hv-rom']} Hán-Việt from 'Sino-Vietnamese reading "
+          f"of X' entries")
     if add.n and not n_chars['hv']:
         print('  WARNING: no han-viet-reading found: the kaikki format may have changed (tools/build_db.py load_kaikki)')
 
@@ -350,13 +406,13 @@ class Adder:
         self._ord = Counter()
 
     def entry(self, word, english='', chars='', label='', pos='', tag='', src_id='', freq=None, examples=(),
-              origin=''):
+              origin='', etymon=''):
         word = vi.nfc(word).strip()
         cur = self.con.execute(
-            'INSERT INTO entry(source, src_id, word, key, tkey, toneless, tag, pos, english, chars, origin, label, freq) '
-            'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            'INSERT INTO entry(source, src_id, word, key, tkey, toneless, tag, pos, english, chars, origin, label, freq, '
+            'etymon) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             (self.source, src_id, word, vi.key(word), vi.tkey(word), vi.toneless(vi.key(word)), tag or '', pos,
-             vi.nfc(english), vi.nfc(chars), origin, label or '', freq))
+             vi.nfc(english), vi.nfc(chars), origin, label or '', freq, vi.nfc(etymon)))
         for ex in examples:
             self.con.execute('INSERT INTO example(entry_id, source, vi, en, ref) VALUES (?,?,?,?,?)',
                              (cur.lastrowid, self.source, vi.nfc(ex.get('vi')), vi.nfc(ex.get('en')), ex.get('ref', '')))
@@ -440,6 +496,57 @@ def southern_variants(con):
     return affected
 
 
+def check_syllables(k):
+    """The syllables of a key for the Hán-Việt check: hyphens and punctuation separate them (Pháp-Hoa 法華, "ôn, lương,
+    cung" 溫良恭)."""
+    return re.sub(r'[^\w\s]', ' ', k).split()
+
+
+def rkey(s):
+    """Reading key for comparing a syllable with a character's reading: tone-mark placement ignored (vi.tkey), and the
+    i/y spellings of one syllable equal (kì = kỳ, tỉ = tỷ; quí/quý and uy untouched)."""
+    return re.sub(r'^([bcdđghklmnprstvx]+)y(\d)$', r'\1i\2', vi.tkey(s))
+
+
+def hannom_attested(con, min_words=2):
+    """Readings of a character attested by Wiktionary's own Sino-Vietnamese words, used as Hán-Việt (kind hv, label
+    'attested', source wiktionary):
+      * Wiktionary gives 5,308 characters only as untagged "Hán-Nôm" readings (Hán-Việt and Nôm not told apart: 車 xa,
+        xe, xế). For a character no Hán-Việt source reads (Thiều Chửu's copy lacks 告 值 冊), a Hán-Nôm reading that a
+        Sino-Vietnamese word reads it with (價值 giá trị -> 值 trị);
+      * for any character, a reading that some source gives it (Wiktionary Hán-Nôm or Nôm, Unihan) and that at least
+        `min_words` Sino-Vietnamese words read it with: 實 thực (thực tế, thực hiện, hiện thực…; Thiều Chửu has only
+        thật, Wiktionary has no tagged reading), 平 bằng (công bằng, Cao Bằng).
+    Returns the number of readings added."""
+    have = {c for (c,) in con.execute("SELECT DISTINCT char FROM hanviet WHERE kind='hv' AND source != 'fixture'")}
+    hvset = defaultdict(set)
+    for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind='hv'"):
+        hvset[ch].add(rkey(r))
+    cand = defaultdict(lambda: defaultdict(set))       # char -> rkey -> kinds
+    for ch, r, kind in con.execute("SELECT char, reading, kind FROM hanviet WHERE kind IN ('hannom', 'nom', 'unchecked')"):
+        cand[ch][rkey(r)].add(kind)
+    used = defaultdict(set)                            # (char, rkey) -> words
+    spelled = {}
+    for k, chars in con.execute("SELECT key, chars FROM entry WHERE origin='sino' AND chars != ''").fetchall():
+        syl = check_syllables(k)
+        if len(syl) == len(chars):
+            for s, c in zip(syl, chars):
+                rk = rkey(s)
+                if rk in cand.get(c, ()) and rk not in hvset[c]:
+                    used[(c, rk)].add(k)
+                    spelled.setdefault((c, rk), s)
+    added = []
+    for (c, rk), ws in sorted(used.items()):
+        if len(ws) >= min_words or (c not in have and 'hannom' in cand[c][rk]):
+            added.append((c, spelled[(c, rk)], len(ws)))
+    con.executemany("INSERT INTO hanviet(char, reading, kind, source, ord, label) VALUES (?,?,'hv','wiktionary',98,"
+                    "'attested')", [(c, r) for c, r, _ in added])
+    top = sorted(added, key=lambda x: -x[2])[:12]
+    print(f'readings attested by Sino-Vietnamese words, used as Hán-Việt: {len(added)} ({len({c for c, _, _ in added})} '
+          f'characters), e.g. ' + ', '.join(f'{c} {r} ({n} words)' for c, r, n in top))
+    return len(added)
+
+
 def unihan_fallback(con):
     """A character no Hán-Việt source reads (Wiktionary, Thiều Chửu) gets its Unihan kVietnamese readings of Hán-Việt
     shape (tools/hanviet.py hv_shaped), labelled 'fallback' and shown as "unchecked (Unihan)"."""
@@ -482,14 +589,14 @@ def word_checks(con):
     cannot be detected: they come from course/false_friends.tsv, on the card (tools/cards.py)."""
     hv = defaultdict(set)
     for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind IN ('hv', 'hannom') OR label = 'fallback'"):
-        hv[ch].add(vi.tkey(r))
+        hv[ch].add(rkey(r))
     rows = []
     for eid, k, chars in con.execute("SELECT id, key, chars FROM entry WHERE chars != ''").fetchall():
-        syl = k.split()
+        syl = check_syllables(k)
         if len(syl) != len(chars):
             rows.append(('length', eid))
         elif all(hv.get(c) for c in chars):
-            rows.append(('ok' if all(vi.tkey(s) in hv[c] for s, c in zip(syl, chars)) else 'differs', eid))
+            rows.append(('ok' if all(rkey(s) in hv[c] for s, c in zip(syl, chars)) else 'differs', eid))
         else:
             rows.append(('', eid))
     con.executemany('UPDATE entry SET hv_check=? WHERE id=?', rows)
@@ -631,6 +738,7 @@ def main():
     hv_crosscheck(con)
     validate_syllables(con, raw)
     rank_chinese(con)
+    hannom_attested(con)          # before southern_variants: an attested Southern form (義 ngãi) is labelled too
     southern_variants(con)
     unihan_fallback(con)
     word_checks(con)

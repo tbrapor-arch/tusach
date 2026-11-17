@@ -76,6 +76,33 @@ with tempfile.TemporaryDirectory() as tmp:
     ok(b.get('學生', (0,))[0] == 3 and b.get('大學', (9,))[0] == 0,
        'bridge: 學生 has three readings (fixture), 大學 none (no Chinese source fetched)')
 
+# 2b. the Wiktionary loader on REAL lines of the snapshot (tools/fixtures/raw-real, CC BY-SA 4.0, see its README)
+with tempfile.TemporaryDirectory() as tmp:
+    db = os.path.join(tmp, 'vi.db')
+    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw-real', db], cwd=ROOT,
+                       capture_output=True, text=True, env=dict(os.environ, TUSACH_ALLOW_MISSING=ALL_BUT_WIKTIONARY))
+    ok(r.returncode == 0, 'build_db reads the real kaikki lines')
+    con = sqlite3.connect(db)
+    e = {r[0]: r[1:] for r in con.execute("SELECT key, chars, origin, label, etymon, english FROM entry "
+                                          "WHERE source='wiktionary'")}
+    ok(e.get('học sinh', ())[:3] == ('學生', 'sino', 'same'), 'real: vi-etym-sino 1=學 2=gloss 3=生 4=gloss')
+    ok(e.get('thế giới', ())[:1] == ('世界',), 'real: vi-etym-sino with the whole word in 1')
+    ok(e.get('giấy', ())[:4] == ('', 'nonhv', '', '紙 chỉ') and e.get('và', ())[:4] == ('', 'nonhv', '', '和 hoà'),
+       'real: "Non-Sino-Vietnamese reading" (hv=/preMC=) is a borrowing, not a Hán-Việt analysis; etymon kept')
+    ok(e.get('câu lạc bộ', ())[:2] == ('俱樂部', 'sino'), 'real: an empty vi-etym-sino takes the borrowed characters')
+    ok(e.get('nguyệt thực', ())[:1] == ('月食',), 'real: two vi-etym-sino (月食 / 月蝕) are alternatives, not joined')
+    ok(e.get('học sinh', ('',) * 5)[4].startswith('a pupil'), 'real: an archaic sense ("a student") comes after')
+    ok('misspelling' not in e.get('chuyện', ('',) * 5)[4], 'real: a "misspelling of" sense is not English')
+    ok('y' not in e, 'real: "Sino-Vietnamese reading of 衣" is not a word')
+    hv = set(con.execute("SELECT char, reading, kind, label FROM hanviet WHERE source='wiktionary'"))
+    ok(('衣', 'y', 'hv', 'romanization') in hv, 'real: ... it is a Hán-Việt reading of 衣')
+    ok(('世', 'thế', 'hv', '') in hv and ('世', 'thá', 'nom', '') in hv, 'real: readings tagged inside senses[].related')
+    ok(('車', 'xa', 'hannom', '') in hv and ('車', 'xe', 'hannom', '') in hv, 'real: untagged Hán-Nôm forms stay hannom')
+    ok(('值', 'trị', 'hv', 'attested') in hv, 'real: a Hán-Nôm reading read so by a Sino-Vietnamese word (giá trị)')
+    ok(('平', 'bằng', 'hv', 'attested') in hv, 'real: a Nôm reading read so by 2+ Sino-Vietnamese words (bằng, công bằng)')
+    chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
+    ok(chk.get('bằng') == 'ok' and chk.get('học sinh') == 'ok', 'real: the check accepts the attested reading')
+
 # 3. the join: whole word first, else character by character with every reading, nothing chosen silently
 con = sqlite3.connect(':memory:')
 con.executescript(open(os.path.join(HERE, 'schema.sql'), encoding='utf-8').read())
