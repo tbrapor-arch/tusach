@@ -34,6 +34,16 @@ PUBLISHED_EN = os.path.join(ROOT, 'app/published-english.tsv')
 os.makedirs(OUT, exist_ok=True)
 
 con = cards.open_db('public')          # refuses vi-nc.db: no non-commercial source on the public page
+# a database built without some sources (meta.missing) makes a page only when every one of them is allowed on purpose
+# (TUSACH_ALLOW_MISSING, sandboxes); the page records them and tools/site.py refuses to publish it
+MISSING = (dict(con.execute('SELECT key, value FROM meta')).get('missing') or '').split()
+_allowed = {x.strip() for x in os.environ.get('TUSACH_ALLOW_MISSING', '').split(',') if x.strip()}
+if set(MISSING) - _allowed:
+    raise SystemExit(f'build_app: REFUSED: the database was built without {", ".join(sorted(set(MISSING) - _allowed))} '
+                     '(meta.missing). Fetch every source (make db), or set TUSACH_ALLOW_MISSING for a sandbox build '
+                     'that will not be published.')
+if MISSING:
+    print(f'build_app: NOT PUBLISHABLE: the database lacks {", ".join(MISSING)} (allowed by TUSACH_ALLOW_MISSING)')
 raw = course.lessons()
 fixture_build = any(L.get('fixture') for L in raw)
 if fixture_build:
@@ -136,7 +146,7 @@ for L in lessons:
 syllabus = course.syllabus()
 data = {'lessons': lessons, 'dict': dictionary, 'syllabus': syllabus.get('lessons') or [], 'fixture': fixture_build,
         'bridge': sorted(i for i, c in dictionary.items() if c.get('chars')), 'recorded': n_rec,
-        'built': datetime.date.today().isoformat()}
+        'built': datetime.date.today().isoformat(), 'missing': MISSING}
 n_letters = check_font([L['title']['vi'] for L in lessons] + [ln['vi'] for L in lessons for ln in L['lines']]
                        + [c['w'] for c in dictionary.values()] + [c['ex']['vi'] for c in dictionary.values() if c.get('ex')])
 

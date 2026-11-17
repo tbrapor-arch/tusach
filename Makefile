@@ -1,4 +1,5 @@
-# make data      download the open sources (data/raw), pinned in data/fetch.sh; a missing one is reported, not fatal
+# make data      download the open sources (data/raw), pinned in data/fetch.sh; a missing one fails (exit 1) unless
+#                listed in TUSACH_ALLOW_MISSING=id,id (sandboxes; the page then cannot be published)
 # make db        public build: data/build/vi.db (commercial-use sources + the test fixture)
 # make db-nc     private build: data/build/vi-nc.db (also non-commercial sources); the public page refuses it
 # make lint      lesson rules (tools/lint.py) + the word verifier (tools/verify_words.py)
@@ -36,6 +37,7 @@ lint:
 
 test: db db-nc
 	$(PY) tools/vi.py
+	$(PY) tools/test_fetch.py
 	$(PY) tools/test_pipeline.py
 	$(PY) tools/test_db.py
 	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'

@@ -18,6 +18,7 @@ import bridge  # noqa: E402
 import freq  # noqa: E402
 
 failures = []
+ALL_BUT_WIKTIONARY = 'thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
 
 
 def ok(cond, what):
@@ -35,9 +36,9 @@ ok(bridge.pinyin_marks('lu:4 gui4 liu2') == 'lǜguìliú', 'pinyin: ü, -ui, -iu
 with tempfile.TemporaryDirectory() as tmp:
     db = os.path.join(tmp, 'vi.db')
     r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db], cwd=ROOT,
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, env=dict(os.environ, TUSACH_ALLOW_MISSING=ALL_BUT_WIKTIONARY))
     out = r.stdout + r.stderr
-    ok(r.returncode == 0, 'build_db runs with most sources missing')
+    ok(r.returncode == 0, 'build_db runs with most sources missing when they are allowed (TUSACH_ALLOW_MISSING)')
     ok('source thieuchuu not fetched' in out and 'source rime not fetched' in out, 'a missing source is reported')
     con = sqlite3.connect(db)
     meta = dict(con.execute('SELECT key, value FROM meta'))

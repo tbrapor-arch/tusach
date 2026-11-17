@@ -8,7 +8,9 @@ public build (the app page) from vi-nc.db and a private build (the private modul
 non-commercial source on the public page" is enforced by the code, not by a document.
 
 SOURCES below: one loader per source of data/fetch.sh, licence as in ATTRIBUTION.md. A source whose file is not in
-data/raw is skipped with "source X not fetched: …" and listed in meta.missing; the build goes on without it.
+data/raw stops the build (exit 1), unless its id is listed in TUSACH_ALLOW_MISSING=id,id (a sandbox that cannot reach
+a host): then it is skipped with "source X not fetched: …" and listed in meta.missing, and tools/build_app.py and
+tools/site.py refuse to make a publishable page from that database.
 After the sources: the frequency of each word (tools/freq.py), the Hán-Việt cross-check, the labels, and the bridge
 join on characters (tools/bridge.py, table `bridge`). Nothing is edited by hand.
 
@@ -41,6 +43,21 @@ csv.field_size_limit(1 << 24)
 
 class Missing(Exception):
     """A source file is not in data/raw."""
+
+
+def allowed_missing():
+    """Source ids that may be missing on purpose (TUSACH_ALLOW_MISSING=id,id; sandboxes only)."""
+    return {x.strip() for x in os.environ.get('TUSACH_ALLOW_MISSING', '').split(',') if x.strip()}
+
+
+def snapshot_pin(source_id):
+    """'snapshot TAG, sha256 SHA8' for a source fetched from our own snapshot release (data/fetch.sh `snap` lines),
+    'snapshot PENDING' before the first snapshot."""
+    for line in open(os.path.join(ROOT, 'data', 'fetch.sh'), encoding='utf-8'):
+        p = line.split()
+        if len(p) == 6 and p[0] == 'snap' and p[1] == source_id:
+            return f'snapshot {p[4]}' + ('' if p[4] == 'PENDING' else f', sha256 {p[5][:8]}')
+    return 'snapshot (not in data/fetch.sh)'
 
 
 def need(raw, *parts):
@@ -251,10 +268,16 @@ def load_tatoeba_challenge(raw, add):
     add.n = len(add.corpus)
 
 
+def load_frequencywords(raw, add):
+    """FrequencyWords' syllable counts: read by tools/freq.py (fallback when wordfreq is not installed) and by the
+    syllable-table validation (tools/vi.py validate_syllables); nothing is stored but the source row."""
+    need(raw, 'frequencywords', 'vi_50k.txt')
+
+
 # Each source: id, name, version (as pinned in data/fetch.sh), licence, url, commercial_ok, loader.
 SOURCES = [
     {'id': 'wiktionary', 'name': 'English Wiktionary, Vietnamese entries (kaikki.org extraction)',
-     'version': 'file of 2026-10-30, sha256 186cd0a6', 'licence': 'CC BY-SA 4.0 / GFDL',
+     'version': snapshot_pin('wiktionary'), 'licence': 'CC BY-SA 4.0 / GFDL',
      'url': 'https://kaikki.org/dictionary/Vietnamese/', 'commercial_ok': True, 'load': load_kaikki},
     {'id': 'thieuchuu', 'name': 'Thiều Chửu, Hán Việt tự điển (catusf/tudien)', 'version': 'a7dd918',
      'licence': 'public domain in Vietnam; repository CC0 1.0', 'url': 'https://github.com/catusf/tudien',
@@ -269,13 +292,16 @@ SOURCES = [
      'load': load_moe},
     {'id': 'cedict', 'name': 'CC-CEDICT (cedict-json)', 'version': '1.3.20251213', 'licence': 'CC BY-SA 4.0',
      'url': 'https://www.mdbg.net/chinese/dictionary?page=cc-cedict', 'commercial_ok': True, 'load': load_cedict},
-    {'id': 'tatoeba', 'name': 'Tatoeba, Vietnamese-English sentences', 'version': 'weekly export (see data/fetch.sh)',
+    {'id': 'tatoeba', 'name': 'Tatoeba, Vietnamese-English sentences', 'version': snapshot_pin('tatoeba'),
      'licence': 'CC BY 2.0 FR (some CC0 1.0)', 'url': 'https://tatoeba.org/en/downloads', 'commercial_ok': True,
      'load': load_tatoeba},
     {'id': 'tatoeba-challenge', 'name': 'Tatoeba sentences, Helsinki-NLP Tatoeba Challenge eng-vie test set (corpus '
      'for word counts only, not stored)', 'version': 'bd05f08', 'licence': 'CC BY 2.0 FR per README; repo LICENSE '
      'CC BY-NC-SA 4.0 (conflict, see ATTRIBUTION.md)', 'url': 'https://github.com/Helsinki-NLP/Tatoeba-Challenge',
      'commercial_ok': True, 'load': load_tatoeba_challenge},
+    {'id': 'frequencywords', 'name': 'FrequencyWords, OpenSubtitles 2018 vi_50k (syllable counts)', 'version': '525f9b5',
+     'licence': 'CC BY-SA 4.0 (content)', 'url': 'https://github.com/hermitdave/FrequencyWords', 'commercial_ok': True,
+     'load': load_frequencywords},
 ]
 
 
@@ -444,8 +470,14 @@ def main():
             s['load'](raw, add)
         except Missing as e:
             con.rollback()
+            if s['id'] not in allowed_missing():
+                con.close()
+                os.remove(tmp)
+                sys.exit(f"build_db: FAILED: source {s['id']} not fetched: {e} is missing (run `make data`; in a sandbox "
+                         f"that cannot reach the host, TUSACH_ALLOW_MISSING={s['id']} builds without it, unpublishable)")
             missing.append(s['id'])
-            print(f"source {s['id']} not fetched: {e} is missing (data/fetch.sh; ATTRIBUTION.md says where it comes from)")
+            print(f"source {s['id']} not fetched: {e} is missing, allowed by TUSACH_ALLOW_MISSING "
+                  "(this database cannot make a publishable page)")
             continue
         con.execute('INSERT INTO source VALUES (?,?,?,?,?,?,0)',
                     (s['id'], s['name'], s['version'], s['licence'], s['url'], int(s['commercial_ok'])))

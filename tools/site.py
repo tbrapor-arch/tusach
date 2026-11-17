@@ -15,9 +15,24 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, '_site'))
 PWA = os.path.join(ROOT, 'app/pwa')
-DIST = os.path.join(ROOT, 'app/dist')
+DIST = os.path.abspath(os.environ.get('TUSACH_DIST') or os.path.join(ROOT, 'app/dist'))
 
 body = open(os.path.join(DIST, 'index.html'), encoding='utf-8').read()
+
+
+def page_missing(html):
+    """The sources the page's database lacked (DATA.missing, written by tools/build_app.py)."""
+    import json
+    m = re.search(r'<script[^>]*type="application/json"[^>]*>(.*?)</script>', html, re.S)
+    if not m:
+        sys.exit('site.py: the page has no data block')
+    return json.loads(m.group(1)).get('missing', ['(not recorded: page built by an older build_app.py)'])
+
+
+# publication gate: a page built from a database with missing sources (TUSACH_ALLOW_MISSING) is never published
+if page_missing(body):
+    sys.exit(f'site.py: REFUSED: the page was built from a database without {", ".join(page_missing(body))} '
+             '(meta.missing). Fetch every source (make data) and rebuild before publishing.')
 build = hashlib.sha1(body.encode()).hexdigest()[:10]
 
 

@@ -1,0 +1,72 @@
+# Snapshot of the sources whose publisher keeps no dated copy (kaikki.org's Vietnamese JSONL, the three Tatoeba
+# exports): downloaded from upstream on a GitHub runner, hashed, and kept as assets of a release of this repository
+# tagged data-YYYY-MM-DD, with SHA256SUMS and NOTES.md (upstream URL, download date, licence of each file). Both
+# licences allow redistribution with attribution (Wiktionary/kaikki CC BY-SA 4.0; Tatoeba CC BY 2.0 FR): ATTRIBUTION.md.
+# data/fetch.sh then fetches these files from the release, pinned by SHA-256 (tools/pin_snapshot.py TAG writes the
+# pins), never from the moving upstream URL.
+# Run it from the Actions tab (workflow_dispatch), or by a commit that changes data/snapshot-request.txt.
+name: Snapshot of unversioned sources
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [data/snapshot-request.txt]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download from upstream
+        run: |
+          set -eu
+          mkdir snap && cd snap
+          day=$(date -u +%Y-%m-%d)
+          echo "DAY=$day" >> "$GITHUB_ENV"
+          {
+            echo "# Snapshot data-$day of sources with no dated upstream copy"
+            echo
+            echo "Downloaded on $day (UTC) by .github/workflows/snapshot.yml, run ${GITHUB_RUN_ID}, unchanged."
+            echo
+            echo "| File | Upstream URL | Licence |"
+            echo "|---|---|---|"
+          } > NOTES.md
+          get() {  # FILE URL LICENCE
+            curl -sSfL --retry 3 --max-time 1800 -o "$1" "$2"
+            echo "| $1 | $2 | $3 |" >> NOTES.md
+          }
+          get kaikki.org-dictionary-Vietnamese.jsonl \
+            https://kaikki.org/dictionary/Vietnamese/kaikki.org-dictionary-Vietnamese.jsonl \
+            "Wiktionary contributors, extraction by kaikki.org (wiktextract): CC BY-SA 4.0 and GFDL; redistributed under CC BY-SA 4.0 with attribution"
+          T=https://downloads.tatoeba.org/exports/per_language
+          TL="Tatoeba contributors: CC BY 2.0 FR (some sentences CC0 1.0); redistributed with attribution"
+          get vie_sentences_detailed.tsv.bz2 $T/vie/vie_sentences_detailed.tsv.bz2 "$TL"
+          get eng_sentences_detailed.tsv.bz2 $T/eng/eng_sentences_detailed.tsv.bz2 "$TL"
+          get vie-eng_links.tsv.bz2 $T/vie/vie-eng_links.tsv.bz2 "$TL"
+          # a file that is empty or not what it should be fails the run instead of becoming a pin
+          test "$(head -c1 kaikki.org-dictionary-Vietnamese.jsonl)" = "{"
+          for f in *.bz2; do bzip2 -tq "$f"; done
+          sha256sum kaikki.org-dictionary-Vietnamese.jsonl *.bz2 > SHA256SUMS
+          { echo; echo '```'; cat SHA256SUMS; echo '```'; } >> NOTES.md
+          cat NOTES.md
+
+      - name: Release data-DAY
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -eu
+          cd snap
+          tag="data-$DAY"
+          if gh release view "$tag" -R "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "release $tag exists already: assets are never replaced (a pin may point to them)"; exit 1
+          fi
+          gh release create "$tag" -R "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Data snapshot $DAY" \
+            --notes-file NOTES.md kaikki.org-dictionary-Vietnamese.jsonl *.bz2 SHA256SUMS NOTES.md
+          echo "Next: python3 -I tools/pin_snapshot.py $tag (writes the pins into data/fetch.sh), commit."

@@ -30,8 +30,9 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
    with poorer English. After publishing: `python3 tools/published_ids.py`, commit both `app/published-*` files.
 6. Any change to the dictionary, the cutter or the pipeline: `python3 -I tools/compare.py run` before publishing.
    For anything risky, a second agent that did not do the work checks the result.
-7. Data sources: pinned in `data/fetch.sh`, licence row in `ATTRIBUTION.md`, loader in `tools/build_db.py`
-   (`SOURCES`), licence checked on its own page first. Never edit the database by hand.
+7. Data sources: pinned by content in `data/fetch.sh` (unversioned ones through our snapshot release), licence row
+   in `ATTRIBUTION.md`, loader in `tools/build_db.py` (`SOURCES`), licence checked on its own page first. A missing
+   source fails `make db`; `TUSACH_ALLOW_MISSING=id,…` is for sandboxes only and makes the page unpublishable.
 8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word.
 
 ## Repository rules

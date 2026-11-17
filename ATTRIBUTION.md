@@ -1,25 +1,32 @@
 # Data sources and attribution
 
 None of these datasets are stored in this repository. `make data` (`data/fetch.sh`) downloads them at pinned versions
-into `data/raw/` (git-ignored), and `make db` builds `data/build/vi.db` locally (`tools/build_db.py`, `SOURCES`). A
+into `data/raw/` (git-ignored) and fails if one is missing or differs from its pin, and `make db` builds `data/build/vi.db` locally (`tools/build_db.py`, `SOURCES`). A
 source is added here only after its licence is checked on its own page; non-commercial sources reach only `make db-nc`
 (private builds). There is none at present. Licences were read on the pages named in the sources report of
 17 Nov 2026; items marked **UNVERIFIED** could not be confirmed on a primary page.
 
 | Dataset | Rights holder / maintainer | Licence | Version pinned | Commercial use | How it is used |
 |---|---|---|---|---|---|
-| English Wiktionary, Vietnamese entries, via [kaikki.org](https://kaikki.org/dictionary/Vietnamese/) (wiktextract) | Wiktionary contributors; extraction by Tatu Ylonen | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and [GFDL 1.1+](https://www.gnu.org/licenses/fdl-1.3.html) (dual); used under CC BY-SA 4.0 | file of 2026-10-30 (83,424,329 bytes), SHA-256 `186cd0a6…` — the hash is the one published by another project (arvicco/nabu), **not computed here** | yes | Words, English glosses, Sino-Vietnamese words and their characters (`vi-etym-sino`), Hán-Việt and Nôm readings of characters (tags `han-viet-reading`, `nom-reading`), example sentences. |
+| English Wiktionary, Vietnamese entries, via [kaikki.org](https://kaikki.org/dictionary/Vietnamese/) (wiktextract) | Wiktionary contributors; extraction by Tatu Ylonen | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and [GFDL 1.1+](https://www.gnu.org/licenses/fdl-1.3.html) (dual); used under CC BY-SA 4.0 | our own snapshot, a release asset of this repository (`data-YYYY-MM-DD`, `.github/workflows/snapshot.yml`), pinned by SHA-256 in `data/fetch.sh`; **PENDING** until the first snapshot | yes | Words, English glosses, Sino-Vietnamese words and their characters (`vi-etym-sino`), Hán-Việt and Nôm readings of characters (tags `han-viet-reading`, `nom-reading`), example sentences. |
 | Thiều Chửu, *Hán Việt tự điển*, digitised text via [catusf/tudien](https://github.com/catusf/tudien) (`dict/TudienThienChuu.tab`) | Thiều Chửu (Nguyễn Hữu Kha, 1902–1954); digitisation: catusf | Public domain in Vietnam (author died 1954; life + 50 years). Repository marked CC0 1.0 | commit `a7dd918`, SHA-256 `62668619…` | yes | Hán-Việt readings of characters: cross-check of Wiktionary's, and fallback for characters it lacks. Readings only, no definitions. |
 | Unihan `kVietnamese` (Unicode 18.0.0), via [unicode-org/unicodetools](https://github.com/unicode-org/unicodetools) | Unicode, Inc. | [Unicode License v3](https://www.unicode.org/license.txt) | commit `ccc86e5`, SHA-256 `d1214bfd…` | yes | Last resort, stored as kind `unchecked` (it mixes Hán-Việt and Nôm readings). Not shown on cards. |
 | rime-cantonese ([rime/rime-cantonese](https://github.com/rime/rime-cantonese)) | CanCLID (粵語計算語言學基礎建設組) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (files used); `jyut6ping3.maps` is ODbL 1.0 and is not read | commit `259f0e48` (same as the Cantonese app) | yes | Jyutping of characters (with rime's share of each reading) and of words. |
 | 教育部臺灣台語常用詞辭典, via [g0v/moedict-data-twblg](https://github.com/g0v/moedict-data-twblg) | Ministry of Education, Taiwan | [CC BY-ND 3.0 TW](https://creativecommons.org/licenses/by-nd/3.0/tw/) | commit `4626bfc` (same as Tsheh-tû) | yes | Tâi-lô literary (文讀) or unmarked readings of characters and readings of words, reproduced unaltered. |
-| CC-CEDICT, via [cedict-json](https://www.npmjs.com/package/cedict-json) | MDBG and CC-CEDICT contributors | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 1.3.20251213 | yes | Pinyin (converted to tone marks) of characters and words. |
-| Tatoeba, Vietnamese–English sentences ([downloads](https://tatoeba.org/en/downloads)) | Tatoeba contributors (each sentence's author is named on the card) | [CC BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) (some sentences CC0 1.0) | weekly export, **UNPINNED**: the first download prints the SHA-256 to write into `data/fetch.sh`; export URLs **UNVERIFIED** | yes | Example sentences on cards, with sentence id and author; corpus for word counts (build time). |
+| CC-CEDICT, via [cedict-json](https://www.npmjs.com/package/cedict-json) | MDBG and CC-CEDICT contributors | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 1.3.20251213, tarball SHA-256 `9a1857e4…` (its sha512 equals the npm registry's `dist.integrity`) | yes | Pinyin (converted to tone marks) of characters and words. |
+| Tatoeba, Vietnamese–English sentences ([downloads](https://tatoeba.org/en/downloads)) | Tatoeba contributors (each sentence's author is named on the card) | [CC BY 2.0 FR](https://creativecommons.org/licenses/by/2.0/fr/) (some sentences CC0 1.0) | our own snapshot of the weekly exports (`vie_sentences_detailed`, `eng_sentences_detailed`, `vie-eng_links`), release asset `data-YYYY-MM-DD`, SHA-256 pinned; **PENDING** until the first snapshot; export URLs **UNVERIFIED** | yes | Example sentences on cards, with sentence id and author; corpus for word counts (build time). |
 | Tatoeba sentences as published by Helsinki-NLP, [Tatoeba Translation Challenge](https://github.com/Helsinki-NLP/Tatoeba-Challenge) (`data/test/eng-vie/test.txt`, 2,500 pairs) | Tatoeba contributors; compilation Helsinki-NLP | README: test and dev data **CC BY 2.0 FR** (its link points to the BY-SA 2.0 FR deed); the repository's LICENSE file is **CC BY-NC-SA 4.0**, stated for the training data. **Conflict UNRESOLVED** | commit `bd05f08`, SHA-256 `38a59fc5…` | not relied on | No sentence ids or authors, so never shown on a card. Build-time corpus for word counts, and the 200 sentences of the cutter reference (`tests/cutter/reference.tsv`). |
 | wordfreq 3.1.1, via [PyPI](https://pypi.org/project/wordfreq/) | Robyn Speer; sources include Wikipedia, OpenSubtitles 2018, web text | Code Apache-2.0; data [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | 3.1.1 (`requirements-build.txt`) | yes | Build time only: syllable frequencies, turned into a frequency per word (`tools/freq.py`). Only a rank per word is published. |
 | FrequencyWords ([hermitdave/FrequencyWords](https://github.com/hermitdave/FrequencyWords)), `content/2018/vi/vi_50k.txt` | Hermit Dave; data from OpenSubtitles 2018 | Content CC BY-SA 4.0, code MIT | commit `525f9b5`, SHA-256 `3f5b112e…` | yes | Fallback syllable frequencies when wordfreq is not installed. |
 | underthesea 9.5.0, via [PyPI](https://pypi.org/project/underthesea/) | Vu Anh and underthesea contributors | Apache-2.0 (licence of the bundled models: **UNVERIFIED**, none found separately) | 9.5.0 (`requirements-build.txt`) | yes | Build and test time only: cuts the corpus into words for the frequency, and is compared with `vi.cut()` in the cutter test. Nothing from the package is published. |
 | Piper voice `vi_VN-vais1000-medium`, via [rhasspy/piper-voices](https://huggingface.co/rhasspy/piper-voices) | Model: Piper project; data: VAIS-1000 by Truong Do | Model MIT; data CC BY 4.0 | commit `e9ab671`, SHA-256 pinned; fetched only with `TUSACH_FETCH_VOICE=1` | yes | Not used yet (TODO(audio)): fallback synthetic Northern voice. |
+
+**Snapshots we redistribute.** kaikki.org and Tatoeba keep no dated copy of their exports, so the build fetches its
+own snapshot of them, kept unchanged as release assets of this repository with `SHA256SUMS` and `NOTES.md` (upstream URL,
+download date, licence). Both licences permit redistribution with attribution: Wiktionary content (kaikki extraction)
+under CC BY-SA 4.0 (attribution to the Wiktionary contributors and kaikki.org/wiktextract, same licence for the
+files), Tatoeba sentences under CC BY 2.0 FR (attribution to the Tatoeba contributors; each sentence's author is in
+the file). The release notes state this for each file.
 
 Romanisations: Vietnamese quốc ngữ; Cantonese Jyutping (LSHK); Taigi Tâi-lô (Ministry of Education); Mandarin Hanyu
 Pinyin.
@@ -34,9 +41,8 @@ unknown); Tatoeba audio (licence per contributor).
    edition is unknown, and the upstream `catusphan/dictionary` says MIT where `catusf/tudien` says CC0.
 2. **Wiktionary**: CC BY-SA 4.0 + GFDL read on Wiktionary:Copyrights through a mirror host; kaikki.org states "the
    same licenses as Wiktionary", without a version.
-3. **kaikki pin**: the per-language file is marked deprecated, with no dated archive; the pinned hash comes from a
-   third party (arvicco/nabu README, file of 2026-10-30). The owner should keep the downloaded file as a release asset
-   of tusach-private, or run wiktextract on a dated dump.
+3. **kaikki pin**: the per-language file is marked deprecated, with no dated archive: pinned through our own snapshot
+   release (PENDING until `.github/workflows/snapshot.yml` has run and `tools/pin_snapshot.py` has written the pins).
 4. **Unihan kVietnamese**: provisional field, no Hán-Việt/Nôm distinction (UAX #38 rev. 41, read on a staging host).
 5. **Tatoeba**: per-language export URLs unverified; the per-sentence CC0 list is not read (all sentences are treated
    as CC BY 2.0 FR, which is safe). The Helsinki-NLP copy has the licence conflict stated in the table.

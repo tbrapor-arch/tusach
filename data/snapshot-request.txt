@@ -1,0 +1,3 @@
+# A commit that changes this file runs .github/workflows/snapshot.yml (a new data-YYYY-MM-DD release of the
+# unversioned sources). Write the date and the reason on a new line.
+2026-11-18 first snapshot (kaikki Vietnamese JSONL, Tatoeba vie/eng sentences and links)

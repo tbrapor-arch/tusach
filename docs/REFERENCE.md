@@ -10,7 +10,9 @@ tools/                   build, pipeline, checks (MIT)
 tools/fixtures/          TEST FIXTURE: dict.yaml (9 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
                          file for tools/test_db.py); not content
 tests/cutter/            reference.tsv: 200 sentences cut by hand, NOT checked by a native speaker
-data/fetch.sh            open sources at pinned versions (ATTRIBUTION.md); a missing one is reported, not fatal
+data/fetch.sh            open sources pinned by content (ATTRIBUTION.md); a missing one fails (TUSACH_ALLOW_MISSING)
+data/fetch-lib.sh        its functions: fetch (clean git checkout), get (SHA-256), snap (our release), npmpkg
+data/snapshot-request.txt  a commit changing it runs .github/workflows/snapshot.yml (tools/pin_snapshot.py TAG)
 data/build/              generated, never committed: vi.db, vi-nc.db, cards.json
 requirements-build*.txt  build-time packages (wordfreq, underthesea), locked with hashes; CI installs them
 app/                     page template, recording page, PWA files, embedded font; app/dist/ is generated

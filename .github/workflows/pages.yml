@@ -1,6 +1,8 @@
 # Build the database and the app and publish on GitHub Pages, on every push to main.
 # One-time setup in the repo: Settings › Pages › Build and deployment › Source: "GitHub Actions".
-# The same checks as check.yml run first: a page that fails them is not published.
+# The same checks as check.yml run first (make db, db-nc, lint, test, app, check): a page that fails them is not
+# published. TUSACH_ALLOW_MISSING is forced empty: a missing source fails the build, and a database with meta.missing
+# non-empty is refused (step below, tools/build_app.py, tools/site.py).
 name: Build and publish the app
 
 on:
@@ -20,6 +22,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TUSACH_ALLOW_MISSING: ''
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -42,16 +46,27 @@ jobs:
           path: data/raw
           key: raw-${{ hashFiles('data/fetch.sh') }}
 
-      # the public build only: tools/cards.py refuses vi-nc.db for the page
-      - name: Database
-        run: make db
+      # both builds (make test needs them); tools/cards.py refuses vi-nc.db for the page
+      - name: Databases (public and non-commercial)
+        run: |
+          make db
+          make db-nc
 
-      - name: Check lessons
+      - name: Every source fetched (meta.missing empty)
+        run: |
+          python3 -I -c "import sqlite3, sys; m = dict(sqlite3.connect('data/build/vi.db').execute('SELECT key, value FROM meta')).get('missing'); sys.exit(f'REFUSED: vi.db lacks {m}' if m else 0)"
+
+      - name: Lessons and words
         run: make lint
 
+      - name: Build guards and word pipeline
+        run: make test
+
       # TODO(audio): no word-recording source yet; add its fetch step here, before the app, once chosen and checked.
-      - name: App (ends with the card check)
-        run: make app
+      - name: App and card check
+        run: |
+          make app
+          make check
 
       - name: Site (installable app, icon, full screen, offline)
         run: python3 tools/site.py _site
