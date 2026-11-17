@@ -8,9 +8,11 @@ course/syllabus.yaml     the plan and the owner's approvals (lint refuses lesson
 course/glosses_en.tsv    English written for words that are not in a lesson's new_words
 course/false_friends.tsv hand-curated false friends (word, chữ Hán, note); empty; format in its header
 tools/                   build, pipeline, checks (MIT)
-tools/fixtures/          TEST FIXTURE: dict.yaml (10 invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
-                         file for tools/test_db.py); not content
-tests/cutter/            reference.tsv: 200 sentences written and cut by Claude (docs/SEGMENTATION.md), NOT native-checked
+tools/fixtures/          TEST FIXTURE: dict.yaml (invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
+                         file), raw-real/ (27 real Wiktionary lines, CC BY-SA, for tools/test_db.py); not content
+tests/cutter/            reference.tsv: 200 sentences written and cut by Claude (docs/SEGMENTATION.md; rules tuned on it);
+                         heldout.tsv: 100 Tatoeba sentences (id, author) cut by Claude, no rule tuned on them; NOT
+                         native-checked
 docs/SEGMENTATION.md     the word-boundary convention (lessons, the cutter reference, vi.cut()'s rules)
 data/fetch.sh            open sources pinned by content (ATTRIBUTION.md); a missing one fails (TUSACH_ALLOW_MISSING)
 data/fetch-lib.sh        its functions: fetch (clean git checkout), get (SHA-256), snap (our release), npmpkg
@@ -67,16 +69,21 @@ reading when it is not the literary one: "colloquial / everyday"), `cmn` (pinyin
 a native speaker" for course English), chữ Hán with Cantonese / Taigi / Mandarin side by side, the label, the example.
 
 ## Database (`tools/schema.sql`, built by `tools/build_db.py`)
-`meta` (nc, sources, missing, freq_method), `source`, `entry` (word, key, english, chars, origin sino|vietic|'',
-hv_check, label same|native|'', freq per billion, freq_rank), `example` (ref: Tatoeba id and author), `hanviet` (char,
-reading, kind hv|nom|hannom|unchecked, source, checked against the other Hán-Việt source), `chinese` (chars, lang
-yue|nan|cmn, reading, level word|char, share, note), `bridge` (one row per chữ Hán spelling of the entries).
-Loaders (`SOURCES`): wiktionary (kaikki: words, English, `vi-etym-sino` → chars, character readings by tag),
+`meta` (nc, sources, missing, freq_method), `source`, `entry` (word, key, english, chars, origin sino|nonhv|vietic|'',
+etymon, hv_check, label same|native|'', freq per billion, freq_rank), `example` (ref: Tatoeba id and author), `hanviet`
+(char, reading, kind hv|nom|hannom|unchecked, source, checked against the other Hán-Việt source, label, use), `chinese`
+(chars, lang yue|nan|cmn, reading, level word|char, share, note), `variant` (Unihan), `bridge` (one row per chữ Hán
+spelling of the entries, with `via`).
+Loaders (`SOURCES`): wiktionary (kaikki: words, English without misspelling senses and archaic ones last;
+`vi-etym-sino` → chars, or origin `nonhv` + etymon for "Non-Sino-Vietnamese reading of X"; several templates =
+alternatives; character readings by tag; "Sino-Vietnamese reading of X" entries → readings; real format in HISTORY),
 thieuchuu (Hán-Việt per character; `Ð`→`Đ`; heads with a stroke count `đại (5 n)` read), unihan (kVietnamese,
-`unchecked`; kMandarin → `mandarin_pref`), rime (Jyutping; chars with rime's %, words), moe (Tâi-lô: characters'
-literary 文讀=1 or unmarked 0 readings, words' own readings; accent variants `a/b` split; appendix types skipped),
+`unchecked`; kMandarin → `mandarin_pref`; kSemanticVariant/kZVariant → `variant`), rime (Jyutping; chars with rime's %,
+words), moe (Tâi-lô: a character's literary 文讀=1 readings, its unmarked 0 ones only when it has no literary one;
+words' own readings; accent variants `a/b` split; appendix types skipped),
 cedict (pinyin, traditional forms only, numbers → marks with the apostrophe and syllabic m/n/ng; capitalised =
-`name`), tatoeba (examples, attached to the words vi.cut() finds, 2 per word), and the
+`name`), tatoeba (examples with id and author, attached to the words vi.cut() finds, 2 per word, 4-20 syllables closest
+to 8; no orphans, no line that is not Vietnamese: `tatoeba_problem`), and the
 Tatoeba Challenge test set (corpus for the counts only). A missing file: "source X not fetched", `meta.missing`.
 - **Bridge join** (`tools/bridge.py join()`, the same for cards, the `bridge` table and coverage): Cantonese and
   Mandarin: the whole word if the source has it, else character by character with every reading in brackets, main
@@ -85,24 +92,32 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
   "attested" when the MOE word entry reads the same; a different MOE word reading (生日 senn-ji̍t, 先生 sian-sinn) is
   shown apart as "colloquial / everyday", never as literary. Mandarin order: Unihan kMandarin's reading first, then
   the number of CC-CEDICT words using the reading; surname/place readings dropped when there are others.
-- **Hán-Việt** (`tools/hanviet.py`): Northern standard first; Thiều Chửu's Southern forms (sanh, chánh, võ…) come
+- **Variant characters**: when the word's own characters give no reading, the same word with Unihan semantic/Z
+  variants (行爲 → 行為, 祕密 → 秘密) is tried; `bridge.via` and the card name the spelling used.
+- **Hán-Việt** (`tools/hanviet.py`): Northern standard first, the reading most Sino-Vietnamese words use first
+  (`hanviet.use`); readings attested by 2+ Wiktionary Sino-Vietnamese words (or 1 for an unread character) are
+  Hán-Việt (`attested`: 實 thực); Thiều Chửu's Southern forms (sanh, chánh, võ, nhựt, bổn, ngãi…) come
   after, labelled "Southern variant"; where only the Southern form exists the Northern one is derived by the rule
   table (label "derived"); a character no Hán-Việt source reads gets Unihan's readings of Hán-Việt shape, labelled
   "unchecked, Unihan"; else "— (no Hán-Việt reading)", listed by `make lint` and `make coverage`. A Wiktionary
-  analysis whose characters do not match the syllables (`hv_check` differs/length) is not shown as "same word";
-  `make lint` lists it.
+  analysis whose characters do not match the syllables (`hv_check` differs/length; hyphens split syllables, kì = kỳ)
+  is not shown as "same word"; `make lint` lists it.
+- **Etymologies on a card** (`cards.senses`): (source, etymology number, characters, origin); unnumbered entries and
+  name-only groups after the others; examples: a Tatoeba sentence first, then Wiktionary's, none over 200 characters.
 - **Labels**: `same` = Wiktionary `vi-etym-sino` whose characters match the syllables; `native` = inherited (`inh`) from Proto-Vietic/Mon-Khmer/
   Austroasiatic; `false-friend` only from `course/false_friends.tsv` (cards.py); borrowings and unknown: no label.
 - **Frequency** (`tools/freq.py`): each syllable's frequency (wordfreq, else FrequencyWords) is divided among the
   dictionary words containing it in the proportions counted in a corpus cut by the project's own cutter (`vi.cut()`
   with the dictionary's keys: Tatoeba snapshot, Wiktionary examples; + the Tatoeba Challenge copy in the private build
   only), smoothed towards wordfreq's own phrase estimate (the syllable prior); a word's frequency is the geometric mean
-  over its syllables. underthesea decides nothing (cutter report only). Biases in the module docstring: a small,
+  over its syllables. Hyphenated spellings are ranked as their spaced key, once; keys with digits/punctuation and 1-2
+  letter non-syllables are not ranked. underthesea decides nothing (cutter report only). Biases in the module
+  docstring (English leaking into the counts: the, in; Wikipedia: huyện, Nguyễn; names): a small,
   conversational, translated corpus; vi.cut()'s longest match gives a listed free phrase its syllables' counts; with
   no corpus (sandbox) the prior alone.
 - **Cutter** (`tools/vi.py cut()`): longest dictionary match, with the rules of docs/SEGMENTATION.md (no join of
   question words, classifier + noun, free function-word sequences, time noun + deictic, verb + complement, word +
-  pronoun, numerals; `LEXICALISED` exceptions).
+  pronoun, numerals, person term + ấy/ta, mọi/mỗi + noun; `LEXICALISED` exceptions).
 
 ## Tools
 | Command | What |
@@ -110,15 +125,15 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 | `make db` / `make db-nc` | `tools/build_db.py`: vi.db (public) / vi-nc.db (`--nc`, private); refuses a wrong path |
 | `make lint` | `tools/lint.py` (rules, see its docstring) + `tools/verify_words.py --lessons` (suspects by class) |
 | `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences), then the cutter report |
-| `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary, a stand-in while Wiktionary is not fetched) |
+| `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv` and (`--set heldout`) `heldout.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
 | `make check` | the card check alone: no word without a card, no card lost, no card without English, no lower English rank, no published gloss that drops senses (unless in `app/english-changes.tsv`); a changed gloss within its rank is a warning |
 | `make smoke` | `tools/smoke.py`: phone-sized click-through (Playwright) |
 | `make lookup W=…` | `tools/lookup.py`: Vietnamese (tones optional), chữ Hán or `-e` English |
-| `tools/compare.py run` | before/after: builds a git ref and the working tree, each with its own database built by its own `build_db.py` (`--before-db/--after-db` to reuse one), diffs lines, cuts, ids, card fields |
+| `tools/compare.py run` | before/after: builds a git ref and the working tree, each with its own database built by its own `build_db.py` from the sources its own `fetch.sh` pinned (`--before-db/--after-db` to reuse one), diffs lines, cuts, ids, card fields (English, chars, hv, readings, via, label, example, other) |
 | `tools/published_ids.py` | after publishing: records card ids and English ranks |
 | `tools/verify_words.py FILE.tsv` | checks a word list (word, English, chữ Hán) |
-| `make coverage` | `tools/coverage.py [TOP]`: of the TOP (3000) most frequent dictionary words, how many have English, a Hán-Việt analysis, and 3/2/1/0 Chinese readings; then lesson coverage |
+| `make coverage` | `tools/coverage.py [TOP]`: of the top 1000/TOP (3000)/5000 dictionary words, English, the card's Hán-Việt analysis, 3/2/1/0 Chinese readings, Taigi attested/composed; Sino-Vietnamese share by frequency band; the 30 most frequent Sino-Vietnamese words with their bridge row and the 30 lacking a reading with the reason; then lesson coverage |
 | `tools/import_recordings.py` | imports a native speaker's zip from `record.html` into `course/audio/lessons/` |
 | `tools/site.py`, `tools/make_icons.py` | installable site (CSP, PWA) for Pages; app icons |
 

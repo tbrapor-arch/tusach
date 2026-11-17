@@ -63,3 +63,31 @@
   course/lesson_template.yaml); exercise copies caught by normalised containment; flow mappings cut at a comma
   (the fixture's "pupil, student" and "I, me" had been read as "pupil" and "I"). The card check compares the English
   text, not only its rank. compare.py run builds both databases.
+
+## 2026-11-18 — first real build (snapshot data-2026-11-17)
+- Pinned the snapshot (kaikki Vietnamese JSONL, three Tatoeba exports); `make db` with nothing missing. vi.words() split
+  only on spaces and crashed on a newline in a corpus line.
+- Wiktionary, read on the real file before trusting the loader (52,167 lines; 9,112 characters): character readings come
+  tagged (`han-viet-reading` / `nom-reading`, 2,110 characters, inside `related` or `senses[].related`) or untagged
+  (`forms` "Hán-Nôm", 5,308 characters). `vi-etym-sino` has the whole word in argument 1 or characters and glosses
+  alternating; with `hv=`/`preMC=` it renders "Non-Sino-Vietnamese reading of Chinese X (SV: …)" (và 和, giấy 紙): a
+  borrowing, not a Hán-Việt analysis (origin `nonhv`, `entry.etymon`); these were ~780 of the 950 "differs" suspects.
+  pos=romanization entries ("Sino-Vietnamese reading of 衣") are readings, not words. Readings that Wiktionary's own
+  Sino-Vietnamese words use are taken as Hán-Việt (實 thực in 36 words: Thiều Chửu has only thật). Suspects 950+110 ->
+  69+56.
+- Tatoeba: 5 sentences not Vietnamese, 4 without author dropped; examples 4-20 syllables, closest to 8.
+- Frequency: hyphenated old spellings (thế-giới, bất-nhân…) were ranked by wordfreq as one phrase with no competitor
+  (20 in the top 300): ranked as spaced keys, once. Keys of digits/punctuation and 1-2 letter non-syllables (m, c, l)
+  are not ranked. Not corrected (no automatic rule found): English in the syllable counts (the, in near rank 250),
+  wordfreq's Wikipedia bias (huyện, quận, Nguyễn), the corpus's topics (tiếng Pháp). Measured ratio of wordfreq's
+  prediction to the Tatoeba counts: `the` is overpredicted about 14x, as are administrative words, so no threshold
+  separates them.
+- Cutter: rules 8 (person term + ấy/ta/này/kia/đó) and 9 (mọi/mỗi + noun) from the top-300 review; reference F1 0.930
+  -> 0.955. A held-out set of 100 Tatoeba sentences (tests/cutter/heldout.tsv) cut before any cutter ran: vi.cut()
+  0.955, underthesea 0.928. Not tuned on it: rule 5 splits cảm thấy (3 times there); "hầu hết thời gian" crosses.
+- Cards: an etymology is (source, number, characters, origin), unnumbered entries after numbered ones; lại "again"
+  had taken 賴 from the surname, anh "elder brother" 英. Coverage now measures the card's own characters.
+- Bridge, reviewed on 120 sampled rows: MOE unmarked readings beside literary ones were colloquial (共 kā): literary
+  only when present; Hán-Việt readings ordered by use in Sino-Vietnamese words (Wiktionary lists them alphabetically);
+  日 nhựt, 本 bổn, 義 ngãi labelled Southern; Unihan variants (行爲 -> 行為) find the Chinese readings, 120 rows.
+- compare.py: hv/other/via/nan_coll fields; a ref is built with the sources its fetch.sh pinned.
