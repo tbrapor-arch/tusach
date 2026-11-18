@@ -100,7 +100,8 @@ the FrequencyWords syllables seen 200+ times (`build_db.py validate_syllables`, 
 Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes). Quote any text with a comma in a
 flow mapping (`{w: tôi, en: "I, me"}`): lint refuses unknown keys, which is what an unquoted comma makes. Exercises
 must be new: lint refuses one equal to, contained in, or equal after a greeting/first clause to a dialogue line, and
-warns at a similarity of 0.8. Lint warns when a course word of several syllables (lexicon, word lists) is written
+warns at a similarity of 0.8. Every word of a real lesson must be a new word of that lesson or an earlier one (lint error: a needed word means the
+plan is wrong). Lint warns when a course word of several syllables (lexicon, word lists) is written
 as separate words (cảm ơn for cảm_ơn): usually a missing underscore.
 
 ## Lesson 0 (`course/lesson0.yaml`, `tools/lesson0.py`; 19 Nov 2026)

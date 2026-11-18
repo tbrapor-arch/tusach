@@ -68,3 +68,10 @@ described from published accounts, not from listening).
 4. Line 7: **Anh Minh đang ở công ty** for "Minh is (already) at the office": natural, or **Anh Minh đi làm rồi**
    (rồi at lesson 10)?
 5. Note: **đi công ty** "go to the office" is given as everyday speech beside **đi làm**. Is it common?
+
+## Lesson 7 (review)
+1. Line 5: Minh, meeting Sacha for the first time, asks **Em bao nhiêu tuổi?** straight out. Is that ordinary
+   between two men of 38 and 27, or would he soften it (**Em năm nay bao nhiêu tuổi?**, năm nay not yet taught)?
+2. Line 7: **Anh ba mươi tám.** without tuổi, and **Em uống trà nhé?** as an offer: natural?
+3. Line 4: **Em làm ở một công ty Pháp ở Hà Nội** (two ở in a row): acceptable, or better **… công ty Pháp ở Hà Nội**
+   without một?

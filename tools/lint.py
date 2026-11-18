@@ -19,6 +19,7 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  exercise sentence taken from the dialogue: equal to a line, contained in a line, or equal to one after removing a
      greeting / first clause (normalised: case, punctuation, word boundaries)
   W  exercise sentence very similar to a dialogue line (similarity >= SIMILAR): check it is a new sentence
+  E  a word of a real lesson that is a new word of no lesson up to it (lessons teach their words, no others)
   W  a course word of several syllables (lexicon, word lists) written as separate words: a missing underscore?
   E  note pointing to a line the dialogue does not have
   E  fill exercise without ___ or answer
@@ -392,6 +393,31 @@ def check_words(m, where, text, keys, tags, all_tags, names, used, real=True):
             m('E', where, f'"{shown}" is only in the test fixture, not in a real source')
 
 
+def taught_order(loaded, msgs):
+    """Every word of a real lesson (dialogue, exercises) is a new word of that lesson or of an earlier one: a lesson
+    teaches its words and no others (a needed word means the plan is wrong: fix the word list)."""
+    taught = set()
+    for f, d in sorted(((f, d) for f, d in loaded if not d.get('fixture') and isinstance(d.get('id'), int)),
+                       key=lambda x: x[1]['id']):
+        for w in d.get('new_words') or []:
+            if w.get('w'):
+                taught.add('name:' + vi.nfc(w['w']).replace('_', ' ') if w.get('name') else
+                           vi.card_id(D.spelling.get(vi.key(w['w']), vi.key(w['w'])), w.get('tag')))
+        texts = [(f'line {ln.get("n")}', ln.get('vi') or '') for ln in d.get('dialogue') or []]
+        for kind, items in (d.get('exercises') or {}).items():
+            for j, it in enumerate(items or []):
+                texts.append((f'exercises.{kind}[{j}]', (it.get('vi') or '').replace(
+                    '___', str(it.get('answer', '')).replace(' ', '_'))))
+        for where, text in texts:
+            for t in vi.words(text):
+                if t[0] != 'w':
+                    continue
+                k = D.spelling.get(t[2], t[2])
+                if vi.card_id(k, t[3]) not in taught and 'name:' + t[1].replace('_', ' ') not in taught:
+                    msgs.append(('E', f'{os.path.relpath(f, ROOT)}:{where}: E "{t[1]}" is taught by no lesson up to '
+                                      'this one (a needed word means the plan is wrong: fix the word list)'))
+
+
 def lint_lesson0(keys, tags, all_tags, names, msgs):
     """course/lesson0.yaml (tools/lesson0.py): its format, no overclaimed sound, every [[…]] span's words as a lesson
     line's, and the chữ Hán of its bridge section as a bridge note's (the same word in Chinese, all four readings)."""
@@ -595,6 +621,7 @@ def main():
         seen[d.get('id')] = os.path.basename(f)
         lint(f, d, keys, tags, all_tags, names, msgs, spellings)
     plan_checks(loaded, msgs)
+    taught_order(loaded, msgs)
     lint_lesson0(keys, tags, all_tags, names, msgs)
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded

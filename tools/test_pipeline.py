@@ -147,6 +147,7 @@ with tempfile.TemporaryDirectory() as tmp:
                          ('only in the test fixture', 'a real lesson using a fixture-only word'),
                          ('`fixture: true` is accepted only under tools/fixtures/', 'fixture: true in course/lessons'),
                          ('notes.yaml:0: E not a lesson file', 'a file not named NN.yaml'),
+                         ('"là" is taught by no lesson up to this one', 'a word no lesson up to it teaches'),
                          ('unknown key "me"', 'a gloss cut at an unquoted comma ({w: tôi, en: I, me})'),
                          ('translate[1]: E exercise sentence taken from the dialogue (line 5)',
                           'an exercise equal to a line after removing the greeting'),
