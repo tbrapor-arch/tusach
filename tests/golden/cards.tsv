@@ -110,8 +110,8 @@ nhà	house, home	native		wiktionary -	yes
 sẽ	will (future)	native		wiktionary 1	yes
 đã	(past) did, already			wiktionary -	yes
 chiều~direction	direction			wiktionary 2	yes
-đường~road	road, street	doubtful	唐	wiktionary 1	yes
-đường	road, street	doubtful	唐	wiktionary 1	yes
+đường~road	road, street	doubtful		wiktionary 1	yes
+đường	road, street	doubtful		wiktionary 1	yes
 đường~sugar	sugar	same	糖	wiktionary 2	yes
 phố	street (in town)	same	舖	wiktionary 1	yes
 xe máy	motorbike	compound		wiktionary -	yes
@@ -250,7 +250,7 @@ mình	oneself	native		wiktionary -	yes
 nó	he, she, it (familiar, or for a child, an animal, a thing)			wiktionary -	yes
 theo	to follow			wiktionary -	yes
 nếu	if			wiktionary -	yes
-cần	to need	doubtful	懃	wiktionary 1	yes
+cần	to need	doubtful		wiktionary 1	yes
 lên	to go up, to get on	native		wiktionary -	yes
 tại	at, in	same	在	wiktionary 1	yes
 sự	(makes a noun of a verb or adjective: sự thật "the truth")	gram	事	wiktionary -	yes
@@ -371,7 +371,7 @@ mỗi	each, every	same	每	wiktionary -	yes
 xuống	to go down, to get off	native		wiktionary -	yes
 cá	fish	native		wiktionary 1	yes
 trở thành	to become	compound		wiktionary -	yes
-tính	to calculate, to count	doubtful	併	wiktionary 1	yes
+tính	to calculate, to count	doubtful		wiktionary 1	yes
 đặt	to put, to place	native		wiktionary -	yes
 hoạt động	activity	same	活動	wiktionary -	yes
 dài	long	native		wiktionary -	yes
@@ -383,7 +383,7 @@ nằm	to lie (down)	native		wiktionary -	yes
 hoa	flower	same	花	wiktionary 1	yes
 tăng	to increase	same	增	wiktionary 1	yes
 hiện	currently, now	same	現	wiktionary -	yes
-cứ	just (go on), keep on	doubtful	據	wiktionary -	yes
+cứ	just (go on), keep on	doubtful		wiktionary -	yes
 sau khi	after (doing)	compound		wiktionary -	yes
 quan trọng	important	hv-vn	關重	wiktionary -	yes
 dù~although	although, even if			wiktionary 2	yes
@@ -524,3 +524,17 @@ kết thúc	to end, to finish	same	結束	wiktionary -	yes
 lòng	heart, feelings	native		wiktionary -	yes
 hội	festival	same	會	wiktionary 1	yes
 quân	troops, army	same	軍	wiktionary 1	yes
+quán	café, small restaurant, eatery	same	館	wiktionary 1	yes
+chồng	husband	native		wiktionary 1	yes
+đói	hungry	native		wiktionary -	yes
+tuần	week	false-friend	旬	wiktionary 1	yes
+buồn	sad	older-loan		wiktionary 1	yes
+cửa hàng	shop, store	compound		wiktionary -	yes
+áo	shirt, top, jacket (a garment for the upper body)	same	襖	wiktionary -	yes
+mặc	to wear, to put on (clothes)	native		wiktionary 1	yes
+đen	black	native		wiktionary -	yes
+trắng	white	native		wiktionary -	yes
+đỏ	red	native		wiktionary -	yes
+tặng	to give (as a present)	same	贈	wiktionary -	yes
+sinh nhật	birthday	same	生日	wiktionary -	yes
+quà	present, gift			wiktionary -	yes

@@ -19,7 +19,7 @@ rất	adv	very	unknown				Before the adjective: rất vui	sure	wikt: very
 vui	adj	happy, glad; fun	native				Rất vui được gặp anh "nice to meet you"	sure	wikt: merry, joyful, gay	
 được	verb	to get, to obtain; can, may; to be allowed to	older-loan		得		After a verb: can (nói được "can speak"); before a verb: get to (được gặp "get to meet")	sure	wikt: to obtain, to get (passively); to be all right	
 gặp	verb	to meet	native					sure	wikt: to meet, to see	
-Sam	name	Sam (the learner in the dialogues)	unknown				Not a Vietnamese name	sure	Claude	
+Sacha	name	Sacha (the learner in the dialogues)	unknown				A French name, not Vietnamese	sure	Claude	
 Lan	name	Lan (a woman's name; 蘭 orchid)	hv	蘭				sure	wikt: a female given name from Chinese	
 Minh	name	Minh (a name; 明 bright)	hv	明				sure	wikt: a unisex given name from Chinese	
 người	noun	person, people; (before a nationality) a … person	native				người Pháp "a French person": the modifier follows the noun	sure	wikt: person, people	
@@ -41,7 +41,7 @@ biết	verb	to know; to know how to	older-loan		別			likely	wikt: to know (non-
 cũng	adv	also, too	older-loan		共		Before the verb: Tôi cũng là sinh viên	likely	wikt: also, too (non-Hán-Việt reading of 共)	
 học	verb	to study, to learn	hv	學				sure	wikt: to study, to learn	
 cà phê	noun	coffee	french				cà phê sữa đá "iced coffee with milk"	sure	wikt: coffee (French café)	
-trà~tea	noun	tea	hv	茶			In the North chè is the everyday word; trà in cafés and for named teas	sure	wikt: tea	
+trà~tea	noun	tea	hv	茶			The usual word, Hà Nội included (trà đá, trà chanh, trà sữa); in the North chè is also tea, at home and for the leaf (nước chè, chè xanh); chè is also a sweet dessert soup everywhere	likely: the home use of chè in Hà Nội today is not checked	wikt: tea	
 sữa	noun	milk	native					sure	wikt: milk	
 đá~ice	noun	ice; stone	native				cà phê đá "iced coffee"	sure	wikt ety 1: rock, stone; ice	
 đá~kick	verb	to kick	native				đá bóng "to play football"	likely	wikt ety 2: to kick	
@@ -203,14 +203,14 @@ chờ	verb	to wait	unknown				Chờ một chút "Wait a moment"; Northern also �
 lát	noun	a moment (một lát)	unknown				một lát "a moment", lát nữa "in a moment"	sure	wikt: moment, short while	
 lại	adv	again; back	native				gọi lại "to call back"	sure	wikt: again; once more	
 sau	adv	after; behind; later	native				sau đó "after that"	sure	wikt: later; after; behind	
-cháu	noun	grandchild; niece, nephew; I (to a person of one's grandparents' age)	native					sure	wikt: grandchild; nephew, niece	
+cháu	noun	grandchild; niece, nephew; I (to someone of one's parents' or grandparents' generation)	native				The young person's "I" to bác, cô, chú, ông, bà, who call him cháu "you"	sure	wikt: grandchild; nephew, niece	
 bác	noun	uncle, aunt (older than one's parent); you (to a person older than one's parents)	native					sure	wikt: uncle (parent's elder brother)	
 cô	pron	aunt (father's sister); Miss; you (to a young woman, a female teacher); she (cô ấy)	hv	姑				sure	wikt: a paternal aunt	
 chú	noun	uncle (father's younger brother); you (to a man of one's father's age)	native					sure	wikt: paternal uncle	
 dạ	intj	yes (polite, to elders)	unknown				Also answers a call politely	sure	wikt: yes (answers a question)	
 vừa	adv	just (now), recently; to fit	unknown				Tôi vừa đến "I have just arrived"; vừa … vừa … "both … and …"	sure	wikt: just, recently; to fit	
 này	det	this; (calling) hey	native				After the noun: cái này "this one"	sure	wikt: this	
-ấy	det	that (anh ấy he, cô ấy she)	unknown				Northern; after a person term it makes "he/she": anh ấy, cô ấy	sure	wikt: that, those (Northern)	
+ấy	det	that (anh ấy he, cô ấy she)	unknown				After a person term it makes "he, she": anh ấy, cô ấy; Southern speech often says ảnh, cổ	sure	wikt: that, those (Northern)	
 đó	pron	that; there	native				cái đó "that one"; ở đó "there"	sure	wikt: that person/thing over there	
 ngày	noun	day	native				mỗi ngày "every day"	sure	wikt: day	
 nhiều	adj	many, much, a lot	older-loan		饒			likely	wikt: many, much (non-Hán-Việt reading of 饒)	
@@ -511,3 +511,17 @@ kết thúc	verb	to end, to finish	hv	結束				sure	wikt: end
 lòng	noun	heart, feelings; insides, guts	native				lòng tốt "kindness"	sure	wikt: intestines; the central part, the heart	
 hội	noun	festival; association	hv	會			lễ hội "festival"	sure	wikt ety 1: a festival; an assembly	
 quân	noun	troops, army	hv	軍			quân đội "the army"	sure	wikt ety 1: troops, army	
+quán	noun	café, small restaurant, eatery; stall	hv	館			quán cà phê "café", quán phở "pho shop"; 館 as in 飯館, 茶館	sure	wikt: an eating establishment with place to sit	
+chồng	noun	husband	native				vợ "wife"; chồng chị "your (chị's) husband"	sure	wikt ety 1: husband	
+đói	adj	hungry	native				Anh đói chưa? "Are you hungry (yet)?"	sure	wikt: hungry	
+tuần	noun	week	hv	旬		In Chinese 旬 is a period of ten days (上旬); Vietnamese tuần is a week of seven days	tuần sau "next week", cuối tuần "weekend"	sure	wikt: week (any period of seven consecutive days)	
+buồn	adj	sad	older-loan		煩			sure	wikt: sad (non-Sino-Vietnamese reading of 煩)	
+cửa hàng	noun	shop, store	compound				cửa "door" + hàng "goods"	sure	wikt: shop, store	
+áo	noun	shirt, top, jacket (a garment for the upper body)	hv	襖			áo dài; áo sơ mi "shirt"; 襖 is a lined jacket (棉襖), áo any upper garment	likely	wikt: top; outfit (from 襖)	
+mặc	verb	to wear, to put on (clothes)	native				mặc áo "to put on a shirt"; mặc thử "to try on"	sure	wikt ety 1: to wear or put on	
+đen	adj	black	native					sure	wikt: of the color black	
+trắng	adj	white	native					sure	wikt: white	
+đỏ	adj	red	native					sure	wikt: red	
+tặng	verb	to give (as a present)	hv	贈			tặng quà "to give a present"	sure	wikt: to give as a gift	
+sinh nhật	noun	birthday	hv	生日			chúc mừng sinh nhật "happy birthday"	sure	wikt: birthday	
+quà	noun	present, gift	unknown				món quà "a present"; also a snack (quà sáng, Northern)	sure	wikt: present, gift; snack	

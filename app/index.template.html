@@ -621,7 +621,7 @@ function openCard(id, w) {
       ${c.etymon ? `<div class="wc-sec"><h3>Older Chinese loan (not read the Hán-Việt way)</h3><div class="wc-chars">${esc(c.etymon.chars)}</div>
         ${c.etymon.hv ? `<div class="wc-src">Hán-Việt reading of the character(s): ${esc(c.etymon.hv)}</div>` : ''}
         <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(c.etymon[k] || '—')}</b></div>`).join('')}</div></div>` : ''}
-      ${c.origin || c.doubt ? `<div class="wc-src">${c.origin ? 'Origin: ' + esc(c.origin) : ''}${c.doubt ? `${c.origin ? ' · ' : ''}Etymology ${c.label === 'opaque' ? 'opaque' : 'doubtful'}: ${esc(c.doubt)}` : ''}</div>` : ''}
+      ${c.origin || c.doubt ? `<div class="wc-src">${c.origin ? 'Origin: ' + esc(c.origin) : ''}${c.doubt ? `${c.origin ? ' · ' : ''}Etymology ${c.label === 'opaque' ? 'opaque' : 'doubtful'}${c.doubt_chars ? ` (characters proposed: ${esc(c.doubt_chars)}, not shown above)` : ''}: ${esc(c.doubt)}` : ''}</div>` : ''}
       ${c.other && c.other.length ? `<div class="wc-sec"><h3>Same spelling, another word</h3>${c.other.map(o => `<div class="wc-src">${esc(o.en || '')}${o.chars ? ` <span class="han">${esc(o.chars)}</span>` : ''}</div>`).join('')}</div>` : ''}
       ${c.ff ? `<div class="wc-src">False friend: ${esc(c.ff)}</div>` : ''}
       ${pt ? `<div class="row"><span class="pill ${pc}">${pt}</span>${c.rank ? `<span class="sub" style="font-size:.8rem">#${c.rank} most common</span>` : ''}</div>` : c.name ? '<div class="row"><span class="pill p-native">Name</span></div>' : ''}

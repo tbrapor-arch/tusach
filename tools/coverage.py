@@ -3,7 +3,7 @@ lessons.
 
   python3 -I tools/coverage.py [TOP]                  # TOP: size of the frequent-word list measured (default 3000)
   python3 -I tools/coverage.py --list FILE.tsv        # also: how much of the frequent words a word list covers
-                                                       # (a TSV with a `word` column, e.g. course/proposal/wordlist-1.tsv)
+                                                       # (a TSV with a `word` column, e.g. course/proposal/wordlist-2.tsv)
 
 "Most frequent": the TOP dictionary words (distinct keys of the Wiktionary headwords, names included) with the best
 entry.freq_rank, i.e. the frequency estimated by tools/freq.py (syllable frequencies divided among the dictionary words

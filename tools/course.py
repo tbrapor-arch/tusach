@@ -70,7 +70,7 @@ PLAN_KEYS = {'n', 'en', 'vi', 'review', 'grammar', 'bridge', 'strand', 'lines', 
 
 
 def wordlist(path):
-    """The rows of a word list in the 11-column format of course/proposal/wordlist-1.tsv (WORDLIST_COLS, with a header
+    """The rows of a word list in the 11-column format of course/proposal/wordlist-2.tsv (WORDLIST_COLS, with a header
     line). Raises ValueError when the header is not that format."""
     path = path if os.path.isabs(path) else os.path.join(ROOT, path)
     lines = open(path, encoding='utf-8').read().split('\n')

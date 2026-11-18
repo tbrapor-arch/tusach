@@ -1,15 +1,15 @@
-"""Regenerate the database columns of an 11-column word list (course/proposal/wordlist-1.tsv; tools/course.py
+"""Regenerate the database columns of an 11-column word list (course/proposal/wordlist-2.tsv; tools/course.py
 WORDLIST_COLS) from the word cards (tools/cards.py: the one word pipeline), keeping its words, lessons and the
 human part of each note.
 
-    python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv            # rewrite the file in place
-    python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv --check    # say which rows would change, write nothing
-    python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv --to-check course/proposal/wordlist-1-to-check.md
+    python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv            # rewrite the file in place
+    python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv --check    # say which rows would change, write nothing
+    python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv --to-check course/proposal/wordlist-2-to-check.md
         # write the to-check list: the course lexicon's doubts and overrides, with the lesson that teaches each word
 
 Columns written: english (the card's English, cut at 90 characters), freq_rank (the card's rank; none for a person's
 name), type (the card label in words: Hán-Việt, Hán-Việt formed in Vietnamese, Hán-Việt (opaque), Hán-Việt
-(doubtful), older Chinese loan, loan, native, compound, unknown, name), characters, han_viet, cantonese,
+(doubtful), older Chinese loan, older Chinese loan (doubtful), loan, native, compound, unknown, name), characters, han_viet, cantonese,
 taigi_literary, mandarin (the bridge row; for an older Chinese loan, those of its etymon; for a compound formed in
 Vietnamese, each character's readings marked "per character"). The note keeps what a person wrote; the part in
 [db: …] is rewritten (origin evidence, doubt, Taigi colloquial reading, older-loan etymon).
@@ -71,6 +71,8 @@ def row_for(r):
         out['english'] = short(c.get('en', ''))
         out['freq_rank'] = '' if person else str(c.get('rank', ''))
         out['type'] = 'name' if person else TYPE.get(c.get('label', ''), c.get('label', ''))
+        if c.get('label') == 'doubtful' and c.get('etymon'):     # a doubtful older loan is not Hán-Việt (decision 5)
+            out['type'] = 'older Chinese loan (doubtful)'
         out['characters'] = c.get('chars', '')
         hv = yue = nan = cmn = ''
         if c.get('per_char'):

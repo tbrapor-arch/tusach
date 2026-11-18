@@ -389,6 +389,9 @@ def lookup(k, tag=None, surface=None):
         gchars, glabel = _group_chars(main)
     chars = course.get('chars') or gchars
     label = course.get('label') or (glabel if not course.get('chars') or chars == gchars else '')
+    if label == 'doubtful' and chars and not course.get('chars'):
+        card['doubt_chars'] = chars      # owner's decision (18 Nov 2026): no characters shown on a doubtful etymology;
+        chars = ''                       # the doubt line names them
     if chars:
         card['chars'] = chars
         card.update(_bridge(chars))
