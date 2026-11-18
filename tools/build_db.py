@@ -409,6 +409,8 @@ def load_cedict(raw, add):
         add.chinese(t, 'cmn', bridge.pinyin_marks(p), 'char' if len(t) == 1 else 'word', note=note)
         if e.get('english') and not note:
             add.con.execute('INSERT INTO cedict_en VALUES (?,?)', (t, '; '.join(e['english'])))
+        elif e.get('english') and 1 < len(t) <= 4:
+            add.con.execute('INSERT INTO cedict_name VALUES (?,?)', (t, '; '.join(e['english'])))
         syl = p.split()
         if len(t) > 1 and len(syl) == len(t) and not note:
             for c, x in zip(t, syl):
@@ -451,10 +453,12 @@ def load_tatoeba(raw, add):
     vie = {p[0]: (vi.nfc(p[2]), p[3]) for p in rows('vie_sentences_detailed.tsv.bz2') if len(p) >= 4}
     eng = {p[0]: p[2] for p in rows('eng_sentences_detailed.tsv.bz2') if len(p) >= 3}
     dropped = Counter()
-    pairs = {}
+    links = defaultdict(list)
     for p in rows('vie-eng_links.tsv.bz2'):
-        if len(p) >= 2 and p[0] in vie and p[1] in eng and p[0] not in pairs:
-            pairs[p[0]] = eng[p[1]]
+        if len(p) >= 2 and p[0] in vie and p[1] in eng:
+            links[p[0]].append(eng[p[1]])
+    # of several linked translations, the first that misaligned() does not refuse (review 3: check the links)
+    pairs = {i: next((e for e in es if not misaligned(vie[i][0], e, [])), es[0]) for i, es in links.items()}
     for i in list(pairs):
         why = 'no author' if vie[i][1] in ('', '\\N') else tatoeba_problem(vie[i][0])
         if why:
@@ -675,7 +679,10 @@ def hannom_attested(con, min_words=2):
         Sino-Vietnamese word reads it with (價值 giá trị -> 值 trị);
       * for any character, a reading that some source gives it (Wiktionary Hán-Nôm or Nôm, Unihan) and that at least
         `min_words` Sino-Vietnamese words read it with: 實 thực (thực tế, thực hiện, hiện thực…; Thiều Chửu has only
-        thật, Wiktionary has no tagged reading), 平 bằng (công bằng, Cao Bằng).
+        thật, Wiktionary has no tagged reading).
+    A reading that Wiktionary gives the character ONLY as a Nôm reading (kind nom) is never promoted, however many words
+    read it so: it is a Nôm or older-layer reading, not Hán-Việt evidence (review 3: 平 bằng, 南 nôm, 局 cuộc, 恩 ơn,
+    威 oai had become Hán-Việt; the words bằng, nôm, cuộc, ơn are older loans in course/lexicon.tsv).
     Returns the number of readings added."""
     have = {c for (c,) in con.execute("SELECT DISTINCT char FROM hanviet WHERE kind='hv' AND source != 'fixture'")}
     hvset = defaultdict(set)
@@ -697,6 +704,8 @@ def hannom_attested(con, min_words=2):
                     spelled.setdefault((c, rk), s)
     added = []
     for (c, rk), ws in sorted(used.items()):
+        if cand[c][rk] == {'nom'}:                     # a Nôm reading is not Hán-Việt evidence
+            continue
         if len(ws) >= min_words or (c not in have and 'hannom' in cand[c][rk]):
             added.append((c, spelled[(c, rk)], len(ws)))
     con.executemany("INSERT INTO hanviet(char, reading, kind, source, ord, label) VALUES (?,?,'hv','wiktionary',98,"
@@ -1034,9 +1043,56 @@ EX_PER_KEY = 40                        # candidates kept per word; tools/cards.p
 EX_UNSUITABLE_EN = re.compile(r"\b(?:fuck\w*|shit\w*|bitch\w*|damn\w*|bastard\w*|asshole|arse|sex\w*|stoned|high on|"
                               r"drugs?|cocaine|heroin|marijuana|weed|joint|porn\w*|rape\w*|naked|nude|penis|vagina|"
                               r"genital\w*|private parts|masturbat\w*|condom\w*|prostitut\w*|whore\w*|horny|erotic|"
-                              r"suicide|kill (?:my|him|her|your)self)\b", re.I)
+                              r"suicid\w*|kill\w*|murder\w*|stab\w*|shoot\w*|gun\w*|bomb\w*|corpse\w*|tortur\w*|"
+                              r"terroris\w*|hang (?:my|him|her|your)self|reason to live|want(?:s|ed)? to die|wanna die|"
+                              r"slave\w*|beat (?:me|him|her|them|you|us) up|abus\w*|kidnap\w*)\b", re.I)
+# review 3 (finding 5): self-harm and violence by the translation's vocabulary ("kill", "suicide", "reason to live"),
+# beside profanity, sex and drugs above; "die" alone is kept (a card for chết needs it).
 EX_UNSUITABLE_VI = re.compile(r'\b(?:đụ|địt|đéo|lồn|buồi|cặc|đĩ|phê thuốc|ma túy|ma tuý|cần sa|vùng kín|tình dục|'
-                              r'làm tình|khiêu dâm|hiếp|mẹ kiếp|chết tiệt|khốn nạn)\b', re.I)
+                              r'làm tình|khiêu dâm|hiếp|mẹ kiếp|chết tiệt|khốn nạn|tự sát|tự tử|giết)\b', re.I)
+# Southern speech on a Northern course's cards (review 3, finding 5): a sentence with one of these words is not shown.
+# The list is the dictionary's own (southern_markers(): every sense of every entry of the key is tagged Southern by
+# Wiktionary, less SOUTHERN_NOT: mùng is Northern "day of the lunar month" too, dục a fragment of Sino-Vietnamese words)
+# plus this core list of Southern colloquial words (pronouns, particles, verbs) that Wiktionary tags only in part.
+SOUTHERN_CORE = {'tui', 'tụi', 'bây', 'tụi bây', 'tụi mày', 'xài', 'thiệt', 'nha', 'hoài', 'hổng', 'hông', 'vầy', 'nè',
+                 'nghen', 'hen', 'ổng', 'bả', 'mầy', 'dzậy', 'dầy', 'nhứt', 'hổm', 'bển', 'trển', 'dưới đó', 'qua bển'}
+SOUTHERN_NOT = {'mùng', 'dục'}
+
+
+def southern_markers(con):
+    """Keys of Southern-only words: every sense of every (non-name) Wiktionary entry of the key is tagged Southern;
+    with SOUTHERN_CORE, less SOUTHERN_NOT."""
+    by = defaultdict(list)
+    for k, tags in con.execute("SELECT e.key, s.tags FROM entry e JOIN sense s ON s.entry_id = e.id WHERE e.source = "
+                               "'wiktionary' AND e.pos NOT IN ('name', 'character-reading')"):
+        by[k].append('South' in (tags or ''))
+    return ({k for k, v in by.items() if v and all(v)} | SOUTHERN_CORE) - SOUTHERN_NOT
+
+
+# a Vietnamese wh-question whose English question has none of these words is a misaligned pair (review 3: "Bộ phim yêu
+# thích của bạn là gì?" linked to "Why is this movie your favourite?"); each question word with what may render it.
+# Only questions are tested: gì, ai, đâu are also "any…" and an emphatic "not" in statements and yes/no questions.
+ALIGN_WH = {'gì': r'what|which|how|anything|something|whatever', 'đâu': r'where|which|how', 'tại sao': r'why|how come|what',
+            'vì sao': r'why|how come|what', 'bao giờ': r'when|what time|how long|ever', 'khi nào': r'when|what time|how long',
+            'bao nhiêu': r'how|what'}
+YES_NO = re.compile(r'(?:không|chưa|à|hả|chứ|nhỉ|sao|phải không|đúng không|được không|có phải)\s*[?？]\s*$')
+
+
+def misaligned(v, en, ws):
+    """Why a Tatoeba pair is not a translation of the same sentence ('' when nothing says so): a Vietnamese
+    wh-question (not a yes/no question) whose English question has no possible rendering of its question word; mỗi
+    khi "whenever" rendered without a word of repetition or time."""
+    low = ' ' + re.sub(r'[^\w\s]', ' ', vi.nfc(v).lower()) + ' '
+    e = en.lower()
+    if v.rstrip().endswith('?') and en.rstrip().endswith('?') and not YES_NO.search(vi.nfc(v).lower()):
+        for k, pat in ALIGN_WH.items():
+            if k == 'gì' and ' làm gì ' in low:          # để làm gì "what for": also "why"
+                pat += '|why'
+            if f' {k} ' in low and not re.search(rf'\b(?:{pat})\b', e):
+                return f'misaligned ({k})'
+    if ' mỗi khi ' in low and not re.search(r'\b(?:whenever|every time|each time|every|when|always|any time)\b', e):
+        return 'misaligned (mỗi khi)'
+    return ''
 
 
 def cut_corpus(sentences, known):
@@ -1049,12 +1105,20 @@ def cut_corpus(sentences, known):
     return out
 
 
-def example_flags(v, en, ws, known):
-    """Why a sentence is not shown on a card ('' when it can be): unsuitable (profanity, sex, drugs), slash
-    (alternatives "Cô ấy/Bà ấy"), unknown-word (a word no dictionary has: a typo such as "đên"; a capitalised word is
-    a name and passes)."""
+def example_flags(v, en, ws, known, south=frozenset()):
+    """Why a sentence is not shown on a card ('' when it can be): unsuitable (profanity, sex, drugs, self-harm,
+    violence), southern (a Southern-only word: southern_markers), misaligned (misaligned()), slash (alternatives "Cô
+    ấy/Bà ấy"), numbered (a recipe step "2. Thái…"), unknown-word (a word no dictionary has: a typo such as "đên"; a
+    capitalised word is a name and passes)."""
     if EX_UNSUITABLE_EN.search(en) or EX_UNSUITABLE_VI.search(v.lower()):
         return 'unsuitable'
+    if any(w[2] in south for w in ws) or any(k in south for k in re.findall(r'\w+ \w+', v.lower())):
+        return 'southern'
+    m = misaligned(v, en, ws)
+    if m:
+        return m
+    if re.match(r'\s*\d+[.)]\s', v):
+        return 'numbered'
     if '/' in v:
         return 'slash'
     if any(w[2] not in known and not w[1][:1].isupper() for w in ws):
@@ -1075,8 +1139,9 @@ def attach_examples(con, cut, known, per_word=EX_PER_KEY):
     rows = []
     usable = [x for x in cut if EX_MIN <= len(x[0].split()) <= EX_MAX]
     flagged = Counter()
+    south = southern_markers(con)
     for v, en, ref, ws in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
-        fl = example_flags(v, en, ws, known)
+        fl = example_flags(v, en, ws, known, south)
         flagged[fl] += 1
         for w in sorted({canon.get(w[2], w[2]) for w in ws}):
             if w in first and have[w] < per_word:
@@ -1220,14 +1285,15 @@ SENSE_SYN = [{'become', 'turn', 'into', 'achieve', 'accomplish', 'succeed'}, {'c
              {'fruit', 'result'}, {'self', 'oneself', 'own', 'personally', 'from', 'since'}, {'like', 'as', 'if'},
              {'suffer', 'passive', 'by', 'subject'}, {'member', 'staff', 'employee', 'personnel'},
              {'feeling', 'emotion', 'love', 'affection', 'sentiment'}, {'mirror', 'lens', 'glass', 'glasses'},
-             {'shop', 'store', 'street', 'lane'}, {'county', 'district', 'prefecture'},
+             {'shop', 'store', 'street', 'lane'}, {'county', 'district', 'prefecture', 'subdivision'},
              {'body', 'oneself', 'relative'}, {'occupy', 'seize', 'take'},
              {'diploma', 'certificate', 'proof', 'evidence'}, {'front', 'before', 'previous', 'former'},
              {'separate', 'apart', 'distance'}, {'orange', 'tangerine', 'mandarin'}, {'walk', 'foot', 'step', 'pace'},
              {'pre', 'early', 'front', 'before', 'former'}, {'cloth', 'fabric', 'textile', 'burlap'},
              {'fist', 'punch', 'boxing'}, {'true', 'truth', 'truly', 'real', 'really', 'genuine'},
-             {'shape', 'appearance', 'pattern', 'manner', 'style'}, {'suppose', 'assume', 'presume', 'think', 'believe'},
-             {'steal', 'rob', 'plagiarize', 'thief', 'rip'}, {'plural', 'many', 'numerous', 'crowd', 'multitude'},
+             {'shape', 'appearance', 'appear', 'pattern', 'manner', 'style'}, {'suppose', 'assume', 'presume', 'think', 'believe'},
+             {'steal', 'rob', 'plagiarize', 'thief', 'rip'}, {'plural', 'pluralizing', 'pluralising', 'many', 'numerous', 'crowd',
+             'multitude'}, {'fry', 'stir', 'saute', 'sauté', 'roast', 'pan'},
              {'palace', 'hall', 'temple', 'shrine'}, {'expect', 'anticipate', 'guess', 'consider', 'reckon'},
              {'practice', 'practise', 'perform', 'carry'}, {'cop', 'police', 'policeman'},
              {'mathematics', 'math', 'maths', 'calculate', 'compute', 'arithmetic'}, {'quarter', 'season'},
@@ -1305,8 +1371,22 @@ def etymology_states(con):
     def forms(c):
         return [c] + bridge.variants(con, c)
 
+    names = defaultdict(list)                         # first character -> CC-CEDICT names (奧 -> 奧地利 Austria)
+    try:
+        for ch, en in con.execute('SELECT chars, english FROM cedict_name'):
+            names[ch[0]].append(en)
+    except sqlite3.Error:                            # a database built before the table existed
+        pass
+
     def zh_support(k, c):
         return any(f in w for t in tables.get(k, []) for w in zh_by_table.get(t, ()) for f in forms(c))
+
+    def abbreviation(c, mine):
+        """One character that abbreviates a name beginning with it (奧 áo "Austrian": 奧地利 Austria): a CC-CEDICT name
+        whose English shares a capitalised word (stemmed, -an folded) with the sense."""
+        caps = _tokens(' '.join(re.findall(r'\b[A-Z][a-z]+', mine)))
+        return bool(caps) and any(caps & _tokens(' '.join(re.findall(r'\b[A-Z][a-z]+', en)))
+                                  for f in forms(c) for en in names.get(f, ()))
     groups = defaultdict(list)
     for r in con.execute("SELECT id, key, pos, english, chars, origin, hv_check, etymon, doubt_why, en_score, source, "
                          "src_id FROM entry WHERE origin IN ('sino', 'nonhv') AND source != 'fixture' AND pos != "
@@ -1333,7 +1413,7 @@ def etymology_states(con):
                     {w for w in _tokens(cedict, stop=False) if w in FUNC_KEEP})
             main = max(words, key=lambda r: (r[9] if r[9] is not None else -9, -r[0]))
             rare = [ch for ch in c if use and max(use[f] for f in forms(ch)) < RARE_CHAR]
-            supported = bool(content) or zh_support(k, c)
+            supported = bool(content) or zh_support(k, c) or (len(c) == 1 and abbreviation(c, mine_all))
             if rare:
                 doubt, reason = 'opaque', f'rare character for a reader of Chinese: {"".join(rare)}'
             elif len(c) == 1 and not supported:
@@ -1366,6 +1446,22 @@ def etymology_states(con):
     return c
 
 
+def _bare(s):
+    return ''.join(c for c in unicodedata.normalize('NFD', s.lower()) if unicodedata.category(c) != 'Mn')
+
+
+def ma_colloquial(con, ch, r, hv):
+    """The 麻 rhyme (review 3, finding 6): its literary Taigi rhyme is -a, as Hán-Việt -a and Cantonese -aa, and its
+    colloquial rhyme -e (茶 tê / tsâ, 家 ke / ka, 爬 pê): an unmarked reading in -e or -enn of a character whose every
+    Hán-Việt reading ends in -a and that Cantonese reads with -aa is colloquial. 14 characters on the 18 Nov 2026
+    data (茶 叉 爬 爸 耙 蝦 杷 渣 衙 裟 靶 壩 耞 …)."""
+    b = _bare(r).replace('nn', '')
+    if not re.fullmatch(r'[a-z]*[^uio]e', b) or not all(_bare(x).endswith('a') for x in hv):
+        return False
+    return any(re.search(r'aa\d$', y) for (y,) in con.execute(
+        "SELECT reading FROM chinese WHERE chars=? AND lang='yue' AND level='char'", (ch,)))
+
+
 def taigi_layers(con):
     """The MOE marks no literary reading for most characters (文白屬性 0: no split); for some the one reading it gives
     is in fact colloquial (冊 tsheh, 院 īnn, 醬 tsiùnn). A literary reading keeps the Middle Chinese coda, as Hán-Việt
@@ -1374,8 +1470,9 @@ def taigi_layers(con):
     a bare vowel for a nasal or stop. Classes: p, t, k (Hán-Việt -c/-ch), m, n, ng (Hán-Việt -nh), h, nn, vowel;
     m/n, p/t and k/t agree (regular literary correspondences: 凡 phàm / huân, 法 pháp / huat, 直 trực / ti̍t), and so
     do a nasal vowel with an open rhyme (他 thann / tha) and -in with -ng (孕 īn / dựng): bridge.coda_agrees.
-    Blind spots (REFERENCE): a colloquial reading with the coda class of the literary one (條 tiâu beside liâu) is
-    not found; a colloquial nasalised open syllable (鼻 phīnn, 怕 phànn) is no longer found either; a character whose
+    A second rule: the 麻 rhyme's colloquial -e (ma_colloquial: 茶 tê). Where no rule decides, the card says that the
+    MOE marks no layer (bridge.join nan_unmarked). Blind spots (REFERENCE): a colloquial reading with the coda class of
+    the literary one (條 tiâu beside liâu) is not found; a colloquial nasalised open syllable (鼻 phīnn, 怕 phànn) is no longer found either; a character whose
     Hán-Việt reading is irregular (呆 ngốc, 炸 tạc) is judged against it.
     Such readings get note 'colloquial' (chinese table): the bridge never shows them as literary; a character left
     with none is "colloquial only" on the card. Readings the MOE marks literary (1) are not touched. Returns the
@@ -1390,7 +1487,8 @@ def taigi_layers(con):
         if not hv:
             continue
         hcls = {bridge.coda_hv(x) for x in hv}
-        bad = [(rid, r) for rid, r in rs if not any(bridge.coda_agrees(h, bridge.coda_nan(r), r) for h in hcls)]
+        bad = [(rid, r) for rid, r in rs if not any(bridge.coda_agrees(h, bridge.coda_nan(r), r) for h in hcls)
+               or ma_colloquial(con, ch, r, hv)]
         if bad:
             changed.add(ch)
             rows += [(rid,) for rid, _ in bad]
@@ -1409,8 +1507,12 @@ def build_bridge(con):
         m = re.match(etym.CJK + '+', e)
         if m:
             spell.add(m.group(0))          # an older loan's etymon: its readings on the card (giấy 紙)
+    syl_of = {}
+    for k, chars in con.execute("SELECT key, chars FROM entry WHERE chars != '' AND hv_check = 'ok' ORDER BY "
+                                "freq_rank IS NULL, freq_rank, id"):
+        syl_of.setdefault(chars, k.split())
     for chars in sorted(spell):
-        j = bridge.join(con, chars)
+        j = bridge.join(con, chars, syls=syl_of.get(chars))
         rows.append((chars, j['hv'], j['yue'], j['yue_by'], j['nan'], j['nan_by'], j['cmn'], j['cmn_by'], j['n'],
                      j['nan_coll'], j.get('via', ''), j['nan_flag']))
     con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', rows)

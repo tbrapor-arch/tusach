@@ -115,20 +115,23 @@ def canon(k):
     return CANON.get(k, k)
 
 
-def per_char(chars):
+def per_char(chars, syls=None):
     """The readings of each character of a compound formed in Vietnamese (trường học 場學): [{c, hv, yue, nan, cmn}],
-    shown "per character", never composed into a Chinese word that does not exist."""
+    shown "per character", never composed into a Chinese word that does not exist; each character's readings ordered
+    by fit with its syllable (tools/soundfit.py)."""
     out = []
-    for c in chars:
-        j = bridge.join(con, c)
+    syls = syls if syls and len(syls) == len(chars) else [None] * len(chars)
+    for c, s in zip(chars, syls):
+        j = bridge.join(con, c, syls=[s] if s else None)
         out.append({'c': c, 'hv': '/'.join(bridge.hv_readings(con, c)), **{x: j[x] for x in bridge.LANGS if j[x]},
                     **({'nan_coll': j['nan_coll']} if j['nan_coll'] else {})})
     return out
 
 
-def _bridge(chars):
-    """The Chinese side of a Hán-Việt card, from tools/bridge.py (the same join the database and coverage use)."""
-    j = bridge.join(con, chars)
+def _bridge(chars, syls=None):
+    """The Chinese side of a Hán-Việt card, from tools/bridge.py (the same join the database and coverage use); with
+    the word's syllables, a character's several readings are ordered by fit with its Hán-Việt syllable."""
+    j = bridge.join(con, chars, syls=syls)
     out = {lang: j[lang] for lang in bridge.LANGS if j[lang]}
     out['hv'] = j['hv']
     if j['nan_coll']:
@@ -137,6 +140,8 @@ def _bridge(chars):
         out['via'] = j['via']                    # readings found under a variant spelling (Unihan): 行爲 -> 行為
     if j.get('nan_flag'):
         out['nan_flag'] = j['nan_flag']          # colloquial-only: no literary Taigi reading (冊 tsheh)
+    if j.get('nan_unmarked'):
+        out['nan_layer'] = 'unmarked'            # the MOE marks no literary / colloquial layer for these readings
     by_char = [lang for lang in bridge.LANGS if j[lang] and j[lang + '_by'] == 'char' and len(chars) > 1]
     if by_char:
         out['by_char'] = by_char
@@ -211,7 +216,15 @@ COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_ra
 SQL_COLS = ', '.join('s.fixture' if c == 'fixture' else 'e.' + c for c in COLS)
 ORIGIN_TEXT = {'sino': 'Hán-Việt', 'nonhv': 'older Chinese loan', 'vietic': 'native', 'loan': 'loan',
                'compound': 'compound'}
-NO_ETYMOLOGY = 'no etymology recorded (not Chinese)'
+LEX_EXAMPLE_SRC = 'course lexicon: written by Claude, not checked by a native speaker'
+
+
+def unbrace(text):
+    """A lexicon note shown on a card: its {preview} braces (words a later lesson teaches, tools/plan.py) removed."""
+    return text.replace('{', '').replace('}', '')
+
+
+NO_ETYMOLOGY = 'no etymology recorded'      # never "(not Chinese)": no source says so (review 3)
 
 
 def sense_tag(rows, tag):
@@ -394,11 +407,11 @@ def lookup(k, tag=None, surface=None):
         chars = ''                       # the doubt line names them
     if chars:
         card['chars'] = chars
-        card.update(_bridge(chars))
+        card.update(_bridge(chars, k.replace('-', ' ').split()))
         vn = (lex['origin'] == 'hv-vn') if lex else \
             next((r['sino_kind'] for r in main if r['chars'] == chars), '') == 'vn'
         if vn and len(chars) > 1:
-            card['per_char'] = per_char(chars)     # formed in Vietnamese: no Chinese "word" is composed
+            card['per_char'] = per_char(chars, k.replace('-', ' ').split())   # formed in Vietnamese: no Chinese word
             for lang in bridge.LANGS:
                 card.pop(lang, None)
             card.pop('by_char', None)
@@ -411,11 +424,11 @@ def lookup(k, tag=None, surface=None):
             card['origin'] = lex['source']
         em = lex['etymon'] if lex['origin'] == 'older-loan' else ''
         if lex['usage']:
-            card['use'] = lex['usage']
+            card['use'] = unbrace(lex['usage'])
         card['conf'] = lex['conf']
         if lex['false_friend'] and not course.get('label'):
             label = 'false-friend'
-            card['ff'] = lex['false_friend']
+            card['ff'] = unbrace(lex['false_friend'])
     else:
         em = ''
         if main and not course.get('chars'):
@@ -472,7 +485,9 @@ def lookup(k, tag=None, surface=None):
     else:
         en, src = ENGLISH.gloss(cid, k, tag, parts if len(parts) == len(syls) else (), dict_entry=den)
     card['en'], card['en_src'], card['en_rank'] = en, src, english.rank(src)
-    if rows or lex:
+    if lex and lex.get('example'):      # the lexicon's own example for the sense (review 3, finding 5) wins
+        card['ex'] = {'vi': lex['example'], 'en': lex['example_en'], 'src': LEX_EXAMPLE_SRC}
+    elif rows or lex:
         ids = [r['id'] for r in main] or [-1]
         ex = choose_example(k, ids, en, [o['en'] for o in other if o.get('en')], strict=bool(lex),
                              pos=lex['pos'] if lex else '', siblings=bool(siblings))

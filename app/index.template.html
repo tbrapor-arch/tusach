@@ -606,7 +606,7 @@ function openCard(id, w) {
     const lk = listHere(), onL = inList(lk, id), alsoL = Object.keys(lists).filter(k => k !== lk && inList(k, id));
     const addBtn = `<button class="wc-add ${onL ? 'on' : ''}" id="add-card" data-list="${esc(lk)}" aria-pressed="${onL}" aria-label="${onL ? `In ${esc(listTitle(lk))}: tap to remove` : `Add to ${esc(listTitle(lk))}`}"><svg viewBox="0 0 24 24" fill="${onL ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>${esc(listTitle(lk))}</span></button>`;
     const audio = c.name ? '' : c.audio ? `<button class="btn small line wc-play" id="play" aria-label="Play the recording">▶ Listen</button>` : `<button class="btn small line wc-play" disabled title="No recording source yet">▶ No recording yet</button>`;
-    const zh = [['yue', 'Cantonese'], ['nan', 'Taigi (literary)'], ['cmn', 'Mandarin']];
+    const zh = [['yue', 'Cantonese'], ['nan', c.nan_layer === 'unmarked' ? 'Taigi (layer not marked by the MOE)' : 'Taigi (literary)'], ['cmn', 'Mandarin']];
     sh.innerHTML = top(c.w, audio, addBtn) + `
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>

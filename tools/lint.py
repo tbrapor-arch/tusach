@@ -138,10 +138,18 @@ class DB_:
                            and r.get('alt_kind') != 'pron' and r.get('english') and not r.get('fixture')])
         return gs
 
-    def bridge_example(self, chars):
+    def bridge_example(self, chars, word=None):
         """'' when `chars` may be a bridge-note example, else why not. The sense taught decides: a lexicon row with
         these characters (唐 is đường~road's analysis, doubtful: refused even though the Tang dynasty is 唐), else
-        the database words with them (names aside)."""
+        the database words with them (names aside). With the Vietnamese `word` the note pairs them with (review 3,
+        finding 7: "phải is 被", "thì is 時", "bằng is 平", "nôm is 南" passed on the characters alone), the PAIR is
+        judged on that word's card for the sense: its lexicon rows (one with these characters, origin hv / hv-gram,
+        not doubtful, not a false friend), else its database entries with these characters labelled same / gram
+        and not doubtful; a single character must also be read so the Hán-Việt way."""
+        if word:
+            why = self.pairing(chars, word)
+            if why:
+                return why
         rows = [r for r in LEX if r['chars'] == chars and r['pos'] != 'name']
         if rows:
             good = [r for r in rows if r['origin'] in ('hv', 'hv-gram') and r['conf'] != 'doubt' and
@@ -153,7 +161,8 @@ class DB_:
                         ': not the same word in Chinese')
         else:
             labels = [r[0] for r in self.con.execute("SELECT label FROM entry WHERE chars=? AND source != 'fixture' "
-                                                     "AND pos NOT IN ('name', 'character-reading')", (chars,))]
+                                                     "AND pos NOT IN ('name', ?)", (chars, 'character-reading' if
+                                                                                    len(chars) > 1 else ''))]
             if not labels:
                 return 'no database word has these characters'
             if 'same' not in labels and 'gram' not in labels:
@@ -162,6 +171,55 @@ class DB_:
         if not b or b[1] < 3 or '—' in (b[0] or ''):
             return 'not all four readings exist (Hán-Việt, Cantonese, Taigi literary, Mandarin)'
         return ''
+
+
+def _pair_ok(self, chars, word):
+    import bridge
+    k = vi.key(word)
+    k = self.spelling.get(k, k)
+    if len(k.split()) != len(chars):
+        return f'{word} has {len(k.split())} syllable(s) for {len(chars)} character(s)'
+    if len(chars) == 1 and lexicon.rkey(k) not in {lexicon.rkey(x) for x in bridge.hv_readings(self.con, chars)}:
+        return f'{word} is not a Hán-Việt reading of {chars} ({"/".join(bridge.hv_readings(self.con, chars)) or "none"})'
+    rows = [r for r in LEX_KEY.get(k, []) if r['pos'] != 'name']
+    if rows:
+        good = [r for r in rows if r['chars'] in bridge.spellings(self.con, chars) and r['origin'] in ('hv', 'hv-gram')
+                and r['conf'] != 'doubt' and not r['false_friend']]
+        if not good:
+            r = next((x for x in rows if x['chars'] in bridge.spellings(self.con, chars)), rows[0])
+            what = r['origin'] + (f' {r["chars"] or r["etymon"]}' if r['chars'] or r['etymon'] else '')
+            return (f'the course lexicon gives {word} as {what}{" (doubtful)" if r["conf"] == "doubt" else ""}'
+                    f'{" (false friend)" if r["false_friend"] else ""}: not "{word} is {chars}"')
+        return ''
+    labels = {lb for lb, dbt, ch in self.con.execute(
+        "SELECT label, doubt, chars FROM entry WHERE key=? AND source != 'fixture' AND pos NOT IN ('name', "
+        "'character-reading') AND chars != ''", (k,)) if ch in bridge.spellings(self.con, chars) and not dbt}
+    if not labels & {'same', 'gram'}:
+        if len(chars) == 1:          # a character read the Hán-Việt way, its word not in the dictionary: its own label
+            return ''
+        return f'no word {word} with {chars} labelled "same word in Chinese" in the dictionary'
+    return ''
+
+
+DB_.pairing = _pair_ok
+
+
+def cjk_pairs(text):
+    """[(chữ Hán run, the Vietnamese word written next to it or '')]: "平 bình", "學生 học sinh" (after the run), "học
+    sinh is 學生" (before it): as many syllables as characters."""
+    out = []
+    syl = r"[^\W\d_]+"
+    for m in re.finditer(vi.CJK.pattern + '+', text):
+        run, n = m.group(0), len(m.group(0))
+        after = re.match(r'\s+(' + r'\s+'.join([syl] * n) + r')\b', text[m.end():])
+        before = re.search(r'\b(' + r'\s+'.join([syl] * n) + r')\s+(?:is|=|:|,)?\s*$', text[:m.start()])
+        word = ''
+        for cand in ((after.group(1) if after else ''), (before.group(1) if before else '')):
+            if cand and all(not vi.syllable_problems(x.lower()) for x in cand.split()):
+                word = cand
+                break
+        out.append((run, word))
+    return out
 
 
 def untagged(k):
@@ -361,10 +419,10 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
         if not note.get('text'):
             m('E', f'notes[{i}]', 'empty note')
         if note.get('topic') == 'bridge':
-            for run in sorted(set(re.findall(vi.CJK.pattern + '+', note.get('text') or ''))):
-                why = D.bridge_example(run)
+            for run, word in sorted(set(cjk_pairs(note.get('text') or ''))):
+                why = D.bridge_example(run, word or None)
                 if why:
-                    m('E', f'notes[{i}]', f'bridge example {run}: {why}')
+                    m('E', f'notes[{i}]', f'bridge example {run} {word}: {why}')
     for kind, items in (d.get('exercises') or {}).items():
         if kind not in ('translate', 'fill'):
             m('E', f'exercises.{kind}', 'unknown exercise kind (translate, fill)')

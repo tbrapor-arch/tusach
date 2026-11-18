@@ -102,9 +102,11 @@ with tempfile.TemporaryDirectory() as tmp:
     ok(('世', 'thế', 'hv', '') in hv and ('世', 'thá', 'nom', '') in hv, 'real: readings tagged inside senses[].related')
     ok(('車', 'xa', 'hannom', '') in hv and ('車', 'xe', 'hannom', '') in hv, 'real: untagged Hán-Nôm forms stay hannom')
     ok(('值', 'trị', 'hv', 'attested') in hv, 'real: a Hán-Nôm reading read so by a Sino-Vietnamese word (giá trị)')
-    ok(('平', 'bằng', 'hv', 'attested') in hv, 'real: a Nôm reading read so by 2+ Sino-Vietnamese words (bằng, công bằng)')
+    ok(('平', 'bằng', 'hv', 'attested') not in hv, 'real: a reading Wiktionary gives only as Nôm is not made Hán-Việt by '
+       '2+ Sino-Vietnamese words (bằng, công bằng: review 3)')
     chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
-    ok(chk.get('bằng') == 'ok' and chk.get('học sinh') == 'ok', 'real: the check accepts the attested reading')
+    ok(chk.get('bằng') == 'differs' and chk.get('học sinh') == 'ok', 'real: bằng 平 is not a Hán-Việt reading (older '
+       'loan), học sinh 學生 is')
     import cards  # noqa: E402
     cards.init(cards.open_db('public', db), lex_rows=[])   # the dictionary layer alone
     lai, thich = (cards.dictionary[cards.lookup(k)] for k in ('lại', 'thích'))
@@ -277,6 +279,22 @@ _rows = [{'source': 'w', 'src_id': '1', 'chars': '', 'origin': '', 'pos': 'num',
          {'source': 'w', 'src_id': '2', 'chars': '', 'origin': '', 'pos': 'noun', 'english': 'year', 'id': 2}]
 ok(cards_.sense_tag(_rows, 'year') is _rows[1] and cards_.sense_tag(_rows, 'num') is _rows[0]
    and cards_.sense_tag(_rows, 'cat') is None, 'a sense tag names a part of speech or a word of one etymology')
+
+
+# review 3, finding 6: a reading Wiktionary gives only as Nôm is never promoted to Hán-Việt (平 bằng, 南 nôm)
+_c = sqlite3.connect(':memory:')
+_c.execute("CREATE TABLE hanviet(char TEXT, reading TEXT, kind TEXT, source TEXT, ord INT, checked INT, label TEXT "
+           "DEFAULT '', use INT DEFAULT 0)")
+_c.execute("CREATE TABLE entry(key TEXT, chars TEXT, origin TEXT, pos TEXT)")
+_c.executemany("INSERT INTO hanviet(char, reading, kind, source) VALUES (?,?,?,'wiktionary')",
+               [('平', 'bình', 'hv'), ('平', 'bằng', 'nom'), ('實', 'thật', 'hv'), ('實', 'thực', 'unchecked')])
+_c.executemany("INSERT INTO entry VALUES (?,?,'sino','noun')",
+               [('công bằng', '公平'), ('bằng phẳng', '平平'), ('cao bằng', '高平'), ('thực tế', '實際'),
+                ('hiện thực', '現實')])
+build_db.hannom_attested(_c)
+_att = set(_c.execute("SELECT char, reading FROM hanviet WHERE label='attested'"))
+ok(('平', 'bằng') not in _att and ('實', 'thực') in _att,
+   'Hán-Việt by attestation: a Nôm-only reading (平 bằng) is not promoted; an Unihan one used by words (實 thực) is')
 
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

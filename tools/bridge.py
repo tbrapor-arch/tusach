@@ -29,6 +29,7 @@ import sys
 import unicodedata
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import soundfit  # noqa: E402
 import vi  # noqa: E402
 
 LANGS = ('yue', 'nan', 'cmn')
@@ -134,9 +135,22 @@ def _uniq(xs):
     return out
 
 
-def _by_char(per, lang, n):
+def _by_char(per, lang, n, fitted=False):
+    """The readings of each character joined: one reading as is; several in brackets in a composed word, the best fit
+    first ('hok6 (saang1/sang1)'); for a single character with readings ordered by fit (review 3, finding 6), the
+    best one, then the others after "also": 'hong4 (also hang4 / haang4 / hang6)'."""
+    if n == 1 and fitted and len(per[0]) > 1:
+        return f"{per[0][0]} (also {' / '.join(per[0][1:])})"
     return SEP[lang].join(rs[0] if len(rs) == 1 else ('(' + '/'.join(rs) + ')' if n > 1 else ' / '.join(rs))
                           for rs in per)
+
+
+def _fit(con, per, lang, syls):
+    """Each character's readings ordered by their fit with the word's Hán-Việt syllable (tools/soundfit.py); unchanged
+    without syllables."""
+    if not syls or len(syls) != len(per):
+        return per
+    return [soundfit.order(con, s, lang, rs) for s, rs in zip(syls, per)]
 
 
 def variants(con, ch):
@@ -177,8 +191,9 @@ def _char_rows(con, ch, lang, level_first, names=False, colloquial=False):
     return [], ch
 
 
-def lang_reading(con, chars, lang, names=False):
-    """(reading shown, how: 'word' | 'char' | '', the spelling it was found under) for Cantonese and Mandarin."""
+def lang_reading(con, chars, lang, names=False, syls=None):
+    """(reading shown, how: 'word' | 'char' | '', the spelling it was found under) for Cantonese and Mandarin. With the
+    word's Hán-Việt syllables (syls), a character's readings are ordered by fit (review 3, finding 6)."""
     if len(chars) > 1:
         for sp in spellings(con, chars):
             w = _uniq(_rows(con, sp, lang, 'word', names))
@@ -191,7 +206,17 @@ def lang_reading(con, chars, lang, names=False):
             return '', '', chars
         per.append(rs)
         forms += form
-    return _by_char(per, lang, len(chars)), 'char', forms
+    return _by_char(_fit(con, per, lang, syls), lang, len(chars), bool(syls)), 'char', forms
+
+
+def unmarked_layer(con, ch):
+    """True when the character's Taigi readings used as literary are the MOE's unmarked ones (no 文讀 reading)."""
+    for form in [ch] + variants(con, ch):
+        notes = {n for (n,) in con.execute("SELECT note FROM chinese WHERE chars=? AND lang='nan' AND level='char' AND "
+                                           "note != 'colloquial'", (form,))}
+        if notes:
+            return 'literary' not in notes
+    return False
 
 
 def colloquial_only(con, chars):
@@ -200,7 +225,7 @@ def colloquial_only(con, chars):
             and _char_rows(con, ch, 'nan', 'char', colloquial=True)[0]]
 
 
-def taigi(con, chars):
+def taigi(con, chars, syls=None):
     """(literary reading, how: 'word' attested | 'char' composed | '', colloquial / everyday word reading or '', the
     spelling it was found under). A character with only colloquial readings (冊 tsheh) has no literary reading: the
     literary column is then empty, and the colloquial reading (the MOE word's, else composed with the colloquial
@@ -231,14 +256,14 @@ def taigi(con, chars):
                 break
     if per is None:
         if not word and coll_per:
-            word = [_by_char(coll_per, 'nan', len(chars))]
+            word = [_by_char(_fit(con, coll_per, 'nan', syls), 'nan', len(chars), bool(syls))]
         return '', '', ' / '.join(word), wsp
     combos = {'-'.join(c).lower() for c in itertools.product(*per)} if len(chars) > 1 else set()
     attested = [w for w in word if w.lower() in combos]
     if attested:
         coll = [w for w in word if w.lower() not in combos]
         return attested[0], 'word', ' / '.join(coll), wsp
-    return _by_char(per, 'nan', len(chars)), 'char', ' / '.join(word), forms
+    return _by_char(_fit(con, per, 'nan', syls), 'nan', len(chars), bool(syls)), 'char', ' / '.join(word), forms
 
 
 def hv_readings(con, ch, labels=False):
@@ -266,30 +291,39 @@ def hv_readings(con, ch, labels=False):
     return out if labels else [r for r, _ in out]
 
 
-def hv_text(con, chars):
-    """'生 sinh/sanh (Southern variant) · 日 nhật'; a character with no reading: '部 — (no Hán-Việt reading)'."""
+def hv_text(con, chars, syls=None):
+    """'生 sinh/sanh (Southern variant) · 日 nhật'; a character with no reading: '部 — (no Hán-Việt reading)'. With the
+    word's syllables, the reading the word uses comes first (行 hàng/hành… on the card of hàng)."""
     parts = []
-    for c in chars:
+    for i, c in enumerate(chars):
         rs = hv_readings(con, c, labels=True)
+        if syls and len(syls) == len(chars):
+            k = vi.tkey(syls[i])
+            rs.sort(key=lambda x: vi.tkey(x[0]) != k)
         parts.append(f"{c} " + ('/'.join(r + (f' ({HV_LABEL[lb]})' if lb in HV_LABEL else '') for r, lb in rs)
                                 if rs else '— (no Hán-Việt reading)'))
     return ' · '.join(parts)
 
 
-def join(con, chars, names=False):
+def join(con, chars, names=False, syls=None):
     """The bridge row of a chữ Hán spelling. `via`: the variant spelling under which a reading was found, when the
-    word's own characters did not give it ('' otherwise)."""
-    out = {'hv': hv_text(con, chars), 'hv_missing': [c for c in chars if not hv_readings(con, c)], 'n': 0}
+    word's own characters did not give it ('' otherwise). `syls`: the Vietnamese word's syllables, one per character
+    (a card): readings composed character by character are ordered by fit with them (tools/soundfit.py)."""
+    if syls and len(syls) != len(chars):
+        syls = None
+    out = {'hv': hv_text(con, chars, syls), 'hv_missing': [c for c in chars if not hv_readings(con, c)], 'n': 0}
     via = []
     for lang in LANGS:
         if lang == 'nan':
-            r, by, out['nan_coll'], sp = taigi(con, chars)
+            r, by, out['nan_coll'], sp = taigi(con, chars, syls)
         else:
-            r, by, sp = lang_reading(con, chars, lang, names)
+            r, by, sp = lang_reading(con, chars, lang, names, syls)
         out[lang], out[lang + '_by'] = r, by
         out['n'] += bool(r)
         if r and sp != chars and sp not in via:
             via.append(sp)
     out['via'] = ' / '.join(via)
+    # review 3 (finding 6): the literary column built from readings the MOE does not mark literary (文白屬性 0) says so
+    out['nan_unmarked'] = bool(out['nan']) and any(unmarked_layer(con, ch) for ch in chars)
     out['nan_flag'] = 'colloquial-only' if not out['nan'] and out['nan_coll'] and colloquial_only(con, chars) else ''
     return out

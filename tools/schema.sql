@@ -132,4 +132,6 @@ CREATE INDEX translation_zh_t ON translation_zh(en, pos, sense);
 CREATE TABLE spelling(key TEXT PRIMARY KEY, canon TEXT, how TEXT);
 -- CC-CEDICT's English of a traditional form (all its entries, '; '): the sense check of a Hán-Việt analysis (doubt)
 CREATE TABLE cedict_en(chars TEXT, english TEXT);
+CREATE TABLE cedict_name(chars TEXT, english TEXT);   -- CC-CEDICT names (capitalised pinyin): 奧地利 Austria, for
+                                                     -- one-character abbreviations (奧 áo "Austrian"), review 3
 CREATE INDEX cedict_en_chars ON cedict_en(chars);

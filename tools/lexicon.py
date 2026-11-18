@@ -24,6 +24,9 @@ Columns (TSV, # starts a comment, header row first):
   confidence   sure | likely | doubt[: reason]   (doubt on a Chinese origin makes the card say "doubtful")
   source       the database entry or sense that supports the row ("wikt: …", "cedict: …"), or "Claude"
   override     `kind: reason` for each validation conflict the row keeps on purpose, separated by " | "
+  example      an example sentence written by Claude for THIS sense (Northern usage, short, the taught sense; review 3,
+               finding 5): on the card it wins over Tatoeba and Wiktionary, labelled not native-checked
+  example_en   its English
 
 Validation (validate()): every row against the data, printing conflicts instead of trusting either side:
   no-key          the key is not in the database
@@ -32,6 +35,15 @@ Validation (validate()): every row against the data, printing conflicts instead 
   chars-conflict  Wiktionary analyses the word with other characters (and none of its etymologies has these)
   en-unsupported  the English shares no content word with any dictionary sense or translation of the word
   not-attested    origin hv/hv-gram with several characters that no Chinese source has as a word
+  en-item         one item of the English (between "; ") shares no word with the dictionary, or only with ANOTHER
+                  etymology than the one the row's characters / etymon name (nhà "house; dog"; thuộc 屬 "to know by
+                  heart", which is the other thuộc): listed for review, an error unless overridden
+  chars-sense     the etymology with the row's characters has none of the row's English (cam 甘 "orange": 甘 is
+                  "sweet"; 柑 is the orange)
+  only-claim      a note that says a word belongs to one Chinese variety only ("頭先 is a word of Cantonese only"): say
+                  "attested in …" with the sources (attested()), never "only"
+  example         a bad example: no English, the word not in it as a whole word, a word no dictionary has, a
+                  Southern-only word (tools/build_db.py southern_markers)
   bad-row         a malformed row (unknown origin / confidence / pos, chars on a non-Chinese origin…, an override
                   of a conflict the row does not have)
 `make lint` fails on any conflict whose kind the row does not override.
@@ -47,12 +59,17 @@ sys.path.insert(0, HERE)
 import vi  # noqa: E402
 
 PATH = os.path.join(ROOT, 'course/lexicon.tsv')
-COLS = ('key', 'pos', 'en', 'origin', 'chars', 'etymon', 'false_friend', 'usage', 'confidence', 'source', 'override')
+COLS = ('key', 'pos', 'en', 'origin', 'chars', 'etymon', 'false_friend', 'usage', 'confidence', 'source', 'override',
+        'example', 'example_en')
 ORIGINS = ('hv', 'hv-gram', 'hv-opaque', 'hv-vn', 'older-loan', 'french', 'loan', 'native', 'compound', 'unknown')
 POS = {'noun', 'verb', 'adj', 'adv', 'pron', 'num', 'classifier', 'particle', 'conj', 'prep', 'intj', 'phrase', 'name',
        'det'}
 HV = ('hv', 'hv-gram', 'hv-opaque', 'hv-vn')
-CONFLICTS = ('no-key', 'hv-mismatch', 'origin-conflict', 'chars-conflict', 'en-unsupported', 'not-attested', 'bad-row')
+CONFLICTS = ('no-key', 'hv-mismatch', 'origin-conflict', 'chars-conflict', 'en-unsupported', 'not-attested', 'bad-row',
+             'en-item', 'chars-sense', 'only-claim', 'example')
+ONLY = re.compile(r'\b(?:of|in|to)\s+(?:Cantonese|Mandarin|Taigi|Hokkien|Taiwanese|Chinese|Japanese)\s+only\b|'
+                  r'\b(?:Cantonese|Mandarin|Taigi|Hokkien)[- ]only\b|\bonly\s+(?:in\s+)?(?:Cantonese|Mandarin|Taigi|Hokkien)\b')
+LANG_NAMES = {'yue': 'Cantonese', 'nan': 'Taigi', 'cmn': 'Mandarin', 'zh-tr': 'a Wiktionary translation table'}
 # the card label of an origin (tools/cards.py; app LABEL)
 LABEL = {'hv': 'same', 'hv-gram': 'gram', 'hv-opaque': 'opaque', 'hv-vn': 'hv-vn', 'older-loan': 'older-loan',
          'french': 'loan', 'loan': 'loan', 'native': 'native', 'compound': 'compound', 'unknown': ''}
@@ -74,7 +91,8 @@ SYNONYMS = [{'mother', 'mom', 'mum', 'mama'}, {'father', 'dad', 'papa'}, {'glass
             {'look', 'see', 'watch'}, {'speak', 'say', 'talk', 'tell'}, {'road', 'street', 'way'},
             {'lake', 'pond'}, {'hot', 'warm'}, {'right', 'correct'}, {'reason', 'cause'}, {'ok', 'okay', 'alright'},
             {'programme', 'program'}, {'colour', 'color'}, {'say', 'said', 'tell'},
-            {'cow', 'ox', 'bovine', 'cattle', 'beef'}, {'busy', 'occupied'}]
+            {'cow', 'ox', 'bovine', 'cattle', 'beef'}, {'busy', 'occupied'}, {'use', 'utilize', 'utilise', 'employ'},
+            {'too', 'excessively', 'overly'}, {'motorbike', 'motorcycle', 'scooter'}, {'café', 'cafe', 'eatery', 'restaurant', 'eating', 'establishment'}]
 
 
 def load(path=PATH):
@@ -132,7 +150,8 @@ IRREGULAR = {'children': 'child', 'people': 'person', 'men': 'man', 'women': 'wo
              'written': 'write', 'read': 'read', 'heard': 'hear', 'felt': 'feel', 'left': 'leave', 'lost': 'lose',
              'ran': 'run', 'flew': 'fly', 'slept': 'sleep', 'spoke': 'speak', 'spoken': 'speak', 'sold': 'sell',
              'better': 'good', 'best': 'good', 'bigger': 'big', 'biggest': 'big', 'programme': 'program',
-             'colour': 'color', 'centre': 'center', 'favourite': 'favorite', 'neighbour': 'neighbor'}
+             'colour': 'color', 'centre': 'center', 'favourite': 'favorite', 'neighbour': 'neighbor',
+             'labour': 'labor', 'organisation': 'organization', 'organise': 'organize'}
 CUE_STOP = {'to', 'a', 'an', 'the', 'it', 'its', 'sb', 'sth', 'etc', 'someone', 'something', 'used', 'one', 'of', 'or',
             'and', 'for', 'as', 'by'}
 
@@ -199,6 +218,45 @@ def attested(con, chars):
                 'SELECT 1 FROM translation_zh WHERE word=? LIMIT 1', (sp,)).fetchone():
             out.append('zh-tr')
     return out
+
+
+def item_words(item):
+    """The content words of one English item, without its explanation in brackets when it has words outside them."""
+    bare = re.sub(r'\([^)]*\)', ' ', item)
+    return cue_words(bare) or cue_words(item)
+
+
+def check_example(con, r, south=None, known=None):
+    """Why the row's example is refused ('' when it is fine)."""
+    v, e = r.get('example', ''), r.get('example_en', '')
+    if not v and not e:
+        return ''
+    if not v or not e:
+        return 'an example needs both example and example_en'
+    if vi.CJK.search(v):
+        return 'chữ Hán in an example'
+    known = known if known is not None else {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
+    toks = [t for t in vi.words(vi.cut(v, known)) if t[0] == 'w']
+    keys = [t[2] for t in toks]
+    k = r['k']
+    syl = vi.key(v.replace('_', ' ')).split()
+    sk = [re.sub(r'[^\w]', '', x) for x in re.sub(r'[^\w\s]', ' ', vi.key(v)).split()]
+    n = len(k.split())
+    if k not in keys and not any(sk[i:i + n] == k.split() for i in range(len(sk) - n + 1)):
+        return f'the word {k!r} is not in the example'
+    for t in toks:
+        for s in t[1].lower().replace('_', ' ').split():
+            p = vi.syllable_problems(s, style=True)
+            if p and not t[1][:1].isupper():
+                return f'"{s}": {p[0]}'
+    bad = [t[1] for t in toks if t[2] not in known and not t[1][:1].isupper()]
+    if bad:
+        return f'not in the dictionary: {", ".join(bad)}'
+    if south:
+        s = [t[1] for t in toks if t[2] in south]
+        if s:
+            return f'Southern word in a Northern example: {", ".join(s)}'
+    return ''
 
 
 def validate(con, rows=None):
@@ -271,6 +329,37 @@ def validate(con, rows=None):
             mine = words(r['en'])
             if mine and not (mine & known):
                 bad('en-unsupported', 'no English word shared with any dictionary sense or translation')
+        # each English item, against the dictionary and against the etymology the row names (review 3, finding 7)
+        if ents:
+            def ety_text(es):
+                ids_ = [e[0] for e in es]
+                return [e[3] for e in es] + [g for (g,) in con.execute(
+                    f"SELECT gloss FROM sense WHERE entry_id IN ({','.join('?' * len(ids_))})", ids_)]
+            mine_e = [e for e in ents if r['chars'] and (e[2] == r['chars'] or r['chars'] in bridge.spellings(con, e[2]))
+                      and e[2]] or [e for e in ents if r['etymon'] and e[4] and (r['etymon'] in e[4])]
+            other_e = [e for e in ents if e not in mine_e]
+            k_mine = set().union(*(cue_words(t) for t in ety_text(mine_e))) if mine_e else set()
+            k_other = set().union(*(cue_words(t) for t in ety_text(other_e))) if other_e else set()
+            k_all = set().union(*(cue_words(t) for t in texts)) if texts else set()
+            for item in [x.strip() for x in r['en'].split(';') if x.strip()]:
+                w = item_words(item)
+                if not w:
+                    continue
+                if not (w & k_all):
+                    bad('en-item', f'"{item}": no dictionary sense or translation has it')
+                elif mine_e and not (w & k_mine) and (w & k_other):
+                    bad('en-item', f'"{item}" is a sense of another etymology of {k!r}, not of '
+                                   f'{r["chars"] or r["etymon"]}')
+            if r['chars'] and mine_e and cue_words(r['en']) and not (cue_words(r['en']) & k_mine):
+                bad('chars-sense', f'the etymology with {r["chars"]} has none of this English')
+        for col in ('false_friend', 'usage'):
+            if ONLY.search(r[col] or ''):
+                langs = ', '.join(LANG_NAMES[x] for x in attested(con, r['chars'])) if r['chars'] else ''
+                bad('only-claim', f'{col}: "{ONLY.search(r[col]).group(0)}": say "attested in …"'
+                                  + (f' (the sources have {r["chars"]} in {langs})' if langs else ''))
+        why = check_example(con, r, _south(con))
+        if why:
+            bad('example', why)
         if r['origin'] in ('hv', 'hv-gram') and len(r['chars']) > 1 and not attested(con, r['chars']):
             bad('not-attested', f'{r["chars"]} is a word of no Chinese source (CC-CEDICT, rime, MOE, translations)')
     kinds = {}
@@ -281,6 +370,17 @@ def validate(con, rows=None):
             if k in CONFLICTS and k not in kinds.get(id(r), set()):
                 out.append((r, 'bad-row', f'override of {k!r}, a conflict the row does not have: remove it'))
     return out
+
+
+_SOUTH = {}
+
+
+def _south(con):
+    """The Southern-only words (tools/build_db.py southern_markers), once per connection."""
+    if id(con) not in _SOUTH:
+        import build_db
+        _SOUTH[id(con)] = build_db.southern_markers(con)
+    return _SOUTH[id(con)]
 
 
 def main():

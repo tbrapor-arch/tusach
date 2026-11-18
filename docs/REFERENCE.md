@@ -166,7 +166,7 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
   senses shares a word, with light stemming and synonyms, with any CC-CEDICT sense of it or its variants, nor a
   translation table with it) | `older-loan` | `loan` | `native` | `compound` (Wiktionary's compound, reduplication or
   calque templates, "X + Y" texts, or syllables that all have an origin) | '' unknown, shown "no etymology recorded"
-  (with "(not Chinese)" when no etymology of the spelling has characters). A language code no table names is shown by
+  (never "not Chinese": a missing etymology is no evidence of origin, review 3). A language code no table names is shown by
   the template's own language name (sit -> Sino-Tibetan, omx -> Old Mon). `false-friend` from the lexicon only.
   Measured on review 2's sample (`tests/golden/opaque-sample.tsv`): false opaque 53 of 73 at fa4d343, 7 of 74 now
   (孤 炒 縣 樣 依 眾 奧), false same 0.
