@@ -149,3 +149,27 @@
 - Results (clean clone): see STATE. The top 300 read card by card against fa4d343 and dcaf84f; review 2's 134 fault
   rows re-judged (/home/claude/rework-faults-status.tsv in the session): 131 fixed, 1 not fixed (nhưng: no MOE 仍),
   2 disagreements (đá's example is its own sense; phở's "folk etymology" is the French theory).
+
+## 2026-11-18 — review 3 fixes (branch data-quality, from 16c8b24)
+Review 3 (an independent agent) found word list 2 incoherent for spoken Northern Vietnamese in places, rule rates
+inflated by left-out items, circular and multi-outcome rules, wrong usage notes and examples, false statements
+marked sure, and guards that let them through. What changed (each reproduced case is a test: tools/test_plan.py,
+tools/test_review3.py):
+- Plan: course/syllabus.yaml is the one source (lessons, cast, the Northern particle strand, the draft word list);
+  tools/plan.py writes the derived counts and the proposal's tables and checks, in `make lint`, that no note, lexicon
+  usage note or planned grammar uses a word before the list teaches it (`{preview}` marks the exceptions) and that
+  reviews have no new words. Word list 2: 206 words + 3 names (à, đấy, thế, đừng, trăm, chợ, lăm / mốt / tư, vợ,
+  sinh viên, hôm qua, sao / tại sao / vì added; bác / cháu at L5, phải "right" at L3, quá at L4).
+- Sound rules: the reading the learner would use (the word's, else the source's most frequent; Cantonese changed
+  tones counted with their base tone), main / strict / lenient rates, conditions on the Chinese side only, best
+  single guess and "narrows"; the proposal's tables are generated (bridge_rules.py --write, checked by lint).
+- Hán-Việt evidence: a reading Wiktionary gives only as Nôm is never Hán-Việt (平 bằng, 南 nôm, 局 cuộc, 恩 ơn);
+  analyses that need such a reading (công bằng, thế cuộc: 38) are older loans with their characters as etymon.
+  Taigi: the 麻-rhyme colloquial -e (茶 tê) and "layer not marked by the MOE" on the card. Polyphonic readings
+  ordered by measured fit with the card's syllable (tools/soundfit.py): on the first 100 polyphonic one-character
+  cards of the top 3,000, 91 with the right reading first in both languages (Claude's judgement).
+- Lexicon: example / example_en (250 rows, Claude's, Northern, labelled), per-item English and characters-vs-
+  etymology checks, "X only" claims refused, rows with another character's sense fixed (cơ, công, tiêu, thuộc, kinh,
+  đàn, đại, bánh), usage notes of năm, bốn, vậy / thế, bát, hay, cốc, xa. Examples: Southern words, self-harm and
+  violence, misaligned wh-questions refused. Bridge notes: the word–character pair judged. Golden: a 550-card
+  snapshot of everything shown. False opaque 7 -> 2.
