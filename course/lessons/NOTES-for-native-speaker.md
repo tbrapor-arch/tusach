@@ -1,77 +1,55 @@
 # Lessons 1–7: questions for a Hà Nội speaker
 
-Not shown in the app (the build reads only `NN.yaml`). Written by Claude while drafting lessons 1–7 (19 Nov 2026):
-each point is a place where Claude hesitated between two forms, chose the safer common one for the lesson, and asks
-a native speaker to confirm or correct. Most important first within each lesson. See also
-`course/proposal/wordlist-2-to-check.md` (the word list's own doubts) and Lesson 0 (`course/lesson0.yaml`, sounds
-described from published accounts, not from listening).
+Not shown in the app (the build reads only `NN.yaml`). Written by Claude while drafting lessons 1–7 (19 Nov 2026) and
+updated after review 5 (an independent reading by a second agent, 19 Nov 2026). For each point: the writer's choice,
+the reviewer's judgement, and whether a native speaker is still needed. Neither writer nor reviewer is a native
+speaker. See also `course/proposal/wordlist-2-to-check.md` and Lesson 0 (`course/lesson0.yaml`).
 
-## Lesson 1
-1. Line 2: chị Lan calls Sacha **em** at the door, before she knows his age (he looks younger). Would a Hà Nội
-   landlady of 35 do so with a foreign tenant of 27 at once, or start with **anh** / **bạn** and switch later?
-2. Line 5: **Vâng, chị Lan.** as "Right, Lan" when taking in a name he had not caught. Natural, or would one say
-   **Dạ, chị Lan ạ** / **À, chị Lan**?
-3. Line 7: **Em rất vui được gặp chị ạ.** as the reply to Rất vui được gặp em, without **cũng** (cũng is taught in
-   lesson 2). Acceptable, or does the reply without cũng sound odd?
-4. Line 3: asking an older woman **Chị tên là gì ạ?** after mishearing her name: is the form with là usual here,
-   or is **Chị tên gì ạ?** (without là) the everyday one? The lesson keeps là, as in the statement.
+## A native speaker first (the reviewer's eight)
+1. **em at the door** (L1 line 2): Lan, 35, calls her new tenant Sacha, 27, **em** at once. Or **anh** / **bạn** first?
+2. **bác or ông** (L5 line 6) for Minh's father, about 70, seen in a photo by a man of 27.
+3. **chiều or tối** (L6 line 4) for 18:30: sáu giờ rưỡi chiều or sáu giờ rưỡi tối?
+4. **"đi công ty"** "go to the office": common in Hà Nội speech? (Taken out of the lessons; đi làm is used.)
+5. **"Mẹ chị đây!" or "Mẹ chị đây này!"** (L5 line 7) when the mother walks in.
+6. **"Anh muốn một cà phê sữa đá" or "Anh uống cà phê sữa đá"** (L3 line 3) at a café table.
+7. **The Hà Nội sound of anh and of uô + ng** (Lesson 0, section 4): anh ≈ [ajŋ]? Does uống close the lips?
+8. **The prices** (L4, L7): trà đá 5,000 đồng a glass at a pavement stall, 35,000 for tea at a café (2026).
 
-## Lesson 2
-1. Line 1: a stranger (Thảo) opens with **Anh là người nước nào?** without xin lỗi. Is that polite enough from a
-   young woman to an unknown foreigner at her sister's gate, or would **Anh ơi, anh là người nước nào ạ?** be usual?
-2. Line 3: **Người Pháp à?** as a short echo ("French, are you?"). Natural with à alone, or more usual as **Anh là
-   người Pháp à?**
-3. Line 5: **Em cũng học ở Hà Nội** for a university student: is **học ở Hà Nội** natural, or would she name the
-   school (later lessons)?
-4. Line 7: **Em là em chị Lan** for "I'm Lan's younger sister", without **gái**: natural in speech?
+## All points
+Choice = what the lesson now says. Reviewer: keep / change (done) / native. Native: yes = still to be asked.
 
-## Lesson 3
-1. Line 1: **Quán này có trà không em?** with the vocative **em** at the end: natural word order between friends?
-2. Line 3: answering the negative question **Anh không uống cà phê à?** with **Có.** ("I do"): is bare **Có** usual,
-   or **Có chứ** / **Có, anh uống** (chứ comes at lesson 18)?
-3. Line 5: Sacha orders **Cho anh một cà phê sữa đá** to a young waiter (anh for himself). Is **cho anh** natural
-   from a customer, or is **cho tôi** / **cho mình** more usual with staff?
-4. Line 7: **Không phải.** as "No, that's not right" to correct an order; would **Không, …** alone be more usual?
-   And **…, nhé** at the end of the corrected order.
-5. Exercises: **Chị là người Hà Nội phải không?** and **Anh muốn uống cà phê phải không?** are written without the
-   comma before phải không (lint's copy check refuses the comma-separated tag while the dialogue has one); both
-   spellings are common in print, as far as Claude knows.
-
-## Lesson 4
-1. Prices: **trà đá 5,000 đồng** a glass at a pavement stall and **35,000** for tea at a café, as of 2026: plausible
-   for Hà Nội? (Claude's estimate.)
-2. Line 7: paying with **Mười lăm nghìn ạ. Cảm ơn chị!** (naming the sum while handing it over): natural, or would
-   one say **Em gửi chị** (not yet taught)?
-3. Note on numbers: **hai mươi tư** / **hai mươi bốn** are both given for 24, and **mười bốn** for 14 (tư only after
-   mươi). Is that the Hà Nội usage? Claude has left out the spoken contraction **hăm** (hăm lăm 25), unsure how
-   common it is now.
-4. Note: **quá** after the adjective (Rẻ quá! exclamation) against before it (quá đắt "too expensive"): is the
-   difference stated fairly?
-
-## Lesson 5
-1. Line 6: Sacha calls the older man in the photo (Minh's father, about 70) **bác này**, guessing he is of his
-   parents' generation. Natural, or would one say **ông này** for a man of 70? (bố mẹ and ông bà, one word each by
-   docs/SEGMENTATION.md, are not in word list 2, so the lesson avoids the pairs.)
-2. Line 4: **Hai cháu mấy tuổi ạ?** to the mother: natural without **rồi** (Hai cháu mấy tuổi rồi ạ?)?
-3. Line 7: **Mẹ chị đây!** as "here's my mother!" when she walks in; is **Mẹ chị đây này!** more natural?
-4. Line 3: **Đây là con chị, Bin và Na.** for "these are my children": natural, or **Còn đây là hai đứa nhà chị**?
-   (còn, đứa are not taught yet.)
-5. Note: **em ấy** for "he/she" (someone younger) is given beside anh ấy and chị ấy. In Hà Nội, is **cô ấy** /
-   **nó** more usual for a younger person (cô ấy is in the word list's gloss of ấy)?
-
-## Lesson 6
-1. Line 2: Sacha asks the grandmother **Bây giờ là mấy giờ ạ?** with no address term; would **Bác ơi, bây giờ là
-   mấy giờ ạ?** be expected from a young man to an elder?
-2. Line 3: **Mấy giờ cháu về?** (time question first) for "what time will you be back?": natural, against **Cháu
-   về lúc mấy giờ?** (lúc comes later).
-3. Line 4: **sáu giờ rưỡi chiều** for 6:30 p.m.: in Hà Nội is 6:30 p.m. **chiều** or already **tối**?
-4. Line 7: **Anh Minh đang ở công ty** for "Minh is (already) at the office": natural, or **Anh Minh đi làm rồi**
-   (rồi at lesson 10)?
-5. Note: **đi công ty** "go to the office" is given as everyday speech beside **đi làm**. Is it common?
-
-## Lesson 7 (review)
-1. Line 5: Minh, meeting Sacha for the first time, asks **Em bao nhiêu tuổi?** straight out. Is that ordinary
-   between two men of 38 and 27, or would he soften it (**Em năm nay bao nhiêu tuổi?**, năm nay not yet taught)?
-2. Line 7: **Anh ba mươi tám.** without tuổi, and **Em uống trà nhé?** as an offer: natural?
-3. Line 4: **Em làm ở một công ty Pháp ở Hà Nội** (two ở in a row): acceptable, or better **… công ty Pháp ở Hà Nội**
-   without một?
+| Point | Choice | Reviewer | Native |
+|---|---|---|---|
+| L1.1 em at the door (line 2) | Chào em! | native | yes (A1) |
+| L1.2 Vâng, chị Lan after a name he had not caught | changed: line 2 Chào em!, 3 Chị tên là gì ạ?, 4 Chị tên là Lan., 5 Vâng. Cảm ơn chị ạ! (no mishearing) | change (done) | no |
+| L1.3 reply Em rất vui được gặp chị ạ without cũng | kept (cũng from L2; L7 line 4 is the form with cũng) | keep | yes, low |
+| L1.4 Chị tên là gì ạ? with là, or Chị tên gì ạ? | kept with là; now an ordinary question, not after a mishearing | keep | yes, low |
+| L2.1 Thảo opens Anh là người nước nào? without xin lỗi | kept | keep | yes, low |
+| L2.2 Người Pháp à? as an echo | kept | keep | yes, low |
+| L2.3 Em cũng học ở Hà Nội for a student | kept | keep | yes, low |
+| L2.4 Em là em chị Lan without gái | kept; the note now says em does not say sister or brother, em {gái} does | keep | yes, low |
+| L3.1 Quán này có trà không em? (vocative at the end) | kept | keep | yes, low |
+| L3.2 bare Có to a negative question | kept | keep | yes, low |
+| L3.3 Cho anh … to a young waiter | kept (the note gives cho tôi as neutral) | keep | yes, low |
+| L3.4 Không phải. to correct an order; … nhé | kept | keep | yes, low |
+| L3.5 phải không without a comma in exercises | kept | keep | no |
+| L3.6 Anh muốn một cà phê sữa đá (line 3) | kept | native | yes (A6) |
+| L4.1 prices | kept | native | yes (A8) |
+| L4.2 paying with Mười lăm nghìn ạ. Cảm ơn chị! | kept | keep | yes, low |
+| L4.3 hai mươi tư / hai mươi bốn; hăm left out | kept; the note says tư is "often" used after mươi | keep | yes, low |
+| L4.4 quá after / before the adjective | changed: "often" an exclamation / "often" too, not a rule | change (done) | no |
+| L5.1 bác này for a man of about 70 | kept | native | yes (A2) |
+| L5.2 Hai cháu mấy tuổi ạ? without rồi | kept | keep | yes, low |
+| L5.3 Mẹ chị đây! | kept | native | yes (A5) |
+| L5.4 Đây là con chị, Bin và Na. | kept | keep | yes, low |
+| L5.5 em ấy / cô ấy for "he, she" | changed: the gloss of ấy and the note give anh ấy, chị ấy only (cô is taught at L19) | change (done) | yes, low (cô ấy / nó for a younger person, later) |
+| L6.1 Bây giờ là mấy giờ ạ? without Bác ơi | kept | keep | yes, low |
+| L6.2 Mấy giờ cháu về? (time question first) | kept; the note says time words usually come first or right after the subject | keep | yes, low |
+| L6.3 sáu giờ rưỡi chiều for 6:30 p.m. | kept | native | yes (A3) |
+| L6.4 Anh Minh đang ở công ty | kept; the English "already" removed; L7 now meets Minh the same Monday evening | keep | yes, low |
+| L6.5 đi công ty "go to the office" | changed: the note no longer claims it; the exercise says đi làm | change (done) | yes (A4) |
+| L7.1 Em bao nhiêu tuổi? straight out | the line left the review dialogue (L7 rewritten as a true review) | – | no |
+| L7.2 Anh ba mươi tám., Em uống trà nhé? | left the dialogue with it | – | no |
+| L7.3 làm ở một công ty Pháp ở Hà Nội | now Em làm ở một công ty Pháp (one ở) | – | yes, low |
+| L7.4 (new) Em đi đâu về đấy? as a greeting on the way home; Anh là anh Minh à? | Claude's choice | not reviewed | yes |
+| L0 (new) anh and uô + ng in Hà Nội | Lesson 0 describes anh ≈ [ajŋ]; uống taken out of the lip rule | native | yes (A7) |
