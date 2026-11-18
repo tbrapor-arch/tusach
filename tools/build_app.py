@@ -21,6 +21,7 @@ import yaml
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
+import appfont  # noqa: E402
 import cards  # noqa: E402
 import check_cards  # noqa: E402
 import course  # noqa: E402
@@ -51,23 +52,24 @@ if fixture_build:
 cards.init(con, cards.course_words(raw))
 
 
+FONT_BYTES = appfont.font_bytes(FONT)
+
+
 def font_css():
     """Noto Sans (OFL), subset to Latin with Vietnamese and the combining marks, with its mark-positioning tables;
-    embedded so stacked marks (ế, ự, ỗ) draw the same everywhere, offline included."""
-    b64 = base64.b64encode(open(FONT, 'rb').read()).decode()
+    embedded so stacked marks (ế, ự, ỗ) and the Taigi marks (a̍, ô) draw the same everywhere, offline included."""
+    b64 = base64.b64encode(FONT_BYTES).decode()
     return (f"@font-face{{font-family:'VietSans';font-weight:400 800;font-display:swap;"
             f"src:url(data:font/woff2;base64,{b64}) format('woff2');}}")
 
 
 def check_font(texts):
-    """Every letter the page shows in Vietnamese must be in the embedded font (no fallback glyph for ế, ự, ỗ)."""
-    from fontTools.ttLib import TTFont
-    cmap = TTFont(FONT).getBestCmap()
-    need = {c for t in texts for c in vi.nfc(t) if c.isalpha() and not vi.CJK.match(c)}
-    missing = sorted(c for c in need if ord(c) not in cmap)
-    if missing:
-        raise SystemExit(f'build_app: the embedded font lacks {" ".join(missing)} (app/fonts/noto-sans-viet.woff2)')
-    return len(need)
+    """Every letter and mark the page shows (Vietnamese, and the readings on cards) in the embedded font, positioned."""
+    probs, n = appfont.font_problems(texts, FONT_BYTES)
+    if probs:
+        raise SystemExit('build_app: the embedded font (app/fonts/noto-sans-viet.woff2 + appfont.MARK_SHAPES): '
+                         + '; '.join(probs[:20]))
+    return n
 
 
 # ---- lessons: every line, exercise and new word through the one word pipeline
@@ -162,8 +164,19 @@ data = {'lessons': lessons, 'dict': dictionary, 'syllabus': syllabus.get('lesson
         'zh': [list(x) for x in cards.DISPLAY_LANGS], 'lesson0': lesson_zero,
         'bridge': sorted(i for i, c in dictionary.items() if c.get('chars')), 'recorded': n_rec,
         'built': datetime.date.today().isoformat(), 'missing': MISSING}
+
+
+def card_readings(c):
+    """Every romanised reading a card shows (Hán-Việt, the Chinese columns, colloquial Taigi, etymon, per character)."""
+    out = [c.get(k) or '' for k in ('hv', 'nan_coll') + tuple(x[0] for x in cards.DISPLAY_LANGS)]
+    for sub in [c.get('etymon') or {}] + list(c.get('per_char') or []):
+        out += [str(v) for k, v in sub.items() if k != 'chars' and isinstance(v, str)]
+    return [x for x in out if x]
+
+
 n_letters = check_font([t for _, t in lesson0.spans(lesson0.load())] + [L['title']['vi'] for L in lessons] + [ln['vi'] for L in lessons for ln in L['lines']]
-                       + [c['w'] for c in dictionary.values()] + [c['ex']['vi'] for c in dictionary.values() if c.get('ex')])
+                       + [c['w'] for c in dictionary.values()] + [c['ex']['vi'] for c in dictionary.values() if c.get('ex')]
+                       + [r for c in dictionary.values() for r in card_readings(c)])
 
 tpl = open(os.path.join(ROOT, 'app/index.template.html'), encoding='utf-8').read()
 tpl = tpl.replace('/*__FONTS__*/', font_css())
@@ -187,7 +200,7 @@ open(os.path.join(OUT, 'english-auto.txt'), 'w', encoding='utf-8').write(''.join
     if c.get('en_src') not in ('course', 'lexicon')))
 print(f'{out}: {"Lesson 0 + " if lesson_zero else ""}{len(lessons)} lessons, {len(dictionary)} cards ({sum(1 for c in dictionary.values() if c.get("chars"))} '
       f'Hán-Việt), {sum(1 for c in dictionary.values() if c.get("audio"))} with audio, {n_rec} recorded lines, '
-      f'{n_letters} letters checked in the font, {os.path.getsize(out) // 1024} KB')
+      f'{n_letters} letters and marks checked in the font, {os.path.getsize(out) // 1024} KB')
 
 # ---- the card check, at the end of every build: no word without a card, no card lost, no poorer English
 warn = []
