@@ -47,6 +47,28 @@ ok(not refuses(lambda: cards.open_db('public')), 'the public build accepts vi.db
 r = run(['tools/build_db.py', 'data/raw', os.path.join(tempfile.gettempdir(), 'x.db'), '--nc'])
 ok(r.returncode != 0 and 'refusing' in r.stdout + r.stderr, 'build_db refuses to write a non-commercial build to *.db')
 
+# 1b. the test fixture never reaches a real build (review 5, finding 5: seven real cards said "Source: test fixture")
+import sqlite3  # noqa: E402
+for which in ('public', 'private'):
+    rc = sqlite3.connect(cards.DB[which])
+    meta = dict(rc.execute('SELECT key, value FROM meta'))
+    n = sum(rc.execute(f"SELECT count(*) FROM {t} WHERE source = 'fixture'").fetchone()[0]
+            for t in ('entry', 'hanviet', 'chinese', 'example')) + \
+        rc.execute("SELECT count(*) FROM source WHERE id = 'fixture' OR fixture = 1").fetchone()[0]
+    ok(meta.get('fixture') == '0' and n == 0, f'the real {which} database has no test-fixture row (meta.fixture 0)')
+r = run(['tools/build_db.py', 'data/raw', os.path.join(tempfile.gettempdir(), 'x.db'), '--fixture'])
+ok(r.returncode != 0 and 'refusing --fixture' in r.stdout + r.stderr, 'build_db refuses --fixture on a real build')
+if os.path.exists(cards.STORE):
+    leaked = sorted(k for k, c in json.load(open(cards.STORE, encoding='utf-8'))['cards'].items()
+                    if 'fixture' in (c.get('src') or []) or c.get('fixture') or c.get('en_src') == 'dict:fixture')
+    ok(not leaked, f'no card of the real card file comes from the test fixture {leaked[:7]}')
+_fx_dir = tempfile.mkdtemp()
+FIXTURE_DB = os.path.join(_fx_dir, 'vi.db')       # a test database: the fixture's raw files + the test fixture
+_r = run(['tools/build_db.py', 'tools/fixtures/raw', FIXTURE_DB, '--fixture'],
+         {'TUSACH_ALLOW_MISSING': 'wiktionary-tr,thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'})
+ok(_r.returncode == 0 and sqlite3.connect(FIXTURE_DB).execute(
+    "SELECT count(*) FROM entry WHERE source = 'fixture'").fetchone()[0] > 0, 'a test database built with --fixture has it')
+
 # 2. one word pipeline: course lines are cut by their own boundaries; texts without boundaries by the dictionary
 con = cards.open_db('public')
 cards.init(con, {'name:Lan': {'w': 'Lan', 'en': 'Lan (a name)', 'name': True}})
@@ -134,7 +156,8 @@ with tempfile.TemporaryDirectory() as tmp:
                  open(os.path.join(ROOT, 'course/syllabus.yaml'), encoding='utf-8').read())
     syl_path = os.path.join(tempfile.mkdtemp(), 'syllabus.yaml')
     open(syl_path, 'w', encoding='utf-8').write(syl)
-    r = run(['tools/lint.py'], {'TUSACH_COURSE': tmp, 'TUSACH_SYLLABUS': syl_path})
+    # on the test database: the fixture-only word (gơm thớp) exists only there
+    r = run(['tools/lint.py'], {'TUSACH_COURSE': tmp, 'TUSACH_SYLLABUS': syl_path, 'TUSACH_DB': FIXTURE_DB})
     out = r.stdout
     ok(r.returncode == 1, 'lint fails on a bad lesson')
     for needle, what in [('before the owner approved', 'a lesson before the syllabus and word list are approved'),
@@ -167,6 +190,17 @@ ok(list(lesson0.spans({'intro': 'a [[học_sinh]] b', 'sections': []})) == [('in
 got = lesson0.inline('**b** [[học]] 學', lambda t: [{'w': {'t': t}}])
 ok(got[0] == '<b>b</b> ' and got[1] == {'v': [{'w': {'t': 'học'}}]} and '<span class="han">學</span>' in got[2],
    'lesson 0 text becomes escaped HTML and token parts')
+
+# 4c. a mistyped TUSACH_LESSON0 is an error, never a page without Lesson 0 (review 5, finding 18)
+r = run(['-c', 'import sys; sys.path.insert(0, "tools"); import lesson0; print(lesson0.load() is None)'],
+        {'TUSACH_LESSON0': '/nonexistent/lesson0.yaml'})
+ok(r.returncode != 0 and 'no such file' in r.stdout + r.stderr, 'a TUSACH_LESSON0 path that does not exist is an error')
+r = run(['-c', 'import sys; sys.path.insert(0, "tools"); import lesson0; print(lesson0.load() is None)'],
+        {'TUSACH_LESSON0': 'none'})
+ok(r.returncode == 0 and r.stdout.strip() == 'True', 'TUSACH_LESSON0=none builds without Lesson 0, on purpose')
+r = run(['-c', 'import sys; sys.path.insert(0, "tools"); import lesson0; print(bool(lesson0.load()))'],
+        {'TUSACH_LESSON0': ''})
+ok(r.returncode == 0 and r.stdout.strip() == 'True', 'by default Lesson 0 is course/lesson0.yaml')
 
 # 5. measure before and after
 a = {'lines': {'L1.1': {'text': 'Tôi là học sinh.', 'cut': [['Tôi', 'tôi'], ['là', 'là'], ['học sinh', 'học sinh']]}},

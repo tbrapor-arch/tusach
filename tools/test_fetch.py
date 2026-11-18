@@ -121,7 +121,7 @@ with tempfile.TemporaryDirectory() as tmp:
                        capture_output=True, text=True)
     ok(r.returncode != 0 and 'FAILED' in r.stdout + r.stderr and not os.path.exists(db), 'build_db fails on a missing source')
     allow = 'wiktionary-tr,thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
-    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db], cwd=ROOT,
+    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db, '--fixture'], cwd=ROOT,
                        env=dict(env, TUSACH_ALLOW_MISSING=allow), capture_output=True, text=True)
     meta = dict(sqlite3.connect(db).execute('SELECT key, value FROM meta')) if r.returncode == 0 else {}
     ok(r.returncode == 0 and 'rime' in meta.get('missing', '').split(), 'with the list it builds and records meta.missing')
@@ -130,7 +130,7 @@ with tempfile.TemporaryDirectory() as tmp:
     out_dir = os.path.join(tmp, 'dist')
     # the fixture database has only the fixture's words: build the fixture lesson, not the course (lessons, Lesson 0)
     benv = dict(env, TUSACH_DB=db, TUSACH_OUT=out_dir, TUSACH_STORE=os.path.join(tmp, 'cards.json'),
-                TUSACH_COURSE=os.path.join(ROOT, 'tools/fixtures/lessons'), TUSACH_LESSON0=os.path.join(tmp, 'none.yaml'))
+                TUSACH_COURSE=os.path.join(ROOT, 'tools/fixtures/lessons'), TUSACH_LESSON0='none')
     r = subprocess.run([sys.executable, '-I', 'tools/build_app.py'], cwd=ROOT, env=benv, capture_output=True, text=True)
     ok(r.returncode != 0 and 'REFUSED' in r.stdout + r.stderr, 'build_app refuses a database with meta.missing')
     r = subprocess.run([sys.executable, '-I', 'tools/build_app.py'], cwd=ROOT, env=dict(benv, TUSACH_ALLOW_MISSING=allow),

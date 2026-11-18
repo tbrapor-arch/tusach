@@ -2,6 +2,7 @@
 
     python3 -I tools/build_db.py data/raw data/build/vi.db            # public build: commercial-use sources only
     python3 -I tools/build_db.py data/raw data/build/vi-nc.db --nc    # private build: also non-commercial sources
+    python3 -I tools/build_db.py tools/fixtures/raw /tmp/x/vi.db --fixture   # a TEST database: + the test fixture
 
 The two builds go to two different files and say which they are in `meta.nc`: tools/cards.py open_db() refuses a
 public build (the app page) from vi-nc.db and a private build (the private module) from vi.db, so the rule "no
@@ -14,9 +15,11 @@ tools/site.py refuse to make a publishable page from that database.
 After the sources: the frequency of each word (tools/freq.py), the Hán-Việt cross-check, the labels, and the bridge
 join on characters (tools/bridge.py, table `bridge`). Nothing is edited by hand.
 
-The invented test fixture (tools/fixtures/dict.yaml) is always loaded, as source `fixture` (fixture = 1): it lets
-`make app`, `make lint` and tools/smoke.py run before any real source exists. tools/lint.py refuses a real lesson that
-uses a word only the fixture has.
+The invented test fixture (tools/fixtures/dict.yaml) is loaded, as source `fixture` (fixture = 1), only with
+`--fixture`: test databases built by the tests themselves (tools/test_db.py, test_fetch.py, test_pipeline.py). A real
+build (`make db`, `make db-nc`) never has it (review 5: its rows had reached seven real cards as "Source: test
+fixture" and its Chinese readings the real `chinese` table); `--fixture` on a build from data/raw is refused.
+tools/lint.py refuses a real lesson that uses a word only the fixture has.
 """
 import bz2
 import csv
@@ -1544,6 +1547,9 @@ def main():
         sys.exit(__doc__)
     raw, out = args
     nc = '--nc' in sys.argv
+    with_fixture = '--fixture' in sys.argv
+    if with_fixture and os.path.abspath(raw) == os.path.abspath(os.path.join(ROOT, 'data', 'raw')):
+        sys.exit('build_db: refusing --fixture on a real build (data/raw): the test fixture is for test databases only')
     # one database rule, enforced here and in tools/cards.py open_db(): the non-commercial build has its own file
     if nc != out.endswith('-nc.db'):
         sys.exit(f'build_db: refusing to write a {"non-commercial" if nc else "public"} build to {out} '
@@ -1578,11 +1584,12 @@ def main():
         corpus += add.corpus
         used.append(s['id'])
         print(f"{s['id']}: {add.n} rows")
-    con.execute("INSERT INTO source VALUES ('fixture', 'TEST FIXTURE (invented entries, not course content)', '', "
-                "'CC0 (written for this repository)', '', 1, 1)")
-    add = Adder(con, 'fixture')
-    load_fixture(add)
-    print(f'fixture: {add.n} rows (test fixture, tools/fixtures/dict.yaml)')
+    if with_fixture:              # test databases only (module docstring)
+        con.execute("INSERT INTO source VALUES ('fixture', 'TEST FIXTURE (invented entries, not course content)', '', "
+                    "'CC0 (written for this repository)', '', 1, 1)")
+        add = Adder(con, 'fixture')
+        load_fixture(add)
+        print(f'fixture: {add.n} rows (test fixture, tools/fixtures/dict.yaml; a test database)')
     hv_crosscheck(con)
     validate_syllables(con, raw)
     rank_chinese(con)
@@ -1609,7 +1616,7 @@ def main():
     character_readings(con)
     build_bridge(con)
     etymology_states(con)
-    con.executemany('INSERT INTO meta VALUES (?,?)', [('nc', '1' if nc else '0'),
+    con.executemany('INSERT INTO meta VALUES (?,?)', [('nc', '1' if nc else '0'), ('fixture', '1' if with_fixture else '0'),
                                                       ('built', datetime.date.today().isoformat()),
                                                       ('sources', ' '.join(used)), ('missing', ' '.join(missing)),
                                                       ('freq_method', fdesc)])

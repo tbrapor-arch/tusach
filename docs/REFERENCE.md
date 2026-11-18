@@ -20,7 +20,8 @@ tests/golden/            cards.tsv (reviewed snapshot of the cards of every lexi
                          notes) and opaque-sample.tsv
                          (review 2's sample of opaque analyses judged T/O): tools/test_golden.py, in `make test`
 tools/                   build, pipeline, checks (MIT)
-tools/fixtures/          TEST FIXTURE: dict.yaml (invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
+tools/fixtures/          TEST FIXTURE (test databases only: build_db.py --fixture; never in vi.db / vi-nc.db):
+                         dict.yaml (invented entries), lessons/00.yaml (3 lines), raw/ (a kaikki-shaped
                          file), raw-real/ (27 real Wiktionary lines, CC BY-SA, for tools/test_db.py); not content
 tests/cutter/            reference.tsv: 200 sentences written and cut by Claude (docs/SEGMENTATION.md; rules tuned on it);
                          heldout.tsv: 100 Tatoeba sentences (id, author) cut by Claude, no rule tuned on them; NOT
@@ -110,7 +111,8 @@ as separate words (cảm ơn for cảm_ơn): usually a missing underscore.
 and tags (`[[ma~ghost]]`), cut by `cards.tokenize` (cards in module `lessons`, the card check covers them) and linted
 as lesson lines; the `bridge` section's chữ Hán are linted as bridge examples (elsewhere characters only anchor a
 Chinese sound: 大 dà); no text may say a foreign sound is "exactly" / "identical" / "just like" one (lint). The page
-(`DATA.lesson0`) shows the labels "not checked by a native speaker" and "no audio yet"; tables become stacked cards
+(`DATA.lesson0`) shows the labels "not checked by a native speaker" and "no audio yet"; `TUSACH_LESSON0=FILE` builds
+another file (one that does not exist is an error), `TUSACH_LESSON0=none` none; tables become stacked cards
 on a phone. `tools/smoke.py` checks it.
 
 ## Word card (`DATA.dict[id]`, built only by `tools/cards.py`)

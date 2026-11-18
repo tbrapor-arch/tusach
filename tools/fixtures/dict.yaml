@@ -1,6 +1,6 @@
 # TEST FIXTURE — not course content, not a dictionary.
-# A handful of hand-entered entries so that `make db`, `make app`, `make lint` and tools/smoke.py run before any real
-# source exists (tools/build_db.py loads this file as source `fixture`). The bridge readings of 學生 are the ones in
+# A handful of hand-entered entries for TEST databases only: tools/build_db.py loads this file as source `fixture` with
+# --fixture (tools/test_db.py, test_fetch.py, test_pipeline.py); a real build (make db) never has it (review 5). The bridge readings of 學生 are the ones in
 # the handover's own table. Not checked by a native speaker. tools/lint.py refuses a real lesson that uses a word
 # found only here.
 entries:

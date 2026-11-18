@@ -10,7 +10,9 @@ course's word boundaries (học_sinh, ma~ghost), cut and given cards by tools/ca
 pipeline); tools/lint.py checks every word of them as it checks lesson lines. Chữ Hán are set in the Chinese font.
 
     import lesson0
-    d = lesson0.load()                          # None when there is no course/lesson0.yaml
+    d = lesson0.load()                          # None when there is no course/lesson0.yaml, or TUSACH_LESSON0=none
+TUSACH_LESSON0=FILE builds another Lesson 0 (a test); a FILE that does not exist is an error (review 5: a mistyped
+path silently dropped Lesson 0); TUSACH_LESSON0=none builds without one, on purpose.
     for where, text in lesson0.spans(d): …      # every [[…]] span (lint)
     page = lesson0.render(d, cards.tokenize)    # the page's DATA.lesson0 (build_app)
 """
@@ -35,13 +37,22 @@ KEYS = {'top': {'title', 'intro', 'sections'}, 'section': {'id', 'h', 'body'}, '
 OVERCLAIM = re.compile(r'\b(exactly|identical|precisely|just like|the same sound)\b', re.I)
 
 
+NONE = 'none'          # TUSACH_LESSON0=none: no Lesson 0, on purpose (tests building a fixture page)
+
+
 def path():
     return os.environ.get('TUSACH_LESSON0') or PATH
 
 
 def load():
     p = path()
-    return yaml.safe_load(open(p, encoding='utf-8')) if os.path.exists(p) else None
+    if p == NONE:
+        return None
+    if not os.path.exists(p):
+        if p != PATH:
+            raise SystemExit(f'lesson0: TUSACH_LESSON0={p}: no such file (TUSACH_LESSON0=none builds without Lesson 0)')
+        return None
+    return yaml.safe_load(open(p, encoding='utf-8'))
 
 
 def texts(d, only=None):

@@ -36,7 +36,7 @@ ok(bridge.pinyin_marks('lu:4 gui4 liu2') == 'lǜguìliú', 'pinyin: ü, -ui, -iu
 # 2. a build from the kaikki-shaped fixture, the other sources missing
 with tempfile.TemporaryDirectory() as tmp:
     db = os.path.join(tmp, 'vi.db')
-    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db], cwd=ROOT,
+    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db, '--fixture'], cwd=ROOT,
                        capture_output=True, text=True, env=dict(os.environ, TUSACH_ALLOW_MISSING=ALL_BUT_WIKTIONARY))
     out = r.stdout + r.stderr
     ok(r.returncode == 0, 'build_db runs with most sources missing when they are allowed (TUSACH_ALLOW_MISSING)')
@@ -80,7 +80,8 @@ with tempfile.TemporaryDirectory() as tmp:
 # 2b. the Wiktionary loader on REAL lines of the snapshot (tools/fixtures/raw-real, CC BY-SA 4.0, see its README)
 with tempfile.TemporaryDirectory() as tmp:
     db = os.path.join(tmp, 'vi.db')
-    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw-real', db], cwd=ROOT,
+    # + the test fixture (its Hán-Việt readings of 學 生: raw-real has no Thiều Chửu file); a test database
+    r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw-real', db, '--fixture'], cwd=ROOT,
                        capture_output=True, text=True, env=dict(os.environ, TUSACH_ALLOW_MISSING=ALL_BUT_WIKTIONARY))
     ok(r.returncode == 0, 'build_db reads the real kaikki lines')
     con = sqlite3.connect(db)

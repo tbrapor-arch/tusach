@@ -1,6 +1,7 @@
 # make data      download the open sources (data/raw), pinned in data/fetch.sh; a missing one fails (exit 1) unless
 #                listed in TUSACH_ALLOW_MISSING=id,id (sandboxes; the page then cannot be published)
-# make db        public build: data/build/vi.db (commercial-use sources + the test fixture)
+# make db        public build: data/build/vi.db (commercial-use sources; never the test fixture: build_db --fixture is
+#                for test databases only)
 # make db-nc     private build: data/build/vi-nc.db (also non-commercial sources); the public page refuses it
 # make lint      lesson rules (tools/lint.py) + the word verifier (tools/verify_words.py)
 # make app       app/dist/index.html, then the card check (tools/check_cards.py)
