@@ -285,8 +285,8 @@ def sentence_fits(v, en, cue, avoid, own=None):
 
 
 def blocked_examples(path=os.path.join(ROOT, 'course/example-block.tsv')):
-    """Tatoeba sentence ids a card never shows (course/example-block.tsv: a mistranslation, a typo, a proverb that
-    the automatic checks let through; each with its reason)."""
+    """Sentences a card never shows (course/example-block.tsv: a Tatoeba sentence id, or the exact text of a Wiktionary
+    example; a mistranslation, a typo, a proverb that the automatic checks let through; each with its reason)."""
     out = set()
     if os.path.exists(path):
         for line in open(path, encoding='utf-8'):
@@ -310,9 +310,9 @@ def choose_example(k, ids, en, others, strict, pos='', siblings=False):
     avoid = set().union(*(lexicon.words(o) for o in others)) - cue if others else set()
     cand = con.execute("SELECT vi, en, source, ref FROM example WHERE key=? AND source='tatoeba' AND flags='' "
                        "ORDER BY id", (k,)).fetchall() if _has_example_key() else []
-    cand = [c for c in cand if (c[3] or '').split(' ')[0].lstrip('#') not in BLOCKED]
     cand += con.execute(f"SELECT vi, en, source, ref FROM example WHERE source != 'tatoeba' AND entry_id IN "
                         f"({','.join('?' * len(ids))}) AND length(vi) <= 200 ORDER BY length(vi), id", ids).fetchall()
+    cand = [c for c in cand if (c[3] or '').split(' ')[0].lstrip('#') not in BLOCKED and c[0] not in BLOCKED]
     if cue:
         for c in cand:
             if sentence_fits(c[0], c[1], cue, avoid, k):
