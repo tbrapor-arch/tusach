@@ -15,3 +15,12 @@ described from published accounts, not from listening).
    lesson 2). Acceptable, or does the reply without cũng sound odd?
 4. Line 3: asking an older woman **Chị tên là gì ạ?** after mishearing her name: is the form with là usual here,
    or is **Chị tên gì ạ?** (without là) the everyday one? The lesson keeps là, as in the statement.
+
+## Lesson 2
+1. Line 1: a stranger (Thảo) opens with **Anh là người nước nào?** without xin lỗi. Is that polite enough from a
+   young woman to an unknown foreigner at her sister's gate, or would **Anh ơi, anh là người nước nào ạ?** be usual?
+2. Line 3: **Người Pháp à?** as a short echo ("French, are you?"). Natural with à alone, or more usual as **Anh là
+   người Pháp à?**
+3. Line 5: **Em cũng học ở Hà Nội** for a university student: is **học ở Hà Nội** natural, or would she name the
+   school (later lessons)?
+4. Line 7: **Em là em chị Lan** for "I'm Lan's younger sister", without **gái**: natural in speech?

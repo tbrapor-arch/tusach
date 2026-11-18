@@ -1,0 +1,57 @@
+id: 2
+title: {vi: "Anh là người nước nào?", en: "Where are you from?"}
+review: false
+setting: >-
+  The next morning, at the gate of chị Lan's house. A young woman of about 24 arrives on a motorbike just as Sacha
+  comes out. She has never seen him before.
+dialogue:
+- {n: 1, speaker: Thảo, vi: "Chào anh! Anh là người nước~country nào?", en: "Hi! Where are you from?", lit: "greet elder-brother! elder-brother be person country which?"}
+- {n: 2, speaker: Sacha, vi: "Chào em. Anh là người Pháp.", en: "Hi. I'm French.", lit: "greet younger-sibling. elder-brother be person France."}
+- {n: 3, speaker: Thảo, vi: "Người Pháp à? Anh học tiếng_Việt ở đâu?", en: "French, are you? Where are you learning Vietnamese?", lit: "person France (checking)? elder-brother study Vietnamese at where?"}
+- {n: 4, speaker: Sacha, vi: "Anh học ở Hà_Nội.", en: "Here in Hà Nội.", lit: "elder-brother study at Hà Nội."}
+- {n: 5, speaker: Thảo, vi: "Em cũng học ở Hà_Nội. Em là người Hà_Nội.", en: "I study in Hà Nội too. I'm from Hà Nội.", lit: "younger-sibling also study at Hà Nội. younger-sibling be person Hà Nội."}
+- {n: 6, speaker: Sacha, vi: "Xin_lỗi, anh không biết tên em.", en: "Sorry, I don't know your name.", lit: "sorry, elder-brother not know name younger-sibling."}
+- {n: 7, speaker: Thảo, vi: "Em tên là Thảo. Em là em chị Lan.", en: "My name's Thảo. I'm Lan's younger sister.", lit: "younger-sibling name be Thảo. younger-sibling be younger-sibling elder-sister Lan."}
+notes:
+- {ref: 1, topic: grammar, text: "Anh là người nước nào? \"Which country are you from?\", literally \"you are a person of which country?\". nào \"which\" follows its noun: nước nào \"which country\", người nào \"which person\". It is the usual way to ask someone's nationality."}
+- {ref: 1, topic: usage, text: "nước here is \"country\". The same spelling is also nước \"water\", a different word you will meet later; the card shows both."}
+- {ref: 2, topic: pronouns, text: "Thảo is younger, so the pair turns round: she calls Sacha anh and herself em, and Sacha now says anh for \"I\" (Anh là người Pháp \"I'm French\") and em for \"you\". With Lan he is em; with Thảo he is anh."}
+- {ref: 2, topic: grammar, text: "The modifier follows the noun: người Pháp \"a French person\" (person + France), người Hà Nội \"a person from Hà Nội\". This is the general order of Vietnamese, the reverse of English and Chinese."}
+- {ref: 3, topic: particles, text: "à at the end checks what you have just heard, often with surprise: Người Pháp à? \"French, are you?\" It expects a confirmation rather than new information. It has the low falling huyền tone."}
+- {ref: 3, topic: grammar, text: "Question words stay where the answer goes: Anh học tiếng Việt ở đâu? \"you study Vietnamese at where?\", answered Anh học ở Hà Nội. ở \"at, in\" before a place; on its own ở also means \"to live, to stay\": Em ở Hà Nội \"I live in Hà Nội\"."}
+- {ref: 4, topic: grammar, text: "Verbs do not change for time: Anh học is \"I study\", \"I am learning\" or \"I learnt\", as the situation says. Vietnamese adds a time word only when it is needed (lesson 6)."}
+- {ref: 5, topic: grammar, text: "cũng \"also, too\" goes before the verb, never at the end as English \"too\" does: Em cũng học \"I study too\"."}
+- {ref: 6, topic: grammar, text: "không before a verb makes it negative: không biết \"don't know\". The same word ends yes/no questions from lesson 3. tên em \"your name\" (name + you): the owner comes after the thing, the same order as người Pháp."}
+- {ref: 6, topic: usage, text: "xin lỗi \"sorry; excuse me\": to apologise, or before a question to a stranger."}
+- {ref: 7, topic: grammar, text: "Em là em chị Lan: the first em is \"I\", the second the noun \"younger sibling\": \"I am chị Lan's younger sister\". Vietnamese leaves out \"younger sister\" against \"younger brother\" when it is clear."}
+- {ref: 2, topic: bridge, text: "Hán-Việt words are Chinese words read the Vietnamese way, one syllable per character: Pháp is 法 (Mandarin fǎ), Việt Nam 越南 (Yuènán), Hà Nội 河內 (Hénèi), học is 學 (xué). Inside such a word the order is Chinese; outside it, Vietnamese: người Pháp."}
+- {ref: 0, topic: pronunciation, text: "ư and ươ (Lesson 0): người [ŋɨəj] with huyền, nước with sắc, ending in an unreleased -c. Việt (nặng) and Nội (nặng) are low and cut short; tiếng (sắc) rises."}
+new_words:
+- {w: người, en: "person, people; (before a nationality) a … person"}
+- {w: nước, tag: country, en: "country, nation"}
+- {w: nào, en: "which; (after a noun) any"}
+- {w: ở, en: "at, in; to live, to be (somewhere)"}
+- {w: đâu, en: "where; (emphatic) not at all"}
+- {w: à, en: "(final particle: checking or surprised) so …?; oh"}
+- {w: Pháp, en: "France; French"}
+- {w: Việt_Nam, en: Vietnam}
+- {w: Hà_Nội, en: Hanoi}
+- {w: tiếng_Việt, en: "Vietnamese (the language)"}
+- {w: nói, en: "to speak; to say"}
+- {w: biết, en: "to know; to know how to"}
+- {w: học, en: "to study, to learn"}
+- {w: cũng, en: "also, too"}
+- {w: xin_lỗi, en: "sorry; excuse me"}
+- {w: không, en: "not; no; (question tag) … or not?"}
+- {w: Thảo, en: "Thảo (a woman's name)", name: true}
+exercises:
+  translate:
+  - {vi: "Chị Lan là người Hà_Nội.", en: "Lan is from Hà Nội."}
+  - {vi: "Tôi không nói tiếng_Việt.", en: "I don't speak Vietnamese."}
+  - {vi: "Chị là người Việt_Nam à?", en: "You're Vietnamese, are you? (to a young woman a little older)"}
+  - {vi: "Anh cũng biết chị Lan.", en: "I know Lan too. (a young man to someone younger)"}
+  - {vi: "Em học tiếng_Việt ở Pháp.", en: "I study Vietnamese in France. (to someone older)"}
+  fill:
+  - {vi: "Chị ___ là người Pháp à?", answer: cũng, en: "So you're French too?"}
+  - {vi: "Anh ở ___?", answer: đâu, en: "Where do you live?"}
+  - {vi: "Em ___ biết chị Lan.", answer: không, en: "I don't know Lan."}
