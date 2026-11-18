@@ -166,6 +166,22 @@ def yue_coda(f):
     return m.group(1) if m else ''
 
 
+def yue_tone(f):
+    """The Hán-Việt tone the T rules predict from the Cantonese tone (and the Vietnamese initial's class)."""
+    t = f['yt']
+    if f['chk']:
+        return 'sắc' if t in (1, 3) else 'nặng'
+    return {1: 'ngang', 2: 'hỏi', 3: 'sắc', 6: 'nặng', 4: 'ngang' if f['son'] else 'huyền',
+            5: 'ngã' if f['son'] else 'nặng'}.get(t)
+
+
+def nan_tone(f):
+    """The Hán-Việt tone the T rules predict from the Taigi literary tone (and the Vietnamese initial's class)."""
+    t = f['nt']
+    return {1: 'ngang', 3: 'sắc', 4: 'sắc', 7: 'nặng', 8: 'nặng', 5: 'ngang' if f['son'] else 'huyền',
+            2: 'ngã' if f['son'] else 'hỏi', 6: 'nặng'}.get(t)
+
+
 JING = lambda f: f['mi'] in ('z', 'c', 's', 'j', 'q', 'x') and f['yi'] in ('z', 'c', 's')   # noqa: E731 精 series
 OPEN = lambda f: not f['chk']                                                                # noqa: E731
 ASP = ('ph', 'th', 'kh', 'x', 's')                 # Hán-Việt letters from old aspirates (and the 章 / 莊 fricatives)
@@ -267,6 +283,10 @@ RULES = [
      lambda f: f['ht'] == 'nặng'),
     ('T4', 'zh>vi', 'Taigi 4 → sắc', lambda f: f['chk'] and f['nt'] == 4, lambda f: f['ht'] == 'sắc'),
     ('T4', 'zh>vi', 'Taigi 8 → nặng', lambda f: f['chk'] and f['nt'] == 8, lambda f: f['ht'] == 'nặng'),
+    ('T*', 'zh>vi', 'every tone from Cantonese (the T1–T4 rules together)', lambda f: f['yt'] is not None,
+     lambda f: f['ht'] == yue_tone(f)),
+    ('T*', 'zh>vi', 'every tone from Taigi (the T1–T4 rules together)', lambda f: f['nt'] is not None,
+     lambda f: f['ht'] == nan_tone(f)),
     # --- initials, by the class of the Middle Chinese initial ---------------------------------------------------
     # labials 幫滂並 / 非敷奉 / 明微
     ('IP', 'zh>vi', 'ph ← Mandarin f-', MI('f'), HV('ph')),

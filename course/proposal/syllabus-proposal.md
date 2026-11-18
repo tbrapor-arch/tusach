@@ -101,3 +101,71 @@ French, English, Mandarin, Cantonese or Taigi. Not the text, which is to be writ
    merges hỏi / ngã and d / v: one line.
 7. **House spelling**: y in lý, kỹ, công ty; tone marks placed the house way (lint).
 8. **Drills**: ma má mà mả mã mạ; tone pairs; place names (Hà Nội, Hải Phòng, Đà Nẵng).
+
+## 3. The tone strand (Hán-Việt words only)
+
+Measured on the Hán-Việt syllables of the top 3,000 cards (`tools/bridge_rules.py`, "hits / total"). Native words and
+older loans follow none of this. **Direction**: "zh→vi" guesses the Vietnamese tone from the Chinese he knows;
+"vi→zh" goes from a tone he hears to the Chinese tone. "Sonorant" means the Vietnamese syllable starts with
+m n nh ng l v d (old m n ŋ l ɲ and the glides): he predicts the initial first (section 5), then the tone.
+
+**The old classes.** Hán-Việt splits each of the four old tones by the old initial, but **not the way Cantonese and
+Taigi do** (the first proposal said "exactly the split Cantonese and Taigi made": false). Two differences matter:
+- **Level tone, sonorant initial → ngang**, with the voiceless ones (nam 南, minh 明, dân 民), where Cantonese
+  (4), Taigi (5) and Mandarin (2) put them with the voiced obstruents. The first proposal (and review 2) said
+  huyền: wrong for these.
+- **Rising tone**: Hán-Việt has three outcomes (hỏi voiceless, ngã sonorant, nặng voiced obstruent). Cantonese
+  keeps 2 / 5 / 6; Taigi has one rising tone (2) for the first two and moved the third to 7; Mandarin has 3 / 3 / 4.
+  So **động 動 and hậu 後 are regular** (old voiced obstruent, rising → nặng, Cantonese 6, Taigi 7), not
+  exceptions as the first proposal said.
+
+| Old class | Hán-Việt | Cantonese | Taigi lit. | Mandarin |
+|---|---|---|---|---|
+| level, voiceless | ngang | 1 | 1 | 1 |
+| level, voiced obstruent | huyền | 4 | 5 | 2 |
+| level, sonorant | **ngang** | 4 | 5 | 2 |
+| rising, voiceless | hỏi | 2 | 2 | 3 |
+| rising, sonorant | ngã | 5 | 2 | 3 |
+| rising, voiced obstruent | nặng | 6 (some 5) | 7 | 4 |
+| departing, voiceless | sắc | 3 | 3 | 4 |
+| departing, voiced | nặng | 6 | 7 | 4 |
+| entering (-p -t -c), voiceless | sắc | 1 / 3 | 4 | any |
+| entering, voiced | nặng | 6 | 8 | any |
+
+**From Cantonese (zh→vi)**, all six rules together: **801 / 850 = 94 %**.
+
+| Cantonese tone | Hán-Việt | Hits | Main exceptions |
+|---|---|---|---|
+| 1 (open) | ngang | 163 / 168, 97 % | 監 giám, 擔 đảm, 胞 bào |
+| 4, obstruent initial | huyền | 82 / 85, 96 % | 查 tra, 郵 bưu, 華 hoa |
+| 4, sonorant initial | ngang | 72 / 72, 100 % | — |
+| 2 | hỏi | 96 / 109, 88 % | 會 hội, 統 thống, 話 thoại, 院 viện, 館 quán |
+| 5, sonorant initial | ngã | 26 / 32, 81 % | 理 lý, 李 lý, 里 lý, 與 dự, 議 nghị |
+| 5, obstruent initial | nặng | 5 / 7, 71 % (tendency, few) | 社 xã, 有 hữu |
+| 3 | sắc | 103 / 109, 94 % | 間 gian, 計 kê, 醬 tương |
+| 6 | nặng | 110 / 120, 92 % | 問 vấn, 士 sĩ, 義 nghĩa, 技 kỹ, 靜 tĩnh (→ ngã) |
+| checked 1 / 3 | sắc | 74 / 76, 97 % | 絡 lạc, 協 hiệp |
+| checked 6 | nặng | 70 / 72, 97 % | 隰 thấp, 摘 trích |
+
+**From Taigi (zh→vi)**, all together: **856 / 915 = 94 %**. Taigi 1 → ngang 95 %; 5 → huyền 97 % (obstruent) or
+ngang 100 % (sonorant); 2 → hỏi 89 % (obstruent; 有 hữu, 少 thiếu, 館 quán) or ngã 86 % (sonorant; 理 lý, 研
+nghiên); 3 → sắc 90 % (過 qua, 句 câu); 7 → nặng 90 % (問 vấn, 社 xã, 士 sĩ, 義 nghĩa); checked 4 → sắc 100 %,
+8 → nặng 95 % (的 đích, 複 phức). Taigi needs the Vietnamese initial twice (5 and 2), Cantonese once (4, 5).
+
+**From Mandarin (zh→vi)**: 1 → ngang 94 %; 2 with an obstruent → huyền 96 %; 3 with a sonorant → ngã 91 %. Tone 4
+does not tell sắc from nặng, and entering syllables are scattered: here Cantonese or Taigi decides.
+
+**From the Vietnamese tone heard (vi→zh)**: huyền → Cantonese 4 (99 %); ngang → Cantonese 1, or 4 after a sonorant
+(98 %); hỏi → Cantonese 2 (97 %); sắc (open) → Cantonese 3 (89 %); nặng (open) → Cantonese 6 (89 %), Mandarin 4
+(96 %); a syllable in -p -t -c -ch is sắc or nặng (166 / 166). **ngã → Cantonese 5 (72 %) or Mandarin 3 (78 %)
+is a tendency**: about a quarter of ngã syllables are old voiced departing or rising ones (士 sĩ, 義 nghĩa, 技 kỹ).
+
+**Teaching order**: T1 level tones (L9), T2 rising (L11), T3 departing (L12), T4 checked (L13), T5 heard → Chinese
+(L15). Examples, each the same word in Chinese with all four readings in the database:
+<!-- bridge-examples -->
+- T1 ngang: 心 tâm, 東 đông, 公 công, 音 âm · ngang after a sonorant: 南 nam, 民 dân, 文明 văn minh, 門 môn, 陽 dương
+  · huyền: 茶 trà, 湖 hồ, 頭 đầu, 平 bình, 情 tình
+- T2 hỏi: 感 cảm, 點 điểm, 水 thủy, 主 chủ, 口 khẩu · ngã: 馬 mã, 女 nữ, 美 mỹ · nặng: 動 động, 後 hậu, 部 bộ, 道 đạo
+- T3 sắc: 過 quá, 世 thế, 意 ý, 信 tín · nặng: 病 bệnh, 定 định, 電 điện, 大 đại
+- T4 sắc: 法 pháp, 發 phát, 一 nhất, 北 bắc, 客 khách · nặng: 學 học, 實 thực, 力 lực, 立 lập, 物 vật
+<!-- /bridge-examples -->

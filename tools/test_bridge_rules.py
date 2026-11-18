@@ -43,6 +43,14 @@ ok(f['ht'] == 'ngang' and f['son'] and f['coda'] == 'm' and f['yt'] == 4 and f['
 f = br.features({'ch': '行', 'hv': 'hành', 'yue': ['hang4', 'hong4'], 'nan': ['hîng'], 'cmn': ['xíng', 'háng']})
 ok(f['yi'] == 'h' and f['yr'] is None and f['mi'] is None and f['mt'] == 2, 'disagreeing readings give None')
 
+# the whole tone prediction: the sonorant split of Cantonese 4 / 5 and Taigi 5 / 2, checked syllables
+for hv, yue, nan, want_y, want_n in (('nam', 'naam4', 'lâm', 'ngang', 'ngang'), ('trà', 'caa4', 'tê', 'huyền', 'huyền'),
+                                     ('mã', 'maa5', 'má', 'ngã', 'ngã'), ('cảm', 'gam2', 'kám', 'hỏi', 'hỏi'),
+                                     ('động', 'dung6', 'tōng', 'nặng', 'nặng'), ('học', 'hok6', 'ha̍k', 'nặng', 'nặng'),
+                                     ('quốc', 'gwok3', 'kok', 'sắc', 'sắc')):
+    f = br.features({'ch': '?', 'hv': hv, 'yue': [yue], 'nan': [nan], 'cmn': []})
+    ok(br.yue_tone(f) == want_y and br.nan_tone(f) == want_n, f'{hv}: {want_y} from {yue}, {want_n} from {nan}')
+
 # kind(): the syllabus's thresholds
 ok(br.kind('zh>vi', 80, 100) == 'rule' and br.kind('zh>vi', 79, 100) == 'tendency', '80 % is a rule, 79 % a tendency')
 ok(br.kind('vi>zh', 60, 100) == 'tendency' and br.kind('vi>zh', 59, 100) == 'drop', '60 % is a tendency')
