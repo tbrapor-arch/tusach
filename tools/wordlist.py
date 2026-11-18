@@ -4,6 +4,8 @@ human part of each note.
 
     python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv            # rewrite the file in place
     python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv --check    # say which rows would change, write nothing
+    python3 -I tools/wordlist.py course/proposal/wordlist-1.tsv --to-check course/proposal/wordlist-1-to-check.md
+        # write the to-check list: the course lexicon's doubts and overrides, with the lesson that teaches each word
 
 Columns written: english (the card's English, cut at 90 characters), freq_rank (the card's rank; none for a person's
 name), type (the card label in words: Hán-Việt, Hán-Việt formed in Vietnamese, Hán-Việt (opaque), Hán-Việt
@@ -11,9 +13,8 @@ name), type (the card label in words: Hán-Việt, Hán-Việt formed in Vietnam
 taigi_literary, mandarin (the bridge row; for an older Chinese loan, those of its etymon; for a compound formed in
 Vietnamese, each character's readings marked "per character"). The note keeps what a person wrote; the part in
 [db: …] is rewritten (origin evidence, doubt, Taigi colloquial reading, older-loan etymon).
-A person's name (type name, or a note starting "(name) Name") is looked up as the name entry (`lan~name`). A row
-drafted with another sense than the card's main one (từ "from", not 詞 "word") keeps it through a sense tag
-(`từ~from`, cards.sense_tag), named in the note so that lessons write it.
+A person's name (type name, or a note starting "(name) Name") is looked up as the name entry (`lan~name`). A word
+with several senses is written with its sense tag (`từ~from`: course/lexicon.tsv; `make lint` refuses it untagged).
 """
 import os
 import re
@@ -25,7 +26,7 @@ import cards  # noqa: E402
 import course  # noqa: E402
 import vi  # noqa: E402
 
-TYPE = {'same': 'Hán-Việt', 'hv-vn': 'Hán-Việt formed in Vietnamese', 'opaque': 'Hán-Việt (opaque)',
+TYPE = {'same': 'Hán-Việt', 'gram': 'Hán-Việt (same morpheme, grammatical use)', 'hv-vn': 'Hán-Việt formed in Vietnamese', 'opaque': 'Hán-Việt (opaque)',
         'doubtful': 'Hán-Việt (doubtful)', 'older-loan': 'older Chinese loan', 'loan': 'loan', 'native': 'native',
         'compound': 'compound', 'false-friend': 'Hán-Việt (false friend)', '': 'unknown'}
 
@@ -48,37 +49,18 @@ def human_note(note):
     return ' '.join(x for x in parts if not STALE.search(x)).strip()
 
 
-def sense_of(k, english):
-    """A sense tag (a part of speech or a word of the English) that names the etymology whose English contains the
-    first sense the list was drafted with ("from" for từ, not 詞 "word"), or None when the card's main sense is it."""
-    first = english.split(';')[0].replace('…', '').strip().lower()
-    if not first:
-        return None
-    rows = [dict(zip(cards.COLS, x)) for x in cards.con.execute(
-        f"SELECT {cards.SQL_COLS} FROM entry e JOIN source s ON s.id = e.source WHERE e.key=?", (k,))]
-    groups = cards.senses(rows)
-    if not groups or first in (cards._group_en(groups[0]) or '').lower():
-        return None
-    want = next((g for g in groups if first in (cards._group_en(g) or '').lower()
-                 or any(first in (x['english'] or '').lower() for x in g)), None)
-    if not want or want is groups[0]:
-        return None
-    for t in [w for w in re.findall(r'[a-z]+', first) if len(w) >= 3] + sorted({x['pos'] for x in want}):
-        hit = cards.sense_tag(rows, t)
-        if hit is not None and hit in want and first in (hit['english'] or '').lower():
-            return t
-    return None
-
-
 def row_for(r):
     """The new row (dict) for one word-list row."""
     word = vi.nfc(r['word'])
     base, _, tag = word.partition('~')
     person = r['type'] == 'name' or r['note'].startswith('(name) Name')
     k = cards.canon(vi.key(base.replace('_', ' ')))
-    stag = None if tag or person else sense_of(k, r['english'])
-    cid = cards.lookup(k, 'name' if person and not tag else (tag or stag))
+    cid = cards.lookup(k, 'name' if person and not tag else (tag or None))
     c = cards.dictionary.get(cid) if cid else None
+    lx = cards.LEX_CID.get('name:' + base.replace('_', ' ')) if person else None
+    if lx:                      # a name of the course lexicon (Lan 蘭): its English and characters
+        c = {'en': lx['en'], 'en_src': 'lexicon', 'conf': lx['conf'], 'label': '', **(
+            {'chars': lx['chars'], **cards._bridge(lx['chars'])} if lx['chars'] else {})}
     out = dict(r)
     note = human_note(r['note'])
     db = []
@@ -109,16 +91,52 @@ def row_for(r):
             db.append(f"origin {c['origin']}")
         if c.get('doubt'):
             db.append(f"{c.get('label', 'doubt')}: {c['doubt']}")
-    if stag:
-        db.insert(0, f'sense tag {base}~{stag}')
+    if c and c.get('en_src') == 'lexicon':
+        db.insert(0, f"course lexicon (Claude, not native-checked), confidence {c.get('conf', '')}"
+                  + (f"; false friend: {c['ff']}" if c.get('ff') else ''))
     if person:
         note = '(name) ' + note
     out['note'] = note + (f" [db: {'; '.join(db)}]" if db else '')
     return out
 
 
+def to_check(list_path, out_path):
+    """The to-check list of a word list: the course lexicon's rows with confidence doubt and its overrides."""
+    import lexicon
+    rows = lexicon.load()
+    wl = {r['word'].replace('_', ' '): r['lesson'] for r in course.wordlist(list_path)}
+
+    def lesson(r):
+        for k in (r['key'], r['key'].split('~')[0]):
+            if k in wl:
+                return f'L{wl[k]}'
+        return '—'
+    doubt = [r for r in rows if r['conf'] == 'doubt']
+    ov = [r for r in rows if r['override']]
+    name = os.path.basename(list_path)
+    out = [f'# {name}: what to check first', '',
+           'Generated by `tools/wordlist.py --to-check` from `course/lexicon.tsv` (Claude\'s course lexicon, NOT checked by a',
+           'native speaker): its rows with confidence **doubt** and its rows that keep a conflict with the data on purpose',
+           '(**override**), each with the reason. The other rows of the list come from lexicon rows marked sure or likely;',
+           'they too need a native speaker\'s reading, but these come first. Column "list": the lesson that teaches the',
+           'word (— when only the lexicon has it).', '',
+           f'## Doubt ({len(doubt)})', '', '| word | list | English | origin | doubt |', '|---|---|---|---|---|']
+    for r in doubt:
+        why = r['confidence'].split(':', 1)[1].strip() if ':' in r['confidence'] else ''
+        o = r['origin'] + (' ' + (r['chars'] or r['etymon']) if (r['chars'] or r['etymon']) else '')
+        out.append(f"| {r['key']} | {lesson(r)} | {r['en']} | {o} | {why} |")
+    out += ['', f'## Override ({len(ov)})', '', '| word | list | conflict kept | reason |', '|---|---|---|---|']
+    for r in ov:
+        for k, why in lexicon.overrides(r).items():
+            out.append(f"| {r['key']} | {lesson(r)} | {k} | {why} |")
+    open(out_path, 'w', encoding='utf-8').write('\n'.join(out) + '\n')
+    print(f'{out_path}: {len(doubt)} doubts, {len(ov)} overrides')
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if '--to-check' in sys.argv:
+        return to_check(args[0], sys.argv[sys.argv.index('--to-check') + 1])
     if len(args) != 1:
         sys.exit(__doc__)
     path = args[0]
