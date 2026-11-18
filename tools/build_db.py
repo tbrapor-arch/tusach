@@ -746,7 +746,7 @@ def word_checks(con):
     """entry.hv_check, and the computed labels: same (Sino-Vietnamese) and native (inherited from Vietic). A Sino-
     Vietnamese analysis whose characters do not match the syllables (number, or readings) is not labelled same and its
     characters are not shown (cards.py); `make lint` prints these suspects (tools/verify_words.py). False friends
-    cannot be detected: they come from course/false_friends.tsv, on the card (tools/cards.py)."""
+    cannot be detected: they come from the course lexicon's false_friend column (course/lexicon.tsv, tools/cards.py)."""
     hv = defaultdict(set)
     for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind IN ('hv', 'hannom') OR label = 'fallback'"):
         hv[ch].add(rkey(r))
@@ -797,7 +797,7 @@ def spelling_groups(con, raw):
     vậy, nhỉ into nhờ): an alternative form, a pronunciation or eye-dialect spelling, a dialectal form keeps its own
     key, senses and rank; its card shows the cross-reference only.
     The house spelling of a group (the key every entry of the group gets, the spelling lint asks for in lessons) is
-    the most frequent one: wordfreq's estimate for the spelling as a phrase (tools/freq.py phrase_freq, English
+    a spelling without hyphens (today's orthography: a lô, not a-lô), then the most frequent one: wordfreq's estimate for the spelling as a phrase (tools/freq.py phrase_freq, English
     leakage removed, so `my` does not win over `mi` by the English word), ties to the spelling Wiktionary has its
     main entry under. Returns the number of groups."""
     keys = [k for (k,) in con.execute("SELECT DISTINCT e.key FROM entry e JOIN source s ON s.id = e.source "
@@ -828,7 +828,7 @@ def spelling_groups(con, raw):
     pf = freq.phrase_freq(raw, {x for g in groups for k in g for x in k.replace('-', ' ').split()})
     rows = []
     for g in groups:
-        canon = max(g, key=lambda k: (pf(k), k in main, '-' not in k, -len(k), k))
+        canon = max(g, key=lambda k: ('-' not in k, pf(k), k in main, -len(k), k))   # spaced (a lô) over a-lô
         for k in g:
             how = 'iy' if iy_key(k) == iy_key(canon) else 'ortho'
             rows.append((k, canon, how))

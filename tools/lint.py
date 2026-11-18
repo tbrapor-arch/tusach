@@ -24,12 +24,18 @@ Checks (E = error, exit 1; W = warning; I = information)
   W  lines per lesson do not grow smoothly (owner's choice: a smooth growth; checked over the non-review lessons)
   W  review flag not on every 7th lesson
   E  a word not in the house spelling of its spelling group (lý do, not lí do; docs/REFERENCE.md "Spelling groups")
-  E  a bridge note (topic bridge) whose chữ Hán example is not a database word labelled "same word in Chinese"
-     (doubtful, opaque, formed in Vietnamese or older loan are refused) with all four readings (Hán-Việt, Cantonese,
-     Taigi literary, Mandarin)
+  E  a word without ~tag whose key has several senses in the course lexicon (course/lexicon.tsv), or, when the
+     lexicon has no row for it, several etymologies in the dictionary: tag it (từ~from, năm~year), never a silent
+     first card
+  E  a bridge note (topic bridge) whose chữ Hán example is not the same word in Chinese for the sense taught: a
+     course lexicon row with these characters and origin hv / hv-gram (not doubtful, not a false friend), else (no
+     lexicon row has them) a database word with them labelled same / gram; and all four readings (Hán-Việt,
+     Cantonese, Taigi literary, Mandarin)
+  E  a conflict of the course lexicon with the data (tools/lexicon.py) that the row does not override with a reason
   E  (once the owner approved a word list: approved.word_list.file in course/syllabus.yaml) a new_words entry not in
      that list, or listed for another lesson; W a word the list gives the lesson that its new_words lacks; E the list
-     not in the 11-column format (tools/course.py WORDLIST_COLS)
+     not in the 11-column format (tools/course.py WORDLIST_COLS), a row listed twice, a lesson number that is not a
+     lesson of the syllabus
   E  an unknown key in a lesson plan of course/syllabus.yaml (n, en, vi, review, grammar, bridge, strand, lines,
      new_words {native, hv}); W a written lesson whose dialogue length or new words (native / Hán-Việt) leave the
      plan by more than one, or whose Hán-Việt share is more than 0.2 from the plan's
@@ -48,7 +54,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import course  # noqa: E402
+import lexicon  # noqa: E402
 import vi  # noqa: E402
+
+LEX = lexicon.load()
+LEX_CID, LEX_KEY = lexicon.index(LEX)
 
 DB = os.environ.get('TUSACH_DB') or os.path.join(ROOT, 'data/build/vi.db')
 REQUIRED = ('id', 'title', 'dialogue', 'notes', 'new_words')
@@ -120,18 +130,55 @@ class DB_:
         import cards
         return cards.sense_tag(self.rows(k), tag) is not None
 
+    def senses(self, k):
+        """The word-etymologies of a key (not names, character readings, pronunciation spellings or English-less
+        stubs): what an untagged lesson word would have to choose between."""
+        import cards
+        gs = cards.senses([r for r in self.rows(k) if r.get('pos') not in ('name', 'character-reading')
+                           and r.get('alt_kind') != 'pron' and r.get('english') and not r.get('fixture')])
+        return gs
+
     def bridge_example(self, chars):
-        """'' when `chars` may be a bridge-note example, else why not."""
-        labels = [r[0] for r in self.con.execute("SELECT label FROM entry WHERE chars=? AND source != 'fixture'",
-                                                 (chars,))]
-        if not labels:
-            return 'no database word has these characters'
-        if 'same' not in labels:
-            return f'its analysis is not "same word in Chinese" ({", ".join(sorted(set(labels)))})'
+        """'' when `chars` may be a bridge-note example, else why not. The sense taught decides: a lexicon row with
+        these characters (唐 is đường~road's analysis, doubtful: refused even though the Tang dynasty is 唐), else
+        the database words with them (names aside)."""
+        rows = [r for r in LEX if r['chars'] == chars and r['pos'] != 'name']
+        if rows:
+            good = [r for r in rows if r['origin'] in ('hv', 'hv-gram') and r['conf'] != 'doubt' and
+                    not r['false_friend']]
+            if not good:
+                r = rows[0]
+                return (f'the course lexicon gives {chars} to {r["key"]} as {r["origin"]}'
+                        f'{" (doubtful)" if r["conf"] == "doubt" else ""}{" (false friend)" if r["false_friend"] else ""}'
+                        ': not the same word in Chinese')
+        else:
+            labels = [r[0] for r in self.con.execute("SELECT label FROM entry WHERE chars=? AND source != 'fixture' "
+                                                     "AND pos NOT IN ('name', 'character-reading')", (chars,))]
+            if not labels:
+                return 'no database word has these characters'
+            if 'same' not in labels and 'gram' not in labels:
+                return f'its analysis is not "same word in Chinese" ({", ".join(sorted(set(labels)))})'
         b = self.con.execute('SELECT hv, n FROM bridge WHERE chars=?', (chars,)).fetchone()
         if not b or b[1] < 3 or '—' in (b[0] or ''):
             return 'not all four readings exist (Hán-Việt, Cantonese, Taigi literary, Mandarin)'
         return ''
+
+
+def untagged(k):
+    """Why an untagged word cannot be written so ('' when it can): several senses in the lexicon, or (no lexicon row)
+    several etymologies in the dictionary."""
+    rs = LEX_KEY.get(k, [])
+    if len(rs) > 1:
+        return (f'the course lexicon has {len(rs)} senses of it: write one of '
+                f'{", ".join(r["key"] for r in rs if r["tag"]) or "its tags"}')
+    if not rs and D is not None:
+        n = len(D.senses(k))
+        if n > 1:
+            return f'{n} etymologies in the dictionary and no lexicon row: add the sense to course/lexicon.tsv or tag it'
+    return ''
+
+
+D = None
 
 
 def load_db():
@@ -284,9 +331,14 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
                 m('E', where, f'"{shown}": write the house spelling "{D.spelling[k]}" (spelling group, '
                               'docs/REFERENCE.md)')
                 k = D.spelling[k]
-            if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()) and not D.sense_tag(k, tag):
-                m('E', where, f'"{surf}": tag ~{tag} is defined by no dictionary entry, no new_words entry, and names '
-                              'no part of speech or single sense of the word')
+            if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()) and vi.card_id(k, tag) not in LEX_CID \
+                    and not D.sense_tag(k, tag):
+                m('E', where, f'"{surf}": tag ~{tag} is defined by no lexicon row, no dictionary entry, no new_words '
+                              'entry, and names no part of speech or single sense of the word')
+            if not tag and k in keys and not (shown in names or shown in lesson_names):
+                why = untagged(k)
+                if why:
+                    m('E', where, f'"{shown}": {why}')
             if k not in keys:
                 hint = ' (a name? declare it in new_words with name: true)' if surf[:1].isupper() and not start else ''
                 m('E', where, f'"{shown}" is in no dictionary{hint}')
@@ -424,6 +476,13 @@ def main():
     for f, d in loaded:
         if isinstance(d.get('id'), int) and d['id'] > 0 and not d.get('fixture') and bool(d.get('review')) != (d['id'] % 7 == 0):
             msgs.append(('W', f'{os.path.basename(f)}: W review lessons are every 7th (7, 14, …)'))
+    res = lexicon.validate(D.con, LEX)
+    for r, kind, msg in res:
+        if kind not in lexicon.overrides(r):
+            msgs.append(('E', f'course/lexicon.tsv:{r["n"]}: E {r["key"]}: {kind}: {msg} (resolve it, or override it '
+                              'with a reason: tools/lexicon.py)'))
+    print(f'lint: course lexicon: {len(LEX)} rows, {len(res)} conflicts with the data, '
+          f'{sum(1 for r, k, _ in res if k in lexicon.overrides(r))} overridden with a reason')
     errors = 0
     for level, text in msgs:
         print(text)
@@ -444,12 +503,25 @@ def check_wordlist(path):
         print(f'E {e}')
         return 1
     errors = 0
+    n_lessons = len(course.syllabus().get('lessons') or []) or 100
+    seen = {}
     for r in rows:
+        where = f'{path}:{r["line"]}'
+        try:
+            n = int(r['lesson'])
+        except (TypeError, ValueError):
+            n = None
+        if n is None or not 1 <= n <= n_lessons:
+            print(f'{where}: E lesson {r["lesson"]!r} is not a lesson of the syllabus (1-{n_lessons})')
+            errors += 1
+        if r['word'] in seen:
+            print(f'{where}: E "{r["word"]}" is listed twice (line {seen[r["word"]]})')
+            errors += 1
+        seen.setdefault(r['word'], r['line'])
         if r['type'] == 'name':
             continue
         base, _, tag = vi.nfc(r['word']).partition('~')
         k = vi.key(base.replace('_', ' '))
-        where = f'{path}:{r["line"]}'
         if D.spelling.get(k, k) != k:
             print(f'{where}: E "{base}": write the house spelling "{D.spelling[k]}"')
             errors += 1
@@ -457,8 +529,11 @@ def check_wordlist(path):
         if k not in keys:
             print(f'{where}: E "{base}" is in no dictionary')
             errors += 1
-        elif tag and tag not in tags.get(k, set()) and not D.sense_tag(k, tag):
-            print(f'{where}: E "{r["word"]}": tag ~{tag} names no entry, part of speech or single sense')
+        elif tag and tag not in tags.get(k, set()) and vi.card_id(k, tag) not in LEX_CID and not D.sense_tag(k, tag):
+            print(f'{where}: E "{r["word"]}": tag ~{tag} names no lexicon row, entry, part of speech or single sense')
+            errors += 1
+        elif not tag and untagged(k):
+            print(f'{where}: E "{base}": {untagged(k)}')
             errors += 1
     print(f'{path}: {len(rows)} rows, {errors} error(s)')
     return 1 if errors else 0

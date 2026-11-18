@@ -1,9 +1,0 @@
-# False friends: Hán-Việt words whose modern Vietnamese meaning drifted from the Chinese word written with the same
-# characters. Hand-curated (they cannot be detected automatically); read by tools/cards.py, which sets the card's
-# label to "false-friend" (a lesson's own `label` in new_words still wins). Empty on purpose: entries are added when
-# a lesson or a check finds one, each with the evidence in the note.
-#
-# Format: one word per line, three tab-separated fields:
-#   word (quốc ngữ, spaces or underscores)  <TAB>  chữ Hán ('' = whatever characters the card has)  <TAB>  note (English)
-# Example (commented out):
-# học sinh	學生	in Vietnamese a pupil at school (up to secondary), not a university student (sinh viên)

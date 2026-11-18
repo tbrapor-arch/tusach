@@ -439,12 +439,19 @@ def lookup(k, tag=None, surface=None):
 
 
 def name_card(surface):
+    """The card of a name declared in a lesson's new_words (name: true); English from the lesson, else from the
+    course lexicon's name row (pos name: Lan, Minh), with its characters and their readings."""
     cid = NAMES.get(surface)
     if cid and cid not in dictionary:
         c = COURSE[cid]
-        en = c.get('en') or ''
-        dictionary[cid] = {'w': surface, 'k': surface, 'name': 1, 'en': en, 'en_src': 'course' if en else '',
-                           'en_rank': english.rank('course' if en else ''), 'label': c.get('label', '')}
+        lx = LEX_CID.get(cid) or {}
+        en, src = (c.get('en'), 'course') if c.get('en') else (lx.get('en'), 'lexicon') if lx.get('en') else ('', '')
+        card = {'w': surface, 'k': surface, 'name': 1, 'en': en, 'en_src': src, 'en_rank': english.rank(src),
+                'label': c.get('label', '')}
+        if lx.get('chars') and not c.get('chars'):
+            card['chars'] = lx['chars']
+            card.update(_bridge(lx['chars']))
+        dictionary[cid] = card
     return cid
 
 

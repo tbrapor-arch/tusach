@@ -1,0 +1,462 @@
+# Course lexicon (tools/lexicon.py): one row per SENSE the course teaches. Written by Claude, NOT checked by a native
+# speaker. On a card it wins for the English, the sense chosen, the origin label, the characters and the false-friend
+# note; readings are always joined from the database on these characters. Columns and validation: tools/lexicon.py.
+# The first row of a key is its main sense (the untagged card); a lesson writes a ~tag when a key has several senses.
+key	pos	en	origin	chars	etymon	false_friend	usage	confidence	source	override
+chào	intj	hello; goodbye; to greet	older-loan		朝		With a person term: chào anh, chào chị; any time of day, hello and goodbye	doubt: Wiktionary says "possibly" a non-Hán-Việt reading of 朝 (to pay court)	wikt: to greet, salute, say hello or goodbye to	
+anh	pron	elder brother; you (to a young man a little older); I (said by him)	native				A man of about the speaker's age or a little older; he says anh for "I" to someone younger	sure	wikt: elder brother; you/I pronoun senses	
+chị	pron	elder sister; you (to a young woman a little older); I (said by her)	native				A woman a little older than the speaker; she says chị for "I" to someone younger	sure	wikt: an elder sister; you, my big sister	
+em	pron	younger sibling; you (to someone younger); I (to someone older)	native				Also used to call a waiter or shop assistant	sure	wikt: younger sibling; person younger than oneself	
+tôi	pron	I, me (neutral)	native				Neutral and polite with strangers; among family and friends a kinship term replaces it	sure	wikt ety 1: I/me (originally "servant")	
+là	verb	to be (noun = noun)	native				Links a noun to a noun (Tôi là Lan); not used before an adjective	sure	wikt ety 2: to be	
+tên	noun	name; to be called (tên là)	unknown				Anh tên là gì? "What is your name?"	sure	wikt ety 1: given name; name	
+gì	pron	what	native				After the verb: Anh tên là gì?	sure	wikt: what, whatever; anything	
+không	adv	not; no; (question tag) … or not?	hv-opaque	空			Before a verb or adjective it negates; at the end of a sentence it makes a yes/no question	sure	wikt: Negates the meaning of the modified verb: not; Used to form polar questions	
+vâng	intj	yes (polite)	unknown				Northern polite "yes"; dạ is also used, especially to elders	sure	wikt: yes	
+ạ	particle	(polite final particle, to older people)	unknown				At the end of a sentence to someone older or of higher status: Chào bà ạ	sure	wikt: to use the particle ạ when speaking to someone	
+cảm ơn	verb	thank you; to thank	older-loan		感恩		Northern spelling; cám ơn is the commoner Southern one	sure	wikt: to thank (nativisation of 感恩)	
+rất	adv	very	unknown				Before the adjective: rất vui	sure	wikt: very	
+vui	adj	happy, glad; fun	native				Rất vui được gặp anh "nice to meet you"	sure	wikt: merry, joyful, gay	
+được	verb	to get, to obtain; can, may; to be allowed to	older-loan		得		After a verb: can (nói được "can speak"); before a verb: get to (được gặp "get to meet")	sure	wikt: to obtain, to get (passively); to be all right	
+gặp	verb	to meet	native					sure	wikt: to meet, to see	
+Sam	name	Sam (the learner in the dialogues)	unknown				Not a Vietnamese name	sure	Claude	
+Lan	name	Lan (a woman's name; 蘭 orchid)	hv	蘭				sure	wikt: a female given name from Chinese	
+Minh	name	Minh (a name; 明 bright)	hv	明				sure	wikt: a unisex given name from Chinese	
+người	noun	person, people; (before a nationality) a … person	native				người Pháp "a French person": the modifier follows the noun	sure	wikt: person, people	
+nước~water	noun	water; drink	native					sure	wikt ety 1: water	
+nước~country	noun	country, nation	native				nước Pháp "France", nước ngoài "abroad"	likely	wikt ety 2: country, nation	
+nào	det	which; (after a noun) any	unknown				After the noun: người nước nào? "from which country?"	sure	wikt: which; every, any	
+ở	prep	at, in; to live, to be (somewhere)	native					sure	wikt: at, in; to be, to live, to stay	
+đâu	pron	where; (emphatic) not at all	unknown				ở đâu? "where?"; không … đâu "not at all"	sure	wikt: where; no, not	
+đến	verb	to come, to arrive; to (a place, a time)	native					sure	wikt: to arrive, to come; to	
+từ~from	prep	from; since	older-loan		自		từ Pháp "from France"; từ hôm qua "since yesterday"	likely	wikt ety 1: from, since (non-Hán-Việt reading of 自)	
+từ~word	noun	word	hv	詞				sure	wikt ety 2: word	
+Việt Nam	noun	Vietnam	hv	越南				sure	wikt: Vietnam	
+Pháp	noun	France; French	hv	法			Short for 法蘭西; người Pháp, tiếng Pháp	sure	wikt: France	
+Trung Quốc	noun	China	hv	中國				sure	wikt: China	
+Hà Nội	noun	Hanoi	hv	河內				sure	wikt: Hanoi	
+tiếng Việt	noun	Vietnamese (the language)	compound				tiếng "language" + Việt	sure	wikt: Vietnamese language	
+nói	verb	to speak; to say	unknown					sure	wikt: to speak, to talk, to say, to tell	
+biết	verb	to know; to know how to	older-loan		別			likely	wikt: to know (non-Hán-Việt reading of 別)	
+cũng	adv	also, too	older-loan		共		Before the verb: Tôi cũng là sinh viên	likely	wikt: also, too (non-Hán-Việt reading of 共)	
+học	verb	to study, to learn	hv	學				sure	wikt: to study, to learn	
+cà phê	noun	coffee	french				cà phê sữa đá "iced coffee with milk"	sure	wikt: coffee (French café)	
+trà~tea	noun	tea	hv	茶			In the North chè is the everyday word; trà in cafés and for named teas	sure	wikt: tea	
+sữa	noun	milk	native					sure	wikt: milk	
+đá~ice	noun	ice; stone	native				cà phê đá "iced coffee"	sure	wikt ety 1: rock, stone; ice	
+đá~kick	verb	to kick	native				đá bóng "to play football"	likely	wikt ety 2: to kick	
+cốc	noun	glass, cup (Northern)	loan				Northern; the South says ly	likely	wikt: glass, tumbler (Sino-Tibetan origin)	
+có	verb	to have; there is, there are; (question) … or not?	native				có … không? "is there …?, do you have …?"	sure	wikt: to have, to possess; there be	
+muốn	verb	to want	native					sure	wikt: to want	
+uống	verb	to drink	native					sure	wikt: to drink	
+cho	verb	to give; for, to; to let	native				cho tôi … "give me …, I'll have …"	sure	wikt: to give; to let; for, to	
+một	num	one; a, an	native					sure	wikt: one	
+hai	num	two	native					sure	wikt: two	
+đây	pron	here; this (one)	unknown				đây là … "this is …"	sure	wikt: this place here; this thing/person	
+ơi	intj	hey (calling someone): em ơi!	native				After the name or person term, to call someone	sure	wikt: hey	
+nhé	particle	…, OK? (friendly final particle)	unknown				A suggestion or promise, friendly: Mai gặp nhé	sure	wikt: alright?, okay?, will you?	
+chút	noun	a little, a bit; a moment	native				một chút "a little"; chờ một chút "wait a moment"	sure	wikt: a very small portion or amount; a moment	
+ngồi	verb	to sit	native					sure	wikt: to sit	
+ba~three	num	three	native					sure	wikt ety 2: three	
+ba~father	noun	father, dad (Southern)	unknown				Southern; the North says bố	likely	wikt ety 1: father	
+bốn	num	four	native				tư replaces it in ordinals (thứ tư) and after mươi (hai mươi tư), everywhere	sure	wikt: four	
+năm~year	noun	year	native				năm nay "this year"; năm 2024	sure	wikt ety 2: year	
+năm~five	num	five	native				After mươi it becomes lăm (hai mươi lăm)	sure	wikt ety 1: five	
+sáu	num	six	native					sure	wikt: six	
+bảy	num	seven	native					sure	wikt: seven	
+tám	num	eight	native					sure	wikt: eight	
+chín	num	nine	native				Also an adjective: ripe, cooked	sure	wikt: nine	
+mười	num	ten	native					sure	wikt: ten	
+mươi	num	ten (in tens from twenty on: hai mươi)	unknown				hai mươi "twenty"; mười alone is "ten"	sure	wikt: ten	
+nghìn	num	thousand	native				Northern; the South says ngàn	likely	wikt: thousand (cognate with Old Mon)	
+bao nhiêu	pron	how much, how many	compound				Bao nhiêu tiền? "How much is it?"	sure	wikt: how much, how many	
+tiền	noun	money	hv	錢				sure	wikt: money	
+đồng	noun	dong (the currency); copper	hv	銅			Prices: hai mươi nghìn đồng	sure	wikt: copper; dong	
+mua	verb	to buy	older-loan		務			doubt: Wiktionary's 務 is the only source given; the reviewer and Claude could not judge it	wikt: to buy	
+đắt	adj	expensive	native				Northern; the South says mắc	sure	wikt: expensive	
+rẻ	adj	cheap	unknown					sure	wikt: cheap	
+quá	adv	too, very (much); to go past	hv	過			đắt quá! "too expensive!"	sure	wikt: very, excessively; to exceed	
+quả	noun	fruit; (classifier for round things: quả cam)	hv	果			Northern; the South says trái	sure	wikt: piece of fruit; something round	
+cam	noun	orange (fruit, colour)	hv	柑				sure	wikt: orange	
+gia đình	noun	family	hv	家庭				sure	wikt: family, household	
+ảnh	noun	photo, picture	hv	影				sure	wikt: image; photograph	
+bố	noun	father, dad (Northern)	native				Northern; the South says ba	sure	wikt: father	
+mẹ	noun	mother, mum	native					sure	wikt: mother	
+ông	pron	grandfather; old man; Mr, sir; you (to an older man)	hv	翁				sure	wikt: grandfather; old man; you, my grandfather	
+bà	pron	grandmother; old woman; Mrs, madam; you (to an older woman)	hv	婆				sure	wikt: a grandmother; an old woman; Mrs	
+anh trai	noun	elder brother	compound					sure	wikt: elder brother	
+chị gái	noun	elder sister	compound					sure	wikt: elder sister	
+em gái	noun	younger sister	compound					sure	wikt: younger sister	
+ai	pron	who; anyone, someone	native					sure	wikt: who; whoever, anyone	
+của	prep	of, belonging to	unknown				After the thing owned: nhà của tôi "my house"	sure	wikt: of (belonging to)	
+con	noun	child; (classifier for animals)	native				con mèo "a cat"; con trai "son"	sure	wikt: child; son	
+mấy	det	how many (small numbers); a few	native				Mấy tuổi? "how old (a child)?"; for larger numbers bao nhiêu	sure	wikt: how many; a few	
+tuổi	noun	age; years old	older-loan		歲		Anh bao nhiêu tuổi? "How old are you?"	sure	wikt: age; a year of age (non-Hán-Việt reading of 歲)	
+giờ	noun	hour; o'clock; time, now	older-loan		時		Mấy giờ rồi? "What time is it?"	sure	wikt: hour (non-Hán-Việt reading of 時)	
+phút	noun	minute	unknown					sure	wikt: minute	
+rưỡi	num	and a half (after a number or unit)	unknown				hai giờ rưỡi "half past two"	sure	wikt: and a half	
+bây giờ	adv	now	compound					sure	wikt: now	
+hôm nay	adv	today	compound				hôm "day" + nay "this, now"	sure	wikt: today (hôm + nay)	
+ngày mai	adv	tomorrow	compound				ngày "day" + mai "morning"	sure	wikt: tomorrow (ngày + mai)	
+sáng	noun	morning; bright	native				buổi sáng "(in the) morning"	sure	wikt: morning; light, bright	
+chiều~afternoon	noun	afternoon	unknown				buổi chiều "(in the) afternoon", from about noon to dusk	sure	wikt: afternoon	
+tối	noun	evening; dark	native				buổi tối "(in the) evening"	sure	wikt: evening; dark	
+đi	verb	to go	native					sure	wikt: to go	
+làm	verb	to do; to make; to work (as)	unknown				làm gì? "what do you do?"; làm bác sĩ "to work as a doctor"	sure	wikt: to do; to make; to work	
+về	verb	to go back, to return (home); about	native				về nhà "to go home"; nói về … "to talk about …"	sure	wikt: to come back or go back; about	
+nhà	noun	house, home	native					sure	wikt: house, home	
+đang	adv	(action in progress) be …-ing, now	hv-gram	當			Before the verb: Tôi đang ăn "I am eating"	likely	wikt: marks the continuous aspect (當)	
+sẽ	adv	will (future)	native				Before the verb: Tôi sẽ đi	sure	wikt ety 1: marks the future tense	
+đã	adv	(past) did, already; had	unknown				Before the verb; often left out when the time is clear	sure	wikt: having completed this action, perfect aspect	
+chiều~direction	noun	direction; dimension; to indulge (a child)	unknown				ba chiều "three-dimensional"; chiều con "to spoil a child"	likely	wikt: direction; dimension	
+đường~road	noun	road, street; way	hv-opaque	唐				doubt: Wiktionary gives 唐 ("road inside a temple") and, alternatively, a Tai origin; 唐 is not "road" for a reader of Chinese	wikt ety 1: road, street, path	
+đường~sugar	noun	sugar	hv	糖				sure	wikt ety 2: sugar	
+phố	noun	street (in town); town	hv	舖			phố cổ "the Old Quarter"; 舖 (店舖) is a shop, a street of shops	likely	wikt: street (舖)	
+xe máy	noun	motorbike	compound					sure	wikt: motorbike (xe gắn máy)	en-unsupported: Wiktionary defines it by two other Vietnamese words (mô tô, xe gắn máy); "motorbike" is the plain English (Claude)
+xe buýt	noun	bus	french				From French (auto)bus; xe "vehicle"	sure	wikt: borrowed from French bus	
+đi bộ	verb	to walk, to go on foot	compound					sure	wikt: to walk	
+rẽ	verb	to turn (left or right)	unknown				Northern; the South says quẹo	sure	wikt: to turn	
+trái	noun	left (side)	native				bên trái "on the left"; in the South trái is also "fruit"	sure	wikt: left	
+phải~right	adj	right (side); right, correct	older-loan		被		bên phải "on the right"; phải không? "isn't it?"	doubt: Wiktionary derives phải from 被 "to suffer" through a long chain of senses; a reader of Chinese sees none of them	wikt: right (side, direction); correct	
+phải~must	verb	must, to have to	older-loan		被		Before the verb: Tôi phải đi	doubt: Wiktionary derives phải from 被 "to suffer" through a long chain of senses; a reader of Chinese sees none of them	wikt: must, have to, should	
+thẳng	adj	straight (ahead)	unknown				đi thẳng "go straight on"	sure	wikt: straight	
+gần	adj	near, close (to); nearly	native					sure	wikt: near, nearby, close (to); nearly	
+xa	adj	far	hv	賒			賒 is "distant" in CC-CEDICT, but the Chinese word for far is 遠	likely	wikt: far (賒)	
+hồ	noun	lake	hv	湖			hồ Hoàn Kiếm	sure	wikt: lake	
+mất	verb	to lose; to take (time); to die	native				mất 10 phút "it takes ten minutes"	sure	wikt: to lose something; to take (time)	
+khoảng	adv	about, approximately; space, interval	older-loan		曠		khoảng 2 cây số "about 2 km"	likely	wikt: about, approximately; space, interval	
+Hoàn Kiếm	noun	Hoàn Kiếm (the lake of the returned sword, in Hanoi)	hv-vn	還劍			A Vietnamese name (the legend of Lê Lợi's sword)	sure	wikt: Hoàn Kiếm (還劍)	
+bản đồ	noun	map	hv	版圖		In Chinese 版圖 is a country's territory; a map is 地圖		sure	wikt: map (版圖)	
+thời tiết	noun	weather	hv	時節		In Chinese 時節 is a season or a time; weather is 天氣		sure	wikt: weather (時節)	
+trời	noun	sky; weather; heaven	native				Trời nóng "it is hot (weather)"	sure	wikt: sky; weather	
+nóng	adj	hot	native					sure	wikt: hot	
+lạnh	adj	cold	older-loan		冷			sure	wikt: cold (non-Hán-Việt reading of 冷)	
+mưa	noun	rain; to rain	native					sure	wikt: rain	
+nắng	noun	sunshine; sunny	native					sure	wikt: sunshine; sunny	
+mùa	noun	season	older-loan		務		mùa hè "summer"	likely	wikt: season (non-Hán-Việt reading of 務)	
+xuân	noun	spring	hv	春			mùa xuân "spring"	sure	wikt: spring	
+hè	noun	summer (Northern)	older-loan		夏		mùa hè; the South says mùa hạ or mùa nắng	likely	wikt: summer (non-Hán-Việt reading of 夏)	
+thu~autumn	noun	autumn	hv	秋			mùa thu "autumn"	sure	wikt: autumn	
+thu~collect	verb	to collect, to receive; to record	hv	收			thu tiền "to collect money"; máy thu hình "television set"	sure	wikt: to collect	
+đông~winter	noun	winter	hv	冬			mùa đông "winter"	sure	wikt: winter	
+đông~crowded	adj	crowded	older-loan		凍			doubt: Wiktionary groups "crowded" with "to congeal, to freeze" under 凍; the sense link is not visible	wikt ety 3: crowded, populous (凍)	
+đông~east	noun	east	hv	東			phía đông "the east"	sure	wikt: east	
+lắm	adv	very (after the word); a lot	unknown				After the adjective: đẹp lắm; more colloquial than rất	sure	wikt: very (placed after the word); many, much	
+hơi	adv	a bit, slightly (before an adjective)	unknown				hơi lạnh "a bit cold"	sure	wikt: slightly	
+hôm qua	adv	yesterday	compound				hôm "day" + qua "past"	sure	wikt: yesterday	
+nhưng	conj	but	hv-gram	仍			In Chinese 仍 is "still, yet"; Vietnamese made it "but"	likely	wikt: but, yet (仍)	
+thế nào	pron	how; what … like	compound				Thời tiết thế nào? "What is the weather like?"	sure	wikt: how	
+ăn	verb	to eat	native					sure	wikt: to eat	
+cơm	noun	(cooked) rice; a meal	native				ăn cơm "to have a meal"	sure	wikt: cooked rice; meal	
+phở	noun	pho (rice-noodle soup)	older-loan		粉		Clipped from nhục phở, from Cantonese 牛肉粉 "beef noodles"; phở is in effect a non-Hán-Việt reading of 粉 (phấn)	likely	wikt: pho; a truncation of Cantonese 牛肉粉; equivalent to a reading of 粉	
+bát	noun	bowl (Northern)	hv	缽			Northern; the South says chén	likely	wikt: bowl (缽)	
+món	noun	dish (of food); item	unknown				món ăn "a dish"	sure	wikt: dish	
+ngon	adj	tasty, delicious	native					sure	wikt: delicious	
+thịt	noun	meat	native				thịt bò "beef", thịt gà "chicken"	sure	wikt: flesh, meat	
+bò	noun	cow, ox; beef	native					sure	wikt: cow	
+gà	noun	chicken	native					sure	wikt: chicken	
+rau	noun	vegetables, greens	native					sure	wikt: vegetable	
+đũa	noun	chopsticks	older-loan		箸		đôi đũa "a pair of chopsticks"	likely	wikt: chopsticks (箸)	
+no	adj	full (after eating)	native					sure	wikt: full, sated	
+chưa	adv	not yet; (question) … yet?	unknown				… chưa? "… yet?"; answer rồi "yes, already" or chưa "not yet"	sure	wikt: not yet; yet	
+rồi	adv	already; then	unknown				At the end: Tôi ăn rồi "I have eaten"	sure	wikt: already; then	
+gọi	verb	to call; to order (food)	unknown				gọi món "to order"; gọi điện "to phone"	sure	wikt: to call	
+cuối tuần	noun	weekend	compound					sure	wikt: weekend	
+thứ bảy	noun	Saturday	compound				thứ "order" + bảy "seven"	sure	wikt: Saturday	
+chủ nhật	noun	Sunday	hv	主日			主日 is "the Lord's day" (Christian)	sure	wikt: Sunday (主日)	
+rảnh	adj	free, not busy	unknown					sure	wikt: free	
+bận	adj	busy	native					sure	wikt: busy	
+thích	verb	to like	hv-opaque	適			Wiktionary gives 適 "to suit"; a reader of Chinese does not see "to like" in it	likely	wikt: to like (適)	
+xem	verb	to watch, to look at; to see	older-loan		占		xem phim "to watch a film"	likely	wikt: to see, to look at, to watch (占)	
+phim	noun	film, movie	french				From French film	sure	wikt: film	
+đọc	verb	to read	older-loan		讀			sure	wikt: to read (non-Hán-Việt reading of 讀)	
+sách	noun	book	hv	冊				sure	wikt: book	
+chơi	verb	to play; to visit, to go out (đi chơi)	native					sure	wikt: to play; to have fun	
+bạn	pron	friend; you (to a peer)	hv	伴			伴 is a companion, partner (同伴)	sure	wikt: a friend, mate; you	
+với	prep	with; and	native					sure	wikt ety 2: with	
+hay~or	conj	or	unknown				In statements; in questions hay is also "or": cà phê hay trà?	sure	wikt ety 4: or	
+hay~good	adj	good, interesting (a film, a book)	unknown				phim hay "a good film"	sure	wikt ety 2: good, interesting	
+hay~often	adv	often	unknown				Before the verb: Tôi hay đi bộ	sure	wikt ety 3: often, habitually	
+định	verb	to intend to, to plan to	hv	定			Before the verb: Tôi định đi Huế	sure	wikt: to intend (to); to fix	
+bao giờ	pron	when; ever	compound				At the start, future: Bao giờ anh đi?; at the end, past: Anh đến bao giờ?	sure	wikt: when	
+mệt	adj	tired	unknown					sure	wikt: tired	
+ốm	adj	ill, sick (Northern)	native				Northern; in the South ốm is "thin" and "ill" is bệnh	sure	wikt: sick, ill (Northern); thin (Southern)	
+đau	adj	to hurt, painful; ill	native				đau đầu "headache"	sure	wikt: painful, to hurt	
+đầu	noun	head; beginning, first (part)	hv	頭			lần đầu "the first time"	sure	wikt: head; an end or extremity	
+bụng	noun	belly, stomach	native				đau bụng "stomach ache"	sure	wikt: belly	
+sốt	noun	fever; to have a fever	unknown				bị sốt "to have a fever"	sure	wikt: fever	
+bị	verb	(passive, for something bad) to suffer, to get; to be (…ed)	hv-gram	被			被 is the Chinese passive marker too	sure	wikt: particle denoting the subject is negatively affected	
+bác sĩ	noun	doctor (physician)	hv	博士		In Chinese 博士 is a doctor of philosophy (PhD); a physician is 醫生		sure	wikt: doctor (博士)	
+bệnh viện	noun	hospital	hv	病院			病院 is the Japanese and older Chinese word; modern Chinese says 醫院	sure	wikt: hospital	
+thuốc	noun	medicine; tobacco	older-loan		毒		thuốc lá "cigarettes"	doubt: Wiktionary's etymon is 毒 "poison" (Old Chinese); plausible for "drug" but not visible to a reader of Chinese	wikt: medicine (毒)	
+nghỉ	verb	to rest; to take time off	unknown				nghỉ ngơi "to rest"	sure	wikt: to rest	
+nên	verb	should; so, therefore	native				Before the verb: Anh nên nghỉ "you should rest"	sure	wikt: should; therefore, so	
+khám	verb	to examine (a patient); to search	hv	勘			đi khám "to see a doctor"	likely	wikt ety 2: to examine (勘)	
+khỏe	adj	well, healthy; strong	older-loan		快		Anh có khỏe không? "How are you?"	likely	wikt: healthy, well (non-Hán-Việt reading of 快)	
+điện thoại	noun	telephone; phone call	hv	電話			gọi điện thoại "to phone"	sure	wikt: telephone	
+a lô	intj	hello (on the phone)	french				From French allô	sure	wikt: hello (when answering the telephone)	
+nghe	verb	to hear, to listen	native					sure	wikt: to hear; to listen	
+số	noun	number	hv	數			số điện thoại "phone number"	sure	wikt: number	
+nhắn	verb	to leave a message, to text	unknown				nhắn tin "to text"	sure	wikt: to send a message	
+tin	noun	news, message; to believe	older-loan		信		tin nhắn "a text message"	sure	wikt: news; to believe (信)	
+chờ	verb	to wait	unknown				Chờ một chút "Wait a moment"; Northern also đợi	sure	wikt: to wait	
+lát	noun	a moment (một lát)	unknown				một lát "a moment", lát nữa "in a moment"	sure	wikt: moment, short while	
+lại	adv	again; back	native				gọi lại "to call back"	sure	wikt: again; once more	
+sau	adv	after; behind; later	native				sau đó "after that"	sure	wikt: later; after; behind	
+cháu	noun	grandchild; niece, nephew; I (to a person of one's grandparents' age)	native					sure	wikt: grandchild; nephew, niece	
+bác	noun	uncle, aunt (older than one's parent); you (to a person older than one's parents)	native					sure	wikt: uncle (parent's elder brother)	
+cô	pron	aunt (father's sister); Miss; you (to a young woman, a female teacher)	hv	姑				sure	wikt: a paternal aunt	
+chú	noun	uncle (father's younger brother); you (to a man of one's father's age)	native					sure	wikt: paternal uncle	
+dạ	intj	yes (polite, to elders)	unknown				Also answers a call politely	sure	wikt: yes (answers a question)	
+vừa	adv	just (now), recently; to fit	unknown				Tôi vừa đến "I have just arrived"; vừa … vừa … "both … and …"	sure	wikt: just, recently; to fit	
+này	det	this; (calling) hey	native				After the noun: cái này "this one"	sure	wikt: this	
+ấy	det	that (anh ấy he, cô ấy she)	unknown				Northern; after a person term it makes "he/she": anh ấy, cô ấy	sure	wikt: that, those (Northern)	
+đó	pron	that; there	native				cái đó "that one"; ở đó "there"	sure	wikt: that person/thing over there	
+ngày	noun	day	native				mỗi ngày "every day"	sure	wikt: day	
+nhiều	adj	many, much, a lot	older-loan		饒			likely	wikt: many, much (non-Hán-Việt reading of 饒)	
+tốt	adj	good	native					sure	wikt: good	
+nhỏ	adj	small, little	unknown				Northern also bé	sure	wikt: small, little	
+lớn	adj	big, large; to grow up	unknown				Northern also to	sure	wikt: big, large; grown-up	
+đẹp	adj	beautiful, good-looking	unknown					sure	wikt: beautiful	
+xin lỗi	intj	sorry; excuse me	compound				xin "to ask for" + lỗi "fault"	sure	wikt: sorry	
+nhỉ	particle	…, isn't it? (tag particle)	unknown				Northern; seeking agreement: Đẹp nhỉ! "Lovely, isn't it?"	sure	wikt: Used to create a tag question	
+và	conj	and	older-loan		和			likely	wikt: and (non-Hán-Việt reading of 和)	
+các	det	(plural marker) the …s, all the	hv-gram	各			Before a noun: các bạn "you (plural), friends"; in Chinese 各 is "each, every"	likely	wikt ety 1: Plural marker (各)	
+trong	prep	in, inside; during	native					sure	wikt ety 2: in, inside, within	
+để	conj	in order to, so that; to put, to leave	unknown				để + verb "(in order) to"; để đó "leave it there"	sure	wikt: in order to, so that; to place; to leave	
+những	det	(plural marker) some, the …s	older-loan		仍		Before a noun: những người này "these people"	likely	wikt: Plural marker (non-Hán-Việt reading of 仍)	
+họ	pron	they, them; family name	older-loan		戶		họ tên "full name"	likely	wikt: family name, surname; they/them (戶 for the family name)	
+vào	verb	to go in, to enter; into, in, at (a time)	native				vào lúc 8 giờ "at eight"	sure	wikt: to enter; in, into, upon	
+ra	verb	to go out, to come out; out	native				After a verb: mở ra "to open (up)"	sure	wikt ety 1: to go out, to leave	
+mà	conj	but; that, which (relative); (emphatic final particle)	native					sure	wikt: but, however; which, whom, that	
+thì	conj	then (nếu … thì); as for	unknown				nếu … thì … "if … then …"; after a topic: Tôi thì không "as for me, no"	likely	wikt ety 2 (no etymology given): as for …; in that case, then	
+trên	prep	on, above; over	native				trên bàn "on the table"	sure	wikt: on; upper, higher	
+có thể	verb	can, may; possibly	compound				Before the verb: Tôi có thể giúp "I can help"	sure	wikt: possibly	
+như	prep	like, as	hv-gram	如			如 is "like, as" in Chinese too	sure	wikt: like, as	
+khi	conj	when	native					sure	wikt ety 1: when	
+chỉ~only	adv	only, just	hv	只			Before the verb: Tôi chỉ có một	sure	wikt ety 2: only	
+chỉ~point	verb	to point (to); to show	hv	指			chỉ đường "to show the way"	sure	wikt ety 3: to point	
+còn	verb	to remain, still (to have); and, as for	native				còn … không? "is there any … left?"; còn anh? "and you?"	sure	wikt: to remain, to be left; yet, still	
+hơn	adv	more (than), -er	native				After the adjective: đắt hơn "more expensive"	sure	wikt: more, -er	
+mình	pron	oneself; I, me (familiar); we	native				Among friends: mình "I"; tự mình "by oneself"	sure	wikt: oneself; I/me; a body	
+điều	noun	matter, thing (something to say or do)	hv	條			điều đó "that (thing)"; in Chinese 條 is an item, a clause	likely	wikt ety 1: something to say or tell; an article	
+nó	pron	he, she, it (familiar, or for a child, an animal, a thing)	unknown				Not polite for an adult one respects	sure	wikt: he, him, she, her; it	
+theo	verb	to follow; according to	unknown				theo tôi "in my opinion"	sure	wikt: to follow; according to	
+nếu	conj	if	unknown				nếu … thì …	sure	wikt: if	
+cần	verb	to need	hv-opaque	懃				doubt: Wiktionary gives 懃 "diligent, earnest"; the sense "to need" is not visible in it	wikt ety 1: to need (懃)	
+lên	verb	to go up, to get on; up	native				lên xe "to get on (a bus, a car)"	sure	wikt: to go up, come up, rise; to get on	
+tại	prep	at, in; because of (tại vì)	hv	在				sure	wikt: to be located at; to be because of	
+sự	noun	(makes a noun of a verb or adjective: sự thật "the truth"); matter, affair	hv-gram	事				sure	wikt: affairs; nominalizes verbs or adjectives	
+vì	conj	because; for (the sake of)	older-loan		爲		vì vậy "therefore"	likely	wikt ety 1: because (non-Hán-Việt reading of 爲)	
+thấy	verb	to see; to feel, to find	older-loan		視		tôi thấy … "I feel/find that …"	likely	wikt: to perceive through the senses (視)	
+nhất	adv	most, -est; first	hv	一			After the adjective: đẹp nhất "the most beautiful"; thứ nhất "first"	sure	wikt: first; the most	
+mới	adj	new; just (recently); only then	native					sure	wikt: new; have just; only after	
+việc	noun	work, job; matter, thing (to do)	older-loan		役		làm việc "to work"	likely	wikt: job, work; matter (non-Hán-Việt reading of 役)	
+khác	adj	other, different	older-loan		各		After the noun: người khác "other people"	likely	wikt: different, other (各)	
+cả	det	all, whole; even	native				cả ngày "all day"; cả … cũng "even …"	sure	wikt ety 1: whole; at all	
+tới	verb	to come, to arrive; to, until; next	older-loan		逮		tuần tới "next week"	doubt: Wiktionary's 逮 is the only source given	wikt: to (indicating destination); to arrive	
+trước	prep	before; in front of; ago	native					sure	wikt ety 1: before; in front of; ago	
+vẫn	adv	still	unknown				Before the verb: Tôi vẫn ở đây	sure	wikt: still, yet	
+hoặc	conj	or	hv	或			Mostly in statements; in questions hay	sure	wikt ety 1: or	
+bằng~by	prep	by (means of), with; made of	hv	憑			đi bằng xe buýt "to go by bus"; 憑 "to rely on, by"; bằng also means a diploma (文憑)	likely	wikt ety 2: by, by means of; made of; diploma	
+bằng~equal	adj	equal (to), as … as	hv	平			cao bằng anh "as tall as you"	likely	wikt ety 1: flat; equal	
+rằng	conj	that (after say, think, know)	unknown				nói rằng … "to say that …"	sure	wikt: that	
+vậy	adv	so, thus; (final particle) then	unknown				vì vậy "therefore"; Sao vậy? "What's the matter?"	sure	wikt: so, thus	
+cái	classifier	(classifier for things) thing; the	native				cái bàn "a table", cái này "this one"	sure	wikt ety 1: indicates an inanimate, tangible thing	
+lần	noun	time (occurrence)	older-loan		輪		lần đầu "the first time"; ba lần "three times"	likely	wikt ety 1: time, instance, occurrence (輪)	
+ta	pron	we, us (including you); I (haughty); (after a person term) he, she	older-loan		咱		chúng ta "we"; anh ta "he", cô ta "she" (cooler than anh ấy)	doubt: the older-loan analysis (咱) is Wiktionary's; the pronoun uses are clear	wikt ety 1-2: our; I/me	
+thứ	noun	order, rank (thứ hai "Monday, second"); thing, kind	hv	次			thứ + number: ordinals and weekdays	sure	wikt ety 1: order, rank; thing; weekday	
+thế	adv	so, thus; like that	unknown				thế này "like this", như thế "like that"; Thế à? "Really?"	likely	wikt ety 1 (勢) lists "thus, so" under "position, situation"; the link is not visible	
+không thể	verb	cannot, to be unable to; impossible	compound				Before the verb: Tôi không thể đi	sure	wikt: impossible, impossibly	
+chính	adj	main, chief; exactly, precisely	hv	正			chính là "is exactly"	sure	wikt: exactly, precisely; main, major	
+thêm	adv	more, extra; to add	older-loan		添		thêm một cốc nữa "one more glass"	sure	wikt: additional; more; to add (添)	
+giúp	verb	to help	unknown					sure	wikt: to help	
+mọi	det	every, all	older-loan		每		mọi người "everyone"	likely	wikt ety 1: all (non-Hán-Việt reading of 每)	
+tìm	verb	to look for, to search; to find	older-loan		尋			likely	wikt: to search, to seek; to find (尋)	
+sống	verb	to live; alive; raw	native					sure	wikt ety 2: to live; alive	
+cao	adj	tall, high	hv	高				sure	wikt ety 1: high or tall	
+tháng	noun	month	native				tháng Ba "March"; tháng này "this month"	sure	wikt: month	
+bộ	noun	set, series; ministry; (classifier for sets, films)	hv	部			bộ phim "a film"; bộ quần áo "a set of clothes"	sure	wikt ety 1: a collection; a series; a ministry	
+lúc	noun	moment, time; at (a time)	unknown				lúc 8 giờ "at eight o'clock"; lúc đó "at that time"	sure	wikt: moment, time	
+ngoài	prep	outside; besides	older-loan		外		ở ngoài "outside"; nước ngoài "abroad"	sure	wikt: outside (non-Hán-Việt reading of 外)	
+cách~way	noun	way, manner	hv	格			cách làm "the way to do (it)"	sure	wikt ety 1: way, manner	
+cách~distance	verb	to be (some distance) away from, distant from	hv	隔			cách đây 2 km "2 km from here"; cách đây 3 năm "3 years ago"	sure	wikt ety 2: to be distant from	
+phần	noun	part, portion, share	hv	分				sure	wikt: a part of something	
+đều	adv	both, all (alike); evenly	older-loan		調		Before the verb: Chúng tôi đều thích "we all like it"	likely	wikt: equal; equally (調)	
+bảo	verb	to tell (someone to), to say	older-loan		報			likely	wikt: to tell; to command by telling (報)	
+hãy	adv	(imperative) do …; let's	unknown				Before the verb: Hãy ngồi xuống "Please sit down"	sure	wikt: do, let's (mild imperative)	
+loại	noun	kind, type, sort	hv	類				sure	wikt ety 1: kind, type, category	
+chúng ta	pron	we, us (including you)	compound				Contrast chúng tôi "we (not you)"	sure	wikt: we/us (inclusive)	
+qua	prep	through, across; past (hôm qua "yesterday"); to pass	hv	過				sure	wikt ety 1: through, across; previous, last	
+cùng	adv	together; with; same	older-loan		共		cùng nhau "together"; cùng lớp "in the same class"	likely	wikt ety 2: with; and (共)	
+sử dụng	verb	to use	hv	使用			Formal; dùng is the everyday word	sure	wikt: to utilize, to employ	
+nơi	noun	place	unknown					sure	wikt: place	
+do	prep	because of, due to; by	hv	由				sure	wikt: by; because of, due to	
+thường	adv	usually, often; ordinary	hv	常				sure	wikt ety 1: frequent, usual; often	
+làm việc	verb	to work	compound					sure	wikt: to work	
+đưa	verb	to give, to hand; to take (someone somewhere)	unknown				đưa con đi học "to take the child to school"	sure	wikt: to bring, to take, to give, to hand	
+từng	adv	ever, once (đã từng); each (từng người)	older-loan		曾			likely	wikt ety 1: once (formerly); each (曾)	
+trường	noun	school	hv	場		In Chinese 場 is a ground, a field, a venue; a school is 學校	trường học "school"	likely	wikt ety 1: school (場)	
+nhìn	verb	to look (at)	unknown					sure	wikt: to look at	
+bắt đầu	verb	to begin, to start	compound					sure	wikt: to begin, to start	
+dưới	prep	under, below	native					sure	wikt: under, below, down	
+nữa	adv	more, further; again	unknown				After the verb or noun: một lần nữa "once more"	sure	wikt: more, further	
+ngay	adv	right (away), immediately; straight	native				ngay bây giờ "right now"	sure	wikt: straight; as soon as, straight away	
+nhanh	adj	fast, quick	native					sure	wikt: fast, quick	
+vụ	noun	case, affair (vụ án); (crop) season	hv	務				likely	wikt ety 1: case, affair; season	
+giữa	prep	between; in the middle of	native					sure	wikt: in the middle, between	
+thực sự	adv	really, truly; real	hv	實事		In Chinese 實事 is "a fact, practical matters", not an adverb "really"		likely	wikt: really, indeed, actually (實事)	
+bên	noun	side; beside, next to	older-loan		邊		bên trái "on the left"; bên cạnh "next to"	sure	wikt: side; by, beside (邊)	
+thành phố	noun	city	hv-vn	城舖			A city is 城市 in Chinese	likely	wikt: a city (Wiktionary writes 城庯)	chars-conflict: Wiktionary writes 城庯 with 庯, a rare form; the course writes phố 舖 (店舖) as it does for phố itself
+thời gian	noun	time	hv	時間				sure	wikt: time	
+hết	verb	to run out, to be finished; all	native				hết tiền "out of money"	sure	wikt: to finish, to end; all	
+thành	verb	to become; into	hv	成			trở thành "to become"; dịch thành "to translate into"	sure	wikt ety 1: into; to become	
+tay	noun	hand, arm	native					sure	wikt: hand; arm	
+chúng tôi	pron	we, us (not including you)	compound					sure	wikt: we/us (exclusive)	
+khu	noun	area, zone, district	hv	區				sure	wikt ety 1: district, area, zone	
+nhận	verb	to receive; to accept; to admit, to recognise	hv	認				likely	wikt ety 1: to receive; to recognise	
+luôn	adv	always; at once; (after a verb) as well	unknown					sure	wikt: always; at once	
+dùng	verb	to use; to have (food or drink, polite)	older-loan		用			sure	wikt ety 1: to use; to eat or drink (用)	
+sinh	verb	to be born; to give birth	hv	生			sinh năm 1990 "born in 1990"	sure	wikt: to give birth	
+tất cả	det	all, everything, everyone	compound					likely	wikt: all, everything, everybody	
+đủ	adj	enough	native					sure	wikt: sufficiently, enough	
+chiếc	classifier	(classifier for vehicles and single objects)	older-loan		隻		chiếc xe "a car", chiếc giày "a shoe"	sure	wikt: Indicates vehicles; a single one (隻)	
+sao~why	adv	why; how (Sao vậy? "What's wrong?")	unknown					sure	wikt ety 1: why; how	
+sao~star	noun	star	native					sure	wikt ety 2: star	
+yêu	verb	to love	native					sure	wikt: to love	
+thế giới	noun	world	hv	世界				sure	wikt: world	
+hiểu	verb	to understand	hv	曉				sure	wikt: to understand	
+phòng	noun	room	hv	房				sure	wikt ety 1: a room	
+tổ chức	verb	to organise, to hold (an event); organisation	hv	組織				sure	wikt: to organize; organization	
+tự	adv	(by) oneself, self-	hv-gram	自			Before the verb: tự làm "to do (it) oneself"	sure	wikt ety 3: by oneself, on one's own	
+lịch sử	noun	history	hv	歷史				sure	wikt: history	
+vị~taste	noun	taste, flavour	hv	味				sure	wikt ety 1: taste; flavour	
+vị~person	classifier	(respectful classifier for persons)	hv	位			các vị "ladies and gentlemen"; vị khách "a guest"	sure	wikt ety 3: used to address a person	
+nhau	pron	each other	unknown				After the verb: gặp nhau "to meet (each other)"	sure	wikt ety 1: each other; together	
+điểm	noun	point; mark, score	hv	點				sure	wikt: point, mark, score	
+như thế	adv	like that, so	compound				như "like" + thế "so"	sure	wikt: so, like that	origin-conflict: Wiktionary's 如勢 makes thế "so" the 勢 of "position"; the course reads như thế as như + thế (see thế)
+lấy	verb	to take; to get; to marry	native					sure	wikt: to take, to seize; to obtain; to marry	
+tỉnh	noun	province	hv	省				sure	wikt ety 1: province	
+Nguyễn	noun	Nguyễn (the commonest surname)	hv	阮			About four in ten Vietnamese bear it	sure	wikt: a surname from Chinese	
+bởi	prep	by; because (bởi vì)	unknown					sure	wikt: because; from	
+công việc	noun	work, job	compound					sure	wikt: work, job	
+đúng	adj	right, correct; exactly	older-loan		中		đúng giờ "on time"	likely	wikt: right, correct (non-Hán-Việt reading of 中)	
+tại sao	adv	why	compound					sure	wikt: why	
+độ	noun	degree; about (độ 5 phút)	hv	度				sure	wikt: a degree; about	
+đánh	verb	to hit, to beat; to play (a sport, an instrument)	older-loan		打		đánh đàn "to play the piano"	sure	wikt: to strike (non-Hán-Việt reading of 打)	
+mang	verb	to carry, to bring; to wear	native					sure	wikt ety 1: to carry; to wear	
+thật	adj	true, real; really	hv	實				sure	wikt: real, true; really	
+cảm	verb	to feel; (to catch) a cold	hv	感			cảm thấy "to feel"; bị cảm "to have a cold"	sure	wikt: to feel; cold, flu	
+vấn đề	noun	problem, issue, question	hv	問題				sure	wikt: problem; issue	
+phát triển	verb	to develop; development	hv	發展				sure	wikt: to develop	
+viết	verb	to write	native					sure	wikt: to write	
+quốc gia	noun	nation, country; national	hv	國家				sure	wikt: state, nation, country	
+cuộc	classifier	(classifier for events and processes: cuộc họp "a meeting", cuộc sống "life")	older-loan		局			likely	wikt: an event that involves several people (局)	
+màu	noun	colour	older-loan		貌		màu đỏ "red"	likely	wikt: colour (貌)	
+nay	adj	this (present): hôm nay "today", năm nay "this year"; now	unknown					sure	wikt: today, now	
+đầu tiên	adj	first	hv	頭先		頭先 is a word of Cantonese only, where it means "just now"; "first" is 首先 or 最先	After the noun: lần đầu tiên "the first time"	likely	wikt: first (頭先)	
+tạo	verb	to create, to make	hv	造			tạo ra "to create"	sure	wikt ety 1: to create, to make	
+mỗi	det	each, every	hv	每			mỗi ngày "every day"	sure	wikt: each, every	
+xuống	verb	to go down, to get off; down	native					sure	wikt: to go downwards; to get off	
+cá	noun	fish	native					sure	wikt ety 1: fish	
+trở thành	verb	to become	compound					sure	wikt: to become	
+tính	verb	to calculate, to count; to intend	hv-opaque	併				doubt: Wiktionary gives 併 "to combine"; the sense "to calculate" is not visible in it	wikt ety 1: to calculate; to plan (併)	
+đặt	verb	to put, to place; to book	native				đặt phòng "to book a room"	sure	wikt: to place, to put	
+hoạt động	noun	activity; to operate, to work	hv	活動				sure	wikt: activity, event; active	
+dài	adj	long	native					sure	wikt: long	
+huyện	noun	(rural) district, a subdivision of a province	hv	縣			縣 is a county in China	sure	wikt: a subdivision of a province	
+thuộc	verb	to belong to; to know by heart	hv	屬			thuộc bài "to know the lesson by heart" is another etymology (熟)	sure	wikt ety 1: to belong to	
+đội	noun	team	hv	隊				sure	wikt ety 1: team	
+nghĩ	verb	to think	older-loan		議			likely	wikt: to think (non-Hán-Việt reading of 議)	
+nằm	verb	to lie (down); to be located	native					sure	wikt: to lie; to be located	
+hoa	noun	flower	hv	花				sure	wikt ety 1: flower	
+tăng	verb	to increase	hv	增				sure	wikt ety 1: to increase	
+hiện	adv	currently, now; to appear	hv	現			hiện nay "nowadays"	sure	wikt: to appear; presently, currently	
+cứ	adv	just (go on), keep on; every (cứ … là)	hv-opaque	據			Cứ đi! "Go ahead!"	doubt: Wiktionary gives 據 "according to"; the adverb's sense is not visible in it	wikt: no matter what; still; every (據)	
+sau khi	conj	after (doing)	compound					sure	wikt: after	
+quan trọng	adj	important	hv-vn	關重			"Important" is 重要 in Chinese	sure	wikt: important (關重)	
+dù~although	conj	although, even if	unknown				dù … nhưng …	sure	wikt ety 2: even if, although	
+dù~umbrella	noun	umbrella; parachute	native				Southern for "umbrella"; the North says ô	likely	wikt ety 1: parachute; umbrella	
+mặt	noun	face; surface, side	native					sure	wikt: face	
+giữ	verb	to keep, to hold	native					sure	wikt: to keep, to hold	
+quyền	noun	right, power	hv	權				sure	wikt ety 1: right; power, authority	
+thay đổi	verb	to change	compound					sure	wikt: to change	
+đêm	noun	night	native					sure	wikt: night	
+cầu	noun	bridge	older-loan		橋			sure	wikt ety 2: bridge (non-Hán-Việt reading of 橋)	
+hỏi	verb	to ask	unknown					sure	wikt: to ask	
+cây	noun	tree, plant; (classifier for long things)	native				cây bút "a pen"	sure	wikt: plant, tree	
+chuyển	verb	to move, to transfer	hv	轉				sure	wikt: to move	
+công ty	noun	company	hv	公司				sure	wikt: company	
+xã hội	noun	society	hv	社會				sure	wikt: society	
+dân	noun	people, citizens	hv	民				sure	wikt: the people	
+tổng thống	noun	president (of a republic)	hv	總統				sure	wikt: president	
+một số	det	some, a number of	compound					sure	wikt: a number of, some	
+quyết định	verb	to decide; decision	hv	決定				sure	wikt: to decide; decision	
+trẻ	adj	young; child (trẻ em)	unknown					sure	wikt: young; a child	
+xe	noun	vehicle (car, bike, motorbike)	older-loan		車		xe đạp "bicycle"	sure	wikt ety 1: wheeled vehicle (non-Hán-Việt reading of 車)	
+chết	verb	to die; dead	native					sure	wikt: to die; dead	
+quận	noun	(urban) district	hv	郡		In Chinese 郡 is a historical commandery or a county (outside China); in Vietnam a quận is an urban district		sure	wikt: district	
+cuối cùng	adv	finally, at last; last	compound					sure	wikt: final, last	
+bán	verb	to sell	native					sure	wikt ety 1: to sell	
+lời	noun	words, what is said	unknown				lời khuyên "advice"	sure	wikt ety 1: word, utterances	
+tiếng	noun	language; sound, voice; hour (colloquial)	older-loan		聲		tiếng Việt "Vietnamese"; một tiếng "one hour"	likely	wikt: voice; sound; language (聲)	
+dịch	verb	to translate	hv	譯				sure	wikt ety 1: to translate	
+chẳng	adv	not (at all)	native				More emphatic than không	sure	wikt: not at all	
+phía	noun	side, direction	native					sure	wikt: side, direction	
+tuy	conj	although	hv	雖			tuy … nhưng …	sure	wikt: although	
+đồ	noun	things, stuff; (đồ ăn) food	native				đồ uống "drinks"	sure	wikt ety 1: unspecified stuff or things	
+vùng	noun	region, area	native					sure	wikt ety 1: region, area	
+khiến	verb	to cause, to make (someone do)	older-loan		遣			likely	wikt: to cause (遣)	
+gây	verb	to cause	native					sure	wikt ety 1: to cause	
+khu vực	noun	area, zone, region	hv	區域				sure	wikt: zone, area	
+hàng	noun	goods; row, line	hv	行			cửa hàng "shop"	sure	wikt ety 1: goods; line, row	
+câu	noun	sentence	hv	句				sure	wikt ety 2: sentence	
+trước khi	conj	before (doing)	compound					sure	wikt: before	
+thi	verb	to take an exam; to compete	older-loan		試		kỳ thi "an exam"	sure	wikt ety 2: to compete; to take an examination (試)	
+đối với	prep	towards, for, regarding	compound				đối (對) + với "with"	likely	wikt: according to; relative to	en-unsupported: Wiktionary has only "according to; relative to"; the everyday use is "for, towards (someone)" (Claude)
+sang	verb	to cross (over), to go over (to)	native				sang Pháp "to go (over) to France"	sure	wikt ety 2: to go over, to cross	
+giáo viên	noun	teacher	hv	教員				sure	wikt: teacher	
+thời	noun	time, era	hv	時				sure	wikt: time, moment, season	
+kiểm tra	verb	to check, to examine; test	hv	檢查				sure	wikt: a test; to check	
+khó	adj	difficult	native					sure	wikt: difficult	
+trận	noun	match, battle; (classifier for matches, storms)	hv	陣			trận bóng đá "a football match"	sure	wikt: battle	
+bỏ	verb	to leave, to quit; to put (in)	native				bỏ thuốc "to quit smoking"	sure	wikt ety 1: to take off; to leave; to put	
+chịu	verb	to bear, to endure; to accept	older-loan		受			likely	wikt: to endure, to suffer (受)	
+phụ nữ	noun	woman	hv	婦女				sure	wikt: woman	
+tiếp tục	verb	to continue	hv	接續				likely	wikt: to continue	
+lý do	noun	reason	hv	理由				sure	wikt: a reason	
+chế độ	noun	system, regime	hv	制度				sure	wikt: a system, regime	
+đặc biệt	adj	special; especially	hv	特別				sure	wikt: special	
+rõ	adj	clear	unknown				rõ ràng "clear(ly)"	sure	wikt: clear	
+giống	verb	to look like, to resemble, to be similar (to)	unknown				giống như "like"; giống "breed" is another etymology (種)	sure	wikt ety 2: to be alike, to be similar	
+chạy	verb	to run	native					sure	wikt: to run	
+chương trình	noun	programme	hv	章程		In Chinese 章程 is the rules or statutes of an organisation; a programme is 節目 or 程序		sure	wikt: a program	
+tàu	noun	ship, boat; train (tàu hỏa)	older-loan		艚			likely	wikt ety 1: vehicle or craft (艚)	
+triệu	num	million	hv	兆		In Chinese 兆 is "trillion" (10¹²) in Taiwan and "mega-" (million) in metric prefixes		likely	wikt: million	
+chống	verb	to oppose, against; to prop up	native					sure	wikt: to prop up; against	
+bay	verb	to fly	native				máy bay "aeroplane"	sure	wikt ety 1: to fly	
+nhớ	verb	to remember; to miss (someone)	native					sure	wikt: to remember; to miss	
+bài	noun	lesson; (written) piece, article; (classifier for songs, poems, texts)	unknown				bài hát "a song"; bài tập "exercise"	likely	wikt ety 2 (排) lists the classifier; no etymology of "lesson" is given	
+khá	adv	fairly, quite; good (enough)	older-loan		可			likely	wikt: fairly; fine, OK (可)	
+hình	noun	picture, image; shape	hv	形				sure	wikt: image; shape; photo	
+học sinh	noun	pupil, (school) student	hv	學生			A university student is sinh viên	sure	wikt: a pupil	
+chi	verb	to spend, to pay out; branch	hv	支			chi tiêu "to spend"; in Central Vietnamese chi is also "what"	likely	wikt ety 1: genus; to spend	
+hắn	pron	he, him (cool or contemptuous)	native					sure	wikt: he/him	
+xảy	verb	to happen (xảy ra)	unknown					sure	wikt: to occur, to happen	
+báo	noun	newspaper; to report, to tell	hv	報			đọc báo "to read the paper"	sure	wikt ety 2: to report; newspaper	
+cấp	noun	level, grade	hv	級				sure	wikt ety 1: rank, level, class	
+cổ	noun	neck	native				cổ "ancient" (古) is another etymology	sure	wikt ety 1: neck	
+động vật	noun	animal	hv	動物				sure	wikt: an animal	
+nam~south	noun	south	hv	南			miền Nam "the South"	sure	wikt ety 1: south	
+nam~male	adj	male, man	hv	男				sure	wikt ety 2: boys and men	
+chắc	adv	probably, surely; firm	unknown				chắc chắn "certain(ly)"	sure	wikt ety 1: firm; sure, certain	
+mở	verb	to open; to turn on	native					sure	wikt: to open	
+nhóm	noun	group	unknown					sure	wikt ety 1: group	
+chính trị	noun	politics; political	hv	政治				sure	wikt: politics	
+thôi	verb	to stop; that's all, only (… thôi)	older-loan		退		At the end: một chút thôi "just a little"	likely	wikt ety 1: to stop; only (退)	
+xin	verb	to ask for; please (polite: xin mời)	unknown				xin lỗi "sorry"; xin chào "hello"	sure	wikt: to ask for, to request	
+Nhật Bản	noun	Japan	hv	日本				sure	wikt: Japan	
+lạm phát	noun	inflation	hv	濫發		In Chinese 濫發 is "to issue excessively"; inflation is 通貨膨脹		likely	wikt: inflation	
+nghĩa trang	noun	cemetery	hv	義莊		In Chinese 義莊 is a charitable estate (a clan's land for its poor); a cemetery is 墓地		likely	wikt: cemetery	
+thông cảm	verb	to sympathise, to understand	hv	通感		In Chinese 通感 is synaesthesia (a figure of speech)		likely	wikt: to sympathize	
+lịch sự	adj	polite	hv-vn	歷事			No such Chinese word: "polite" is 禮貌	likely	wikt: polite (歷事)	

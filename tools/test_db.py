@@ -106,7 +106,7 @@ with tempfile.TemporaryDirectory() as tmp:
     chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
     ok(chk.get('bằng') == 'ok' and chk.get('học sinh') == 'ok', 'real: the check accepts the attested reading')
     import cards  # noqa: E402
-    cards.init(cards.open_db('public', db))
+    cards.init(cards.open_db('public', db), lex_rows=[])   # the dictionary layer alone
     lai, thich = (cards.dictionary[cards.lookup(k)] for k in ('lại', 'thích'))
     ok('chars' not in lai and lai['en'].startswith('once more') and thich.get('chars') == '適',
        'real: a card takes its characters from its own etymology (lại "again" not 賴 of the surname; thích 適 not 釋)')

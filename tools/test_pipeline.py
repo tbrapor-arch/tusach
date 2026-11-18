@@ -85,6 +85,8 @@ with tempfile.TemporaryDirectory() as tmp:
     open(pub, 'w').write('gone\n')
     en = os.path.join(tmp, 'en.tsv')
     open(en, 'w').write('chào\t3\thello\n')
+    d['cards']['chào'].update(en='hello', en_src='dict:fixture', en_rank=2)    # (the lexicon gives it rank 3)
+    json.dump(d, open(path, 'w', encoding='utf-8'))
     errs = check_cards.check(path, None, pub, en, modules=('lessons',))
     ok(any('card lost: gone' in e for e in errs), 'the card check fails on a lost published card')
     ok(any('poorer English than before: chào' in e for e in errs), 'the card check fails on poorer English')

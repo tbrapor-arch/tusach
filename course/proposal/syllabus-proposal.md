@@ -148,7 +148,7 @@ vô-, phi-); tone exceptions (động 動 dung6 / tōng / dòng, hậu 後 hau6 
 thích 適, đang 當, đường 唐 "road".
 
 ### 2.4 False friends
-One per bridge slot when a lesson meets it, each added to `course/false_friends.tsv` with its evidence:
+One per bridge slot when a lesson meets it, each written in the false_friend column of `course/lexicon.tsv` with its evidence:
 thời tiết 時節 (weather, not season; L9), bác sĩ 博士 (physician, not PhD; L12), bản đồ 版圖 (map; L8), thư 書
 (letter, not book), học sinh 學生 (pupil) vs sinh viên 生員 (university student; L52), tử tế 仔細 (kind, decent),
 lịch sự 歷事 (polite; the database's characters), phương tiện 方便 (means of transport), an ninh 安寧 (security),

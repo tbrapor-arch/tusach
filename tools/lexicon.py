@@ -32,7 +32,8 @@ Validation (validate()): every row against the data, printing conflicts instead 
   chars-conflict  Wiktionary analyses the word with other characters (and none of its etymologies has these)
   en-unsupported  the English shares no content word with any dictionary sense or translation of the word
   not-attested    origin hv/hv-gram with several characters that no Chinese source has as a word
-  bad-row         a malformed row (unknown origin / confidence / pos, chars on a non-Chinese origin…)
+  bad-row         a malformed row (unknown origin / confidence / pos, chars on a non-Chinese origin…, an override
+                  of a conflict the row does not have)
 `make lint` fails on any conflict whose kind the row does not override.
 """
 import csv
@@ -63,16 +64,16 @@ ORIGIN_TEXT = {'hv': 'Hán-Việt (the same word in Chinese)', 'hv-gram': 'Hán-
 # what a Wiktionary origin (entry.origin) allows
 DB_ALLOWS = {'sino': set(HV), 'nonhv': {'older-loan'}, 'vietic': {'native', 'compound'},
              'loan': {'french', 'loan'}, 'compound': {'compound', 'native', 'hv-vn', 'hv'}}
-EN_STOP = {'to', 'a', 'an', 'the', 'of', 'be', 'is', 'one', 'someone', 'something', 'sb', 'sth', 'etc', 'it', 'its',
-           'oneself', 'used', 'for', 'and', 'or', 'in', 'on', 'at', 'by', 'as', 'with', 'after', 'before', 'that', 'this',
-           'polite', 'word', 'particle', 'marker', 'classifier', 'form', 'question', 'final', 'sentence', 'thing',
-           'things', 'person', 'people', 'very', 'not', 'no', 'yes', 'up', 'out', 'off', 'about', 'into', 'from'}
+EN_STOP = {'to', 'a', 'an', 'the', 'of', 'is', 'one', 'someone', 'something', 'sb', 'sth', 'etc', 'it', 'its', 'used',
+           'for', 'and', 'or', 'in', 'on', 'at', 'by', 'as', 'with', 'up', 'out', 'off', 'into', 'from', 'word',
+           'particle', 'marker', 'classifier', 'form', 'question', 'final', 'sentence', 'very'}
 SYNONYMS = [{'mother', 'mom', 'mum', 'mama'}, {'father', 'dad', 'papa'}, {'glass', 'cup', 'tumbler'},
             {'big', 'large', 'great'}, {'small', 'little', 'tiny'}, {'fast', 'quick', 'quickly'},
             {'grandfather', 'grandpa'}, {'grandmother', 'grandma'}, {'film', 'movie'}, {'photo', 'photograph', 'picture'},
             {'tired', 'weary'}, {'ill', 'sick'}, {'begin', 'start'}, {'finish', 'complete', 'end'},
             {'look', 'see', 'watch'}, {'speak', 'say', 'talk', 'tell'}, {'road', 'street', 'way'},
-            {'lake', 'pond'}, {'hot', 'warm'}, {'right', 'correct'}, {'reason', 'cause'}]
+            {'lake', 'pond'}, {'hot', 'warm'}, {'right', 'correct'}, {'reason', 'cause'}, {'ok', 'okay', 'alright'},
+            {'programme', 'program'}, {'colour', 'color'}, {'say', 'said', 'tell'}]
 
 
 def load(path=PATH):
@@ -195,8 +196,8 @@ def validate(con, rows=None):
         if k != r['k']:
             bad('bad-row', f'not the house spelling: {k!r}')
         ents = con.execute("SELECT e.id, e.origin, e.chars, e.english, e.etymon, e.hv_check, e.origin_note FROM entry e "
-                           "JOIN source s ON s.id = e.source WHERE e.key=? AND s.fixture = 0 AND e.pos NOT IN "
-                           "('name', 'character-reading')", (k,)).fetchall()
+                           "JOIN source s ON s.id = e.source WHERE e.key=? AND s.fixture = 0 AND e.pos != "
+                           "'character-reading' ORDER BY e.pos = 'name'", (k,)).fetchall()
         if not ents:
             bad('no-key', f'{r["k"]!r} is not a word of the database')
         # characters against the syllables
@@ -231,6 +232,13 @@ def validate(con, rows=None):
                 bad('en-unsupported', 'no English word shared with any dictionary sense or translation')
         if r['origin'] in ('hv', 'hv-gram') and len(r['chars']) > 1 and not attested(con, r['chars']):
             bad('not-attested', f'{r["chars"]} is a word of no Chinese source (CC-CEDICT, rime, MOE, translations)')
+    kinds = {}
+    for r, k, _ in out:
+        kinds.setdefault(id(r), set()).add(k)
+    for r in rows:
+        for k in overrides(r):
+            if k in CONFLICTS and k not in kinds.get(id(r), set()):
+                out.append((r, 'bad-row', f'override of {k!r}, a conflict the row does not have: remove it'))
     return out
 
 
