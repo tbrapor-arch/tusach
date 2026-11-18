@@ -179,6 +179,7 @@ h2 { margin: 0; font-size: 1.15rem; font-weight: 800; display: flex; align-items
 #dlg, .allnotes, h2[id] { scroll-margin-top: 3.6rem; }
 .toolbar { display: flex; gap: .5rem 1rem; flex-wrap: wrap; align-items: center; padding-block: .6rem; border-bottom: 1px solid var(--line); }
 .setting { color: var(--sub); margin: 0; }
+.en .lit { display: block; font-size: .85em; font-style: italic; color: var(--sub); }
 .l0sec { display: flex; flex-direction: column; gap: .75rem; scroll-margin-top: 1rem; }
 .l0sec p, .l0sec ul { margin: 0; line-height: 1.55; }
 .l0sec li + li { margin-top: .35rem; }
@@ -498,8 +499,11 @@ function wireTokens(root) {
   });
 }
 const REVEAL = {};
-function enLine(en, k) { return prefs.en ? `<span class="en">${esc(en)}</span>` : `<button class="reveal" data-reveal="${k}">Show English</button>`; }
-function wireReveal(root) { $$('[data-reveal]', root).forEach(b => b.onclick = () => { b.outerHTML = `<span class="en">${esc(REVEAL[b.dataset.reveal])}</span>`; }); }
+// the English of a line, with its word-for-word gloss (lit) where Vietnamese order differs
+const enHTML = (en, lit) => `<span class="en">${esc(en)}${lit ? `<span class="lit">word for word: ${esc(lit)}</span>` : ''}</span>`;
+const LIT = {};
+function enLine(en, k, lit) { if (lit) LIT[k] = lit; return prefs.en ? enHTML(en, lit) : `<button class="reveal" data-reveal="${k}">Show English</button>`; }
+function wireReveal(root) { $$('[data-reveal]', root).forEach(b => b.onclick = () => { b.outerHTML = enHTML(REVEAL[b.dataset.reveal], LIT[b.dataset.reveal]); }); }
 // notes are English with Vietnamese words in them; chữ Hán in a note (bridge notes) are set in the Chinese font
 function fmt(t) { return esc(t).replace(/([㐀-鿿\u{20000}-\u{3ffff}豈-﫿]+)/gu, '<span class="han">$1</span>'); }
 
@@ -555,7 +559,7 @@ function showLesson(L) {
       <div class="sent" id="line-${ln.n}">
         <div class="who"><span class="n">${ln.n}</span>${esc(ln.speaker)}</div>
         ${active ? `<div class="en act">${esc(ln.en)}</div><button class="reveal" data-tw="${li}">Show Vietnamese</button><div class="txt" id="tw-${li}" hidden>${sentence(ln.tokens, 'L' + li)}</div>` : `<div class="txt">${sentence(ln.tokens, 'L' + li)}</div>`}
-        <div class="under">${ln.audio ? `<button class="lplay" data-lplay="${li}" aria-label="Listen to line ${ln.n}" title="Recorded by ${esc(ln.voice)}">▶</button>` : ''}${active ? '' : enLine(ln.en, 'l' + li)}${WAVE ? '' : (notesBy[ln.n] || []).map(k => `<button class="nlink" data-note="${k}" aria-label="Note ${k}">${k}</button>`).join('')}</div>
+        <div class="under">${ln.audio ? `<button class="lplay" data-lplay="${li}" aria-label="Listen to line ${ln.n}" title="Recorded by ${esc(ln.voice)}">▶</button>` : ''}${active ? '' : enLine(ln.en, 'l' + li, ln.lit)}${WAVE ? '' : (notesBy[ln.n] || []).map(k => `<button class="nlink" data-note="${k}" aria-label="Note ${k}">${k}</button>`).join('')}</div>
       </div>`; }).join('')}</div>
     ${active ? `<div class="row"><button class="btn small quiet" id="show-all">Show all the Vietnamese</button></div>` : ''}
     ${WAVE ? '' : `

@@ -19,6 +19,7 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  exercise sentence taken from the dialogue: equal to a line, contained in a line, or equal to one after removing a
      greeting / first clause (normalised: case, punctuation, word boundaries)
   W  exercise sentence very similar to a dialogue line (similarity >= SIMILAR): check it is a new sentence
+  W  a course word of several syllables (lexicon, word lists) written as separate words: a missing underscore?
   E  note pointing to a line the dialogue does not have
   E  fill exercise without ___ or answer
   W  lines per lesson do not grow smoothly (owner's choice: a smooth growth; checked over the non-review lessons)
@@ -68,7 +69,7 @@ DB = os.environ.get('TUSACH_DB') or os.path.join(ROOT, 'data/build/vi.db')
 REQUIRED = ('id', 'title', 'dialogue', 'notes', 'new_words')
 KEYS = {'top': {'id', 'title', 'review', 'setting', 'native_check', 'dialogue', 'notes', 'new_words', 'exercises',
                 'fixture'},
-        'title': {'vi', 'en'}, 'dialogue': {'n', 'speaker', 'vi', 'en'}, 'notes': {'ref', 'topic', 'text'},
+        'title': {'vi', 'en'}, 'dialogue': {'n', 'speaker', 'vi', 'en', 'lit'}, 'notes': {'ref', 'topic', 'text'},
         'new_words': {'w', 'en', 'tag', 'chars', 'label', 'name'}, 'translate': {'vi', 'en'},
         'fill': {'vi', 'answer', 'en'}, 'native_check': {'by', 'date'}}
 SIMILAR = 0.8
@@ -335,6 +336,26 @@ def plan_checks(loaded, msgs):
                 msgs.append(('W', f'{name}: W Hán-Việt share of new words {hv / (hv + nat):.2f}, the plan {want:.2f}'))
 
 
+_COMPOUNDS = None
+
+
+def compounds():
+    """Keys of several syllables of the course lexicon and the word lists (course/syllabus.yaml)."""
+    global _COMPOUNDS
+    if _COMPOUNDS is None:
+        out = {r['k'] for r in LEX if ' ' in r['k']}
+        syl = course.syllabus()
+        for f in {(syl.get('draft') or {}).get('word_list'), ((syl.get('approved') or {}).get('word_list') or {}).get('file')}:
+            if f and os.path.exists(os.path.join(ROOT, f)):
+                for r in course.wordlist(f):
+                    if r['type'] != 'name':
+                        k = vi.key(vi.nfc(r['word']).partition('~')[0].replace('_', ' '))
+                        if ' ' in k:
+                            out.add(k)
+        _COMPOUNDS = out
+    return _COMPOUNDS
+
+
 def check_words(m, where, text, keys, tags, all_tags, names, used, real=True):
     """Every word of a Vietnamese text written with the course's boundaries (a lesson line, an exercise, a Lesson 0
     span): chữ Hán, syllables and tone-mark placement, house spelling, tags, dictionary, fixture-only words."""
@@ -443,6 +464,14 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
 
     def check_line(where, text):
         check_words(m, where, text, keys, tags, all_tags, names | lesson_names, used, real)
+        # a course word of several syllables written as separate words (cảm ơn for cảm_ơn): usually a missing
+        # underscore; a warning, since the free sequence can be meant (Tôi không có gì "I have nothing")
+        ks = [t[2] for t in vi.words(text) if t[0] == 'w']
+        for n in (2, 3, 4):
+            for i in range(len(ks) - n + 1):
+                if all(' ' not in k for k in ks[i:i + n]) and ' '.join(ks[i:i + n]) in compounds():
+                    m('W', where, f'"{" ".join(ks[i:i + n])}" is one course word: write it with underscores '
+                                  'unless the free sequence is meant')
 
     lines = d.get('dialogue') or []
     ns = set()

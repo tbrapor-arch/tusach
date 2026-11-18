@@ -37,12 +37,16 @@ def is_fixture_path(path):
     return os.path.abspath(path).startswith(os.path.abspath(FIXTURE_DIR) + os.sep)
 
 
+# the one other file allowed beside the lessons: the hesitations for a native speaker (never read by the build)
+NOT_SHOWN = {'NOTES-for-native-speaker.md'}
+
+
 def stray_files():
     """Files in the lesson directory that are not NN.yaml lessons (tools/lint.py reports them as errors)."""
     d = lesson_dir()
     if not os.path.isdir(d):
         return []
-    return sorted(os.path.join(d, f) for f in os.listdir(d) if not re.fullmatch(r'\d\d+\.yaml', f))
+    return sorted(os.path.join(d, f) for f in os.listdir(d) if not re.fullmatch(r'\d\d+\.yaml', f) and f not in NOT_SHOWN)
 
 
 def load(path):

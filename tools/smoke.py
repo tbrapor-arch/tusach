@@ -146,8 +146,11 @@ with sync_playwright() as pw:
                 f.locator('button[type=submit]').click()
                 if 'near' not in (page.locator(f'#fb-{k}').get_attribute('class') or ''):
                     p(f'lesson {lid}: exercise {k}: "{bare}" (tones missing) is not pointed out as nearly right')
-        for bt in page.locator('[data-ans]').all():
-            bt.click()
+        n_ans = page.locator('[data-ans]').count()     # each button removes itself when clicked
+        for _ in range(n_ans):
+            page.locator('[data-ans]').first.click()
+        if page.locator('[data-ans]').count():
+            p(f'lesson {lid}: a "Show English" button of a translation exercise does not open')
         page.evaluate('window.scrollTo(0,0)')
         shot(page, f'lesson-{lid}')
     # every card of the page has English (owner's rule), opened one by one

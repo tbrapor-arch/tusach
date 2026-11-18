@@ -77,7 +77,8 @@ for d in raw:
     for ln in d['dialogue']:
         toks = cards.tokenize(ln['vi'])
         all_tokens += toks
-        lines.append({'n': ln['n'], 'speaker': ln.get('speaker') or '', 'en': ln['en'], 'vi': vi.display(ln['vi']),
+        lines.append({'n': ln['n'], 'speaker': ln.get('speaker') or '', 'en': ln['en'], 'lit': ln.get('lit') or '',
+                      'vi': vi.display(ln['vi']),
                       'tokens': toks})
     ex = []
     for kind, items in (d.get('exercises') or {}).items():

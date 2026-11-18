@@ -2,8 +2,8 @@
 
 ## Layout
 ```
-course/lessons/NN.yaml   lessons (none yet: the syllabus and word list wait for the owner's approval); nothing else
-                         may be there (lint); the template is course/lesson_template.yaml
+course/lessons/NN.yaml   lessons (1-7 drafted 19 Nov 2026, not native-checked); nothing else may be there (lint) but
+                         NOTES-for-native-speaker.md (Claude's hesitations, never built); template course/lesson_template.yaml
 course/lesson0.yaml      Lesson 0, "Reading Vietnamese" (tools/lesson0.py; format below); page `#reading`, linked from home
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them); the draft word list
                          and proposal, the cast, the Northern particle strand: ONE source (tools/plan.py)
@@ -44,7 +44,8 @@ review: false                      # true on every 7th lesson
 setting: One line of scene setting, in English.
 native_check: {by: name, date: 2026-12-01}   # omit until a native speaker has checked it; the app then says so
 dialogue:
-- {n: 1, speaker: Lan, vi: "Chào anh! Tôi là học_sinh.", en: "Hello! I'm a student."}
+- {n: 1, speaker: Lan, vi: "Chào anh! Tôi là học_sinh.", en: "Hello! I'm a student.", lit: "greet elder-brother! I be pupil."}
+                                   # lit (optional): word-for-word gloss where the order differs; shown under the English
 notes:
 - {ref: 1, topic: bridge, text: "học sinh is 學生 …"}      # ref 0 = recap note; topic free (bridge, pronouns, false-friend…)
 new_words:
@@ -99,7 +100,8 @@ the FrequencyWords syllables seen 200+ times (`build_db.py validate_syllables`, 
 Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes). Quote any text with a comma in a
 flow mapping (`{w: tôi, en: "I, me"}`): lint refuses unknown keys, which is what an unquoted comma makes. Exercises
 must be new: lint refuses one equal to, contained in, or equal after a greeting/first clause to a dialogue line, and
-warns at a similarity of 0.8.
+warns at a similarity of 0.8. Lint warns when a course word of several syllables (lexicon, word lists) is written
+as separate words (cảm ơn for cảm_ơn): usually a missing underscore.
 
 ## Lesson 0 (`course/lesson0.yaml`, `tools/lesson0.py`; 19 Nov 2026)
 `{title: {en, vi}, intro, sections: [{id: slug, h, body: [{p: text} | {ul: [text…]} | {table: {head: [...], rows:
