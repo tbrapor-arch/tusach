@@ -116,3 +116,36 @@
   coda) was used, with m/n, p/t, k/t allowed after a first run flagged 凡 huân, 法 huat, 直 ti̍t (229 -> 187 characters).
 - Frequency: English leakage removed by k x English frequency (k from English words that cannot be Vietnamese
   syllables); names sharing a key no longer carry the common word's rank; spelling groups ranked once.
+
+## 2026-11-18 — card quality rework after review 2 (branch data-quality, from fa4d343)
+- Why: review 2 (independent, from a clean clone) found 48 of the top 200 cards and ~45 of the 195 word-list rows
+  faulty after the data-quality pass, which its own measure had scored as an improvement. The architect's decision:
+  stop letting heuristics over Wiktionary decide everything; three layers.
+- Layer 1, the course lexicon `course/lexicon.tsv` (508 rows: word list 1, the essentials missing from it, the top 300,
+  the review's fault words; doubt 14, likely 86, sure 408; 4 overrides), written by Claude, validated by
+  `tools/lexicon.py`. First validation: 28 conflicts; resolved by fixing the row (English missing the dictionary's
+  wording: tưởng, giống, huyện; origins: xe buýt French, đông "crowded" and thuốc older loans as Wiktionary has
+  them; châu Âu formed in Vietnam; kênh's 巠 has no reading: origin left unknown), by fixing the validator (stop words
+  that hid "to be", "not", "person"; names as keys; stemming; programme/program), or kept with an override and its
+  reason (4). It absorbed glosses_en.tsv, glosses-proposed.tsv, etymology-review.tsv and false_friends.tsv.
+- Layer 2, the dictionary: spelling groups pool only orthographic variants (i/y, hyphens, case); pronunciation /
+  eye-dialect spellings keep their key (ga, ấy, dậy, nhỉ, biếu, kênh, nôm…). English: translation-table scoring,
+  head-word cancellation, the global POS map and the comma cut removed: Wiktionary's order, late senses last, long
+  later senses left out, no fragments. Main etymology from Tatoeba translations; first run gave là "to move down"
+  (its long gloss had "water", "ground", and "is mounted" counted as "be"): bracketed explanations, "is" inside glosses,
+  form-of and late senses are now left out; weak evidence claims no main sense. Opaque test loosened (all senses, all
+  CC-CEDICT senses, variants, synonyms, stemming): review 2's sample false opaque 53/73 -> 7/74, false same 0.
+  Examples: whole word, the sense's words in the linked translation, numbers and time words kept by the translation
+  (a first rule on all nouns refused "giá / costs" paraphrases: narrowed), flags for profanity/sex/drugs, slashes and
+  unknown words, and `course/example-block.tsv` (13 sentences). Origins: language names for codes, compounds,
+  reduplications and calques from templates, Old Chinese etymons in a following template; doubt only when Wiktionary
+  doubts the source itself. Frequency: Trung Quốc ranked again (3254 -> 303), tiếng Pháp and 4+-syllable keys
+  unranked. Taigi: nasalised literary and -in/-ng agree (187 -> 167 characters), blind spots listed by coverage.
+- Layer 3: `tests/golden/cards.tsv` (524 cards) and the opaque sample in `make test`; `tools/compare.py run` compares
+  the real cards of the top 3,000 and every course word, each side built with its own tools.
+- Other: smoke fails ("NOT TESTED", exit 2) without the private module; lint checks word-list duplicates and lesson
+  numbers; the Vietnamese Wiktionary extract is no longer fetched or snapshotted (release data-2026-11-18.2 still holds
+  the old asset, its licence unverified); ATTRIBUTION describes the MOE layers as our own classification.
+- Results (clean clone): see STATE. The top 300 read card by card against fa4d343 and dcaf84f; review 2's 134 fault
+  rows re-judged (/home/claude/rework-faults-status.tsv in the session): 131 fixed, 1 not fixed (nhưng: no MOE 仍),
+  2 disagreements (đá's example is its own sense; phở's "folk etymology" is the French theory).
