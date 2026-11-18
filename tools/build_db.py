@@ -823,12 +823,16 @@ def spelling_groups(con, raw):
     groups = defaultdict(list)
     for k in keys:
         groups[find(k)].append(k)
-    groups = [sorted(g) for g in groups.values() if len(g) > 1]
+    # a hyphenated spelling alone (sô-cô-la) is filed under its spaced form, today's orthography and the form texts
+    # write, so that the cutter finds it in "sô cô la"
+    groups = [sorted(g) for g in groups.values() if len(g) > 1 or '-' in g[0]]
     main = {k for (k,) in con.execute("SELECT DISTINCT key FROM entry WHERE alt_kind = '' AND pos != 'character-reading'")}
     pf = freq.phrase_freq(raw, {x for g in groups for k in g for x in k.replace('-', ' ').split()})
     rows = []
     for g in groups:
         canon = max(g, key=lambda k: ('-' not in k, pf(k), k in main, -len(k), k))   # spaced (a lô) over a-lô
+        canon = ' '.join(canon.replace('-', ' ').split()) if re.fullmatch(r'[^\W\d_]+(?:-[^\W\d_]+)+', canon) \
+            else canon
         for k in g:
             how = 'iy' if iy_key(k) == iy_key(canon) else 'ortho'
             rows.append((k, canon, how))

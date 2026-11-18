@@ -1,0 +1,13 @@
+# Tatoeba sentences no card shows (tools/cards.py choose_example): what the automatic checks (whole word, sense of the
+# translation, words the translation must keep, profanity/sex/drugs, slashes, unknown words) let through. Claude's
+# reading, NOT checked by a native speaker; from review 2 (finding 6). sentence id <TAB> reason
+6275280	mistranslation: "Where did you buy this outfit?", not "Where do you buy clothes?"; Ấy as a pronoun
+1541933	mistranslation: "What kind of boy is that!", not "What a kind boy he is!"
+13647647	mistranslation: Thứ Bảy is Saturday, the translation says Sunday
+8990756	proverb ("Every dog has his day"), not a sentence about the number three
+8990229	proverb (a close neighbour is better than a distant relative)
+2520968	typo: "đên" for "đến"
+4195504	typo: "cố gang" for "cố gắng"
+1542041	calque of an English idiom with Southern nè
+9739398	làm việc ấy is làm + việc ấy ("to do that thing"), not làm việc "to work"
+12557782	"cuộc" for "cuộc đời" (life): a word missing

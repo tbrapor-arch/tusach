@@ -66,7 +66,7 @@ DB_ALLOWS = {'sino': set(HV), 'nonhv': {'older-loan'}, 'vietic': {'native', 'com
              'loan': {'french', 'loan'}, 'compound': {'compound', 'native', 'hv-vn', 'hv'}}
 EN_STOP = {'to', 'a', 'an', 'the', 'of', 'is', 'one', 'someone', 'something', 'sb', 'sth', 'etc', 'it', 'its', 'used',
            'for', 'and', 'or', 'in', 'on', 'at', 'by', 'as', 'with', 'up', 'out', 'off', 'into', 'from', 'word',
-           'particle', 'marker', 'classifier', 'form', 'question', 'final', 'sentence', 'very'}
+           'particle', 'marker', 'classifier', 'form', 'question', 'final', 'sentence', 'very'}    # validation
 SYNONYMS = [{'mother', 'mom', 'mum', 'mama'}, {'father', 'dad', 'papa'}, {'glass', 'cup', 'tumbler'},
             {'big', 'large', 'great'}, {'small', 'little', 'tiny'}, {'fast', 'quick', 'quickly'},
             {'grandfather', 'grandpa'}, {'grandmother', 'grandma'}, {'film', 'movie'}, {'photo', 'photograph', 'picture'},
@@ -122,15 +122,50 @@ def overrides(row):
     return out
 
 
-def words(text):
+IRREGULAR = {'children': 'child', 'people': 'person', 'men': 'man', 'women': 'woman', 'feet': 'foot', 'teeth': 'tooth',
+             'is': 'be', 'are': 'be', 'was': 'be', 'were': 'be', 'am': 'be', 'been': 'be', 'said': 'say',
+             'told': 'tell', 'saw': 'see', 'seen': 'see', 'went': 'go', 'gone': 'go', 'ate': 'eat', 'eaten': 'eat',
+             'bought': 'buy', 'drank': 'drink', 'came': 'come', 'gave': 'give', 'given': 'give', 'thought': 'think',
+             'knew': 'know', 'known': 'know', 'met': 'meet', 'sat': 'sit', 'took': 'take', 'taken': 'take',
+             'made': 'make', 'did': 'do', 'done': 'do', 'had': 'have', 'has': 'have', 'wrote': 'write',
+             'written': 'write', 'read': 'read', 'heard': 'hear', 'felt': 'feel', 'left': 'leave', 'lost': 'lose',
+             'ran': 'run', 'flew': 'fly', 'slept': 'sleep', 'spoke': 'speak', 'spoken': 'speak', 'sold': 'sell',
+             'better': 'good', 'best': 'good', 'bigger': 'big', 'biggest': 'big', 'programme': 'program',
+             'colour': 'color', 'centre': 'center', 'favourite': 'favorite', 'neighbour': 'neighbor'}
+CUE_STOP = {'to', 'a', 'an', 'the', 'it', 'its', 'sb', 'sth', 'etc', 'someone', 'something', 'used', 'one', 'of', 'or',
+            'and', 'for', 'as', 'by'}
+
+
+def cue_words(text):
+    """The words an example's translation must share with a sense (tools/cards.py): its words with only CUE_STOP left
+    out, so that "sentence" (câu), "into" (thành), "with" (với), "very" (rất) count; a sense whose words are all in
+    CUE_STOP ("and", "or", "one; a, an") keeps them."""
+    w = words(text, CUE_STOP)
+    return w or words(text, set())
+
+
+def all_words(text):
+    """Every word of a translation, stemmed as words() does: what it offers to cue_words()."""
+    return words(text, set())
+
+
+def words(text, stop=None):
+    """The content words of an English text: lower case, irregular forms and plurals folded (IRREGULAR, -s, -es,
+    -ed, -ing, -ly, a final -e), synonyms added (SYNONYMS); without `stop` (default EN_STOP)."""
+    stop = EN_STOP if stop is None else stop
     out = set()
     for w in re.findall(r'[a-z]+', (text or '').lower()):
-        if w in EN_STOP or len(w) < 2:
+        w = IRREGULAR.get(w, w)
+        if re.fullmatch(r'(?:my|your|him|her|it|our|them|one)sel(?:f|ves)', w):
+            w = 'oneself'
+        if w in stop or len(w) < 2 and w not in ('a',):
             continue
         for suf in ('ing', 'ies', 'ed', 'es', 's', 'ly'):
             if len(w) > len(suf) + 3 and w.endswith(suf):
                 w = w[:-len(suf)] + ('y' if suf == 'ies' else '')
                 break
+        if len(w) > 4 and w.endswith('e'):
+            w = w[:-1]
         out.add(w)
     for syn in SYNONYMS:
         if out & syn:

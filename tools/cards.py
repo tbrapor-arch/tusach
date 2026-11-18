@@ -246,11 +246,16 @@ def lex_group(groups, row):
     return best if mine & lexicon.words(' '.join(r['english'] or '' for r in best)) else None
 
 
-def sentence_fits(v, en, cue, avoid):
+FUNCTION_POS = {'prep', 'conj', 'particle', 'det', 'classifier'}
+TIME_WORDS = {'hôm nay', 'hôm qua', 'ngày mai', 'bây giờ', 'tối nay', 'sáng nay'}
+
+
+def sentence_fits(v, en, cue, avoid, own=None):
     """An example fits a sense when its English translation has a word of the sense (cue) and none that only another
-    sense of the spelling has (avoid), and when the course words of the sentence whose meaning is a number or a
-    noun with a single lexicon sense are in the translation (Thứ Bảy / "on Sunday" is refused)."""
-    tw = lexicon.words(en)
+    sense of the spelling has (avoid), and when the course words of the sentence that a translation cannot leave out
+    (a number, a noun or a time word with a single lexicon sense) are in the translation (Thứ Bảy / "on Sunday",
+    sáng hôm qua / "this morning" are refused)."""
+    tw = lexicon.all_words(en)
     if cue and not (cue & tw):
         return False
     if avoid & tw - cue:
@@ -258,33 +263,55 @@ def sentence_fits(v, en, cue, avoid):
     for w in vi.words(vi.cut(v, KNOWN)):
         if w[0] != 'w':
             continue
-        rs = LEX_KEY.get(canon(w[2]))
-        if rs and len(rs) == 1 and rs[0]['pos'] in ('num', 'noun') and not (lexicon.words(rs[0]['en']) & tw):
+        k = canon(w[2])
+        rs = LEX_KEY.get(k) if k != own else None
+        if rs and len(rs) == 1 and (rs[0]['pos'] in ('num', 'noun') or k in TIME_WORDS) and \
+                lexicon.cue_words(rs[0]['en']) and not (lexicon.cue_words(rs[0]['en']) & tw):
             return False
     return True
 
 
-def choose_example(k, ids, en, others, strict):
+def blocked_examples(path=os.path.join(ROOT, 'course/example-block.tsv')):
+    """Tatoeba sentence ids a card never shows (course/example-block.tsv: a mistranslation, a typo, a proverb that
+    the automatic checks let through; each with its reason)."""
+    out = set()
+    if os.path.exists(path):
+        for line in open(path, encoding='utf-8'):
+            if line.strip() and not line.startswith('#'):
+                out.add(line.split('\t')[0].strip())
+    return out
+
+
+BLOCKED = blocked_examples()
+
+
+def choose_example(k, ids, en, others, strict, pos='', siblings=False):
     """(vi, en, source, ref) of the card's example, or None. Tatoeba candidates of the word (whole word, not flagged:
-    tools/build_db.py attach_examples) in their order, then Wiktionary's examples of the etymology shown (ids). With
-    several senses on the spelling (`others`: their English) or a lexicon card (`strict`) the translation must fit
-    the sense (sentence_fits); a word whose English has no content word (a particle) takes the first candidate only
-    when it has no other sense."""
-    cue = lexicon.words(en)
+    tools/build_db.py attach_examples; not in course/example-block.tsv) in their order, then Wiktionary's examples of
+    the etymology shown (ids). The first whose translation fits the sense (sentence_fits: a word of the sense, none of
+    another sense's); with no other sense on the spelling (`others`), the first aligned one; a lexicon function word
+    (pos) whose translations
+    rarely carry its English (của "of") takes the first candidate without another sense's words, when the lexicon
+    gives the key no other sense (siblings)."""
+    cue = lexicon.cue_words(en)
     avoid = set().union(*(lexicon.words(o) for o in others)) - cue if others else set()
     cand = con.execute("SELECT vi, en, source, ref FROM example WHERE key=? AND source='tatoeba' AND flags='' "
                        "ORDER BY id", (k,)).fetchall() if _has_example_key() else []
+    cand = [c for c in cand if (c[3] or '').split(' ')[0].lstrip('#') not in BLOCKED]
     cand += con.execute(f"SELECT vi, en, source, ref FROM example WHERE source != 'tatoeba' AND entry_id IN "
                         f"({','.join('?' * len(ids))}) AND length(vi) <= 200 ORDER BY length(vi), id", ids).fetchall()
-    for c in cand:
-        if not cue and (others or strict):
-            if others:
-                return None
-            return c
-        if sentence_fits(c[0], c[1], cue, avoid):
-            return c
-    if not others and not strict and cand:
-        return cand[0]
+    if cue:
+        for c in cand:
+            if sentence_fits(c[0], c[1], cue, avoid, k):
+                return c
+    if not others:                     # one sense only: any sentence with the word as a whole word, aligned
+        for c in cand:
+            if sentence_fits(c[0], c[1], set(), set(), k):
+                return c
+    if strict and pos in FUNCTION_POS and not siblings:
+        for c in cand:
+            if not (avoid & lexicon.words(c[1])) and sentence_fits(c[0], c[1], set(), avoid, k):
+                return c
     return None
 
 
@@ -429,7 +456,8 @@ def lookup(k, tag=None, surface=None):
     card['en'], card['en_src'], card['en_rank'] = en, src, english.rank(src)
     if rows or lex:
         ids = [r['id'] for r in main] or [-1]
-        ex = choose_example(k, ids, en, [o['en'] for o in other if o.get('en')], strict=bool(lex))
+        ex = choose_example(k, ids, en, [o['en'] for o in other if o.get('en')], strict=bool(lex),
+                             pos=lex['pos'] if lex else '', siblings=bool(siblings))
         if ex:
             card['ex'] = {'vi': ex[0], 'en': ex[1]}
             if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
