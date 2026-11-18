@@ -58,3 +58,13 @@ described from published accounts, not from listening).
    (còn, đứa are not taught yet.)
 5. Note: **em ấy** for "he/she" (someone younger) is given beside anh ấy and chị ấy. In Hà Nội, is **cô ấy** /
    **nó** more usual for a younger person (cô ấy is in the word list's gloss of ấy)?
+
+## Lesson 6
+1. Line 2: Sacha asks the grandmother **Bây giờ là mấy giờ ạ?** with no address term; would **Bác ơi, bây giờ là
+   mấy giờ ạ?** be expected from a young man to an elder?
+2. Line 3: **Mấy giờ cháu về?** (time question first) for "what time will you be back?": natural, against **Cháu
+   về lúc mấy giờ?** (lúc comes later).
+3. Line 4: **sáu giờ rưỡi chiều** for 6:30 p.m.: in Hà Nội is 6:30 p.m. **chiều** or already **tối**?
+4. Line 7: **Anh Minh đang ở công ty** for "Minh is (already) at the office": natural, or **Anh Minh đi làm rồi**
+   (rồi at lesson 10)?
+5. Note: **đi công ty** "go to the office" is given as everyday speech beside **đi làm**. Is it common?
