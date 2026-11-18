@@ -422,6 +422,10 @@ def lookup(k, tag=None, surface=None):
             card['origin'] = NO_ETYMOLOGY
         if lex['origin'] == 'loan' and lex['source'].startswith('loan from'):
             card['origin'] = lex['source']
+        top = main[0] if main else {}
+        if top.get('origin_note') and {'native': 'vietic', 'compound': 'compound'}.get(lex['origin']) == \
+                top.get('origin'):      # the dictionary's evidence for the same origin (Proto-Vietic *…, the parts)
+            card['origin'] += ': ' + top['origin_note']
         em = lex['etymon'] if lex['origin'] == 'older-loan' else ''
         if lex['usage']:
             card['use'] = unbrace(lex['usage'])

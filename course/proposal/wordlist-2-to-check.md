@@ -121,8 +121,10 @@ decided by a native speaker yet.
 
 **Etymologies and Taigi layers a native speaker of Taigi or a historical linguist should check** (the reviewer
 could not judge them; Claude's choices):
-16. **MOE layer** of 陣 tsūn, 縣 kuān, 房 pông, 高 kau: the MOE marks none, so the card says "layer not marked by
-    the MOE" instead of "literary"; 茶 tê and the other 麻-rhyme readings in -e are now colloquial by rule.
+16. **MOE layer** of 陣 tsūn, 縣 kuān, 房 pông, 高 kau, and of 條 tiâu / liâu (review 3 says liâu is the literary
+    one): the MOE marks none, so the card says "layer not marked by the MOE" instead of "literary", and orders the
+    readings by their fit with the Hán-Việt (tiâu first for điều); 茶 tê and the other 麻-rhyme readings in -e are
+    now colloquial by rule.
 17. **buồn 煩** (older loan): Wiktionary gives it without hedging, and the tone fits (煩 level, voiced → huyền);
     lowered from sure to likely because nothing but Wiktionary supports the -uôn rhyme.
 18. **thi / thử 試** (both older loans of 試, "exam" and "to try") and **màu 貌** (likely): kept as Wiktionary
