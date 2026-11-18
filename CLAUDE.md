@@ -37,7 +37,7 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
    source fails `make db`; `TUSACH_ALLOW_MISSING=id,…` is for sandboxes only and makes the page unpublishable.
 8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word;
    `fixture: true` counts only there. Only `NN.yaml` files in `course/lessons/`.
-9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks follow the house style (lint).
+9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks and spellings (lý do, not lí do) follow the house style (lint).
 
 ## Repository rules
 - Public repo: code and Claude's own lessons. Copyrighted material (books, transcripts, recordings he owns) lives

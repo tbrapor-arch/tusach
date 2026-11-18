@@ -91,3 +91,28 @@
   only when present; Hán-Việt readings ordered by use in Sino-Vietnamese words (Wiktionary lists them alphabetically);
   日 nhựt, 本 bổn, 義 ngãi labelled Southern; Unihan variants (行爲 -> 行為) find the Chinese readings, 120 rows.
 - compare.py: hv/other/via/nan_coll fields; a ref is built with the sources its fetch.sh pinned.
+
+## 2026-11-18 — data quality (branch data-quality)
+- Why: the owner judged word list 1 too poor (69 rows of unknown origin, 26 to check, weak English for common words).
+  Method: from data and code only; Claude's judgement only in course/etymology-review.tsv (2 rows) and the proposed
+  glosses (not in force).
+- New source: the English Wiktionary's translation tables, filtered on the snapshot runner (`.github/snapshot-
+  translations.py`, release data-2026-11-18.2; the first release of the day had the Vietnamese rows only, superseded
+  for the Chinese rows; the workflow now names a second release of a day data-DAY.N). Vietnamese Wiktionary
+  (kaikki vi-extract): evaluated, not loaded (licence not readable on a primary page; it would class 4 of 159 unknown
+  top-1000 words).
+- English: tried ordering senses by the zipf of every attested English word: it promoted English homonyms ("love" =
+  tennis zero for không, "why" for lý do, "remote" for xa). Kept: a sense with an attested word before one without;
+  an attested word is put first only when no sense of the word has any ("busy"), in one entry; tables defined by
+  another English word of the same Vietnamese word are skipped. The first measure of "missing main sense" (best
+  zipf word absent) was noisy (uống lacked "take"): replaced by "none of the attested words present". Etymology
+  order by evidence fixed là "fine silk", với "to reach", ra "train station", báo "leopard" as main senses.
+- Doubt: a token-overlap test with CC-CEDICT on every entry marked 4,552 entries opaque (bạn 伴 "friend" vs
+  "companion"); now per etymology, one-character analyses only, with the translation tables' Chinese words as a second
+  witness, and a stricter test for function words.
+- Taigi: the reported colloquial readings checked on the MOE file: 冊 tsheh, 院 īnn, 醬 tsiùnn are unmarked (0) and
+  colloquial; 外 guē, 場 tshiâng, 房 pông are MARKED literary (1) by the MOE and are kept. MOE compound words carry no
+  文白 mark, so no literary reading can be read from them; the coda rule (Hán-Việt as witness of the Middle Chinese
+  coda) was used, with m/n, p/t, k/t allowed after a first run flagged 凡 huân, 法 huat, 直 ti̍t (229 -> 187 characters).
+- Frequency: English leakage removed by k x English frequency (k from English words that cannot be Vietnamese
+  syllables); names sharing a key no longer carry the common word's rank; spelling groups ranked once.
