@@ -3,8 +3,8 @@
 ## Repository (18 Nov 2026)
 Branch `data-quality` (pushed; not merged): from a clean clone with nothing missing, `make data db db-nc lint test app
 check coverage cutter` and `tools/smoke.py` (with TUSACH_PRIVATE) pass (data 34 s, each database ~80 s, test 165 s).
-Next steps: a native speaker reads the lexicon's doubts (course/proposal/wordlist-1-to-check.md) and the cutter sets
-→ syllabus revision and word list → the owner's approval → lessons 1–7.
+Next steps: the owner approves the syllabus proposal and word list 2 (course/proposal/); a native speaker reads
+wordlist-2-to-check.md and the cutter sets → lessons 1–7.
 
 ## Data sources (18 Nov 2026)
 `data/fetch.sh` pins every source by content (ATTRIBUTION.md). kaikki (Wiktionary), Tatoeba and the English
@@ -20,8 +20,8 @@ characters with no reading…). Tatoeba: 22,181 sentence pairs used; 45,475 exam
 flagged), the card chooses by sense.
 
 ## Cards (branch data-quality, 18 Nov 2026)
-Three layers (REFERENCE): the course lexicon `course/lexicon.tsv`, 508 rows (doubt 14, likely 86, sure 408; 4
-overrides; 0 open conflicts), Claude's, NOT native-checked; the dictionary for other words; the golden check (524
+Three layers (REFERENCE): the course lexicon `course/lexicon.tsv`, 522 rows (doubt 14, likely 88, sure 420; 4
+overrides; 0 open conflicts), Claude's, NOT native-checked; the dictionary for other words; the golden check (538
 cards) and the real-card compare. Top 1,000 cards: English not usable 33 (was 49 at fa4d343, 225 at dcaf84f); labels
 same 386, gram 7, hv-vn 13, doubtful 12, opaque 20, older-loan 111, loan 9, native 200, compound 111, false-friend 8,
 unknown 123. Spelling groups: orthographic only. Top 300 read against fa4d343: 118 better, 172 neutral, 10
@@ -31,8 +31,9 @@ unchanged, 0 worse; against dcaf84f: 100 better, 193 neutral, 7 unchanged, 0 wor
 Join on characters in `tools/bridge.py`: Taigi literary reading (literary MOE readings only when a character has one)
 with the colloquial word reading apart (167 characters colloquial by the coda rule, 149 colloquial only); Hán-Việt
 readings by use, Northern first; Unihan variants (195 rows). 12,347 spellings: 3 readings 11,239, 2 1,024, 1 60, 0 24.
-False friends: the lexicon's false_friend column (bác sĩ, thời tiết, bản đồ, trường, quận, đầu tiên…). Sound-correspondence
-drills: TODO(bridge).
+False friends: the lexicon's false_friend column (14 rows: bác sĩ, thời tiết, tuần, bản đồ, trường, quận, đầu tiên…).
+Sound rules: `tools/bridge_rules.py` measures them on 994 Hán-Việt syllables of the top 3,000 cards (tones from
+Cantonese 801 / 850, from Taigi 856 / 915; initials by old class, each with its direction). Drills: TODO(bridge).
 
 ## Word frequency and coverage
 Ranks: `tools/freq.py` (vi.cut() over Tatoeba + Wiktionary examples, wordfreq prior less English leakage; names
@@ -46,9 +47,12 @@ sentences, `tests/cutter/heldout.tsv`) vi.cut() 0.953, underthesea 0.928. Both s
 native speaker**.
 
 ## Lessons
-None. `course/syllabus.yaml`: syllabus and word list not approved. Proposal in course/proposal/ (word list 1
-regenerated from the cards with sense tags; its to-check list = the lexicon's doubts and overrides; the syllabus
-revision, with the essentials review 2 found missing, is the next task). The build uses `tools/fixtures/lessons/00.yaml`.
+None. `course/syllabus.yaml`: the 100-lesson plan (lines, new words native / hv, grammar, bridge, strand); syllabus
+and word list NOT approved (both null). Proposal: `course/proposal/syllabus-proposal.md` (second version, 18 Nov
+2026: the owner's twelve decisions, Sacha and the cast, measured sound rules, Lesson 0 outline, 100 lessons);
+`wordlist-2.tsv` (L1–13, 194 words + 3 names; Hán-Việt 37, older loans 24) and its to-check list. Next: the
+owner's approval (and, if possible, a native reading of the to-check list), then lessons 1–7. The build uses
+`tools/fixtures/lessons/00.yaml`.
 
 ## Audio
 No source of word recordings (TODO(audio)); cards say "No recording yet". The native-speaker recording page
