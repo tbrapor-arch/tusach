@@ -9,8 +9,9 @@ reading of its character: entry.hv_check ok) whose characters the Chinese source
 MOE, CC-CEDICT) gives, for each of its characters, a pair (Hán-Việt syllable, the word's own reading of that
 character): no polyphonic character is guessed. Counted per language: initial against initial, final (rhyme without
 tone) against final, Hán-Việt tone against Chinese tone. A reading's score is the sum of the three log-probabilities
-P(Chinese part | Hán-Việt part) with add-half smoothing; the best-scoring reading comes first; equal scores keep the
-source's own order (rime's share, the MOE's order, Unihan kMandarin then CC-CEDICT use: tools/build_db.py
+P(Chinese part | Hán-Việt part) with add-half smoothing, plus the log of the source's own preference for the reading
+(prior(): rime's share for Cantonese, the source's order otherwise); the best-scoring reading comes first; equal
+scores keep the source's own order (rime's share, the MOE's order, Unihan kMandarin then CC-CEDICT use: tools/build_db.py
 rank_chinese). The same split functions serve tools/bridge_rules.py (the syllabus's sound rules).
 """
 import math
@@ -155,11 +156,25 @@ def score(con, hv, lang, r):
     return out
 
 
-def order(con, hv, lang, readings):
-    """`readings` (in the source's order) with the one that best fits the Hán-Việt syllable `hv` first; equal scores
-    keep the source's order."""
+def prior(con, ch, lang, readings):
+    """The source's own preference among a character's readings, as a probability: Cantonese, rime's share (its main
+    reading has no percentage: 0.85; an alternative its percentage, at least 0.5 %); Taigi and Mandarin, their order
+    (the MOE's; Unihan kMandarin then CC-CEDICT use): the first 0.6 (Taigi) or 0.8 (Mandarin), the rest shared."""
+    n = len(readings)
+    if lang == 'yue' and ch:
+        share = dict(con.execute("SELECT reading, share FROM chinese WHERE chars=? AND lang='yue' AND level='char'",
+                                 (ch,)).fetchall())
+        return {r: 0.85 if share.get(r) is None else max(share[r], 0.5) / 100 for r in readings}
+    first = 0.8 if lang == 'cmn' else 0.6
+    return {r: first if i == 0 else (1 - first) / (n - 1) for i, r in enumerate(readings)}
+
+
+def order(con, hv, lang, readings, ch=None):
+    """`readings` (in the source's order) with the most likely first: the measured fit with the Hán-Việt syllable `hv`
+    times the source's own preference (prior()); equal scores keep the source's order."""
     if len(readings) < 2 or not hv:
         return list(readings)
-    sc = {r: score(con, hv, lang, r) for r in readings}
+    pr = prior(con, ch, lang, readings)
+    sc = {r: score(con, hv, lang, r) + math.log(pr[r]) for r in readings}
     # a Mandarin neutral-tone reading (過 guo) is never a character's citation reading: last
     return sorted(readings, key=lambda r: (lang == 'cmn' and tone('cmn', r) == 0, -round(sc[r], 6), readings.index(r)))

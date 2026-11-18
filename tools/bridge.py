@@ -145,12 +145,13 @@ def _by_char(per, lang, n, fitted=False):
                           for rs in per)
 
 
-def _fit(con, per, lang, syls):
+def _fit(con, per, lang, syls, chars=''):
     """Each character's readings ordered by their fit with the word's Hán-Việt syllable (tools/soundfit.py); unchanged
     without syllables."""
     if not syls or len(syls) != len(per):
         return per
-    return [soundfit.order(con, s, lang, rs) for s, rs in zip(syls, per)]
+    chars = chars if len(chars) == len(per) else [None] * len(per)
+    return [soundfit.order(con, s, lang, rs, c) for s, rs, c in zip(syls, per, chars)]
 
 
 def variants(con, ch):
@@ -206,7 +207,7 @@ def lang_reading(con, chars, lang, names=False, syls=None):
             return '', '', chars
         per.append(rs)
         forms += form
-    return _by_char(_fit(con, per, lang, syls), lang, len(chars), bool(syls)), 'char', forms
+    return _by_char(_fit(con, per, lang, syls, forms), lang, len(chars), bool(syls)), 'char', forms
 
 
 def unmarked_layer(con, ch):
@@ -256,14 +257,14 @@ def taigi(con, chars, syls=None):
                 break
     if per is None:
         if not word and coll_per:
-            word = [_by_char(_fit(con, coll_per, 'nan', syls), 'nan', len(chars), bool(syls))]
+            word = [_by_char(_fit(con, coll_per, 'nan', syls, chars), 'nan', len(chars), bool(syls))]
         return '', '', ' / '.join(word), wsp
     combos = {'-'.join(c).lower() for c in itertools.product(*per)} if len(chars) > 1 else set()
     attested = [w for w in word if w.lower() in combos]
     if attested:
         coll = [w for w in word if w.lower() not in combos]
         return attested[0], 'word', ' / '.join(coll), wsp
-    return _by_char(_fit(con, per, 'nan', syls), 'nan', len(chars), bool(syls)), 'char', ' / '.join(word), forms
+    return _by_char(_fit(con, per, 'nan', syls, forms), 'nan', len(chars), bool(syls)), 'char', ' / '.join(word), forms
 
 
 def hv_readings(con, ch, labels=False):
