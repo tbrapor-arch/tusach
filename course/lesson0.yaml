@@ -1,0 +1,186 @@
+# Lesson 0, "Reading Vietnamese" (format: docs/REFERENCE.md "Lesson 0"; tools/lesson0.py). Written by Claude,
+# 19 Nov 2026, from published descriptions of Hà Nội speech (Kirby 2011, "Vietnamese (Hanoi Vietnamese)", Journal of
+# the IPA 41: 381-392; Thompson 1965, A Vietnamese Grammar), NOT from listening and NOT checked by a native speaker.
+# [[…]] = Vietnamese words with the course's word boundaries: each gets its card through tools/cards.py.
+title: {en: Reading Vietnamese, vi: Chữ quốc ngữ}
+intro: >-
+  How to read the Latin alphabet of Vietnamese (quốc ngữ) the Hà Nội way. **There is no audio in the app yet**, so
+  this page describes sounds in words: IPA in square brackets, then the nearest sound in French, English or Mandarin
+  (Cantonese or Taigi only where they come closest). A comparison only ever says "close to": no sound of another
+  language is the Vietnamese one, and the tones in particular must be learnt by ear once recordings exist. Tap any
+  Vietnamese word for its card. Written by Claude from published descriptions of Hà Nội speech; **not checked by a
+  native speaker**. You need not learn it all now: read it once, then come back to it.
+sections:
+- id: syllable
+  h: 1. The syllable
+  body:
+  - p: >-
+      Vietnamese is written syllable by syllable, with a space after each one, the way Chinese is written character
+      by character: [[Việt_Nam]] is two syllables and one word, like 越南. A syllable has up to five parts, and only
+      the vowel and the tone are always there:
+  - table:
+      head: [Part, What it can be, Example]
+      rows:
+      - [initial consonant, "one of about 20 sounds, or none", "[[người]]: ng-"]
+      - [glide, "a [w] written o or u: oa, oe, uy, uê, qu", "[[quá]]: q + u = [kw]"]
+      - [vowel, one of 11 vowels or 3 diphthongs, "[[người]]: ươ"]
+      - [final, "-p -t -c -ch, -m -n -ng -nh, or the glides -i/-y and -o/-u", "[[người]]: -i"]
+      - [tone, "one of six, shown by a mark on the vowel (none for the level tone)", "[[người]]: ` (huyền)"]
+  - p: >-
+      The spelling is close to the sound, much closer than in French or English, once you know the rules on this
+      page. The one big exception: Hà Nội pronounces some letters alike (section 6), so their spelling has to be
+      learnt word by word.
+- id: vowels
+  h: 2. Vowels
+  body:
+  - p: >-
+      Twelve vowel letters. The marks ˘ ˆ and the horn (ơ, ư) make new vowels; they are part of the letter, not
+      tones. Vietnamese has long and short vowels: **ă** and **â** are short and never end a syllable.
+  - table:
+      head: [Letter, IPA, Nearest sound, Example]
+      rows:
+      - [a, "`[aː]`", "French *patte*, but longer; Cantonese long aa (三 saam1)", "[[ba~three]] three"]
+      - [ă, "`[a]`", "the same a, short; Cantonese short a (心 sam1) is near: the same long/short contrast", "[[ăn]] to eat"]
+      - [â, "`[ə]`", "short, as in English *but* said quickly; the Mandarin vowel of 很 hěn", "[[mấy]] how many"]
+      - [ơ, "`[əː]`", "the same vowel, long: English *fur* without the r", "[[cơm]] rice"]
+      - [e, "`[ɛ]`", "French è (*père*)", "[[em]] younger sibling"]
+      - [ê, "`[e]`", "French é (*été*)", "[[tên]] name"]
+      - ["i, y", "`[i]`", "French i (*lit*); i and y are the same vowel after a consonant (lý = lí)", "[[đi]] to go"]
+      - [o, "`[ɔ]`", "French o of *or*, English *law* (British)", "[[có]] to have"]
+      - [ô, "`[o]`", "French *eau*, *beau*", "[[bố]] father"]
+      - [u, "`[u]`", "French ou (*tout*)", "[[ngủ]] to sleep"]
+      - [ư, "`[ɨ]`", "u with the lips spread, not rounded; no French or English match; Mandarin readers find the vowel of 字 zì not far", "[[tư]] four"]
+  - p: >-
+      **Diphthongs** glide from the first vowel towards a central [ə]. Each has two spellings: ia, ưa, ua when nothing
+      follows; iê (yê), ươ, uô before a final consonant or glide.
+  - table:
+      head: [Spelling, IPA, Examples]
+      rows:
+      - ["ia / iê", "`[iə]`", "[[bia~beer]] beer · [[tiền]] money"]
+      - ["ưa / ươ", "`[ɨə]`", "[[sữa]] milk · [[người]] person"]
+      - ["ua / uô", "`[uə]`", "[[mua]] to buy · [[muốn]] to want"]
+  - p: >-
+      **Vowel + glide** endings are common: ai [aːj] (long a) against ay [aj] (short), ao [aːw] against au [aw]; ây [əj]
+      and âu [əw] use the short â. Compare [[hai]] two and [[bảy]] seven, [[chào]] hello and [[sáu]] six, [[đây]] here
+      and [[đâu]] where.
+- id: consonants
+  h: 3. Initial consonants
+  body:
+  - p: >-
+      The trap for a reader of pinyin: Vietnamese **t, c/k** are like pinyin **d, g** (no puff of air), and **th** like
+      pinyin **t**. **b** and **đ** are voiced, as in French, often with the larynx moving down (implosive); pinyin b
+      and d are not voiced, so take French as the model. d without a bar is a different letter (section 6).
+  - table:
+      head: [Letter, IPA (Hà Nội), Nearest sound, Example]
+      rows:
+      - [b, "`[ɓ]`", "French b, voiced (implosive)", "[[bố]] father"]
+      - [đ, "`[ɗ]`", "French d, voiced (implosive)", "[[đi]] to go"]
+      - [t, "`[t]`", "French t, Mandarin d (大 dà): no puff of air", "[[tôi]] I"]
+      - [th, "`[tʰ]`", "English t of *top*, Mandarin t (他 tā)", "[[tháng]] month"]
+      - ["c, k, q", "`[k]`", "French k, Mandarin g (高 gāo)", "[[có]] · [[kem]] ice cream · [[quán]] café"]
+      - [kh, "`[x]`", "Mandarin h (好 hǎo), German *ach*", "[[không]] not"]
+      - ["g, gh", "`[ɣ]`", "a g with friction, as in Spanish *agua*; neither French nor Mandarin has it", "[[gặp]] to meet · [[ghế]] chair"]
+      - ["ng, ngh", "`[ŋ]`", "English *sing*, but at the start of the syllable; Cantonese 我 ngo5, Taigi 五 ngóo", "[[người]] person · [[nghìn]] thousand"]
+      - [nh, "`[ɲ]`", "French gn (*agneau*)", "[[nhà]] house"]
+      - [ph, "`[f]`", "French f", "[[Pháp]] France"]
+      - [v, "`[v]`", "French v", "[[vui]] happy"]
+      - ["d, gi, r", "`[z]`", "French z (*zéro*): in Hà Nội the three are one sound", "[[gì]] what · [[rất]] very"]
+      - ["ch, tr", "`[c]`", "between t and ch: the tongue flat against the palate, no puff of air; Mandarin j (家 jiā) is near but has more hiss", "[[chào]] hello · [[trà]] tea"]
+      - ["s, x", "`[s]`", "French s: in Hà Nội the two are one sound", "[[sáu]] six · [[xin_lỗi]] sorry"]
+      - ["h, l, m, n", "`[h] [l] [m] [n]`", "as in English (h) and French", "[[hai]] two · [[là]] to be · [[mẹ]] mother · [[nhé]] OK?"]
+  - p: >-
+      **Spelling rules**: before i, y, e, ê the sound [k] is written k, [ɣ] gh and [ŋ] ngh (kem, ghế, nghìn); elsewhere
+      c, g, ng. [kw] is always qu. In gi the i belongs to the consonant (gì is gi + ì). A syllable may also start with a
+      vowel: [[ăn]], [[em]], [[uống]] (to drink) have no initial (Vietnamese inserts a slight catch in the throat).
+- id: finals
+  h: 4. Final consonants
+  body:
+  - p: >-
+      Vietnamese keeps the old Chinese finals -p -t -k (written -c) and -m, as Cantonese and Taigi do; Mandarin lost
+      them. The stops are **not released**: the mouth closes and no air comes out, as in Cantonese 十 sap6 or Taigi
+      學 ha̍k. A French speaker must resist adding a little vowel after them.
+  - table:
+      head: [Final, IPA, Example, Note]
+      rows:
+      - [-p, "`[p̚]`", "[[gặp]] to meet", lips close]
+      - [-t, "`[t̚]`", "[[rất]] very", tongue on the teeth ridge]
+      - [-c, "`[k̚]`", "[[học]] to study", see the lip rule below]
+      - [-m, "`[m]`", "[[năm~five]] five", "as Cantonese 三 saam1"]
+      - [-n, "`[n]`", "[[tên]] name", ""]
+      - [-ng, "`[ŋ]`", "[[tháng]] month", see the lip rule below]
+      - ["-nh, -ch", "after a: about `[ajŋ] [ajk]`", "[[anh]] elder brother · [[thích]] to like", "only after a, ê, i (y); see below"]
+  - p: >-
+      **-nh and -ch** are the Hà Nội spelling of ng and c after a front vowel. After a, the vowel is short and glides
+      towards i before closing: [[anh]] sounds roughly like English *eye* + ng, said fast. After i and ê the tongue stays
+      high and forward: [[thích]], [[mình]] (oneself). Descriptions differ in the details; trust recordings over this
+      line when they come. A useful fact for later lessons: a Hán-Việt -nh / -ch always answers a Cantonese -ng / -k
+      (明 minh, Cantonese ming4).
+  - p: >-
+      **The lip rule.** After o, ô and u, the finals -ng and -c close the lips as well as the back of the tongue, so
+      the syllable ends with the mouth shut, roughly `[ŋ͡m]` and `[k͡p]`: [[không]] not, [[học]] to study, [[cũng]]
+      also, [[uống]] to drink. Hear it as "ng" and "k" with the lips closing at the same moment. After the other vowels
+      (tháng, rất) the lips stay open.
+- id: tones
+  h: 5. The six tones
+  body:
+  - p: >-
+      Every syllable has one of six tones; a different tone is a different word, as in Chinese. In Hà Nội a tone is a
+      pitch line **and** a voice quality (breathy, creaky, or cut by a catch in the throat). The pitch numbers below
+      go from 1 (low) to 5 (high), from published descriptions (Kirby 2011); other descriptions differ by a step here
+      and there. The Chinese tones named are anchors for your ear, close at best, never the same.
+  - table:
+      head: [Name, Mark, Hà Nội shape, Voice, Nearest anchor, Example]
+      rows:
+      - [ngang, none, "mid level, about 33", plain, "Cantonese tone 3 (mid level); lower than Mandarin tone 1", "[[ma~ghost]] ghost"]
+      - [huyền, "`grave` à", "low falling, about 21", "often breathy, relaxed", "Cantonese tone 4 (low falling)", "[[mà]] but"]
+      - [sắc, "`acute` á", "rising to high, about 24 to 35", plain, "Mandarin tone 2, Cantonese tone 2", "[[má~cheek]] cheek"]
+      - [hỏi, "`hook` ả", "low falling, about 31, sometimes rising again at the end (312)", "can be tense or creaky", "the low dip of Mandarin tone 3", "[[mả~grave]] grave"]
+      - [ngã, "`tilde` ã", "rising, broken in the middle by a catch in the throat, about 3ʔ5", glottalised, "no Chinese match: a sắc with a hiccup in it", "[[mã~code]] code"]
+      - [nặng, "`dot below` ạ", "low, short, about 21ʔ, ending in a catch or creak", glottalised, "no Chinese match; the cut-off end recalls Taigi syllables in -h", "[[mạ~rice]] rice seedling"]
+  - p: >-
+      The mark sits on the vowel (on the main vowel of a diphthong: [[người]], [[muốn]]); with ơ, ư, ê, ô, â, ă it
+      sits above or below the other mark: ế, ự, ỗ.
+  - p: >-
+      **Checked syllables.** A syllable ending in -p, -t, -c or -ch can only have **sắc** or **nặng**, short: high
+      and short ([[rất]], [[Pháp]], [[thích]]) or low and short ([[gặp]], [[học]]). This matches the Chinese "entering
+      tone" (入聲) syllables that Cantonese and Taigi still end in -p -t -k.
+  - p: >-
+      **Two pairs to keep apart**: hỏi and ngã (low against broken-rising) and sắc and ngã (smooth against broken).
+      The South merges hỏi and ngã; Hà Nội keeps them apart, and so does the spelling.
+- id: mergers
+  h: 6. What Hà Nội pronounces alike
+  body:
+  - p: >-
+      The spelling keeps distinctions that Hà Nội speech has lost; the Centre and the South keep some of them.
+  - table:
+      head: [Letters, Hà Nội, Examples]
+      rows:
+      - ["d, gi, r", "all `[z]`", "[[da~skin]] skin · [[gì]] what · [[rất]] very"]
+      - ["ch, tr", "both `[c]`", "[[chào]] hello · [[trà]] tea"]
+      - ["s, x", "both `[s]`", "[[sáu]] six · [[xin_lỗi]] sorry"]
+  - p: >-
+      So [[da~skin]] (skin) and [[ra]] (to go out) sound the same in Hà Nội. The spelling of a native word is learnt with the
+      word. For Hán-Việt words the Chinese reading often decides; a later lesson (27) shows how. In the South, r, s
+      and tr keep a retroflex sound and d, gi, v merge as [j]: one line in each lesson where it matters.
+- id: reading
+  h: 7. How to read a syllable
+  body:
+  - p: >-
+      Read from the left: initial, glide, vowel, final, then put the whole syllable on its tone. Three examples:
+  - ul:
+    - "[[người]] person: ng `[ŋ]` + ươ `[ɨə]` + i `[j]`, huyền (low falling, breathy): about `[ŋɨəj˨˩]`."
+    - "[[Việt_Nam]] Vietnam: v `[v]` + iê `[iə]` + t (unreleased), nặng (low, short, cut off); then n + a `[aː]` + m, ngang (mid level)."
+    - "[[không]] not: kh `[x]` + ô `[o]` + ng with the lips closing (section 4), ngang."
+  - p: >-
+      Word boundaries: a word of two syllables is written with a space, like a phrase ([[cà_phê]], [[Hà_Nội]]). In this
+      course's own text the syllables of one word are joined so that tapping finds the right card; you will see them as
+      on paper, with a space.
+- id: bridge
+  h: 8. What to expect from the Chinese bridge
+  body:
+  - ul:
+    - "Many Vietnamese words, most of the learned ones, are **Hán-Việt**: the Vietnamese reading of a Chinese word, one syllable per character, as [[học]] is 學 (Mandarin xué)."
+    - "A word card shows its characters with the readings you know, **Mandarin (pinyin) first**, then Cantonese and Taigi."
+    - "The sounds answer each other by rules and tendencies, taught a few at a time: the finals -p -t -c -m survive (學 học, Cantonese hok6), and the tones follow the old Chinese tone classes."
+    - "Everyday words are mostly native ([[tôi]], [[ăn]], [[nhà]]) or older Chinese loans read another way: there the bridge says nothing, and the card says so."
+    - "Inside a Hán-Việt word the order is Chinese (越南 [[Việt_Nam]]); outside it, Vietnamese order: the modifier follows ([[người Pháp]], a French person)."

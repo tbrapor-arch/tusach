@@ -154,6 +154,19 @@ with tempfile.TemporaryDirectory() as tmp:
                           'an exercise contained in a dialogue line')]:
         ok(needle in out, f'lint catches {what}')
 
+# 4b. Lesson 0 (tools/lesson0.py): format, no overclaimed sound, spans through the one pipeline
+import lesson0  # noqa: E402
+bad0 = {'title': {'en': 'x', 'vi': 'x'}, 'sections': [{'id': 'a', 'h': 'h', 'body': [
+    {'p': 'ơ is exactly the French e'}, {'table': {'head': ['a', 'b'], 'rows': [['x']]}}, {'p': '[[學]]'}]}]}
+pr = ' | '.join(w for _, w in lesson0.problems(bad0))
+ok('a foreign sound is only ever close' in pr, 'lesson 0 refuses "exactly" for a foreign sound')
+ok('1 cells for 2 columns' in pr, 'lesson 0 refuses a table row of the wrong width')
+ok('chữ Hán inside [[' in pr, 'lesson 0 refuses chữ Hán in a Vietnamese span')
+ok(list(lesson0.spans({'intro': 'a [[học_sinh]] b', 'sections': []})) == [('intro', 'học_sinh')], 'lesson 0 finds its spans')
+got = lesson0.inline('**b** [[học]] 學', lambda t: [{'w': {'t': t}}])
+ok(got[0] == '<b>b</b> ' and got[1] == {'v': [{'w': {'t': 'học'}}]} and '<span class="han">學</span>' in got[2],
+   'lesson 0 text becomes escaped HTML and token parts')
+
 # 5. measure before and after
 a = {'lines': {'L1.1': {'text': 'Tôi là học sinh.', 'cut': [['Tôi', 'tôi'], ['là', 'là'], ['học sinh', 'học sinh']]}},
      'cards': {'tôi': {'en': 'I', 'en_src': 'course'}, 'học sinh': {'en': 'pupil', 'en_src': 'course'}}}

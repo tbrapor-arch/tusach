@@ -102,6 +102,19 @@ for d in raw:
                     'fixture': bool(d.get('fixture')), 'native_check': d.get('native_check'),
                     'lines': lines, 'notes': d.get('notes') or [], 'new_words': new_words, 'exercises': ex})
 
+# ---- Lesson 0, "Reading Vietnamese" (course/lesson0.yaml, tools/lesson0.py): its Vietnamese words through the same
+# pipeline, their cards in module `lessons`
+import lesson0  # noqa: E402
+
+
+def tok0(text):
+    toks = cards.tokenize(text)
+    all_tokens.extend(toks)
+    return toks
+
+
+lesson_zero = lesson0.render(lesson0.load(), tok0)
+
 # ---- the shared card file: this build replaces module `lessons` only (a partial build adds, never restores)
 store = cards.Store(STORE)
 store.replace_module('lessons', all_tokens, extra_ids)
@@ -145,10 +158,10 @@ for L in lessons:
 
 syllabus = course.syllabus()
 data = {'lessons': lessons, 'dict': dictionary, 'syllabus': syllabus.get('lessons') or [], 'fixture': fixture_build,
-        'zh': [list(x) for x in cards.DISPLAY_LANGS],
+        'zh': [list(x) for x in cards.DISPLAY_LANGS], 'lesson0': lesson_zero,
         'bridge': sorted(i for i, c in dictionary.items() if c.get('chars')), 'recorded': n_rec,
         'built': datetime.date.today().isoformat(), 'missing': MISSING}
-n_letters = check_font([L['title']['vi'] for L in lessons] + [ln['vi'] for L in lessons for ln in L['lines']]
+n_letters = check_font([t for _, t in lesson0.spans(lesson0.load())] + [L['title']['vi'] for L in lessons] + [ln['vi'] for L in lessons for ln in L['lines']]
                        + [c['w'] for c in dictionary.values()] + [c['ex']['vi'] for c in dictionary.values() if c.get('ex')])
 
 tpl = open(os.path.join(ROOT, 'app/index.template.html'), encoding='utf-8').read()
@@ -171,7 +184,7 @@ print('English on word cards:', ', '.join(f'{k} {v}' for k, v in src.most_common
 open(os.path.join(OUT, 'english-auto.txt'), 'w', encoding='utf-8').write(''.join(
     f"{c['w']}\t{c.get('en_src') or 'none'}\t{c.get('en') or ''}\n" for c in dictionary.values()
     if c.get('en_src') not in ('course', 'lexicon')))
-print(f'{out}: {len(lessons)} lessons, {len(dictionary)} cards ({sum(1 for c in dictionary.values() if c.get("chars"))} '
+print(f'{out}: {"Lesson 0 + " if lesson_zero else ""}{len(lessons)} lessons, {len(dictionary)} cards ({sum(1 for c in dictionary.values() if c.get("chars"))} '
       f'Hán-Việt), {sum(1 for c in dictionary.values() if c.get("audio"))} with audio, {n_rec} recorded lines, '
       f'{n_letters} letters checked in the font, {os.path.getsize(out) // 1024} KB')
 

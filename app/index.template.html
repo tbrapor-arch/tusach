@@ -179,6 +179,24 @@ h2 { margin: 0; font-size: 1.15rem; font-weight: 800; display: flex; align-items
 #dlg, .allnotes, h2[id] { scroll-margin-top: 3.6rem; }
 .toolbar { display: flex; gap: .5rem 1rem; flex-wrap: wrap; align-items: center; padding-block: .6rem; border-bottom: 1px solid var(--line); }
 .setting { color: var(--sub); margin: 0; }
+.l0sec { display: flex; flex-direction: column; gap: .75rem; scroll-margin-top: 1rem; }
+.l0sec p, .l0sec ul { margin: 0; line-height: 1.55; }
+.l0sec li + li { margin-top: .35rem; }
+.l0 code { font-family: "Noto Sans", "Charis SIL", "Doulos SIL", system-ui, sans-serif; font-size: .95em; background: none; }
+.l0v { font-family: var(--f-vi); font-weight: 700; font-size: 1.08em; }
+.l0wrap { border-radius: var(--r); background: var(--surface); border: var(--border-soft); }
+.l0tab { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.l0tab th, .l0tab td { padding: .45rem .6rem; border-bottom: 1px solid var(--soft-line); text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.l0tab th { font-family: var(--f-ui); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--sub); }
+.l0tab tr:last-child td { border-bottom: 0; }
+.l0tab td:first-child { font-family: var(--f-vi); font-weight: 800; font-size: 1.05rem; }
+@media (max-width: 640px) {
+  .l0tab thead { display: none; }
+  .l0tab tr { display: block; padding: .5rem .2rem; border-bottom: 1px solid var(--soft-line); }
+  .l0tab tr:last-child { border-bottom: 0; }
+  .l0tab td { display: block; border: 0; padding: .12rem .5rem; }
+  .l0tab td:not(:first-child)::before { content: attr(data-h) ": "; font-family: var(--f-ui); font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--sub); }
+}
 .lines { display: flex; flex-direction: column; gap: 1.25rem; }
 .sent { display: flex; flex-direction: column; gap: .15rem; }
 .sent .who { display: flex; align-items: center; gap: .5rem; font-family: var(--f-ui); font-size: .78rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--coral); }
@@ -394,6 +412,7 @@ function route() {
   let m;
   WAVE = false;
   if (h === 'lessons') return showLessons();
+  if (h === 'reading' && DATA.lesson0) return showReading();
   if ((m = h.match(/^(lesson|wave)-(\d+)$/))) { const L = DATA.lessons.find(l => l.id === +m[2]); if (L) { WAVE = m[1] === 'wave'; store.set('last', L.id); return showLesson(L); } }
   if (h === 'review') return showReview();
   if (h === 'lists') return showLists();
@@ -419,7 +438,7 @@ function renderTabs(cur) {
   $('#tabs').innerHTML = tabs.map(([k, t]) => `<button class="tab" data-tab="${k}" aria-current="${cur === k}">${ICONS[k]}<span>${t}</span></button>`).join('');
   $$('[data-tab]', $('#tabs')).forEach(b => b.onclick = () => { const k = b.dataset.tab; if (k === 'review') { sess = null; const sec = store.get('pracSec', 'lists'); go(sec === 'review' ? 'lists' : sec); return; } if (k === 'lessons') resetHome = true; go(k); });
 }
-function currentTab() { const h = location.hash.slice(1) || 'lessons'; return /^(lesson|wave)/.test(h) ? 'lessons' : /^(review|bridge|lists?$|list-)/.test(h) ? 'review' : /^(books|private-book)/.test(h) ? 'books' : h.startsWith('private') ? 'review' : h; }
+function currentTab() { const h = location.hash.slice(1) || 'lessons'; return /^(lesson|wave|reading)/.test(h) ? 'lessons' : /^(review|bridge|lists?$|list-)/.test(h) ? 'review' : /^(books|private-book)/.test(h) ? 'books' : h.startsWith('private') ? 'review' : h; }
 
 // ---------- lessons home
 const TOTAL = 100;
@@ -448,6 +467,7 @@ function showLessons() {
       <div class="nc-main"><span class="nc-n">${next.id}</span><span class="nc-t"><b>${esc(next.title.vi)}</b><span class="sub">${esc(next.title.en)}</span></span>
         <button class="btn" data-go="lesson-${next.id}">${last === next.id ? 'Resume' : 'Start'} →</button></div></div>`
       : `<div class="card raised"><span class="eyebrow">All written lessons are done</span><span>New lessons will appear here as they are written.</span></div>`}
+    ${DATA.lesson0 ? `<button class="item" data-go="reading" id="go-reading"><span class="no">0</span><span><span class="tt">${esc(DATA.lesson0.title.vi)}</span><br><span class="ts">Lesson 0 · ${esc(DATA.lesson0.title.en)}: letters, sounds and the six tones</span></span><span class="chev">›</span></button>` : ''}
     ${wv ? `<button class="card wave" data-go="wave-${wv.id}"><span class="eyebrow">Second wave</span><span><b>${lname(wv.id)}</b>: read the English, say it in Vietnamese, then check.</span></button>` : ''}
     ${extra.map(l => `<button class="item" data-go="lesson-${l.id}"><span class="no">${l.id}</span><span><span class="tt">${esc(l.title.vi)}</span> ${l.fixture ? '<span class="pill p-fx">Test fixture</span>' : ''}<br><span class="ts">${esc(l.title.en)}</span></span><span class="chev">›</span></button>`).join('')}
     <div class="lgrid">${[...Array(TOTAL)].map((_, i) => tile(i + 1)).join('')}</div>
@@ -482,6 +502,30 @@ function enLine(en, k) { return prefs.en ? `<span class="en">${esc(en)}</span>` 
 function wireReveal(root) { $$('[data-reveal]', root).forEach(b => b.onclick = () => { b.outerHTML = `<span class="en">${esc(REVEAL[b.dataset.reveal])}</span>`; }); }
 // notes are English with Vietnamese words in them; chữ Hán in a note (bridge notes) are set in the Chinese font
 function fmt(t) { return esc(t).replace(/([㐀-鿿\u{20000}-\u{3ffff}豈-﫿]+)/gu, '<span class="han">$1</span>'); }
+
+// ---------- Lesson 0, "Reading Vietnamese" (course/lesson0.yaml): sections of paragraphs, lists and tables; every
+// text is parts: HTML strings (escaped by tools/lesson0.py) and {v: tokens}, Vietnamese words with their cards
+function parts(ps, key) { return (ps || []).map((p, i) => typeof p === 'string' ? p : `<span class="l0v">${sentence(p.v, key + '.' + i)}</span>`).join(''); }
+function showReading() {
+  renderTabs('lessons');
+  const R = DATA.lesson0, first = DATA.lessons.find(l => l.id >= 1);
+  const block = (b, k) => b.p ? `<p>${parts(b.p, k)}</p>`
+    : b.ul ? `<ul>${b.ul.map((x, i) => `<li>${parts(x, k + 'u' + i)}</li>`).join('')}</ul>`
+    : `<div class="l0wrap"><table class="l0tab"><thead><tr>${b.table.head.map((x, i) => `<th>${parts(x, k + 'h' + i)}</th>`).join('')}</tr></thead><tbody>${b.table.rows.map((r, ri) => `<tr>${r.map((x, i) => `<td data-h="${esc(b.table.head[i].filter(p => typeof p === 'string').join('').replace(/<[^>]+>/g, ''))}">${parts(x, k + 'r' + ri + 'c' + i)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  $('#main').innerHTML = `<div class="col l0">
+    <div class="lbar"><button class="icon" data-go="lessons" aria-label="Back to lessons">←</button><span class="where">Lesson 0 · ${esc(R.title.en)}</span>
+      <button class="icon" disabled aria-label="Previous lesson">‹</button><button class="icon" data-go="lesson-${first ? first.id : ''}" aria-label="Next lesson" ${first ? '' : 'disabled'}>›</button></div>
+    <div class="head"><span class="eyebrow">Lesson 0</span><h1>${esc(R.title.vi)}</h1><span class="tl">${esc(R.title.en)}</span></div>
+    <div class="banner">Not checked by a native speaker. No audio yet: the sounds are described, not played.</div>
+    <p class="setting">${parts(R.intro, 'R0')}</p>
+    <nav class="lnav" aria-label="Sections">${R.sections.map(s => `<button data-jump="l0-${esc(s.id)}">${parts(s.h.filter(p => typeof p === 'string'), 'x')}</button>`).join('')}</nav>
+    ${R.sections.map((s, si) => `<section class="l0sec" id="l0-${esc(s.id)}"><h2>${parts(s.h, 'R' + si + 'h')}</h2>${s.body.map((b, bi) => block(b, 'R' + si + 'b' + bi)).join('')}</section>`).join('')}
+    ${first ? `<div class="row"><button class="btn" data-go="lesson-${first.id}">${lname(first.id)}: ${esc(first.title.vi)} →</button></div>` : ''}
+  </div>`;
+  const main = $('#main');
+  wireTokens(main); wireGo(main);
+  $$('[data-jump]', main).forEach(b => b.onclick = () => document.getElementById(b.dataset.jump).scrollIntoView({ behavior: 'smooth', block: 'start' }));
+}
 
 // ---------- lesson
 function showLesson(L) {

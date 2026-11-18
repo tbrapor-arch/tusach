@@ -335,6 +335,71 @@ def plan_checks(loaded, msgs):
                 msgs.append(('W', f'{name}: W Hán-Việt share of new words {hv / (hv + nat):.2f}, the plan {want:.2f}'))
 
 
+def check_words(m, where, text, keys, tags, all_tags, names, used, real=True):
+    """Every word of a Vietnamese text written with the course's boundaries (a lesson line, an exercise, a Lesson 0
+    span): chữ Hán, syllables and tone-mark placement, house spelling, tags, dictionary, fixture-only words."""
+    if vi.CJK.search(text):
+        m('E', where, 'chữ Hán in a lesson line (characters go on cards and in the bridge only)')
+    for t in vi.words(text):
+        if t[0] != 'w':
+            continue
+        _, surf, k, tag, start = t
+        shown = surf.replace('_', ' ')
+        used.add(vi.card_id(k, tag))
+        if shown in names:
+            used.add('name:' + shown)
+            continue
+        for s in shown.lower().split():
+            for p in vi.syllable_problems(s, style=True):
+                m('E', where, p)
+        if D.spelling.get(k, k) != k:
+            m('E', where, f'"{shown}": write the house spelling "{D.spelling[k]}" (spelling group, '
+                          'docs/REFERENCE.md)')
+            k = D.spelling[k]
+        if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()) and vi.card_id(k, tag) not in LEX_CID \
+                and not D.sense_tag(k, tag):
+            m('E', where, f'"{surf}": tag ~{tag} is defined by no lexicon row, no dictionary entry, no new_words '
+                          'entry, and names no part of speech or single sense of the word')
+        if not tag and k in keys:
+            why = untagged(k)
+            if why:
+                m('E', where, f'"{shown}": {why}')
+        if k not in keys:
+            hint = ' (a name? declare it in new_words with name: true)' if surf[:1].isupper() and not start else ''
+            m('E', where, f'"{shown}" is in no dictionary{hint}')
+        elif real and keys[k] == {True}:
+            m('E', where, f'"{shown}" is only in the test fixture, not in a real source')
+
+
+def lint_lesson0(keys, tags, all_tags, names, msgs):
+    """course/lesson0.yaml (tools/lesson0.py): its format, no overclaimed sound, every [[…]] span's words as a lesson
+    line's, and the chữ Hán of its bridge section as a bridge note's (the same word in Chinese, all four readings)."""
+    import lesson0
+    try:
+        d = lesson0.load()
+    except yaml.YAMLError as e:
+        msgs.append(('E', f'course/lesson0.yaml:0: E YAML error: {e}'))
+        return
+    if d is None:
+        return
+    rel = os.path.relpath(lesson0.path(), ROOT)
+
+    def m(level, where, text):
+        msgs.append((level, f'{rel}:{where}: {level} {text}'))
+    for where, why in lesson0.problems(d):
+        m('E', where, why)
+    used = set()
+    for where, text in lesson0.spans(d):
+        check_words(m, where, text, keys, tags, all_tags, names, used)
+    # the bridge section's chữ Hán are same-word examples; elsewhere characters only anchor a Chinese sound (大 dà)
+    for where, text in lesson0.texts(d, only='bridge'):
+        for run, word in sorted(set(cjk_pairs(lesson0.SPAN.sub(lambda x: x.group(1).replace('_', ' '), str(text))))):
+            why = D.bridge_example(run, word or None)
+            if why:
+                m('E', where, f'chữ Hán example {run} {word}: {why}')
+    print(f'lint: Lesson 0 ({rel}): {sum(1 for _ in lesson0.spans(d))} Vietnamese spans checked')
+
+
 def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
     def m(level, where, text):
         msgs.append((level, f'{os.path.relpath(path, ROOT)}:{where}: {level} {text}'))
@@ -377,37 +442,7 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
     used = set()
 
     def check_line(where, text):
-        if vi.CJK.search(text):
-            m('E', where, 'chữ Hán in a lesson line (characters go on cards and in the bridge only)')
-        for t in vi.words(text):
-            if t[0] != 'w':
-                continue
-            _, surf, k, tag, start = t
-            shown = surf.replace('_', ' ')
-            used.add(vi.card_id(k, tag))
-            if shown in names or shown in lesson_names:
-                used.add('name:' + shown)
-                continue
-            for s in shown.lower().split():
-                for p in vi.syllable_problems(s, style=True):
-                    m('E', where, p)
-            if D.spelling.get(k, k) != k:
-                m('E', where, f'"{shown}": write the house spelling "{D.spelling[k]}" (spelling group, '
-                              'docs/REFERENCE.md)')
-                k = D.spelling[k]
-            if tag and tag not in tags.get(k, set()) | all_tags.get(k, set()) and vi.card_id(k, tag) not in LEX_CID \
-                    and not D.sense_tag(k, tag):
-                m('E', where, f'"{surf}": tag ~{tag} is defined by no lexicon row, no dictionary entry, no new_words '
-                              'entry, and names no part of speech or single sense of the word')
-            if not tag and k in keys and not (shown in names or shown in lesson_names):
-                why = untagged(k)
-                if why:
-                    m('E', where, f'"{shown}": {why}')
-            if k not in keys:
-                hint = ' (a name? declare it in new_words with name: true)' if surf[:1].isupper() and not start else ''
-                m('E', where, f'"{shown}" is in no dictionary{hint}')
-            elif real and keys[k] == {True}:
-                m('E', where, f'"{shown}" is only in the test fixture, not in a real source')
+        check_words(m, where, text, keys, tags, all_tags, names | lesson_names, used, real)
 
     lines = d.get('dialogue') or []
     ns = set()
@@ -531,6 +566,7 @@ def main():
         seen[d.get('id')] = os.path.basename(f)
         lint(f, d, keys, tags, all_tags, names, msgs, spellings)
     plan_checks(loaded, msgs)
+    lint_lesson0(keys, tags, all_tags, names, msgs)
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded
                   if not d.get('fixture') and not d.get('review') and isinstance(d.get('id'), int))

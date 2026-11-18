@@ -3,7 +3,8 @@
   python3 tools/smoke.py [app/dist/index.html] [--shots DIR]
   SMOKE_IDS=1,2 python3 tools/smoke.py      # only these lessons
 
-Checks: JS errors, horizontal overflow, the embedded Vietnamese font is used for stacked marks, every lesson renders,
+Checks: JS errors, horizontal overflow, the embedded Vietnamese font is used for stacked marks, Lesson 0 (sections,
+tables, labels, every word's card), every lesson renders,
 every word token opens a card (a word without a card is a problem), every card shows English, new-word chips and notes
 open, exercises accept their answer and point out a tone-only mistake, a lesson can be finished, a review session runs,
 lists, bridge and settings render, every page maps to a tab; the private-module loader and its merge rule against a
@@ -57,6 +58,40 @@ with sync_playwright() as pw:
     page.evaluate('document.fonts.ready')
     if not page.evaluate("document.fonts.check('24px VietSans', 'ế ự ỗ ặ ẫ')"):
         p('the embedded VietSans font is not available for ế ự ỗ ặ ẫ')
+    # Lesson 0, "Reading Vietnamese": reached from home, every section and table drawn, the two labels (not
+    # native-checked, no audio), every Vietnamese word opens its card with English, nothing scrolls sideways
+    if page.evaluate('!!DATA.lesson0'):
+        if not page.locator('#go-reading').count():
+            p('home: no link to Lesson 0')
+        else:
+            page.click('#go-reading')
+        page.wait_for_selector('.l0sec')
+        overflow(page, 'lesson 0')
+        if page.locator('.l0sec').count() != page.evaluate('DATA.lesson0.sections.length'):
+            p('lesson 0: not every section is shown')
+        if page.locator('.l0tab').count() != page.evaluate("DATA.lesson0.sections.flatMap(s => s.body).filter(b => b.table).length"):
+            p('lesson 0: not every table is shown')
+        ban = page.locator('.l0 .banner').inner_text()
+        if 'native speaker' not in ban or 'No audio' not in ban:
+            p(f'lesson 0: the banner does not say "not checked by a native speaker" and "no audio": {ban!r}')
+        if page.evaluate("currentTab()") != 'lessons':
+            p('lesson 0: currentTab() is not lessons')
+        shot(page, 'reading')
+        toks = page.locator('.l0 .tok[data-tok]')
+        if not toks.count():
+            p('lesson 0: no Vietnamese word can be tapped')
+        nocard = page.evaluate("[...document.querySelectorAll('.l0 .tok.nocard')].map(t => t.textContent)")
+        if nocard:
+            p(f'lesson 0: words without a card: {nocard}')
+        for i in range(toks.count()):
+            toks.nth(i).click()
+            if i == 0:
+                page.wait_for_timeout(350)
+            if not page.evaluate("document.getElementById('sheet').classList.contains('open') && document.querySelector('#sheet .wc-gloss').textContent.trim() !== ''"):
+                p(f'lesson 0: word {i} "{toks.nth(i).inner_text()}" did not open a card with English')
+            if i == 0:
+                shot(page, 'reading-card')
+            page.keyboard.press('Escape')
     ids = page.evaluate('DATA.lessons.map(l => l.id)')
     if os.environ.get('SMOKE_IDS'):
         ids = [int(x) for x in os.environ['SMOKE_IDS'].split(',')]
@@ -157,7 +192,7 @@ with sync_playwright() as pw:
         page.wait_for_timeout(150)
         if page.evaluate('location.hash') != f'#lesson-{ids[1]}':
             p('ArrowRight does not go to the next lesson')
-    for h in ('lists', 'review', 'bridge', 'settings', 'lessons'):
+    for h in ('lists', 'review', 'bridge', 'settings', 'reading', 'lessons'):
         page.evaluate(f"location.hash = '{h}'")
         page.wait_for_timeout(150)
         overflow(page, h)

@@ -4,6 +4,7 @@
 ```
 course/lessons/NN.yaml   lessons (none yet: the syllabus and word list wait for the owner's approval); nothing else
                          may be there (lint); the template is course/lesson_template.yaml
+course/lesson0.yaml      Lesson 0, "Reading Vietnamese" (tools/lesson0.py; format below); page `#reading`, linked from home
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them); the draft word list
                          and proposal, the cast, the Northern particle strand: ONE source (tools/plan.py)
 course/lexicon.tsv       the course lexicon: one row per sense taught (English, origin, characters, etymon, false-friend
@@ -99,6 +100,15 @@ Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge note
 flow mapping (`{w: tôi, en: "I, me"}`): lint refuses unknown keys, which is what an unquoted comma makes. Exercises
 must be new: lint refuses one equal to, contained in, or equal after a greeting/first clause to a dialogue line, and
 warns at a similarity of 0.8.
+
+## Lesson 0 (`course/lesson0.yaml`, `tools/lesson0.py`; 19 Nov 2026)
+`{title: {en, vi}, intro, sections: [{id: slug, h, body: [{p: text} | {ul: [text…]} | {table: {head: [...], rows:
+[[...]]}}]}]}`. Inline: `**bold**`, `*italic*`, `` `IPA` ``, and `[[vi words]]`: Vietnamese with the course's boundaries
+and tags (`[[ma~ghost]]`), cut by `cards.tokenize` (cards in module `lessons`, the card check covers them) and linted
+as lesson lines; the `bridge` section's chữ Hán are linted as bridge examples (elsewhere characters only anchor a
+Chinese sound: 大 dà); no text may say a foreign sound is "exactly" / "identical" / "just like" one (lint). The page
+(`DATA.lesson0`) shows the labels "not checked by a native speaker" and "no audio yet"; tables become stacked cards
+on a phone. `tools/smoke.py` checks it.
 
 ## Word card (`DATA.dict[id]`, built only by `tools/cards.py`)
 Id: the word's key (lower-case NFC, spaces between syllables), `~tag` for a homograph, `name:` + surface for a name.
