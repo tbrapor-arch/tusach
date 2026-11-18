@@ -23,8 +23,13 @@ reading (tools/build_db.py rank_chinese). Used by tools/build_db.py (table `brid
 cards), so the card and the measurement agree.
 """
 import itertools
+import os
 import re
+import sys
 import unicodedata
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import vi  # noqa: E402
 
 LANGS = ('yue', 'nan', 'cmn')
 SEP = {'yue': ' ', 'nan': '-', 'cmn': ' '}
@@ -249,10 +254,15 @@ def hv_readings(con, ch, labels=False):
     rows = real or [(r, lb) for r, _, lb in rows]
     if any(lb != 'fallback' for _, lb in rows):
         rows = [x for x in rows if x[1] != 'fallback']
-    out = []
+    out, seen = [], {}
     for r, lb in rows:
-        if r not in [x[0] for x in out]:
-            out.append((r, lb))
+        k = vi.tkey(r)            # one reading in two tone-mark placements (hoà / hòa) is shown once, house style
+        if k in seen:
+            if vi.key(r) == r and vi.key(out[seen[k]][0]) != out[seen[k]][0]:
+                out[seen[k]] = (r, out[seen[k]][1])
+            continue
+        seen[k] = len(out)
+        out.append((r, lb))
     return out if labels else [r for r, _ in out]
 
 
