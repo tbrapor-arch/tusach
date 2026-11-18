@@ -201,3 +201,22 @@ tools/test_review3.py):
   the dialogue has one (a two-word clause is "contained"): exercises write the tag without the comma (NOTES L3 5).
 - Found and fixed: test_fetch's fixture-database build picked up the real course once lessons existed (make test
   failed in CI from 26c5aa7 to 0729180); smoke's "Show English" loop skipped buttons as they removed themselves.
+
+## 2026-11-19 — review 5 of lessons 1–7 (a second agent's per-line list, 25 rows + 19 findings)
+- Content: L1 lines 2–5 in order (Chào em! / Chị tên là gì ạ? / Chị tên là Lan. / Vâng. Cảm ơn chị ạ!); a man who
+  says chị says em, never anh (L1 fill 3 now Tôi …); the label Bác is what Sacha calls her; ạ = politeness toward
+  elders and in service; cà phê sữa đá, each word describes everything before it; ông 翁 / bà 婆 not asserted
+  (lexicon likely); đi công ty out; L6/L7 one story (Minh leaves early, comes home late; they meet at the tea stall
+  that Monday evening). Load: 7–9 notes per lesson (were 10–14), numbers as a small table + two rules; L7 a true
+  review of 9 lines. Lesson 0: nhé was the example of n; uống out of the lip rule; pitch numbers, Voice column,
+  glide table, Southern lines and section 8 cut (page 11,676 → 9,958 px at phone width).
+- Code: the test fixture had been loaded into every real build (seven real cards said "Source: test fixture", and
+  its 學生 / 學 / 生 readings were in the real tables): now only `build_db.py --fixture` (test databases); compare
+  reads card sources and blocks a fixture source. The Taigi mark U+030D drew as a dot: Noto Sans's own short stroke
+  (tables and anchors were fine; the Taigi app's font is the same file), redrawn at build time (tools/appfont.py),
+  and the font check now covers the cards' readings, combining marks and their positioning. Lint: person-term pairs
+  (W), copies from earlier lessons and note examples (E), Vietnamese in notes and glosses taught first or {preview}
+  (E); Lesson 0's sound-table examples checked against their row; a mistyped TUSACH_LESSON0 fails. Tests:
+  tools/test_review5.py, test_pipeline.py.
+- Kept, with the reason in NOTES-for-native-speaker.md: L3 line 3 Anh muốn một cà phê sữa đá and L5 line 6 bác này
+  (the reviewer left both to a native speaker), L4 prices.

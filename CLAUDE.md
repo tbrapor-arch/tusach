@@ -37,7 +37,7 @@ remark is one or two lines on a word he knows; no more Cantonese / Taigi reading
    in `ATTRIBUTION.md`, loader in `tools/build_db.py` (`SOURCES`), licence checked on its own page first. A missing
    source fails `make db`; `TUSACH_ALLOW_MISSING=id,…` is for sandboxes only and makes the page unpublishable.
 8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word;
-   `fixture: true` counts only there. Only `NN.yaml` files in `course/lessons/`.
+   `fixture: true` counts only there; only test databases load it (`build_db --fixture`). Only `NN.yaml` in lessons.
 9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks and spellings (lý do, not lí do) follow the house style (lint).
 10. The course lexicon `course/lexicon.tsv` (Claude's, not native-checked; honest `doubt`) decides a word's English,
    sense, origin, characters, notes and example; readings come from the database. Lint refuses a conflict with the
