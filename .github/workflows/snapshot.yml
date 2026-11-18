@@ -24,9 +24,13 @@ jobs:
   snapshot:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          path: src
       - name: Download from upstream
+        shell: bash
         run: |
-          set -eu
+          set -euo pipefail
           mkdir snap && cd snap
           day=$(date -u +%Y-%m-%d)
           echo "DAY=$day" >> "$GITHUB_ENV"
@@ -50,10 +54,26 @@ jobs:
           get vie_sentences_detailed.tsv.bz2 $T/vie/vie_sentences_detailed.tsv.bz2 "$TL"
           get eng_sentences_detailed.tsv.bz2 $T/eng/eng_sentences_detailed.tsv.bz2 "$TL"
           get vie-eng_links.tsv.bz2 $T/vie/vie-eng_links.tsv.bz2 "$TL"
+          # The Vietnamese Wiktionary (vi.wiktionary.org) as kaikki.org extracts it: evaluated for English and etymology.
+          get vi-extract.jsonl.gz https://kaikki.org/dictionary/downloads/vi/vi-extract.jsonl.gz \
+            "Vietnamese Wiktionary contributors, extraction by kaikki.org (wiktextract): CC BY-SA 4.0 and GFDL; redistributed under CC BY-SA 4.0 with attribution"
+          # The Vietnamese translations of the English Wiktionary's English entries ("busy" -> bận), the one part of
+          # the 2.9 GB raw extraction this project reads. DERIVED on this runner by .github/snapshot-translations.py
+          # (kept in the repository); the SHA-256 of the raw file it read is in NOTES.md.
+          R=https://kaikki.org/dictionary/raw-wiktextract-data.jsonl.gz
+          curl -sSfL --retry 3 --max-time 3600 "$R" | tee >(sha256sum | cut -d' ' -f1 > raw.sha256) \
+            | gzip -dc | grep -E '"(lang_)?code": ?"vi"' \
+            | python3 -I "$GITHUB_WORKSPACE/src/.github/snapshot-translations.py" > en-vi-translations.tsv
+          sleep 2
+          gzip -n -9 en-vi-translations.tsv
+          echo "| en-vi-translations.tsv.gz | derived from $R (sha256 $(cat raw.sha256)) by .github/snapshot-translations.py at ${GITHUB_SHA} | English Wiktionary contributors, extraction by kaikki.org (wiktextract): CC BY-SA 4.0 and GFDL; redistributed under CC BY-SA 4.0 with attribution |" >> NOTES.md
+          rm raw.sha256
           # a file that is empty or not what it should be fails the run instead of becoming a pin
           test "$(head -c1 kaikki.org-dictionary-Vietnamese.jsonl)" = "{"
           for f in *.bz2; do bzip2 -tq "$f"; done
-          sha256sum kaikki.org-dictionary-Vietnamese.jsonl *.bz2 > SHA256SUMS
+          gzip -t vi-extract.jsonl.gz en-vi-translations.tsv.gz
+          test "$(gzip -dc en-vi-translations.tsv.gz | wc -l)" -gt 10000
+          sha256sum kaikki.org-dictionary-Vietnamese.jsonl *.bz2 *.gz > SHA256SUMS
           { echo; echo '```'; cat SHA256SUMS; echo '```'; } >> NOTES.md
           cat NOTES.md
 
@@ -68,5 +88,5 @@ jobs:
             echo "release $tag exists already: assets are never replaced (a pin may point to them)"; exit 1
           fi
           gh release create "$tag" -R "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Data snapshot $DAY" \
-            --notes-file NOTES.md kaikki.org-dictionary-Vietnamese.jsonl *.bz2 SHA256SUMS NOTES.md
+            --notes-file NOTES.md kaikki.org-dictionary-Vietnamese.jsonl *.bz2 *.gz SHA256SUMS NOTES.md
           echo "Next: python3 -I tools/pin_snapshot.py $tag (writes the pins into data/fetch.sh), commit."
