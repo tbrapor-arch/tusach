@@ -73,7 +73,7 @@ Western loans; lint counts them with the native words.
 | New words | 16–18 | 16–18 | 18 | 18–19 | 19–20 | 20–21 | 21–22 | 22–23 | 23–24 |
 | of which Hán-Việt | 0–5 | 2–6 | 5 | 5–7 | 7–8 | 9–10 | 10–11 | 11–12 | 12–13 |
 
-<!-- plan:counts -->Word list 2 (L1–13): 206 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 17, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 42 with no etymology recorded.<!-- /plan -->
+<!-- plan:counts -->Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 41 with no etymology recorded.<!-- /plan -->
 The whole course: about 1,750 words (native 893, Hán-Việt 724 = 41 %, other 131).
 
 ## 2. Lesson 0 — reading quốc ngữ (outline only)
@@ -238,7 +238,7 @@ word) L2, B1 L4, B2 L6, B3 L8, B4 L32, V1 L30, V2 L31.
 |---|---|---|---|---|---|---|---|---|
 | B1 | Cantonese -p → -p | zh→vi | 22 / 22, 100 % | 22 / 22, 100 % |  |  | **rule** | — |
 | B1 | Cantonese -t → -t | zh→vi | 41 / 44, 93 % | 41 / 46, 89 % |  |  | **rule** | 實 thực 法 pháp 壓 áp |
-| B1 | Cantonese -k → -c / -ch | zh→vi | 99 / 100, 99 % | 100 / 108, 93 % |  | c 70 % | **rule** | 值 trị |
+| B1 | Cantonese -k → -c / -ch | zh→vi | 99 / 100, 99 % | 100 / 108, 93 % |  | c 70 % | **rule** (one guess: c 70 %) | 值 trị |
 | B2 | Cantonese -m → -m | zh→vi | 42 / 43, 98 % | 43 / 46, 93 % |  |  | **rule** | 禪 thiền |
 | B2 | Taigi -m → -m | zh→vi | 40 / 42, 95 % | 40 / 42, 95 % |  |  | **rule** | 填 điền 忍 nhẫn |
 | B3 | Hán-Việt -nh / -ch → Cantonese -ng / -k | vi→zh | 95 / 95, 100 % | 94 / 95, 99 % | 95 / 95, 100 % |  | **rule** | — |
@@ -277,7 +277,7 @@ c, or gi before Cantonese aa / o).
 | IP | b ← Mandarin b- | zh→vi | 38 / 42, 90 % | 39 / 43, 91 % |  |  | **rule** | 標 tiêu 比 tỷ 弊 tệ 必 tất |
 | IP | b ← Taigi p- | zh→vi | 42 / 47, 89 % | 42 / 47, 89 % |  |  | **rule** | 房 phòng 標 tiêu 比 tỷ 弊 tệ 必 tất |
 | IP | ph → Mandarin f- or p- | vi→zh | 50 / 50, 100 % | 50 / 50, 100 % | 50 / 50, 100 % | f 82 % | **rule** | — |
-| IP | b → Mandarin b- or p- | vi→zh | 44 / 48, 92 % | 44 / 48, 92 % | 45 / 48, 94 % | b 79 % | **rule** | 幅 bức 祕 bí 秘 bí 郵 bưu |
+| IP | b → Mandarin b- or p- | vi→zh | 44 / 48, 92 % | 44 / 48, 92 % | 45 / 48, 94 % | b 79 % | **rule** (one guess: b 79 %) | 幅 bức 祕 bí 秘 bí 郵 bưu |
 | IM | m ← Mandarin m- | zh→vi | 31 / 37, 84 % | 31 / 37, 84 % |  |  | **rule** | 民 dân 祕 bí 面 diện 名 danh 滅 diệt 秘 bí |
 | IM | m → Mandarin m- | vi→zh | 31 / 31, 100 % | 30 / 31, 97 % | 31 / 31, 100 % |  | **rule** | — |
 | IM | v ← Cantonese m- with Mandarin w- | zh→vi | 11 / 11, 100 % | 11 / 12, 92 % |  |  | **rule** | — |
@@ -293,12 +293,12 @@ c, or gi before Cantonese aa / o).
 | ID | đ ← Mandarin t- in tone 2 | zh→vi | 18 / 18, 100 % | 22 / 22, 100 % |  |  | **rule** | — |
 | ID | th ← Mandarin t- in tones 1 3 4 | zh→vi | 16 / 19, 84 % | 16 / 19, 84 % |  |  | **rule** | 特 đặc 突 đột 推 suy |
 | ID | đ ← Taigi t- with Mandarin d- / t- | zh→vi | 58 / 58, 100 % | 59 / 60, 98 % |  |  | **rule** | — |
-| ID | đ → Mandarin d- or t- | vi→zh | 66 / 66, 100 % | 65 / 66, 98 % | 66 / 66, 100 % | d 70 % | **rule** | — |
+| ID | đ → Mandarin d- or t- | vi→zh | 66 / 66, 100 % | 65 / 66, 98 % | 66 / 66, 100 % | d 70 % | **rule** (one guess: d 70 %) | — |
 | ID | n ← Mandarin n- | zh→vi | 14 / 15, 93 % | 14 / 15, 93 % |  |  | **rule** | 凝 ngưng |
 | ID | l ← Mandarin l- | zh→vi | 50 / 52, 96 % | 50 / 52, 96 % |  |  | **rule** | 樂 nhạc 率 suất |
 | ID | n → Mandarin n- | vi→zh | 14 / 14, 100 % | 14 / 14, 100 % | 14 / 14, 100 % |  | **rule** | — |
 | ID | l → Mandarin l- | vi→zh | 50 / 50, 100 % | 50 / 50, 100 % | 50 / 50, 100 % |  | **rule** | — |
-| ID | Taigi l- → l or n (Mandarin decides) | zh→vi | 59 / 61, 97 % | 59 / 70, 84 % |  | l 74 % | **rule** | 條 điều 冗 nhũng |
+| ID | Taigi l- → l or n (Mandarin decides) | zh→vi | 59 / 61, 97 % | 59 / 70, 84 % |  | l 74 % | **rule** (one guess: l 74 %) | 條 điều 冗 nhũng |
 <!-- /rules -->
 
 **Retroflex series** (old ʈ- and tʂ- / tɕ- series: Mandarin zh ch sh)
@@ -309,11 +309,11 @@ c, or gi before Cantonese aa / o).
 | IR | tr ← Mandarin zh- / ch- with Taigi t- / th- | zh→vi | 37 / 37, 100 % | 37 / 38, 97 % |  |  | **rule** | — |
 | IR | ch ← Mandarin zh- with Taigi ts- | zh→vi | 34 / 47, 72 % | 34 / 50, 68 % |  |  | **tendency** | 陣 trận 爭 tranh 助 trợ 棧 sạn 狀 trạng 妝 trang 者 giả 站 trạm |
 | IR | ch → Mandarin zh- | vi→zh | 34 / 34, 100 % | 34 / 34, 100 % | 34 / 34, 100 % |  | **rule** | — |
-| IR | tr → Mandarin zh- or ch- | vi→zh | 51 / 52, 98 % | 50 / 52, 96 % | 51 / 52, 98 % | zh 69 % | **rule** | 責 trách |
-| IR | th or s ← Mandarin sh- | zh→vi | 68 / 71, 96 % | 70 / 73, 96 % |  | th 76 % | **rule** | 省 tỉnh 社 xã 賒 xa |
+| IR | tr → Mandarin zh- or ch- | vi→zh | 51 / 52, 98 % | 50 / 52, 96 % | 51 / 52, 98 % | zh 69 % | **rule** (one guess: zh 69 %) | 責 trách |
+| IR | th or s ← Mandarin sh- | zh→vi | 68 / 71, 96 % | 70 / 73, 96 % |  | th 76 % | **rule** (one guess: th 76 %) | 省 tỉnh 社 xã 賒 xa |
 | IR | x or s ← Mandarin ch- in tones 1 3 4 | zh→vi | 17 / 18, 94 % | 17 / 18, 94 % |  | x 56 % | **narrows** | 場 trường |
 | IR | x ← Mandarin ch- in tones 1 3 4 with Taigi tsh- | zh→vi | 9 / 16, 56 % | 9 / 16, 56 % |  |  | **drop** | 場 trường 銃 súng 差 sai 超 siêu 礎 sở 充 sung 創 sáng |
-| IR | tr or th ← Mandarin ch- in tone 2 | zh→vi | 22 / 23, 96 % | 26 / 28, 93 % |  | tr 61 % | **rule** | 察 sát |
+| IR | tr or th ← Mandarin ch- in tone 2 | zh→vi | 22 / 23, 96 % | 26 / 28, 93 % |  | tr 61 % | **rule** (one guess: tr 61 %) | 察 sát |
 | IR | tr ← Mandarin ch- in tone 2 with Taigi t- | zh→vi | 6 / 6, 100 % | 9 / 10, 90 % |  |  | **rule** | — |
 | IR | th ← Mandarin ch- in tone 2 with Taigi s- / tsh- | zh→vi | 7 / 10, 70 % | 7 / 13, 54 % |  |  | **tendency** | 查 tra 察 sát 持 trì |
 | IR | x → Mandarin ch- | vi→zh | 10 / 15, 67 % | 10 / 15, 67 % | 10 / 15, 67 % |  | **tendency** | 社 xã 確 xác 賒 xa 殼 xác 侵 xâm |
@@ -354,7 +354,7 @@ group is marked by none of his three varieties and is taught as a list.
 | IK | c / k / q + i y ê iê ư ươ → Mandarin j q | vi→zh | 34 / 35, 97 % | 34 / 35, 97 % | 34 / 35, 97 % | j 89 % | **rule** | 剛 cương |
 | IK | c / k / q + other vowels → Mandarin g k | vi→zh | 45 / 75, 60 % | 45 / 75, 60 % | 46 / 75, 61 % | g 59 % | **narrows** | 權 quyền 決 quyết 郡 quận 句 câu 級 cấp 警 cảnh 軍 quân 機 cơ |
 | IK | c / k / q → Taigi k- | vi→zh | 101 / 107, 94 % | 101 / 107, 94 % | 101 / 107, 94 % |  | **rule** | 權 quyền 擒 cầm 俱 câu 儉 kiệm 昆 côn 琴 cầm |
-| IK | kh → Mandarin k- or q- | vi→zh | 28 / 30, 93 % | 28 / 30, 93 % | 28 / 30, 93 % | k 60 % | **rule** | 緊 khẩn 概 khái |
+| IK | kh → Mandarin k- or q- | vi→zh | 28 / 30, 93 % | 28 / 30, 93 % | 28 / 30, 93 % | k 60 % | **rule** (one guess: k 60 %) | 緊 khẩn 概 khái |
 | IK | kh → Taigi kh- | vi→zh | 25 / 29, 86 % | 25 / 29, 86 % | 25 / 29, 86 % |  | **rule** | 枯 khô 緊 khẩn 概 khái 券 khoán |
 | IK | gi → Mandarin j- with Cantonese g- | vi→zh | 19 / 20, 95 % | 18 / 20, 90 % | 19 / 20, 95 % |  | **rule** | 者 giả |
 | IG | ng / ngh ← Taigi g- | zh→vi | 23 / 25, 92 % | 23 / 25, 92 % |  |  | **rule** | 樂 nhạc 牙 nha |
@@ -372,13 +372,13 @@ So Mandarin j q x, which Mandarin merged, split again by Cantonese: g k h → c 
 | Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
 |---|---|---|---|---|---|---|---|---|
 | IY | nh ← Mandarin r- | zh→vi | 13 / 16, 81 % | 13 / 16, 81 % |  |  | **rule** | 阮 nguyễn 容 dung 榮 vinh |
-| IY | nh → Mandarin r-, y- or none | vi→zh | 19 / 21, 90 % | 19 / 21, 90 % | 20 / 21, 95 % | r 62 % | **rule** | 樂 nhạc 需 nhu |
+| IY | nh → Mandarin r-, y- or none | vi→zh | 19 / 21, 90 % | 19 / 21, 90 % | 20 / 21, 95 % | r 62 % | **rule** (one guess: r 62 %) | 樂 nhạc 需 nhu |
 | IY | nh ← Taigi j- | zh→vi | 12 / 12, 100 % | 12 / 12, 100 % |  |  | **rule** | — |
 | IY | d ← Mandarin y- with Cantonese j- in tone 4 5 6, Taigi no initial | zh→vi | 25 / 33, 76 % | 25 / 33, 76 % |  |  | **tendency** | 越 việt 員 viên 有 hữu 園 viên 宇 vũ 羽 vũ 郵 bưu 友 hữu |
 | IY | d → Mandarin y- | vi→zh | 27 / 34, 79 % | 27 / 34, 79 % | 27 / 34, 79 % |  | **tendency** | 民 dân 唯 duy 面 diện 容 dung 名 danh 滅 diệt 維 duy |
 | IY | d → Cantonese j- | vi→zh | 27 / 34, 79 % | 26 / 34, 76 % | 27 / 34, 79 % |  | **tendency** | 民 dân 唯 duy 面 diện 名 danh 滅 diệt 遺 di 維 duy |
 | IY | no initial ← Mandarin y- / w- / none with Cantonese j- / w- / none in tone 1 2 3 | zh→vi | 32 / 35, 91 % | 32 / 41, 78 % |  |  | **rule** | 一 nhất 因 nhân 姻 nhân |
-| IY | no initial → Mandarin y-, w- or none | vi→zh | 32 / 32, 100 % | 32 / 32, 100 % | 32 / 32, 100 % | y 62 % | **rule** | — |
+| IY | no initial → Mandarin y-, w- or none | vi→zh | 32 / 32, 100 % | 32 / 32, 100 % | 32 / 32, 100 % | y 62 % | **rule** (one guess: y 62 %) | — |
 | IY | no Hán-Việt syllable starts with r | fact | 993 / 993, 100 % | 993 / 993, 100 % |  |  | **fact** | — |
 <!-- /rules -->
 
@@ -467,16 +467,20 @@ early; the Southern counterparts get one line where they differ and L67.
 | phải không | L3 | "…, right?": Anh là người Pháp, phải không? |
 | đấy | L6 | a friendly question: Anh đi đâu đấy? |
 | đi | L8 | urging or suggesting, after the verb: Đi thẳng đi! |
+| nào | L8 | urging, "let's": Đi nào! |
 | nhỉ | L9 | seeking agreement: Nóng nhỉ! |
 | thế | L9 | "so" (Nóng thế!), and in questions "then" (Sao thế? at L12); the South says vậy |
+| đâu | L12 | emphatic "not at all": Không sao đâu! (first met at L2 in ở đâu "where") |
 | thôi | L15 | "only, that's all": Hai mươi nghìn thôi. |
+| hả | L16 | a blunt, familiar question, to equals or younger people: Con no rồi hả? |
+| nhá | L16 | the familiar Northern nhé, to children and close friends: Ăn đi nhá! |
+| với | L17 | softening a request for help, at the end: Giúp em với! |
 | chứ | L18 | "of course", "surely": Được chứ! |
+| dạ | L19 | the deferential "yes" and answer to a call, to elders: Dạ, cháu đây ạ. |
 | mà | L27 | insisting, "I told you": Em biết mà! |
 | cơ | L44 | insisting on the right one: Em muốn cái kia cơ! |
-| đâu | L44 | emphatic "not at all": Không phải đâu! |
-| hả | L44 | a blunt, familiar question: Thật hả? |
-| vậy | L67 | the Southern thế: Sao vậy? |
 | nha | L67 | the Southern nhé |
+| vậy | L67 | as a final particle, the Southern counterpart of thế (Sao vậy?); in vì vậy, như vậy it is general |
 <!-- /plan -->
 
 **Stage B (22–49)**: thì, khi / lúc (L22); direction verbs (L24) and result complements (L25); thường / hay / luôn
@@ -548,22 +552,22 @@ L1–13 are word list 2, later lessons are targets for each word list. Generated
 | 1 | Hello (Sacha meets chị Lan) | là; tôi / anh / chị / em; ạ, vâng; rất + adjective; cảm ơn – không có gì | — | 7 | 13 / 0 / 3 |
 | 2 | Where are you from? | người + nationality (modifier after the noun); ở đâu; nào; không + verb; cũng; à (checking: Anh là người Pháp à?) | B0 what Hán-Việt is | 7 | 9 / 5 / 2 |
 | 3 | At the café | có … không?; không phải là; … phải không?; muốn; cho tôi …; noun + này; ơi; nhé; và; một, hai, ba | — | 7 | 13 / 2 / 3 |
-| 4 | At the market | numbers to the thousands: mười, mươi; lăm / mốt / tư after mươi; trăm, nghìn; bao nhiêu; Đắt quá! | B1 -p -t -c survive | 7 | 14 / 2 / 2 |
+| 4 | Paying at the tea stall | numbers to the thousands: mười, mươi; lăm / mốt / tư after mươi; trăm, nghìn; bao nhiêu; cốc as a counter (hai cốc trà đá); Đắt quá! – Rẻ quá! | B1 -p -t -c survive | 7 | 15 / 2 / 1 |
 | 5 | A family photo | của (dropped with family); ai; person term + ấy; mấy … tuổi; đây là | — | 8 | 12 / 4 / 1 |
 | 6 | What time is it? | clock time: giờ, rưỡi, phút; đang / sẽ; time words first; đấy (Anh đi đâu đấy?) | B2 -m survives | 8 | 14 / 2 / 1 |
 | 7 | **Review 1** | recap 1–6 | — | 8 | — |
-| 8 | Around Hoàn Kiếm lake | directions; imperatives: verb + đi (Đi thẳng đi!), đừng + verb; rồi "then"; đó; khoảng | B3 -nh / -ch = -ng / -k | 8 | 8 / 6 / 2 |
+| 8 | Around Hoàn Kiếm lake | directions; imperatives: verb + đi (Đi thẳng đi!), đừng + verb; nào (Đi nào!); rồi "then"; đó; khoảng | B3 -nh / -ch = -ng / -k | 8 | 8 / 6 / 2 |
 | 9 | What is the weather like? | adjective as predicate (no là); rất / lắm / quá / hơi; thế "so" (Nóng thế!); nhỉ; nhưng | T1 level tones: ngang / huyền; FF thời tiết | 8 | 10 / 3 / 4 |
-| 10 | A bowl of phở | đã … chưa? / rồi / chưa; hôm qua; thêm; classifier quả | O1 two layers: giờ and thời | 8 | 13 / 2 / 2 |
+| 10 | A bowl of phở | đã … chưa? / rồi / chưa; hôm qua; thêm; classifier quả (một quả trứng) | O1 two layers: giờ and thời | 8 | 14 / 2 / 2 |
 | 11 | Free at the weekend? | days, weeks and dates; bao giờ; hay "or"; với; định + verb; thích | T2 rising tones: hỏi / ngã / nặng; FF tuần | 9 | 11 / 5 / 2 |
-| 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không?; sao / tại sao …? – vì …; Sao thế? | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 5 |
-| 13 | A birthday present | classifier cái; colours; vừa "to fit"; mua, lấy; tặng | T4 checked syllables: sắc / nặng only | 9 | 12 / 3 / 3 |
+| 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không?; sao / tại sao …? – vì …; Sao thế?; đâu (Không sao đâu!) | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 5 |
+| 13 | A birthday present | classifier cái; colours; to / nhỏ for size; vừa "to fit"; mua, lấy; tặng; ở chợ | T4 checked syllables: sắc / nặng only | 9 | 11 / 3 / 4 |
 | 14 | **Review 2** | recap 8–13 | — | 9 | — |
 | 15 | Which phone is cheaper? | comparison hơn / bằng / nhất; thôi "only, that's all" | T5 tones heard → Chinese tone | 9 | 11 / 5 / 2 |
-| 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái | IK c / k / q, kh, gi | 9 | 11 / 5 / 2 |
-| 17 | At the bookshop | classifiers quyển, tờ, chiếc, con | IH h and IG ng | 10 | 11 / 5 / 2 |
+| 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái; hả (Con no rồi hả?); nhá (Ăn đi nhá!) | IK c / k / q, kh, gi | 9 | 11 / 5 / 2 |
+| 17 | At the bookshop | classifiers quyển, tờ, chiếc, con; với softening a request (Giúp em với!) | IH h and IG ng | 10 | 11 / 5 / 2 |
 | 18 | At the swimming pool | có thể; verb + được; biết + verb; chứ (Được chứ!) | IP b, ph | 10 | 11 / 5 / 2 |
-| 19 | Tea with ông Hùng | ông / bà as "you"; cho "for, to" | IM m, v | 10 | 11 / 5 / 2 |
+| 19 | Tea with ông Hùng | ông / bà as "you"; cho "for, to"; dạ (answering an elder: Dạ, cháu đây ạ.) | IM m, v | 10 | 11 / 5 / 2 |
 | 20 | A day at the office | vừa … vừa; cũng / đều | ID đ, th, n, l; FF đầu tiên | 10 | 11 / 5 / 2 |
 | 21 | **Review 3** | recap 15–20 | — | 10 | — |
 | 22 | At Hà Nội station | thì; khi / lúc | IA aspiration and the old voiced tones; FF bản đồ | 10 | 11 / 5 / 2 |
@@ -651,7 +655,7 @@ L1–13 are word list 2, later lessons are targets for each word list. Generated
 
 - **Written by Claude, not checked by a native speaker**: the Vietnamese (titles, examples), the Northern usage
   notes, the tone descriptions, the course English, the word boundaries and the course lexicon. The choices a
-  lesson repeats most (tôi → em with chị Lan, bác for her mother, chú for the children, vâng or dạ, trà, nhỏ / lớn,
+  lesson repeats most (tôi → em with chị Lan, bác for her mother, chú for the children, vâng or dạ, trà, to / nhỏ,
   rảnh) are in `wordlist-2-to-check.md` for a native speaker, most important first.
 - **Frequency is biased**: a small, partly translated corpus (Tatoeba, Wiktionary examples); spoken particles,
   numbers and food words rank low (vâng 3,663, nhỉ 2,207, phở 12,139); some ranks are junk. Ranks guide; the

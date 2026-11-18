@@ -502,6 +502,16 @@ def _best(m):
     return f"{o or 'none'} {100 * n / m['tot']:.0f} %"
 
 
+def kind_cell(m):
+    """The kind in bold; beside a rule or tendency of several outcomes whose best single guess is under 80 %, that
+    guess, so a "rule" of "tr or th" (tr 61 %) is not read as a prediction of one letter (review 4, C)."""
+    k = kind(m['way'], m['hit'], m['tot'], m['best'])
+    cell = f'**{k}**'
+    if k in ('rule', 'tendency') and m['best'] and m['best'][1] < m['hit'] and m['best'][1] / m['tot'] < 0.795:
+        cell += f' (one guess: {_best(m)})'
+    return cell
+
+
 GROUP_TITLES = {'tones-yue': 'From Cantonese (zh→vi)', 'tones-nan': 'From Taigi (zh→vi)',
                 'tones-cmn': 'From Mandarin (zh→vi)', 'tones-vi': 'From the Vietnamese tone heard (vi→zh)'}
 WAY = {'zh>vi': 'zh→vi', 'vi>zh': 'vi→zh', 'spell': 'spell', 'fact': 'fact', 'drop': 'dropped'}
@@ -514,7 +524,7 @@ def table(ms, group):
     for m in rows:
         out.append(f"| {m['id']} | {m['text']} | {WAY[m['way']]} | {pct(m['hit'], m['tot'])} | {pct(*m['strict'])} | "
                    f"{pct(*m['lenient']) if m['way'] == 'vi>zh' else ''} | {_best(m)} | "
-                   f"**{kind(m['way'], m['hit'], m['tot'], m['best'])}** | {' '.join(m['exc']) or '—'} |")
+                   f"{kind_cell(m)} | {' '.join(m['exc']) or '—'} |")
     ch = sum(m['changed'] for m in rows if m['id'] == 'T*')
     if group == 'tones-yue' and ch:
         out.append('')

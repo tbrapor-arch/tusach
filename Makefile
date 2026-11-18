@@ -46,6 +46,7 @@ test: db db-nc
 	$(PY) tools/test_bridge_rules.py
 	$(PY) tools/test_plan.py
 	$(PY) tools/test_review3.py
+	$(PY) tools/test_review4.py
 	$(PY) tools/test_golden.py
 	$(PY) tools/state.py --check
 	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'

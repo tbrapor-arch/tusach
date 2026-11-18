@@ -44,6 +44,9 @@ word (— when only the lexicon has it).
 | thuốc | L12 | en-item | "tobacco" (hút thuốc "to smoke") is everyday use |
 | nghỉ | L12 | en-item | "to rest" (nghỉ một chút) is everyday use |
 | cháu | L5 | en-item | the pronoun use is the course's point |
+| đấy | L6 | en-item | the statement use (Đẹp đấy!) is grammar the dictionary does not describe |
+| chứ | — | en-unsupported | the final-particle uses are grammar the dictionary describes in other words |
+| chứ | — | en-item | the same |
 | nhỉ | L9 | en-item | a particle, described in English |
 | các | — | en-item | a plural marker, described in English |
 | những | — | en-item | a plural marker, described in English |
@@ -51,7 +54,6 @@ word (— when only the lexicon has it).
 | còn | — | en-item | "and, as for" (còn anh? "and you?") is everyday use |
 | vì | L12 | en-item | "for (the sake of)" (vì con "for the children") is Wiktionary's prep sense in other words |
 | cả | — | en-item | "even" (cả anh ấy cũng …) is everyday use |
-| bằng~equal | — | origin-conflict | Wiktionary analyses bằng as 平 (sino), but the Hán-Việt reading of 平 is bình; Wiktionary gives bằng only as a Nôm reading (review 3): an older loan |
 | vậy | — | en-item | a particle, described in English |
 | cái | L13 | en-item | the determiner use (cái này) is grammar |
 | ta | — | en-item | the pronoun uses are described in English |
@@ -74,7 +76,6 @@ word (— when only the lexicon has it).
 | tàu | — | en-item | "train" (tàu hỏa) is everyday use |
 | bài | — | en-item | "article, piece" (bài báo) is everyday use |
 | chi | — | en-item | "branch" (chi nhánh) is 支's sense |
-| nôm | — | origin-conflict | Wiktionary analyses nôm as 南 (sino), but the Hán-Việt reading of 南 is nam; Wiktionary gives nôm only as a Nôm reading (review 3): an older loan |
 | kỳ | — | en-item | "session" (kỳ họp) is everyday use |
 | thị | — | en-item | a middle name explained |
 | cơ | — | en-unsupported | a particle, described in English |
@@ -100,8 +101,9 @@ decided by a native speaker yet.
    as the more deferential answer to the older generation. Which should a young foreign man use to each?
 5. **bạn / tôi between Sacha and Mai** (L11), colleagues of the same age: chosen bạn and tôi (decision 3; later
    mình). Would Hà Nội colleagues of 27 rather use names, or cậu / tớ?
-6. **nhỏ / lớn or bé / to** (L13) for clothes sizes in a Hà Nội shop ("cái này hơi nhỏ"): chosen nhỏ / lớn, the
-   forms of the written standard.
+6. **to / nhỏ** (L13) for sizes in a Hà Nội shop ("Áo này to quá", "cái này hơi nhỏ"): chosen to / nhỏ as the
+   spoken pair (bé noted as the other Northern "small"; lớn noted as more formal or written, and Southern-leaning,
+   taught later for "to grow up"). Is to / nhỏ right for clothes, or would a Hà Nội speaker say rộng / chật?
 7. **rảnh or rỗi** (L11) for "free, not busy": chosen rảnh (more frequent in the corpus).
 8. **Ordering** (L3): the examples say "Cho tôi một cốc trà đá" and "Em ơi, cho anh một trà đá!": which would a
    customer of 27 say to a waiter of about 20 in a Hà Nội café?
@@ -113,7 +115,8 @@ decided by a native speaker yet.
     whether hè is Northern only (the card says "summer (Northern)").
 13. **The particle strand** (syllabus.yaml `particles`): "Anh đi đâu đấy?" as an everyday Northern greeting (L6),
     "Nóng thế!" and "Sao thế?" against Southern vậy (L9, L12), "Anh là người Pháp à?" (L2), "Em muốn cái màu đỏ
-    cơ!" (cơ, L44): are these the Hà Nội forms, and are any too familiar for a beginner?
+    cơ!" (cơ, L44), and the new entries Đi nào! (L8), Không sao đâu! (L12), hả and nhá (L16), Giúp em với!
+    (L17), dạ (L19): are these the Hà Nội forms, and are any too familiar for a beginner?
 14. **Numbers** (L4): hai mươi tư or hai mươi bốn (the card says both are said), and nhăm for lăm (hai mươi nhăm):
     how common in Hà Nội speech today?
 15. **The lexicon's example sentences** (every word of word list 2 and 13 frequent cards; Claude's, labelled on

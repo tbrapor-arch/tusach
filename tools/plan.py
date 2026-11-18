@@ -42,10 +42,11 @@ import vi  # noqa: E402
 SYLLABUS = os.path.join(ROOT, 'course/syllabus.yaml')
 TO_CHECK = os.path.join(ROOT, 'course/proposal/wordlist-2-to-check.md')
 EN_COMMON = {'a', 'an', 'as', 'at', 'by', 'do', 'go', 'he', 'hi', 'in', 'is', 'it', 'me', 'my', 'no', 'of', 'on', 'or',
-             'so', 'to', 'up', 'us', 'we', 'ban', 'bin', 'can', 'con', 'hot', 'long', 'man', 'men', 'mom', 'son', 'tin',
+             'so', 'to', 'up', 'us', 'we', 'ban', 'bin', 'can', 'hot', 'long', 'man', 'men', 'mom', 'son', 'tin',
              'ten', 'than', 'then', 'them', 'him', 'his', 'her', 'had', 'has', 'not', 'but', 'and', 'for', 'one', 'all',
-             'out', 'how', 'who', 'see', 'say', 'say', 'that', 'this', 'when', 'with', 'also', 'here', 'there', 'later',
-             'same', 'once', 'some', 'into', 'only', 'then', 'one', 'ago', 'mi', 'la', 'ha', 'na', 'cam', 'pho', 'ca'}
+             'out', 'how', 'who', 'see', 'say', 'that', 'this', 'when', 'with', 'also', 'here', 'there', 'later',
+             'same', 'once', 'some', 'into', 'only', 'then', 'one', 'ago', 'mi', 'la', 'ha', 'na', 'cam', 'pho', 'ca'}   # 'con' is not here: it is Vietnamese (review 4)
+COMMON_RANK = 1500     # a name that is also a word of at most this rank is that word at a sentence start
 VI_MARK = re.compile('[ăâêôơưđ̣̀́̃̉]')
 KIND = (('Hán-Việt', 'hv'), ('older Chinese loan', 'other'), ('loan', 'other'), ('name', 'name'))
 PLAN_ORDER = ('n', 'en', 'vi', 'review', 'grammar', 'bridge', 'strand', 'lines', 'new_words')
@@ -133,7 +134,8 @@ def syllabus_head():
 TERMS = {'hán việt', 'hán', 'việt', 'nôm', 'chữ nôm', 'chữ hán', 'quốc ngữ', 'tâi lô', 'ngang', 'huyền', 'sắc', 'hỏi',
          'ngã', 'nặng'}   # metalanguage, not lesson words
 EN_MORE = {'the', 'café', 'cafe', 'pho', 'no', 'ha', 'ma', 'me', 'he', 'be', 'see', 'ten', 'tea', 'sang', 'pan', 'bang',
-           'long', 'tan', 'can', 'ban', 'dan', 'man', 'nam', 'van', 'ton', 'non', 'chi', 'yin', 'tai', 'lo', 'ho', 'do'}
+           'long', 'tan', 'can', 'ban', 'dan', 'man', 'nam', 'van', 'ton', 'non', 'chi', 'yin', 'tai', 'lo', 'ho', 'do',
+           'day', 'loan', 'don', 'ti', 'hen'}
 
 
 class Words:
@@ -143,15 +145,21 @@ class Words:
         self.known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
         self.canon = dict(con.execute('SELECT key, canon FROM spelling'))
         self.names = {vi.key(n) for n in names}
+        # a name that is also a common word (Mai / mai "tomorrow", Minh / minh): at the start of a sentence it is read
+        # as the word (review 4, C)
+        self.common = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry WHERE freq_rank <= ?', (COMMON_RANK,))}
 
     def runs(self, text):
-        """[[syllable, …]] of the Vietnamese runs of `text` (module docstring)."""
+        """[[syllable, …]] of the Vietnamese runs of `text` (module docstring). Every token is classified on its own
+        (review 4, C: a lone mua, cho, ba, ai, xa is a Vietnamese word, checked like any other); a capitalised name
+        of the cast keeps its capital (exempt) except at the start of a sentence when it is also a common word, where
+        it is lower-cased and checked as that word ("Mai gặp nhé" uses mai "tomorrow")."""
         text = re.sub(r'\{[^}]*\}', ' ', vi.nfc(text))          # {preview}
         text = re.sub(vi.CJK.pattern + '+', ' ', text)
         out, run, last = [], [], None
 
         def flush():
-            if run and any(VI_MARK.search(unicodedata.normalize('NFD', t.lower())) for t in run):
+            if run:
                 out.append(list(run))
             run.clear()
         for m in re.finditer(r"[^\W\d_]+", text):
@@ -159,6 +167,11 @@ class Words:
             low = t.lower()
             viet = (bool(VI_MARK.search(unicodedata.normalize('NFD', low))) and low not in EN_MORE) or (
                 low in self.known and low not in EN_COMMON | EN_MORE and not vi.syllable_problems(low))
+            if t[:1].isupper() and vi.key(t) in self.names:
+                viet = True
+                before = text[:m.start()].rstrip(' "“‘\'(')
+                if (not before or before[-1] in '.!?:;\n') and vi.key(t) in self.common:
+                    t = low                                  # sentence-initial: the common word, checked
             gap = text[last.end():m.start()] if last else ''
             if not viet or (run and re.search(r'[^\s]', gap)):
                 flush()
@@ -177,7 +190,7 @@ class Words:
             covered = [False] * len(syl)
             for i, s in enumerate(syl):
                 k = self.canon.get(s, s)
-                if taught.get(k, 999) <= n or s in self.names:
+                if taught.get(k, 999) <= n or (s in self.names and run[i][:1].isupper()):
                     covered[i] = True
             for ks in multi:                               # a taught word of several syllables covers them
                 for i in range(len(syl) - len(ks) + 1):
@@ -185,7 +198,7 @@ class Words:
                         covered[i:i + len(ks)] = [True] * len(ks)
             for i, nm in enumerate(syl):                  # names of several syllables (Hoàn Kiếm, Hà Nội)
                 for j in range(i + 2, len(syl) + 1):
-                    if ' '.join(syl[i:j]) in self.names | TERMS:
+                    if ' '.join(syl[i:j]) in TERMS or (' '.join(syl[i:j]) in self.names and run[i][:1].isupper()):
                         covered[i:j] = [True] * (j - i)
             if all(covered):
                 continue
@@ -197,7 +210,7 @@ class Words:
                 m = len(w[1].replace('_', ' ').split())
                 if not all(covered[pos:pos + m]):
                     k = self.canon.get(w[2], w[2])
-                    if k not in TERMS and k not in self.names:
+                    if k not in TERMS and not (k in self.names and w[1][:1].isupper()):
                         bad.append(f'{w[1].replace("_", " ")} ({"L" + str(taught[k]) if k in taught else "not in the list"})')
                 pos += m
         return bad
