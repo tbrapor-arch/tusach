@@ -45,8 +45,7 @@ he lands with no Vietnamese and rents a room in chị Lan's family house near th
 | ông Hùng, the old neighbour | 78 | grandparents' generation | ông / cháu |
 
 **trà or chè.** The previous session's lexicon row (trà~tea, kept): trà is the usual word, Hà Nội included (trà đá,
-trà chanh, trà sữa at every café and stall), and is more frequent: rank 1,345 against 11,198 in the course ranks
-(wordfreq's raw syllable counts: 75,900 against 12,900 per billion, chè counting the dessert). The card adds: in the North chè is also tea, at home and for the leaf
+trà chanh, trà sữa at every café and stall), and is more frequent: <!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11198; tools/freq.py, chè counting the dessert too)<!-- /plan -->. The card adds: in the North chè is also tea, at home and for the leaf
 (nước chè, chè xanh), and everywhere chè is a sweet dessert soup. Who still says chè at home in Hà Nội is not
 checked (to-check list, item 1).
 
@@ -65,17 +64,17 @@ lines(n) = round(7 + 8(n−1)/49) up to lesson 50, then round(15 + 5(n−50)/50)
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | Lines | 7 | 8 | 9 | 10 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 |
 
-**New words per lesson** (names apart). Lessons 1–13 are word list 2's real counts; from 15, total(n) =
+**New words per lesson** (names apart). Lessons 1–13 are word list 2's real counts (tools/plan.py); from 15, total(n) =
 round(18 + 6(n−15)/85) and the Hán-Việt share grows from a quarter to over half. "Other" = older Chinese loans and
 Western loans; lint counts them with the native words.
 
 | Lessons | 1–6 | 8–13 | 15–20 | 22–34 | 36–48 | 50–62 | 64–76 | 78–90 | 92–100 |
 |---|---|---|---|---|---|---|---|---|---|
-| New words | 15–16 | 16–18 | 18 | 18–19 | 19–20 | 20–21 | 21–22 | 22–23 | 23–24 |
-| of which Hán-Việt | 0–5 | 1–5 | 5 | 5–7 | 7–8 | 9–10 | 10–11 | 11–12 | 12–13 |
+| New words | 16–18 | 16–18 | 18 | 18–19 | 19–20 | 20–21 | 21–22 | 22–23 | 23–24 |
+| of which Hán-Việt | 0–5 | 2–6 | 5 | 5–7 | 7–8 | 9–10 | 10–11 | 11–12 | 12–13 |
 
-Word list 2 (L1–13): 194 words + 3 names; native 130 (incl. compounds and unknown origin), Hán-Việt 37 (19 %),
-older loans 24, Western loans 3. The whole course: about 1,750 words (native 893, Hán-Việt 724 = 41 %, other 131).
+<!-- plan:counts -->Word list 2 (L1–13): 206 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 17, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 42 with no etymology recorded.<!-- /plan -->
+The whole course: about 1,750 words (native 893, Hán-Việt 724 = 41 %, other 131).
 
 ## 2. Lesson 0 — reading quốc ngữ (outline only)
 
@@ -437,37 +436,68 @@ IA aspiration (L22), IS sibilants (L23), IR tr, ch (L24), IR th, s, x (L25), IY 
 Lessons in brackets; L1–13 agree with word list 2 (each word's lesson is the list's).
 
 **Stage A (1–21), the survival core**
-1. **là** between nouns (L1); **không** + verb (L2); **không phải là** (L3); adjectives need no là (L9).
+1. **là** between nouns (L1); **không** + verb (L2); **không phải là** "is not" and **… phải không?** "…, right?"
+   (L3); adjectives need no là (L9).
 2. **The modifier follows the noun**: người Pháp, cà phê sữa đá, quán này (L2–3), the opposite of Chinese, and of
    the Hán-Việt words themselves (Việt Nam 越南): B0 shows both orders side by side.
-3. **Questions**: có … không? (L3); gì (L1), nào (L2), ở đâu (L2), ai, mấy (L5), bao nhiêu (L4), bao giờ, hay
-   "or" (L11); **final particles** ạ (L1, politeness), nhé (L3, "OK?"), nhỉ (L9, "isn't it?"); ơi to call (L3).
-4. **Numbers** and mươi, nghìn (L4); **classifiers** quả (L4), cái (L13), quyển, tờ, chiếc, con (L17).
+3. **Questions**: có … không? (L3); gì (L1), nào, ở đâu, à (L2), ai, mấy (L5), bao nhiêu (L4), bao giờ, hay
+   "or" (L11), sao / tại sao "why" with vì "because" (L12); **final particles**: the strand below.
+4. **Numbers**: mười, mươi, lăm / mốt / tư after mươi, trăm, nghìn (L4; một, hai, ba at L3); **classifiers** quả
+   (L10), cái (L13), quyển, tờ, chiếc, con (L17).
 5. **của**, dropped with family and close ties (L5); person term + ấy = he / she (L5); đây là (L5).
 6. **Time and aspect**: đang / sẽ (L6), usually left out when the context says it; **đã … chưa? / rồi / chưa**
-   (L10); rồi "then" (L8); sắp (L31); vừa mới (L47); đã từng (L26).
-7. **Degree**: rất (L1), lắm, quá, hơi (L9); comparison hơn / bằng / nhất (L15); càng … càng (L40).
-8. **Modals**: muốn (L3), định (L11), nên / phải (L12), có thể, verb + được, biết + verb (L18), cần (L33).
+   with hôm qua (L10); rồi "then" (L8); sắp (L31); vừa mới (L47); đã từng (L26).
+7. **Degree**: rất (L1), quá (L4: Đắt quá!), lắm, hơi, thế "so" (L9); comparison hơn / bằng / nhất (L15);
+   càng … càng (L40).
+8. **Modals and imperatives**: muốn (L3), verb + đi and đừng + verb (L8), định (L11), nên / phải (L12), có thể,
+   verb + được, biết + verb (L18), cần (L33).
 9. **bị** for something bad (L12); **cho** "give, let, for" (L3, L19); tặng (L13); với "with", và "and" (L3, L11).
 10. Plural and quantity: các / những, mọi / mỗi (L23); cũng / đều, vừa … vừa (L20).
 
+**The Northern particle strand** (course/syllabus.yaml `particles`; each lesson's grammar names its particle, and
+`make lint` checks that the word list teaches it by then). Hà Nội speech uses them all the time, so they come
+early; the Southern counterparts get one line where they differ and L67.
+<!-- plan:particles -->
+| Particle | Lesson | Use |
+|---|---|---|
+| ạ | L1 | polite, to someone older: Chào chị ạ. |
+| à | L2 | checking what one has just heard, or surprise: Anh là người Pháp à? |
+| ơi | L3 | calling someone: Em ơi! |
+| nhé | L3 | friendly "OK?" on a suggestion or promise: Hai cà phê sữa đá nhé! |
+| phải không | L3 | "…, right?": Anh là người Pháp, phải không? |
+| đấy | L6 | a friendly question: Anh đi đâu đấy? |
+| đi | L8 | urging or suggesting, after the verb: Đi thẳng đi! |
+| nhỉ | L9 | seeking agreement: Nóng nhỉ! |
+| thế | L9 | "so" (Nóng thế!), and in questions "then" (Sao thế? at L12); the South says vậy |
+| thôi | L15 | "only, that's all": Hai mươi nghìn thôi. |
+| chứ | L18 | "of course", "surely": Được chứ! |
+| mà | L27 | insisting, "I told you": Em biết mà! |
+| cơ | L44 | insisting on the right one: Em muốn cái kia cơ! |
+| đâu | L44 | emphatic "not at all": Không phải đâu! |
+| hả | L44 | a blunt, familiar question: Thật hả? |
+| vậy | L67 | the Southern thế: Sao vậy? |
+| nha | L67 | the Southern nhé |
+<!-- /plan -->
+
 **Stage B (22–49)**: thì, khi / lúc (L22); direction verbs (L24) and result complements (L25); thường / hay / luôn
-(L26); còn / vẫn / nữa / lại (L27); **passives được (good) and bị (bad)** with an agent (L29–30); nếu … thì (L33);
-vì … nên (L34); relative **mà** (L36); purpose **để** (L37); tuy … nhưng (L38); reported speech rằng (L39);
-không những … mà còn (L40); causatives làm cho / khiến (L43); particles chứ / mà / đâu / à (L44); register:
-apologies, quý khách, xin vui lòng (L45–46); khi … thì, bỗng (L47); past narration hồi, ngày xưa (L48).
+(L26); còn / vẫn / nữa / lại, mà insisting (L27); **passives được (good) and bị (bad)** with an agent (L29–30); nếu
+… thì (L33); vì … nên (L34); relative **mà** (L36); purpose **để** (L37); tuy … nhưng (L38); reported speech rằng
+(L39); không những … mà còn (L40); causatives làm cho / khiến (L43); insisting and contradicting cơ, đâu, hả
+(L44); register: apologies, quý khách, xin vui lòng (L45–46); khi … thì, bỗng (L47); past narration hồi, ngày xưa
+(L48).
 
 **Stage C (50–100)**: written register (L50); nominalisers sự / việc / cuộc (L51); reduplication (L53); four-syllable
-idioms (L55); softeners thôi / đi / mà (L59); trước khi / sau khi (L61); không được / cấm (L62); narrative
-connectors (L64, L72); dù … vẫn (L69); letter formulas (L76); nuances of phải / cần / nên (L79); argument and
-reporting (L89–90); formal speech (L99).
+idioms (L55); softeners thôi / đi / mà in requests (L59); trước khi / sau khi (L61); không được / cấm (L62);
+narrative connectors (L64, L72); dù … vẫn (L69); letter formulas (L76); nuances of phải / cần / nên (L79); argument
+and reporting (L89–90); formal speech (L99).
 
 **Pronouns and kinship** (its own strand; the cast's ages decide each choice):
 - L1 **tôi, anh, chị, em**: Sacha starts with tôi; chị Lan calls him em and says chị, and he switches to em.
-- L3 **em** to a young waiter; L5 **anh ấy, chị ấy**, family nouns (bố, mẹ, ông, bà, chồng, con, em gái).
+- L3 **em** to a young waiter; L5 **anh ấy, chị ấy**, family nouns (bố, mẹ, ông, bà, chồng, vợ, con), and **bác /
+  cháu**: Sacha greets chị Lan's mother (Cháu chào bác ạ) and asks Bin and Na Cháu mấy tuổi?
 - L11 **bạn**, the neutral "you" between peers (Mai) and in writing (signs, forms, messages).
-- L12 **bác / cháu** with chị Lan's mother; L16 **chúng tôi** (without you) and **chúng ta** (with you), the
-  Taigi 阮 / 咱 split; anh trai, chị gái.
+- L12 bác / cháu again (bác looks after Sacha when he is ill); L16 **chúng tôi** (without you) and **chúng ta**
+  (with you), the Taigi 阮 / 咱 split; anh trai, chị gái, em gái.
 - L19 **ông / bà** as "you" (ông Hùng); **cô, chú**: Bin and Na call Sacha chú, he calls them cháu.
 - L32 in-laws, nội / ngoại; L44 **mình** "I" among friends, **cậu / tớ**, and **mày / tao** only to recognise;
   L58 con cháu, họ hàng; L60 anh / em between lovers; L100 the whole cast, each with the right term.
@@ -509,28 +539,30 @@ sounds in Lesson 0 (nh = gn, ê = é, ô = eau).
 
 Bridge ids as in sections 3–7 (B finals, V rhymes, T tones, I initials, Z spelling, O older loans, C word-building,
 FF false friend). Lines from the rule in section 1. New words: native / Hán-Việt / other (older and Western loans);
-L1–13 are word list 2, later lessons are targets for each word list. The same plan is in `course/syllabus.yaml`.
+L1–13 are word list 2, later lessons are targets for each word list. Generated by `tools/plan.py --write` from
+`course/syllabus.yaml` and the word list (one source; `make lint` fails when they disagree).
 
+<!-- plan:lessons -->
 | # | Situation | Grammar | Bridge / false friend | Lines | New: nat / HV / oth |
 |---|---|---|---|---|---|
-| 1 | Hello (Sacha meets chị Lan) | là; tôi / anh / chị / em; ạ, vâng; rất + adjective | — | 7 | 12 / 0 / 3 |
-| 2 | Where are you from? | người + nationality (modifier after the noun); ở đâu; nào; không + verb; cũng | B0 what Hán-Việt is | 7 | 8 / 5 / 2 |
-| 3 | At the café | có … không?; không phải là; muốn; cho tôi …; noun + này; ơi; nhé; và | — | 7 | 10 / 2 / 3 |
-| 4 | At the market | numbers, mươi, nghìn; first classifier quả; bao nhiêu | B1 -p -t -c survive | 7 | 13 / 2 / 1 |
-| 5 | A family photo | của (dropped with family); ai; person term + ấy; mấy … tuổi; đây là | — | 8 | 11 / 4 / 1 |
-| 6 | What time is it? | clock time, rưỡi; đang / sẽ; time words first | B2 -m survives | 8 | 13 / 2 / 1 |
+| 1 | Hello (Sacha meets chị Lan) | là; tôi / anh / chị / em; ạ, vâng; rất + adjective; cảm ơn – không có gì | — | 7 | 13 / 0 / 3 |
+| 2 | Where are you from? | người + nationality (modifier after the noun); ở đâu; nào; không + verb; cũng; à (checking: Anh là người Pháp à?) | B0 what Hán-Việt is | 7 | 9 / 5 / 2 |
+| 3 | At the café | có … không?; không phải là; … phải không?; muốn; cho tôi …; noun + này; ơi; nhé; và; một, hai, ba | — | 7 | 13 / 2 / 3 |
+| 4 | At the market | numbers to the thousands: mười, mươi; lăm / mốt / tư after mươi; trăm, nghìn; bao nhiêu; Đắt quá! | B1 -p -t -c survive | 7 | 14 / 2 / 2 |
+| 5 | A family photo | của (dropped with family); ai; person term + ấy; mấy … tuổi; đây là | — | 8 | 12 / 4 / 1 |
+| 6 | What time is it? | clock time: giờ, rưỡi, phút; đang / sẽ; time words first; đấy (Anh đi đâu đấy?) | B2 -m survives | 8 | 14 / 2 / 1 |
 | 7 | **Review 1** | recap 1–6 | — | 8 | — |
-| 8 | Around Hoàn Kiếm lake | directions; imperatives; rồi "then"; đó; khoảng | B3 -nh / -ch = -ng / -k | 8 | 9 / 5 / 2 |
-| 9 | What is the weather like? | adjective as predicate (no là); rất / lắm / quá / hơi; nhỉ; nhưng | T1 level tones: ngang / huyền; FF thời tiết | 8 | 9 / 4 / 3 |
-| 10 | A bowl of phở | đã … chưa? / rồi / chưa; thêm; nhiều | O1 two layers: giờ and thời | 8 | 13 / 1 / 3 |
-| 11 | Free at the weekend? | days and weeks; bao giờ; hay "or"; với; định + verb; thích | T2 rising tones: hỏi / ngã / nặng; FF tuần | 9 | 10 / 5 / 2 |
-| 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không? | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 4 |
-| 13 | A birthday present | classifier cái; colours; vừa "to fit"; lấy; tặng | T4 checked syllables: sắc / nặng only | 9 | 13 / 3 / 2 |
+| 8 | Around Hoàn Kiếm lake | directions; imperatives: verb + đi (Đi thẳng đi!), đừng + verb; rồi "then"; đó; khoảng | B3 -nh / -ch = -ng / -k | 8 | 8 / 6 / 2 |
+| 9 | What is the weather like? | adjective as predicate (no là); rất / lắm / quá / hơi; thế "so" (Nóng thế!); nhỉ; nhưng | T1 level tones: ngang / huyền; FF thời tiết | 8 | 10 / 3 / 4 |
+| 10 | A bowl of phở | đã … chưa? / rồi / chưa; hôm qua; thêm; classifier quả | O1 two layers: giờ and thời | 8 | 13 / 2 / 2 |
+| 11 | Free at the weekend? | days, weeks and dates; bao giờ; hay "or"; với; định + verb; thích | T2 rising tones: hỏi / ngã / nặng; FF tuần | 9 | 11 / 5 / 2 |
+| 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không?; sao / tại sao …? – vì …; Sao thế? | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 5 |
+| 13 | A birthday present | classifier cái; colours; vừa "to fit"; mua, lấy; tặng | T4 checked syllables: sắc / nặng only | 9 | 12 / 3 / 3 |
 | 14 | **Review 2** | recap 8–13 | — | 9 | — |
-| 15 | Which phone is cheaper? | comparison hơn / bằng / nhất | T5 tones heard → Chinese tone | 9 | 11 / 5 / 2 |
+| 15 | Which phone is cheaper? | comparison hơn / bằng / nhất; thôi "only, that's all" | T5 tones heard → Chinese tone | 9 | 11 / 5 / 2 |
 | 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái | IK c / k / q, kh, gi | 9 | 11 / 5 / 2 |
 | 17 | At the bookshop | classifiers quyển, tờ, chiếc, con | IH h and IG ng | 10 | 11 / 5 / 2 |
-| 18 | At the swimming pool | có thể; verb + được; biết + verb | IP b, ph | 10 | 11 / 5 / 2 |
+| 18 | At the swimming pool | có thể; verb + được; biết + verb; chứ (Được chứ!) | IP b, ph | 10 | 11 / 5 / 2 |
 | 19 | Tea with ông Hùng | ông / bà as "you"; cho "for, to" | IM m, v | 10 | 11 / 5 / 2 |
 | 20 | A day at the office | vừa … vừa; cũng / đều | ID đ, th, n, l; FF đầu tiên | 10 | 11 / 5 / 2 |
 | 21 | **Review 3** | recap 15–20 | — | 10 | — |
@@ -539,7 +571,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 24 | Learning to ride a motorbike | direction verbs ra / vào / lên / xuống / về / sang | IR tr, ch | 11 | 11 / 6 / 2 |
 | 25 | Lunch near the office | result complements xong, hết, thấy, được | IR th, s, x | 11 | 11 / 6 / 2 |
 | 26 | Hobbies | đã từng; thường / hay / luôn | IY nh, d, no initial | 11 | 11 / 6 / 2 |
-| 27 | Bà's stories | còn, vẫn, nữa, lại | Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x | 11 | 11 / 6 / 2 |
+| 27 | Bà's stories | còn, vẫn, nữa, lại; mà (insisting: Em biết mà!) | Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x | 11 | 11 / 6 / 2 |
 | 28 | **Review 4** | recap 22–27 | — | 11 | — |
 | 29 | At the bank | được (good passive) | initials heard → Chinese (recap) | 12 | 11 / 6 / 2 |
 | 30 | A stolen bike | bị and được with an agent | V1 -ương | 12 | 11 / 6 / 2 |
@@ -556,7 +588,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 41 | Feelings | cảm thấy; emotion words | C6 prefixes bất-, vô-, phi- | 14 | 11 / 7 / 2 |
 | 42 | **Review 6** | recap 36–41 | — | 14 | — |
 | 43 | Ordering online | làm cho / khiến | C7 when the Vietnamese word is not the Mandarin one | 14 | 10 / 8 / 2 |
-| 44 | An argument with Mai | chứ / mà / đâu (contradiction); à | FF thông cảm | 14 | 10 / 8 / 2 |
+| 44 | An argument with Mai | cơ, đâu, hả (insisting, contradicting: Không phải đâu!) | FF thông cảm | 14 | 10 / 8 / 2 |
 | 45 | Making up | apologies by register | FF thực sự | 14 | 10 / 8 / 2 |
 | 46 | At the post office | formal register: quý khách, xin vui lòng | C8 Hán-Việt on signs | 14 | 10 / 8 / 2 |
 | 47 | Floods in the rainy season | khi … thì; vừa mới; sudden events (bỗng, tự nhiên) | — | 15 | 10 / 8 / 2 |
@@ -571,7 +603,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 56 | **Review 8** | recap 50–55 | — | 16 | — |
 | 57 | The news on TV (neutral) | formal political words | C12 the vocabulary of institutions | 16 | 10 / 10 / 1 |
 | 58 | Bác in hospital | chăm sóc; giving care | — | 16 | 10 / 10 / 1 |
-| 59 | Bargaining at Đồng Xuân market | softeners thôi, đi, mà | FF triệu | 16 | 10 / 10 / 1 |
+| 59 | Bargaining at Đồng Xuân market | softeners in requests: thôi, đi, mà | FF triệu | 16 | 10 / 10 / 1 |
 | 60 | Love songs | pronouns in songs | — | 16 | 10 / 10 / 1 |
 | 61 | Cooking nem | trước khi / sau khi | — | 16 | 10 / 10 / 1 |
 | 62 | Traffic rules | không được / cấm | — | 16 | 10 / 10 / 1 |
@@ -579,7 +611,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 64 | Childhood memories | narrative connectors (rồi, sau đó, cuối cùng) | — | 16 | 10 / 10 / 1 |
 | 65 | Prices and the economy | triệu, tỷ; percentages | FF lạm phát | 16 | 10 / 11 / 1 |
 | 66 | A trip to Huế | Central speech (one note) | C13 the court's Hán-Việt | 17 | 10 / 11 / 1 |
-| 67 | A trip to Sài Gòn | Southern words and sounds | C14 Southern readings nhựt, sanh, chánh | 17 | 10 / 11 / 1 |
+| 67 | A trip to Sài Gòn | Southern words and sounds; particles vậy, nha, ha | C14 Southern readings nhựt, sanh, chánh | 17 | 10 / 11 / 1 |
 | 68 | Sport and health | nên / không nên; advice | — | 17 | 10 / 11 / 1 |
 | 69 | Money worries | dù … vẫn | — | 17 | 10 / 11 / 1 |
 | 70 | **Review 10** | recap 64–69 | — | 17 | — |
@@ -613,6 +645,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 98 | **Review 14** | recap 92–97 | — | 20 | — |
 | 99 | A farewell speech | formal speech | — | 20 | 10 / 13 / 1 |
 | 100 | Goodbye, Hà Nội | everything: a free conversation | — | 20 | 10 / 13 / 1 |
+<!-- /plan -->
 
 ## 9. Limits, plainly
 

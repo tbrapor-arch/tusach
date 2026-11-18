@@ -40,6 +40,10 @@ Checks (E = error, exit 1; W = warning; I = information)
      new_words {native, hv}); W a written lesson whose dialogue length or new words (native / Hán-Việt) leave the
      plan by more than one, or whose Hán-Việt share is more than 0.2 from the plan's
   I  lesson not checked by a native speaker (no native_check: {by, date}); the app labels it
+  E  (review 3) the draft word list (draft.word_list in course/syllabus.yaml) against the plan: tools/plan.py's checks
+     (no word in a review lesson, counts, no Vietnamese word in a note, usage note or planned grammar before it is
+     taught unless marked {preview}, the particle strand) and its generated blocks; the proposal's sound-rule tables
+     as tools/bridge_rules.py measures them; its bridge examples, each word with its characters
 The words of the lines are also checked by tools/verify_words.py (`make lint` runs both).
 """
 import collections
@@ -295,8 +299,9 @@ def plan_checks(loaded, msgs):
                                   f'{", ".join(sorted(course.PLAN_KEYS))})'))
         if isinstance(p.get('new_words'), dict):
             for k in p['new_words']:
-                if k not in ('native', 'hv'):
-                    msgs.append(('E', f'course/syllabus.yaml: lessons[{i}].new_words: E unknown key "{k}" (native, hv)'))
+                if k not in ('native', 'hv', 'other'):
+                    msgs.append(('E', f'course/syllabus.yaml: lessons[{i}].new_words: E unknown key "{k}" (native, hv, '
+                                      'other: the older and Western loans, counted in native too)'))
         if p.get('n') is not None:
             plans[p['n']] = p
     import cards
@@ -540,6 +545,35 @@ def main():
         if kind not in lexicon.overrides(r):
             msgs.append(('E', f'course/lexicon.tsv:{r["n"]}: E {r["key"]}: {kind}: {msg} (resolve it, or override it '
                               'with a reason: tools/lexicon.py)'))
+    # the plan, the draft word list and the proposal from one source (review 3, finding 1): tools/plan.py
+    draft = (course.syllabus().get('draft') or {})
+    if draft.get('word_list'):
+        import contextlib
+        import io
+        import plan
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            bad_list = check_wordlist(draft['word_list'])
+        if bad_list:
+            msgs += [('E', x) for x in buf.getvalue().splitlines() if ': E ' in x or x.startswith('E ')]
+        msgs += [(lv, m) for lv, m in plan.check(D.con) if lv == 'E']
+        for path, text in plan.outputs(D.con).items():
+            if os.path.exists(path) and open(path, encoding='utf-8').read() != text:
+                msgs.append(('E', f'{os.path.relpath(path, ROOT)}: E not as tools/plan.py --write would write it'))
+        prop = os.path.join(ROOT, draft.get('proposal') or '')
+        if draft.get('proposal') and os.path.exists(prop):
+            import bridge_rules
+            groups, _, _ = bridge_rules.render(D.con)
+            text = open(prop, encoding='utf-8').read()
+            if bridge_rules.rewrite(text, groups) != text:
+                msgs.append(('E', f'{draft["proposal"]}: E its sound-rule tables are not the measured ones: '
+                                  f'tools/bridge_rules.py --write {draft["proposal"]}'))
+            blocks = ''.join(re.findall(r'<!-- bridge-examples -->(.*?)<!-- /bridge-examples -->', text, re.S))
+            for run, word in dict.fromkeys(cjk_pairs(blocks)):
+                why = D.bridge_example(run, word or None)
+                if why:
+                    msgs.append(('E', f'{draft["proposal"]}: E bridge example {run} {word}: {why}'))
+        print(f'lint: draft word list {draft["word_list"]} and proposal checked against the plan (tools/plan.py)')
     print(f'lint: course lexicon: {len(LEX)} rows, {len(res)} conflicts with the data, '
           f'{sum(1 for r, k, _ in res if k in lexicon.overrides(r))} overridden with a reason')
     errors = 0

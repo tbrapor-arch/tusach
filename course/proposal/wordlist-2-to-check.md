@@ -11,10 +11,10 @@ word (— when only the lexicon has it).
 | word | list | English | origin | doubt |
 |---|---|---|---|---|
 | chào | L1 | hello; goodbye; to greet | older-loan 朝 | Wiktionary says "possibly" a non-Hán-Việt reading of 朝 (to pay court) |
-| mua | L4 | to buy | older-loan 務 | Wiktionary's 務 is the only source given; the reviewer and Claude could not judge it |
+| mua | L13 | to buy | older-loan 務 | Wiktionary's 務 is the only source given; the reviewer and Claude could not judge it |
 | đường~road | L8 | road, street; way | hv-opaque 唐 | Wiktionary gives 唐 ("road inside a temple") and, alternatively, a Tai origin; 唐 is not "road" for a reader of Chinese |
 | phải~must | L12 | must, to have to | older-loan 被 | Wiktionary derives phải from 被 "to suffer" through a long chain of senses; a reader of Chinese sees none of them |
-| phải~right | L8 | right (side); right, correct | older-loan 被 | Wiktionary derives phải from 被 "to suffer" through a long chain of senses; a reader of Chinese sees none of them |
+| phải~right | L3 | right (side); right, correct | older-loan 被 | Wiktionary derives phải from 被 "to suffer" through a long chain of senses; a reader of Chinese sees none of them |
 | mùa | L9 | season | older-loan 務 | Wiktionary's 務 is the only source given (the same etymon as mua "to buy"); not visible to a reader of Chinese |
 | đông~crowded | — | crowded | older-loan 凍 | Wiktionary groups "crowded" with "to congeal, to freeze" under 凍; the sense link is not visible |
 | thuốc | L12 | medicine; tobacco | older-loan 毒 | Wiktionary's etymon is 毒 "poison" (Old Chinese); plausible for "drug" but not visible to a reader of Chinese |
@@ -25,32 +25,105 @@ word (— when only the lexicon has it).
 | cứ | — | just (go on), keep on; every (cứ … là) | hv-opaque 據 | Wiktionary gives 據 "according to"; the adverb's sense is not visible in it |
 | đóng | — | to close, to shut; to build, to make (furniture) | older-loan 凍 | Wiktionary's etymon 凍 "to freeze" is not visible in "to close" |
 
-## Override (4)
+## Override (51)
 
 | word | list | conflict kept | reason |
 |---|---|---|---|
-| xe máy | L8 | en-unsupported | Wiktionary defines it by two other Vietnamese words (mô tô, xe gắn máy); "motorbike" is the plain English (Claude) |
+| em | L1 | en-item | the pronoun uses ("you", "I") are the course's point; Wiktionary gives them in a usage note |
+| tên | L1 | en-item | "to be called" renders tên là; Wiktionary has the noun only |
+| vui | L1 | en-item | "fun" (vui lắm "great fun") is everyday use |
+| nước~water | — | en-item | "drink" (nước uống) is everyday use |
+| à | L2 | en-item | a particle, described in English |
+| có | L3 | en-item | the question frame có … không? is grammar, not a gloss |
+| một | L3 | en-item | the article use is grammar, not a gloss |
+| quá | L4 | en-item | "to go past" (quá ga "past the station") is the verb of 過 |
+| mấy | L5 | en-item | "a few" (mấy ngày "a few days") is everyday use |
+| giờ | L6 | en-item | "o'clock" (ba giờ) is everyday use |
+| Hoàn Kiếm | L8 | en-item | a place name explained |
+| bị | L12 | en-item | the passive of misfortune is grammar, described in English |
+| thuốc | L12 | en-item | "tobacco" (hút thuốc "to smoke") is everyday use |
+| nghỉ | L12 | en-item | "to rest" (nghỉ một chút) is everyday use |
+| cháu | L5 | en-item | the pronoun use is the course's point |
+| nhỉ | L9 | en-item | a particle, described in English |
+| các | — | en-item | a plural marker, described in English |
+| những | — | en-item | a plural marker, described in English |
+| thì | — | en-item | "as for" (Tôi thì …) is everyday use |
+| còn | — | en-item | "and, as for" (còn anh? "and you?") is everyday use |
+| vì | L12 | en-item | "for (the sake of)" (vì con "for the children") is Wiktionary's prep sense in other words |
+| cả | — | en-item | "even" (cả anh ấy cũng …) is everyday use |
+| bằng~equal | — | origin-conflict | Wiktionary analyses bằng as 平 (sino), but the Hán-Việt reading of 平 is bình; Wiktionary gives bằng only as a Nôm reading (review 3): an older loan |
+| vậy | — | en-item | a particle, described in English |
+| cái | L13 | en-item | the determiner use (cái này) is grammar |
+| ta | — | en-item | the pronoun uses are described in English |
+| thế | L9 | en-item | the particle use is described in English |
+| không thể | — | en-item | the modal is grammar, described in English |
+| bộ | — | en-item | the classifier use (bộ phim) is everyday use |
+| đều | — | en-item | "both, all (alike)" is the adverb's everyday use |
+| nữa | — | en-item | "again" (nói lại nữa) is everyday use |
 | thành phố | — | chars-conflict | Wiktionary writes 城庯 with 庯, a rare form; the course writes phố 舖 (店舖) as it does for phố itself |
+| luôn | — | en-item | "as well" (… luôn) is everyday use |
 | như thế | — | origin-conflict | Wiktionary's 如勢 makes thế "so" the 勢 of "position"; the course reads như thế as như + thế (see thế) |
+| Nguyễn | — | en-item | a surname explained |
+| đúng | — | en-item | "exactly" (đúng ba giờ) is everyday use |
+| tính | — | en-item | "to intend" (tính đi "to plan to go") is everyday use |
+| cây | — | en-item | the classifier use (cây bút) is everyday use |
+| đồ | — | en-item | "food" in đồ ăn is everyday use |
 | đối với | — | en-unsupported | Wiktionary has only "according to; relative to"; the everyday use is "for, towards (someone)" (Claude) |
+| đối với | — | en-item | "towards, for, regarding" renders the preposition |
+| đặc biệt | — | en-item | "especially" is the adverb use |
+| tàu | — | en-item | "train" (tàu hỏa) is everyday use |
+| bài | — | en-item | "article, piece" (bài báo) is everyday use |
+| chi | — | en-item | "branch" (chi nhánh) is 支's sense |
+| nôm | — | origin-conflict | Wiktionary analyses nôm as 南 (sino), but the Hán-Việt reading of 南 is nam; Wiktionary gives nôm only as a Nôm reading (review 3): an older loan |
+| kỳ | — | en-item | "session" (kỳ họp) is everyday use |
+| thị | — | en-item | a middle name explained |
+| cơ | — | en-unsupported | a particle, described in English |
+| cơ | — | en-item | a particle, described in English |
+| đóng | — | en-item | "to build, to make" (đóng tàu, đóng bàn) is everyday use |
+| hội | — | en-item | "association" (hội sinh viên) is everyday use |
+| quán | L3 | en-item | "stall" (quán nước) is everyday use |
 
-## For a native speaker (written by hand, 18 Nov 2026; kept when the list above is regenerated)
+## For a native speaker (written by hand, 18 Nov 2026, revised after review 3; kept when the list above is regenerated)
 
 The Northern usage points of word list 2 that Claude is least sure of, most important first. Each is a choice
-the lessons will repeat, so a wrong one would be learnt many times.
+the lessons will repeat, so a wrong one would be learnt many times. Each says what Claude chose and why; none is
+decided by a native speaker yet.
 
-1. **trà or chè** (L3, decision 10). The list teaches trà: far more frequent in the corpus (60,092 against 2,989
-   per billion words, chè counting the dessert too), and trà đá, trà chanh, trà sữa are what a Hà Nội café or
+1. **trà or chè** (L3, decision 10). The list teaches trà: far more frequent in the corpus (<!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11198; tools/freq.py, chè counting the dessert too)<!-- /plan -->), and trà đá, trà chanh, trà sữa are what a Hà Nội café or
    street stall sells. Is chè still the natural word at home in Hà Nội (pha chè, nước chè, chè xanh), and for whom?
 2. **tôi → em with chị Lan** (L1). Sacha (27) meets his landlady (about 35): he starts with tôi and switches to
-   em when she calls him em. Is that switch natural on a first meeting, or would he say em from the start?
-3. **bác or bà** for chị Lan's mother (L12): she is about 62, older than Sacha's parents. bác, with cháu for "I"?
-4. **vâng or dạ** (L1): which should a young foreign man use to chị Lan, and which to her mother?
-5. **nhỏ / lớn or bé / to** (L13) for clothes sizes in a Hà Nội shop ("cái này hơi nhỏ").
-6. **rảnh or rỗi** (L11) for "free, not busy" in Hà Nội speech.
-7. **Ordering** (L3): "Cho tôi một cốc trà đá" or "Cho em …" or "Lấy cho anh …" in a Hà Nội café, said by a
-   customer of 27 to a waiter of about 20.
-8. **một bát phở** (L10): bát for a bowl of phở in Hà Nội (tô is Southern)?
-9. **bị cảm** (L12) for "to have a cold" in everyday Hà Nội speech, beside bị ốm, bị cảm cúm.
-10. **Rất vui được gặp anh** (L1): natural in speech, or textbook only?
-11. **nhỉ** (L9): Nóng nhỉ! as a young speaker's small talk; **hè** (mùa hè) as the everyday word for summer.
+   em when she calls him em. Chosen because tôi is the safe neutral form with a stranger; is the switch natural on
+   a first meeting, or would he say em from the start?
+3. **bác or bà** for chị Lan's mother (now L5): she is 62, older than Sacha's parents. Chosen: bác, with cháu for
+   "I", because bà is for the grandparents' generation (ông Hùng, 78). Right for a woman of 62?
+4. **vâng or dạ** (L1): chosen vâng to chị Lan and dạ to her mother (dạ is in the lexicon, not yet in a lesson),
+   as the more deferential answer to the older generation. Which should a young foreign man use to each?
+5. **bạn / tôi between Sacha and Mai** (L11), colleagues of the same age: chosen bạn and tôi (decision 3; later
+   mình). Would Hà Nội colleagues of 27 rather use names, or cậu / tớ?
+6. **nhỏ / lớn or bé / to** (L13) for clothes sizes in a Hà Nội shop ("cái này hơi nhỏ"): chosen nhỏ / lớn, the
+   forms of the written standard.
+7. **rảnh or rỗi** (L11) for "free, not busy": chosen rảnh (more frequent in the corpus).
+8. **Ordering** (L3): the examples say "Cho tôi một cốc trà đá" and "Em ơi, cho anh một trà đá!": which would a
+   customer of 27 say to a waiter of about 20 in a Hà Nội café?
+9. **một bát phở** (L10): bát for a bowl of phở in Hà Nội (tô is Southern)?
+10. **bị cảm** (L12) for "to have a cold" in everyday Hà Nội speech, beside bị ốm, bị cảm cúm; and "Anh nên gặp bác
+    sĩ" (chosen over "đi bác sĩ", which Claude is less sure of).
+11. **Rất vui được gặp anh** (L1): natural in speech, or textbook only? Kept because it teaches được "get to".
+12. **nhỉ** (L9): Nóng nhỉ! as a young speaker's small talk; **hè** (mùa hè) as the everyday word for summer, and
+    whether hè is Northern only (the card says "summer (Northern)").
+13. **The particle strand** (syllabus.yaml `particles`): "Anh đi đâu đấy?" as an everyday Northern greeting (L6),
+    "Nóng thế!" and "Sao thế?" against Southern vậy (L9, L12), "Anh là người Pháp à?" (L2), "Em muốn cái màu đỏ
+    cơ!" (cơ, L44): are these the Hà Nội forms, and are any too familiar for a beginner?
+14. **Numbers** (L4): hai mươi tư or hai mươi bốn (the card says both are said), and nhăm for lăm (hai mươi nhăm):
+    how common in Hà Nội speech today?
+15. **The lexicon's example sentences** (every word of word list 2 and 13 frequent cards; Claude's, labelled on
+    the card): a native reading of all of them, in order of the lessons, is the most useful single check.
+
+**Etymologies and Taigi layers a native speaker of Taigi or a historical linguist should check** (the reviewer
+could not judge them; Claude's choices):
+16. **MOE layer** of 陣 tsūn, 縣 kuān, 房 pông, 高 kau: the MOE marks none, so the card says "layer not marked by
+    the MOE" instead of "literary"; 茶 tê and the other 麻-rhyme readings in -e are now colloquial by rule.
+17. **buồn 煩** (older loan): Wiktionary gives it without hedging, and the tone fits (煩 level, voiced → huyền);
+    lowered from sure to likely because nothing but Wiktionary supports the -uôn rhyme.
+18. **thi / thử 試** (both older loans of 試, "exam" and "to try") and **màu 貌** (likely): kept as Wiktionary
+    gives them.
