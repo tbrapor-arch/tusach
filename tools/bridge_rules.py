@@ -10,7 +10,10 @@ is Hán-Việt (label same, gram, hv-vn, opaque, false-friend); each distinct (c
 cards is one item. A Chinese reading is the word's own reading when the source has the word (Cantonese, Mandarin;
 Taigi only when it is one of the character's literary readings), else every reading of the character; a feature
 (initial, rhyme, tone) counts only when all candidate readings agree on it, else the item is left out of that rule.
-A rule's total is the items its condition covers; a rule under 80 % is taught as a tendency, or not at all.
+A rule's total is the items its condition covers (an item whose prediction cannot be judged, its readings
+disagreeing, is left out); kind(): a rule at 80 % or more is taught as a rule, from 60 % as a tendency, else not.
+Each rule has a direction: zh>vi (from the Chinese word he knows to the Vietnamese), vi>zh (from the Vietnamese
+heard or read to the Chinese), spell (writing a sound Hà Nội merges), drop (the first proposal's, not taught).
 """
 import collections
 import json
@@ -165,116 +168,221 @@ def yue_coda(f):
 
 JING = lambda f: f['mi'] in ('z', 'c', 's', 'j', 'q', 'x') and f['yi'] in ('z', 'c', 's')   # noqa: E731 精 series
 OPEN = lambda f: not f['chk']                                                                # noqa: E731
+ASP = ('ph', 'th', 'kh', 'x', 's')                 # Hán-Việt letters from old aspirates (and the 章 / 莊 fricatives)
+UNASP = ('b', 'đ', 'c', 't', 'tr', 'ch', 'gi')     # Hán-Việt letters from old plain or voiced stops and affricates
 
-# (id, rule as taught, condition, prediction). Ids are the syllabus's.
+
+def _is(key, *vals):
+    """f[key] in vals; None when the feature is undetermined (the readings disagree or are missing): measure() then
+    leaves the item out of the rule."""
+    return lambda f: None if f[key] is None else f[key] in vals
+
+
+def _known(key):
+    return lambda f: None if f[key] is None else True
+
+
+def _all(*fns):
+    def test(f):
+        vals = [g(f) for g in fns]
+        return None if None in vals else all(vals)
+    return test
+
+
+def _spell(pair, test):
+    """A spelling rule for two letters Hà Nội pronounces alike: among the syllables spelt with either, the first letter
+    is written exactly when `test` holds."""
+    return lambda f: f['hi'] in pair, lambda f: None if test(f) is None else (f['hi'] == pair[0]) == bool(test(f))
+
+
+HV, YI, NI, MI = (lambda *v: _is('hi', *v)), (lambda *v: _is('yi', *v)), (lambda *v: _is('ni', *v)), \
+    (lambda *v: _is('mi', *v))
+YT, MT = (lambda *v: _is('yt', *v)), (lambda *v: _is('mt', *v))
+
+# Directions: 'zh>vi' guess the Vietnamese from the Chinese word he knows; 'vi>zh' find the Chinese word from the
+# Vietnamese he hears or reads; 'spell' write a sound Hà Nội merges (d / gi / r, tr / ch, s / x) from the Chinese;
+# 'drop' a rule of the first proposal, measured and not taught.
+# (id, direction, rule as taught, condition, prediction). Ids are the syllabus's.
 RULES = [
-    ('B1', 'Cantonese -p → -p', lambda f: yue_coda(f) == 'p', lambda f: f['coda'] == 'p'),
-    ('B1', 'Cantonese -t → -t', lambda f: yue_coda(f) == 't', lambda f: f['coda'] == 't'),
-    ('B1', 'Cantonese -k → -c / -ch', lambda f: yue_coda(f) == 'k', lambda f: f['coda'] in ('c', 'ch')),
-    ('B2', 'Cantonese -m → -m', lambda f: yue_coda(f) == 'm', lambda f: f['coda'] == 'm'),
-    ('B2', 'Taigi -m → -m', lambda f: re.search('m$', f['nr']) is not None and not f['nr'].endswith('nn'),
+    ('B1', 'zh>vi', 'Cantonese -p → -p', lambda f: yue_coda(f) == 'p', lambda f: f['coda'] == 'p'),
+    ('B1', 'zh>vi', 'Cantonese -t → -t', lambda f: yue_coda(f) == 't', lambda f: f['coda'] == 't'),
+    ('B1', 'zh>vi', 'Cantonese -k → -c / -ch', lambda f: yue_coda(f) == 'k', lambda f: f['coda'] in ('c', 'ch')),
+    ('B2', 'zh>vi', 'Cantonese -m → -m', lambda f: yue_coda(f) == 'm', lambda f: f['coda'] == 'm'),
+    ('B2', 'zh>vi', 'Taigi -m → -m', lambda f: re.search('m$', f['nr']) is not None and not f['nr'].endswith('nn'),
      lambda f: f['coda'] == 'm'),
-    ('B3', 'Hán-Việt -nh / -ch ← Cantonese -ng / -k', lambda f: f['coda'] in ('nh', 'ch') and f['yr'] is not None,
+    ('B3', 'vi>zh', 'Hán-Việt -nh / -ch ← Cantonese -ng / -k', lambda f: f['coda'] in ('nh', 'ch') and f['yr'] is not None,
      lambda f: yue_coda(f) in ('ng', 'k')),
-    ('B3', 'Mandarin -ing → -nh (tendency: -ưng/-ăng for some)', lambda f: f['mr'] == 'ing', lambda f: f['coda'] == 'nh'),
-    ('B3x', 'Cantonese -ing / -ik → -nh / -ch (dropped)', lambda f: f['yr'] in ('ing', 'ik'),
+    ('B3', 'zh>vi', 'Mandarin -ing → -nh (-ưng / -ăng for some)', lambda f: f['mr'] == 'ing',
+     lambda f: f['coda'] == 'nh'),
+    ('B3x', 'drop', 'Cantonese -ing / -ik → -nh / -ch', lambda f: f['yr'] in ('ing', 'ik'),
      lambda f: f['coda'] in ('nh', 'ch')),
-    ('V1', 'Cantonese -oeng / -oek → -ương / -ươc', lambda f: f['yr'] in ('oeng', 'oek'), lambda f: 'ươ' in f['hr']),
-    ('V2', 'Cantonese -in / -it → -iên / -iêt', lambda f: f['yr'] in ('in', 'it'),
+    ('V1', 'zh>vi', 'Cantonese -oeng / -oek → -ương / -ươc', lambda f: f['yr'] in ('oeng', 'oek'),
+     lambda f: 'ươ' in f['hr']),
+    ('V2', 'zh>vi', 'Cantonese -in / -it → -iên / -iêt', lambda f: f['yr'] in ('in', 'it'),
      lambda f: 'iê' in f['hr'] or 'yê' in f['hr']),
-    ('T1', 'Cantonese 1 (open syllable) → ngang', lambda f: OPEN(f) and f['yt'] == 1, lambda f: f['ht'] == 'ngang'),
-    ('T1', 'Cantonese 4, obstruent initial → huyền', lambda f: OPEN(f) and f['yt'] == 4 and not f['son'] and f['hi'],
-     lambda f: f['ht'] == 'huyền'),
-    ('T1', 'Cantonese 4, sonorant initial (m n nh ng l v d) → ngang', lambda f: OPEN(f) and f['yt'] == 4 and f['son'],
+    ('T1', 'zh>vi', 'Cantonese 1 (open syllable) → ngang', lambda f: OPEN(f) and f['yt'] == 1,
      lambda f: f['ht'] == 'ngang'),
-    ('T1', 'Taigi 5, sonorant initial → ngang', lambda f: OPEN(f) and f['nt'] == 5 and f['son'],
+    ('T1', 'zh>vi', 'Cantonese 4, obstruent initial → huyền',
+     lambda f: OPEN(f) and f['yt'] == 4 and not f['son'] and f['hi'], lambda f: f['ht'] == 'huyền'),
+    ('T1', 'zh>vi', 'Cantonese 4, sonorant initial (m n nh ng l v d) → ngang',
+     lambda f: OPEN(f) and f['yt'] == 4 and f['son'], lambda f: f['ht'] == 'ngang'),
+    ('T1', 'zh>vi', 'Taigi 5, sonorant initial → ngang', lambda f: OPEN(f) and f['nt'] == 5 and f['son'],
      lambda f: f['ht'] == 'ngang'),
-    ('T1x', 'Cantonese 4 → huyền, whatever the initial (old table)', lambda f: OPEN(f) and f['yt'] == 4,
+    ('T1x', 'drop', 'Cantonese 4 → huyền, whatever the initial (first proposal)', lambda f: OPEN(f) and f['yt'] == 4,
      lambda f: f['ht'] == 'huyền'),
-    ('T2', 'Cantonese 2 → hỏi', lambda f: OPEN(f) and f['yt'] == 2, lambda f: f['ht'] == 'hỏi'),
-    ('T2', 'Cantonese 5, sonorant initial → ngã', lambda f: OPEN(f) and f['yt'] == 5 and f['son'],
+    ('T2', 'zh>vi', 'Cantonese 2 → hỏi', lambda f: OPEN(f) and f['yt'] == 2, lambda f: f['ht'] == 'hỏi'),
+    ('T2', 'zh>vi', 'Cantonese 5, sonorant initial → ngã', lambda f: OPEN(f) and f['yt'] == 5 and f['son'],
      lambda f: f['ht'] == 'ngã'),
-    ('T2', 'Taigi 2, obstruent or no initial → hỏi', lambda f: OPEN(f) and f['nt'] == 2 and not f['son'],
+    ('T2', 'zh>vi', 'Taigi 2, obstruent or no initial → hỏi', lambda f: OPEN(f) and f['nt'] == 2 and not f['son'],
      lambda f: f['ht'] == 'hỏi'),
-    ('T2', 'Taigi 2, sonorant initial → ngã', lambda f: OPEN(f) and f['nt'] == 2 and f['son'], lambda f: f['ht'] == 'ngã'),
-    ('T2', 'Mandarin 3, sonorant initial → ngã', lambda f: OPEN(f) and f['mt'] == 3 and f['son'],
+    ('T2', 'zh>vi', 'Taigi 2, sonorant initial → ngã', lambda f: OPEN(f) and f['nt'] == 2 and f['son'],
      lambda f: f['ht'] == 'ngã'),
-    ('T3', 'Cantonese 3 → sắc', lambda f: OPEN(f) and f['yt'] == 3, lambda f: f['ht'] == 'sắc'),
-    ('T3', 'Cantonese 6 → nặng', lambda f: OPEN(f) and f['yt'] == 6, lambda f: f['ht'] == 'nặng'),
-    ('T3', 'Taigi 3 → sắc', lambda f: OPEN(f) and f['nt'] == 3, lambda f: f['ht'] == 'sắc'),
-    ('T3', 'Taigi 7 → nặng', lambda f: OPEN(f) and f['nt'] == 7, lambda f: f['ht'] == 'nặng'),
-    ('T4', '-p -t -c -ch → sắc or nặng only', lambda f: f['chk'], lambda f: f['ht'] in ('sắc', 'nặng')),
-    ('T4', 'checked, Cantonese 1 / 3 → sắc', lambda f: f['chk'] and f['yt'] in (1, 3), lambda f: f['ht'] == 'sắc'),
-    ('T4', 'checked, Cantonese 6 → nặng', lambda f: f['chk'] and f['yt'] in (2, 4, 5, 6), lambda f: f['ht'] == 'nặng'),
-    ('T4', 'Taigi 4 → sắc', lambda f: f['chk'] and f['nt'] == 4, lambda f: f['ht'] == 'sắc'),
-    ('T4', 'Taigi 8 → nặng', lambda f: f['chk'] and f['nt'] == 8, lambda f: f['ht'] == 'nặng'),
-    ('I1', 'kh ← Cantonese h- / f- with Mandarin k- / q-', lambda f: f['yi'] in ('h', 'f') and f['mi'] in ('k', 'q'),
-     lambda f: f['hi'] == 'kh'),
-    ('I1', 'h ← Cantonese h- / f- / w- / j- with Mandarin h- / x-',
-     lambda f: f['yi'] in ('h', 'f', 'w', 'j') and f['mi'] in ('h', 'x'), lambda f: f['hi'] == 'h'),
-    ('I1x', 'kh ← Cantonese h- (old I1)', lambda f: f['yi'] == 'h', lambda f: f['hi'] == 'kh'),
-    ('I1x', 'kh ← Taigi kh- (old I1)', lambda f: f['ni'] == 'kh', lambda f: f['hi'] == 'kh'),
-    ('I2', 'ph ← Mandarin f-', lambda f: f['mi'] == 'f', lambda f: f['hi'] == 'ph'),
-    ('I2x', 'ph ← Cantonese f- (old I2)', lambda f: f['yi'] == 'f', lambda f: f['hi'] == 'ph'),
-    ('I3', 'v ← Cantonese m- with Mandarin w-', lambda f: f['yi'] == 'm' and f['mi'] == 'w', lambda f: f['hi'] == 'v'),
-    ('I3x', 'v ← Mandarin w- (old I3)', lambda f: f['mi'] == 'w', lambda f: f['hi'] == 'v'),
-    ('I4', 'gi ← Mandarin j- with Cantonese g- + aa / o',
-     lambda f: f['mi'] == 'j' and f['yi'] == 'g' and f['yr'][:2] in ('aa', 'ok', 'on'), lambda f: f['hi'] == 'gi'),
-    ('I4', 'spelling d or gi: gi when Cantonese has g-', lambda f: f['hi'] in ('d', 'gi') and f['yi'] is not None,
-     lambda f: (f['hi'] == 'gi') == (f['yi'] == 'g')),
-    ('I4x', 'gi ← Mandarin j- (old I4)', lambda f: f['mi'] == 'j', lambda f: f['hi'] == 'gi'),
-    ('I5', 'tr ← Mandarin zh- / ch- with Taigi t- / th-', lambda f: f['mi'] in ('zh', 'ch') and f['ni'] in ('t', 'th'),
-     lambda f: f['hi'] == 'tr'),
-    ('I5', 'ch ← Mandarin zh- with Taigi ts- (tendency)', lambda f: f['mi'] == 'zh' and f['ni'] == 'ts',
-     lambda f: f['hi'] == 'ch'),
-    ('I5x', 'spelling tr or ch: tr when Taigi t-, ch when ts- (old I5)',
-     lambda f: f['hi'] in ('tr', 'ch') and f['ni'] in ('t', 'ts'), lambda f: (f['hi'] == 'tr') == (f['ni'] == 't')),
-    ('I6', 'th ← Mandarin sh- (tendency; s in a closed set)', lambda f: f['mi'] == 'sh', lambda f: f['hi'] == 'th'),
-    ('I6', 'th or s ← Mandarin sh-', lambda f: f['mi'] == 'sh', lambda f: f['hi'] in ('th', 's')),
-    ('I6x', 'spelling s or x: s when Mandarin sh-, x when ch- (old I6)',
-     lambda f: f['hi'] in ('s', 'x') and f['mi'] in ('sh', 'ch'), lambda f: (f['hi'] == 's') == (f['mi'] == 'sh')),
-    ('I6x', 'spelling s or x: x when Taigi tsh-', lambda f: f['hi'] in ('s', 'x') and f['ni'] is not None,
-     lambda f: (f['hi'] == 'x') == (f['ni'] == 'tsh')),
-    ('I7', 'd ← Mandarin y- with Cantonese j- in a low tone (4 5 6), Taigi not g- (tendency)',
-     lambda f: f['mi'] == 'y' and f['yi'] == 'j' and f['yt'] in (4, 5, 6) and f['ni'] not in ('g', 'j', 'h'),
-     lambda f: f['hi'] == 'd'),
-    ('I7x', 'd ← Mandarin y- (old I7)', lambda f: f['mi'] == 'y', lambda f: f['hi'] == 'd'),
-    ('I7', 'no Hán-Việt syllable starts with r', lambda f: True, lambda f: f['hi'] != 'r'),
-    ('I8', 'nh ← Mandarin r-', lambda f: f['mi'] == 'r', lambda f: f['hi'] == 'nh'),
-    ('I9', 'ng / ngh ← Taigi g-', lambda f: f['ni'] == 'g', lambda f: f['hi'] == 'ng'),
-    ('I10', 'Mandarin j q x: Cantonese g k h → c kh h gi',
-     lambda f: f['mi'] in ('j', 'q', 'x') and f['yi'] in ('g', 'k', 'gw', 'kw', 'h', 'f'),
-     lambda f: f['hi'] in ('c', 'kh', 'h', 'gi')),
-    ('I10', 'Mandarin j q x: Cantonese z c s → t th', lambda f: f['mi'] in ('j', 'q', 'x') and f['yi'] in ('z', 'c', 's'),
-     lambda f: f['hi'] in ('t', 'th')),
-    ('I10', 'Mandarin z- → t', lambda f: f['mi'] == 'z', lambda f: f['hi'] == 't'),
-    ('I10', 'old ts- s- series, Taigi ts- / s- → t', lambda f: JING(f) and f['ni'] in ('ts', 's'), lambda f: f['hi'] == 't'),
-    ('I10', 'old ts- s- series, Taigi tsh- → th', lambda f: JING(f) and f['ni'] == 'tsh', lambda f: f['hi'] == 'th'),
-    ('I11', 'đ ← Mandarin d-', lambda f: f['mi'] == 'd', lambda f: f['hi'] == 'đ'),
-    ('I11', 'đ ← Mandarin t- in tone 2', lambda f: f['mi'] == 't' and f['mt'] == 2, lambda f: f['hi'] == 'đ'),
-    ('I11', 'th ← Mandarin t- in tones 1 3 4', lambda f: f['mi'] == 't' and f['mt'] in (1, 3, 4),
-     lambda f: f['hi'] == 'th'),
+    ('T2', 'zh>vi', 'Mandarin 3, sonorant initial → ngã', lambda f: OPEN(f) and f['mt'] == 3 and f['son'],
+     lambda f: f['ht'] == 'ngã'),
+    ('T3', 'zh>vi', 'Cantonese 3 → sắc', lambda f: OPEN(f) and f['yt'] == 3, lambda f: f['ht'] == 'sắc'),
+    ('T3', 'zh>vi', 'Cantonese 6 → nặng', lambda f: OPEN(f) and f['yt'] == 6, lambda f: f['ht'] == 'nặng'),
+    ('T3', 'zh>vi', 'Taigi 3 → sắc', lambda f: OPEN(f) and f['nt'] == 3, lambda f: f['ht'] == 'sắc'),
+    ('T3', 'zh>vi', 'Taigi 7 → nặng', lambda f: OPEN(f) and f['nt'] == 7, lambda f: f['ht'] == 'nặng'),
+    ('T4', 'vi>zh', '-p -t -c -ch → sắc or nặng only', lambda f: f['chk'], lambda f: f['ht'] in ('sắc', 'nặng')),
+    ('T4', 'zh>vi', 'checked, Cantonese 1 / 3 → sắc', lambda f: f['chk'] and f['yt'] in (1, 3),
+     lambda f: f['ht'] == 'sắc'),
+    ('T4', 'zh>vi', 'checked, Cantonese 6 → nặng', lambda f: f['chk'] and f['yt'] in (2, 4, 5, 6),
+     lambda f: f['ht'] == 'nặng'),
+    ('T4', 'zh>vi', 'Taigi 4 → sắc', lambda f: f['chk'] and f['nt'] == 4, lambda f: f['ht'] == 'sắc'),
+    ('T4', 'zh>vi', 'Taigi 8 → nặng', lambda f: f['chk'] and f['nt'] == 8, lambda f: f['ht'] == 'nặng'),
+    # --- initials, by the class of the Middle Chinese initial ---------------------------------------------------
+    # labials 幫滂並 / 非敷奉 / 明微
+    ('IP', 'zh>vi', 'ph ← Mandarin f-', MI('f'), HV('ph')),
+    ('IP', 'zh>vi', 'b ← Mandarin b-', MI('b'), HV('b')),
+    ('IP', 'zh>vi', 'b ← Taigi p-', NI('p'), HV('b')),
+    ('IP', 'vi>zh', 'ph → Mandarin f- or p-', HV('ph'), MI('f', 'p')),
+    ('IP', 'vi>zh', 'b → Mandarin b- or p-', HV('b'), MI('b', 'p')),
+    ('IM', 'zh>vi', 'm ← Mandarin m-', MI('m'), HV('m')),
+    ('IM', 'vi>zh', 'm → Mandarin m-', HV('m'), MI('m')),
+    ('IM', 'zh>vi', 'v ← Cantonese m- with Mandarin w-', _all(YI('m'), MI('w')), HV('v')),
+    ('IM', 'vi>zh', 'v → Mandarin w- or y-', HV('v'), MI('w', 'y')),
+    # dentals 端透定 / 泥來
+    ('ID', 'zh>vi', 'đ ← Mandarin d-', MI('d'), HV('đ')),
+    ('ID', 'zh>vi', 'đ ← Mandarin t- in tone 2', _all(MI('t'), MT(2)), HV('đ')),
+    ('ID', 'zh>vi', 'th ← Mandarin t- in tones 1 3 4', _all(MI('t'), MT(1, 3, 4)), HV('th')),
+    ('ID', 'zh>vi', 'đ ← Taigi t- with Mandarin d- / t-', _all(NI('t'), MI('d', 't')), HV('đ')),
+    ('ID', 'vi>zh', 'đ → Mandarin d- or t-', HV('đ'), MI('d', 't')),
+    ('ID', 'zh>vi', 'n ← Mandarin n-', MI('n'), HV('n')),
+    ('ID', 'zh>vi', 'l ← Mandarin l-', MI('l'), HV('l')),
+    ('ID', 'vi>zh', 'n → Mandarin n-', HV('n'), MI('n')),
+    ('ID', 'vi>zh', 'l → Mandarin l-', HV('l'), MI('l')),
+    ('ID', 'zh>vi', 'Taigi l- → l or n (Mandarin decides)', NI('l'), HV('l', 'n')),
+    # retroflex series 知徹澄 / 莊初崇生 / 章昌船書禪
+    ('IR', 'zh>vi', 'tr ← Mandarin zh- / ch- with Taigi t- / th-', _all(MI('zh', 'ch'), NI('t', 'th')), HV('tr')),
+    ('IR', 'zh>vi', 'ch ← Mandarin zh- with Taigi ts- (tendency)', _all(MI('zh'), NI('ts')), HV('ch')),
+    ('IR', 'zh>vi', 'ch or tr ← Mandarin zh-', MI('zh'), HV('ch', 'tr')),
+    ('IR', 'vi>zh', 'ch → Mandarin zh-', HV('ch'), MI('zh')),
+    ('IR', 'vi>zh', 'tr → Mandarin zh- or ch-', HV('tr'), MI('zh', 'ch')),
+    ('IR', 'zh>vi', 'th ← Mandarin sh- (tendency; s for some)', MI('sh'), HV('th')),
+    ('IR', 'zh>vi', 'th or s ← Mandarin sh-', MI('sh'), HV('th', 's')),
+    ('IR', 'zh>vi', 'x or s ← Mandarin ch- in tones 1 3 4', _all(MI('ch'), MT(1, 3, 4)), HV('x', 's')),
+    ('IR', 'zh>vi', 'tr or th ← Mandarin ch- in tone 2', _all(MI('ch'), MT(2)), HV('tr', 'th')),
+    ('IR', 'vi>zh', 'x → Mandarin ch- (tendency)', HV('x'), MI('ch')),
+    ('IR', 'vi>zh', 's → Mandarin sh- or ch- (tendency)', HV('s'), MI('sh', 'ch')),
+    # dental sibilants 精清從心邪
+    ('IS', 'zh>vi', 't ← Mandarin z-', MI('z'), HV('t')),
+    ('IS', 'zh>vi', 'Mandarin j q x with Cantonese z c s → t or th', _all(MI('j', 'q', 'x'), YI('z', 'c', 's')),
+     HV('t', 'th')),
+    ('IS', 'zh>vi', 'old ts- s- series, Taigi ts- / s- → t', lambda f: JING(f) and f['ni'] in ('ts', 's'), HV('t')),
+    ('IS', 'zh>vi', 'old ts- s- series, Taigi tsh- → th', lambda f: JING(f) and f['ni'] == 'tsh', HV('th')),
+    ('IS', 'vi>zh', 't → Mandarin z c s j q x', HV('t'), MI('z', 'c', 's', 'j', 'q', 'x')),
+    ('IS', 'vi>zh', 't → Cantonese z c s', HV('t'), YI('z', 'c', 's')),
+    # velars 見溪群 / 疑 / 曉匣
+    ('IK', 'zh>vi', 'c / k / q ← Mandarin g-', MI('g'), HV('c')),
+    ('IK', 'zh>vi', 'c / k / q or gi ← Taigi k-', NI('k'), HV('c', 'gi')),
+    ('IK', 'zh>vi', 'Mandarin j q x with Cantonese g k h → c kh h gi',
+     _all(MI('j', 'q', 'x'), YI('g', 'k', 'gw', 'kw', 'h', 'f')), HV('c', 'kh', 'h', 'gi')),
+    ('IK', 'zh>vi', 'gi ← Mandarin j- with Cantonese g- + aa / o',
+     lambda f: f['mi'] == 'j' and f['yi'] == 'g' and f['yr'][:2] in ('aa', 'ok', 'on'), HV('gi')),
+    ('IK', 'zh>vi', 'kh ← Cantonese h- / f- with Mandarin k- / q-', _all(YI('h', 'f'), MI('k', 'q')), HV('kh')),
+    ('IK', 'zh>vi', 'kh ← Taigi kh- (tendency)', NI('kh'), HV('kh')),
+    ('IK', 'vi>zh', 'c / k / q → Mandarin g j k q', HV('c'), MI('g', 'j', 'k', 'q')),
+    ('IK', 'vi>zh', 'c / k / q → Taigi k-', HV('c'), NI('k')),
+    ('IK', 'vi>zh', 'kh → Mandarin k- or q-', HV('kh'), MI('k', 'q')),
+    ('IK', 'vi>zh', 'kh → Taigi kh-', HV('kh'), NI('kh')),
+    ('IK', 'vi>zh', 'gi → Mandarin j- with Cantonese g-', HV('gi'), _all(MI('j'), YI('g'))),
+    ('IG', 'zh>vi', 'ng / ngh ← Taigi g-', NI('g'), HV('ng')),
+    ('IG', 'vi>zh', 'ng / ngh → Taigi g-', HV('ng'), NI('g')),
+    ('IH', 'zh>vi', 'h ← Mandarin h- / x- with Cantonese h- / f- / w- / j-',
+     _all(MI('h', 'x'), YI('h', 'f', 'w', 'j')), HV('h')),
+    ('IH', 'zh>vi', 'Taigi h- → h, but ph when Mandarin has f-', _all(NI('h'), _known('mi')),
+     lambda f: f['hi'] == ('ph' if f['mi'] == 'f' else 'h')),
+    ('IH', 'vi>zh', 'h → Mandarin h- or x-', HV('h'), MI('h', 'x')),
+    ('IH', 'vi>zh', 'h → Taigi h-', HV('h'), NI('h')),
+    # 影云以日: no initial, v, d, nh
+    ('IY', 'zh>vi', 'nh ← Mandarin r-', MI('r'), HV('nh')),
+    ('IY', 'vi>zh', 'nh → Mandarin r- (tendency)', HV('nh'), MI('r')),
+    ('IY', 'vi>zh', 'nh → Mandarin r-, y- or none', HV('nh'), MI('r', 'y', '')),
+    ('IY', 'zh>vi', 'nh ← Taigi j-', NI('j'), HV('nh')),
+    ('IY', 'zh>vi', 'd ← Mandarin y- with Cantonese j- in a low tone (4 5 6), Taigi none (tendency)',
+     _all(MI('y'), YI('j'), YT(4, 5, 6), NI('')), HV('d')),
+    ('IY', 'vi>zh', 'd → Mandarin y- (tendency, at the threshold)', HV('d'), MI('y')),
+    ('IY', 'vi>zh', 'd → Cantonese j- (tendency)', HV('d'), YI('j')),
+    ('IY', 'zh>vi', 'no initial ← Mandarin y- / w- / none with Cantonese j- / w- / none in tone 1 2 3',
+     _all(MI('y', 'w', ''), YI('j', 'w', ''), YT(1, 2, 3)), HV('')),
+    ('IY', 'vi>zh', 'no initial → Mandarin y-, w- or none', HV(''), MI('y', 'w', '')),
+    ('IY', 'vi>zh', 'no Hán-Việt syllable starts with r', lambda f: True, lambda f: f['hi'] != 'r'),
+    # aspiration, across the classes
+    ('IA', 'zh>vi', 'Cantonese p t k kw c in tone 4 / 5 → b đ c t tr ch gi (old voiced)',
+     _all(YI('p', 't', 'k', 'kw', 'c'), YT(4, 5)), HV(*UNASP)),
+    ('IA', 'zh>vi', 'Mandarin p t k q c ch in tone 2 → b đ c t tr ch gi (old voiced)',
+     _all(MI('p', 't', 'k', 'q', 'c', 'ch'), MT(2)), HV(*UNASP)),
+    ('IA', 'zh>vi', 'Mandarin p t k q c ch in tones 1 3 4 → ph th kh x s',
+     _all(MI('p', 't', 'k', 'q', 'c', 'ch'), MT(1, 3, 4)), HV(*ASP)),
+    # spelling what Hà Nội merges
+    ('Z1', 'spell', 'd or gi: gi when Cantonese has g-', *_spell(('gi', 'd'), YI('g'))),
+    ('Z1', 'spell', 'd or gi: gi when Mandarin has j-', *_spell(('gi', 'd'), MI('j'))),
+    ('Z2', 'spell', 'tr or ch: ch when Taigi has ts-', *_spell(('ch', 'tr'), NI('ts'))),
+    ('Z3', 'spell', 's or x: x when Mandarin has ch- (tendency)', *_spell(('x', 's'), MI('ch'))),
+    ('Z3', 'spell', 's or x: x when Taigi has tsh- (tendency)', *_spell(('x', 's'), NI('tsh'))),
+    # the first proposal's initials, measured and dropped
+    ('I1x', 'drop', 'kh ← Cantonese h-', YI('h'), HV('kh')),
+    ('I2x', 'drop', 'ph ← Cantonese f-', YI('f'), HV('ph')),
+    ('I3x', 'drop', 'v ← Cantonese m-', YI('m'), HV('v')),
+    ('I3x', 'drop', 'v ← Mandarin w-', MI('w'), HV('v')),
+    ('I4x', 'drop', 'gi ← Mandarin j-', MI('j'), HV('gi')),
+    ('I5x', 'drop', 'tr or ch: tr when Taigi t-, ch when ts- (replaced by Z2)', lambda f: f['hi'] in ('tr', 'ch') and f['ni'] in ('t', 'ts'),
+     lambda f: (f['hi'] == 'tr') == (f['ni'] == 't')),
+    ('I6x', 'drop', 's or x: s when Mandarin sh-, x when ch-', lambda f: f['hi'] in ('s', 'x') and f['mi'] in ('sh', 'ch'),
+     lambda f: (f['hi'] == 's') == (f['mi'] == 'sh')),
+    ('I7x', 'drop', 'd ← Mandarin y-', MI('y'), HV('d')),
 ]
 
 
 def measure(fs, show=8):
     out = []
-    for rid, text, cond, pred in RULES:
+    for rid, way, text, cond, pred in RULES:
         hit = tot = 0
         exc = []
         for f in fs:
             try:
                 if not cond(f):
                     continue
+                p = pred(f)
             except (TypeError, AttributeError):     # a feature left undetermined
                 continue
+            if p is None:                           # the prediction's feature is undetermined
+                continue
             tot += 1
-            if pred(f):
+            if p:
                 hit += 1
             else:
                 exc.append(f"{f['ch']} {f['hv']}")
-        out.append((rid, text, hit, tot, exc[:show]))
+        out.append((rid, way, text, hit, tot, exc[:show]))
     return out
+
+
+def kind(way, hit, tot):
+    """How the syllabus may teach a measured rule: 'rule' at 80 % or more, 'tendency' from 60 %, else 'drop'."""
+    if way == 'drop' or not tot:
+        return 'drop'
+    r = hit / tot
+    return 'rule' if r >= 0.795 else 'tendency' if r >= 0.6 else 'drop'
 
 
 def check_examples(path):
@@ -300,9 +408,10 @@ def main():
     fs = [features(d) for d in data]
     words = {w for d in data for w in d['words']}
     print(f'{len(fs)} syllables (character + Hán-Việt reading) of {len(words)} Hán-Việt cards of rank <= {TOP}\n')
-    print('| id | rule | hits / total | % | main exceptions |\n|---|---|---|---|---|')
-    for rid, text, hit, tot, exc in measure(fs):
-        print(f"| {rid} | {text} | {hit} / {tot} | {100 * hit / tot if tot else 0:.0f} | {' '.join(exc)} |")
+    print('| id | direction | rule | hits / total | % | kind | main exceptions |\n|---|---|---|---|---|---|---|')
+    for rid, way, text, hit, tot, exc in measure(fs):
+        print(f"| {rid} | {way} | {text} | {hit} / {tot} | {100 * hit / tot if tot else 0:.0f} | {kind(way, hit, tot)} "
+              f"| {' '.join(exc)} |")
     if '--json' in sys.argv:
         json.dump(data, open(sys.argv[sys.argv.index('--json') + 1], 'w', encoding='utf-8'), ensure_ascii=False)
 
