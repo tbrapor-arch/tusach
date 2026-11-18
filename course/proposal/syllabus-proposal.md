@@ -388,7 +388,7 @@ giờ "hour" is an older reading of 時, whose Hán-Việt reading is thời; O2
 The etymons are not "same word" examples; the Hán-Việt words beside them are:
 <!-- bridge-examples -->
 - O1–O2: 時間 thời gian, 特別 đặc biệt, 共 cộng
-- C4–C6: 員 viên, 會員 hội viên, 士 sĩ, 化 hóa, 現代化 hiện đại hóa, 無 vô, 無數 vô số, 非 phi, 非常 phi thường, 不同 bất đồng
+- C4–C6: 員 viên, 會員 hội viên, 士 sĩ, 化 hóa, 現代化 hiện đại hóa, 無 vô, 無數 vô số, 非 phi, 不同 bất đồng
 <!-- /bridge-examples -->
 
 **Word-building notes** (C1–C24, one per lesson from L34; table in section 8): Hán-Việt order inside a word, native
@@ -410,3 +410,112 @@ the readings nhựt 日, sanh 生, chánh 正).
 
 **French** (decision 7): a line where it helps: loans (cà phê, phim, ga, ô tô, xà phòng: L3, L11, L94), and
 sounds in Lesson 0 (nh = gn, ê = é, ô = eau).
+
+## 8. Lesson by lesson
+
+Bridge ids as in sections 3–7 (B finals, V rhymes, T tones, I initials, Z spelling, O older loans, C word-building,
+FF false friend). Lines from the rule in section 1. New words: native / Hán-Việt / other (older and Western loans);
+L1–13 are word list 2, later lessons are targets for each word list. The same plan is in `course/syllabus.yaml`.
+
+| # | Situation | Grammar | Bridge / false friend | Lines | New: nat / HV / oth |
+|---|---|---|---|---|---|
+| 1 | Hello (Sacha meets chị Lan) | là; tôi / anh / chị / em; ạ, vâng; rất + adjective | — | 7 | 12 / 0 / 3 |
+| 2 | Where are you from? | người + nationality (modifier after the noun); ở đâu; nào; không + verb; cũng | B0 what Hán-Việt is | 7 | 8 / 5 / 2 |
+| 3 | At the café | có … không?; không phải là; muốn; cho tôi …; noun + này; ơi; nhé; và | — | 7 | 10 / 2 / 3 |
+| 4 | At the market | numbers, mươi, nghìn; first classifier quả; bao nhiêu | B1 -p -t -c survive | 7 | 13 / 2 / 1 |
+| 5 | A family photo | của (dropped with family); ai; person term + ấy; mấy … tuổi; đây là | — | 8 | 11 / 4 / 1 |
+| 6 | What time is it? | clock time, rưỡi; đang / sẽ; time words first | B2 -m survives | 8 | 13 / 2 / 1 |
+| 7 | **Review 1** | recap 1–6 | — | 8 | — |
+| 8 | Around Hoàn Kiếm lake | directions; imperatives; rồi "then"; đó; khoảng | B3 -nh / -ch = -ng / -k | 8 | 9 / 5 / 2 |
+| 9 | What is the weather like? | adjective as predicate (no là); rất / lắm / quá / hơi; nhỉ; nhưng | T1 level tones: ngang / huyền; FF thời tiết | 8 | 9 / 4 / 3 |
+| 10 | A bowl of phở | đã … chưa? / rồi / chưa; thêm; nhiều | O1 two layers: giờ and thời | 8 | 13 / 1 / 3 |
+| 11 | Free at the weekend? | days and weeks; bao giờ; hay "or"; với; định + verb; thích | T2 rising tones: hỏi / ngã / nặng; FF tuần | 9 | 10 / 5 / 2 |
+| 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không? | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 4 |
+| 13 | A birthday present | classifier cái; colours; vừa "to fit"; lấy; tặng | T4 checked syllables: sắc / nặng only | 9 | 13 / 3 / 2 |
+| 14 | **Review 2** | recap 8–13 | — | 9 | — |
+| 15 | Which phone is cheaper? | comparison hơn / bằng / nhất | T5 tones heard → Chinese tone | 9 | 11 / 5 / 2 |
+| 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái | IK c / k / q, kh, gi | 9 | 11 / 5 / 2 |
+| 17 | At the bookshop | classifiers quyển, tờ, chiếc, con | IH h and IG ng | 10 | 11 / 5 / 2 |
+| 18 | At the swimming pool | có thể; verb + được; biết + verb | IP b, ph | 10 | 11 / 5 / 2 |
+| 19 | Tea with ông Hùng | ông / bà as "you"; cho "for, to" | IM m, v | 10 | 11 / 5 / 2 |
+| 20 | A day at the office | vừa … vừa; cũng / đều | ID đ, th, n, l; FF đầu tiên | 10 | 11 / 5 / 2 |
+| 21 | **Review 3** | recap 15–20 | — | 10 | — |
+| 22 | At Hà Nội station | thì; khi / lúc | IA aspiration and the old voiced tones; FF bản đồ | 10 | 11 / 5 / 2 |
+| 23 | A room for Thảo | các / những; mọi / mỗi | IS t, th from the old ts- s- series; FF quận | 11 | 11 / 6 / 2 |
+| 24 | Learning to ride a motorbike | direction verbs ra / vào / lên / xuống / về / sang | IR tr, ch | 11 | 11 / 6 / 2 |
+| 25 | Lunch near the office | result complements xong, hết, thấy, được | IR th, s, x | 11 | 11 / 6 / 2 |
+| 26 | Hobbies | đã từng; thường / hay / luôn | IY nh, d, no initial | 11 | 11 / 6 / 2 |
+| 27 | Bà's stories | còn, vẫn, nữa, lại | Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x | 11 | 11 / 6 / 2 |
+| 28 | **Review 4** | recap 22–27 | — | 11 | — |
+| 29 | At the bank | được (good passive) | initials heard → Chinese (recap) | 12 | 11 / 6 / 2 |
+| 30 | A stolen bike | bị and được with an agent | V1 -ương | 12 | 11 / 6 / 2 |
+| 31 | Tết is coming | sắp; wishes with chúc | V2 -iên | 12 | 11 / 6 / 2 |
+| 32 | Tết in anh Minh's village | kinship: nội / ngoại, in-laws | B4 Mandarin -ing → -nh (-ưng, -ăng) | 12 | 11 / 6 / 2 |
+| 33 | The doctor again | nếu … thì; cần | O2 older loans: đọc, được, biết | 12 | 11 / 6 / 2 |
+| 34 | A football match | vì … nên; tại vì | C1 Hán-Việt order inside a word, native order outside | 12 | 10 / 7 / 2 |
+| 35 | **Review 5** | recap 29–34 | — | 13 | — |
+| 36 | The Old Quarter | mà (relative) | C2 Hán-Việt words made in Vietnam | 13 | 10 / 7 / 2 |
+| 37 | Water puppets | để (purpose) | FF chương trình | 13 | 11 / 7 / 2 |
+| 38 | A wedding | tuy … nhưng; formal greetings | C3 surnames: Nguyễn, Trần, Lê, Phạm | 13 | 11 / 7 / 2 |
+| 39 | Looking for a job | rằng (reported speech) | C4 suffixes -viên, -sĩ, -gia | 13 | 11 / 7 / 2 |
+| 40 | A trip to Hạ Long | càng … càng; không những … mà còn | C5 suffixes -học, -hóa | 13 | 11 / 7 / 2 |
+| 41 | Feelings | cảm thấy; emotion words | C6 prefixes bất-, vô-, phi- | 14 | 11 / 7 / 2 |
+| 42 | **Review 6** | recap 36–41 | — | 14 | — |
+| 43 | Ordering online | làm cho / khiến | C7 when the Vietnamese word is not the Mandarin one | 14 | 10 / 8 / 2 |
+| 44 | An argument with Mai | chứ / mà / đâu (contradiction); à | FF thông cảm | 14 | 10 / 8 / 2 |
+| 45 | Making up | apologies by register | FF thực sự | 14 | 10 / 8 / 2 |
+| 46 | At the post office | formal register: quý khách, xin vui lòng | C8 Hán-Việt on signs | 14 | 10 / 8 / 2 |
+| 47 | Floods in the rainy season | khi … thì; sudden events (bỗng, tự nhiên) | — | 15 | 10 / 8 / 2 |
+| 48 | Hà Nội then and now | hồi, ngày xưa: past narration | — | 15 | 10 / 8 / 2 |
+| 49 | **Review 7** | recap 43–48 | — | 15 | — |
+| 50 | Sacha writes an email | written register (second wave starts) | C9 native and Hán-Việt pairs: nhà / gia, nước / quốc | 15 | 10 / 9 / 1 |
+| 51 | Headlines | nominalisers sự / việc / cuộc | C10 reading dense Hán-Việt | 15 | 11 / 9 / 1 |
+| 52 | At Thảo's university | giving reasons: bởi vì, do | FF học sinh / sinh viên, trường | 15 | 10 / 10 / 1 |
+| 53 | Street food | reduplication (đo đỏ, nho nhỏ) | — | 15 | 10 / 10 / 1 |
+| 54 | Mid-Autumn | trong khi; festival words | — | 15 | 10 / 10 / 1 |
+| 55 | The Temple of Literature | four-syllable idioms | C11 thành ngữ from Chinese idioms | 16 | 10 / 10 / 1 |
+| 56 | **Review 8** | recap 50–55 | — | 16 | — |
+| 57 | The news on TV (neutral) | formal political words | C12 the vocabulary of institutions | 16 | 10 / 10 / 1 |
+| 58 | Bác in hospital | chăm sóc; giving care | — | 16 | 10 / 10 / 1 |
+| 59 | Bargaining at Đồng Xuân market | softeners thôi, đi, mà | FF triệu | 16 | 10 / 10 / 1 |
+| 60 | Love songs | pronouns in songs | — | 16 | 10 / 10 / 1 |
+| 61 | Cooking nem | trước khi / sau khi | — | 16 | 10 / 10 / 1 |
+| 62 | Traffic rules | không được / cấm | — | 16 | 10 / 10 / 1 |
+| 63 | **Review 9** | recap 57–62 | — | 16 | — |
+| 64 | Childhood memories | narrative connectors (rồi, sau đó, cuối cùng) | — | 16 | 10 / 10 / 1 |
+| 65 | Prices and the economy | triệu, tỷ; percentages | FF lạm phát | 16 | 10 / 11 / 1 |
+| 66 | A trip to Huế | Central speech (one note) | C13 the court's Hán-Việt | 17 | 10 / 11 / 1 |
+| 67 | A trip to Sài Gòn | Southern words and sounds | C14 Southern readings nhựt, sanh, chánh | 17 | 10 / 11 / 1 |
+| 68 | Sport and health | nên / không nên; advice | — | 17 | 10 / 11 / 1 |
+| 69 | Money worries | dù … vẫn | — | 17 | 10 / 11 / 1 |
+| 70 | **Review 10** | recap 64–69 | — | 17 | — |
+| 71 | The scripts of Vietnamese | chữ Hán, chữ Nôm, quốc ngữ | FF nôm; C15 chữ Nôm (one note) | 17 | 10 / 11 / 1 |
+| 72 | A folk tale | ngày xửa ngày xưa; narrative | — | 17 | 10 / 11 / 1 |
+| 73 | Moving house | nhờ, giúp: asking for help | — | 17 | 10 / 11 / 1 |
+| 74 | Pets | con + noun; animal words | — | 17 | 10 / 11 / 1 |
+| 75 | Thuốc Nam, thuốc Bắc | giá mà (wishes) | C16 medicine words | 18 | 10 / 11 / 1 |
+| 76 | A formal letter | kính gửi; letter formulas | — | 18 | 10 / 11 / 1 |
+| 77 | **Review 11** | recap 71–76 | — | 18 | — |
+| 78 | A typhoon day off | bị / được with weather | — | 18 | 10 / 11 / 1 |
+| 79 | Family conflict | phải / cần / nên: nuances | — | 18 | 10 / 12 / 1 |
+| 80 | Science and technology | definitions: được gọi là | C17 science words | 18 | 10 / 12 / 1 |
+| 81 | The environment | cause and effect: do … nên, dẫn đến | — | 18 | 10 / 12 / 1 |
+| 82 | Law and rights | theo; conditions in writing | C18 law words | 18 | 10 / 12 / 1 |
+| 83 | At the pagoda | respectful speech | C19 Buddhist words | 18 | 10 / 12 / 1 |
+| 84 | **Review 12** | recap 78–83 | — | 18 | — |
+| 85 | History: Bạch Đằng | dates and narration in writing | C20 history words | 18 | 10 / 12 / 1 |
+| 86 | Literature: Truyện Kiều | verse word order | C21 literary Hán-Việt | 19 | 10 / 12 / 1 |
+| 87 | Proverbs (tục ngữ) | parallel structures | C22 native and Hán-Việt proverbs | 19 | 10 / 12 / 1 |
+| 88 | A job interview | formal self-presentation | — | 19 | 10 / 12 / 1 |
+| 89 | A TV interview | reporting: theo …, cho biết | — | 19 | 10 / 12 / 1 |
+| 90 | City or countryside? | arguing a point: một mặt … mặt khác | — | 19 | 10 / 12 / 1 |
+| 91 | **Review 13** | recap 85–90 | — | 19 | — |
+| 92 | Heritage and tourism | được coi là; descriptions | — | 19 | 10 / 12 / 1 |
+| 93 | A hospital visit | symptoms and treatment | C23 medicine words 2 | 19 | 10 / 13 / 1 |
+| 94 | Việt kiều in France | French loans (ga, ô tô, xà phòng) | C24 French loans beside Hán-Việt | 19 | 10 / 13 / 1 |
+| 95 | Social media | colloquial written style | — | 20 | 10 / 13 / 1 |
+| 96 | Weddings and funerals | ritual formulas | FF nghĩa trang | 20 | 10 / 13 / 1 |
+| 97 | Sacha's year in Hà Nội | looking back: đã từng, chưa bao giờ | — | 20 | 10 / 13 / 1 |
+| 98 | **Review 14** | recap 92–97 | — | 20 | — |
+| 99 | A farewell speech | formal speech | — | 20 | 10 / 13 / 1 |
+| 100 | Goodbye, Hà Nội | everything: a free conversation | — | 20 | 10 / 13 / 1 |

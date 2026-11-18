@@ -1,8 +1,111 @@
 # The course plan. No lesson may be drafted before the owner approves the syllabus AND the first word list
 # (fixed decision, 17 Nov 2026): tools/lint.py refuses any file in course/lessons/ while either is not approved.
-# Proposal to write: handover section 7 (about 100 lessons, review every 7th, a bridge thread, native words first in
-# the dialogues, an early pronouns and kinship strand). Pronunciation: Northern (Hanoi). Lesson language: English.
+# Proposal: course/proposal/syllabus-proposal.md (second version, 18 Nov 2026, NOT approved); word list:
+# course/proposal/wordlist-2.tsv (lessons 1-13). Pronunciation: Northern (Hà Nội). Lesson language: English.
+# lessons: the plan lint checks a written lesson against (lines; new_words native / hv, where native counts every
+# word that is not Hán-Việt, older and Western loans included). L1-13 new_words are word list 2's real counts.
 approved:
   syllabus: null        # e.g. {by: owner, date: 2026-11-20}
-  word_list: null       # e.g. {by: owner, date: 2026-11-20, file: course/wordlist.tsv}
-lessons: []             # [{n: 1, en: planned title, vi: ...}], shown greyed on the lessons home until written
+  word_list: null       # e.g. {by: owner, date: 2026-11-20, file: course/proposal/wordlist-2.tsv}
+lessons:
+  - {n: 1, en: "Hello (Sacha meets chị Lan)", vi: "Chào chị", grammar: "là; tôi / anh / chị / em; ạ, vâng; rất + adjective", strand: "tôi, anh, chị, em; the switch tôi → em", lines: 7, new_words: {native: 15, hv: 0}}
+  - {n: 2, en: "Where are you from?", vi: "Anh là người nước nào?", grammar: "người + nationality (modifier after the noun); ở đâu; nào; không + verb; cũng", bridge: "B0 what Hán-Việt is", lines: 7, new_words: {native: 10, hv: 5}}
+  - {n: 3, en: "At the café", vi: "Ở quán cà phê", grammar: "có … không?; không phải là; muốn; cho tôi …; noun + này; ơi; nhé; và", strand: "em to the waiter", lines: 7, new_words: {native: 13, hv: 2}}
+  - {n: 4, en: "At the market", vi: "Bao nhiêu tiền?", grammar: "numbers, mươi, nghìn; first classifier quả; bao nhiêu", bridge: "B1 -p -t -c survive", lines: 7, new_words: {native: 14, hv: 2}}
+  - {n: 5, en: "A family photo", vi: "Ảnh gia đình", grammar: "của (dropped with family); ai; person term + ấy; mấy … tuổi; đây là", strand: "anh ấy, chị ấy; family nouns", lines: 8, new_words: {native: 12, hv: 4}}
+  - {n: 6, en: "What time is it?", vi: "Bây giờ là mấy giờ?", grammar: "clock time, rưỡi; đang / sẽ; time words first", bridge: "B2 -m survives", lines: 8, new_words: {native: 14, hv: 2}}
+  - {n: 7, en: "Review 1", review: true, grammar: "recap 1–6", lines: 8, new_words: {native: 0, hv: 0}}
+  - {n: 8, en: "Around Hoàn Kiếm lake", vi: "Hồ Hoàn Kiếm", grammar: "directions; imperatives; rồi \"then\"; đó; khoảng", bridge: "B3 -nh / -ch = -ng / -k", lines: 8, new_words: {native: 11, hv: 5}}
+  - {n: 9, en: "What is the weather like?", vi: "Trời hôm nay thế nào?", grammar: "adjective as predicate (no là); rất / lắm / quá / hơi; nhỉ; nhưng", bridge: "T1 level tones: ngang / huyền; FF thời tiết", lines: 8, new_words: {native: 12, hv: 4}}
+  - {n: 10, en: "A bowl of phở", vi: "Một bát phở", grammar: "đã … chưa? / rồi / chưa; thêm; nhiều", bridge: "O1 two layers: giờ and thời", lines: 8, new_words: {native: 16, hv: 1}}
+  - {n: 11, en: "Free at the weekend?", vi: "Cuối tuần bạn có rảnh không?", grammar: "days and weeks; bao giờ; hay \"or\"; với; định + verb; thích", bridge: "T2 rising tones: hỏi / ngã / nặng; FF tuần", strand: "bạn, the neutral \"you\" (Mai)", lines: 9, new_words: {native: 12, hv: 5}}
+  - {n: 12, en: "Sacha has a cold", vi: "Cháu bị cảm", grammar: "bị (something bad); nên / phải; có khỏe không?", bridge: "T3 departing tones: sắc / nặng; FF bác sĩ", strand: "bác / cháu (Lan's mother)", lines: 9, new_words: {native: 13, hv: 4}}
+  - {n: 13, en: "A birthday present", vi: "Quà sinh nhật", grammar: "classifier cái; colours; vừa \"to fit\"; lấy; tặng", bridge: "T4 checked syllables: sắc / nặng only", lines: 9, new_words: {native: 15, hv: 3}}
+  - {n: 14, en: "Review 2", review: true, grammar: "recap 8–13", lines: 9, new_words: {native: 0, hv: 0}}
+  - {n: 15, en: "Which phone is cheaper?", grammar: "comparison hơn / bằng / nhất", bridge: "T5 tones heard → Chinese tone", lines: 9, new_words: {native: 13, hv: 5}}
+  - {n: 16, en: "Dinner with the family", grammar: "chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái", bridge: "IK c / k / q, kh, gi", strand: "chúng tôi / chúng ta, like Taigi 阮 / 咱", lines: 9, new_words: {native: 13, hv: 5}}
+  - {n: 17, en: "At the bookshop", grammar: "classifiers quyển, tờ, chiếc, con", bridge: "IH h and IG ng", lines: 10, new_words: {native: 13, hv: 5}}
+  - {n: 18, en: "At the swimming pool", grammar: "có thể; verb + được; biết + verb", bridge: "IP b, ph", lines: 10, new_words: {native: 13, hv: 5}}
+  - {n: 19, en: "Tea with ông Hùng", grammar: "ông / bà as \"you\"; cho \"for, to\"", bridge: "IM m, v", strand: "ông, bà; cô, chú (Bin and Na call Sacha chú)", lines: 10, new_words: {native: 13, hv: 5}}
+  - {n: 20, en: "A day at the office", grammar: "vừa … vừa; cũng / đều", bridge: "ID đ, th, n, l; FF đầu tiên", lines: 10, new_words: {native: 13, hv: 5}}
+  - {n: 21, en: "Review 3", review: true, grammar: "recap 15–20", lines: 10, new_words: {native: 0, hv: 0}}
+  - {n: 22, en: "At Hà Nội station", grammar: "thì; khi / lúc", bridge: "IA aspiration and the old voiced tones; FF bản đồ", lines: 10, new_words: {native: 13, hv: 5}}
+  - {n: 23, en: "A room for Thảo", grammar: "các / những; mọi / mỗi", bridge: "IS t, th from the old ts- s- series; FF quận", lines: 11, new_words: {native: 13, hv: 6}}
+  - {n: 24, en: "Learning to ride a motorbike", grammar: "direction verbs ra / vào / lên / xuống / về / sang", bridge: "IR tr, ch", lines: 11, new_words: {native: 13, hv: 6}}
+  - {n: 25, en: "Lunch near the office", grammar: "result complements xong, hết, thấy, được", bridge: "IR th, s, x", lines: 11, new_words: {native: 13, hv: 6}}
+  - {n: 26, en: "Hobbies", grammar: "đã từng; thường / hay / luôn", bridge: "IY nh, d, no initial", lines: 11, new_words: {native: 13, hv: 6}}
+  - {n: 27, en: "Bà's stories", grammar: "còn, vẫn, nữa, lại", bridge: "Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x", lines: 11, new_words: {native: 13, hv: 6}}
+  - {n: 28, en: "Review 4", review: true, grammar: "recap 22–27", lines: 11, new_words: {native: 0, hv: 0}}
+  - {n: 29, en: "At the bank", grammar: "được (good passive)", bridge: "initials heard → Chinese (recap)", lines: 12, new_words: {native: 13, hv: 6}}
+  - {n: 30, en: "A stolen bike", grammar: "bị and được with an agent", bridge: "V1 -ương", lines: 12, new_words: {native: 13, hv: 6}}
+  - {n: 31, en: "Tết is coming", grammar: "sắp; wishes with chúc", bridge: "V2 -iên", lines: 12, new_words: {native: 13, hv: 6}}
+  - {n: 32, en: "Tết in anh Minh's village", grammar: "kinship: nội / ngoại, in-laws", bridge: "B4 Mandarin -ing → -nh (-ưng, -ăng)", strand: "in-laws; nội / ngoại", lines: 12, new_words: {native: 13, hv: 6}}
+  - {n: 33, en: "The doctor again", grammar: "nếu … thì; cần", bridge: "O2 older loans: đọc, được, biết", lines: 12, new_words: {native: 13, hv: 6}}
+  - {n: 34, en: "A football match", grammar: "vì … nên; tại vì", bridge: "C1 Hán-Việt order inside a word, native order outside", lines: 12, new_words: {native: 12, hv: 7}}
+  - {n: 35, en: "Review 5", review: true, grammar: "recap 29–34", lines: 13, new_words: {native: 0, hv: 0}}
+  - {n: 36, en: "The Old Quarter", grammar: "mà (relative)", bridge: "C2 Hán-Việt words made in Vietnam", lines: 13, new_words: {native: 12, hv: 7}}
+  - {n: 37, en: "Water puppets", grammar: "để (purpose)", bridge: "FF chương trình", lines: 13, new_words: {native: 13, hv: 7}}
+  - {n: 38, en: "A wedding", grammar: "tuy … nhưng; formal greetings", bridge: "C3 surnames: Nguyễn, Trần, Lê, Phạm", lines: 13, new_words: {native: 13, hv: 7}}
+  - {n: 39, en: "Looking for a job", grammar: "rằng (reported speech)", bridge: "C4 suffixes -viên, -sĩ, -gia", lines: 13, new_words: {native: 13, hv: 7}}
+  - {n: 40, en: "A trip to Hạ Long", grammar: "càng … càng; không những … mà còn", bridge: "C5 suffixes -học, -hóa", lines: 13, new_words: {native: 13, hv: 7}}
+  - {n: 41, en: "Feelings", grammar: "cảm thấy; emotion words", bridge: "C6 prefixes bất-, vô-, phi-", lines: 14, new_words: {native: 13, hv: 7}}
+  - {n: 42, en: "Review 6", review: true, grammar: "recap 36–41", lines: 14, new_words: {native: 0, hv: 0}}
+  - {n: 43, en: "Ordering online", grammar: "làm cho / khiến", bridge: "C7 when the Vietnamese word is not the Mandarin one", lines: 14, new_words: {native: 12, hv: 8}}
+  - {n: 44, en: "An argument with Mai", grammar: "chứ / mà / đâu (contradiction); à", bridge: "FF thông cảm", strand: "mình; cậu / tớ; mày / tao to recognise only", lines: 14, new_words: {native: 12, hv: 8}}
+  - {n: 45, en: "Making up", grammar: "apologies by register", bridge: "FF thực sự", lines: 14, new_words: {native: 12, hv: 8}}
+  - {n: 46, en: "At the post office", grammar: "formal register: quý khách, xin vui lòng", bridge: "C8 Hán-Việt on signs", lines: 14, new_words: {native: 12, hv: 8}}
+  - {n: 47, en: "Floods in the rainy season", grammar: "khi … thì; sudden events (bỗng, tự nhiên)", lines: 15, new_words: {native: 12, hv: 8}}
+  - {n: 48, en: "Hà Nội then and now", grammar: "hồi, ngày xưa: past narration", lines: 15, new_words: {native: 12, hv: 8}}
+  - {n: 49, en: "Review 7", review: true, grammar: "recap 43–48", lines: 15, new_words: {native: 0, hv: 0}}
+  - {n: 50, en: "Sacha writes an email", grammar: "written register (second wave starts)", bridge: "C9 native and Hán-Việt pairs: nhà / gia, nước / quốc", lines: 15, new_words: {native: 11, hv: 9}}
+  - {n: 51, en: "Headlines", grammar: "nominalisers sự / việc / cuộc", bridge: "C10 reading dense Hán-Việt", lines: 15, new_words: {native: 12, hv: 9}}
+  - {n: 52, en: "At Thảo's university", grammar: "giving reasons: bởi vì, do", bridge: "FF học sinh / sinh viên, trường", lines: 15, new_words: {native: 11, hv: 10}}
+  - {n: 53, en: "Street food", grammar: "reduplication (đo đỏ, nho nhỏ)", lines: 15, new_words: {native: 11, hv: 10}}
+  - {n: 54, en: "Mid-Autumn", grammar: "trong khi; festival words", lines: 15, new_words: {native: 11, hv: 10}}
+  - {n: 55, en: "The Temple of Literature", grammar: "four-syllable idioms", bridge: "C11 thành ngữ from Chinese idioms", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 56, en: "Review 8", review: true, grammar: "recap 50–55", lines: 16, new_words: {native: 0, hv: 0}}
+  - {n: 57, en: "The news on TV (neutral)", grammar: "formal political words", bridge: "C12 the vocabulary of institutions", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 58, en: "Bác in hospital", grammar: "chăm sóc; giving care", strand: "con cháu, họ hàng", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 59, en: "Bargaining at Đồng Xuân market", grammar: "softeners thôi, đi, mà", bridge: "FF triệu", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 60, en: "Love songs", grammar: "pronouns in songs", strand: "anh / em between lovers", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 61, en: "Cooking nem", grammar: "trước khi / sau khi", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 62, en: "Traffic rules", grammar: "không được / cấm", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 63, en: "Review 9", review: true, grammar: "recap 57–62", lines: 16, new_words: {native: 0, hv: 0}}
+  - {n: 64, en: "Childhood memories", grammar: "narrative connectors (rồi, sau đó, cuối cùng)", lines: 16, new_words: {native: 11, hv: 10}}
+  - {n: 65, en: "Prices and the economy", grammar: "triệu, tỷ; percentages", bridge: "FF lạm phát", lines: 16, new_words: {native: 11, hv: 11}}
+  - {n: 66, en: "A trip to Huế", grammar: "Central speech (one note)", bridge: "C13 the court's Hán-Việt", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 67, en: "A trip to Sài Gòn", grammar: "Southern words and sounds", bridge: "C14 Southern readings nhựt, sanh, chánh", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 68, en: "Sport and health", grammar: "nên / không nên; advice", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 69, en: "Money worries", grammar: "dù … vẫn", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 70, en: "Review 10", review: true, grammar: "recap 64–69", lines: 17, new_words: {native: 0, hv: 0}}
+  - {n: 71, en: "The scripts of Vietnamese", grammar: "chữ Hán, chữ Nôm, quốc ngữ", bridge: "FF nôm; C15 chữ Nôm (one note)", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 72, en: "A folk tale", grammar: "ngày xửa ngày xưa; narrative", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 73, en: "Moving house", grammar: "nhờ, giúp: asking for help", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 74, en: "Pets", grammar: "con + noun; animal words", lines: 17, new_words: {native: 11, hv: 11}}
+  - {n: 75, en: "Thuốc Nam, thuốc Bắc", grammar: "giá mà (wishes)", bridge: "C16 medicine words", lines: 18, new_words: {native: 11, hv: 11}}
+  - {n: 76, en: "A formal letter", grammar: "kính gửi; letter formulas", lines: 18, new_words: {native: 11, hv: 11}}
+  - {n: 77, en: "Review 11", review: true, grammar: "recap 71–76", lines: 18, new_words: {native: 0, hv: 0}}
+  - {n: 78, en: "A typhoon day off", grammar: "bị / được with weather", lines: 18, new_words: {native: 11, hv: 11}}
+  - {n: 79, en: "Family conflict", grammar: "phải / cần / nên: nuances", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 80, en: "Science and technology", grammar: "definitions: được gọi là", bridge: "C17 science words", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 81, en: "The environment", grammar: "cause and effect: do … nên, dẫn đến", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 82, en: "Law and rights", grammar: "theo; conditions in writing", bridge: "C18 law words", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 83, en: "At the pagoda", grammar: "respectful speech", bridge: "C19 Buddhist words", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 84, en: "Review 12", review: true, grammar: "recap 78–83", lines: 18, new_words: {native: 0, hv: 0}}
+  - {n: 85, en: "History: Bạch Đằng", grammar: "dates and narration in writing", bridge: "C20 history words", lines: 18, new_words: {native: 11, hv: 12}}
+  - {n: 86, en: "Literature: Truyện Kiều", grammar: "verse word order", bridge: "C21 literary Hán-Việt", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 87, en: "Proverbs (tục ngữ)", grammar: "parallel structures", bridge: "C22 native and Hán-Việt proverbs", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 88, en: "A job interview", grammar: "formal self-presentation", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 89, en: "A TV interview", grammar: "reporting: theo …, cho biết", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 90, en: "City or countryside?", grammar: "arguing a point: một mặt … mặt khác", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 91, en: "Review 13", review: true, grammar: "recap 85–90", lines: 19, new_words: {native: 0, hv: 0}}
+  - {n: 92, en: "Heritage and tourism", grammar: "được coi là; descriptions", lines: 19, new_words: {native: 11, hv: 12}}
+  - {n: 93, en: "A hospital visit", grammar: "symptoms and treatment", bridge: "C23 medicine words 2", lines: 19, new_words: {native: 11, hv: 13}}
+  - {n: 94, en: "Việt kiều in France", grammar: "French loans (ga, ô tô, xà phòng)", bridge: "C24 French loans beside Hán-Việt", lines: 19, new_words: {native: 11, hv: 13}}
+  - {n: 95, en: "Social media", grammar: "colloquial written style", lines: 20, new_words: {native: 11, hv: 13}}
+  - {n: 96, en: "Weddings and funerals", grammar: "ritual formulas", bridge: "FF nghĩa trang", lines: 20, new_words: {native: 11, hv: 13}}
+  - {n: 97, en: "Sacha's year in Hà Nội", grammar: "looking back: đã từng, chưa bao giờ", lines: 20, new_words: {native: 11, hv: 13}}
+  - {n: 98, en: "Review 14", review: true, grammar: "recap 92–97", lines: 20, new_words: {native: 0, hv: 0}}
+  - {n: 99, en: "A farewell speech", grammar: "formal speech", lines: 20, new_words: {native: 11, hv: 13}}
+  - {n: 100, en: "Goodbye, Hà Nội", grammar: "everything: a free conversation", strand: "every person term of the cast", lines: 20, new_words: {native: 11, hv: 13}}
+
