@@ -13,6 +13,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import bridge  # noqa: E402
+import cards  # noqa: E402
 import vi  # noqa: E402
 
 args = sys.argv[1:]
@@ -40,9 +41,9 @@ for eid, src, w, en, chars, label, rank in rows:
     if chars:
         j = bridge.join(con, chars)
         print(f'    Hán-Việt: {j["hv"]}')
-        for lang in bridge.LANGS:
+        for lang, name, _ in cards.DISPLAY_LANGS:
             if j[lang]:
-                print(f'    {dict(yue="Cantonese", nan="Taigi", cmn="Mandarin")[lang]}: {j[lang]}'
+                print(f'    {name}: {j[lang]}'
                       + (' (by character)' if j[lang + "_by"] == 'char' and len(chars) > 1 else ''))
     for v, e in con.execute('SELECT vi, en FROM example WHERE entry_id = ? LIMIT 2', (eid,)):
         print(f'    e.g. {v} / {e}')

@@ -264,6 +264,7 @@ kbd { font-family: var(--f-ui); font-size: .7rem; font-weight: 700; border: 1px 
 .zhgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; }
 .zhgrid div { background: var(--surface); border: var(--border-soft); border-radius: var(--r); padding: .35rem .5rem; display: flex; flex-direction: column; min-width: 0; }
 .zhgrid small { font-family: var(--f-ui); font-size: .68rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--sub); }
+.zhgrid small .rom, .vtable th .rom { display: block; font-weight: 600; letter-spacing: 0; text-transform: none; }
 .zhgrid b { font-family: var(--f-vi); font-size: 1.05rem; color: var(--brand); overflow-wrap: anywhere; }
 .wc-ex .v { font-size: 1.15rem; } .wc-ex .e { color: var(--sub); }
 .parts { display: flex; gap: .4rem; flex-wrap: wrap; }
@@ -587,8 +588,8 @@ function wireExercises(ex, root) {
 }
 
 // ---------- word card, top to bottom (handover section 5): the word and its audio; English; for a Hán-Việt word the
-// characters, then Cantonese (Jyutping), Taigi (Tâi-lô: the literary reading, the colloquial word reading apart) and
-// Mandarin (pinyin); the label; an example; other words of the same spelling (other etymologies)
+// characters, then Mandarin (pinyin), Cantonese (Jyutping) and Taigi (Tâi-lô: the literary reading, the colloquial
+// word reading apart), in the order of DATA.zh; the label; an example; other words of the same spelling (other etymologies)
 function enSrc(c) {
   const s = c.en_src || '';
   if (s === 'course') return 'Written for the course · not checked by a native speaker';
@@ -596,6 +597,12 @@ function enSrc(c) {
   if (s.startsWith('dict:')) return s.slice(5) === 'fixture' ? 'Test fixture' : 'Dictionary: ' + esc(s.slice(5));
   if (s === 'parts') return 'Automatic: from its syllables';
   return '';
+}
+// the Chinese readings in display order (tools/cards.py DISPLAY_LANGS: Mandarin first), each labelled with its
+// language and romanisation so a first-time reader sees which is which
+function zhCols(c) {
+  return (DATA.zh || [['cmn', 'Mandarin', 'pinyin'], ['yue', 'Cantonese', 'Jyutping'], ['nan', 'Taigi', 'Tâi-lô, literary']])
+    .map(([k, lang, rom]) => [k, `${lang} <span class="rom">${k === 'nan' && c && c.nan_layer === 'unmarked' ? 'Tâi-lô, layer not marked by the MOE' : rom}</span>`]);
 }
 function openCard(id, w) {
   const c = id ? DATA.dict[id] : null, sh = $('#sheet');
@@ -606,7 +613,7 @@ function openCard(id, w) {
     const lk = listHere(), onL = inList(lk, id), alsoL = Object.keys(lists).filter(k => k !== lk && inList(k, id));
     const addBtn = `<button class="wc-add ${onL ? 'on' : ''}" id="add-card" data-list="${esc(lk)}" aria-pressed="${onL}" aria-label="${onL ? `In ${esc(listTitle(lk))}: tap to remove` : `Add to ${esc(listTitle(lk))}`}"><svg viewBox="0 0 24 24" fill="${onL ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/></svg><span>${esc(listTitle(lk))}</span></button>`;
     const audio = c.name ? '' : c.audio ? `<button class="btn small line wc-play" id="play" aria-label="Play the recording">▶ Listen</button>` : `<button class="btn small line wc-play" disabled title="No recording source yet">▶ No recording yet</button>`;
-    const zh = [['yue', 'Cantonese'], ['nan', c.nan_layer === 'unmarked' ? 'Taigi (layer not marked by the MOE)' : 'Taigi (literary)'], ['cmn', 'Mandarin']];
+    const zh = zhCols(c);
     sh.innerHTML = top(c.w, audio, addBtn) + `
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>
@@ -798,8 +805,8 @@ function showBridge() {
   const ids = DATA.bridge.filter(id => DATA.dict[id]), m = $('#main');
   m.innerHTML = `<div class="col">${pracHead('bridge', 'Hán-Việt words and the Chinese you already know')}
     <div class="banner">The sound-correspondence drills are not built yet. Readings marked * are built character by character (the source lacks the whole word).</div>
-    ${ids.length ? `<div class="vwrap"><table class="vtable"><thead><tr><th>Word</th><th>Chữ Hán</th><th>Cantonese</th><th>Taigi (literary)</th><th>Mandarin</th></tr></thead><tbody>
-      ${ids.map(id => { const c = DATA.dict[id]; return `<tr data-word="${esc(id)}" tabindex="0"><td class="vw">${esc(c.w)}${c.fixture ? ' <span class="pill p-fx">fixture</span>' : ''}</td><td class="vh">${esc(c.chars)}</td>${['yue', 'nan', 'cmn'].map(k => `<td class="vr">${esc(c[k] || '')}${(c.by_char || []).includes(k) ? '*' : ''}</td>`).join('')}</tr>`; }).join('')}</tbody></table></div>`
+    ${ids.length ? `<div class="vwrap"><table class="vtable"><thead><tr><th>Word</th><th>Chữ Hán</th>${zhCols(null).map(([, t]) => `<th>${t}</th>`).join('')}</tr></thead><tbody>
+      ${ids.map(id => { const c = DATA.dict[id]; return `<tr data-word="${esc(id)}" tabindex="0"><td class="vw">${esc(c.w)}${c.fixture ? ' <span class="pill p-fx">fixture</span>' : ''}</td><td class="vh">${esc(c.chars)}</td>${zhCols(null).map(([k]) => `<td class="vr">${esc(c[k] || '')}${(c.by_char || []).includes(k) ? '*' : ''}</td>`).join('')}</tr>`; }).join('')}</tbody></table></div>`
       : '<p class="sub">No Hán-Việt word in the cards yet.</p>'}</div>`;
   wireGo(m);
   $$('[data-word]', m).forEach(r => { r.onclick = () => openCard(r.dataset.word); r.onkeydown = e => { if (e.key === 'Enter') openCard(r.dataset.word); }; });

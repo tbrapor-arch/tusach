@@ -8,7 +8,7 @@ contradicts tests/golden/cards.tsv, or when the dictionary labels contradict tes
 tests/golden/cards.tsv (review 3, finding 7): a REVIEWED SNAPSHOT of what the learner sees on the cards of every
 course lexicon row (tagged and untagged ids), every word of the draft word list (course/syllabus.yaml draft) and the
 300 most frequent words: the English, the label, the characters, the readings in display order (Hán-Việt per
-character, Cantonese, Taigi literary and its layer, Taigi colloquial, Mandarin), the older loan's etymon, the
+character, Mandarin, Cantonese, Taigi literary and its layer, Taigi colloquial), the older loan's etymon, the
 dictionary etymology used, the example text and its source, the usage and false-friend notes. It protects what the
 lexicon does NOT state: a change of a dictionary rule, a reading order or an example filter that alters any of these
 fails `make test` until the diff is read and the snapshot rewritten (--write). Generated from the cards and read by
@@ -30,8 +30,11 @@ import vi  # noqa: E402
 
 GOLDEN = os.path.join(ROOT, 'tests/golden/cards.tsv')
 SAMPLE = os.path.join(ROOT, 'tests/golden/opaque-sample.tsv')
-COLS = ('id', 'en', 'label', 'chars', 'hv', 'yue', 'nan', 'nan_layer', 'nan_coll', 'cmn', 'etymon', 'ety', 'ex', 'ex_src',
-        'use', 'ff')
+# the readings in the order the learner sees them (cards.DISPLAY_LANGS: Mandarin first, owner 19 Nov 2026); Taigi's
+# layer and colloquial reading follow its literary one
+COLS = (('id', 'en', 'label', 'chars', 'hv')
+        + tuple(x for k, _, _ in cards.DISPLAY_LANGS for x in ((k, 'nan_layer', 'nan_coll') if k == 'nan' else (k,)))
+        + ('etymon', 'ety', 'ex', 'ex_src', 'use', 'ff'))
 TOP = 300
 
 
@@ -81,12 +84,17 @@ def row(cid):
 
 
 def read(path=GOLDEN):
-    out = []
+    """The snapshot's rows, by its own header; a header that is not COLS (a changed display order) is an error."""
+    out, head = [], None
     for line in open(path, encoding='utf-8'):
         if line.startswith('#') or not line.strip():
             continue
         p = line.rstrip('\n').split('\t')
         if p[0] == 'id':
+            head = tuple(p)
+            if head != COLS:
+                raise SystemExit(f'{path}: columns {" ".join(head)} are not the display order {" ".join(COLS)}: '
+                                 'tools/test_golden.py --write, then read the diff')
             continue
         out.append(dict(zip(COLS, p + [''] * (len(COLS) - len(p)))))
     return out

@@ -145,6 +145,7 @@ for L in lessons:
 
 syllabus = course.syllabus()
 data = {'lessons': lessons, 'dict': dictionary, 'syllabus': syllabus.get('lessons') or [], 'fixture': fixture_build,
+        'zh': [list(x) for x in cards.DISPLAY_LANGS],
         'bridge': sorted(i for i, c in dictionary.items() if c.get('chars')), 'recorded': n_rec,
         'built': datetime.date.today().isoformat(), 'missing': MISSING}
 n_letters = check_font([L['title']['vi'] for L in lessons] + [ln['vi'] for L in lessons for ln in L['lines']]

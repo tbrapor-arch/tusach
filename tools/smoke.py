@@ -175,7 +175,16 @@ with sync_playwright() as pw:
         if not page.evaluate("!!document.querySelector('#sheet.open .wc-chars')"):
             p('bridge: a Hán-Việt card shows no characters')
         if page.evaluate("[...document.querySelectorAll('#sheet.open .zhgrid b')].length") != 3:
-            p('bridge: the card does not show Cantonese, Taigi and Mandarin side by side')
+            p('bridge: the card does not show Mandarin, Cantonese and Taigi side by side')
+        # Mandarin first, each reading labelled with its language and romanisation (owner, 19 Nov 2026)
+        labels = page.evaluate("[...document.querySelectorAll('#sheet.open .zhgrid small')].map(s => s.textContent)")
+        if not (len(labels) >= 3 and labels[0].startswith('Mandarin') and 'pinyin' in labels[0]
+                and labels[1].startswith('Cantonese') and 'Jyutping' in labels[1] and labels[2].startswith('Taigi')
+                and 'Tâi-lô' in labels[2]):
+            p(f'bridge: the card readings are not Mandarin (pinyin), Cantonese (Jyutping), Taigi (Tâi-lô): {labels[:3]}')
+        heads = page.evaluate("[...document.querySelectorAll('.vtable th')].map(t => t.textContent)")
+        if heads[2:3] and not heads[2].startswith('Mandarin'):
+            p(f'bridge: the table does not put Mandarin first: {heads}')
         shot(page, 'bridge-card')
     # the private-module loader, against a mocked GitHub API serving the private repository's module/ files
     # (TUSACH_PRIVATE, default ../tusach-private) and a test cards.json: the merge rule keeps a public card unless the

@@ -41,6 +41,9 @@ import vi  # noqa: E402
 DB = {'public': os.path.join(ROOT, 'data/build/vi.db'), 'private': os.path.join(ROOT, 'data/build/vi-nc.db')}
 STORE = os.path.join(ROOT, 'data/build/cards.json')
 PUBLIC_MODULES = ('lessons',)
+# The Chinese readings in the order and with the labels the learner sees (cards, the Bridge tab, the golden snapshot):
+# Mandarin, the Chinese he knows best, first (owner, 19 Nov 2026), then Cantonese, then Taigi (its literary reading)
+DISPLAY_LANGS = (('cmn', 'Mandarin', 'pinyin'), ('yue', 'Cantonese', 'Jyutping'), ('nan', 'Taigi', 'Tâi-lô, literary'))
 
 dictionary = {}
 con = ENGLISH = None

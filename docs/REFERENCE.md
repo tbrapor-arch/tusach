@@ -123,7 +123,9 @@ example, bad-row); lint fails on a conflict
 the row does not override with a reason. (2) The dictionary for every other word (below). (3) The golden check
 (`tools/test_golden.py`) and the real-card compare (`tools/compare.py`).
 English, characters, label and example of a card come from ONE etymology. Shown top to bottom: word and ▶, English
-(+ its source and confidence), usage, chữ Hán with Cantonese / Taigi / Mandarin side by side, the label, the example.
+(+ its source and confidence), usage, chữ Hán with Mandarin / Cantonese / Taigi side by side (`cards.DISPLAY_LANGS`:
+Mandarin first, owner 19 Nov 2026; each labelled with its language and romanisation; the Bridge tab and the golden
+snapshot use the same order), the label, the example.
 **Examples** (`cards.choose_example`, review 2 finding 6; review 3): the course lexicon's own example (Claude's,
 Northern, the taught sense, labelled not native-checked) wins; else Tatoeba candidates attached to the word as a WHOLE
 word by the cutter (40 per key; flagged and never shown: profanity/sex/drugs, self-harm and violence by the
