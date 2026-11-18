@@ -140,7 +140,7 @@ def origin_of(entry, analysis):
         if analysis[1] == 'hv':
             return 'sino', ''
         return 'nonhv', f'{analysis[0]} {analysis[2]}'.strip()
-    return etym.classify(entry.get('etymology_templates'), entry.get('etymology_text'))
+    return etym.classify(entry.get('etymology_templates'), entry.get('etymology_text'), entry.get('word', ''))
 
 
 # senses never used for English: a misspelling ("chuyện: misspelling of truyện"), an empty sense; senses with these

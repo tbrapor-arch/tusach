@@ -17,6 +17,10 @@ The origin of an entry is decided by the first decisive piece of evidence, in th
      "borrowed from (Middle) Chinese X" -> nonhv; "From French …" -> loan; "From Proto-Vietic …" -> vietic.
   4. cognate evidence (cog templates or "Cognate with Muong …"): a cognate in a Vietic or other Austroasiatic language
      (Muong, Chut, Thavung, Pacoh, Khmer, Mon, Bahnar, Khmu…) -> vietic, note "cognate with Muong chi".
+  Review 4: the note says what the etymology says about THIS word ("Alteration of năm after mười" is not "inherited
+  from" mười's ancestor); a cognate is shown only with its form ({{cog|mtq|-}} takes it from the text, "Muong Bi
+  tỏl", else no note); an ancestor stage given with {{cog}} is no cognate (Middle Vietnamese: "inherited from"; a
+  proto-form: "related to"); an inherited form identical to the word (chị < Middle Vietnamese chị) is no note.
   5. nothing: '' (unknown). Later steps of the build give an origin to alternative forms (that of their target) and to
      compounds whose syllables all have one (tools/build_db.py origins_after_load).
 
@@ -49,10 +53,30 @@ LANG = {'fr': 'French', 'en': 'English', 'ja': 'Japanese', 'la': 'Latin', 'la-ne
         'aem': 'Arem', 'kjg': 'Khmu', 'thm': 'Thavung', 'kpm': 'Koho', 'sea': 'Semai', 'mkh-vie-pro': 'Proto-Vietic',
         'mkh-pro': 'Proto-Mon-Khmer', 'aav-pro': 'Proto-Austroasiatic', 'mkh-mvi': 'Middle Vietnamese',
         'mkh-kat-pro': 'Proto-Katuic'}
-NATIVE_TEXT = re.compile(r'\b(?:From|Inherited from|Derived from) (?:Late |Early )?Proto-(?:Vietic|Viet-Muong|'
-                         r'Mon-Khmer|Austroasiatic)\b')
-COGNATE_TEXT = re.compile(r'\b[Cc]ognates? (?:with|to) (?:Muong|Mường|Chut|Thavung|Pacoh|Khmer|Mon|Bahnar|Khmu|'
-                          r'Arem|Maleng|Ruc|Rục|Thổ|Tho|Kri|Sach|May)\b')
+NATIVE_TEXT = re.compile(r'\b(?:From|Inherited from|Derived from) ((?:Late |Early )?Proto-(?:Vietic|Viet-Muong|'
+                         r'Mon-Khmer|Austroasiatic))\b(?: (\*[^\s,.;()]+))?')
+_AA = (r'(?:Muong|Mường|Chut|Thavung|Pacoh|Khmer|Mon|Bahnar|Khmu|Arem|Maleng|Ruc|Rục|Thổ|Tho|Kri|Sach|May)')
+COGNATE_LANG_TEXT = re.compile(r'\b[Cc]ognates? (?:with|to) ' + _AA + r'\b')
+# "Cognate with Muong Bi tỏl", "Cognate with Kri Phoong praŋ⁴²ˀ": the language (with a capitalised variety) and the form
+COGNATE_TEXT = re.compile(r'\b[Cc]ognates? (?:with|to) (' + _AA + r'(?: [A-ZĐ][^\s,.;()]*)?) ([^\s,.;()“”A-Z][^\s,.;()“”]*)')
+# lăm: "Alteration of năm (“five”) after mười (“ten”)": what the template's word is to THIS word (review 4, A)
+ALTERATION_TEXT = re.compile(r'^(Alteration|Variant|Contraction|Clipping|Shortening) of ([^\s,.;()]+)(?: \(“([^”]*)”\))?'
+                             r'(?: after ([^\s,.;()]+)(?: \(“([^”]*)”\))?)?')
+
+
+def _same(form, headword):
+    """True when an ancestor form says nothing new: the modern word itself (chị < Middle Vietnamese chị)."""
+    import unicodedata
+    n = lambda x: unicodedata.normalize('NFC', x).lower().strip()
+    return bool(headword) and all(n(f) == n(headword) for f in form.split(','))
+
+
+def _alteration(m):
+    s = f'an {m.group(1).lower()} of {m.group(2)}' + (f' “{m.group(3)}”' if m.group(3) else '')
+    if m.group(4):
+        s += f' after {m.group(4)}' + (f' “{m.group(5)}”' if m.group(5) else '')
+    return s.replace('an variant', 'a variant').replace('an contraction', 'a contraction').replace(
+        'an clipping', 'a clipping').replace('an shortening', 'a shortening')
 CHINESE_TEXT = re.compile(r'(?:[Nn]ativi[sz](?:ation|ed form)|[Vv]ernacular(?:ized)? (?:form|reading)|[Bb]orrowed|'
                           r'[Ll]oan(?:word)?) (?:of|from) (?:Late |Early )?(?:Middle |Old |Literary |Classical )?'
                           r'(?:Chinese|Cantonese|Hokkien|Min Nan) (' + CJK + r'+)')
@@ -81,17 +105,26 @@ def _word(args, i='3'):
     return '' if w in ('-', '') else w
 
 
-def classify(templates, text):
+def classify(templates, text, headword=''):
     """(origin, note) of one Wiktionary etymology without {{vi-etym-sino}}: vietic | nonhv | loan | compound | '' and
     the evidence in words. For nonhv, the note starts with the Chinese etymon: '感恩 (Chinese)'."""
     cognate = ''
+    native = None            # an inherited line that names no form other than the word itself (chị < MV chị)
+    text = text or ''
+    alt = ALTERATION_TEXT.match(text.strip())
     ts = list(templates or [])
     for i, t in enumerate(ts):
         name, a = t.get('name'), t.get('args') or {}
         exp = t.get('expansion') or ''
         src = a.get('2', '')
         if name in INHERIT and src.startswith(NATIVE_INH):
-            return 'vietic', f'inherited from {_lang(src, exp, _word(a))} {_word(a)}'.strip()
+            w = _word(a)
+            if alt:              # lăm: "Alteration of năm after mười, which derives from Proto-Vietic *maːl"
+                return 'vietic', _alteration(alt)
+            if not w or _same(w, headword):
+                native = native or ('vietic', '')
+                continue
+            return 'vietic', f'inherited from {_lang(src, exp, w)} {w}'
         if name in BORROW:
             if src in CHINESE:
                 w = _word(a)
@@ -113,23 +146,42 @@ def classify(templates, text):
         if name in ('cal', 'calque', 'clq') and src and src != 'vi':
             return 'compound', f'calque of {_lang(src, exp, _word(a))} {_word(a)}: formed in Vietnamese'.strip()
         if name in ('cog', 'cog-lite') and not cognate:
-            c = a.get('1', '')
-            if c in AA_COGNATE or c.startswith(NATIVE_INH):
-                cognate = f'cognate with {_lang(c, exp, _word(a, "2"))} {_word(a, "2")}'.strip()
-    text = text or ''
+            c, w = a.get('1', ''), _word(a, '2')
+            if c.startswith(NATIVE_INH):
+                # an ancestor stage of the same line given with {{cog}} is not a cognate (review 4, A): Middle
+                # Vietnamese is an attested ancestor ("from"); a proto-form so marked is hedged ("related to")
+                if w and not _same(w, headword):
+                    cognate = (f'inherited from {_lang(c, exp, w)} {w}' if c == 'mkh-mvi' else
+                               f'related to {_lang(c, exp, w)} {w}')
+            elif c in AA_COGNATE:
+                if not w:                       # {{cog|mtq|-}}: the form is in the text ("Cognate with Muong Bi tỏl")
+                    m = COGNATE_TEXT.search(text)
+                    w = m.group(2) if m else ''
+                    lang = m.group(1) if m else ''
+                else:
+                    lang = _lang(c, exp, w)
+                if w:                           # a cognate is shown only with its form
+                    cognate = f'cognate with {lang} {w}'
+    if alt and native:
+        return 'vietic', _alteration(alt)
+    if native:
+        return native
     m = CHINESE_TEXT.search(text) or OLD_CHINESE_TEXT.search(text.strip())
     if m:
         return 'nonhv', f'{m.group(1)} (Chinese)'
     m = LOAN_TEXT.search(text.strip())
     if m:
         return 'loan', f'borrowed from {m.group(1)}' + (f' {m.group(2)}' if m.group(2) else '')
-    if NATIVE_TEXT.search(text):
-        return 'vietic', NATIVE_TEXT.search(text).group(0)[0].lower() + NATIVE_TEXT.search(text).group(0)[1:]
+    m = NATIVE_TEXT.search(text)
+    if m:                    # the note only when the text names the proto-form
+        return 'vietic', (f'inherited from {m.group(1)} {m.group(2)}' if m.group(2) else '')
     if cognate:
         return 'vietic', cognate
     m = COGNATE_TEXT.search(text)
     if m:
-        return 'vietic', m.group(0)[0].lower() + m.group(0)[1:]
+        return 'vietic', f'cognate with {m.group(1)} {m.group(2)}'
+    if COGNATE_LANG_TEXT.search(text):
+        return 'vietic', ''      # a cognate named with no form: native, no note
     m = COMPOUND_TEXT.match(text.strip())
     if m:
         return 'compound', m.group(0).rstrip('.')
@@ -179,6 +231,26 @@ def _selftest():
     assert classify([{'name': 'der', 'args': {'1': 'vi', '2': 'och'}}, {'name': 'och-l', 'args': {'1': '卷'}}],
                     '')[0] == 'nonhv'
     assert classify([], 'vì (“because; for”) + sao (“why; how”).')[0] == 'compound'
+    # review 4, A: the note says what the etymology says about THIS word, with a form, and an ancestor is no cognate
+    lam = [{'name': 'inh', 'args': {'1': 'vi', '2': 'mkh-vie-pro', '3': '*maːl'}},
+           {'name': 'cog', 'args': {'1': 'mtq', '2': 'mườl'}}]
+    assert classify(lam, 'Alteration of năm (“five”) after mười (“ten”) (realized as mươi), which historically derives '
+                    'from Proto-Vietic *maːl, whence also Muong mườl.', 'lăm') == \
+        ('vietic', 'an alteration of năm “five” after mười “ten”')
+    assert classify([{'name': 'cog', 'args': {'1': 'mkh-mvi', '2': 'muốn, muấn'}}], 'Attested as …', 'muốn') == \
+        ('vietic', 'inherited from Middle Vietnamese muốn, muấn')
+    assert classify([{'name': 'cog', 'args': {'1': 'mkh-vie-pro', '2': '*p-laːŋʔ'}}], 'x', 'sáng') == \
+        ('vietic', 'related to Proto-Vietic *p-laːŋʔ')
+    assert classify([{'name': 'cog', 'args': {'1': 'mtq', '2': '-'}}], 'Cognate with Muong Bi tỏl.', 'đói') == \
+        ('vietic', 'cognate with Muong Bi tỏl')
+    assert classify([{'name': 'cog', 'args': {'1': 'thm', '2': '-'}}], 'Cognate with Thavung (Suwilai, 2000).', 'x') \
+        == ('vietic', '')
+    assert classify([{'name': 'inh', 'args': {'1': 'vi', '2': 'mkh-mvi', '3': 'chị'}}], 'From Middle Vietnamese chị.',
+                    'chị') == ('vietic', '')
+    assert classify([{'name': 'inh', 'args': {'1': 'vi', '2': 'mkh-mvi', '3': 'chị'}},
+                     {'name': 'inh', 'args': {'1': 'vi', '2': 'mkh-vie-pro', '3': '*ɟiːʔ'}}], '', 'chị') == \
+        ('vietic', 'inherited from Proto-Vietic *ɟiːʔ')
+    assert classify([], 'From Proto-Vietic.', 'x') == ('vietic', '')
     print('etym: self-test ok')
 
 
