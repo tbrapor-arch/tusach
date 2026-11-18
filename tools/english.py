@@ -89,7 +89,7 @@ DESCRIPTION = re.compile(r'^(?:used\b|negates\b|indicates\b|expresses\b|denotes\
 MAX_FIRST = 60          # a first sense longer than this is "too long" for a card (measure); a later one is left out
 MAX_TOTAL = 100         # composed English stops before the sense that would pass this length (the first is kept)
 MAX_ITEMS = 4
-CROSS_REF = re.compile(r'(?:[;,.]\s*|\s+)\(?(?:compare|see also|see|cf\.)\s.*$', re.I)
+CROSS_REF = re.compile(r'(?:[;,.]\s*\(?|\s*\()(?:compare|see also|see|cf\.)\s.*$', re.I)   # "; compare mũi", "(see x)"
 
 
 def late(tags):
@@ -206,6 +206,8 @@ def _selftest():
                     ('for; to', set(), 0, False)])[0] == 'to give; to let, to make, to cause; for, to'
     t, _ = compose([('head', set(), 0, False), ('an end or extremity; compare mũi (“tip”)', set(), 0, False)])
     assert t == 'head; an end or extremity', t
+    assert clean('to try doing something and see if it works') == 'to try doing something and see if it works'
+    assert clean('a festival (see also lễ hội)') == 'a festival'
     t, _ = compose([('what the fuck', {'vulgar'}, 0, False), ('to stop', set(), 0, False)])
     assert t.startswith('to stop'), t
     t, _ = compose([('to have', set(), 0, False), ('the left side of the balance sheet records the existing capital '

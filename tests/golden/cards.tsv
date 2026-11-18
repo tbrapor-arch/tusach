@@ -141,7 +141,7 @@ xuân	spring	same	春	wiktionary -	yes
 hè	summer (Northern)	older-loan		wiktionary 1	yes
 thu~autumn	autumn	same	秋	wiktionary 1	no
 thu	autumn	same	秋	wiktionary 1	no
-thu~collect	to collect, to receive	same	收	wiktionary 2	no
+thu~collect	to collect, to receive	same	收	wiktionary 2	yes
 đông~winter	winter	same	冬	wiktionary 1	yes
 đông	winter	same	冬	wiktionary 1	yes
 đông~crowded	crowded	doubtful		wiktionary 3	yes
@@ -154,8 +154,8 @@ thế nào	how	compound		wiktionary -	yes
 ăn	to eat	native		wiktionary -	yes
 cơm	(cooked) rice	native		wiktionary -	yes
 phở	pho (rice-noodle soup)	older-loan		wiktionary 1	yes
-bát	bowl (Northern)	same	缽	wiktionary 1	no
-món	dish (of food)			wiktionary 1	no
+bát	bowl (Northern)	same	缽	wiktionary 1	yes
+món	dish (of food)			wiktionary 1	yes
 ngon	tasty, delicious	native		wiktionary -	yes
 thịt	meat	native		wiktionary -	yes
 bò	cow, ox	native		wiktionary 1	yes
@@ -197,7 +197,7 @@ bệnh viện	hospital	same	病院	wiktionary -	yes
 thuốc	medicine	doubtful		wiktionary -	yes
 nghỉ	to rest			wiktionary 1	yes
 nên	should	native		wiktionary -	yes
-khám	to examine (a patient)	same	勘	wiktionary 2	no
+khám	to examine (a patient)	same	勘	wiktionary 2	yes
 khỏe	well, healthy	older-loan		wiktionary -	yes
 điện thoại	telephone	same	電話	wiktionary -	yes
 a lô	hello (on the phone)	loan		wiktionary -	yes
@@ -473,3 +473,54 @@ lạm phát	inflation	false-friend	濫發	wiktionary -	no
 nghĩa trang	cemetery	false-friend	義莊	wiktionary -	yes
 thông cảm	to sympathise, to understand	false-friend	通感	wiktionary -	no
 lịch sự	polite	hv-vn	歷事	wiktionary -	yes
+ga	(railway) station	loan		wiktionary 1	yes
+ý	idea, opinion	same	意	wiktionary 1	yes
+dậy	to get up, to wake up	native		wiktionary 1	yes
+biếu	to give (as a respectful gift)	older-loan		wiktionary 1	yes
+kênh	canal			wiktionary 1	yes
+kinh	scripture, (Chinese) classic	same	經	wiktionary 2	yes
+nôm	(chữ Nôm) the Vietnamese script made of Chinese characters	same	南	wiktionary -	no
+thương	to love, to feel for, to pity			wiktionary 2	yes
+bức	(classifier for pictures, letters, walls)	same	幅	wiktionary 2	yes
+kỳ	period, term	same	期	wiktionary 2	yes
+cố	to try (hard)			wiktionary 2	yes
+dần	gradually			wiktionary 2	no
+căn	(classifier for houses, flats, rooms)	older-loan		wiktionary 2	yes
+càng	the more (càng … càng … "the more … the more …")	older-loan		wiktionary 1	yes
+thị	Thị (middle name of women)	same	氏	wiktionary 2	no
+cắt	to cut	native		wiktionary 1	yes
+chất	substance, matter	same	質	wiktionary 1	yes
+ngài	you, sir (very respectful)	native		wiktionary 1	yes
+cơ	muscle	same	肌	wiktionary 1	yes
+tòa	(classifier for large buildings)	older-loan		wiktionary -	yes
+cảnh	scenery, view	same	景	wiktionary 1	yes
+nhờ	to ask (someone) a favour	native		wiktionary 1	yes
+đóng	to close, to shut	doubtful		wiktionary -	yes
+con người	human being, man	compound		wiktionary -	yes
+quay	to turn	native		wiktionary -	yes
+hoàn thành	to complete, to finish	same	完成	wiktionary -	yes
+chắc chắn	certain, sure	compound		wiktionary -	yes
+khả năng	ability	same	可能	wiktionary -	yes
+kế hoạch	plan	same	計畫	wiktionary -	yes
+tưởng	to think (wrongly), to assume	same	想	wiktionary -	yes
+tiêu	to spend (money)	same	消	wiktionary 1	yes
+bánh	cake, bread, pastry (any dish of dough)	older-loan		wiktionary 1	yes
+vô	to enter, to go in (Southern)			wiktionary 1	yes
+đàn	(string) instrument	same	彈	wiktionary 2	no
+phủ	to cover			wiktionary 1	yes
+đại	big, great (in compounds)	same	大	wiktionary 2	yes
+sức khỏe	health	compound		wiktionary -	yes
+châu âu	Europe	hv-vn	洲歐	wiktionary -	yes
+nước ngoài	abroad, foreign country	compound		wiktionary -	yes
+hệ điều hành	operating system	hv-vn	系調行	wiktionary -	yes
+cuốn	(classifier for books)	older-loan		wiktionary -	yes
+vì sao	why	compound		wiktionary 1	yes
+giá	price	same	價	wiktionary 1	yes
+công	work, labour	same	工	wiktionary 2	yes
+một cách	(makes an adverb: một cách nhanh chóng "quickly")	compound		wiktionary -	yes
+thử	to try (out)	older-loan		wiktionary -	yes
+khỏi	to get well, to recover			wiktionary -	yes
+kết thúc	to end, to finish	same	結束	wiktionary -	yes
+lòng	heart, feelings	native		wiktionary -	yes
+hội	festival	same	會	wiktionary 1	yes
+quân	troops, army	same	軍	wiktionary 1	yes

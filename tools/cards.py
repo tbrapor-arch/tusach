@@ -259,14 +259,15 @@ def lex_group(groups, row):
 
 
 FUNCTION_POS = {'prep', 'conj', 'particle', 'det', 'classifier'}
-TIME_WORDS = {'hôm nay', 'hôm qua', 'ngày mai', 'bây giờ', 'tối nay', 'sáng nay'}
+TIME_WORDS = {'hôm nay', 'hôm qua', 'ngày mai', 'bây giờ', 'tối nay', 'sáng nay', 'thứ hai', 'thứ ba', 'thứ tư',
+              'thứ năm', 'thứ sáu', 'thứ bảy', 'chủ nhật', 'hôm kia', 'ngày kia', 'tuần trước', 'tuần sau'}
 
 
 def sentence_fits(v, en, cue, avoid, own=None):
     """An example fits a sense when its English translation has a word of the sense (cue) and none that only another
-    sense of the spelling has (avoid), and when the course words of the sentence that a translation cannot leave out
-    (a number, a noun or a time word with a single lexicon sense) are in the translation (Thứ Bảy / "on Sunday",
-    sáng hôm qua / "this morning" are refused)."""
+    sense of the spelling has (avoid), and when the words of the sentence that a translation cannot leave out (a
+    number with a single lexicon sense, a day or time word) are in the translation (Thứ Bảy / "on Sunday", sáng hôm
+    qua / "this morning" are refused). Other nouns are not checked: a translation may paraphrase them (giá / costs)."""
     tw = lexicon.all_words(en)
     if cue and not (cue & tw):
         return False
@@ -277,7 +278,7 @@ def sentence_fits(v, en, cue, avoid, own=None):
             continue
         k = canon(w[2])
         rs = LEX_KEY.get(k) if k != own else None
-        if rs and len(rs) == 1 and (rs[0]['pos'] in ('num', 'noun') or k in TIME_WORDS) and \
+        if rs and len(rs) == 1 and (rs[0]['pos'] == 'num' or k in TIME_WORDS) and \
                 lexicon.cue_words(rs[0]['en']) and not (lexicon.cue_words(rs[0]['en']) & tw):
             return False
     return True

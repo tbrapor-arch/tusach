@@ -3,16 +3,22 @@ change to the dictionary (sources, build_db.py), the cutter (tools/vi.py cut) or
 english.py), before publishing. For anything risky, a second agent that did not do the work reads the result.
 
   python3 -I tools/compare.py run [--ref origin/main] [--before-db PATH] [--after-db PATH] [--max 20]
+                                  [--top 3000] [--cards-out FILE.tsv]
       builds REF (default: origin/main if it exists, else HEAD) in a temporary git worktree and the working tree, each
       with its OWN database built by its own tools/build_db.py from data/raw (so a change to the database build shows;
-      a source the ref's data/fetch.sh leaves PENDING is left out of its build, as it was then), then compares the pages. --before-db / --after-db use an existing database instead.
+      a source the ref's data/fetch.sh leaves PENDING is left out of its build, as it was then), then compares the
+      pages AND the real word cards: the --top most frequent words of either database plus every course word (the
+      lexicon's card ids, the proposal word lists), each side built by its own tools/cards.py (tools/carddump.py).
+      Printed: lost cards, changed English leads, labels, characters, examples, with a summary; --cards-out writes
+      every changed card (rank, field, before, after) for reading. --before-db / --after-db use an existing database.
   python3 -I tools/compare.py snapshot [app/dist/index.html] OUT.json
   python3 -I tools/compare.py diff BEFORE.json AFTER.json [--max 20]
 
 What is compared: every lesson line and exercise (the text shown, the cut into words, the card id of each word) and
 every card (English and its source, chữ Hán, Hán-Việt readings, Cantonese / Taigi (literary, colloquial) / Mandarin
 readings, variant spelling, label, example, the other etymologies of the spelling).
-Exit 1 when a line's text changed, a card was lost, or a card's English rank went down; other changes are listed.
+Exit 1 when a line's text changed, a card was lost (a page card, or the card of a course word), or a page card's
+English rank went down; other changes are listed.
 """
 import json
 import os
@@ -148,6 +154,95 @@ def build_db(src_root, db):
         sys.exit(f'compare: the database build in {src_root} failed:\n{r.stdout[-1500:]}\n{r.stderr[-1500:]}')
 
 
+def course_words():
+    """The course's own words: every card id of course/lexicon.tsv (not names) and every word of the proposal word
+    lists (tag kept)."""
+    import course
+    import lexicon
+    out = []
+    for r in lexicon.load():
+        if r['pos'] != 'name':
+            out += [r['cid'], r['k']]
+    import glob
+    for f in sorted(glob.glob(os.path.join(ROOT, 'course/proposal/wordlist-*.tsv'))):
+        try:
+            out += [r['word'].replace('_', ' ') for r in course.wordlist(f) if r['type'] != 'name']
+        except ValueError:
+            pass
+    seen = set()
+    return [w for w in out if not (w in seen or seen.add(w))]
+
+
+def top_keys(db, n):
+    import sqlite3
+    return [k for (k,) in sqlite3.connect(db).execute(
+        "SELECT e.key FROM entry e JOIN source s ON s.id = e.source WHERE s.fixture = 0 AND e.freq_rank IS NOT NULL "
+        "GROUP BY e.key ORDER BY min(e.freq_rank) LIMIT ?", (n,))]
+
+
+def dump_cards(src_root, db, words, out_dir):
+    """{word: card fields} through src_root's own tools/cards.py and `db` (tools/carddump.py)."""
+    os.makedirs(out_dir, exist_ok=True)
+    kf, out = os.path.join(out_dir, 'keys.txt'), os.path.join(out_dir, 'cards.json')
+    open(kf, 'w', encoding='utf-8').write('\n'.join(words) + '\n')
+    r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'carddump.py'), src_root, db, out, kf],
+                       capture_output=True, text=True)
+    if r.returncode or not os.path.exists(out):
+        sys.exit(f'compare: card dump in {src_root} failed:\n{r.stdout[-1500:]}\n{r.stderr[-1500:]}')
+    return json.load(open(out, encoding='utf-8'))
+
+
+def lead(c):
+    return ((c or {}).get('en') or '').split('; ')[0]
+
+
+def diff_cards(a, b, course, ranks, limit=20, out_path=None):
+    """Prints the real-card differences; returns the number of blocking ones (a course word that lost its card)."""
+    classes = {}
+    rows = []
+
+    def add(cls, w, x, y):
+        classes.setdefault(cls, []).append(f'{w}: {x} -> {y}')
+        rows.append((ranks.get(w.split('~')[0], ''), w, cls, x, y))
+    for w in sorted(set(a) | set(b), key=lambda w: (ranks.get(w.split('~')[0], 10 ** 9), w)):
+        x, y = a.get(w), b.get(w)
+        if x and not y:
+            add('CARD LOST' if w in course else 'card lost', w, lead(x), '(none)')
+            continue
+        if y and not x:
+            add('card gained', w, '(none)', lead(y))
+            continue
+        if not x or not y:
+            continue
+        if lead(x) != lead(y):
+            add('English lead changed', w, json.dumps(lead(x), ensure_ascii=False), json.dumps(lead(y), ensure_ascii=False))
+        elif x.get('en') != y.get('en'):
+            add('English (later items) changed', w, json.dumps(x.get('en'), ensure_ascii=False),
+                json.dumps(y.get('en'), ensure_ascii=False))
+        for f in ('label', 'chars'):
+            if (x.get(f) or '') != (y.get(f) or ''):
+                add(f'{f} changed', w, x.get(f) or '-', y.get(f) or '-')
+        ex, ey = (x.get('ex') or {}).get('vi', ''), (y.get('ex') or {}).get('vi', '')
+        if ex != ey:
+            add('example lost' if not ey else 'example gained' if not ex else 'example changed', w, ex or '-', ey or '-')
+    blocking = len(classes.get('CARD LOST', []))
+    print(f'== real cards: {len(a)} words before, {len(b)} after ({len(course)} course words)')
+    for cls in sorted(classes, key=lambda c: (not c.isupper(), c)):
+        print(f'== {cls}: {len(classes[cls])}')
+        for it in classes[cls][:limit]:
+            print('  ' + it)
+        if len(classes[cls]) > limit:
+            print(f'  … {len(classes[cls]) - limit} more')
+    print('cards: ' + '; '.join(f'{c} {len(v)}' for c, v in sorted(classes.items())) + f'; {blocking} blocking')
+    if out_path:
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write('rank\tword\tchange\tbefore\tafter\n')
+            for r in rows:
+                f.write('\t'.join(str(x).replace('\t', ' ') for x in r) + '\n')
+        print(f'compare: every changed card written to {out_path}')
+    return blocking
+
+
 def run():
     arg = lambda n, d: sys.argv[sys.argv.index(n) + 1] if n in sys.argv else d   # noqa: E731
     ref = arg('--ref', None)
@@ -167,7 +262,15 @@ def run():
         (_, _, before_db, _), (_, _, after_db, _) = plan
         a = snapshot(build(wt, before_db, os.path.join(tmp, 'before')))
         b = snapshot(build(ROOT, after_db, os.path.join(tmp, 'after')))
-        return diff(a, b, int(arg('--max', 20)))
+        blocking = diff(a, b, int(arg('--max', 20)))
+        n = int(arg('--top', 3000))
+        course = course_words()
+        tb, ta = top_keys(before_db, n), top_keys(after_db, n)
+        words = list(dict.fromkeys(ta + tb + course))
+        ranks = {k: i + 1 for i, k in enumerate(ta)}
+        ca = dump_cards(wt, before_db, words, os.path.join(tmp, 'cards-before'))
+        cb = dump_cards(ROOT, after_db, words, os.path.join(tmp, 'cards-after'))
+        return blocking + diff_cards(ca, cb, set(course), ranks, int(arg('--max', 20)), arg('--cards-out', None))
     finally:
         subprocess.run(['git', 'worktree', 'remove', '--force', wt], cwd=ROOT, capture_output=True)
         shutil.rmtree(tmp, ignore_errors=True)

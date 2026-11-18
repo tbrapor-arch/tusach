@@ -1093,12 +1093,17 @@ USE_STOP = {'to', 'a', 'an', 'the', 'of', 'one', 'someone', 'something', 'sb', '
 BE = {'is', 'are', 'was', 'were', 'am', 'been', 'being', 's', 'm', 're'}
 
 
-def gloss_words(text):
-    """The words of an English gloss, lower case, light stemming (plural / -ing / -ed), without USE_STOP; forms of
-    "be" count as be (là "to be")."""
+def gloss_words(text, translation=False):
+    """The words of an English gloss, lower case, light stemming (plural / -ing / -ed), without USE_STOP and without
+    its bracketed explanations ("mount (object on which another object is mounted)"); in a translation
+    (translation=True) the forms of "be" count as be, so that là "to be" is found in "is", "are"."""
     out = set()
+    if not translation:
+        text = re.sub(r'\([^()]*\)', ' ', text or '')
     for w in re.findall(r"[a-z]+", (text or '').lower()):
         if w in BE:
+            if not translation:
+                continue
             w = 'be'
         if w in USE_STOP:
             continue
@@ -1144,7 +1149,7 @@ def etymology_usage(con, cut, min_n=3, ratio=2.0):
     canon = dict(con.execute('SELECT key, canon FROM spelling'))
     count = defaultdict(Counter)
     for v, en, ref, ws in cut:
-        tw = gloss_words(en)
+        tw = gloss_words(en, translation=True)
         for k in {canon.get(w[2], w[2]) for w in ws} & multi.keys():
             gs = list(multi[k])
             for gk in gs:
