@@ -6,25 +6,22 @@ setting: >-
   Quarter where he has rented a room. Chị Lan, about 35, opens the door and takes one of his bags.
 dialogue:
 - {n: 1, speaker: Sacha, vi: "Chào chị ạ! Tôi tên là Sacha.", en: "Hello! My name is Sacha.", lit: "greet elder-sister (polite)! I name be Sacha."}
-- {n: 2, speaker: Lan, vi: "Chào em! Chị tên là Lan.", en: "Hi! My name's Lan.", lit: "greet younger-sibling! elder-sister name be Lan."}
-- {n: 3, speaker: Sacha, vi: "Chị tên là gì ạ?", en: "What is your name, please?", lit: "elder-sister name be what (polite)?"}
-- {n: 4, speaker: Lan, vi: "Lan. Chị là Lan.", en: "Lan. I'm Lan.", lit: "Lan. elder-sister be Lan."}
-- {n: 5, speaker: Sacha, vi: "Vâng, chị Lan. Cảm_ơn chị ạ!", en: "Right, Lan. Thank you!", lit: "yes, elder-sister Lan. thank elder-sister (polite)!"}
+- {n: 2, speaker: Lan, vi: "Chào em!", en: "Hi!", lit: "greet younger-sibling!"}
+- {n: 3, speaker: Sacha, vi: "Chị tên là gì ạ?", en: "What's your name, please?", lit: "elder-sister name be what (polite)?"}
+- {n: 4, speaker: Lan, vi: "Chị tên là Lan.", en: "My name's Lan.", lit: "elder-sister name be Lan."}
+- {n: 5, speaker: Sacha, vi: "Vâng. Cảm_ơn chị ạ!", en: "Right. Thank you!", lit: "yes. thank elder-sister (polite)!"}
 - {n: 6, speaker: Lan, vi: "Không_có_gì. Rất vui được gặp em.", en: "You're welcome. Nice to meet you.", lit: "nothing. very glad get meet younger-sibling."}
 - {n: 7, speaker: Sacha, vi: "Em rất vui được gặp chị ạ.", en: "I'm very glad to meet you.", lit: "younger-sibling very glad get meet elder-sister (polite)."}
 notes:
-- {ref: 1, topic: pronouns, text: "Vietnamese has no all-purpose \"you\". You call people by a kinship word chosen by their age compared with yours: chị \"elder sister\" for a woman a little older, anh \"elder brother\" for a man a little older, em \"younger sibling\" for anyone younger. Sacha guesses that Lan is older, so she is chị."}
-- {ref: 1, topic: pronouns, text: "tôi is the neutral \"I\": polite and safe with a stranger, but distant. Sacha starts with it because he does not yet know where he stands."}
-- {ref: 1, topic: particles, text: "ạ at the end of a sentence makes it polite to someone older or of higher standing: Chào chị ạ! It is low and short (nặng tone). It is never used to a child or to someone younger."}
-- {ref: 1, topic: grammar, text: "Chào + the person: Chào chị! \"Hello (elder sister)!\" The same words say goodbye. Leaving the person out (Chào!) is curt; adding the name is warm: Chào chị Lan!"}
-- {ref: 2, topic: pronouns, text: "The words come in pairs. Lan, the older one, calls Sacha em and calls herself chị: Chị tên là Lan is literally \"elder sister's name is Lan\", that is, \"my name is Lan\". The same word is \"you\" or \"I\" depending on who says it."}
-- {ref: 2, topic: grammar, text: "tên là: \"name is\". Tôi tên là Sacha \"my name is Sacha\": a person, then tên, then là. là joins two nouns (A là B, \"A is B\"); it does not go before adjectives (see line 6)."}
-- {ref: 3, topic: grammar, text: "A question keeps the order of the answer: Chị tên là gì? \"your name is what?\", answered Chị tên là Lan. gì \"what\" sits where the answer will go, as 什麼 does in Mandarin."}
-- {ref: 5, topic: usage, text: "vâng: the polite Northern \"yes\", also \"right, I see\" when you take in what was said. dạ is also heard in Hà Nội, especially to elders; the South says dạ."}
-- {ref: 5, topic: usage, text: "Cảm ơn + the person: Cảm ơn chị. \"Thank you (elder sister).\" The answer is Không có gì, literally \"(it is) nothing\". The South often writes and says cám ơn."}
-- {ref: 6, topic: grammar, text: "Rất vui được gặp em: rất \"very\" before an adjective, vui \"glad\" with no là before it, được \"get to\" before a verb, gặp \"meet\". The whole phrase is the set way to say \"nice to meet you\"."}
-- {ref: 7, topic: pronouns, text: "The switch: Lan has said chị and em, so Sacha now calls himself em. Going on with tôi to her would sound cold. From here on he is em and she is chị."}
-- {ref: 0, topic: pronunciation, text: "Tones met in this lesson: chào, là, gì (huyền, low falling); tên, em, vui (ngang, mid level); chị, ạ, được, gặp (nặng, low and cut short); cảm (hỏi, low falling); rất (sắc, high and short, as it ends in -t). ch in chào and chị is the Hà Nội [c] (Lesson 0); gì starts with [z]."}
+- {ref: 1, topic: pronouns, text: "chị, anh, em: there is no all-purpose \"you\". You call people by a kinship word chosen by age: chị \"elder sister\" for a woman a little older, anh \"elder brother\" for a man a little older, em \"younger sibling\" for anyone younger. Sacha guesses that Lan is older: she is chị."}
+- {ref: 1, topic: pronouns, text: "tôi: the neutral \"I\". Polite and safe with a stranger, but distant."}
+- {ref: 1, topic: particles, text: "ạ at the end of a sentence marks politeness, typically toward elders and in service (staff say it to customers). As a learner, use it with anyone older than you."}
+- {ref: 1, topic: grammar, text: "Chào chị! \"Hello!\": chào + the person you greet. The same words say goodbye."}
+- {ref: 2, topic: pronouns, text: "Chào em! The words come in pairs: Lan, the older one, calls Sacha em and herself chị. So Chị tên là Lan (line 4) is \"elder sister's name is Lan\", that is, \"my name is Lan\"."}
+- {ref: 3, topic: grammar, text: "Chị tên là gì? \"your name is what?\": gì \"what\" stands where the answer goes (Chị tên là Lan). là joins two nouns: A là B, \"A is B\"."}
+- {ref: 5, topic: usage, text: "vâng: the polite \"yes\", also \"right, I see\". Cảm ơn chị \"thank you\": cảm ơn + the person. The answer: Không có gì, \"(it's) nothing\" (line 6)."}
+- {ref: 6, topic: grammar, text: "Rất vui được gặp em: the set phrase \"nice to meet you\". rất \"very\" goes before vui \"glad\", with no là; được gặp is \"get to meet\"."}
+- {ref: 7, topic: pronouns, text: "Em rất vui …: Lan has said chị and em, so Sacha now calls himself em. Going on with tôi to her would sound cold."}
 new_words:
 - {w: chào, en: "hello; goodbye; to greet"}
 - {w: tôi, en: "I, me (neutral)"}
@@ -54,4 +51,4 @@ exercises:
   fill:
   - {vi: "Em ___ là Sacha.", answer: tên, en: "My name is Sacha."}
   - {vi: "___ anh ạ!", answer: "Cảm ơn", en: "Thank you! (politely, to a young man a little older)"}
-  - {vi: "Anh ___ vui được gặp chị.", answer: rất, en: "I'm very glad to meet you. (a man to an older woman)"}
+  - {vi: "Tôi ___ vui được gặp chị Lan.", answer: rất, en: "I'm very glad to meet you, Lan. (neutral)"}

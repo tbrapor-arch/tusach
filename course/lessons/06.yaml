@@ -3,7 +3,7 @@ title: {vi: "Bây giờ là mấy giờ?", en: "What time is it?"}
 review: false
 setting: >-
   Monday morning, Sacha's first day at the office. On his way out he meets chị Lan's mother, who is sweeping the
-  courtyard. His phone is flat.
+  courtyard. His phone is flat. He has not met Lan's husband yet: anh Minh leaves early and comes home late.
 dialogue:
 - {n: 1, speaker: Bác, vi: "Cháu đi đâu đấy?", en: "Where are you off to?", lit: "grandchild go where (friendly)?"}
 - {n: 2, speaker: Sacha, vi: "Cháu đi làm ạ. Bây_giờ là mấy giờ ạ?", en: "To work. What time is it now, please?", lit: "grandchild go work (polite). now be how-many hour (polite)?"}
@@ -11,23 +11,18 @@ dialogue:
 - {n: 4, speaker: Sacha, vi: "Sáu giờ rưỡi chiều~afternoon cháu sẽ về ạ.", en: "I'll be back at half past six this evening.", lit: "six hour half afternoon grandchild will return (polite)."}
 - {n: 5, speaker: Bác, vi: "Ngày_mai cháu có đi làm không?", en: "Are you working tomorrow?", lit: "tomorrow grandchild (yes) go work not?"}
 - {n: 6, speaker: Sacha, vi: "Không ạ. Ngày_mai cháu ở nhà. Anh Minh đâu ạ?", en: "No. Tomorrow I'm at home. Where is Minh?", lit: "not (polite). tomorrow grandchild at house. elder-brother Minh where (polite)?"}
-- {n: 7, speaker: Bác, vi: "Anh Minh đang ở công_ty.", en: "Minh is at the office already.", lit: "elder-brother Minh (now) at company."}
+- {n: 7, speaker: Bác, vi: "Anh Minh đang ở công_ty.", en: "Minh is at the office.", lit: "elder-brother Minh (now) at company."}
 - {n: 8, speaker: Sacha, vi: "Vâng. Cháu chào bác ạ!", en: "I see. Goodbye!", lit: "yes. grandchild greet uncle-aunt (polite)!"}
 notes:
-- {ref: 1, topic: particles, text: "Đi đâu đấy? \"(you're) going where?\" is an everyday greeting more than a question: a vague answer is enough (Cháu đi làm ạ \"to work\"). đấy at the end of a question makes it friendly and familiar. It is Northern; the South says đó."}
-- {ref: 1, topic: pronouns, text: "Lan's mother calls Sacha cháu, as he calls himself to her, and he calls her bác (lesson 5). The speaker label Bác is what everyone in the house calls her."}
-- {ref: 2, topic: grammar, text: "đi + a verb or a place: đi làm \"go to work\", đi học \"go to school\". làm is \"to do, to make, to work\": Em làm gì? \"what are you doing?\""}
-- {ref: 2, topic: grammar, text: "Bây giờ là mấy giờ? \"what time is it now?\" giờ is \"hour, o'clock\" and mấy giờ \"what time\": mấy asks for a small number, as in mấy tuổi."}
-- {ref: 3, topic: numbers, text: "Clock time: hour + giờ, then minutes + phút: bảy giờ hai mươi phút \"7:20\"; phút is often dropped (bảy giờ hai mươi). Half past is rưỡi after giờ: bảy giờ rưỡi \"7:30\"."}
-- {ref: 3, topic: grammar, text: "Time words come first, before the person: Mấy giờ cháu về? \"what time will you come back?\", Ngày mai cháu ở nhà \"tomorrow I'm at home\". về is \"to go back, to come home\": the return to one's base, often with nhà (về nhà \"go home\")."}
-- {ref: 4, topic: grammar, text: "The part of the day follows the hour: sáu giờ rưỡi chiều \"6:30 in the afternoon / evening\", tám giờ sáng \"8 a.m.\", chín giờ tối \"9 p.m.\". sáng \"morning\", chiều \"afternoon\", tối \"evening\"."}
-- {ref: 4, topic: grammar, text: "sẽ before a verb marks the future (cháu sẽ về \"I will come back\"); đang marks what is going on now (line 7). Both are left out when a time word or the situation already says it, as in Mấy giờ cháu về?"}
-- {ref: 5, topic: grammar, text: "có … không? also asks about an action: cháu có đi làm không? \"are you going to work?\" Answer Có ạ or Không ạ (ạ to an elder)."}
-- {ref: 6, topic: grammar, text: "Anh Minh đâu? \"where is Minh?\": with a person or thing, đâu alone asks where it is; ở đâu asks where something happens or where one lives (lesson 2)."}
-- {ref: 7, topic: grammar, text: "đang ở công ty \"is at the company (now)\". công ty \"company\" is also the everyday word for one's office: đi công ty \"go to the office\"."}
-- {ref: 8, topic: usage, text: "Cháu chào bác ạ also says goodbye: chào is both."}
+- {ref: 1, topic: particles, text: "Cháu đi đâu đấy? \"where are you off to?\": an everyday greeting more than a question; a vague answer is enough (Cháu đi làm ạ). đấy at the end makes the question friendly."}
+- {ref: 1, topic: pronouns, text: "Lan's mother calls Sacha cháu, and he calls her bác (lesson 5). The speaker label Bác is what Sacha calls her."}
+- {ref: 2, topic: grammar, text: "đi làm \"go to work\": đi + a verb or a place (đi học \"go to school\"). làm is \"to do, to make, to work\"."}
+- {ref: 3, topic: numbers, text: "Bây giờ là mấy giờ? \"what time is it now?\": giờ is \"hour, o'clock\". Clock time is hour + giờ, then minutes + phút (often dropped): bảy giờ hai mươi (phút) \"7:20\"; rưỡi \"half\" after giờ: bảy giờ rưỡi \"7:30\"."}
+- {ref: 3, topic: grammar, text: "Mấy giờ cháu về?, Ngày mai cháu ở nhà: time words usually come first, or right after the subject. về is \"to go back, to come home\": về nhà \"go home\"."}
+- {ref: 4, topic: grammar, text: "sáu giờ rưỡi chiều \"6:30 in the afternoon / evening\": the part of the day follows the hour: tám giờ sáng \"8 a.m.\", chín giờ tối \"9 p.m.\"."}
+- {ref: 4, topic: grammar, text: "sẽ before a verb marks the future (cháu sẽ về); đang marks what is going on now (Anh Minh đang ở công ty, line 7). Both are left out when a time word says it. công ty \"company\" is also one's office."}
+- {ref: 6, topic: grammar, text: "Anh Minh đâu? \"where is Minh?\" is the short, more colloquial form of Anh Minh ở đâu?"}
 - {ref: 0, topic: bridge, text: "Final -m: Nam in Việt Nam is 南 (Mandarin nán, Cantonese naam4). Mandarin turned the old -m into -n; Vietnamese, like Cantonese, kept it."}
-- {ref: 0, topic: pronunciation, text: "giờ starts with the Hà Nội [z] (gi = d = r); rưỡi has ươ and the broken ngã tone; phút is sắc and short (-t). công ty and đang: công closes the lips at the end, đang does not."}
 new_words:
 - {w: giờ, en: "hour; o'clock; time, now"}
 - {w: rưỡi, en: "and a half (after a number or unit)"}
@@ -52,7 +47,7 @@ exercises:
   - {vi: "Bây_giờ là chín giờ tối.", en: "It's nine in the evening now."}
   - {vi: "Ngày_mai em sẽ đi làm.", en: "I'll go to work tomorrow. (to someone older)"}
   - {vi: "Anh Minh đang làm ở nhà.", en: "Minh is working at home."}
-  - {vi: "Tám giờ sáng chị Lan đi công_ty.", en: "Lan goes to the office at eight in the morning."}
+  - {vi: "Tám giờ sáng chị Lan đi làm.", en: "Lan goes to work at eight in the morning."}
   fill:
   - {vi: "Mười giờ ___.", answer: rưỡi, en: "Half past ten."}
   - {vi: "Em ___ làm gì?", answer: đang, en: "What are you doing (right now)?"}

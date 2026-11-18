@@ -2,36 +2,39 @@ id: 7
 title: {vi: Chào anh, en: Review 1}
 review: true
 setting: >-
-  Sunday evening. Anh Minh, back from a week's work trip, meets Sacha at last, in the courtyard. Nothing new in
-  this dialogue: every word comes from lessons 1–6. The notes gather what you have met so far.
+  Monday, half past six in the evening. On his way home from work Sacha stops at the pavement tea stall of lesson 4.
+  A man of about forty sits down beside him: anh Minh, home early for once. Nothing new in this dialogue: every word
+  comes from lessons 1–6. The notes gather what you have met so far.
 dialogue:
-- {n: 1, speaker: Minh, vi: "Chào em! Anh là Minh, chồng chị Lan.", en: "Hi! I'm Minh, Lan's husband.", lit: "greet younger-sibling! elder-brother be Minh, husband elder-sister Lan."}
-- {n: 2, speaker: Sacha, vi: "Chào anh ạ! Em là Sacha. Rất vui được gặp anh.", en: "Hello! I'm Sacha. Nice to meet you.", lit: "greet elder-brother (polite)! younger-sibling be Sacha. very glad get meet elder-brother."}
-- {n: 3, speaker: Minh, vi: "Em là người Pháp, phải~right không? Em làm ở đâu?", en: "You're French, aren't you? Where do you work?", lit: "younger-sibling be person France, right not? younger-sibling work at where?"}
-- {n: 4, speaker: Sacha, vi: "Vâng. Em làm ở một công_ty Pháp ở Hà_Nội.", en: "Yes. I work for a French company in Hà Nội.", lit: "yes. younger-sibling work at one company France at Hà Nội."}
-- {n: 5, speaker: Minh, vi: "Em bao_nhiêu tuổi?", en: "How old are you?", lit: "younger-sibling how-many age?"}
-- {n: 6, speaker: Sacha, vi: "Em hai mươi bảy tuổi ạ.", en: "I'm twenty-seven.", lit: "younger-sibling two ten seven age (polite)."}
-- {n: 7, speaker: Minh, vi: "Anh ba~three mươi tám. Em uống trà nhé?", en: "I'm thirty-eight. Some tea?", lit: "elder-brother three ten eight. younger-sibling drink tea, OK?"}
-- {n: 8, speaker: Sacha, vi: "Vâng, cảm_ơn anh.", en: "Yes, thank you.", lit: "yes, thank elder-brother."}
+- {n: 1, speaker: Minh, vi: "Chào em! Em là Sacha, phải~right không?", en: "Hi! You're Sacha, aren't you?", lit: "greet younger-sibling! younger-sibling be Sacha, right not?"}
+- {n: 2, speaker: Sacha, vi: "Vâng ạ. Anh là anh Minh à?", en: "Yes. Are you Minh?", lit: "yes (polite). elder-brother be elder-brother Minh (checking)?"}
+- {n: 3, speaker: Minh, vi: "Anh là Minh, chồng chị Lan. Em đi đâu về đấy?", en: "I'm Minh, Lan's husband. Where are you coming back from?", lit: "elder-brother be Minh, husband elder-sister Lan. younger-sibling go where return (friendly)?"}
+- {n: 4, speaker: Sacha, vi: "Em đi làm về ạ. Em làm ở một công_ty Pháp.", en: "From work. I work for a French company.", lit: "younger-sibling go work return (polite). younger-sibling work at one company France."}
+- {n: 5, speaker: Minh, vi: "Mấy giờ em đi làm?", en: "What time do you go to work?", lit: "how-many hour younger-sibling go work?"}
+- {n: 6, speaker: Sacha, vi: "Bảy giờ rưỡi sáng ạ.", en: "At half past seven in the morning.", lit: "seven hour half morning (polite)."}
+- {n: 7, speaker: Minh, vi: "Chị ơi! Cho em hai cốc trà đá~ice.", en: "Excuse me! Two iced teas, please.", lit: "elder-sister hey! give younger-sibling two glass tea ice."}
+- {n: 8, speaker: Stall owner, vi: "Hai cốc, mười nghìn.", en: "Two glasses: ten thousand.", lit: "two glass, ten thousand."}
+- {n: 9, speaker: Sacha, vi: "Rẻ quá! Cảm_ơn anh ạ.", en: "That's so cheap! Thank you.", lit: "cheap so! thank elder-brother (polite)."}
 notes:
-- {ref: 5, topic: pronouns, text: "Em bao nhiêu tuổi? Asking a new acquaintance's age is ordinary in Vietnamese: the answer decides who is anh, chị or em. Minh already guessed (he says em from line 1); the numbers confirm it."}
-- {ref: 0, topic: pronouns, text: "Pronouns so far. tôi: neutral \"I\" with strangers. anh: a man a little older (\"you\"), or \"I\" said by him. chị: the same for a woman. em: someone younger, or \"I\" to someone older. bác / cháu: Sacha and Lan's mother (her generation is older than his parents'). ông, bà: grandfather, grandmother. He or she: person term + ấy (anh ấy, chị ấy). Sacha is em to Lan and Minh, anh to Thảo, cháu to bác."}
-- {ref: 0, topic: grammar, text: "Word order so far. The describing word follows: người Pháp, công ty Pháp, cà phê sữa đá, quán này, mẹ chị. Time comes first: Ngày mai cháu ở nhà. cũng, không, đang, sẽ go before the verb. là joins two nouns (A là B); \"is not\" before a noun is không phải là. Ages and prices need no verb: Em hai mươi bảy tuổi; năm nghìn một cốc."}
-- {ref: 0, topic: grammar, text: "Questions so far: gì \"what\", ai \"who\", đâu / ở đâu \"where\", nào \"which\", mấy \"how many (small)\", bao nhiêu \"how much, how many\", each where the answer goes; có … không? for yes or no; …, phải không? \"…, right?\"; à to check what you have just heard."}
-- {ref: 0, topic: particles, text: "Final particles so far: ạ (polite, to someone older), à (checking, surprise), ơi (calling: Em ơi!), nhé (a friendly \"OK?\": Em uống trà nhé?), đấy (friendly questions: Đi đâu đấy?)."}
-- {ref: 0, topic: numbers, text: "Numbers: mười 10, mười lăm 15, hai mươi 20, hai mươi mốt 21, hai mươi tư 24, ba mươi lăm 35; trăm 100, nghìn 1,000. Clock: bảy giờ hai mươi (phút), bảy giờ rưỡi; then sáng, chiều, tối."}
-- {ref: 0, topic: pronunciation, text: "Tones and finals. Six tones: ngang (level: anh, em), huyền (low falling: là, người), sắc (rising: có, tám), hỏi (low: cảm, bảy), ngã (broken: sữa, rưỡi), nặng (low, short: chị, mẹ). A syllable ending in -p, -t, -c, -ch has only sắc or nặng: rất, Pháp (sắc); gặp, học (nặng). After o, ô, u the finals -ng and -c close the lips: không, công ty, học, cốc."}
-- {ref: 0, topic: bridge, text: "Hán-Việt words met so far keep the old finals that Mandarin lost: 學 học (xué), 法 Pháp (fǎ), 南 nam (nán); the card shows the Chinese with Mandarin first."}
+- {ref: 1, topic: particles, text: "Em là Sacha, phải không? and Anh là anh Minh à? both check a guess: phải không asks \"…, right?\"; à checks what one has just understood."}
+- {ref: 3, topic: particles, text: "Em đi đâu về đấy? \"where are you coming back from?\" is a friendly greeting, like Đi đâu đấy? in lesson 6; a vague answer is enough: Em đi làm về."}
+- {ref: 0, topic: pronouns, text: "Pronouns so far. tôi: neutral \"I\" with strangers. anh, chị: a man, a woman a little older (\"you\"), or \"I\" said by them. em: someone younger, or \"I\" to someone older. bác / cháu: Sacha and Lan's mother. ông, bà: grandfather, grandmother. He or she: anh ấy, chị ấy. Sacha is em to Lan and Minh, anh to Thảo, cháu to bác."}
+- {ref: 0, topic: grammar, text: "Word order so far. The describing word follows: người Pháp, công ty Pháp, cà phê sữa đá, quán này. Time words usually come first or right after the subject. cũng, không, đang, sẽ go before the verb. là joins two nouns; \"is not\" before a noun is không phải là. Ages and prices need no verb."}
+- {ref: 0, topic: grammar, text: "Questions so far: gì \"what\", ai \"who\", đâu / ở đâu \"where\", nào \"which\", mấy \"how many (small)\", bao nhiêu \"how much\", each where the answer goes; có … không? for yes or no; …, phải không? \"…, right?\"."}
+- {ref: 0, topic: particles, text: "Final particles so far: ạ (polite), à (checking, surprise), ơi (calling: Chị ơi!), nhé (a friendly \"OK?\"), đấy (friendly questions)."}
+- {ref: 0, topic: numbers, text: "Numbers and the clock: mười lăm 15, hai mươi mốt 21, hai mươi tư 24, ba mươi lăm 35, trăm 100, nghìn 1,000. bảy giờ rưỡi sáng 7:30 a.m., sáu giờ chiều 6 p.m., chín giờ tối 9 p.m."}
+- {ref: 0, topic: usage, text: "Northern words met so far, where the South uses another: cốc ({ly}), nhé ({nha}), đắt ({mắc}), nghìn ({ngàn}), bố ({ba}), đấy ({đó}), vâng ({dạ}). This course keeps to Hà Nội."}
+- {ref: 0, topic: pronunciation, text: "Six tones: ngang (level: anh, em), huyền (low falling: là, người), sắc (rising: có, tám), hỏi (low: bảy), ngã (broken: sữa, rưỡi), nặng (low, short: chị, mẹ). A syllable ending in -p, -t, -c, -ch takes only sắc or nặng: rất, gặp, học. After o, ô, u the finals -ng and -c close the lips: không, công ty, học, cốc."}
 new_words: []
 exercises:
   translate:
   - {vi: "Chị Lan bao_nhiêu tuổi?", en: "How old is Lan?"}
   - {vi: "Bin và Na không uống cà_phê.", en: "Bin and Na don't drink coffee."}
   - {vi: "Bây_giờ là mười giờ rưỡi sáng.", en: "It's half past ten in the morning."}
-  - {vi: "Ngày_mai anh Minh sẽ về nhà.", en: "Minh will come home tomorrow."}
+  - {vi: "Bảy giờ tối anh Minh về nhà.", en: "Minh comes home at seven in the evening."}
   - {vi: "Xin_lỗi, quán này có trà đá~ice không?", en: "Excuse me, does this café have iced tea?"}
   - {vi: "Mẹ chị Lan cũng là người Hà_Nội à?", en: "So Lan's mother is from Hà Nội too?"}
   fill:
-  - {vi: "Anh ấy là ___? – Anh Minh.", answer: ai, en: "Who is he? – Minh."}
-  - {vi: "Cháu ___ bác ạ!", answer: chào, en: "Hello! (to someone of one's parents' generation)"}
+  - {vi: "Chị ấy là ___? – Chị Thảo, em chị Lan.", answer: ai, en: "Who is she? – Thảo, Lan's younger sister."}
+  - {vi: "Em ___ đi làm à?", answer: cũng, en: "Are you going to work too? (to someone younger)"}
   - {vi: "Một cốc cà_phê ___ mươi lăm nghìn.", answer: "ba~three", en: "A coffee is thirty-five thousand."}

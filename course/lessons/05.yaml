@@ -14,17 +14,15 @@ dialogue:
 - {n: 7, speaker: Lan, vi: "Không phải~right, bố anh Minh. Mẹ chị đây!", en: "No, that's Minh's father. And here's my mother!", lit: "not right, father elder-brother Minh. mother elder-sister here!"}
 - {n: 8, speaker: Sacha, vi: "Cháu chào bác ạ!", en: "Good evening! (to Lan's mother)", lit: "grandchild greet uncle-aunt (polite)!"}
 notes:
-- {ref: 1, topic: grammar, text: "Đây là … \"this is …\", for what you show or point at; đây is \"here, this (one)\". ảnh gia đình chị \"photo + family + me\": each word describes the one before, and the owner comes last."}
-- {ref: 2, topic: pronouns, text: "Person term + ấy (\"that\") is \"he\" or \"she\": anh ấy for a man of about one's own age or a little older, chị ấy for such a woman, em ấy for someone younger. ai \"who\" stays where the answer goes: Anh ấy là ai? – Anh Minh."}
-- {ref: 3, topic: grammar, text: "chồng chị \"my husband\", con chị \"my children\": with family and close ties, của \"of\" is left out. With things it is usual: Cốc này của ai? \"whose glass is this?\", cốc của em \"your glass\"."}
-- {ref: 3, topic: usage, text: "con is a son or daughter, one or several: con chị \"my child(ren)\". chồng \"husband\" and vợ \"wife\": Lan is vợ anh Minh."}
-- {ref: 4, topic: pronouns, text: "cháu is a grandchild, nephew or niece, and the word for any child of a friend's generation. Talking to Lan about her children, Sacha calls them cháu: hai cháu \"the two children\"."}
-- {ref: 4, topic: grammar, text: "mấy \"how many\" expects a small number, so it is the way to ask a child's age: Cháu mấy tuổi? For an adult one asks with bao nhiêu: Anh bao nhiêu tuổi? The age needs no verb: Bin tám tuổi \"Bin (is) eight\"."}
-- {ref: 6, topic: pronouns, text: "bác is for anyone of one's parents' generation, older than one's parents: Sacha will call Lan's mother bác and himself cháu. Bác này \"this man (of that generation)\". bố \"dad\" (the South says ba) and mẹ \"mum\" together are bố mẹ \"parents\"."}
-- {ref: 7, topic: grammar, text: "Mẹ chị đây! \"here's my mother!\": đây after the noun announces that someone or something is here."}
-- {ref: 8, topic: pronouns, text: "Cháu chào bác ạ: \"I\" + chào + \"you\" + ạ, the full polite greeting to an elder. A child greets a grandparent Cháu chào ông ạ or Cháu chào bà ạ; ông and bà are grandfather and grandmother, and later \"you\" to old people (lesson 19)."}
-- {ref: 1, topic: bridge, text: "gia đình is 家庭 (Mandarin jiātíng), the same word; ông is 翁 (wēng), bà is 婆 (pó)."}
-- {ref: 0, topic: pronunciation, text: "ảnh ends in Hà Nội -nh after a, roughly [ajŋ] (Lesson 0). mẹ and vợ are nặng, low and cut short; tuổi and của are hỏi, low falling. chồng and ông close the lips at the end (the lip rule)."}
+- {ref: 1, topic: grammar, text: "Đây là … \"this is …\", for what you show; đây is \"here, this (one)\". ảnh gia đình chị \"my family photo\": photo + family + me, the owner last."}
+- {ref: 2, topic: pronouns, text: "Anh ấy là ai? \"who is he?\": person term + ấy (\"that\") is \"he\" or \"she\": anh ấy for a man about one's age or a little older, chị ấy for such a woman. ai \"who\" stands where the answer goes."}
+- {ref: 3, topic: grammar, text: "chồng chị \"my husband\", con chị \"my children\" (con: son or daughter, one or several; vợ \"wife\"): with family, của \"of\" is left out. With things của is common, but often dropped too: tiền của em or tiền em \"your money\"."}
+- {ref: 4, topic: pronouns, text: "Hai cháu: cháu is a grandchild, nephew or niece, and the word for any child of a friend's generation: hai cháu \"the two children\"."}
+- {ref: 4, topic: grammar, text: "mấy tuổi: mấy \"how many\" expects a small number, so it asks a child's age; for an adult one asks bao nhiêu tuổi. The age needs no verb: Bin tám tuổi \"Bin is eight\"."}
+- {ref: 6, topic: pronouns, text: "Bác này \"this man (of my parents' generation)\": bác is for anyone of one's parents' generation, older than one's parents. Sacha calls Lan's mother bác and himself cháu. bố \"dad\", mẹ \"mum\"."}
+- {ref: 7, topic: grammar, text: "Mẹ chị đây! \"here's my mother!\": đây after a noun says that someone has just come or is right here."}
+- {ref: 8, topic: pronouns, text: "Cháu chào bác ạ: \"I\" + chào + \"you\" + ạ, the full polite greeting to an elder. ông and bà are grandfather and grandmother."}
+- {ref: 1, topic: bridge, text: "gia đình is 家庭 (Mandarin jiātíng), the same word."}
 new_words:
 - {w: gia_đình, en: family}
 - {w: ảnh, en: "photo, picture"}
@@ -39,7 +37,7 @@ new_words:
 - {w: bác, en: "uncle, aunt (older than one's parent); you (to a person older than one's parents)"}
 - {w: của, en: "of, belonging to"}
 - {w: ai, en: "who; anyone, someone"}
-- {w: ấy, en: "that (anh ấy he, cô ấy she)"}
+- {w: ấy, en: "that (anh ấy he, chị ấy she)"}
 - {w: mấy, en: "how many (small numbers); a few"}
 - {w: tuổi, en: "age; years old"}
 - {w: đây, en: "here; this (one)"}
