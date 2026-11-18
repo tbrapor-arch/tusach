@@ -30,14 +30,20 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
    with poorer English (lower rank, or a gloss that drops senses unless recorded in `app/english-changes.tsv`).
    The private module never replaces a public card unless its English rank is strictly better.
    After publishing: `python3 tools/published_ids.py`, commit both `app/published-*` files.
-6. Any change to the dictionary, the cutter or the pipeline: `python3 -I tools/compare.py run` before publishing.
-   For anything risky, a second agent that did not do the work checks the result.
+6. Any change to the dictionary, the cutter or the pipeline: `python3 -I tools/compare.py run` (pages and the real
+   cards of the top 3,000 and all course words) before publishing; read the changed cards. For anything risky, a
+   second agent that did not do the work checks the result.
 7. Data sources: pinned by content in `data/fetch.sh` (unversioned ones through our snapshot release), licence row
    in `ATTRIBUTION.md`, loader in `tools/build_db.py` (`SOURCES`), licence checked on its own page first. A missing
    source fails `make db`; `TUSACH_ALLOW_MISSING=id,…` is for sandboxes only and makes the page unpublishable.
 8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word;
    `fixture: true` counts only there. Only `NN.yaml` files in `course/lessons/`.
 9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks and spellings (lý do, not lí do) follow the house style (lint).
+10. The course lexicon `course/lexicon.tsv` (Claude's, not native-checked; an honest `doubt` where unsure) decides a
+   word's English, sense, origin, characters, false-friend note; readings come from the database. Lint refuses a row
+   in conflict with the data unless overridden with a reason, and a lesson word of several senses without `~tag`.
+11. `make test` checks the built cards against `tests/golden/cards.tsv` (every lexicon row, the top 300) and the
+   opaque sample; after a deliberate change, `tools/test_golden.py --write` and read the diff before committing.
 
 ## Repository rules
 - Public repo: code and Claude's own lessons. Copyrighted material (books, transcripts, recordings he owns) lives
