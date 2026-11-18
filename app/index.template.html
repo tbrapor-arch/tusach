@@ -616,7 +616,7 @@ function openCard(id, w) {
         ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
         ${c.per_char ? `<div class="wc-src">Formed in Vietnamese: each character's readings, not a word of Chinese.</div>${c.per_char.map(p => `<div class="zhgrid"><div><small>${esc(p.c)} ${esc(p.hv || '')}</small></div>${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(p[k] || (k === 'nan' && p.nan_coll ? p.nan_coll + ' (colloquial)' : '—'))}</b></div>`).join('')}</div>`).join('')}`
           : `<div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div>`}
-        ${c.nan_coll ? `<div class="wc-src">Taigi, ${c.nan_flag ? 'colloquial only (the MOE gives no literary reading of a character)' : "colloquial / everyday (the MOE's reading of the word)"}: ${esc(c.nan_coll)}</div>` : ''}
+        ${c.nan_coll ? `<div class="wc-src">Taigi, ${c.nan_flag ? 'colloquial only (no literary reading of a character; where the MOE marks no layer, the layer is this app\'s classification by the final consonant)' : "colloquial / everyday (the MOE's reading of the word)"}: ${esc(c.nan_coll)}</div>` : ''}
         ${c.via ? `<div class="wc-src">Chinese readings found under the variant spelling ${esc(c.via)}</div>` : ''}</div>` : ''}
       ${c.etymon ? `<div class="wc-sec"><h3>Older Chinese loan (not read the Hán-Việt way)</h3><div class="wc-chars">${esc(c.etymon.chars)}</div>
         ${c.etymon.hv ? `<div class="wc-src">Hán-Việt reading of the character(s): ${esc(c.etymon.hv)}</div>` : ''}

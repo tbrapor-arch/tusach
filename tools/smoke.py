@@ -6,7 +6,9 @@
 Checks: JS errors, horizontal overflow, the embedded Vietnamese font is used for stacked marks, every lesson renders,
 every word token opens a card (a word without a card is a problem), every card shows English, new-word chips and notes
 open, exercises accept their answer and point out a tone-only mistake, a lesson can be finished, a review session runs,
-lists, bridge and settings render, every page maps to a tab.
+lists, bridge and settings render, every page maps to a tab; the private-module loader and its merge rule against a
+mocked API (TUSACH_PRIVATE, default ../tusach-private). A part that cannot run is reported "NOT TESTED" and smoke
+exits 2, unless TUSACH_SMOKE_ALLOW_UNTESTED=1.
 """
 import os
 import sys
@@ -18,6 +20,7 @@ args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and s
 PAGE = os.path.abspath(args[0] if args else os.path.join(ROOT, 'app/dist/index.html'))
 SHOTS = sys.argv[sys.argv.index('--shots') + 1] if '--shots' in sys.argv else None
 problems = []
+not_tested = []    # a part that could not run: smoke fails (exit 2) unless TUSACH_SMOKE_ALLOW_UNTESTED=1
 
 
 def p(msg):
@@ -217,8 +220,12 @@ with sync_playwright() as pw:
             p('private module: a card the page lacks was not added')
         pg.close()
     else:
-        print(f'note: {priv}/module not found: the private-module loader is not tested')
+        not_tested.append(f'the private-module merge (no {priv}/module: set TUSACH_PRIVATE)')
+        print(f'\n*** NOT TESTED: the private-module loader and merge rule: {priv}/module not found '
+              '(set TUSACH_PRIVATE to a checkout of tusach-private; TUSACH_SMOKE_ALLOW_UNTESTED=1 to pass anyway) ***')
     b.close()
 
-print(f'\n{len(problems)} problem(s)')
+print(f'\n{len(problems)} problem(s)' + (f'; NOT TESTED: {"; ".join(not_tested)}' if not_tested else ''))
+if not_tested and os.environ.get('TUSACH_SMOKE_ALLOW_UNTESTED') != '1':
+    sys.exit(2)
 sys.exit(1 if problems else 0)

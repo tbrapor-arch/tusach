@@ -56,7 +56,7 @@ with tempfile.TemporaryDirectory() as tmp:
     fetch_sh = open(os.path.join(ROOT, 'data/fetch.sh'), encoding='utf-8').read()
     code_lines = [x for x in fetch_sh.splitlines() if x.strip() and not x.lstrip().startswith('#')]
     snaps = [x.split() for x in code_lines if x.split()[0] == 'snap']
-    ok(len(snaps) == 6 and all(len(p) == 6 and re.fullmatch(r'data-\d{4}-\d\d-\d\d(\.\d+)?', p[4])
+    ok(len(snaps) == 5 and all(len(p) == 6 and re.fullmatch(r'data-\d{4}-\d\d-\d\d(\.\d+)?', p[4])
                                and re.fullmatch(r'[0-9a-f]{64}', p[5]) for p in snaps)
        and not any('://kaikki.org' in x or 'tatoeba.org/' in x for x in code_lines),
        'every snapshot source is pinned to a release tag and a SHA-256, never to the moving upstream URL')

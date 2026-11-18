@@ -54,9 +54,6 @@ jobs:
           get vie_sentences_detailed.tsv.bz2 $T/vie/vie_sentences_detailed.tsv.bz2 "$TL"
           get eng_sentences_detailed.tsv.bz2 $T/eng/eng_sentences_detailed.tsv.bz2 "$TL"
           get vie-eng_links.tsv.bz2 $T/vie/vie-eng_links.tsv.bz2 "$TL"
-          # The Vietnamese Wiktionary (vi.wiktionary.org) as kaikki.org extracts it: evaluated for English and etymology.
-          get vi-extract.jsonl.gz https://kaikki.org/dictionary/downloads/vi/vi-extract.jsonl.gz \
-            "Vietnamese Wiktionary contributors, extraction by kaikki.org (wiktextract): CC BY-SA 4.0 and GFDL; redistributed under CC BY-SA 4.0 with attribution"
           # The Vietnamese translations of the English Wiktionary's English entries ("busy" -> bận), with the Chinese
           # translations of the same tables, the one part of the 2.9 GB raw extraction this project reads. DERIVED on
           # this runner by .github/snapshot-translations.py (kept in the repository); the SHA-256 of the raw file it
@@ -72,7 +69,7 @@ jobs:
           # a file that is empty or not what it should be fails the run instead of becoming a pin
           test "$(head -c1 kaikki.org-dictionary-Vietnamese.jsonl)" = "{"
           for f in *.bz2; do bzip2 -tq "$f"; done
-          gzip -t vi-extract.jsonl.gz en-translations.tsv.gz
+          gzip -t en-translations.tsv.gz
           test "$(gzip -dc en-translations.tsv.gz | wc -l)" -gt 10000
           sha256sum kaikki.org-dictionary-Vietnamese.jsonl *.bz2 *.gz > SHA256SUMS
           { echo; echo '```'; cat SHA256SUMS; echo '```'; } >> NOTES.md
