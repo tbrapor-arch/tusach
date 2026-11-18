@@ -28,10 +28,14 @@ Biases, stated plainly:
   common syllables (an upper bound rather than an estimate). With no corpus (sandbox build without Tatoeba and
   Wiktionary) every share is the prior.
 - A monosyllable used mostly inside compounds (quốc, học) is pushed down only as far as the corpus shows it.
-- English in the Vietnamese web and subtitle text: `the` (Vietnamese "gauze") and `in` ("to print") rank near 250 on
-  the syllable counts of English text; wordfreq's Wikipedia share lifts administrative words (huyện, quận, tỉnh,
-  Nguyễn). Not corrected: no automatic rule separates them from real formal vocabulary (18 Nov 2026, HISTORY).
-- Names are ranked like words (Việt Nam, Mỹ, Pháp, Nguyễn); the Tatoeba corpus favours its own topics (tiếng Pháp).
+- English in the Vietnamese web and subtitle text: `the` (Vietnamese "gauze") and `in` ("to print") ranked near 250 on
+  the syllable counts of English text. Corrected since 18 Nov 2026 (english_leak()): each syllable loses the share
+  that the English word of the same letters explains. wordfreq's Wikipedia share lifts administrative words (huyện,
+  quận, tỉnh, Nguyễn): not corrected (no automatic rule separates them from real formal vocabulary; HISTORY).
+- Names: a key that is only a name (Việt Nam, Hà Nội) is ranked like a word. A key shared by a name and a common
+  word (Lan / lan "orchid", Hoa / hoa "flower"): a capitalised use inside a sentence counts for the name, not for the
+  common word, and the name's entries get no rank (tools/build_db.py frequencies). The Tatoeba corpus favours its
+  own topics (tiếng Pháp).
 """
 import math
 from collections import Counter, defaultdict
@@ -41,12 +45,37 @@ import vi
 A = 10.0
 
 
-def syllable_freqs(raw_dir, syllables):
-    """({syllable: frequency per word token}, description). wordfreq when installed, else FrequencyWords."""
+LEAK_FLOOR = 0.02      # a syllable keeps at least this share of its count after the English leakage is removed
+
+
+def english_leak():
+    """k, the share of English text in wordfreq's Vietnamese counts: the median, over the 300 most frequent English
+    words that cannot be Vietnamese syllables (of, and, with, which…), of their Vietnamese count divided by their
+    English one (0.0073 on wordfreq 3.1.1). A Vietnamese syllable that is also an English word then loses
+    k x its English frequency: the English `the` (5.4 % of English words) accounts for all of `the` "gauze" in the
+    Vietnamese list, the English `in` for 29 % of `in` "to print". None without wordfreq."""
     try:
         import wordfreq
-        return ({s: wordfreq.word_frequency(s, 'vi') for s in syllables},
-                f'wordfreq {getattr(wordfreq, "__version__", "3.1.1")} syllable frequencies')
+    except ImportError:
+        return None
+    r = sorted(wordfreq.word_frequency(w, 'vi') / wordfreq.word_frequency(w, 'en')
+               for w in wordfreq.top_n_list('en', 300)
+               if w.isalpha() and vi.syllable_problems(w) and wordfreq.word_frequency(w, 'vi') > 0)
+    return r[len(r) // 2] if r else None
+
+
+def syllable_freqs(raw_dir, syllables):
+    """({syllable: frequency per word token}, description). wordfreq when installed (English leakage removed:
+    english_leak()), else FrequencyWords."""
+    try:
+        import wordfreq
+        k = english_leak() or 0.0
+        out = {}
+        for s in syllables:
+            f = wordfreq.word_frequency(s, 'vi')
+            out[s] = max(f - k * wordfreq.word_frequency(s, 'en'), LEAK_FLOOR * f) if f else 0.0
+        return (out, f'wordfreq {getattr(wordfreq, "__version__", "3.1.1")} syllable frequencies, less the English '
+                     f'leakage (k = {k:.4f} x the English frequency of the same letters)')
     except ImportError:
         pass
     import os
@@ -62,10 +91,22 @@ def syllable_freqs(raw_dir, syllables):
     return {s: counts.get(s, 0) / total for s in syllables}, 'FrequencyWords 2018 vi_50k syllable counts (wordfreq not installed)'
 
 
-def segmenter(known):
-    """(function text -> list of word keys, description): the project's own cutter, tools/vi.py cut()."""
+def segmenter(known, canon=None, name_keys=()):
+    """(function text -> list of word keys, description): the project's own cutter, tools/vi.py cut(). canon: {key:
+    house key} of the spelling groups (lí do counts for lý do). name_keys: keys that are also names: a capitalised
+    use not at the start of a sentence is the name ('name:' + key, a key no word has), not the common word."""
+    canon = canon or {}
+
     def cut(text):
-        return [w[2] for w in vi.words(vi.cut(text, known)) if w[0] == 'w']
+        out = []
+        for w in vi.words(vi.cut(text, known)):
+            if w[0] != 'w':
+                continue
+            k = canon.get(w[2], w[2])
+            if k in name_keys and not w[4] and w[1][:1].isupper():
+                k = 'name:' + k
+            out.append(k)
+        return out
     return cut, 'tools/vi.py cut() (longest dictionary match with the rules of docs/SEGMENTATION.md)'
 
 
@@ -82,7 +123,7 @@ def estimate(keys, F, corpus_tokens):
     kset = set(keys)
     c_ws, c_s = Counter(), Counter()
     for t in corpus_tokens:
-        syls = t.split()
+        syls = (t[5:] if t.startswith('name:') else t).split()
         for s in syls:
             c_s[s] += 1
         if t in kset:
@@ -97,3 +138,17 @@ def estimate(keys, F, corpus_tokens):
             logs.append(math.log(F[s] * share))
         out[k] = math.exp(sum(logs) / len(logs))
     return out
+
+
+def phrase_freq(raw_dir, syllables):
+    """A function key -> wordfreq-style estimate of the spelling as a phrase, 1 / sum(1 / F(s)) over its syllables
+    (F: syllable_freqs, English leakage removed); 0 when a syllable has no count. Used to choose the house spelling
+    of a spelling group (tools/build_db.py spelling_groups)."""
+    F, _ = syllable_freqs(raw_dir, syllables)
+
+    def f(k):
+        xs = k.replace('-', ' ').split()
+        if not xs or not all(F.get(x) for x in xs):
+            return 0.0
+        return 1.0 / sum(1.0 / F[x] for x in xs)
+    return f

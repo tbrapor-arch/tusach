@@ -1,7 +1,9 @@
 """Coverage of the frequent vocabulary: by the dictionary (English, Hán-Việt analysis, Chinese readings) and by the
 lessons.
 
-  python3 -I tools/coverage.py [TOP]      # TOP: size of the frequent-word list measured (default 3000)
+  python3 -I tools/coverage.py [TOP]                  # TOP: size of the frequent-word list measured (default 3000)
+  python3 -I tools/coverage.py --list FILE.tsv        # also: how much of the frequent words a word list covers
+                                                       # (a TSV with a `word` column, e.g. course/proposal/wordlist-1.tsv)
 
 "Most frequent": the TOP dictionary words (distinct keys of the Wiktionary headwords, names included) with the best
 entry.freq_rank, i.e. the frequency estimated by tools/freq.py (syllable frequencies divided among the dictionary words
@@ -20,7 +22,9 @@ sys.path.insert(0, HERE)
 import course  # noqa: E402
 import vi  # noqa: E402
 
-TOP = int(sys.argv[1]) if len(sys.argv) > 1 else 3000
+LIST_FILE = sys.argv[sys.argv.index('--list') + 1] if '--list' in sys.argv else None
+_args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and sys.argv[i - 1] != '--list']
+TOP = int(_args[0]) if _args else 3000
 SIZES = sorted({1000, TOP, 5000})
 BANDS = ((1, 500), (501, 1000), (1001, 2000), (2001, 3000), (3001, 5000))
 LIST = 30
@@ -40,7 +44,7 @@ for k, rank, en, org, name in con.execute('''
   WHERE s.fixture = 0 AND e.freq_rank IS NOT NULL GROUP BY e.key ORDER BY min(e.freq_rank) LIMIT ?''',
                                           (max(SIZES),)).fetchall():
     card = cards.dictionary.get(cards.lookup(k)) or {}
-    rows.append((k, rank, en, org, name, card.get('chars', '')))
+    rows.append((k, rank, en, org, name, card.get('chars', ''), card))
 if not rows:
     sys.exit(f"coverage: no ranked dictionary word (Wiktionary {'not fetched' if 'wiktionary' in (meta.get('missing') or '') else 'has no frequency'}): "
              'the coverage of the frequent words cannot be measured on this build (only the test fixture is there)')
@@ -53,6 +57,47 @@ Wiktionary-examples corpus cut by vi.cut()). Known bias: only words Wiktionary l
 by construction); wordfreq leans to Wikipedia/web text (administrative words, names) and to English leaking into it
 (the, in); the corpus is small and translated (tiếng Pháp ranks high). "Hán-Việt analysis" = chữ Hán shown on the card
 (Wiktionary vi-etym-sino matching the syllables); a borrowing read the non-Hán-Việt way (giấy 紙) is not one.''')
+
+
+import english  # noqa: E402
+LABELS = ('same', 'hv-vn', 'doubtful', 'opaque', 'older-loan', 'loan', 'native', 'compound', 'false-friend', 'name',
+          'unknown')
+MISSING = {}
+TR = sqlite3.connect(':memory:')        # the translation table: this build's, or (an older build) read from data/raw
+if con.execute("SELECT 1 FROM sqlite_master WHERE name='translation'").fetchone():
+    TR = con
+else:
+    import build_db  # noqa: E402
+    TR.executescript('CREATE TABLE translation(en TEXT, pos TEXT, sense TEXT, key TEXT, tags TEXT, n_vi INT); '
+                     'CREATE TABLE translation_zh(en TEXT, pos TEXT, sense TEXT, word TEXT); '
+                     'CREATE INDEX t_k ON translation(key);')
+    try:
+        build_db.load_translations(os.path.join(os.path.dirname(HERE), 'data', 'raw'), build_db.Adder(TR, 'x'))
+    except build_db.Missing:
+        pass
+
+
+def main_english(k):
+    """The best-attested English word the English Wiktionary translates by this word (english.evidence), if the
+    card's English lacks it: the "missing main sense" measure."""
+    if k in MISSING:
+        return MISSING[k]
+    rows_ = TR.execute('SELECT en, pos, sense, tags, n_vi FROM translation WHERE key=?', (k,)).fetchall()
+    best = sorted(english.evidence(rows_, None).items(), key=lambda x: -x[1]) if rows_ else []
+    MISSING[k] = best[0][0] if best and best[0][1] >= 4.5 else ''
+    return MISSING[k]
+
+
+def english_problems(r):
+    """Why the card's English of row r is not usable (tools/english.py problems): form-of, description, too-long,
+    missing-main (the English Wiktionary's best-attested English word for the word, zipf - log2(rivals) >= 4.5, is
+    not in the card's English)."""
+    c = r[6]
+    if r[4] and not c.get('label'):
+        return []                     # a name: its English is the name
+    en = c.get('en', '')
+    m = main_english(r[0])
+    return english.problems(en, missing=m if m and not english.has_word(en, m) else '')
 
 
 def table(part):
@@ -76,8 +121,12 @@ def table(part):
           ('attested as a word', 'composed by character', 'single character', 'missing')))
     print(f'    words of 2+ characters ({len(multi)}): Cantonese as a word {yue["word"]}, by character {yue["char"]}, '
           f'missing {yue[""]}; Mandarin as a word {cmn["word"]}, by character {cmn["char"]}, missing {cmn[""]}')
-    org = Counter((r[3] or '').split(',')[0] or 'unknown' for r in part)
-    print(f'  origin (first Wiktionary etymology of the key): {dict(org)}')
+    lab = Counter('name' if r[4] and not r[6].get('label') else (r[6].get('label') or 'unknown') for r in part)
+    print('  card label (main etymology): ' + ', '.join(f'{k} {lab[k]}' for k in LABELS if lab[k]))
+    probs = Counter(p for r in part for p in english_problems(r))
+    bad = sum(1 for r in part if english_problems(r))
+    print(f'  English not usable on a card: {pct(bad, n)} (' + ', '.join(f'{k} {v}' for k, v in sorted(probs.items()))
+          + ')')
 
 
 for size in SIZES:

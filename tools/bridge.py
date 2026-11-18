@@ -68,6 +68,40 @@ def pinyin_marks(numbered):
     return unicodedata.normalize('NFC', word)
 
 
+_TONE_MARKS = re.compile('[\u0300-\u036f]')
+
+
+def coda_hv(r):
+    """Coda class of a Hán-Việt reading: p, t, k (-c, -ch), m, n, ng (-ng, -nh), or v (a vowel or glide)."""
+    r = unicodedata.normalize('NFD', r.lower())
+    r = _TONE_MARKS.sub('', r)
+    for end, cls in (('ch', 'k'), ('nh', 'ng'), ('ng', 'ng'), ('c', 'k'), ('p', 'p'), ('t', 't'), ('m', 'm'), ('n', 'n')):
+        if r.endswith(end):
+            return cls
+    return 'v'
+
+
+def coda_nan(r):
+    """Coda class of a Tâi-lô syllable: p, t, k, h (glottal stop), m, n, ng, nn (nasal vowel), or v."""
+    r = _TONE_MARKS.sub('', unicodedata.normalize('NFD', r.lower())).replace('ⁿ', 'nn')
+    if r.endswith('h'):
+        return 'h'
+    for end, cls in (('nn', 'nn'), ('ng', 'ng'), ('p', 'p'), ('t', 't'), ('k', 'k'), ('m', 'm'), ('n', 'n')):
+        if r.endswith(end):
+            return cls
+    return 'v'
+
+
+# regular literary correspondences that change the coda class: labial dissimilation (凡 phàm / huân, 法 pháp / huat,
+# 品 phẩm / phín) and Hokkien -k/-t crossings in the literary layer (直 trực / ti̍t, 室 thất / sik)
+CODA_PAIRS = ({'m', 'n'}, {'p', 't'}, {'k', 't'})
+
+
+def coda_agrees(hv_class, nan_class):
+    """True when a Taigi reading's coda class can be the literary counterpart of a Hán-Việt coda class."""
+    return hv_class == nan_class or {hv_class, nan_class} in CODA_PAIRS
+
+
 def _rows(con, chars, lang, level, names=False):
     """Readings in display order (chinese.rank). Name readings (CC-CEDICT capitalised) are dropped when the source
     has other readings, unless the word is a name; a word the source has only as a name (越南, 西安) is a name.
@@ -109,11 +143,24 @@ def spellings(con, chars, limit=8):
     return [''.join(p) for p in itertools.islice(itertools.product(*opts), limit)]
 
 
-def _char_rows(con, ch, lang, level_first, names=False):
+def _nan_char(con, chars, colloquial=False):
+    """A character's Taigi readings of one layer: literary (MOE 文讀, or unmarked readings whose coda agrees with
+    Hán-Việt: tools/build_db.py taigi_layers) or, with colloquial=True, the unmarked readings found colloquial."""
+    rows = con.execute("SELECT c.reading, s.fixture FROM chinese c JOIN source s ON s.id = c.source WHERE c.chars=? "
+                       "AND c.lang='nan' AND c.level='char' AND (c.note = 'colloquial') = ? ORDER BY c.rank, c.ord, "
+                       "c.reading", (chars, int(colloquial))).fetchall()
+    real = [r for r, fx in rows if not fx]
+    return real or [r for r, _ in rows]
+
+
+def _char_rows(con, ch, lang, level_first, names=False, colloquial=False):
     """(readings, the form they were found under) of one character: its own, else a variant's."""
     for form in [ch] + variants(con, ch):
-        rs = _uniq(_rows(con, form, lang, level_first, names) or
-                   (_rows(con, form, lang, 'word', names) if level_first == 'char' and lang != 'nan' else []))
+        if lang == 'nan':
+            rs = _uniq(_nan_char(con, form, colloquial))
+        else:
+            rs = _uniq(_rows(con, form, lang, level_first, names) or
+                       (_rows(con, form, lang, 'word', names) if level_first == 'char' else []))
         if rs:
             return rs, form
     return [], ch
@@ -136,17 +183,34 @@ def lang_reading(con, chars, lang, names=False):
     return _by_char(per, lang, len(chars)), 'char', forms
 
 
+def colloquial_only(con, chars):
+    """The characters of `chars` that have a Taigi reading but no literary one (only readings found colloquial)."""
+    return [ch for ch in chars if not _char_rows(con, ch, 'nan', 'char')[0]
+            and _char_rows(con, ch, 'nan', 'char', colloquial=True)[0]]
+
+
 def taigi(con, chars):
     """(literary reading, how: 'word' attested | 'char' composed | '', colloquial / everyday word reading or '', the
-    spelling it was found under)."""
+    spelling it was found under). A character with only colloquial readings (冊 tsheh) has no literary reading: the
+    literary column is then empty, and the colloquial reading (the MOE word's, else composed with the colloquial
+    reading of that character) is given as colloquial / everyday."""
     per, forms = [], ''
+    coll_per = []
     for ch in chars:
         rs, form = _char_rows(con, ch, 'nan', 'char')
         if not rs:
+            cr, _ = _char_rows(con, ch, 'nan', 'char', colloquial=True)
+            if cr and coll_per is not None:
+                coll_per.append(cr)
+            else:
+                coll_per = None
             per = None
-            break
-        per.append(rs)
-        forms += form
+            continue
+        if coll_per is not None:
+            coll_per.append(rs)
+        if per is not None:
+            per.append(rs)
+            forms += form
     word, wsp = [], chars
     if len(chars) > 1:
         for sp in spellings(con, chars):
@@ -155,6 +219,8 @@ def taigi(con, chars):
                 wsp = sp
                 break
     if per is None:
+        if not word and coll_per:
+            word = [_by_char(coll_per, 'nan', len(chars))]
         return '', '', ' / '.join(word), wsp
     combos = {'-'.join(c).lower() for c in itertools.product(*per)} if len(chars) > 1 else set()
     attested = [w for w in word if w.lower() in combos]
@@ -209,4 +275,5 @@ def join(con, chars, names=False):
         if r and sp != chars and sp not in via:
             via.append(sp)
     out['via'] = ' / '.join(via)
+    out['nan_flag'] = 'colloquial-only' if not out['nan'] and out['nan_coll'] and colloquial_only(con, chars) else ''
     return out

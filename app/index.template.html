@@ -93,6 +93,8 @@ h2 { margin: 0; font-size: 1.15rem; font-weight: 800; display: flex; align-items
 .p-ff { background: var(--coral); color: #fff; }
 .p-native { background: var(--surface); color: var(--sub); border: 1px solid var(--line); }
 .p-fx { background: var(--sun); color: #2B2100; }
+.p-hvvn, .p-old, .p-loan { background: var(--surface); color: var(--brand); border: 1px solid var(--brand); }
+.p-doubt { background: var(--surface); color: var(--coral); border: 1px dashed var(--coral); }
 .bar { height: .5rem; border-radius: 999px; background: var(--soft-line); overflow: hidden; }
 .bar i { display: block; height: 100%; background: var(--sun); border-radius: 999px; }
 .banner { font-family: var(--f-ui); font-weight: 700; font-size: .85rem; padding: .45rem .75rem; border-radius: var(--r); background: var(--sun-soft); border: 2px dashed var(--sun); }
@@ -371,7 +373,9 @@ function studied() { studyDays.add(today()); store.set('days', [...studyDays]); 
 function streak() { let n = 0; const d = new Date(); if (!studyDays.has(ymd(d))) d.setDate(d.getDate() - 1); while (studyDays.has(ymd(d))) { n++; d.setDate(d.getDate() - 1); } return n; }
 
 // the card label (handover section 5): same word in Chinese / false friend / native Vietnamese word
-const LABEL = { 'same': ['p-same', 'Same word in Chinese', 'c-same'], 'false-friend': ['p-ff', 'False friend', 'c-ff'], 'native': ['p-native', 'Native Vietnamese word', ''] };
+const LABEL = { 'same': ['p-same', 'Same word in Chinese', 'c-same'], 'false-friend': ['p-ff', 'False friend', 'c-ff'], 'native': ['p-native', 'Native Vietnamese word', ''],
+  'hv-vn': ['p-hvvn', 'Hán-Việt, formed in Vietnamese', ''], 'older-loan': ['p-old', 'Older Chinese loan', ''], 'loan': ['p-loan', 'Loanword', ''],
+  'compound': ['p-native', 'Compound', ''], 'doubtful': ['p-doubt', 'Etymology doubtful', ''], 'opaque': ['p-doubt', 'Opaque etymology', ''] };
 const lab = id => LABEL[(DATA.dict[id] || {}).label] || ['', '', ''];
 const ICONS = {
   lessons: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 1 2-2h13"/></svg>',
@@ -605,11 +609,16 @@ function openCard(id, w) {
     sh.innerHTML = top(c.w, audio, addBtn) + `
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>
-      ${c.chars ? `<div class="wc-sec"><h3>Hán-Việt · the Chinese word</h3><div class="wc-chars">${esc(c.chars)}</div>
+      ${c.chars ? `<div class="wc-sec"><h3>${c.per_char ? 'Hán-Việt · characters (not a Chinese word)' : 'Hán-Việt · the Chinese word'}</h3><div class="wc-chars">${esc(c.chars)}</div>
         ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
-        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div>
-        ${c.nan_coll ? `<div class="wc-src">Taigi, colloquial / everyday (the MOE's reading of the word): ${esc(c.nan_coll)}</div>` : ''}
+        ${c.per_char ? `<div class="wc-src">Formed in Vietnamese: each character's readings, not a word of Chinese.</div>${c.per_char.map(p => `<div class="zhgrid"><div><small>${esc(p.c)} ${esc(p.hv || '')}</small></div>${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(p[k] || (k === 'nan' && p.nan_coll ? p.nan_coll + ' (colloquial)' : '—'))}</b></div>`).join('')}</div>`).join('')}`
+          : `<div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}${(c.by_char || []).includes(k) ? ' · by character' : ''}</small><b>${esc(c[k] || '—')}</b></div>`).join('')}</div>`}
+        ${c.nan_coll ? `<div class="wc-src">Taigi, ${c.nan_flag ? 'colloquial only (the MOE gives no literary reading of a character)' : "colloquial / everyday (the MOE's reading of the word)"}: ${esc(c.nan_coll)}</div>` : ''}
         ${c.via ? `<div class="wc-src">Chinese readings found under the variant spelling ${esc(c.via)}</div>` : ''}</div>` : ''}
+      ${c.etymon ? `<div class="wc-sec"><h3>Older Chinese loan (not read the Hán-Việt way)</h3><div class="wc-chars">${esc(c.etymon.chars)}</div>
+        ${c.etymon.hv ? `<div class="wc-src">Hán-Việt reading of the character(s): ${esc(c.etymon.hv)}</div>` : ''}
+        <div class="zhgrid">${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(c.etymon[k] || '—')}</b></div>`).join('')}</div></div>` : ''}
+      ${c.origin || c.doubt ? `<div class="wc-src">${c.origin ? 'Origin: ' + esc(c.origin) : ''}${c.doubt ? `${c.origin ? ' · ' : ''}Etymology ${c.label === 'opaque' ? 'opaque' : 'doubtful'}: ${esc(c.doubt)}` : ''}</div>` : ''}
       ${c.other && c.other.length ? `<div class="wc-sec"><h3>Same spelling, another word</h3>${c.other.map(o => `<div class="wc-src">${esc(o.en || '')}${o.chars ? ` <span class="han">${esc(o.chars)}</span>` : ''}</div>`).join('')}</div>` : ''}
       ${c.ff ? `<div class="wc-src">False friend: ${esc(c.ff)}</div>` : ''}
       ${pt ? `<div class="row"><span class="pill ${pc}">${pt}</span>${c.rank ? `<span class="sub" style="font-size:.8rem">#${c.rank} most common</span>` : ''}</div>` : c.name ? '<div class="row"><span class="pill p-native">Name</span></div>' : ''}

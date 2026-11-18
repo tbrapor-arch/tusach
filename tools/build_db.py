@@ -35,6 +35,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import bridge  # noqa: E402
+import english  # noqa: E402
+import etym  # noqa: E402
 import freq  # noqa: E402
 import hanviet  # noqa: E402
 import vi  # noqa: E402
@@ -132,19 +134,49 @@ def sino_chars(entry):
 
 
 def origin_of(entry, analysis):
+    """(origin, note): sino | nonhv from {{vi-etym-sino}}, else the evidence of tools/etym.py classify() (inherited,
+    borrowed, cognate templates; the etymology text)."""
     if analysis is not None:
-        return 'sino' if analysis[1] == 'hv' else 'nonhv'
-    for t in entry.get('etymology_templates') or []:
-        a = t.get('args') or {}
-        if t.get('name') in ('inh', 'inh+', 'inh-lite') and a.get('2', '').startswith(VIETIC):
-            return 'vietic'
-    return ''
+        if analysis[1] == 'hv':
+            return 'sino', ''
+        return 'nonhv', f'{analysis[0]} {analysis[2]}'.strip()
+    return etym.classify(entry.get('etymology_templates'), entry.get('etymology_text'))
 
 
 # senses never used for English: a misspelling ("chuyện: misspelling of truyện"), an empty sense; senses with these
 # tags come after the ordinary ones (học sinh: "a student" is archaic, "a pupil" is today's sense)
 SKIP_SENSE = {'misspelling', 'no-gloss'}
 LATE_SENSE = {'archaic', 'obsolete', 'rare', 'dialectal', 'Southern', 'Central', 'historical', 'dated', 'uncommon'}
+
+
+def sense_rows(entry):
+    """[(gloss, tags, examples, alt_of)] of an entry's senses: the last (most specific) gloss of each sense ("pronoun
+    used to refer to younger person…" rather than the general one before it); alt_of: the target of an "alternative
+    form/spelling of X" sense (kaikki's alt_of / form_of, or the gloss itself)."""
+    out = []
+    for s in entry.get('senses') or []:
+        gl = [g.strip() for g in s.get('glosses') or [] if g.strip()]
+        tags = set(s.get('tags') or [])
+        alt = ''
+        for f in (s.get('alt_of') or []) + (s.get('form_of') or []):
+            if f.get('word'):
+                alt = vi.nfc(f['word'])
+                break
+        if not alt and gl and english.FORM_OF.match(gl[-1]) and not english.SHORT_FOR.match(gl[-1]):
+            m = re.search(r'\b(?:of|for) ([^\s(“"][^(“"]*?)(?:\s*\(|[.:]|$)', gl[-1])
+            alt = vi.nfc(m.group(1).strip()) if m else ''
+        out.append((gl[-1] if gl else '', tags, len(s.get('examples') or []), alt))
+    return out
+
+
+def alt_of(senses):
+    """(target key, 'spelling' | 'form') when every usable sense of an entry is an alternative spelling/form of one
+    word, else ('', '')."""
+    ss = [s for s in senses if s[0] and not english.SKIP_TAGS & s[1]]
+    if ss and all(s[3] for s in ss):
+        kind = 'spelling' if any(re.search(r'\bspelling\b', s[0], re.I) for s in ss) else 'form'
+        return vi.key(ss[0][3]), kind
+    return '', ''
 
 
 def english_of(entry):
@@ -192,12 +224,19 @@ def load_kaikki(raw, add):
         if vi.CJK.search(word) or e.get('pos') == 'character':
             continue
         if e.get('pos') == 'romanization':
-            # 786 entries "y: Sino-Vietnamese reading of 衣": a Hán-Việt reading of a character (kind hv), not a word
+            # 786 entries "y: Sino-Vietnamese reading of 衣": a Hán-Việt reading of a character (kind hv), not a word.
+            # Each is also kept as an entry of pos `character-reading`, tagged with the character (tam~三): the card
+            # of a character taught without a word entry (Sino-Vietnamese numerals); never a word of its own (not
+            # ranked, not the main sense of its spelling, not in coverage counts).
             for s in e.get('senses') or []:
-                m = SV_READING.match((s.get('glosses') or [''])[0])
+                g = (s.get('glosses') or [''])[0]
+                m = SV_READING.match(g)
                 if m and len(word.split()) == 1:
                     add.hanviet(m.group(1), word, 'hv', 99, label='romanization')
                     n_chars['hv-rom'] += 1
+                    gm = re.search(r'\(“([^”]+)”', g)
+                    add.entry(word, gm.group(1) if gm else '', m.group(1), pos='character-reading', tag=m.group(1),
+                              origin='sino', origin_note=f'Hán-Việt reading of {m.group(1)}')
             continue
         en = english_of(e)
         ana = sino_analysis(e)
@@ -209,9 +248,20 @@ def load_kaikki(raw, add):
                 if x.get('text') and (x.get('english') or x.get('translation')) and not vi.CJK.search(x['text']):
                     examples.append({'vi': x['text'], 'en': x.get('english') or x.get('translation')})
         chars = ana[0] if ana and ana[1] == 'hv' else ''
-        etymon = f'{ana[0]} {ana[2]}'.strip() if ana and ana[1] == 'nonhv' and ana[0] else ''
-        add.entry(word, en, chars, pos=e.get('pos', ''), src_id=str(e.get('etymology_number') or ''),
-                  origin=origin_of(e, ana), examples=examples[:3], etymon=etymon)
+        origin, note = origin_of(e, ana)
+        etymon = ''
+        if origin == 'nonhv':
+            m = re.match(etym.CJK + '+', note)
+            etymon = note if ana else (m.group(0) if m else '')
+            note = '' if ana else note
+        senses = sense_rows(e)
+        alt, alt_kind = alt_of(senses)
+        doubt = etym.doubt_words(e.get('etymology_text')) if origin in ('sino', 'nonhv') else ''
+        eid = add.entry(word, en, chars, pos=e.get('pos', ''), src_id=str(e.get('etymology_number') or ''),
+                        origin=origin, examples=examples[:3], etymon=etymon, alt_of=alt, alt_kind=alt_kind,
+                        origin_note=note, doubt_why=doubt)
+        add.con.executemany('INSERT INTO sense VALUES (?,?,?,?,?,?)',
+                            [(eid, i, vi.nfc(g), ','.join(sorted(t)), x, a) for i, (g, t, x, a) in enumerate(senses)])
     print(f"  wiktionary character readings: {n_chars['hv']} Hán-Việt, {n_chars['nom']} Nôm, "
           f"{n_chars['hannom']} Hán-Nôm (not told apart), {n_chars['hv-rom']} Hán-Việt from 'Sino-Vietnamese reading "
           f"of X' entries")
@@ -344,6 +394,8 @@ def load_cedict(raw, add):
             continue
         note = 'name' if p[:1].isupper() else ''
         add.chinese(t, 'cmn', bridge.pinyin_marks(p), 'char' if len(t) == 1 else 'word', note=note)
+        if e.get('english') and not note:
+            add.con.execute('INSERT INTO cedict_en VALUES (?,?)', (t, '; '.join(e['english'])))
         syl = p.split()
         if len(t) > 1 and len(syl) == len(t) and not note:
             for c, x in zip(t, syl):
@@ -409,6 +461,42 @@ def load_tatoeba_challenge(raw, add):
     add.n = len(add.corpus)
 
 
+def load_translations(raw, add):
+    """The English Wiktionary's translation tables that have a Vietnamese row (snapshot file derived by
+    .github/snapshot-translations.py): one row per (English headword, part of speech, table, language, word).
+    Vietnamese rows (table `translation`): written in quốc ngữ (not chữ Nôm, not "various"), keyed with tools/vi.py;
+    n_vi = the number of Vietnamese words of the same table; used for card English (compose_english): which sense of a
+    word is the main one, and its English when the entry's own senses lack it (bận "busy"). Chinese rows (Mandarin,
+    Cantonese, Min Nan; table `translation_zh`): the sense check of Hán-Việt analyses (etymology_states)."""
+    import gzip
+    tables = defaultdict(list)
+    zh = []
+    with gzip.open(need(raw, 'kaikki', 'en-translations.tsv.gz'), 'rt', encoding='utf-8') as f:
+        for line in f:
+            p = (line.rstrip('\n').split('\t') + [''] * 7)[:7]
+            en, pos, _n, sense, word, tags, lang = p
+            word = vi.nfc(word).strip()
+            if not en or not word:
+                continue
+            if lang in ('cmn', 'zh', 'yue', 'nan'):
+                if is_cjk_word(word):
+                    zh.append((en, pos, sense, word))
+                continue
+            if lang != 'vi' or vi.CJK.search(word) or word.lower() in ('various', 'see', '-'):
+                continue
+            if not all(re.fullmatch(r"[^\W\d_]+", x) for x in word.replace('-', ' ').split()):
+                continue
+            tables[(en, pos, sense)].append((vi.key(word), tags))
+    rows = []
+    for (en, pos, sense), vs in tables.items():
+        keys = {k for k, _ in vs}
+        for k, tags in vs:
+            rows.append((en, pos, sense, k, tags, len(keys)))
+    add.con.executemany('INSERT INTO translation VALUES (?,?,?,?,?,?)', rows)
+    add.con.executemany('INSERT INTO translation_zh VALUES (?,?,?,?)', sorted(set(zh)))
+    add.n = len(rows) + len(zh)
+
+
 def load_frequencywords(raw, add):
     """FrequencyWords' syllable counts: read by tools/freq.py (fallback when wordfreq is not installed) and by the
     syllable-table validation (tools/vi.py validate_syllables); nothing is stored but the source row."""
@@ -420,6 +508,10 @@ SOURCES = [
     {'id': 'wiktionary', 'name': 'English Wiktionary, Vietnamese entries (kaikki.org extraction)',
      'version': snapshot_pin('wiktionary'), 'licence': 'CC BY-SA 4.0 / GFDL',
      'url': 'https://kaikki.org/dictionary/Vietnamese/', 'commercial_ok': True, 'load': load_kaikki},
+    {'id': 'wiktionary-tr', 'name': "English Wiktionary, the Vietnamese translations of English entries (kaikki.org "
+     "raw extraction, filtered on our snapshot runner)", 'version': snapshot_pin('wiktionary-tr'),
+     'licence': 'CC BY-SA 4.0 / GFDL', 'url': 'https://kaikki.org/dictionary/rawdata.html', 'commercial_ok': True,
+     'load': load_translations},
     {'id': 'thieuchuu', 'name': 'Thiều Chửu, Hán Việt tự điển (catusf/tudien)', 'version': 'a7dd918',
      'licence': 'public domain in Vietnam; repository CC0 1.0', 'url': 'https://github.com/catusf/tudien',
      'commercial_ok': True, 'load': load_thieuchuu},
@@ -459,13 +551,14 @@ class Adder:
         self._ord = Counter()
 
     def entry(self, word, english='', chars='', label='', pos='', tag='', src_id='', freq=None, examples=(),
-              origin='', etymon=''):
+              origin='', etymon='', alt_of='', alt_kind='', origin_note='', doubt_why=''):
         word = vi.nfc(word).strip()
         cur = self.con.execute(
             'INSERT INTO entry(source, src_id, word, key, tkey, toneless, tag, pos, english, chars, origin, label, freq, '
-            'etymon) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            'etymon, alt_of, alt_kind, origin_note, doubt_why) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
             (self.source, src_id, word, vi.key(word), vi.tkey(word), vi.toneless(vi.key(word)), tag or '', pos,
-             vi.nfc(english), vi.nfc(chars), origin, label or '', freq, vi.nfc(etymon)))
+             vi.nfc(english), vi.nfc(chars), origin, label or '', freq, vi.nfc(etymon), alt_of, alt_kind,
+             vi.nfc(origin_note), doubt_why))
         for ex in examples:
             self.con.execute('INSERT INTO example(entry_id, source, vi, en, ref) VALUES (?,?,?,?,?)',
                              (cur.lastrowid, self.source, vi.nfc(ex.get('vi')), vi.nfc(ex.get('en')), ex.get('ref', '')))
@@ -580,7 +673,8 @@ def hannom_attested(con, min_words=2):
         cand[ch][rkey(r)].add(kind)
     used = defaultdict(set)                            # (char, rkey) -> words
     spelled = {}
-    for k, chars in con.execute("SELECT key, chars FROM entry WHERE origin='sino' AND chars != ''").fetchall():
+    for k, chars in con.execute("SELECT key, chars FROM entry WHERE origin='sino' AND chars != '' AND "
+                                "pos != 'character-reading'").fetchall():
         syl = check_syllables(k)
         if len(syl) == len(chars):
             for s, c in zip(syl, chars):
@@ -666,6 +760,184 @@ def word_checks(con):
         print(f'characters of Sino-Vietnamese entries with NO Hán-Việt reading: {len(none)}: {" ".join(none[:80])}')
 
 
+# ---------------------------------------------------------------------------------------------- spelling groups
+IY = re.compile(r'^([bcdđghklmnprstvx]+|qu)([yýỳỷỹỵ])$')
+I_FOR_Y = dict(zip('yýỳỷỹỵ', 'iíìỉĩị'))
+
+
+def iy_key(k):
+    """The key with the i/y spellings of one syllable made equal (lý = lí, kỳ = kì, quý = quí): a consonant (or qu)
+    + y, the whole rhyme, is the same syllable as the consonant + i. y alone (ý) and the rhyme uy (tuy) are untouched."""
+    return ' '.join(IY.sub(lambda m: m.group(1) + I_FOR_Y[m.group(2)], x) for x in k.split())
+
+
+def spelling_groups(con, raw):
+    """Pool the spellings of one word into one key (table `spelling`, entry.key rewritten): keys equal but for i/y
+    (lí do / lý do, kĩ thuật / kỹ thuật, Mĩ / Mỹ), and keys joined by a Wiktionary "alternative / obsolete spelling
+    of" entry (tiến-hoá / tiến hoá). Not pooled: "alternative form of" (cảm ơn / cám ơn, tui / tôi: another
+    pronunciation, a word of its own; alt_forms() gives it its target's English and origin).
+    The house spelling of a group (the key every entry of the group gets, the spelling lint asks for in lessons) is
+    the most frequent one: wordfreq's estimate for the spelling as a phrase (tools/freq.py phrase_freq, English
+    leakage removed, so `my` does not win over `mi` by the English word), ties to the spelling Wiktionary has its
+    main entry under. Returns the number of groups."""
+    keys = [k for (k,) in con.execute("SELECT DISTINCT e.key FROM entry e JOIN source s ON s.id = e.source "
+                                      "WHERE s.fixture = 0")]
+    parent = {k: k for k in keys}
+
+    def find(x):
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def union(a, b):
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+    by_iy = defaultdict(list)
+    for k in keys:
+        by_iy[iy_key(k)].append(k)
+    for ks in by_iy.values():
+        for k in ks[1:]:
+            union(ks[0], k)
+    for k, target in con.execute("SELECT key, alt_of FROM entry WHERE alt_kind = 'spelling' AND alt_of != ''"):
+        t = ' '.join(target.replace('-', ' ').split()) if target not in parent else target
+        if t in parent and k in parent:
+            union(k, t)
+    groups = defaultdict(list)
+    for k in keys:
+        groups[find(k)].append(k)
+    groups = [sorted(g) for g in groups.values() if len(g) > 1]
+    main = {k for (k,) in con.execute("SELECT DISTINCT key FROM entry WHERE alt_kind = '' AND pos != 'character-reading'")}
+    pf = freq.phrase_freq(raw, {x for g in groups for k in g for x in k.replace('-', ' ').split()})
+    rows = []
+    for g in groups:
+        canon = max(g, key=lambda k: (pf(k), k in main, '-' not in k, -len(k), k))
+        for k in g:
+            how = 'iy' if iy_key(k) == iy_key(canon) else 'alt'
+            rows.append((k, canon, how))
+    con.executemany('INSERT INTO spelling VALUES (?,?,?)', rows)
+    con.executemany('UPDATE entry SET key=?, tkey=?, toneless=? WHERE key=?',
+                    [(c, vi.tkey(c), vi.toneless(c), k) for k, c, _ in rows if k != c])
+    # an "alternative spelling of X" entry pooled with X has no English of its own: the group's entries give it
+    con.execute("UPDATE entry SET english = '' WHERE alt_kind = 'spelling' AND key IN (SELECT canon FROM spelling) AND "
+                "EXISTS (SELECT 1 FROM entry x WHERE x.key = entry.key AND x.alt_kind = '' AND x.english != '')")
+    print(f'spelling groups: {len(groups)} groups ({len(rows)} keys) pooled under one key each; examples: '
+          + ', '.join(f"{'/'.join(g)} -> {next(c for k, c, _ in rows if k == g[0])}" for g in groups[:6]))
+    return len(groups)
+
+
+def alt_forms(con):
+    """An "alternative form of X" entry (cảm ơn of cám ơn, tui of tôi) or an alternative spelling whose X is not
+    pooled with it: it keeps its own key, card and frequency, and takes X's characters and origin when it has none
+    (note "as X"); its English is composed from X's senses (compose_english)."""
+    n = 0
+    for eid, target, pos in con.execute("SELECT id, alt_of, pos FROM entry WHERE alt_of != '' AND alt_of != key").fetchall():
+        tk = con.execute('SELECT canon FROM spelling WHERE key=?', (target,)).fetchone()
+        tk = tk[0] if tk else target
+        t = con.execute("SELECT chars, origin, etymon, origin_note, hv_check FROM entry WHERE key=? AND alt_kind = '' "
+                        "AND pos NOT IN ('name', 'character-reading') ORDER BY pos != ?, id LIMIT 1", (tk, pos)).fetchone()
+        if not t:
+            continue
+        cur = con.execute('SELECT chars, origin FROM entry WHERE id=?', (eid,)).fetchone()
+        if not cur[1] and t[1]:
+            con.execute("UPDATE entry SET chars=?, origin=?, etymon=?, origin_note=? WHERE id=?",
+                        (t[0], t[1], t[2], f'as {tk} (alternative form)' + (f'; {t[3]}' if t[3] else ''), eid))
+            n += 1
+    print(f'alternative forms: {n} took the characters and origin of the word they are a form of')
+
+
+def origins_after_load(con):
+    """A compound with no etymology of its own whose syllables all have an origin (from their main entry): origin
+    `compound`, note "nói (native) + chuyện (older Chinese loan)". Returns the number of entries given one."""
+    main = {}
+    for k, origin, sid in con.execute("SELECT key, origin, src_id FROM entry WHERE pos NOT IN ('name', "
+                                      "'character-reading') AND source != 'fixture' ORDER BY id"):
+        n = int(sid) if str(sid).isdigit() else 10 ** 6
+        if k not in main or n < main[k][1]:
+            main[k] = (origin, n)            # the first etymology of the syllable, as its card shows it
+    rows = []
+    for eid, k in con.execute("SELECT id, key FROM entry WHERE origin = '' AND chars = '' AND pos != 'name' AND "
+                              "key LIKE '% %' AND source != 'fixture'").fetchall():
+        syl = k.replace('-', ' ').split()
+        os_ = [main.get(x, ('', 0))[0] for x in syl]
+        if all(os_):
+            if all(o == 'vietic' for o in os_):
+                rows.append(('vietic', 'compound of native words: ' + ' + '.join(syl), eid))
+            else:
+                rows.append(('compound', 'formed in Vietnamese from ' + ' + '.join(syl) + ' (see each syllable)', eid))
+    con.executemany("UPDATE entry SET origin=?, origin_note=? WHERE id=?", rows)
+    print(f'compounds whose syllables all have an origin: {len(rows)} '
+          f'({sum(1 for r in rows if r[0] == "vietic")} of native words only)')
+
+
+def compose_english(con):
+    """entry.english and en_score of every Wiktionary entry, by tools/english.py compose(): senses reordered
+    (ordinary before archaic/dialectal/literary, a sense with an English word the English Wiktionary translates by
+    this word before one without), and, when no sense of any entry of the word contains such a word, the best one
+    first in ONE entry of the word: the first etymology's first entry of a matching part of speech whose senses are
+    not all archaic/dialectal (bận "busy"; not its Southern homograph "to wear"). An entry that is only "alternative
+    form of X" is composed from X's senses."""
+    canon = dict(con.execute('SELECT key, canon FROM spelling'))
+    ev_rows = defaultdict(list)
+    en_pos = {}
+    for en, pos, sense, k, tags, n in con.execute('SELECT en, pos, sense, key, tags, n_vi FROM translation'):
+        ev_rows[canon.get(k, k)].append((en, pos, sense, tags, n))
+        en_pos.setdefault(en, pos)
+    senses = defaultdict(list)
+    for eid, g, tags, x, a in con.execute('SELECT entry_id, gloss, tags, examples, alt_of FROM sense ORDER BY entry_id, n'):
+        senses[eid].append((g, set(filter(None, tags.split(','))), x, bool(a)))
+    entries = defaultdict(list)
+    for r in con.execute("SELECT id, key, pos, alt_of, english, src_id FROM entry WHERE source='wiktionary' AND "
+                         "pos != 'character-reading'"):
+        entries[r[1]].append(r)
+    rows, changed, leads_n = [], 0, 0
+    for k, es in entries.items():
+        es.sort(key=lambda r: (int(r[5]) if str(r[5]).isdigit() else 10 ** 6, r[0]))
+        ss_of = {}
+        for eid, _, pos, alt_of, english_now, _ in es:
+            ss = senses.get(eid, [])
+            if alt_of and ss and all(s[3] for s in ss if s[0]):
+                t = canon.get(alt_of, alt_of)
+                if t != k:
+                    ss = [s for c in entries.get(t, []) if not c[3] and c[2] == pos for s in senses.get(c[0], [])] or \
+                         [s for c in entries.get(t, [])[:2] if not c[3] for s in senses.get(c[0], [])] or ss
+            ss_of[eid] = ss
+        glosses = [s[0] for ss in ss_of.values() for s in ss if s[0]]
+        given = False
+        for eid, _, pos, alt_of, english_now, _ in es:
+            if alt_of and not english_now and canon.get(alt_of, alt_of) == k:
+                rows.append(('', -9.0, eid))          # pooled spelling: its group has the English
+                continue
+            ss = ss_of[eid]
+            ev = english.evidence(ev_rows.get(k, []), pos)
+            leads = []
+            usable = [s for s in ss if s[0] and not english.SKIP_TAGS & s[1]]
+            if not given and pos != 'name' and usable and not all(english.LATE_TAGS & s[1] for s in usable):
+                leads = english.leads_for(ev, glosses)
+                given = bool(leads)
+                leads_n += given
+            text, score = english.compose(ss, ev, en_pos, leads)
+            if text != english_now:
+                changed += 1
+            rows.append((text or english_now, score, eid))
+    con.executemany('UPDATE entry SET english=?, en_score=? WHERE id=?', rows)
+    print(f'card English composed for {len(rows)} entries ({changed} changed by sense order and translation evidence; '
+          f'{leads_n} words given an English word their senses lacked)')
+
+
+def character_readings(con):
+    """English of the `character-reading` entries (tam~三): the gloss Wiktionary gives the reading, else CC-CEDICT's
+    first sense of the character, + "(Hán-Việt reading of 三)"."""
+    rows = []
+    for eid, ch, en in con.execute("SELECT id, chars, english FROM entry WHERE pos='character-reading'").fetchall():
+        if not en:
+            c = con.execute('SELECT english FROM cedict_en WHERE chars=? LIMIT 1', (ch,)).fetchone()
+            en = c[0].split('; ')[0] if c else ''
+        rows.append(((f'{en} ' if en else '') + f'(Hán-Việt reading of {ch})', eid))
+    con.executemany('UPDATE entry SET english=? WHERE id=?', rows)
+
+
 def freq_key(k):
     """The key a word is ranked under: hyphens are syllable breaks (Wiktionary keeps old hyphenated spellings such as
     thế-giới, công-nhân, việt-nam as entries; wordfreq read each as one phrase with no competitor, which put 20 of them
@@ -685,7 +957,7 @@ def hv_usage(con):
     each character with each reading. It orders a character's readings (tools/bridge.py hv_readings): Wiktionary lists
     them alphabetically (員 vân/viên, 義 ngãi/nghì/nghĩa), Thiều Chửu by its own order."""
     use = Counter()
-    for k, chars in con.execute("SELECT DISTINCT key, chars FROM entry WHERE hv_check='ok'"):
+    for k, chars in con.execute("SELECT DISTINCT key, chars FROM entry WHERE hv_check='ok' AND pos != 'character-reading'"):
         for s, c in zip(check_syllables(k), chars):
             use[(c, rkey(s))] += 1
     rows = [(use[(c, rkey(r))], rid) for rid, c, r in con.execute("SELECT rowid, char, reading FROM hanviet WHERE kind='hv'")
@@ -697,8 +969,8 @@ def frequencies(con, raw, corpus):
     """entry.freq and freq_rank (tools/freq.py). A key is ranked under freq_key(); a hyphenated spelling whose spaced
     form is also a key (thế-giới / thế giới) gets the same freq but no rank of its own, so a word is counted once."""
     keys = [k for (k,) in con.execute("SELECT DISTINCT e.key FROM entry e JOIN source s ON s.id = e.source "
-                                      "WHERE s.fixture = 0 OR NOT EXISTS (SELECT 1 FROM entry x JOIN source y ON "
-                                      "y.id = x.source WHERE y.fixture = 0)")]
+                                      "WHERE (s.fixture = 0 OR NOT EXISTS (SELECT 1 FROM entry x JOIN source y ON "
+                                      "y.id = x.source WHERE y.fixture = 0)) AND e.pos != 'character-reading'")]
     fk = {k: freq_key(k) for k in keys}
     fkeys = sorted({f for f in fk.values() if f})
     syls = {s for k in fkeys for s in k.split()}
@@ -706,7 +978,12 @@ def frequencies(con, raw, corpus):
     if not F:
         print('frequency: no syllable frequency source (wordfreq not installed, FrequencyWords not fetched)')
         return ''
-    cut, cdesc = freq.segmenter(set(keys))
+    canon = dict(con.execute('SELECT key, canon FROM spelling'))
+    pos = defaultdict(set)
+    for k, p in con.execute("SELECT key, pos FROM entry WHERE pos != 'character-reading'"):
+        pos[k].add(p)
+    name_keys = {k for k, ps in pos.items() if 'name' in ps and ps - {'name'}}
+    cut, cdesc = freq.segmenter(set(keys) | set(canon), canon, name_keys)
     tokens = [fk.get(t) or t for s in corpus for t in cut(s)]
     est = freq.estimate(fkeys, F, tokens)
     ranked = sorted(est, key=lambda k: (-est[k], k))
@@ -717,8 +994,12 @@ def frequencies(con, raw, corpus):
             variant = f != k and f in fk           # the spaced spelling is a key of its own: it carries the rank
             rows.append((round(est[f] * 1e9), None if variant else rank[f], k))
     con.executemany('UPDATE entry SET freq=?, freq_rank=? WHERE key=?', rows)
+    # a name sharing its key with a common word (Lan / lan "orchid") does not carry the common word's rank
+    con.executemany("UPDATE entry SET freq_rank=NULL WHERE key=? AND pos='name'", [(k,) for k in sorted(name_keys)])
+    con.execute("UPDATE entry SET freq=NULL, freq_rank=NULL WHERE pos='character-reading'")
     desc = (f'{fdesc}, divided among the dictionary words by their shares in a corpus of {len(corpus)} sentences '
-            f'({len(tokens)} words) cut by {cdesc} (tools/freq.py); hyphenated spellings ranked as spaced ones')
+            f'({len(tokens)} words) cut by {cdesc} (tools/freq.py); hyphenated spellings ranked as spaced ones; '
+            f'spelling groups ranked once, under their house spelling; a name sharing a key with a common word unranked')
     print(f'frequency: {len(ranked)} words ranked ({sum(1 for k in keys if not fk[k])} keys not made of letters, '
           f'not ranked): {desc}')
     return desc
@@ -734,11 +1015,12 @@ def attach_examples(con, sentences, known, per_word=2):
     first = {}
     for k, eid in con.execute('SELECT key, min(id) FROM entry GROUP BY key'):
         first[k] = eid
+    canon = dict(con.execute('SELECT key, canon FROM spelling'))
     have = Counter()
     rows = []
     usable = [x for x in sentences if EX_MIN <= len(x[0].split()) <= EX_MAX]
     for v, en, ref in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
-        for w in sorted({w[2] for w in vi.words(vi.cut(v, known)) if w[0] == 'w'}):
+        for w in sorted({canon.get(w[2], w[2]) for w in vi.words(vi.cut(v, known)) if w[0] == 'w'}):
             if w in first and have[w] < per_word:
                 have[w] += 1
                 rows.append((first[w], 'tatoeba', v, en, ref))
@@ -774,14 +1056,185 @@ def validate_syllables(con, raw):
             print(f'  rejected {w} ({c}): {why}')
 
 
+# ---------------------------------------------------------------------------------------------- etymology states
+REVIEW = os.path.join(ROOT, 'course', 'etymology-review.tsv')
+FUNCTION_POS = {'particle', 'conj', 'prep', 'adv', 'pron', 'det', 'postp', 'intj', 'classifier'}
+STOP = {'to', 'a', 'an', 'the', 'of', 'be', 'is', 'one', 'sth', 'sb', 'something', 'someone', 'etc', 'used', 'in',
+        'with', 'for', 'by', 'as', 'on', 'oneself', 'its', 'it', 'that', 'this', 'which', 'who', 'and', 'or', 'not',
+        'no', 'from', 'into', 'at', 'up', 'out', 'very', 'thing', 'person', 'make', 'have', 'has', 'variant', 'old',
+        'literary', 'classical', 'surname', 'name', 'see', 'also', 'kind', 'type', 'form'}
+RARE_CHAR = 3        # a character used in fewer CC-CEDICT words than this is rare for a reader of Chinese
+FUNC_STOP = STOP - {'at', 'or', 'in', 'on', 'not', 'no', 'by', 'for', 'with', 'from', 'as', 'and', 'up', 'out'}
+
+
+def _tokens(text, stop=True):
+    out = set()
+    for w in re.findall(r'[a-z]+', (text or '').lower()):
+        if stop and (w in STOP or len(w) < 3):
+            continue
+        for suf in ('ing', 'ed', 'es', 's', 'ly'):
+            if len(w) > len(suf) + 3 and w.endswith(suf):
+                w = w[:-len(suf)]
+                break
+        out.add(w)
+    return out
+
+
+def load_review(path=REVIEW):
+    """{(key, chars): (verdict, reason)} from course/etymology-review.tsv (Claude's judgement, not checked by a native
+    speaker): key <TAB> chars <TAB> verdict (same | doubtful | opaque) <TAB> reason. # starts a comment."""
+    out = {}
+    if os.path.exists(path):
+        for line in open(path, encoding='utf-8'):
+            if not line.strip() or line.startswith('#'):
+                continue
+            p = (line.rstrip('\n').split('\t') + ['', '', '', ''])[:4]
+            if p[2] in ('same', 'doubtful', 'opaque'):
+                out[(vi.key(p[0]), p[1].strip())] = (p[2], p[3].strip())
+    return out
+
+
+def etymology_states(con):
+    """For each etymology of a word (its entries of one source, etymology number, characters and origin) that is a
+    Sino-Vietnamese analysis (origin sino, characters matching the syllables) or an older Chinese loan:
+    entry.sino_kind (word: the characters are a word of CC-CEDICT, rime-cantonese or the MOE, or one character;
+    vn: a compound formed in Vietnamese or in Vietnamese order, 場學 trường học) and entry.doubt:
+      doubtful  Wiktionary's own etymology says possibly / perhaps / alternatively… (doubt_why keeps the words)
+      opaque    the analysis holds but a reader of Chinese would not see the word in it:
+                - a character is rare (used in fewer than RARE_CHAR CC-CEDICT words): 懃 cần, 隰 thấp;
+                - one character, and the sense is attested on neither side: no content word of the etymology's English
+                  is in CC-CEDICT's English of the character, and no English Wiktionary translation table that gives
+                  this Vietnamese word gives a Chinese word containing the character (xa 賒 "far": the table of "far"
+                  gives 遠; bạn 伴 "friend" passes through the table of "companion": 同伴);
+                - a grammaticalised function word: the etymology's main entry (best English score) is a particle,
+                  conjunction, preposition, adverb, determiner… and its first English is not in CC-CEDICT's English
+                  of the character nor supported by a table (không 空 "not", đang 當, nhưng 仍 "but").
+    course/etymology-review.tsv overrides both (Claude's judgement, each row with its reason). Then the label:
+    same (Hán-Việt, the same word in Chinese) | hv-vn (Hán-Việt formed in Vietnamese) | doubtful | opaque |
+    older-loan | loan | native | compound | '' (unknown). Returns a Counter of labels."""
+    review = load_review()
+    ced = defaultdict(list)
+    for ch, en in con.execute('SELECT chars, english FROM cedict_en'):
+        ced[ch].append(en)
+    use = Counter()
+    for ch, n in con.execute('SELECT char, sum(n) FROM cmn_use GROUP BY char'):
+        use[ch] = n
+    zh_by_table = defaultdict(set)
+    for en, pos, sense, w in con.execute('SELECT en, pos, sense, word FROM translation_zh'):
+        zh_by_table[(en, pos, sense)].add(w)
+    tables = defaultdict(list)                        # vietnamese key -> [(english pos, table)]
+    for en, pos, sense, k in con.execute('SELECT en, pos, sense, key FROM translation'):
+        tables[k].append((pos, (en, pos, sense)))
+    canon = dict(con.execute('SELECT key, canon FROM spelling'))
+    tables = {canon.get(k, k): v for k, v in tables.items()}
+
+    def zh_support(k, c, pos=None):
+        ok = english.POS_OK.get(pos, None) if pos else None
+        return any(c in w for p, t in tables.get(k, []) if ok is None or p in ok for w in zh_by_table.get(t, ()))
+    bridge_rows = {r[0]: r for r in con.execute('SELECT chars, yue_by, nan_by, cmn_by, nan_coll FROM bridge')}
+    groups = defaultdict(list)
+    for r in con.execute("SELECT id, key, pos, english, chars, origin, hv_check, etymon, doubt_why, en_score, source, "
+                         "src_id FROM entry WHERE origin IN ('sino', 'nonhv') AND source != 'fixture' AND pos != "
+                         "'character-reading'").fetchall():
+        groups[(r[1], r[10], r[11], r[4], r[5])].append(r)
+    rows = []
+    for (k, _src, _sid, chars, origin), rs in groups.items():
+        etymon = next((r[7] for r in rs if r[7]), '')
+        c = chars if origin == 'sino' else (re.match(etym.CJK + '+', etymon) or [''])[0]
+        if not c:
+            continue
+        kind = ''
+        if origin == 'sino' and chars and all(r[6] not in ('differs', 'length') for r in rs):
+            b = bridge_rows.get(chars)
+            kind = 'word' if len(chars) == 1 or (b and ('word' in (b[1], b[2], b[3]) or b[4])) else 'vn'
+        why = next((r[8] for r in rs if r[8]), '')
+        words = [r for r in rs if r[2] != 'name']
+        doubt, reason = '', ''
+        if why:
+            doubt, reason = 'doubtful', f"Wiktionary's etymology says: {why}"
+        elif words:
+            main = max(words, key=lambda r: (r[9] if r[9] is not None else -9, -r[0]))
+            cedict = ' ; '.join(ced.get(c, []) or [x for ch in c for x in ced.get(ch, [])])
+            ctoks = _tokens(cedict, stop=False)
+            rare = [ch for ch in c if use[ch] < RARE_CHAR] if use else []      # CC-CEDICT not loaded: no test
+            first = english.first_sense(main[3])
+            if rare:
+                doubt, reason = 'opaque', f'rare character for a reader of Chinese: {"".join(rare)}'
+            elif not ced:
+                pass                                   # CC-CEDICT not loaded: no sense test
+            elif len(c) == 1 and main[2] in FUNCTION_POS:
+                mine = _tokens(first, stop=False) - FUNC_STOP
+                if not (mine & (_tokens(cedict, stop=False) - FUNC_STOP)) and not zh_support(k, c, main[2]):
+                    doubt = 'opaque'
+                    reason = (f'grammaticalised {main[2]}: its English "{first[:40]}" is neither among CC-CEDICT\'s '
+                              f'senses of {c} nor in a translation table with {c}')
+            elif len(c) == 1:
+                mine = set().union(*(_tokens(r[3]) for r in words))
+                if mine and not (mine & ctoks) and not zh_support(k, c):
+                    doubt = 'opaque'
+                    reason = (f'the sense "{first[:40]}" is neither among CC-CEDICT\'s senses of {c} '
+                              f'({cedict[:50]}) nor in a translation table with {c}')
+        r = review.get((k, c))
+        if r:
+            doubt, reason = ('' if r[0] == 'same' else r[0]), f'review (Claude, not native-checked): {r[1]}'
+        rows += [(kind, doubt, reason, x[0]) for x in rs]
+    con.executemany('UPDATE entry SET sino_kind=?, doubt=?, doubt_why=? WHERE id=?', rows)
+    con.execute("UPDATE entry SET label = CASE "
+                "WHEN source = 'fixture' THEN label "
+                "WHEN origin = 'sino' AND chars != '' AND hv_check NOT IN ('differs', 'length') THEN "
+                "  CASE WHEN doubt != '' THEN doubt WHEN sino_kind = 'vn' THEN 'hv-vn' ELSE 'same' END "
+                "WHEN origin = 'nonhv' THEN 'older-loan' WHEN origin = 'loan' THEN 'loan' "
+                "WHEN origin = 'vietic' THEN 'native' WHEN origin = 'compound' THEN 'compound' ELSE '' END")
+    c = Counter(r for (r,) in con.execute("SELECT label FROM entry WHERE source != 'fixture'"))
+    d = Counter(r for (r,) in con.execute("SELECT doubt FROM entry WHERE doubt != ''"))
+    print(f'etymology labels (entries): {dict(c)}; doubtful/opaque analyses: {dict(d)}')
+    return c
+
+
+def taigi_layers(con):
+    """The MOE marks no literary reading for most characters (文白屬性 0: no split); for some the one reading it gives
+    is in fact colloquial (冊 tsheh, 院 īnn, 醬 tsiùnn). A literary reading keeps the Middle Chinese coda, as Hán-Việt
+    does, so an unmarked reading whose coda class differs from every Hán-Việt reading of the character is colloquial:
+    -h (glottal stop) for a stop (冊 tsheh / sách), a nasal vowel -nn for -n/-ng (院 īnn / viện, 醬 tsiùnn / tương),
+    a bare vowel for a nasal or stop. Classes: p, t, k (Hán-Việt -c/-ch), m, n, ng (Hán-Việt -nh), h, nn, vowel;
+    m/n, p/t and k/t agree (regular literary correspondences: 凡 phàm / huân, 法 pháp / huat, 直 trực / ti̍t).
+    Such readings get note 'colloquial' (chinese table): the bridge never shows them as literary; a character left
+    with none is "colloquial only" on the card. Readings the MOE marks literary (1) are not touched. Returns the
+    characters changed."""
+    rows, changed = [], set()
+    by_char = defaultdict(list)
+    for rid, ch, r in con.execute("SELECT rowid, chars, reading FROM chinese WHERE lang='nan' AND level='char' AND "
+                                  "note='unmarked'"):
+        by_char[ch].append((rid, r))
+    for ch, rs in by_char.items():
+        hv = bridge.hv_readings(con, ch)
+        if not hv:
+            continue
+        hcls = {bridge.coda_hv(x) for x in hv}
+        bad = [(rid, r) for rid, r in rs if not any(bridge.coda_agrees(h, bridge.coda_nan(r)) for h in hcls)]
+        if bad:
+            changed.add(ch)
+            rows += [(rid,) for rid, _ in bad]
+    con.executemany("UPDATE chinese SET note='colloquial' WHERE rowid=?", rows)
+    only = sorted(ch for ch in changed if len(by_char[ch]) == sum(1 for rid, _ in by_char[ch] if (rid,) in set(rows)))
+    print(f'Taigi: {len(changed)} characters have an unmarked MOE reading whose coda does not match Hán-Việt (now '
+          f'"colloquial"); {len(only)} of them have no other reading (colloquial only): {"".join(only[:60])}')
+    return changed
+
+
 def build_bridge(con):
     rows = []
-    for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != '' AND hv_check NOT IN ('differs', "
-                                "'length')").fetchall():
+    spell = {c for (c,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != '' AND hv_check NOT IN "
+                                       "('differs', 'length')")}
+    for (e,) in con.execute("SELECT DISTINCT etymon FROM entry WHERE origin = 'nonhv' AND etymon != ''"):
+        m = re.match(etym.CJK + '+', e)
+        if m:
+            spell.add(m.group(0))          # an older loan's etymon: its readings on the card (giấy 紙)
+    for chars in sorted(spell):
         j = bridge.join(con, chars)
         rows.append((chars, j['hv'], j['yue'], j['yue_by'], j['nan'], j['nan_by'], j['cmn'], j['cmn_by'], j['n'],
-                     j['nan_coll'], j.get('via', '')))
-    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?,?)', rows)
+                     j['nan_coll'], j.get('via', ''), j['nan_flag']))
+    con.executemany('INSERT INTO bridge VALUES (?,?,?,?,?,?,?,?,?,?,?,?)', rows)
     c = Counter(r[8] for r in rows)
     print(f'bridge: {len(rows)} distinct chữ Hán spellings; with 3 Chinese readings {c[3]}, 2 {c[2]}, 1 {c[1]}, 0 {c[0]}; '
           f'{sum(1 for r in rows if r[-1])} found partly under a variant spelling (Unihan)')
@@ -838,16 +1291,24 @@ def main():
     hannom_attested(con)          # before southern_variants: an attested Southern form (義 ngãi) is labelled too
     southern_variants(con)
     unihan_fallback(con)
+    spelling_groups(con, raw)
+    alt_forms(con)
     word_checks(con)
+    origins_after_load(con)
     hv_usage(con)
-    known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')}
+    taigi_layers(con)
+    known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')} | \
+        {k for (k,) in con.execute('SELECT key FROM spelling')}
     if sentences:
         attach_examples(con, sentences, known)
     # the corpus for word counts: Tatoeba, Wiktionary's examples (+ the Tatoeba Challenge copy in the private build)
     corpus = [v for v, _, _ in sentences] + [v for (v,) in con.execute(
         "SELECT vi FROM example WHERE source = 'wiktionary'")] + corpus
     fdesc = frequencies(con, raw, corpus)
+    compose_english(con)
+    character_readings(con)
     build_bridge(con)
+    etymology_states(con)
     con.executemany('INSERT INTO meta VALUES (?,?)', [('nc', '1' if nc else '0'),
                                                       ('built', datetime.date.today().isoformat()),
                                                       ('sources', ' '.join(used)), ('missing', ' '.join(missing)),

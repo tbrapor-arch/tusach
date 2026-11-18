@@ -62,3 +62,27 @@ def lessons():
 def syllabus():
     p = os.path.join(ROOT, 'course/syllabus.yaml')
     return load(p) if os.path.exists(p) else {}
+
+
+WORDLIST_COLS = ('lesson', 'word', 'english', 'freq_rank', 'type', 'characters', 'han_viet', 'cantonese',
+                 'taigi_literary', 'mandarin', 'note')
+PLAN_KEYS = {'n', 'en', 'vi', 'review', 'grammar', 'bridge', 'strand', 'lines', 'new_words'}
+
+
+def wordlist(path):
+    """The rows of a word list in the 11-column format of course/proposal/wordlist-1.tsv (WORDLIST_COLS, with a header
+    line). Raises ValueError when the header is not that format."""
+    path = path if os.path.isabs(path) else os.path.join(ROOT, path)
+    lines = open(path, encoding='utf-8').read().split('\n')
+    head = tuple(lines[0].split('\t'))
+    if head != WORDLIST_COLS:
+        raise ValueError(f'{os.path.relpath(path, ROOT)}: header must be the 11 columns {" ".join(WORDLIST_COLS)}')
+    out = []
+    for i, line in enumerate(lines[1:], 2):
+        if not line.strip() or line.startswith('#'):
+            continue
+        p = line.split('\t')
+        if len(p) != len(WORDLIST_COLS):
+            raise ValueError(f'{os.path.relpath(path, ROOT)}:{i}: {len(p)} columns, not {len(WORDLIST_COLS)}')
+        out.append(dict(zip(WORDLIST_COLS, p), line=i))
+    return out

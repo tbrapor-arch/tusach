@@ -56,7 +56,7 @@ with tempfile.TemporaryDirectory() as tmp:
     fetch_sh = open(os.path.join(ROOT, 'data/fetch.sh'), encoding='utf-8').read()
     code_lines = [x for x in fetch_sh.splitlines() if x.strip() and not x.lstrip().startswith('#')]
     snaps = [x.split() for x in code_lines if x.split()[0] == 'snap']
-    ok(len(snaps) == 4 and all(len(p) == 6 and re.fullmatch(r'data-\d{4}-\d\d-\d\d', p[4])
+    ok(len(snaps) == 6 and all(len(p) == 6 and re.fullmatch(r'data-\d{4}-\d\d-\d\d(\.\d+)?', p[4])
                                and re.fullmatch(r'[0-9a-f]{64}', p[5]) for p in snaps)
        and not any('://kaikki.org' in x or 'tatoeba.org/' in x for x in code_lines),
        'every snapshot source is pinned to a release tag and a SHA-256, never to the moving upstream URL')
@@ -120,7 +120,7 @@ with tempfile.TemporaryDirectory() as tmp:
     r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db], cwd=ROOT, env=env,
                        capture_output=True, text=True)
     ok(r.returncode != 0 and 'FAILED' in r.stdout + r.stderr and not os.path.exists(db), 'build_db fails on a missing source')
-    allow = 'thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
+    allow = 'wiktionary-tr,thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
     r = subprocess.run([sys.executable, '-I', 'tools/build_db.py', 'tools/fixtures/raw', db], cwd=ROOT,
                        env=dict(env, TUSACH_ALLOW_MISSING=allow), capture_output=True, text=True)
     meta = dict(sqlite3.connect(db).execute('SELECT key, value FROM meta')) if r.returncode == 0 else {}

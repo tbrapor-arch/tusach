@@ -47,6 +47,7 @@ con = ENGLISH = None
 COURSE = {}       # card id -> course data for the word (en, chars, label, name) from the lessons' new_words
 NAMES = {}        # surface (spaces, original case) -> card id, for names declared in new_words with `name: true`
 KNOWN = set()     # every dictionary key, for the dictionary cutter
+CANON = {}        # key of a spelling -> the house spelling's key (table `spelling`: lí do -> lý do)
 
 
 def open_db(purpose, path=None):
@@ -94,6 +95,17 @@ def init(connection, course=None, written=None):
     ENGLISH = english.English(con, {cid: c['en'] for cid, c in COURSE.items() if c.get('en')}, written)
     KNOWN.clear()
     KNOWN.update(k for (k,) in con.execute('SELECT DISTINCT key FROM entry'))
+    CANON.clear()
+    try:
+        CANON.update(con.execute('SELECT key, canon FROM spelling'))
+    except sqlite3.Error:              # a database built before spelling groups existed
+        pass
+    KNOWN.update(CANON)
+
+
+def canon(k):
+    """The key a spelling is filed under: the house spelling of its spelling group (lí do -> lý do), else itself."""
+    return CANON.get(k, k)
 
 
 def load_false_friends(path=FALSE_FRIENDS):
@@ -112,6 +124,17 @@ def load_false_friends(path=FALSE_FRIENDS):
 FF = load_false_friends()
 
 
+def per_char(chars):
+    """The readings of each character of a compound formed in Vietnamese (trường học 場學): [{c, hv, yue, nan, cmn}],
+    shown "per character", never composed into a Chinese word that does not exist."""
+    out = []
+    for c in chars:
+        j = bridge.join(con, c)
+        out.append({'c': c, 'hv': '/'.join(bridge.hv_readings(con, c)), **{x: j[x] for x in bridge.LANGS if j[x]},
+                    **({'nan_coll': j['nan_coll']} if j['nan_coll'] else {})})
+    return out
+
+
 def _bridge(chars):
     """The Chinese side of a Hán-Việt card, from tools/bridge.py (the same join the database and coverage use)."""
     j = bridge.join(con, chars)
@@ -121,6 +144,8 @@ def _bridge(chars):
         out['nan_coll'] = j['nan_coll']          # the MOE word reading, colloquial / everyday (never as literary)
     if j.get('via'):
         out['via'] = j['via']                    # readings found under a variant spelling (Unihan): 行爲 -> 行為
+    if j.get('nan_flag'):
+        out['nan_flag'] = j['nan_flag']          # colloquial-only: no literary Taigi reading (冊 tsheh)
     by_char = [lang for lang in bridge.LANGS if j[lang] and j[lang + '_by'] == 'char' and len(chars) > 1]
     if by_char:
         out['by_char'] = by_char
@@ -137,25 +162,41 @@ def senses(rows):
     on the first real build lại "again" (no number) took 賴 from the surname entry and anh "elder brother" took 英 from
     the name/adjective entry under Etymology 1."""
     groups = {}
-    for r in rows:
+    real = [r for r in rows if r.get('english') or r.get('chars') or not r.get('alt_kind')]
+    for r in (real or rows):         # an "alternative spelling" row pooled with its word has no English of its own
         groups.setdefault((r['source'], r['src_id'], r['chars'], r.get('origin') or ''), []).append(r)
     order = {s: i for i, s in enumerate(english.SOURCE_RANK)}
 
     def k(item):
         (src, sid, _, _), rs = item
-        # an entry with no etymology number on a page that has numbered ones (thích 釋, a surname) comes after them
-        return (rs[0]['fixture'], order.get(src, len(order)), int(sid) if str(sid).isdigit() else 10 ** 6,
-                all(r.get('pos') == 'name' for r in rs), rs[0]['id'])
-    return [rs for _, rs in sorted(groups.items(), key=k)]
+        # an entry with no etymology number on a page that has numbered ones (thích 釋, a surname) comes after them;
+        # a character reading (tam~三) and an English-less group come last
+        return (rs[0]['fixture'], all(r.get('pos') == 'character-reading' for r in rs),
+                not any(r.get('english') for r in rs), order.get(src, len(order)),
+                int(sid) if str(sid).isdigit() else 10 ** 6, all(r.get('pos') == 'name' for r in rs), rs[0]['id'])
+    out = [rs for _, rs in sorted(groups.items(), key=k)]
+    # a later etymology with English the English Wiktionary attests (en_score >= 3) goes before a first one whose
+    # senses are all archaic/dialectal/literary (score <= -2): khám "to examine" before the Southern khám "jail"
+    score = lambda g: max((r['en_score'] if r.get('en_score') is not None else -9) for r in g)  # noqa: E731
+    if len(out) > 1 and score(out[0]) <= -2 and not out[0][0]['fixture']:
+        best = max(range(len(out)), key=lambda i: (score(out[i]) >= 3, -i))
+        if score(out[best]) >= 3 and not all(r.get('pos') in ('name', 'character-reading') for r in out[best]):
+            out.insert(0, out.pop(best))
+    # inside one etymology, the entry with the best English evidence first (tools/english.py compose: bận "busy"
+    # before the literary noun "time; occurrence"), then the source order
+    return [sorted(rs, key=lambda r: (-(r.get('en_score') if r.get('en_score') is not None else -9), r['id']))
+            for rs in out]
 
 
 def _group_en(rs):
+    """The English of one etymology: its entries' English, best-attested entry first, at most 4 items and
+    english.MAX_TOTAL characters (the first item always)."""
     gl = []
     for r in rs:
         for g in (r['english'] or '').split('; '):
-            if g and g not in gl:
+            if g and g not in gl and len(gl) < 4 and (not gl or len('; '.join(gl + [g])) <= english.MAX_TOTAL):
                 gl.append(g)
-    return '; '.join(gl[:4])
+    return '; '.join(gl)
 
 
 def _group_chars(rs):
@@ -167,27 +208,55 @@ def _group_chars(rs):
     return '', next((r['label'] for r in rs if r['label'] and not r['chars']), '')
 
 
-COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_rank', 'src_id', 'hv_check', 'origin', 'pos')
+COLS = ('word', 'english', 'chars', 'label', 'source', 'fixture', 'id', 'freq_rank', 'src_id', 'hv_check', 'origin', 'pos',
+        'alt_kind', 'en_score', 'etymon', 'origin_note', 'doubt', 'doubt_why', 'sino_kind', 'tag', 'key')
+SQL_COLS = ', '.join('s.fixture' if c == 'fixture' else 'e.' + c for c in COLS)
+ORIGIN_TEXT = {'sino': 'Hán-Việt', 'nonhv': 'older Chinese loan', 'vietic': 'native', 'loan': 'loan',
+               'compound': 'compound'}
+
+
+def sense_tag(rows, tag):
+    """The entry a homograph tag names when no entry carries the tag itself (phải~must, năm~year): an entry whose part
+    of speech is the tag (phải~verb), else the one entry whose English has the tag as a word. None if not exactly
+    one etymology matches (tools/lint.py says so)."""
+    t = tag.lower()
+    hit = [r for r in rows if (r.get('pos') or '') == t]
+    if not hit:
+        hit = [r for r in rows if r.get('english') and english.has_word(r['english'], t)]
+    keys = {(r['source'], r['src_id'], r['chars'], r.get('origin') or '') for r in hit}
+    return hit[0] if len(keys) == 1 else None
 
 
 def lookup(k, tag=None, surface=None):
     """Card id for the word with key `k` (and homograph tag), or None when neither the dictionary nor the course has it."""
+    k = canon(k)
     cid = vi.card_id(k, tag)
     if cid in dictionary:
         return cid
     rows = [dict(zip(COLS, r)) for r in con.execute(
-        "SELECT e.word, e.english, e.chars, e.label, e.source, s.fixture, e.id, e.freq_rank, e.src_id, e.hv_check, "
-        "e.origin, e.pos "
-        "FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? AND (?='' OR e.tag=?) "
-        "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k, tag or '', tag or '')).fetchall()]
+        f"SELECT {SQL_COLS} FROM entry e JOIN source s ON s.id = e.source WHERE e.key=? "
+        "ORDER BY s.fixture, e.freq_rank IS NULL, e.freq_rank, e.id", (k,)).fetchall()]
+    chosen = None
+    if tag:
+        tagged = [r for r in rows if r['tag'] == tag]
+        if tagged:
+            rows = tagged
+        else:
+            chosen = sense_tag(rows, tag)            # a sense tag: the etymology and entry it names come first
+            if not chosen:
+                rows = []
     course = COURSE.get(cid, {})
     if not rows and not course:
         return None
     groups = senses(rows)
+    if chosen:
+        groups.sort(key=lambda g: chosen not in g)
+        groups[0].sort(key=lambda r: r is not chosen)
     if course.get('chars'):          # the course names the etymology by its characters
         groups.sort(key=lambda g: not any(r['chars'] == course['chars'] for r in g))
     main = groups[0] if groups else []
-    card = {'w': course.get('w') or (main[0]['word'] if main else (surface or k).replace('_', ' ')), 'k': k}
+    house = next((r['word'] for g in groups for r in g if vi.key(r['word']) == k), None)
+    card = {'w': course.get('w') or house or (main[0]['word'] if main else (surface or k).replace('_', ' ')), 'k': k}
     if tag:
         card['tag'] = tag
     gchars, glabel = _group_chars(main)
@@ -196,6 +265,26 @@ def lookup(k, tag=None, surface=None):
     if chars:
         card['chars'] = chars
         card.update(_bridge(chars))
+        if next((r['sino_kind'] for r in main if r['chars'] == chars), '') == 'vn' and len(chars) > 1:
+            card['per_char'] = per_char(chars)     # formed in Vietnamese: no Chinese "word" is composed
+            for lang in bridge.LANGS:
+                card.pop(lang, None)
+            card.pop('by_char', None)
+            card.pop('nan_coll', None)
+    if main and not course.get('chars'):
+        top = main[0]
+        if top.get('origin'):
+            card['origin'] = ORIGIN_TEXT.get(top['origin'], top['origin'])
+            if top.get('origin_note') and top['origin'] != 'sino':
+                card['origin'] += ': ' + top['origin_note']
+        if top.get('doubt'):
+            card['doubt'] = top['doubt_why'] or top['doubt']
+        if top.get('origin') == 'nonhv':
+            em = next((r['etymon'] for r in main if r.get('etymon')), '')
+            ec = ''.join(c for c in em.split(' ')[0] if vi.CJK.match(c))
+            if ec:
+                j = bridge.join(con, ec)
+                card['etymon'] = {'chars': ec, 'hv': j['hv'], **{x: j[x] for x in bridge.LANGS if j[x]}}
     ff = FF.get((k, chars)) if (k, chars) in FF else FF.get((k, ''))
     if ff is not None and not course.get('label'):
         label = 'false-friend'
@@ -220,7 +309,8 @@ def lookup(k, tag=None, surface=None):
             if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
                 card['ex']['src'] = ex[2] + (' ' + ex[3] if ex[3] else '')
         other = [{'en': _group_en(g), **({'chars': _group_chars(g)[0]} if _group_chars(g)[0] else {})}
-                 for g in groups[1:] if _group_en(g) and not g[0]['fixture']]
+                 for g in groups[1:] if _group_en(g) and not g[0]['fixture']
+                 and not all(r['pos'] == 'character-reading' for r in g)]
         if other:
             card['other'] = other         # the other etymologies of this spelling, each with its own English and chars
     syls = k.split()

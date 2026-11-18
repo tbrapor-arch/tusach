@@ -19,7 +19,7 @@ import bridge  # noqa: E402
 import freq  # noqa: E402
 
 failures = []
-ALL_BUT_WIKTIONARY = 'thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
+ALL_BUT_WIKTIONARY = 'wiktionary-tr,thieuchuu,unihan,rime,moe,cedict,tatoeba,tatoeba-challenge,frequencywords'
 
 
 def ok(cond, what):
@@ -48,7 +48,7 @@ with tempfile.TemporaryDirectory() as tmp:
     ok(e.get('học sinh', ())[:3] == ('學生', 'sino', 'same'), 'vi-etym-sino gives the characters (odd arguments) and label same')
     ok(e.get('đại học', ())[:1] == ('大學',), 'vi-etym-sino with the whole word in one argument')
     ok(e.get('chó', ())[:3] == ('', 'vietic', 'native'), 'an inherited Vietic word is labelled native')
-    ok(e.get('cà phê', ())[:3] == ('', '', ''), 'a borrowing is neither same nor native')
+    ok(e.get('cà phê', ())[:3] == ('', 'loan', 'loan'), 'a borrowing is neither same nor native: a loan')
     ok('quốc' in e and 'ken' not in e and '馬' not in e and 'dog' not in e,
        'keeps a glossless Sino-Vietnamese entry; drops empty stubs, Han-character headwords and other languages')
     hv = set(con.execute("SELECT char, reading, kind FROM hanviet WHERE source='wiktionary'"))
@@ -87,13 +87,15 @@ with tempfile.TemporaryDirectory() as tmp:
                                           "WHERE source='wiktionary'")}
     ok(e.get('học sinh', ())[:3] == ('學生', 'sino', 'same'), 'real: vi-etym-sino 1=學 2=gloss 3=生 4=gloss')
     ok(e.get('thế giới', ())[:1] == ('世界',), 'real: vi-etym-sino with the whole word in 1')
-    ok(e.get('giấy', ())[:4] == ('', 'nonhv', '', '紙 chỉ') and e.get('và', ())[:4] == ('', 'nonhv', '', '和 hoà'),
+    ok(e.get('giấy', ())[:4] == ('', 'nonhv', 'older-loan', '紙 chỉ') and
+       e.get('và', ())[:4] == ('', 'nonhv', 'older-loan', '和 hoà'),
        'real: "Non-Sino-Vietnamese reading" (hv=/preMC=) is a borrowing, not a Hán-Việt analysis; etymon kept')
     ok(e.get('câu lạc bộ', ())[:2] == ('俱樂部', 'sino'), 'real: an empty vi-etym-sino takes the borrowed characters')
     ok(e.get('nguyệt thực', ())[:1] == ('月食',), 'real: two vi-etym-sino (月食 / 月蝕) are alternatives, not joined')
     ok(e.get('học sinh', ('',) * 5)[4].startswith('a pupil'), 'real: an archaic sense ("a student") comes after')
     ok('misspelling' not in e.get('chuyện', ('',) * 5)[4], 'real: a "misspelling of" sense is not English')
-    ok('y' not in e, 'real: "Sino-Vietnamese reading of 衣" is not a word')
+    ok(not con.execute("SELECT 1 FROM entry WHERE key='y' AND pos != 'character-reading'").fetchone(),
+       'real: "Sino-Vietnamese reading of 衣" is not a word (only a character-reading entry, tagged 衣)')
     hv = set(con.execute("SELECT char, reading, kind, label FROM hanviet WHERE source='wiktionary'"))
     ok(('衣', 'y', 'hv', 'romanization') in hv, 'real: ... it is a Hán-Việt reading of 衣')
     ok(('世', 'thế', 'hv', '') in hv and ('世', 'thá', 'nom', '') in hv, 'real: readings tagged inside senses[].related')

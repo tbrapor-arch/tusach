@@ -37,7 +37,20 @@ CREATE TABLE entry(
   label TEXT,             -- same | native | '' (computed from origin); false-friend comes from course/false_friends.tsv
   freq INT,               -- estimated occurrences per billion words (tools/freq.py; method in meta.freq_method)
   freq_rank INT,          -- 1 = most frequent key; entries of one key share its rank
-  etymon TEXT             -- origin nonhv: the Chinese etymon and its Hán-Việt reading ('紙 chỉ'); not a Hán-Việt analysis
+  etymon TEXT,            -- origin nonhv: the Chinese etymon and its Hán-Việt reading ('紙 chỉ'); not a Hán-Việt analysis
+  alt_of TEXT DEFAULT '', -- a Wiktionary entry whose every sense is "alternative spelling/form of X": the key of X
+  alt_kind TEXT DEFAULT '', -- spelling (same word, other spelling: công ty / công ti) | form (another form of the word:
+                          -- cảm ơn / cám ơn, Northern / Southern) | ''
+  origin_note TEXT DEFAULT '', -- the evidence for origin, in words ('inherited from Proto-Vietic *ʔɛːm', 'cognate with
+                          -- Muong chi', 'borrowed from French ga', 'as cám ơn (alternative form)')
+  sino_kind TEXT DEFAULT '', -- origin sino: word (the characters are a Chinese word in CC-CEDICT, rime or the MOE, or one
+                          -- character) | vn (a compound formed in Vietnamese or in Vietnamese order: 場學 trường học)
+  doubt TEXT DEFAULT '',  -- '' | doubtful (Wiktionary's own uncertainty, or course/etymology-review.tsv) | opaque (the
+                          -- analysis holds but a Chinese reader would not see the word: sense not in CC-CEDICT's English
+                          -- of the characters, a grammaticalised function word, a rare character)
+  doubt_why TEXT DEFAULT '', -- the evidence for `doubt`, in words
+  en_score REAL           -- tools/english.py compose(): evidence for the entry's first English (the card puts the
+                          -- entry with the best score first among the entries of one etymology)
 );
 CREATE INDEX entry_key ON entry(key);
 CREATE INDEX entry_tkey ON entry(tkey);
@@ -66,7 +79,7 @@ CREATE INDEX hanviet_char ON hanviet(char);
 -- level: word (the source has these characters as one word) | char (a single character's reading).
 -- share: the source's own weight for this reading, when it gives one (rime-cantonese: % of the character's uses; a
 -- character's main reading has none). note: nan = literary (文讀) | unmarked (the MOE gives no literary/colloquial
--- split for it); cmn = name (CC-CEDICT capitalised reading: surname or place; not shown unless the word is a name).
+-- split for it) | colloquial (unmarked, but its coda does not match Hán-Việt: tools/build_db.py taigi_layers); cmn = name (CC-CEDICT capitalised reading: surname or place; not shown unless the word is a name).
 -- Only CC-CEDICT's traditional forms are keyed (a simplified form's readings never reach a traditional character).
 -- rank: display order within (chars, lang, level), set after loading (tools/build_db.py rank_chinese): yue rime's main
 -- reading then its share; cmn Unihan kMandarin's reading first, then by the number of CC-CEDICT words using the
@@ -88,5 +101,29 @@ CREATE INDEX variant_char ON variant(char);
 -- nan is the LITERARY (文讀) reading, composed from the characters' literary readings; nan_by = word when the MOE word
 -- entry reads the word exactly so (attested); nan_coll = the MOE word reading when it differs (colloquial / everyday).
 -- via: the variant spelling under which some Chinese reading was found ('' when the word's own characters gave all)
+-- nan_flag: colloquial-only (a character has no literary Taigi reading, only a colloquial one: 冊 tsheh; the literary
+-- column is then empty and nan_coll gives the colloquial reading)
 CREATE TABLE bridge(chars TEXT PRIMARY KEY, hv TEXT, yue TEXT, yue_by TEXT, nan TEXT, nan_by TEXT, cmn TEXT,
-                    cmn_by TEXT, n INT, nan_coll TEXT, via TEXT);
+                    cmn_by TEXT, n INT, nan_coll TEXT, via TEXT, nan_flag TEXT);
+
+-- the senses of a Wiktionary entry as kaikki gives them (before any reordering): gloss (the last, most specific gloss
+-- of the sense), tags (comma-separated), examples (number of examples), alt_of (the "alternative form of" target)
+CREATE TABLE sense(entry_id INT, n INT, gloss TEXT, tags TEXT, examples INT, alt_of TEXT);
+CREATE INDEX sense_entry ON sense(entry_id);
+-- the English Wiktionary's Vietnamese translations of English entries (source wiktionary-tr): en (the English
+-- headword), pos, sense (the translation table's gloss), key (the Vietnamese translation, tools/vi.py key()), tags,
+-- n_vi (how many Vietnamese translations that table gives: 1 = specific). Card English (tools/build_db.py
+-- compose_english): which English is a word's main one.
+CREATE TABLE translation(en TEXT, pos TEXT, sense TEXT, key TEXT, tags TEXT, n_vi INT);
+CREATE INDEX translation_key ON translation(key);
+-- the Chinese words (Mandarin, Cantonese, Min Nan; traditional and simplified) of the same translation tables: a
+-- Hán-Việt analysis whose characters appear in a Chinese translation of a table that has the Vietnamese word is
+-- the same word in that sense (tools/build_db.py etymology_states)
+CREATE TABLE translation_zh(en TEXT, pos TEXT, sense TEXT, word TEXT);
+CREATE INDEX translation_zh_t ON translation_zh(en, pos, sense);
+-- a spelling group (tools/build_db.py spelling_groups): every key of a group of spellings of ONE word (i/y: lí do /
+-- lý do; Wiktionary "alternative spelling of") -> the house spelling (canon, docs/REFERENCE.md); how: iy | alt
+CREATE TABLE spelling(key TEXT PRIMARY KEY, canon TEXT, how TEXT);
+-- CC-CEDICT's English of a traditional form (all its entries, '; '): the sense check of a Hán-Việt analysis (doubt)
+CREATE TABLE cedict_en(chars TEXT, english TEXT);
+CREATE INDEX cedict_en_chars ON cedict_en(chars);
