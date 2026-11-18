@@ -5,7 +5,8 @@ human part of each note.
     python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv            # rewrite the file in place
     python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv --check    # say which rows would change, write nothing
     python3 -I tools/wordlist.py course/proposal/wordlist-2.tsv --to-check course/proposal/wordlist-2-to-check.md
-        # write the to-check list: the course lexicon's doubts and overrides, with the lesson that teaches each word
+        # write the to-check list: the course lexicon's doubts and overrides, with the lesson that teaches each word;
+        # a hand-written section from the heading "## For a native speaker" on is kept
 
 Columns written: english (the card's English, cut at 90 characters), freq_rank (the card's rank; none for a person's
 name), type (the card label in words: Hán-Việt, Hán-Việt formed in Vietnamese, Hán-Việt (opaque), Hán-Việt
@@ -131,8 +132,16 @@ def to_check(list_path, out_path):
     for r in ov:
         for k, why in lexicon.overrides(r).items():
             out.append(f"| {r['key']} | {lesson(r)} | {k} | {why} |")
-    open(out_path, 'w', encoding='utf-8').write('\n'.join(out) + '\n')
-    print(f'{out_path}: {len(doubt)} doubts, {len(ov)} overrides')
+    hand = ''                   # the hand-written part (from HAND on) survives regeneration
+    if os.path.exists(out_path):
+        old = open(out_path, encoding='utf-8').read()
+        if HAND in old:
+            hand = '\n' + old[old.index(HAND):].rstrip('\n') + '\n'
+    open(out_path, 'w', encoding='utf-8').write('\n'.join(out) + '\n' + hand)
+    print(f'{out_path}: {len(doubt)} doubts, {len(ov)} overrides' + (', hand-written section kept' if hand else ''))
+
+
+HAND = '## For a native speaker'
 
 
 def main():
