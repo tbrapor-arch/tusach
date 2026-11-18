@@ -24,3 +24,15 @@ described from published accounts, not from listening).
 3. Line 5: **Em cũng học ở Hà Nội** for a university student: is **học ở Hà Nội** natural, or would she name the
    school (later lessons)?
 4. Line 7: **Em là em chị Lan** for "I'm Lan's younger sister", without **gái**: natural in speech?
+
+## Lesson 3
+1. Line 1: **Quán này có trà không em?** with the vocative **em** at the end: natural word order between friends?
+2. Line 3: answering the negative question **Anh không uống cà phê à?** with **Có.** ("I do"): is bare **Có** usual,
+   or **Có chứ** / **Có, anh uống** (chứ comes at lesson 18)?
+3. Line 5: Sacha orders **Cho anh một cà phê sữa đá** to a young waiter (anh for himself). Is **cho anh** natural
+   from a customer, or is **cho tôi** / **cho mình** more usual with staff?
+4. Line 7: **Không phải.** as "No, that's not right" to correct an order; would **Không, …** alone be more usual?
+   And **…, nhé** at the end of the corrected order.
+5. Exercises: **Chị là người Hà Nội phải không?** and **Anh muốn uống cà phê phải không?** are written without the
+   comma before phải không (lint's copy check refuses the comma-separated tag while the dialogue has one); both
+   spellings are common in print, as far as Claude knows.

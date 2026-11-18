@@ -1,0 +1,58 @@
+id: 3
+title: {vi: Ở quán cà phê, en: At the café}
+review: false
+setting: >-
+  Saturday afternoon. Thảo takes Sacha to a small café near her sister's house. They sit on low plastic stools on the
+  pavement; a young waiter comes over.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Quán này có trà không em?", en: "Do they have tea here?", lit: "café this have tea not, younger-sibling?"}
+- {n: 2, speaker: Thảo, vi: "Có. Anh không uống cà_phê à?", en: "Yes. Don't you drink coffee?", lit: "have. elder-brother not drink coffee (surprised)?"}
+- {n: 3, speaker: Sacha, vi: "Có. Anh muốn một cà_phê sữa đá~ice. Em uống gì?", en: "I do. I'd like an iced coffee with milk. What will you have?", lit: "have. elder-brother want one coffee milk ice. younger-sibling drink what?"}
+- {n: 4, speaker: Thảo, vi: "Em uống trà đá~ice.", en: "I'll have an iced tea.", lit: "younger-sibling drink tea ice."}
+- {n: 5, speaker: Sacha, vi: "Em ơi! Cho anh một cà_phê sữa đá~ice và một cốc trà đá~ice.", en: "Excuse me! An iced coffee with milk and a glass of iced tea, please.", lit: "younger-sibling hey! give elder-brother one coffee milk ice and one glass tea ice."}
+- {n: 6, speaker: Waiter, vi: "Hai cà_phê sữa đá~ice, phải~right không ạ?", en: "Two iced coffees with milk, is that right?", lit: "two coffee milk ice, right not (polite)?"}
+- {n: 7, speaker: Sacha, vi: "Không phải~right. Một cà_phê sữa đá~ice và một trà đá~ice nhé.", en: "No. One iced coffee with milk and one iced tea, OK?", lit: "not right. one coffee milk ice and one tea ice, OK?"}
+notes:
+- {ref: 1, topic: grammar, text: "Yes/no questions: có … không? around the verb or the thing asked about. Quán này có trà không? \"does this café have tea?\" The answer repeats the verb: Có \"yes (it has)\" or Không \"no\". có means \"to have, there is\"; with another verb, có … không? asks \"do you …?\" (Anh có uống trà không? \"do you drink tea?\")."}
+- {ref: 1, topic: grammar, text: "này \"this\" follows the noun: quán này \"this café\", cốc này \"this glass\". The name of the person you talk to can end the sentence: … không em?"}
+- {ref: 2, topic: grammar, text: "To answer a negative question, say what is true: Anh không uống cà phê à? \"don't you drink coffee?\" – Có \"I do\" (like French si), or Không \"no, I don't\"."}
+- {ref: 3, topic: grammar, text: "muốn \"to want\", before a noun (Anh muốn một cà phê) or a verb (Anh muốn uống trà). One noun is enough for an order: một cà phê \"a coffee\", the cup is understood."}
+- {ref: 3, topic: usage, text: "cà phê sữa đá: coffee + milk + ice, each word describing the one before it, as in người Pháp. In Hà Nội it usually means strong coffee with sweetened condensed milk, over ice. cà phê is the French café."}
+- {ref: 5, topic: pronouns, text: "Em ơi! is how you call a young waiter or shop assistant: em because they are younger, ơi \"hey\" to call. It is friendly, not rude. To an older woman: Chị ơi!"}
+- {ref: 5, topic: grammar, text: "Cho anh … \"give me …\" is the everyday way to order: cho \"to give\" + the person + the thing. With strangers of any age, cho tôi … is neutral and always correct."}
+- {ref: 5, topic: usage, text: "cốc \"glass, cup\" is the Northern word (the South says ly); một cốc trà đá \"a glass of iced tea\". và \"and\" joins nouns."}
+- {ref: 6, topic: particles, text: "…, phải không? \"…, right?\" checks a guess: Hai cà phê sữa đá, phải không? The waiter adds ạ for politeness to a customer older than him."}
+- {ref: 7, topic: grammar, text: "Không phải \"not so, that's not right\". Before a noun, \"is not\" is không phải là: Thảo không phải là người Pháp \"Thảo is not French\". Plain không does not go before là."}
+- {ref: 7, topic: particles, text: "nhé at the end makes a request or proposal friendly, like \"…, OK?\": Một trà đá nhé. It is the Northern particle; the South says nha."}
+- {ref: 5, topic: bridge, text: "quán is 館 (Mandarin guǎn), a place that serves you: here a café."}
+- {ref: 0, topic: pronunciation, text: "trà and cho both start with the Hà Nội [c] (tr = ch, Lesson 0). sữa has the broken ngã tone; đá starts with the voiced đ. cốc and uống end with the lips closing (Lesson 0, the lip rule)."}
+new_words:
+- {w: quán, en: "café, small restaurant, eatery; stall"}
+- {w: cà_phê, en: coffee}
+- {w: trà, en: tea}
+- {w: sữa, en: milk}
+- {w: đá, tag: ice, en: "ice; stone"}
+- {w: cốc, en: "glass, cup (Northern)"}
+- {w: uống, en: to drink}
+- {w: muốn, en: to want}
+- {w: có, en: "to have; there is, there are; (question) … or not?"}
+- {w: cho, en: "to give; for, to; to let"}
+- {w: một, en: "one; a, an"}
+- {w: hai, en: two}
+- {w: ba, tag: three, en: three}
+- {w: ơi, en: "hey (calling someone): em ơi!"}
+- {w: nhé, en: "…, OK? (friendly final particle)"}
+- {w: và, en: and}
+- {w: này, en: "this; (calling) hey"}
+- {w: phải, tag: right, en: "right (side); right, correct"}
+exercises:
+  translate:
+  - {vi: "Chị có muốn uống trà không?", en: "Would you like some tea? (to a young woman a little older)"}
+  - {vi: "Cho tôi ba~three cốc cà_phê.", en: "Three coffees, please."}
+  - {vi: "Thảo không phải~right là người Pháp.", en: "Thảo isn't French."}
+  - {vi: "Chị Lan uống trà và cà_phê.", en: "Lan drinks tea and coffee."}
+  - {vi: "Anh muốn uống cà_phê phải~right không?", en: "You want a coffee, right?"}
+  fill:
+  - {vi: "Chị ___! Cho em hai cốc trà.", answer: ơi, en: "Excuse me! Two glasses of tea, please. (to an older woman)"}
+  - {vi: "Quán này ___ sữa không?", answer: có, en: "Does this café have milk?"}
+  - {vi: "Chị là người Hà_Nội ___ không?", answer: "phải~right", en: "You're from Hà Nội, aren't you? (to a young woman a little older)"}
