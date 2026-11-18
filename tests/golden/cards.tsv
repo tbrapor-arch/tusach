@@ -1,540 +1,552 @@
 # Golden word cards (tools/test_golden.py): generated from the cards on 2026-11-18 and reviewed by Claude, NOT checked by a native speaker.
-id	en_lead	label	chars	ety	example
-chào	hello	doubtful		wiktionary -	yes
-anh	elder brother	native		wiktionary 1	yes
-chị	elder sister	native		wiktionary -	yes
-em	younger sibling	native		wiktionary -	yes
-tôi	I, me (neutral)	native		wiktionary 1	yes
-là	to be (noun = noun)	native		wiktionary 2	yes
-tên	name			wiktionary 1	yes
-gì	what	native		wiktionary -	yes
-không	not	opaque	空	wiktionary -	yes
-vâng	yes (polite)			wiktionary -	yes
-ạ	(polite final particle, to older people)			wiktionary 2	yes
-cảm ơn	thank you	older-loan		wiktionary -	yes
-rất	very			wiktionary -	yes
-vui	happy, glad	native		wiktionary -	yes
-được	to get, to obtain	older-loan		wiktionary -	yes
-gặp	to meet	native		wiktionary -	yes
-người	person, people	native		wiktionary -	yes
-nước~water	water	native		wiktionary 1	yes
-nước	water	native		wiktionary 1	yes
-nước~country	country, nation	native		wiktionary 2	yes
-nào	which			wiktionary -	yes
-ở	at, in	native		wiktionary -	yes
-đâu	where			wiktionary -	yes
-đến	to come, to arrive	native		wiktionary -	yes
-từ~from	from	older-loan		wiktionary 1	yes
-từ	from	older-loan		wiktionary 1	yes
-từ~word	word	same	詞	wiktionary 2	yes
-việt nam	Vietnam	same	越南	wiktionary -	yes
-pháp	France	same	法	wiktionary -	yes
-trung quốc	China	same	中國	wiktionary -	yes
-hà nội	Hanoi	same	河內	wiktionary -	yes
-tiếng việt	Vietnamese (the language)	compound		wiktionary -	yes
-nói	to speak			wiktionary -	yes
-biết	to know	older-loan		wiktionary -	yes
-cũng	also, too	older-loan		wiktionary -	yes
-học	to study, to learn	same	學	wiktionary -	yes
-cà phê	coffee	loan		wiktionary -	yes
-trà~tea	tea	same	茶	wiktionary 2	yes
-trà	tea	same	茶	wiktionary 2	yes
-sữa	milk	native		wiktionary 1	yes
-đá~ice	ice	native		wiktionary 1	yes
-đá	ice	native		wiktionary 1	yes
-đá~kick	to kick	native		wiktionary 2	yes
-cốc	glass, cup (Northern)	loan		wiktionary 1	yes
-có	to have	native		wiktionary 1	yes
-muốn	to want	native		wiktionary -	yes
-uống	to drink	native		wiktionary -	yes
-cho	to give	native		wiktionary -	yes
-một	one	native		wiktionary -	yes
-hai	two	native		wiktionary 1	yes
-đây	here			wiktionary -	yes
-ơi	hey (calling someone): em ơi!	native		wiktionary -	yes
-nhé	…, OK? (friendly final particle)			wiktionary -	yes
-chút	a little, a bit	native		wiktionary -	yes
-ngồi	to sit	native		wiktionary -	yes
-ba~three	three	native		wiktionary 2	yes
-ba	three	native		wiktionary 2	yes
-ba~father	father, dad (Southern)			wiktionary 1	yes
-bốn	four	native		wiktionary -	yes
-năm~year	year	native		wiktionary 2	yes
-năm	year	native		wiktionary 2	yes
-năm~five	five	native		wiktionary 1	yes
-sáu	six	native		wiktionary -	yes
-bảy	seven	native		wiktionary -	yes
-tám	eight	native		wiktionary 1	yes
-chín	nine	native		wiktionary 1	yes
-mười	ten	native		wiktionary -	yes
-mươi	ten (in tens from twenty on: hai mươi)			wiktionary 1	yes
-nghìn	thousand	native		wiktionary -	yes
-bao nhiêu	how much, how many	compound		wiktionary -	yes
-tiền	money	same	錢	wiktionary 1	yes
-đồng	dong (the currency)	same	銅	wiktionary 3	yes
-mua	to buy	doubtful		wiktionary 1	yes
-đắt	expensive	native		wiktionary -	yes
-rẻ	cheap			wiktionary -	yes
-quá	too, very (much)	same	過	wiktionary -	yes
-quả	fruit	same	果	wiktionary 1	yes
-cam	orange (fruit, colour)	same	柑	wiktionary 1	yes
-gia đình	family	same	家庭	wiktionary -	yes
-ảnh	photo, picture	same	影	wiktionary 1	yes
-bố	father, dad (Northern)	native		wiktionary 1	yes
-mẹ	mother, mum	native		wiktionary -	yes
-ông	grandfather	same	翁	wiktionary -	yes
-bà	grandmother	same	婆	wiktionary -	yes
-anh trai	elder brother	compound		wiktionary -	yes
-chị gái	elder sister	compound		wiktionary -	yes
-em gái	younger sister	compound		wiktionary -	yes
-ai	who	native		wiktionary 1	yes
-của	of, belonging to			wiktionary -	yes
-con	child	native		wiktionary -	yes
-mấy	how many (small numbers)	native		wiktionary -	yes
-tuổi	age	older-loan		wiktionary -	yes
-giờ	hour	older-loan		wiktionary -	yes
-phút	minute			wiktionary -	yes
-rưỡi	and a half (after a number or unit)			wiktionary -	yes
-bây giờ	now	compound		wiktionary -	yes
-hôm nay	today	compound		wiktionary -	yes
-ngày mai	tomorrow	compound		wiktionary -	yes
-sáng	morning	native		wiktionary 1	yes
-chiều~afternoon	afternoon			wiktionary 1	yes
-chiều	afternoon			wiktionary 1	yes
-tối	evening	native		wiktionary 1	yes
-đi	to go	native		wiktionary -	yes
-làm	to do			wiktionary -	yes
-về	to go back, to return (home)	native		wiktionary 1	yes
-nhà	house, home	native		wiktionary -	yes
-đang	(action in progress) be …-ing, now	gram	當	wiktionary -	yes
-sẽ	will (future)	native		wiktionary 1	yes
-đã	(past) did, already			wiktionary -	yes
-chiều~direction	direction			wiktionary 2	yes
-đường~road	road, street	doubtful		wiktionary 1	yes
-đường	road, street	doubtful		wiktionary 1	yes
-đường~sugar	sugar	same	糖	wiktionary 2	yes
-phố	street (in town)	same	舖	wiktionary 1	yes
-xe máy	motorbike	compound		wiktionary -	yes
-xe buýt	bus	loan		wiktionary -	yes
-đi bộ	to walk, to go on foot	compound		wiktionary -	yes
-rẽ	to turn (left or right)			wiktionary 1	yes
-trái	left (side)	native		wiktionary 1	yes
-phải~must	must, to have to	doubtful		wiktionary -	yes
-phải	must, to have to	doubtful		wiktionary -	yes
-phải~right	right (side)	doubtful		wiktionary -	yes
-thẳng	straight (ahead)			wiktionary -	yes
-gần	near, close (to)	native		wiktionary -	yes
-xa	far	same	賒	wiktionary 1	yes
-hồ	lake	same	湖	wiktionary 1	yes
-mất	to lose	native		wiktionary -	yes
-khoảng	about, approximately	older-loan		wiktionary -	yes
-hoàn kiếm	Hoàn Kiếm (the lake of the returned sword, in Hanoi)	hv-vn	還劍	wiktionary -	no
-bản đồ	map	false-friend	版圖	wiktionary -	yes
-thời tiết	weather	false-friend	時節	wiktionary -	yes
-trời	sky	native		wiktionary -	yes
-nóng	hot	native		wiktionary -	yes
-lạnh	cold	older-loan		wiktionary -	yes
-mưa	rain	native		wiktionary -	yes
-nắng	sunshine	native		wiktionary -	yes
-mùa	season	doubtful		wiktionary -	yes
-xuân	spring	same	春	wiktionary -	yes
-hè	summer (Northern)	older-loan		wiktionary 1	yes
-thu~autumn	autumn	same	秋	wiktionary 1	no
-thu	autumn	same	秋	wiktionary 1	no
-thu~collect	to collect, to receive	same	收	wiktionary 2	yes
-đông~crowded	crowded	doubtful		wiktionary 3	yes
-đông	crowded	doubtful		wiktionary 3	yes
-đông~winter	winter	same	冬	wiktionary 1	yes
-đông~east	east	same	東	wiktionary 2	yes
-lắm	very (after the word)			wiktionary -	yes
-hơi	a bit, slightly (before an adjective)			wiktionary 1	yes
-hôm qua	yesterday	compound		wiktionary -	yes
-nhưng	but	gram	仍	wiktionary -	yes
-thế nào	how	compound		wiktionary -	yes
-ăn	to eat	native		wiktionary -	yes
-cơm	(cooked) rice	native		wiktionary -	yes
-phở	pho (rice-noodle soup)	older-loan		wiktionary 1	yes
-bát	bowl (Northern)	same	缽	wiktionary 1	yes
-món	dish (of food)			wiktionary 1	yes
-ngon	tasty, delicious	native		wiktionary -	yes
-thịt	meat	native		wiktionary -	yes
-bò	cow, ox	native		wiktionary 1	yes
-gà	chicken	native		wiktionary -	yes
-rau	vegetables, greens	native		wiktionary -	yes
-đũa	chopsticks	older-loan		wiktionary -	yes
-no	full (after eating)	native		wiktionary -	yes
-chưa	not yet			wiktionary -	yes
-rồi	already			wiktionary -	yes
-gọi	to call			wiktionary -	yes
-cuối tuần	weekend	compound		wiktionary -	yes
-thứ bảy	Saturday	compound		wiktionary -	yes
-chủ nhật	Sunday	same	主日	wiktionary -	yes
-rảnh	free, not busy			wiktionary -	yes
-bận	busy	native		wiktionary 1	yes
-thích	to like	opaque	適	wiktionary 1	yes
-xem	to watch, to look at	older-loan		wiktionary -	yes
-phim	film, movie	loan		wiktionary -	yes
-đọc	to read	older-loan		wiktionary -	yes
-sách	book	same	冊	wiktionary 1	yes
-chơi	to play	native		wiktionary -	yes
-bạn	friend	same	伴	wiktionary 1	yes
-với	with	native		wiktionary 2	yes
-hay~or	or			wiktionary 4	yes
-hay	or			wiktionary 4	yes
-hay~good	good, interesting (a film, a book)			wiktionary 2	yes
-hay~often	often			wiktionary 3	yes
-định	to intend to, to plan to	same	定	wiktionary -	yes
-bao giờ	when	compound		wiktionary -	yes
-mệt	tired			wiktionary -	yes
-ốm	ill, sick (Northern)	native		wiktionary -	yes
-đau	to hurt, painful	native		wiktionary -	yes
-đầu	head	same	頭	wiktionary -	yes
-bụng	belly, stomach	native		wiktionary -	yes
-sốt	fever			wiktionary 1	yes
-bị	(passive, for something bad) to suffer, to get	gram	被	wiktionary 1	yes
-bác sĩ	doctor (physician)	false-friend	博士	wiktionary -	yes
-bệnh viện	hospital	same	病院	wiktionary -	yes
-thuốc	medicine	doubtful		wiktionary -	yes
-nghỉ	to rest			wiktionary 1	yes
-nên	should	native		wiktionary -	yes
-khám	to examine (a patient)	same	勘	wiktionary 2	yes
-khỏe	well, healthy	older-loan		wiktionary -	yes
-điện thoại	telephone	same	電話	wiktionary -	yes
-a lô	hello (on the phone)	loan		wiktionary -	yes
-nghe	to hear, to listen	native		wiktionary -	yes
-số	number	same	數	wiktionary -	yes
-nhắn	to leave a message, to text			wiktionary -	yes
-tin	news, message	older-loan		wiktionary -	yes
-chờ	to wait			wiktionary 1	yes
-lát	a moment (một lát)			wiktionary -	yes
-lại	again	native		wiktionary -	yes
-sau	after	native		wiktionary -	yes
-cháu	grandchild	native		wiktionary -	yes
-bác	uncle, aunt (older than one's parent)	native		wiktionary 1	yes
-cô	aunt (father's sister)	same	姑	wiktionary 1	yes
-chú	uncle (father's younger brother)	native		wiktionary 1	yes
-dạ	yes (polite, to elders)			wiktionary 1	yes
-vừa	just (now), recently			wiktionary -	yes
-này	this	native		wiktionary -	yes
-ấy	that (anh ấy he, cô ấy she)			wiktionary -	yes
-đó	that	native		wiktionary 1	yes
-ngày	day	native		wiktionary -	yes
-nhiều	many, much, a lot	older-loan		wiktionary -	yes
-tốt	good	native		wiktionary 1	yes
-nhỏ	small, little			wiktionary 1	yes
-lớn	big, large			wiktionary -	yes
-đẹp	beautiful, good-looking			wiktionary -	yes
-xin lỗi	sorry	compound		wiktionary -	yes
-nhỉ	…, isn't it? (tag particle)			wiktionary -	yes
-và	and	older-loan		wiktionary 1	yes
-các	(plural marker) the …s, all the	gram	各	wiktionary 1	yes
-trong	in, inside	native		wiktionary 2	yes
-để	in order to, so that			wiktionary -	yes
-những	(plural marker) some, the …s	older-loan		wiktionary -	yes
-họ	they, them	older-loan		wiktionary -	yes
-vào	to go in, to enter	native		wiktionary -	yes
-ra	to go out, to come out	native		wiktionary 1	yes
-mà	but	native		wiktionary -	yes
-thì	then (nếu … thì)			wiktionary 2	yes
-trên	on, above	native		wiktionary -	yes
-có thể	can, may	compound		wiktionary -	yes
-như	like, as	gram	如	wiktionary -	yes
-khi	when	native		wiktionary 1	yes
-chỉ~only	only, just	same	只	wiktionary 2	yes
-chỉ	only, just	same	只	wiktionary 2	yes
-chỉ~point	to point (to)	same	指	wiktionary 3	yes
-còn	to remain, still (to have)	native		wiktionary -	yes
-hơn	more (than), -er	native		wiktionary -	yes
-mình	oneself	native		wiktionary -	yes
-điều	matter, thing (something to say or do)	same	條	wiktionary 1	yes
-nó	he, she, it (familiar, or for a child, an animal, a thing)			wiktionary -	yes
-theo	to follow			wiktionary -	yes
-nếu	if			wiktionary -	yes
-cần	to need	doubtful		wiktionary 1	yes
-lên	to go up, to get on	native		wiktionary -	yes
-tại	at, in	same	在	wiktionary 1	yes
-sự	(makes a noun of a verb or adjective: sự thật "the truth")	gram	事	wiktionary -	yes
-vì	because	older-loan		wiktionary 1	yes
-thấy	to see	older-loan		wiktionary -	yes
-nhất	most, -est	same	一	wiktionary -	yes
-mới	new	native		wiktionary -	yes
-việc	work, job	older-loan		wiktionary -	yes
-khác	other, different	older-loan		wiktionary -	yes
-cả	all, whole	native		wiktionary 1	yes
-tới	to come, to arrive	doubtful		wiktionary -	yes
-trước	before	native		wiktionary 1	yes
-vẫn	still			wiktionary -	yes
-hoặc	or	same	或	wiktionary 1	yes
-bằng~by	by (means of), with	same	憑	wiktionary 2	yes
-bằng	by (means of), with	same	憑	wiktionary 2	yes
-bằng~equal	equal (to), as … as	same	平	wiktionary 1	yes
-rằng	that (after say, think, know)			wiktionary -	yes
-vậy	so, thus			wiktionary -	yes
-cái	(classifier for things) thing	native		wiktionary 1	yes
-lần	time (occurrence)	older-loan		wiktionary 1	yes
-ta	we, us (including you)	doubtful		wiktionary 1	yes
-thứ	order, rank (thứ hai "Monday, second")	same	次	wiktionary 1	yes
-thế	so, thus			wiktionary 1	yes
-không thể	cannot, to be unable to	compound		wiktionary -	yes
-chính	main, chief	same	正	wiktionary 1	yes
-thêm	more, extra	older-loan		wiktionary -	yes
-giúp	to help			wiktionary -	yes
-mọi	every, all	older-loan		wiktionary 1	yes
-tìm	to look for, to search	older-loan		wiktionary -	yes
-sống	to live	native		wiktionary 2	yes
-cao	tall, high	same	高	wiktionary 1	yes
-tháng	month	native		wiktionary -	yes
-bộ	set, series	same	部	wiktionary 1	yes
-lúc	moment, time			wiktionary 1	yes
-ngoài	outside	older-loan		wiktionary -	yes
-cách~way	way, manner	same	格	wiktionary 1	yes
-cách	way, manner	same	格	wiktionary 1	yes
-cách~distance	to be (some distance) away from, distant from	same	隔	wiktionary 2	yes
-phần	part, portion, share	same	分	wiktionary 1	yes
-đều	both, all (alike)	older-loan		wiktionary -	yes
-bảo	to tell (someone to), to say	older-loan		wiktionary 1	yes
-hãy	(imperative) do …			wiktionary 1	yes
-loại	kind, type, sort	same	類	wiktionary 1	yes
-chúng ta	we, us (including you)	compound		wiktionary -	yes
-qua	through, across	same	過	wiktionary 1	yes
-cùng	together	older-loan		wiktionary 2	yes
-sử dụng	to use	same	使用	wiktionary -	yes
-nơi	place			wiktionary -	yes
-do	because of, due to	same	由	wiktionary -	yes
-thường	usually, often	same	常	wiktionary 1	yes
-làm việc	to work	compound		wiktionary -	yes
-đưa	to give, to hand			wiktionary -	yes
-từng	ever, once (đã từng)	older-loan		wiktionary 1	yes
-trường	school	false-friend	場	wiktionary 1	yes
-nhìn	to look (at)			wiktionary -	yes
-bắt đầu	to begin, to start	compound		wiktionary -	yes
-dưới	under, below	native		wiktionary -	yes
-nữa	more, further			wiktionary -	yes
-ngay	right (away), immediately	native		wiktionary -	yes
-nhanh	fast, quick	native		wiktionary -	yes
-vụ	case, affair (vụ án)	same	務	wiktionary 1	yes
-giữa	between	native		wiktionary -	yes
-thực sự	really, truly	false-friend	實事	wiktionary -	yes
-bên	side	older-loan		wiktionary -	yes
-thành phố	city	hv-vn	城舖	wiktionary -	yes
-thời gian	time	same	時間	wiktionary -	yes
-hết	to run out, to be finished	native		wiktionary -	yes
-thành	to become	same	成	wiktionary 1	yes
-tay	hand, arm	native		wiktionary -	yes
-chúng tôi	we, us (not including you)	compound		wiktionary -	yes
-khu	area, zone, district	same	區	wiktionary 1	no
-nhận	to receive	same	認	wiktionary 1	yes
-luôn	always			wiktionary -	yes
-dùng	to use	older-loan		wiktionary 1	yes
-sinh	to be born	same	生	wiktionary -	yes
-tất cả	all, everything, everyone	compound		wiktionary -	yes
-đủ	enough	native		wiktionary -	yes
-chiếc	(classifier for vehicles and single objects)	older-loan		wiktionary -	yes
-sao~why	why			wiktionary 1	yes
-sao	why			wiktionary 1	yes
-sao~star	star	native		wiktionary 2	yes
-yêu	to love	native		wiktionary 1	yes
-thế giới	world	same	世界	wiktionary -	yes
-hiểu	to understand	same	曉	wiktionary -	yes
-phòng	room	same	房	wiktionary 1	yes
-tổ chức	to organise, to hold (an event)	same	組織	wiktionary -	yes
-tự	(by) oneself, self-	gram	自	wiktionary 3	yes
-lịch sử	history	same	歷史	wiktionary -	yes
-vị~taste	taste, flavour	same	味	wiktionary 1	yes
-vị	taste, flavour	same	味	wiktionary 1	yes
-vị~person	(respectful classifier for persons)	same	位	wiktionary 3	yes
-nhau	each other			wiktionary 1	yes
-điểm	point	same	點	wiktionary -	yes
-như thế	like that, so	compound		wiktionary -	yes
-lấy	to take	native		wiktionary -	yes
-tỉnh	province	same	省	wiktionary 1	yes
-nguyễn	Nguyễn (the commonest surname)	same	阮	wiktionary -	no
-bởi	by			wiktionary -	yes
-công việc	work, job	compound		wiktionary -	yes
-đúng	right, correct	older-loan		wiktionary -	yes
-tại sao	why	compound		wiktionary -	yes
-độ	degree	same	度	wiktionary -	yes
-đánh	to hit, to beat	older-loan		wiktionary -	yes
-mang	to carry, to bring	native		wiktionary 1	yes
-thật	true, real	same	實	wiktionary -	yes
-cảm	to feel	same	感	wiktionary 1	yes
-vấn đề	problem, issue, question	same	問題	wiktionary -	yes
-phát triển	to develop	same	發展	wiktionary -	yes
-viết	to write	native		wiktionary -	yes
-quốc gia	nation, country	same	國家	wiktionary -	yes
-cuộc	(classifier for events and processes: cuộc họp "a meeting", cuộc sống "life")	older-loan		wiktionary -	yes
-màu	colour	older-loan		wiktionary -	yes
-nay	this (present): hôm nay "today", năm nay "this year"			wiktionary -	yes
-đầu tiên	first	false-friend	頭先	wiktionary -	yes
-tạo	to create, to make	same	造	wiktionary 1	yes
-mỗi	each, every	same	每	wiktionary -	yes
-xuống	to go down, to get off	native		wiktionary -	yes
-cá	fish	native		wiktionary 1	yes
-trở thành	to become	compound		wiktionary -	yes
-tính	to calculate, to count	doubtful		wiktionary 1	yes
-đặt	to put, to place	native		wiktionary -	yes
-hoạt động	activity	same	活動	wiktionary -	yes
-dài	long	native		wiktionary -	yes
-huyện	(rural) district, a subdivision of a province	same	縣	wiktionary -	yes
-thuộc	to belong to	same	屬	wiktionary 1	yes
-đội	team	same	隊	wiktionary 1	yes
-nghĩ	to think	older-loan		wiktionary -	yes
-nằm	to lie (down)	native		wiktionary -	yes
-hoa	flower	same	花	wiktionary 1	yes
-tăng	to increase	same	增	wiktionary 1	yes
-hiện	currently, now	same	現	wiktionary -	yes
-cứ	just (go on), keep on	doubtful		wiktionary -	yes
-sau khi	after (doing)	compound		wiktionary -	yes
-quan trọng	important	hv-vn	關重	wiktionary -	yes
-dù~although	although, even if			wiktionary 2	yes
-dù	although, even if			wiktionary 2	yes
-dù~umbrella	umbrella	native		wiktionary 1	yes
-mặt	face	native		wiktionary -	yes
-giữ	to keep, to hold	native		wiktionary -	yes
-quyền	right, power	same	權	wiktionary 1	yes
-thay đổi	to change	compound		wiktionary -	yes
-đêm	night	native		wiktionary -	yes
-cầu	bridge	older-loan		wiktionary 2	yes
-hỏi	to ask			wiktionary -	yes
-cây	tree, plant	native		wiktionary -	yes
-chuyển	to move, to transfer	same	轉	wiktionary -	yes
-công ty	company	same	公司	wiktionary -	yes
-xã hội	society	same	社會	wiktionary -	yes
-dân	people, citizens	same	民	wiktionary -	yes
-tổng thống	president (of a republic)	same	總統	wiktionary -	yes
-một số	some, a number of	compound		wiktionary -	yes
-quyết định	to decide	same	決定	wiktionary -	yes
-trẻ	young			wiktionary -	yes
-xe	vehicle (car, bike, motorbike)	older-loan		wiktionary 1	yes
-chết	to die	native		wiktionary -	yes
-quận	(urban) district	false-friend	郡	wiktionary -	yes
-cuối cùng	finally, at last	compound		wiktionary -	yes
-bán	to sell	native		wiktionary 1	yes
-lời	words, what is said			wiktionary 1	yes
-tiếng	language	older-loan		wiktionary -	yes
-dịch	to translate	same	譯	wiktionary 1	yes
-chẳng	not (at all)	native		wiktionary -	yes
-phía	side, direction	native		wiktionary -	yes
-tuy	although	same	雖	wiktionary -	yes
-đồ	things, stuff	native		wiktionary 1	yes
-vùng	region, area	native		wiktionary 1	yes
-khiến	to cause, to make (someone do)	older-loan		wiktionary -	yes
-gây	to cause	native		wiktionary 1	yes
-khu vực	area, zone, region	same	區域	wiktionary -	yes
-hàng	goods	same	行	wiktionary 1	yes
-câu	sentence	same	句	wiktionary 2	yes
-trước khi	before (doing)	compound		wiktionary -	yes
-thi	to take an exam	older-loan		wiktionary 2	yes
-đối với	towards, for, regarding	compound		wiktionary -	yes
-sang	to cross (over), to go over (to)	native		wiktionary 2	yes
-giáo viên	teacher	same	教員	wiktionary -	yes
-thời	time, era	same	時	wiktionary -	yes
-kiểm tra	to check, to examine	same	檢查	wiktionary -	yes
-khó	difficult	native		wiktionary -	yes
-trận	match, battle	same	陣	wiktionary -	yes
-bỏ	to leave, to quit	native		wiktionary 1	yes
-chịu	to bear, to endure	older-loan		wiktionary -	yes
-phụ nữ	woman	same	婦女	wiktionary -	yes
-tiếp tục	to continue	same	接續	wiktionary -	yes
-lý do	reason	same	理由	wiktionary -	yes
-chế độ	system, regime	same	制度	wiktionary -	yes
-đặc biệt	special	same	特別	wiktionary -	yes
-rõ	clear			wiktionary -	yes
-giống	to look like, to resemble, to be similar (to)			wiktionary 2	yes
-chạy	to run	native		wiktionary -	yes
-chương trình	programme	false-friend	章程	wiktionary -	yes
-tàu	ship, boat	older-loan		wiktionary 1	yes
-triệu	million	false-friend	兆	wiktionary -	yes
-chống	to oppose, against	native		wiktionary -	yes
-bay	to fly	native		wiktionary 1	yes
-nhớ	to remember	native		wiktionary -	yes
-bài	lesson			wiktionary 2	yes
-khá	fairly, quite	older-loan		wiktionary -	yes
-hình	picture, image	same	形	wiktionary -	yes
-học sinh	pupil, (school) student	same	學生	wiktionary -	yes
-chi	to spend, to pay out	same	支	wiktionary 1	no
-hắn	he, him (cool or contemptuous)	native		wiktionary -	yes
-xảy	to happen (xảy ra)			wiktionary -	yes
-báo	newspaper	same	報	wiktionary 2	yes
-cấp	level, grade	same	級	wiktionary 1	no
-cổ	neck	native		wiktionary 1	yes
-động vật	animal	same	動物	wiktionary -	yes
-nam~south	south	same	南	wiktionary 1	yes
-nam	south	same	南	wiktionary 1	yes
-nam~male	male, man	same	男	wiktionary 2	yes
-chắc	probably, surely			wiktionary 1	yes
-mở	to open	native		wiktionary -	yes
-nhóm	group			wiktionary 1	yes
-chính trị	politics	same	政治	wiktionary -	yes
-thôi	to stop	older-loan		wiktionary 1	yes
-xin	to ask for			wiktionary -	yes
-nhật bản	Japan	same	日本	wiktionary -	yes
-lạm phát	inflation	false-friend	濫發	wiktionary -	no
-nghĩa trang	cemetery	false-friend	義莊	wiktionary -	yes
-thông cảm	to sympathise, to understand	false-friend	通感	wiktionary -	no
-lịch sự	polite	hv-vn	歷事	wiktionary -	yes
-ga	(railway) station	loan		wiktionary 1	yes
-ý	idea, opinion	same	意	wiktionary 1	yes
-dậy	to get up, to wake up	native		wiktionary 1	yes
-biếu	to give (as a respectful gift)	older-loan		wiktionary 1	yes
-kênh	canal			wiktionary 1	yes
-kinh	scripture, (Chinese) classic	same	經	wiktionary 2	yes
-nôm	(chữ Nôm) the Vietnamese script made of Chinese characters	false-friend	南	wiktionary -	no
-thương	to love, to feel for, to pity			wiktionary 2	yes
-bức	(classifier for pictures, letters, walls)	same	幅	wiktionary 2	yes
-kỳ	period, term	same	期	wiktionary 2	yes
-cố	to try (hard)			wiktionary 2	yes
-dần	gradually			wiktionary 2	no
-căn	(classifier for houses, flats, rooms)	older-loan		wiktionary 2	yes
-càng	the more (càng … càng … "the more … the more …")	older-loan		wiktionary 1	yes
-thị	Thị (middle name of women)	same	氏	wiktionary 2	no
-cắt	to cut	native		wiktionary 1	yes
-chất	substance, matter	same	質	wiktionary 1	yes
-ngài	you, sir (very respectful)	native		wiktionary 1	yes
-cơ	muscle	same	肌	wiktionary 1	yes
-tòa	(classifier for large buildings)	older-loan		wiktionary -	yes
-cảnh	scenery, view	same	景	wiktionary 1	yes
-nhờ	to ask (someone) a favour	native		wiktionary 1	yes
-đóng	to close, to shut	doubtful		wiktionary -	yes
-con người	human being, man	compound		wiktionary -	yes
-quay	to turn	native		wiktionary -	yes
-hoàn thành	to complete, to finish	same	完成	wiktionary -	yes
-chắc chắn	certain, sure	compound		wiktionary -	yes
-khả năng	ability	same	可能	wiktionary -	yes
-kế hoạch	plan	same	計畫	wiktionary -	yes
-tưởng	to think (wrongly), to assume	same	想	wiktionary -	yes
-tiêu	to spend (money)	same	消	wiktionary 1	yes
-bánh	cake, bread, pastry (any dish of dough)	older-loan		wiktionary 1	yes
-vô	to enter, to go in (Southern)			wiktionary 1	yes
-đàn	(string) instrument	same	彈	wiktionary 2	no
-phủ	to cover			wiktionary 1	yes
-đại	big, great (in compounds)	same	大	wiktionary 2	yes
-sức khỏe	health	compound		wiktionary -	yes
-châu âu	Europe	hv-vn	洲歐	wiktionary -	yes
-nước ngoài	abroad, foreign country	compound		wiktionary -	yes
-hệ điều hành	operating system	hv-vn	系調行	wiktionary -	yes
-cuốn	(classifier for books)	older-loan		wiktionary -	yes
-vì sao	why	compound		wiktionary 1	yes
-giá	price	same	價	wiktionary 1	yes
-công	work, labour	same	工	wiktionary 2	yes
-một cách	(makes an adverb: một cách nhanh chóng "quickly")	compound		wiktionary -	yes
-thử	to try (out)	older-loan		wiktionary -	yes
-khỏi	to get well, to recover			wiktionary -	yes
-kết thúc	to end, to finish	same	結束	wiktionary -	yes
-lòng	heart, feelings	native		wiktionary -	yes
-hội	festival	same	會	wiktionary 1	yes
-quân	troops, army	same	軍	wiktionary 1	yes
-quán	café, small restaurant, eatery	same	館	wiktionary 1	yes
-chồng	husband	native		wiktionary 1	yes
-đói	hungry	native		wiktionary -	yes
-tuần	week	false-friend	旬	wiktionary 1	yes
-buồn	sad	older-loan		wiktionary 1	yes
-cửa hàng	shop, store	compound		wiktionary -	yes
-áo	shirt, top, jacket (a garment for the upper body)	same	襖	wiktionary -	yes
-mặc	to wear, to put on (clothes)	native		wiktionary 1	yes
-đen	black	native		wiktionary -	yes
-trắng	white	native		wiktionary -	yes
-đỏ	red	native		wiktionary -	yes
-tặng	to give (as a present)	same	贈	wiktionary -	yes
-sinh nhật	birthday	same	生日	wiktionary -	yes
-quà	present, gift			wiktionary -	yes
+id	en	label	chars	hv	yue	nan	nan_layer	nan_coll	cmn	etymon	ety	ex	ex_src	use	ff
+chào	hello; goodbye; to greet	doubtful								朝 朝 triều/triêu/trào	wiktionary -	Chào chị ạ! / Hello! (politely, to a young woman a little older)	course lexicon: written	With a person term: chào anh, chào chị; any time of day, hello and goodbye	
+anh	elder brother; you (to a young man a little older); I (said by him)	native									wiktionary 1	Chào anh, tôi là Lan. / Hello, I am Lan.	course lexicon: written	A man of about the speaker's age or a little older; he says anh for "I" to someone younger	
+chị	elder sister; you (to a young woman a little older); I (said by her)	native									wiktionary -	Chị tên là gì ạ? / What is your name? (politely, to a young woman)	course lexicon: written	A woman a little older than the speaker; she says chị for "I" to someone younger	
+em	younger sibling; you (to someone younger); I (to someone older)	native									wiktionary -	Em tên là gì? / What is your name? (to someone younger)	course lexicon: written	Also used to call a waiter or shop assistant	
+tôi	I, me (neutral)	native									wiktionary 1	Tôi là Sacha. / I am Sacha.	course lexicon: written	Neutral and polite with strangers; among family and friends a kinship term replaces it	
+là	to be (noun = noun)	native									wiktionary 2	Em là Sacha. / I'm Sacha. (to someone older)	course lexicon: written	Links a noun to a noun (Tôi là Lan); not used before an adjective	
+tên	name; to be called (tên là)										wiktionary 1	Tên tôi là Lan. / My name is Lan.	course lexicon: written	Anh tên là gì? "What is your name?"	
+gì	what	native									wiktionary -	Anh tên là gì? / What is your name?	course lexicon: written	After the verb: Anh tên là gì?	
+không	not; no; (question tag) … or not?	opaque	空	空 không/khống/khổng	hung1 (also hung3)	khong (also khòng)			kōng (also kòng)		wiktionary -	Tôi không nói tiếng Việt. / I don't speak Vietnamese.	course lexicon: written	Before a verb or adjective it negates; at the end of a sentence it makes a yes/no question	
+vâng	yes (polite)										wiktionary -	Vâng, tôi là Sacha. / Yes, I'm Sacha.	course lexicon: written	Northern polite "yes"; dạ is also used, especially to elders	
+ạ	(polite final particle, to older people)										wiktionary 2	Cảm ơn chị ạ. / Thank you. (politely, to someone older)	course lexicon: written	At the end of a sentence to someone older or of higher status: Chào chị ạ	
+cảm ơn	thank you; to thank	older-loan								感恩 感 cảm · 恩 ân	wiktionary -	Cảm ơn anh. / Thank you.	course lexicon: written	Northern spelling; cám ơn is the commoner Southern one	
+không có gì	you're welcome; nothing	compound									wiktionary -	Không có gì ạ. / You're welcome.	course lexicon: written	The reply to cảm ơn: Không có gì ạ	
+rất	very										wiktionary -	Rất vui được gặp chị. / Very glad to meet you.	course lexicon: written	Before the adjective: rất vui	
+vui	happy, glad; fun	native									wiktionary -	Em rất vui. / I'm very happy.	course lexicon: written	Rất vui được gặp anh "nice to meet you"	
+được	to get, to obtain; can, may; to be allowed to	older-loan								得 得 đắc	wiktionary -	Rất vui được gặp anh. / Nice to meet you.	course lexicon: written	After a verb: can (nói được "can speak"); before a verb: get to (được gặp "get to meet")	
+gặp	to meet	native									wiktionary -	Tôi gặp chị Lan. / I meet Lan.	course lexicon: written		
+người	person, people; (before a nationality) a … person	native									wiktionary -	Tôi là người Pháp. / I'm French.	course lexicon: written	người Pháp "a French person": the modifier follows the noun	
+nước~water	water; drink	native									wiktionary 1	Anh ấy uống nước và một ít sữa. / He drinks water and a little bit of milk.	tatoeba #13534977		
+nước	water; drink	native									wiktionary 1	Anh ấy uống nước và một ít sữa. / He drinks water and a little bit of milk.	tatoeba #13534977		
+nước~country	country, nation	native									wiktionary 2	Anh là người nước nào? / Which country are you from?	course lexicon: written	nước Pháp "France", nước ngoài "abroad"	
+nào	which; (after a noun) any										wiktionary -	Chị là người nước nào? / What country are you from?	course lexicon: written	After the noun: người nước nào? "from which country?"	
+ở	at, in; to live, to be (somewhere)	native									wiktionary -	Em ở Hà Nội. / I live in Hanoi.	course lexicon: written		
+đâu	where; (emphatic) not at all										wiktionary -	Anh ở đâu? / Where do you live?	course lexicon: written	ở đâu? "where?"; không … đâu "not at all"	
+à	(final particle: checking or surprised) so …?; oh										wiktionary 3	Anh là người Pháp à? / So you're French?	course lexicon: written	Anh là người Pháp à? "So you're French?"; Thế à? "Really?"	
+đến	to come, to arrive; to (a place, a time)	native									wiktionary -	Vì cơn bão nên họ đã đến muộn. / Owing to the storm, they arrived late.	tatoeba #8976474		
+từ~from	from; since	older-loan								自 自 tự	wiktionary 1	Nó đã ở đây từ hôm qua rồi. / It has been here since yesterday.	tatoeba #13534982	từ Pháp "from France"; từ hôm qua "since yesterday"	
+từ	from; since	older-loan								自 自 tự	wiktionary 1	Nó đã ở đây từ hôm qua rồi. / It has been here since yesterday.	tatoeba #13534982	từ Pháp "from France"; từ hôm qua "since yesterday"	
+từ~word	word	same	詞	詞 từ	ci4	sû	unmarked		cí		wiktionary 2	Đó thật sự là một từ rất đẹp. / That's a really beautiful word.	tatoeba #13525764		
+việt nam	Vietnam	same	越南	越 việt/hoạt · 南 nam	jyut6 naam4	ua̍t-lâm	unmarked		Yuènán		wiktionary -	Tôi rất vui ở Việt Nam. / I'm very happy in Vietnam.	course lexicon: written		
+pháp	France; French	same	法	法 pháp	faat3 (also fat3)	huat	unmarked		fǎ		wiktionary -	Tôi học tiếng Pháp. / I study French.	course lexicon: written	Short for 法蘭西; người Pháp, tiếng Pháp	
+trung quốc	China	same	中國	中 trung/trúng · 國 quốc/quấc	zung1 gwok3	Tiong-kok	unmarked		Zhōngguó		wiktionary -	Người ta ăn bằng đũa ở Trung Quốc. / In China, people eat with chopsticks.	tatoeba #10309097		
+hà nội	Hanoi	same	河內	河 hà · 內 nội/nạp	ho4 noi6	hô-luē	unmarked		Hénèi		wiktionary -	Chị Lan ở Hà Nội. / Lan lives in Hanoi.	course lexicon: written		
+tiếng việt	Vietnamese (the language)	compound									wiktionary -	Tôi học tiếng Việt. / I'm learning Vietnamese.	course lexicon: written	tiếng "language" + Việt	
+nói	to speak; to say										wiktionary -	Em nói tiếng Pháp. / I speak French.	course lexicon: written		
+biết	to know; to know how to	older-loan								別 別 biệt	wiktionary -	Tôi không biết. / I don't know.	course lexicon: written		
+cũng	also, too	older-loan								共 共 cộng/cọng/cung	wiktionary -	Tôi cũng là người Pháp. / I'm French too.	course lexicon: written	Before the verb: Tôi cũng là người Pháp	
+học	to study, to learn	same	學	學 học	hok6	ha̍k			xué		wiktionary -	Chị học tiếng Pháp à? / You study French?	course lexicon: written		
+cà phê	coffee	loan									wiktionary -	Cho tôi một cà phê sữa đá. / An iced coffee with milk, please.	course lexicon: written	cà phê sữa đá "iced coffee with milk"	
+trà~tea	tea	same	茶	茶 trà	caa4		 colloquial-only	tê	chá		wiktionary 2	Em uống trà đá. / I'll have iced tea.	course lexicon: written	The usual word, Hà Nội included (trà chanh, trà sữa, trà đá); in the North chè is also tea, at home and for the leaf (nước chè, chè xanh); chè is also a sweet dessert soup everywhere	
+trà	tea	same	茶	茶 trà	caa4		 colloquial-only	tê	chá		wiktionary 2	Em uống trà đá. / I'll have iced tea.	course lexicon: written	The usual word, Hà Nội included (trà chanh, trà sữa, trà đá); in the North chè is also tea, at home and for the leaf (nước chè, chè xanh); chè is also a sweet dessert soup everywhere	
+sữa	milk	native									wiktionary 1	Anh có muốn sữa không? / Do you want milk?	course lexicon: written		
+đá~ice	ice; stone	native									wiktionary 1	Cho em một cốc trà đá. / A glass of iced tea, please.	course lexicon: written	cà phê đá "iced coffee"	
+đá	ice; stone	native									wiktionary 1	Cho em một cốc trà đá. / A glass of iced tea, please.	course lexicon: written	cà phê đá "iced coffee"	
+đá~kick	to kick	native									wiktionary 2	Một con la đã đá vào Tom. / A mule kicked Tom.	tatoeba #9012721	đá bóng "to play football"	
+cốc	glass, cup (Northern)										wiktionary 1	Cho tôi hai cốc trà đá. / Two glasses of iced tea, please.	course lexicon: written	Northern; the South says ly. Origin uncertain (Wiktionary compares Burmese hkwak "cup")	
+có	to have; there is, there are; (question) … or not?	native									wiktionary 1	Quán này có trà đá không? / Does this café have iced tea?	course lexicon: written	có … không? "is there …?, do you have …?"	
+muốn	to want	native									wiktionary -	Em muốn uống cà phê. / I want to drink coffee.	course lexicon: written		
+uống	to drink	native									wiktionary -	Anh uống gì? / What will you drink?	course lexicon: written		
+cho	to give; for, to; to let	native									wiktionary -	Cho tôi một cốc cà phê. / A cup of coffee for me, please.	course lexicon: written	cho tôi … "give me …, I'll have …"	
+một	one; a, an	native									wiktionary -	Cho em một cà phê sữa. / One coffee with milk, please.	course lexicon: written		
+hai	two	native									wiktionary 1	Hai cà phê sữa đá nhé! / Two iced milk coffees, please!	course lexicon: written		
+đây	here; this (one)										wiktionary -	Đây là bố mẹ tôi. / These are my parents.	course lexicon: written	đây là … "this is …"	
+ơi	hey (calling someone): em ơi!	native									wiktionary -	Em ơi, cho anh một trà đá! / Excuse me (to a young waiter), an iced tea for me!	course lexicon: written	After the name or person term, to call someone	
+nhé	…, OK? (friendly final particle)										wiktionary -	Hai cốc trà đá nhé! / Two glasses of iced tea, OK?	course lexicon: written	A suggestion or promise, friendly: Mai gặp nhé	
+chút	a little, a bit; a moment	native									wiktionary -	Tôi cho thêm chút sữa vào cà phê. / I've put a little bit of milk in my coffee.	tatoeba #5404930	một chút "a little"; chờ một chút "wait a moment"	
+ngồi	to sit	native									wiktionary -	Tôi có thể ngồi ở phía sau xe. / I can sit in the back of the car.	tatoeba #11318205		
+ba~three	three	native									wiktionary 2	Cho tôi ba cốc trà đá. / Three glasses of iced tea, please.	course lexicon: written		
+ba	three	native									wiktionary 2	Cho tôi ba cốc trà đá. / Three glasses of iced tea, please.	course lexicon: written		
+ba~father	father, dad (Southern)										wiktionary 1	Tom đã lớn lên mà không có ba. / Tom didn't grow up with a dad.	tatoeba #9815449	Southern; the North says bố	
+bốn	four	native									wiktionary -	Bốn mươi nghìn ạ. / Forty thousand (dong).	course lexicon: written	After mươi both are said: hai mươi bốn or hai mươi tư; tư is the form in thứ tư "Wednesday, fourth" and một phần tư "a quarter"; mười bốn (14) is always bốn	
+năm~year	year	native									wiktionary 2	Tôi ở Hà Nội một năm. / I'm in Hanoi for a year.	course lexicon: written	năm nay "this year"; năm 2024	
+năm	year	native									wiktionary 2	Tôi ở Hà Nội một năm. / I'm in Hanoi for a year.	course lexicon: written	năm nay "this year"; năm 2024	
+năm~five	five	native									wiktionary 1	Năm nghìn một cốc. / Five thousand a glass.	course lexicon: written	After mười and mươi it becomes lăm: mười lăm (15), hai mươi lăm (25); Hà Nội speech also says nhăm	
+sáu	six	native									wiktionary -	Sáu mươi nghìn ạ. / Sixty thousand (dong).	course lexicon: written		
+bảy	seven	native									wiktionary -	Bảy mươi nghìn, đắt quá! / Seventy thousand, that's too expensive!	course lexicon: written		
+tám	eight	native									wiktionary 1	Tám nghìn một cốc trà đá. / Eight thousand for a glass of iced tea.	course lexicon: written		
+chín	nine	native									wiktionary 1	Chín mươi nghìn ạ. / Ninety thousand (dong).	course lexicon: written	Also an adjective: ripe, cooked	
+mười	ten	native									wiktionary -	Mười nghìn một cốc. / Ten thousand a glass.	course lexicon: written		
+mươi	ten (in tens from twenty on: hai mươi)										wiktionary 1	Hai mươi nghìn ạ. / Twenty thousand (dong).	course lexicon: written	hai mươi "twenty"; mười alone is "ten"	
+lăm	five (after mười and mươi)	native									wiktionary 1	Cà phê mười lăm nghìn. / The coffee is fifteen thousand.	course lexicon: written	mười lăm "fifteen", hai mươi lăm "twenty-five"; Hà Nội speech also says nhăm	
+mốt	one (after mươi)										wiktionary 2	Hai mươi mốt nghìn ạ. / Twenty-one thousand (dong).	course lexicon: written	hai mươi mốt "twenty-one"; after mười it stays một: mười một "eleven"	
+tư	four (after mươi, and in thứ tư, phần tư)	older-loan								四 四 tứ	wiktionary 1	Ba mươi tư nghìn ạ. / Thirty-four thousand (dong).	course lexicon: written	hai mươi tư or hai mươi bốn "twenty-four"; thứ tư "Wednesday, fourth"; một phần tư "a quarter"	
+trăm	hundred	native									wiktionary -	Một trăm năm mươi nghìn. / A hundred and fifty thousand.	course lexicon: written	một trăm năm mươi "a hundred and fifty"	
+nghìn	thousand	native									wiktionary -	Ba mươi nghìn một cốc. / Thirty thousand a glass.	course lexicon: written	Northern; the South says ngàn	
+bao nhiêu	how much, how many	compound									wiktionary -	Cốc này bao nhiêu tiền? / How much is this glass?	course lexicon: written	Bao nhiêu tiền? "How much is it?"	
+tiền	money	same	錢	錢 tiền/tiễn	cin4 (also zin2 / cin2)	tsiân			qián		wiktionary 1	Bao nhiêu tiền ạ? / How much is it?	course lexicon: written		
+đồng	dong (the currency); copper	same	銅	銅 đồng	tung4	tâng	unmarked		tóng		wiktionary 3	Nó được làm bằng đồng sao? / Is it made of copper?	tatoeba #11536564	Prices: hai mươi nghìn đồng	
+mua	to buy	doubtful								務 務 vụ	wiktionary 1	Tôi muốn mua quà sinh nhật. / I want to buy a birthday present.	course lexicon: written		
+đắt	expensive	native									wiktionary -	Đắt quá! / That's too expensive!	course lexicon: written	Northern; the South says mắc	
+rẻ	cheap										wiktionary -	Cái này rẻ quá! / This one is so cheap!	course lexicon: written		
+chợ	market	older-loan								市 市 thị	wiktionary -	Ở chợ này, trà đá năm nghìn. / At this market, iced tea is five thousand.	course lexicon: written	đi chợ "to go to the market, to do the shopping"	
+quá	too, very (much); to go past	same	過	過 quá/qua	gwo3 (also gwo1)	kò (also kòo)			guò (also guo)		wiktionary -	Đắt quá, chị ơi! / That's too expensive!	course lexicon: written	đắt quá! "too expensive!"	
+quả	fruit; (classifier for round things: quả cam)	same	果	果 quả	gwo2 (also gu2)	kó			guǒ		wiktionary 1	Bao nhiêu tiền một quả? / How much for one (fruit)?	course lexicon: written	Northern; the South says trái	
+cam	orange (fruit, colour)	same	柑	柑 cam	gam1 (also kim4)	kam	unmarked		gān		wiktionary 1	Bạn đang trồng giống cam gì ở đây? / What kind of oranges do you plant here?	tatoeba #4305298		
+gia đình	family	same	家庭	家 gia/cô · 庭 đình/thính	gaa1 ting4	ka-tîng			jiātíng		wiktionary -	Đây là ảnh gia đình tôi. / This is a photo of my family.	course lexicon: written		
+ảnh	photo, picture	same	影	影 ảnh	jing2 (also jeng2)	íng			yǐng		wiktionary 1	Đây là ảnh của chị Lan. / This is Lan's photo.	course lexicon: written		
+bố	father, dad (Northern)	native									wiktionary 1	Bố tôi là người Pháp. / My father is French.	course lexicon: written	Northern; the South says ba	
+mẹ	mother, mum	native									wiktionary -	Mẹ em ở Hà Nội. / My mother lives in Hanoi.	course lexicon: written		
+ông	grandfather; old man; Mr, sir; you (to an older man)	same	翁	翁 ông	jung1	ong			wēng		wiktionary -	Ông tôi chín mươi tuổi. / My grandfather is ninety.	course lexicon: written		
+bà	grandmother; old woman; Mrs, madam; you (to an older woman)	same	婆	婆 bà	po4	pô	unmarked		pó		wiktionary -	Bà tôi ở Hà Nội. / My grandmother lives in Hanoi.	course lexicon: written		
+anh trai	elder brother	compound									wiktionary -	Anh trai tôi có một trí nhớ tốt. / My brother has a good memory.	tatoeba #8978307		
+chị gái	elder sister	compound									wiktionary -	Chị gái của mẹ tôi là bác tôi. / My mother's sister is my aunt.	tatoeba #9081273		
+em gái	younger sister	compound									wiktionary -	Em gái của mẹ tôi là dì tôi. / My mother's sister is my aunt.	tatoeba #9081272		
+ai	who; anyone, someone	native									wiktionary 1	Đây là ai? / Who is this?	course lexicon: written		
+của	of, belonging to										wiktionary -	Đây là ảnh của ai? / Whose photo is this?	course lexicon: written	After the thing owned: ảnh của tôi "my photo"	
+con	child; (classifier for animals)	native									wiktionary -	Chị có hai con. / I have two children. (said by a woman)	course lexicon: written	con mèo "a cat"; con trai "son"	
+mấy	how many (small numbers); a few	native									wiktionary -	Con chị mấy tuổi? / How old is your child?	course lexicon: written	Mấy tuổi? "how old (a child)?"; for larger numbers bao nhiêu	
+tuổi	age; years old	older-loan								歲 歲 tuế	wiktionary -	Em hai mươi tư tuổi. / I'm twenty-four.	course lexicon: written	Anh bao nhiêu tuổi? "How old are you?"	
+giờ	hour; o'clock; time, now	older-loan								時 時 thời/thì	wiktionary -	Bây giờ là mấy giờ? / What time is it now?	course lexicon: written	Mấy giờ rồi? "What time is it?"	
+phút	minute										wiktionary -	Tám giờ mười lăm phút. / A quarter past eight.	course lexicon: written		
+rưỡi	and a half (after a number or unit)										wiktionary -	Bảy giờ rưỡi. / Half past seven.	course lexicon: written	hai giờ rưỡi "half past two"	
+bây giờ	now	compound									wiktionary -	Bây giờ tôi đi làm. / I'm going to work now.	course lexicon: written		
+hôm nay	today	compound									wiktionary -	Hôm nay anh làm gì? / What are you doing today?	course lexicon: written	hôm "day" + nay "this, now"	
+ngày mai	tomorrow	compound									wiktionary -	Ngày mai em về Hà Nội. / Tomorrow I'm going back to Hanoi.	course lexicon: written	ngày "day" + mai "morning"	
+sáng	morning; bright	native									wiktionary 1	Tám giờ sáng tôi đi làm. / I go to work at eight in the morning.	course lexicon: written	buổi sáng "(in the) morning"	
+chiều~afternoon	afternoon										wiktionary 1	Ba giờ chiều chị về nhà. / I go home at three in the afternoon.	course lexicon: written	buổi chiều "(in the) afternoon", from about noon to dusk	
+chiều	afternoon										wiktionary 1	Ba giờ chiều chị về nhà. / I go home at three in the afternoon.	course lexicon: written	buổi chiều "(in the) afternoon", from about noon to dusk	
+tối	evening; dark	native									wiktionary 1	Bảy giờ tối anh về nhà. / I come home at seven in the evening.	course lexicon: written	buổi tối "(in the) evening"	
+đi	to go	native									wiktionary -	Tám giờ tôi đi làm. / I go to work at eight.	course lexicon: written	At the end of a sentence đi urges or suggests: Đi thẳng đi! "Go straight on!"	
+làm	to do; to make; to work (as)										wiktionary -	Chị làm ở công ty nào? / Which company do you work at?	course lexicon: written	làm gì? "what do you do?"; làm bác sĩ "to work as a doctor"	
+về	to go back, to return (home); about	native									wiktionary 1	Mấy giờ em về nhà? / What time do you go home?	course lexicon: written	về nhà "to go home"; nói về … "to talk about …"	
+nhà	house, home	native									wiktionary -	Nhà chị Lan ở Hà Nội. / Lan's house is in Hanoi.	course lexicon: written		
+đang	(action in progress) be …-ing, now	gram	當	當 đang/đương/đáng	dong1 (also dong3)	tong (also tòng)			dāng (also dàng)		wiktionary -	Anh ấy đang làm ở công ty. / He's at work at the company right now.	course lexicon: written	Before the verb: Anh ấy đang làm "he is working"	
+sẽ	will (future)	native									wiktionary 1	Ngày mai tôi sẽ đi làm. / Tomorrow I will go to work.	course lexicon: written	Before the verb: Tôi sẽ đi	
+đã	(past) did, already; had										wiktionary -	Hôm qua tôi đã ăn phở gà. / Yesterday I had chicken phở.	course lexicon: written	Before the verb; often left out when the time is clear	
+chiều~direction	direction; dimension										wiktionary 2	theo chiều từ A đến B / follow the direction from A to B	wiktionary	ba chiều "three-dimensional"; chiều con "to spoil a child"	
+đường~road	road, street; way	doubtful									wiktionary 1	Đường này đi Hồ Hoàn Kiếm. / This road goes to Hoàn Kiếm Lake.	course lexicon: written		
+đường	road, street; way	doubtful									wiktionary 1	Đường này đi Hồ Hoàn Kiếm. / This road goes to Hoàn Kiếm Lake.	course lexicon: written		
+đường~sugar	sugar	same	糖	糖 đường	tong4 (also tong2)	thn̂g	unmarked		táng		wiktionary 2	Đồ uống của tôi cần thêm chút đường. / My drink needs a little more sugar.	tatoeba #13896382		
+phố	street (in town)	same	舖	舖 phố/phô	pou3 (also pou1)	phòo	unmarked		pù		wiktionary 1	Quán cà phê ở phố này. / The café is on this street.	course lexicon: written	phố cổ "the Old Quarter"; 舖 (店舖) is a shop, a street of shops	
+xe máy	motorbike	compound									wiktionary -	Anh đi xe máy à? / You're going by motorbike?	course lexicon: written		
+xe buýt	bus	loan									wiktionary -	Tôi có thể đón xe buýt ở đâu? / Where do I get the bus?	tatoeba #1563750	From French (auto)bus; xe "vehicle"	
+đi bộ	to walk, to go on foot	compound									wiktionary -	Đi bộ khoảng mười phút. / About ten minutes on foot.	course lexicon: written		
+rẽ	to turn (left or right)										wiktionary 1	Đi thẳng rồi rẽ trái. / Go straight on, then turn left.	course lexicon: written	Northern; the South says quẹo	
+đừng	don't (do)	older-loan								停 停 đình	wiktionary -	Đừng đi xe máy! / Don't go by motorbike!	course lexicon: written	Đừng + verb: Đừng đi! "Don't go!"	
+trái	left (side)	native									wiktionary 1	Rẽ trái, đừng rẽ phải. / Turn left, don't turn right.	course lexicon: written	bên trái "on the left"; in the South trái is also "fruit"	
+phải~must	must, to have to	doubtful								被 被 bị/bí	wiktionary -	Ngày mai tôi phải đi làm. / I have to go to work tomorrow.	course lexicon: written	Before the verb: Tôi phải đi	
+phải	must, to have to	doubtful								被 被 bị/bí	wiktionary -	Ngày mai tôi phải đi làm. / I have to go to work tomorrow.	course lexicon: written	Before the verb: Tôi phải đi	
+phải~right	right (side); right, correct	doubtful								被 被 bị/bí	wiktionary -	Anh là người Pháp, phải không? / You're French, right?	course lexicon: written	bên phải "on the right"; phải không? "isn't it?"	
+thẳng	straight (ahead)										wiktionary -	Đi thẳng khoảng năm phút. / Go straight on for about five minutes.	course lexicon: written	đi thẳng "go straight on"	
+gần	near, close (to); nearly	native									wiktionary -	Hồ Hoàn Kiếm ở gần đây. / Hoàn Kiếm Lake is near here.	course lexicon: written		
+xa	far	opaque	賒	賒 xa	se1	sia	unmarked		shē		wiktionary 1	Công ty em không xa. / My company isn't far.	course lexicon: written	賒 is "distant" only in classical Chinese; the modern Chinese word for far is 遠, and 賒 is "to buy on credit"	
+hồ	lake	same	湖	湖 hồ	wu4	ôo	unmarked		hú		wiktionary 1	Nhà chị ở gần hồ. / My house is near the lake.	course lexicon: written	hồ Hoàn Kiếm	
+mất	to lose; to take (time); to die	native									wiktionary -	Vì lí do đó, cô ấy mất việc. / For that reason, she lost her job.	tatoeba #14083121	mất 10 phút "it takes ten minutes"	
+khoảng	about, approximately; space, interval	older-loan								曠 曠 khoáng	wiktionary -	Đi bộ khoảng mười lăm phút. / About fifteen minutes on foot.	course lexicon: written	khoảng 2 cây số "about 2 km"	
+hoàn kiếm	Hoàn Kiếm (the lake of the returned sword, in Hanoi)	hv-vn	還劍	還 hoàn/toàn · 劍 kiếm	還 waan4 (also syun4) · 劍 gim3	還 huân · 劍 kiàm	unmarked	還 — · 劍 —	還 huán (also hái) · 劍 jiàn		wiktionary -	Hồ Hoàn Kiếm ở đâu? / Where is Hoàn Kiếm Lake?	course lexicon: written	A Vietnamese name (the legend of Lê Lợi's sword)	
+bản đồ	map	false-friend	版圖	版 bản · 圖 đồ	baan2 tou4	pán-tôo	unmarked		bǎntú		wiktionary -	Đấy là cái bản đồ Tom đưa cho bạn à? / Is that the map that Tom gave you?	tatoeba #9034221		In Chinese 版圖 is a country's territory; a map is 地圖
+thời tiết	weather	false-friend	時節	時 thời/thì · 節 tiết/tiệt	si4 zit3	sî-tsiat	unmarked		shíjié		wiktionary -	Thời tiết hôm nay thế nào? / What's the weather like today?	course lexicon: written		In Chinese 時節 is a season or a time; weather is 天氣
+trời	sky; weather; heaven	native									wiktionary -	Hôm nay trời nóng quá! / It's so hot today!	course lexicon: written	Trời nóng "it is hot (weather)"	
+nóng	hot	native									wiktionary -	Mùa hè ở Hà Nội rất nóng. / Summer in Hanoi is very hot.	course lexicon: written		
+lạnh	cold	older-loan								冷 冷 lãnh	wiktionary -	Mùa đông hơi lạnh. / Winter is a bit cold.	course lexicon: written		
+mưa	rain; to rain	native									wiktionary -	Hôm nay trời mưa. / It's raining today.	course lexicon: written		
+nắng	sunshine; sunny	native									wiktionary -	Trời nắng đẹp. / It's lovely and sunny.	course lexicon: written		
+mùa	season	doubtful								務 務 vụ	wiktionary -	Hà Nội có bốn mùa. / Hanoi has four seasons.	course lexicon: written	mùa hè "summer"	
+xuân	spring	same	春	春 xuân	ceon1	tshun	unmarked		chūn		wiktionary -	Một năm có bốn mùa: xuân, hạ, thu, đông. / There are four seasons in a year: spring, summer, fall and winter.	tatoeba #1543720	mùa xuân "spring"	
+hè	summer (Northern)	older-loan								夏 夏 hạ/giạ/giá	wiktionary 1	Mùa hè ở đây nóng lắm. / Summer here is very hot.	course lexicon: written	mùa hè "summer"; mùa hạ (夏 read the Hán-Việt way) is literary	
+thu~autumn	autumn	same	秋	秋 thu	cau1	tshiu	unmarked		qiū		wiktionary 1			mùa thu "autumn"	
+thu	autumn	same	秋	秋 thu	cau1	tshiu	unmarked		qiū		wiktionary 1			mùa thu "autumn"	
+thu~collect	to collect, to receive; to record	same	收	收 thu/thú	sau1	siu	unmarked		shōu		wiktionary 2	Toàn bộ cuộn băng đã được thu trong một lần. / The whole tape was recorded in one session.	tatoeba #11260606	thu tiền "to collect money"; máy thu hình "television set"	
+đông~crowded	crowded	doubtful								凍 凍 đống/đông	wiktionary 3	Công viên rất đông người lớn và trẻ con. / The park was crowded with people with children.	tatoeba #1542902		
+đông	crowded	doubtful								凍 凍 đống/đông	wiktionary 3	Công viên rất đông người lớn và trẻ con. / The park was crowded with people with children.	tatoeba #1542902		
+đông~winter	winter	same	冬	冬 đông	dung1	tong			dōng		wiktionary 1	Mùa đông Hà Nội lạnh nhưng đẹp. / Winter in Hanoi is cold but beautiful.	course lexicon: written	mùa đông "winter"	
+đông~east	east	same	東	東 đông	dung1	tong			dōng		wiktionary 2	Gió đang thổi về hướng đông. / The wind is blowing east.	tatoeba #8987286	phía đông "the east"	
+lắm	very (after the word); a lot										wiktionary -	Hôm nay nóng lắm. / It's very hot today.	course lexicon: written	After the adjective: đẹp lắm; more colloquial than rất	
+hơi	a bit, slightly (before an adjective)										wiktionary 1	Trà này hơi nóng. / This tea is a bit hot.	course lexicon: written	hơi lạnh "a bit cold"	
+hôm qua	yesterday	compound									wiktionary -	Hôm qua trời mưa. / It rained yesterday.	course lexicon: written	hôm "day" + qua "past"	
+nhưng	but	gram	仍	仍 nhưng	jing4				réng		wiktionary -	Trời nắng nhưng không nóng. / It's sunny but not hot.	course lexicon: written	In Chinese 仍 is "still, yet"; Vietnamese made it "but"	
+thế nào	how; what … like	compound									wiktionary -	Hà Nội mùa đông thế nào? / What is Hanoi like in winter?	course lexicon: written	Thời tiết thế nào? "What is the weather like?"	
+ăn	to eat	native									wiktionary -	Anh ăn phở chưa? / Have you had phở yet?	course lexicon: written		
+cơm	(cooked) rice; a meal	native									wiktionary -	Mấy giờ nhà chị ăn cơm? / What time does your family eat?	course lexicon: written	ăn cơm "to have a meal"	
+phở	pho (rice-noodle soup)	older-loan								粉 粉 phấn	wiktionary 1	Hôm qua tôi ăn phở. / Yesterday I had phở.	course lexicon: written	Clipped from nhục phở, from Cantonese 牛肉粉 "beef noodles"; phở is in effect a non-Hán-Việt reading of 粉 (phấn)	
+bát	bowl (Northern)	same	缽	缽 bát	but3	puat			bō		wiktionary 1	Hai bát phở gà nhé! / Two bowls of chicken phở, please!	course lexicon: written	Northern; for a bowl of phở the South says tô (a big bowl); chén is the small rice bowl	
+món	dish (of food); item										wiktionary 1	Món này ngon lắm. / This dish is delicious.	course lexicon: written	món ăn "a dish"	
+ngon	tasty, delicious	native									wiktionary -	Phở Hà Nội rất ngon. / Hanoi phở is very good.	course lexicon: written		
+thịt	meat	native									wiktionary -	Em không ăn thịt. / I don't eat meat.	course lexicon: written	thịt bò "beef", thịt gà "chicken"	
+bò	cow, ox; beef	native									wiktionary 1	Cho anh một bát phở bò. / A bowl of beef phở for me, please.	course lexicon: written		
+gà	chicken	native									wiktionary -	Cho em phở gà. / Chicken phở for me, please.	course lexicon: written		
+rau	vegetables, greens	native									wiktionary -	Cà chua là hoa quả hay rau củ? / Are tomatoes a fruit or a vegetable?	tatoeba #13715069		
+đũa	chopsticks	older-loan								箸 箸 trứ/trợ	wiktionary -	Tom gặp khó khăn khi ăn bằng đũa. / Tom had trouble eating with chopsticks.	tatoeba #13381875	đôi đũa "a pair of chopsticks"	
+no	full (after eating)	native									wiktionary -	Tôi no rồi. / I'm full.	course lexicon: written		
+chưa	not yet; (question) … yet?										wiktionary -	Anh đã ăn chưa? / Have you eaten yet?	course lexicon: written	… chưa? "… yet?"; answer rồi "yes, already" or chưa "not yet"	
+rồi	already; then										wiktionary -	Đi thẳng, rồi rẽ phải. / Go straight on, then turn right.	course lexicon: written	At the end: Tôi ăn rồi "I have eaten"	
+gọi	to call; to order (food)										wiktionary -	Anh gọi món gì? / What will you order?	course lexicon: written	gọi món "to order"; gọi điện "to phone"	
+cuối tuần	weekend	compound									wiktionary -	Cuối tuần bạn có rảnh không? / Are you free at the weekend?	course lexicon: written		
+thứ bảy	Saturday	compound									wiktionary -	Thứ bảy này anh làm gì? / What are you doing this Saturday?	course lexicon: written	thứ "order" + bảy "seven"	
+chủ nhật	Sunday	same	主日	主 chủ/chúa · 日 nhật/nhựt (Southern variant)	zyu2 jat6	tsú-(ji̍t/li̍t)	unmarked		zhǔrì		wiktionary -	Chủ nhật tôi không đi làm. / I don't work on Sundays.	course lexicon: written	主日 is "the Lord's day" (Christian)	
+rảnh	free, not busy										wiktionary -	Thứ bảy em rảnh. / I'm free on Saturday.	course lexicon: written		
+bận	busy	native									wiktionary 1	Hôm nay anh bận quá. / I'm so busy today.	course lexicon: written		
+thích	to like	opaque	適	適 thích/đích	sik1 (also tik1 / dik1 / zaak3 / zaak6)	sik	unmarked		shì		wiktionary 1	Tôi thích phở bò. / I like beef phở.	course lexicon: written	Wiktionary gives 適 "to suit"; a reader of Chinese does not see "to like" in it	
+xem	to watch, to look at; to see	older-loan								占 占 chiêm/chiếm	wiktionary -	Cuối tuần chị thích xem phim. / At the weekend I like watching films.	course lexicon: written	xem phim "to watch a film"	
+phim	film, movie	loan									wiktionary -	Bạn có muốn đi xem phim không? / Do you want to go and see a film?	course lexicon: written	From French film	
+đọc	to read	older-loan								讀 讀 độc/đậu	wiktionary -	Tôi đã đọc di chúc của ông ấy. / I've read his will.	tatoeba #11266528		
+sách	book	same	冊	冊 sách	caak3		 colloquial-only	tsheh	cè		wiktionary 1	Hãy lấy 1 quyển sách và đọc nó / Take a book and read it.	tatoeba #12557870		
+chơi	to play; to visit, to go out (đi chơi)	native									wiktionary -	Chủ nhật đi chơi nhé! / Let's go out on Sunday!	course lexicon: written		
+bạn	friend; you (to a peer)	same	伴	伴 bạn	bun6 (also pun2 / pun5)	phuān			bàn		wiktionary 1	Mai là bạn tôi. / Mai is my friend.	course lexicon: written	伴 is a companion, partner (同伴)	
+với	with; and	native									wiktionary 2	Em đi xem phim với bạn. / I'm going to see a film with a friend.	course lexicon: written		
+hay~or	or										wiktionary 4	Anh uống cà phê hay trà? / Will you have coffee or tea?	course lexicon: written	In questions and statements: cà phê hay trà? "coffee or tea?"; hoặc "or" is used in statements only	
+hay	or										wiktionary 4	Anh uống cà phê hay trà? / Will you have coffee or tea?	course lexicon: written	In questions and statements: cà phê hay trà? "coffee or tea?"; hoặc "or" is used in statements only	
+hay~good	good, interesting (a film, a book)										wiktionary 2	Khu vực lân cận có gì hay không? / What's good in the neighborhood?	tatoeba #1541905	phim hay "a good film"	
+hay~often	often										wiktionary 3	Tôi hay gặp bạn bè vào cuối tuần. / I often see my friends on the weekend.	tatoeba #11395225	Before the verb: Tôi hay đi bộ	
+định	to intend to, to plan to	same	定	定 định/đính	ding6 (also ding3 / deng6)	tīng			dìng		wiktionary -	Cuối tuần bạn định làm gì? / What are you planning to do at the weekend?	course lexicon: written	Before the verb: Tôi định đi Huế	
+bao giờ	when; ever	compound									wiktionary -	Bao giờ anh về Pháp? / When are you going back to France?	course lexicon: written	At the start, future: Bao giờ anh đi?; at the end, past: Anh đến bao giờ?	
+mệt	tired										wiktionary -	Hôm nay em mệt quá. / I'm so tired today.	course lexicon: written		
+ốm	ill, sick (Northern)	native									wiktionary -	Cháu bị ốm à? / Are you ill?	course lexicon: written	Northern; in the South ốm is "thin" and "ill" is bệnh	
+đau	to hurt, painful	native									wiktionary -	Tôi đau đầu quá. / I have a bad headache.	course lexicon: written	đau đầu "headache"	
+đầu	head; beginning, first (part)	same	頭	頭 đầu	tau4	thôo (also thiô)			tóu (also tou)		wiktionary -	Bác ơi, cháu đau đầu. / I've got a headache (to someone older).	course lexicon: written	lần đầu "the first time"	
+bụng	belly, stomach	native									wiktionary -	Sữa bị hư làm bụng tôi khó chịu. / The spoiled milk upset my stomach.	tatoeba #14028932	đau bụng "stomach ache"	
+sốt	fever; to have a fever										wiktionary 1	Có vẻ như là tôi bị sốt. / I seem to have a fever.	tatoeba #5149404	bị sốt "to have a fever"	
+bị	(passive, for something bad) to suffer, to get; to be (…ed)	gram	被	被 bị/bí	bei6 (also pei5 / pei1)	pī			bèi		wiktionary 1	Anh ấy bị cảm. / He has a cold.	course lexicon: written	被 is the Chinese passive marker too	
+bác sĩ	doctor (physician)	false-friend	博士	博 bác · 士 sĩ	bok3 si6	phok-sū	unmarked		bóshì		wiktionary -	Anh nên gặp bác sĩ. / You should see a doctor.	course lexicon: written		In Chinese 博士 is a doctor of philosophy (PhD); a physician is 醫生
+bệnh viện	hospital	same	病院	病 bệnh · 院 viện	beng6 jyun2		 colloquial-only	pēnn-īnn / pīnn-īnn	bìngyuàn		wiktionary -	Cô ấy làm y tá trong bệnh viện. / She works as a nurse in the hospital.	tatoeba #11311494	病院 is the Japanese and older Chinese word; modern Chinese says 醫院	
+thuốc	medicine; tobacco	doubtful								毒 毒 độc/đốc	wiktionary -	Cháu uống thuốc chưa? / Have you taken your medicine?	course lexicon: written	thuốc lá "cigarettes"	
+nghỉ	to rest; to take time off										wiktionary 1	Hôm nay em nghỉ ở nhà. / I'm resting at home today.	course lexicon: written	nghỉ ngơi "to rest"	
+nên	should; so, therefore	native									wiktionary -	Chị nên nghỉ một ngày. / You should take a day off.	course lexicon: written	Before the verb: Anh nên nghỉ "you should rest"	
+khám	to examine (a patient); to search	same	勘	勘 khám	ham3 (also ham1)	khàm (also kham)	unmarked		kān		wiktionary 2	khám bụng / to clinically examine the abdomen	wiktionary	đi khám "to see a doctor"	
+khỏe	well, healthy; strong	older-loan								快 快 khoái	wiktionary -	Bác có khỏe không ạ? / Are you well? (to someone older)	course lexicon: written	Anh có khỏe không? "How are you?"	
+điện thoại	telephone; phone call	same	電話	電 điện · 話 thoại	din6 waa2	tiān-uē	unmarked		diànhuà		wiktionary -	Emily làm hư điện thoại của cô ấy. / Emily broke her phone.	tatoeba #3714417	gọi điện thoại "to phone"	
+a lô	hello (on the phone)	loan									wiktionary -	A-lô. Tôi là Ogawa. / Hello. This is Ogawa speaking.	tatoeba #9052608	From French allô	
+nghe	to hear, to listen	native									wiktionary -	Cô ấy nghe điều này từ anh ấy. / She heard this from him.	tatoeba #10276508		
+số	number	same	數	數 số/sác/sổ/xúc	sou3 (also sou2 / sok3 / cuk1)	sòo			shù (also shǔ / shuò)		wiktionary -	Tôi e là bạn đã nhầm số rồi. / I'm afraid you have the wrong number.	tatoeba #8974482	số điện thoại "phone number"	
+nhắn	to leave a message, to text										wiktionary -	Cậu đang nhắn tin cho bạn gái à? / Are you texting your girlfriend?	tatoeba #10261214	nhắn tin "to text"	
+tin	news, message; to believe	older-loan								信 信 tín	wiktionary -	Tôi không tin anh ấy. / I don't believe him.	course lexicon: written	tin nhắn "a text message"	
+chờ	to wait										wiktionary 1	Tôi đã chờ cô ấy rất, rất lâu. / I waited for her for a really long time.	tatoeba #5763087	Chờ một chút "Wait a moment"; Northern also đợi	
+lát	a moment (một lát)										wiktionary -	Chỉ một lát thôi. / Just a moment.	tatoeba #13599291	một lát "a moment", lát nữa "in a moment"	
+lại	again; back	native									wiktionary -	Tôi biết là bạn sẽ quay lại mà. / I knew you'd come back.	tatoeba #13726773	gọi lại "to call back"	
+sau	after; behind; later	native									wiktionary -	Ba ngày sau anh ấy khỏe. / Three days later he was well.	course lexicon: written	sau đó "after that"	
+cháu	grandchild; niece, nephew; I (to someone of one's parents' or grandparents' generation)	native									wiktionary -	Cháu mấy tuổi? / How old are you? (to a child)	course lexicon: written	The young person's "I" to bác, cô, chú, ông, bà, who call him cháu "you"	
+bác	uncle, aunt (older than one's parent); you (to a person older than one's parents)	native									wiktionary 1	Cháu chào bác ạ. / Hello! (politely, to someone older than one's parents)	course lexicon: written		
+cô	aunt (father's sister); Miss; you (to a young woman, a female teacher); she (cô ấy)	same	姑	姑 cô	gu1	koo	unmarked		gū		wiktionary 1	Cô ấy là bạn tôi. / She is my friend.	course lexicon: written		
+chú	uncle (father's younger brother); you (to a man of one's father's age)	native									wiktionary 1	Chú tôi đã từng đi đến Phần Lan. / My uncle has been to Finland.	tatoeba #9008617		
+dạ	yes (polite, to elders)										wiktionary 1	Dạ vâng. / Yes, Sir / Yes, Madam.	wiktionary	Also answers a call politely	
+vừa	just (now), recently; to fit										wiktionary -	Cái áo này vừa lắm. / This shirt fits well.	course lexicon: written	Tôi vừa đến "I have just arrived"; vừa … vừa … "both … and …"	
+này	this; (calling) hey	native									wiktionary -	Quán này rất vui. / This café is great fun.	course lexicon: written	After the noun: cái này "this one"	
+ấy	that (anh ấy he, cô ấy she)										wiktionary -	Anh ấy là chồng chị Lan. / He is Lan's husband.	course lexicon: written	After a person term it makes "he, she": anh ấy, cô ấy; Southern speech often says ảnh, cổ	
+đó	that; there	native									wiktionary 1	Quán cà phê ở đó. / The café is there.	course lexicon: written	cái đó "that one"; ở đó "there"	
+đấy	(final particle in questions, friendly); there, that (Northern)										wiktionary -	Chị đi đâu đấy? / Where are you off to?	course lexicon: written	Northern: Anh đi đâu đấy? "Where are you off to?"; also "there, that", as đó	
+ngày	day	native									wiktionary -	Một tuần có bảy ngày. / A week has seven days.	course lexicon: written	mỗi ngày "every day"	
+nhiều	many, much, a lot	older-loan								饒 饒 nhiêu	wiktionary -	Mùa hè Hà Nội mưa nhiều. / It rains a lot in Hanoi in summer.	course lexicon: written		
+tốt	good	native									wiktionary 1	Thuốc này tốt lắm. / This medicine is very good.	course lexicon: written		
+nhỏ	small, little										wiktionary 1	Cái này hơi nhỏ. / This one is a bit small.	course lexicon: written	Northern also bé	
+lớn	big, large; to grow up										wiktionary -	Áo này lớn quá. / This top is too big.	course lexicon: written	Northern also to	
+đẹp	beautiful, good-looking										wiktionary -	Hồ Hoàn Kiếm đẹp lắm. / Hoàn Kiếm Lake is very beautiful.	course lexicon: written		
+xin lỗi	sorry; excuse me	compound									wiktionary -	Xin lỗi, anh là người nước nào? / Excuse me, which country are you from?	course lexicon: written	xin "to ask for" + lỗi "fault"	
+nhỉ	…, isn't it? (tag particle)										wiktionary -	Hôm nay đẹp trời nhỉ! / Lovely weather today, isn't it!	course lexicon: written	Northern; seeking agreement: Đẹp nhỉ! "Lovely, isn't it?"	
+và	and	older-loan								和 和 hòa/họa/hồ	wiktionary 1	Cho tôi một cà phê và một trà. / A coffee and a tea, please.	course lexicon: written		
+các	(plural marker) the …s, all the	gram	各	各 các/cách	gok3	kok			gè		wiktionary 1	Các bạn có khỏe không? / How are you all?	course lexicon: written	Before a noun: các bạn "you (plural), friends"; in Chinese 各 is "each, every"	
+trong	in, inside; during	native									wiktionary 2	Cô ấy làm y tá trong bệnh viện. / She works as a nurse in the hospital.	tatoeba #11311494		
+để	in order to, so that; to put, to leave										wiktionary -	Tôi học tiếng Việt để nói chuyện với bạn. / I am learning Vietnamese to talk with you.	course lexicon: written	để + verb "(in order) to"; để đó "leave it there"	
+những	(plural marker) some, the …s	older-loan								仍 仍 nhưng	wiktionary -	Những người này là bạn tôi. / These people are my friends.	course lexicon: written	Before a noun: những người này "these people"	
+họ	they, them; family name	older-loan								戶 戶 hộ	wiktionary -	Họ nói hôm qua họ đã đi bơi. / They said they went swimming yesterday.	tatoeba #9837221	họ tên "full name"	
+vào	to go in, to enter; into, in, at (a time)	native									wiktionary -	Mời anh vào nhà. / Please come in.	course lexicon: written	vào lúc 8 giờ "at eight"	
+ra	to go out, to come out; out	native									wiktionary 1	Anh ấy ra ngoài rồi. / He's gone out.	course lexicon: written	After a verb: mở ra "to open (up)"	
+mà	but; that, which (relative); (emphatic final particle)	native									wiktionary -	Đó là người mà tôi đang chờ đợi. / That's the person I've been waiting for.	tatoeba #5754294		
+thì	then (nếu … thì); as for										wiktionary 2	Nếu bạn đói thì hãy ăn gì đó. / If you get hungry, eat something.	tatoeba #14028362	nếu … thì … "if … then …"; after a topic: Tôi thì không "as for me, no"	
+trên	on, above; over	native									wiktionary -	Mary đã để cái ví ở trên bàn. / Mary placed her purse on the table.	tatoeba #4302053	trên bàn "on the table"	
+có thể	can, may; possibly	compound									wiktionary -	Tôi có thể mua tơ lụa ở đâu? / Where can I buy silk?	tatoeba #1509572	Before the verb: Tôi có thể giúp "I can help"	
+như	like, as	gram	如	如 như	jyu4	jû (also lû)	unmarked		rú		wiktionary -	Anh ấy nói tiếng Việt như người Việt. / He speaks Vietnamese like a Vietnamese.	course lexicon: written	如 is "like, as" in Chinese too	
+khi	when	native									wiktionary 1	Bạn hãy ở bên tôi khi tôi cần. / Please stand by me when I need you.	tatoeba #537004		
+chỉ~only	only, just	same	只	只 chỉ	zi2 (also zek3)	tsí	unmarked		zhǐ (also zhī)		wiktionary 2	Tôi chỉ có một trăm nghìn. / I only have a hundred thousand.	course lexicon: written	Before the verb: Tôi chỉ có một	
+chỉ	only, just	same	只	只 chỉ	zi2 (also zek3)	tsí	unmarked		zhǐ (also zhī)		wiktionary 2	Tôi chỉ có một trăm nghìn. / I only have a hundred thousand.	course lexicon: written	Before the verb: Tôi chỉ có một	
+chỉ~point	to point (to); to show	same	指	指 chỉ	zi2	tsí			zhǐ		wiktionary 3	Chỉ vào người khác là bất lịch sự. / It is rude to point at people.	tatoeba #1542206	chỉ đường "to show the way"	
+còn	to remain, still (to have); and, as for	native									wiktionary -	Không ai còn lời nào để nói cả. / No one had anything left to say.	tatoeba #11370067	còn … không? "is there any … left?"; còn anh? "and you?"	
+hơn	more (than), -er	native									wiktionary -	Sáu nhỏ hơn mười và lớn hơn ba. / Six is less than ten and greater than three.	tatoeba #13603236	After the adjective: đắt hơn "more expensive"	
+mình	oneself; I, me (familiar); we	native									wiktionary -	Bọn mình ở đây để hỗ trợ Tom. / We're here to support Tom.	tatoeba #6275548	Among friends: mình "I"; tự mình "by oneself"	
+điều	matter, thing (something to say or do)	same	條	條 điều/thiêu	tiu4 (also tiu5)	tiâu (also liâu)	unmarked		tiáo		wiktionary 1	Tôi đã làm điều đó vì cô ấy. / I did it for her.	tatoeba #9082334	điều đó "that (thing)"; in Chinese 條 is an item, a clause	
+nó	he, she, it (familiar, or for a child, an animal, a thing)										wiktionary -	Anh ấy có đủ tiền để mua nó. / He has enough money to buy it.	tatoeba #9027871	Not polite for an adult one respects	
+theo	to follow; according to										wiktionary -	Tom muốn chúng ta đi theo anh ấy. / Tom wants us to follow him.	tatoeba #5159560	theo tôi "in my opinion"	
+nếu	if										wiktionary -	Nếu bạn đói thì hãy ăn gì đó. / If you get hungry, eat something.	tatoeba #14028362	nếu … thì …	
+cần	to need	doubtful									wiktionary 1	Anh ấy cần phải đi với cô ấy. / He needs to go with her.	tatoeba #9082301		
+lên	to go up, to get on; up	native									wiktionary -	Anh ấy lên xe buýt. / He gets on the bus.	course lexicon: written	lên xe "to get on (a bus, a car)"	
+tại	at, in; because of (tại vì)	same	在	在 tại	zoi6	tsāi	unmarked		zài		wiktionary 1	Tôi đã gặp cô ta tại bữa tiệc. / I saw her at the party.	tatoeba #490695		
+sự	(makes a noun of a verb or adjective: sự thật "the truth"); matter, affair	gram	事	事 sự	si6	sū			shì		wiktionary -	Tom đã đưa ra sự lựa chọn. / Tom made his choice.	tatoeba #4605253		
+vì	because; for (the sake of)	older-loan								爲 爲 vị/vi/vì	wiktionary 1	Em nghỉ vì bị ốm. / I'm off because I'm ill.	course lexicon: written	vì vậy "therefore"	
+thấy	to see; to feel, to find	older-loan								視 視 thị	wiktionary -	Anh ấy thấy cô ấy và đỏ mặt. / He saw her and blushed.	tatoeba #13472327	tôi thấy … "I feel/find that …"	
+nhất	most, -est; first	same	一	一 nhất/nhứt (Southern variant)	jat1	it	unmarked		yī		wiktionary -	Tình yêu là cảm xúc đẹp đẽ nhất. / Love is the most beautiful feeling.	tatoeba #14028354	After the adjective: đẹp nhất "the most beautiful"; thứ nhất "first"	
+mới	new; just (recently); only then	native									wiktionary -	Em nghe nói anh có bạn gái mới. / I hear you've got a new girlfriend.	tatoeba #1554858		
+việc	work, job; matter, thing (to do)	older-loan								役 役 dịch	wiktionary -	Vì lí do đó, cô ấy mất việc. / For that reason, she lost her job.	tatoeba #14083121	làm việc "to work"	
+khác	other, different	older-loan								各 各 các/cách	wiktionary -	Từ giờ trở đi, mọi thứ sẽ khác. / Everything is going to be different now.	tatoeba #13901160	After the noun: người khác "other people"	
+cả	all, whole; even	native									wiktionary 1	Bạn có muốn ở đây cả đêm không? / Do you want to stay here all night?	tatoeba #8999767	cả ngày "all day"; cả … cũng "even …"	
+tới	to come, to arrive; to, until; next	doubtful								逮 逮 đãi/đệ	wiktionary -	Vì cơn bão nên họ đã tới trễ. / Owing to the storm, they arrived late.	tatoeba #8976476	tuần tới "next week"	
+trước	before; in front of; ago	native									wiktionary 1	Hai năm trước tôi ở Lyon. / Two years ago I lived in Lyon.	course lexicon: written		
+vẫn	still										wiktionary -	Tại sao anh vẫn ở bên cô ấy? / Why are you still with her?	tatoeba #12060098	Before the verb: Tôi vẫn ở đây	
+hoặc	or	same	或	或 hoặc	waak6	hi̍k	unmarked		huò		wiktionary 1	Tôi sẽ đi thứ bảy hoặc chủ nhật. / I'll go on Saturday or Sunday.	course lexicon: written	Mostly in statements; in questions hay	
+bằng~by	by (means of), with; made of	same	憑	憑 bằng	pang4 (also bang6)	pîng			píng		wiktionary 2	Hãy thay lốp cũ bằng lốp mới đi. / Replace the old tires with new ones.	tatoeba #9005768	đi bằng xe buýt "to go by bus"; 憑 "to rely on, by"; bằng also means a diploma (文憑)	
+bằng	by (means of), with; made of	same	憑	憑 bằng	pang4 (also bang6)	pîng			píng		wiktionary 2	Hãy thay lốp cũ bằng lốp mới đi. / Replace the old tires with new ones.	tatoeba #9005768	đi bằng xe buýt "to go by bus"; 憑 "to rely on, by"; bằng also means a diploma (文憑)	
+bằng~equal	equal (to), as … as	older-loan								平 平 bình/biền	wiktionary 1	một cộng một bằng hai / one plus one equal to two	wiktionary	cao bằng anh "as tall as you"	
+rằng	that (after say, think, know)										wiktionary -	Tôi hiểu rằng đã có một sai lầm. / I understand that a mistake has been made.	tatoeba #11392989	nói rằng … "to say that …"	
+vậy	so, thus; (final particle) then										wiktionary -	Sao mấy cô gái đó tàn nhẫn vậy? / Why are these girls so cruel?	tatoeba #3839337	Southern and neutral; Hà Nội speech says thế (Sao vậy? in the South, Sao thế? in the North); vì vậy "therefore" is used everywhere	
+cái	(classifier for things) thing; the	native									wiktionary 1	Tôi lấy cái này. / I'll take this one.	course lexicon: written	cái bàn "a table", cái này "this one"	
+lần	time (occurrence)	older-loan								輪 輪 luân	wiktionary 1	Bạn đã xem bộ phim này mấy lần? / How many times have you seen this movie?	tatoeba #10658597	lần đầu "the first time"; ba lần "three times"	
+ta	we, us (including you); I (haughty); (after a person term) he, she	doubtful								咱 咱 cha/gia/thính/thánh	wiktionary 1	Anh ta là người Pháp. / He is French.	course lexicon: written	chúng ta "we"; anh ta "he", cô ta "she" (cooler than anh ấy)	
+thứ	order, rank (thứ hai "Monday, second"); thing, kind	same	次	次 thứ/tư	ci3 (also ci1 / zi1)	tshù	unmarked		cì		wiktionary 1	Tuyết rơi từ thứ 2 đến thứ 6 / It snowed from Monday to Friday.	tatoeba #1555100	thứ + number: ordinals and weekdays	
+thế	so, thus, like that; (final particle in questions) then										wiktionary 1	Hôm nay nóng thế! / It's so hot today!	course lexicon: written	Northern; the South says vậy. Nóng thế! "So hot!"; Thế à? "Really?"; thế này "like this"; Sao thế? "What's wrong?"	
+không thể	cannot, to be unable to; impossible	compound									wiktionary -	Không thể biết được anh ấy là ai. / It's impossible to know who he is.	tatoeba #13809570	Before the verb: Tôi không thể đi	
+chính	main, chief; exactly, precisely	same	正	正 chính/chinh/chánh (Southern variant)	zing3 (also zing1 / zeng3)	tsìng			zhèng (also zhēng)		wiktionary 1	Đây là mục tiêu chính của chúng ta. / This is our main goal.	tatoeba #8991252	chính là "is exactly"	
+thêm	more, extra; to add	older-loan								添 添 thiêm	wiktionary -	Cho tôi thêm một bát cơm. / Another bowl of rice for me, please.	course lexicon: written	thêm một cốc nữa "one more glass"	
+giúp	to help										wiktionary -	Giúp tôi làm bài tập về nhà đi. / Help me do my homework.	tatoeba #13426439		
+mọi	every, all	older-loan								每 每 mỗi/môi	wiktionary 1	Mọi người đều thích phở. / Everyone likes phở.	course lexicon: written	mọi người "everyone"	
+tìm	to look for, to search; to find	older-loan								尋 尋 tầm	wiktionary -	Tôi muốn tìm ra ai đã làm thế. / I want to find out who did this.	tatoeba #14028393		
+sống	to live; alive; raw	native									wiktionary 2	Bố mẹ tôi sống ở Lyon. / My parents live in Lyon.	course lexicon: written		
+cao	tall, high	same	高	高 cao	gou1	ko (also kau)	unmarked		gāo		wiktionary 1	Anh trai của anh ấy rất cao. / His big brother is very tall.	tatoeba #13480597		
+tháng	month	native									wiktionary -	Tháng này trời mưa nhiều. / It rains a lot this month.	course lexicon: written	tháng Ba "March"; tháng này "this month"	
+bộ	set, series; ministry; (classifier for sets, films)	same	部	部 bộ	bou6	pōo	unmarked		bù		wiktionary 1	Bộ phim này rất hay. / This film is very good.	course lexicon: written	bộ phim "a film"; bộ quần áo "a set of clothes"	
+lúc	moment, time; at (a time)										wiktionary 1	Anh ấy đã về nhà lúc 6 giờ. / He went home at six.	tatoeba #9709788	lúc 8 giờ "at eight o'clock"; lúc đó "at that time"	
+ngoài	outside; besides	older-loan								外 外 ngoại	wiktionary -	Đừng ra ngoài mà không đội mũ. / Do not go outside without a hat.	tatoeba #13598276	ở ngoài "outside"; nước ngoài "abroad"	
+cách~way	way, manner	same	格	格 cách/các	gaak3	kik			gé (also gē)		wiktionary 1	Đây là cách nấu phở. / This is how to cook phở.	course lexicon: written	cách làm "the way to do (it)"	
+cách	way, manner	same	格	格 cách/các	gaak3	kik			gé (also gē)		wiktionary 1	Đây là cách nấu phở. / This is how to cook phở.	course lexicon: written	cách làm "the way to do (it)"	
+cách~distance	to be (some distance) away from, distant from	same	隔	隔 cách	gaak3 (also gik1)	kik			gé		wiktionary 2	Mỹ đang tìm cách dẫn độ Julian Assange. / The United States is seeking extradition of Julian Assange.	tatoeba #9734359	cách đây 2 km "2 km from here"; cách đây 3 năm "3 years ago"	
+phần	part, portion, share	same	分	分 phần/phân/phận/phiện	fan1 (also fan6)	hun			fēn (also fèn)		wiktionary 1	Phần này là phần sâu nhất. / This part is the deepest.	tatoeba #13173134		
+đều	both, all (alike); evenly	older-loan								調 調 điều/điệu	wiktionary -	Hai anh em đều là sinh viên. / Both brothers are students.	course lexicon: written	Before the verb: Chúng tôi đều thích "we all like it"	
+bảo	to tell (someone to), to say	older-loan								報 報 báo	wiktionary 1	Tớ đã bảo cậu để đó cho tớ. / I told you to leave it up to me.	tatoeba #6230488		
+hãy	(imperative) do …; let's										wiktionary 1	Hãy thử cái gì đó mới mẻ đi. / Let's try something new.	tatoeba #9739498	Before the verb: Hãy ngồi xuống "Please sit down"	
+loại	kind, type, sort	same	類	類 loại	leoi6	luī	unmarked		lèi		wiktionary 1	Bạn thích mặc những loại quần áo nào? / What types of clothes do you like wearing?	tatoeba #11314573		
+chúng ta	we, us (including you)	compound									wiktionary -	Tối nay chúng ta sẽ ăn ở đâu? / Where shall we eat tonight?	tatoeba #11291340	Contrast chúng tôi "we (not you)"	
+qua	through, across; past (hôm qua "yesterday"); to pass	same	過	過 qua/quá	gwo1 (also gwo3)	kò (also kòo)			guò (also guo)		wiktionary 1	Thưa ông, ông không thể qua được. / You may not pass, sir.	tatoeba #1573870		
+cùng	together; with; same	older-loan								共 共 cộng/cọng/cung	wiktionary 2	Tôi chưa bao giờ câu cá cùng Tom. / I've never been fishing with Tom.	tatoeba #14083109	cùng nhau "together"; cùng lớp "in the same class"	
+sử dụng	to use	same	使用	使 sử/sứ · 用 dụng	sai2 jung6 / si2 jung6	sú-iōng			shǐyòng		wiktionary -	Hãy dạy tôi cách sử dụng nó. / Teach me how to use it.	tatoeba #11265108	Formal; dùng is the everyday word	
+nơi	place										wiktionary -	Nơi này trông có vẻ quen quen. / This place looks familiar.	tatoeba #11328621		
+do	because of, due to; by	same	由	由 do	jau4	iû	unmarked		yóu		wiktionary -	Công ti đang gặp khó khăn do nợ xấu. / That company is on the rocks because of bad debts.	tatoeba #13870207		
+thường	usually, often; ordinary	same	常	常 thường	soeng4	siông	unmarked		cháng		wiktionary 1	Tom thường đi ngủ lúc 10 giờ 40. / Tom usually goes to bed at ten-forty.	tatoeba #4274418		
+làm việc	to work	compound									wiktionary -	Tôi biết cô ấy làm việc ở đâu. / I know where she works.	tatoeba #13603220		
+đưa	to give, to hand; to take (someone somewhere)										wiktionary -	Tom đã đưa cái gì đó cho Mary. / Tom gave something to Mary.	tatoeba #4302043	đưa con đi học "to take the child to school"	
+từng	ever, once (đã từng); each (từng người)	older-loan								曾 曾 tăng/tằng	wiktionary 1	Bạn đã từng ăn bánh chuối chưa / Have you ever eaten a banana pie?	tatoeba #12560325		
+trường	school	false-friend	場	場 trường/tràng	coeng4	tshiâng			cháng (also chǎng)		wiktionary 1	Tôi sẽ đi xe buýt để đến trường. / I take the bus to school.	tatoeba #5150119	trường học "school"	In Chinese 場 is a ground, a field, a venue; a school is 學校
+nhìn	to look (at)										wiktionary -	Nhìn xem cái gì đã xảy ra này. / Look at what's already happened.	tatoeba #3468399		
+bắt đầu	to begin, to start	compound									wiktionary -	Cơn đau này bắt đầu từ khi nào? / When did this pain start?	tatoeba #11446615		
+dưới	under, below	native									wiktionary -	Có con mèo nào ở dưới bàn không? / Are there any cats under the table?	tatoeba #13344022		
+nữa	more, further; again										wiktionary -	Có ai còn câu hỏi gì nữa không? / Do you have more questions?	tatoeba #13173205	After the verb or noun: một lần nữa "once more"	
+ngay	right (away), immediately; straight	native									wiktionary -	Cô ấy ở ngay đằng sau bạn đấy! / She's right behind you!	tatoeba #8964702	ngay bây giờ "right now"	
+nhanh	fast, quick	native									wiktionary -	Tất cả bọn họ đều bơi rất nhanh. / All of them swim very fast.	tatoeba #5066478		
+vụ	case, affair (vụ án); (crop) season	same	務	務 vụ	mou6	bū	unmarked		wù		wiktionary 1	Tôi đang điều tra vụ án khác. / I'm working on another case.	tatoeba #1571452		
+giữa	between; in the middle of	native									wiktionary -	Mary đang chần chừ giữa hai lựa chọn. / Mary is hesitating between two options.	tatoeba #13893844		
+thực sự	really, truly; real	false-friend	實事	實 thực/thật · 事 sự	sat6 si6	si̍t-sū			shíshì		wiktionary -	Tôi cảm thấy thực sự tốt ở đây. / I feel really good here.	tatoeba #11434809		In Chinese 實事 is "a fact, practical matters", not an adverb "really"
+bên	side; beside, next to	older-loan								邊 邊 biên	wiktionary -	Nhà tôi ở kế bên nhà anh ấy. / My house is next to his house.	tatoeba #11395304	bên trái "on the left"; bên cạnh "next to"	
+thành phố	city	hv-vn	城舖	城 thành · 舖 phố/phô	城 sing4 (also seng4 / seng2) · 舖 pou3 (also pou1)	城 sîng · 舖 phòo	unmarked	城 — · 舖 —	城 chéng · 舖 pù		wiktionary -	Hà Nội là một thành phố đẹp. / Hanoi is a beautiful city.	course lexicon: written	A city is 城市 in Chinese	
+thời gian	time	same	時間	時 thời/thì · 間 gian/gián	si4 gaan3	sî-kan	unmarked		shíjiān		wiktionary -	Gọi cho tôi nếu bạn có thời gian. / Call me if you have time.	tatoeba #13846149		
+hết	to run out, to be finished; all	native									wiktionary -	Hết tiền rồi! / The money's all gone!	course lexicon: written	hết tiền "out of money"	
+thành	to become; into	same	成	成 thành	sing4 (also cing4 / seng4)	sîng			chéng		wiktionary 1	Lan dịch câu này thành tiếng Anh. / Lan translated this sentence into English.	course lexicon: written	trở thành "to become"; dịch thành "to translate into"	
+tay	hand, arm	native									wiktionary -	Cô ấy đã bị bỏng tay trái. / She got her left hand burned.	tatoeba #9051496		
+chúng tôi	we, us (not including you)	compound									wiktionary -	Chúng tôi là người Pháp. / We are French.	course lexicon: written		
+khu	area, zone, district	same	區	區 khu/âu	keoi1 (also au1)	khu	unmarked		qū		wiktionary 1	Khu này có nhiều quán ăn. / There are many places to eat in this area.	course lexicon: written		
+nhận	to receive; to accept; to admit, to recognise	same	認	認 nhận	jan6 (also jing6 / jing2)	jīn (also līn)	unmarked		rèn		wiktionary 1	Tôi nhận được một bức thư nặc danh. / I received an anonymous letter.	tatoeba #13899206		
+luôn	always; at once; (after a verb) as well										wiktionary -	Tom nói anh ta luôn làm như vậy. / Tom says he always does it this way.	tatoeba #12132381		
+dùng	to use; to have (food or drink, polite)	older-loan								用 用 dụng	wiktionary 1	Chúng ta dùng dao để cắt thức ăn. / We use a knife to slice food.	tatoeba #13896429		
+sinh	to be born; to give birth	same	生	生 sinh/sanh (Southern variant)	sang1 (also saang1)	sing			shēng		wiktionary -	Cô ấy được sinh ra ở Hoa Kỳ. / She was born in the United States.	tatoeba #9010664	sinh năm 1990 "born in 1990"	
+tất cả	all, everything, everyone	compound									wiktionary -	Tất cả chúng tôi đều là người Pháp. / We are all French.	course lexicon: written		
+đủ	enough	native									wiktionary -	Anh ấy có đủ tiền để mua nó. / He has enough money to buy it.	tatoeba #9027871		
+chiếc	(classifier for vehicles and single objects)	older-loan								隻 隻 chích	wiktionary -	Tôi có một chiếc xe ô tô Đức. / I have a German car.	tatoeba #13580338	chiếc xe "a car", chiếc giày "a shoe"	
+sao~why	why; how (Sao thế? "What's wrong?")										wiktionary 1	Sao thế, cháu? / What's wrong?	course lexicon: written	Northern Sao thế?, Southern Sao vậy?	
+sao	why; how (Sao thế? "What's wrong?")										wiktionary 1	Sao thế, cháu? / What's wrong?	course lexicon: written	Northern Sao thế?, Southern Sao vậy?	
+sao~star	star	native									wiktionary 2	Đây là quyển sách về những ngôi sao. / This is a book about stars.	tatoeba #1591261		
+yêu	to love	native									wiktionary 1	Anh ấy yêu vợ lắm. / He loves his wife very much.	course lexicon: written		
+thế giới	world	same	世界	世 thế · 界 giới/giái	sai3 gaai3	sè-kài			shìjiè		wiktionary -	Cả thế giới đã lãng quên anh ấy. / The world forgot him.	tatoeba #13634481		
+hiểu	to understand	same	曉	曉 hiểu	hiu2	hiáu	unmarked		xiǎo		wiktionary -	Tôi không hiểu ý của bạn là gì. / I don't understand what you mean.	tatoeba #3313609		
+phòng	room	same	房	房 phòng/bàng	fong4 (also pong4 / fong2)	pông			fáng		wiktionary 1	Hút thuốc lá bị cấm ở phòng này. / Smoking is prohibited in this room.	tatoeba #5150866		
+tổ chức	to organise, to hold (an event); organisation	same	組織	組 tổ · 織 chức/chí/xí	zou2 zik1	tsoo-tsit	unmarked		zǔzhī		wiktionary -	Đó là một tổ chức rất quan trọng. / It's a very important organisation.	tatoeba #9066083		
+tự	(by) oneself, self-	gram	自	自 tự	zi6	tsū	unmarked		zì		wiktionary 3	Tom đã tự đổ cà phê lên người. / Tom spilled coffee on himself.	tatoeba #12132271	Before the verb: tự làm "to do (it) oneself"	
+lịch sử	history	same	歷史	歷 lịch · 史 sử	lik6 si2	li̍k-sú	unmarked		lìshǐ		wiktionary -	Ông ấy có nhiều sách về lịch sử. / He has a lot of books on history.	tatoeba #9008611		
+vị~taste	taste, flavour	same	味	味 vị	mei6	bī	unmarked		wèi		wiktionary 1	Nó có vị như nước ép táo. / It tastes like apple juice.	tatoeba #13517481		
+vị	taste, flavour	same	味	味 vị	mei6	bī	unmarked		wèi		wiktionary 1	Nó có vị như nước ép táo. / It tastes like apple juice.	tatoeba #13517481		
+vị~person	(respectful classifier for persons)	same	位	位 vị	wai6 (also wai2)	uī	unmarked		wèi		wiktionary 3	Nhiều người luôn đi tìm những vị thuốc cổ truyền thì thuốc này rất hiếm. / People are always seeking this traditional medicine because it is very rare.	tatoeba #13860565	các vị "ladies and gentlemen"; vị khách "a guest"	
+nhau	each other										wiktionary 1	Tom và Mary nhìn nhau và mỉm cười. / Tom and Mary looked at each other and smiled.	tatoeba #9066095	After the verb: gặp nhau "to meet (each other)"	
+điểm	point; mark, score	same	點	點 điểm	dim2	tiám	unmarked		diǎn		wiktionary -	Điểm toán của tôi không bao giờ cao. / I never got good marks in maths.	tatoeba #13472191		
+như thế	like that, so	compound									wiktionary -	Ồ, bạn vắt sữa bò như thế hả? / Oh, is that the way you milk a cow?	tatoeba #9739113	như "like" + thế "so"	
+lấy	to take; to get; to marry	native									wiktionary -	Em lấy cái màu đen. / I'll take the black one.	course lexicon: written		
+tỉnh	province	same	省	省 tỉnh/tiển	sing2 (also saang2)	síng	unmarked		xǐng (also shěng)		wiktionary 1	Bố mẹ tôi sống ở một tỉnh nhỏ. / My parents live in a small province.	course lexicon: written		
+nguyễn	Nguyễn (the commonest surname)	same	阮	阮 nguyễn	jyun5 (also jyun2)		 colloquial-only	ńg	ruǎn		wiktionary -	Nguyễn là họ phổ biến nhất ở Việt Nam. / Nguyễn is the commonest surname in Vietnam.	course lexicon: written	About four in ten Vietnamese bear it	
+bởi	by; because (bởi vì)										wiktionary -	Bánh mì bị ăn bởi những con chim. / The bread was eaten by the birds.	tatoeba #13980732		
+công việc	work, job	compound									wiktionary -	Đừng từ bỏ. Bám lấy công việc đó. / Don't give up. Stick with the job.	tatoeba #3534112		
+đúng	right, correct; exactly	older-loan								中 中 trung/trúng	wiktionary -	Hoá ra cậu đã đúng về điều đó. / It turns out you were right about that.	tatoeba #5159487	đúng giờ "on time"	
+tại sao	why	compound									wiktionary -	Tại sao anh không đi làm? / Why aren't you going to work?	course lexicon: written		
+độ	degree; about (độ 5 phút)	same	度	度 độ/đạc	dou6 (also dok6)	tōo (also to̍k)	unmarked		dù (also duó)		wiktionary -	Nó sốt nhẹ, cỡ 38 độ. / He has a light 38-degree fever.	wiktionary		
+đánh	to hit, to beat; to play (a sport, an instrument)	older-loan								打 打 đả	wiktionary -	Chủ nhật tôi đánh cầu lông. / On Sundays I play badminton.	course lexicon: written	đánh đàn "to play the piano"	
+mang	to carry, to bring; to wear	native									wiktionary 1	Tôi chỉ mang theo đồ dùng cá nhân. / I'm only bringing personal items.	tatoeba #5159004		
+thật	true, real; really	same	實	實 thật/thực	sat6	si̍t			shí		wiktionary -	Thật không? / Really?	course lexicon: written		
+cảm	to feel; (to catch) a cold	same	感	感 cảm	gam2	kám	unmarked		gǎn		wiktionary 1	Cháu bị cảm rồi. / I've caught a cold.	course lexicon: written	cảm thấy "to feel"; bị cảm "to have a cold"	
+vấn đề	problem, issue, question	same	問題	問 vấn · 題 đề	man6 tai4	būn-tê	unmarked		wèntí		wiktionary -	Bạn có vấn đề gì với tôi à? / Do you have a problem with me?	tatoeba #8989024		
+phát triển	to develop; development	same	發展	發 phát · 展 triển	faat3 zin2	huat-tián	unmarked		fāzhǎn		wiktionary -	Bơi lội làm phát triển cơ bắp. / Swimming develops our muscles.	tatoeba #3470058		
+viết	to write	native									wiktionary -	Em viết tên anh ở đây nhé. / Write your name here, please.	course lexicon: written		
+quốc gia	nation, country; national	same	國家	國 quốc/quấc · 家 gia/cô	gwok3 gaa1	kok-ka	unmarked		guójiā		wiktionary -	Canada là một quốc gia có chủ quyền. / Canada is a sovereign nation.	tatoeba #13351010		
+cuộc	(classifier for events and processes: cuộc họp "a meeting", cuộc sống "life")	older-loan								局 局 cục	wiktionary -	Cuộc gặp của chúng tôi chỉ là tình cờ. / Our meeting was just an accident.	tatoeba #5764369		
+màu	colour	older-loan								貌 貌 mạo/mộc	wiktionary -	Em thích màu đỏ. / I like red.	course lexicon: written	màu đỏ "red"	
+nay	this (present): hôm nay "today", năm nay "this year"; now										wiktionary -	Sáng nay ông ấy đã ngủ quá giờ. / He overslept this morning.	tatoeba #496375		
+đầu tiên	first	false-friend	頭先	頭 đầu · 先 tiên/tiến	tau4 sin1	(thôo/thiô)-sian		thâu-sing	(tóu/tou) xiān		wiktionary -	Đây là lần đầu tiên tôi đến Hà Nội. / This is my first time in Hanoi.	course lexicon: written	After the noun: lần đầu tiên "the first time"	頭先 is attested in Cantonese and Taigi (thâu-sing) as "just now"; "first" is 首先 or 最先
+tạo	to create, to make	same	造	造 tạo/tháo	zou6 (also cou5 / cou3)	tsō	unmarked		zào		wiktionary 1	Bạn đã tạo ra cái gì rồi ? / What did you make?	tatoeba #1931846	tạo ra "to create"	
+mỗi	each, every	same	每	每 mỗi/môi	mui5	muí	unmarked		měi		wiktionary -	Anh ấy đi bộ 25 dặm mỗi ngày. / He walked 25 miles every day.	tatoeba #13472552	mỗi ngày "every day"	
+xuống	to go down, to get off; down	native									wiktionary -	Đứa bé đã bị ngã xuống và khóc. / The baby fell down and cried.	tatoeba #11326733		
+cá	fish	native									wiktionary 1	Tôi muốn ăn cá và quả xa kê. / I'd like to eat fish and breadfruit.	tatoeba #13896433		
+trở thành	to become	compound									wiktionary -	Tom không muốn trở thành lính cứu hỏa. / Tom doesn't want to become a fireman.	tatoeba #10257515		
+tính	to calculate, to count; to intend	doubtful									wiktionary 1	Em ơi, tính tiền nhé! / The bill, please!	course lexicon: written		
+đặt	to put, to place; to book	native									wiktionary -	Tôi muốn đặt bàn cho hai người. / I'd like to book a table for two.	course lexicon: written	đặt phòng "to book a room"	
+hoạt động	activity; to operate, to work	same	活動	活 hoạt/quạt · 動 động	wut6 dung6	hua̍t-tōng		ua̍h-tāng	huódòng		wiktionary -	Đó không phải là cách nó hoạt động. / That's not how it works.	tatoeba #3534124		
+dài	long	native									wiktionary -	Cái này có độ dài bằng cái kia. / This is as long as that.	tatoeba #12006940		
+huyện	(rural) district, a subdivision of a province	same	縣	縣 huyện/huyền	jyun6 (also jyun2 / jyun4)	kuān	unmarked		xiàn		wiktionary -	Có ba mươi huyện ở Izmir. / There are thirty districts in Izmir.	tatoeba #13901210	縣 is a county in China	
+thuộc	to belong to	same	屬	屬 thuộc/chúc/chú	suk6 (also zuk6 / zuk1)	sio̍k (also tsiok)	unmarked		shǔ (also zhǔ)		wiktionary 1	Cá voi thuộc loài động vật có vú. / Whales belong to mammals.	tatoeba #11402427	thuộc bài "to know the lesson by heart" is another word (not 屬)	
+đội	team	same	隊	隊 đội	deoi6 (also deoi2 / zeoi6)	tuī	unmarked		duì		wiktionary 1	Đội chúng tôi đã thua hết mọi trận. / Our team lost all its matches.	tatoeba #14083176		
+nghĩ	to think	older-loan								議 議 nghị	wiktionary -	Anh nghĩ thế nào? / What do you think?	course lexicon: written		
+nằm	to lie (down); to be located	native									wiktionary -	Nước Ý nằm ở phía nam châu âu. / Italy is in southern Europe.	tatoeba #10269473		
+hoa	flower	same	花	花 hoa/huê	faa1	hua			huā		wiktionary 1	Tôi có sở thích chụp ảnh hoa dại. / My hobby is taking pictures of wild flowers.	tatoeba #8995667		
+tăng	to increase	same	增	增 tăng	zang1 (also cang4)	tsing	unmarked		zēng		wiktionary 1	Lượng khí CO2 đã tăng 10 phần trăm. / The amount of carbon dioxide has increased by 10 percent.	tatoeba #9011202		
+hiện	currently, now; to appear	same	現	現 hiện	jin6	hiān (also hiàn)	unmarked		xiàn		wiktionary -	Venice hiện có ít hơn 60000 cư dân. / Venice now has fewer than 60,000 residents.	tatoeba #10269092	hiện nay "nowadays"	
+cứ	just (go on), keep on; every (cứ … là)	doubtful									wiktionary -	Cứ nói cho mình biết bạn cần gì. / Just tell me what you need.	tatoeba #11475697	Cứ đi! "Go ahead!"	
+sau khi	after (doing)	compound									wiktionary -	Tôi xem TV sau khi tôi rửa bát. / I watched TV after I washed the dishes.	tatoeba #13842897		
+quan trọng	important	hv-vn	關重	關 quan/loan · 重 trọng/trùng	關 gwaan1 · 重 zung6 (also cung5 / cung4)	關 kuan · 重 tiōng (also tiông)		關 — · 重 —	關 guān · 重 zhòng (also chóng)		wiktionary -	Ý kiến của cô ấy cũng quan trọng. / Her opinion is important too.	tatoeba #14057091	"Important" is 重要 in Chinese	
+dù~although	although, even if										wiktionary 2	Cho dù trời mưa tôi vẫn sẽ đạp xe. / I will go cycling even if it rains.	tatoeba #8853632	dù … nhưng …	
+dù	although, even if										wiktionary 2	Cho dù trời mưa tôi vẫn sẽ đạp xe. / I will go cycling even if it rains.	tatoeba #8853632	dù … nhưng …	
+dù~umbrella	umbrella; parachute	native									wiktionary 1	Tôi đã cầm nhầm cây dù của bạn. / I took your umbrella by mistake.	tatoeba #3486777	Southern for "umbrella"; the North says ô	
+mặt	face; surface, side	native									wiktionary -	Rửa mặt đi! / Wash your face!	course lexicon: written		
+giữ	to keep, to hold	native									wiktionary -	Anh ấy yêu cầu tôi giữ bí mật. / He asked me to keep the secret.	tatoeba #584865		
+quyền	right, power	same	權	權 quyền/quờn	kyun4	khuân	unmarked		quán		wiktionary 1	Tom có quyền bầu cử. / Tom has the right to vote.	tatoeba #1573877		
+thay đổi	to change	compound									wiktionary -	Màu mắt của cô ấy đã thay đổi. / The girl's eyes' color has changed.	tatoeba #13904668		
+đêm	night	native									wiktionary -	Bạn có muốn ở đây cả đêm không? / Do you want to stay here all night?	tatoeba #8999767		
+cầu	bridge	older-loan								橋 橋 kiều/khiêu/cao	wiktionary 2	Có nhiều cây cầu trong thành phố này. / There are many bridges in this city.	tatoeba #13769843		
+hỏi	to ask										wiktionary -	Tôi muốn hỏi bạn một đặc ân lớn. / I want to ask you a big favor.	tatoeba #638946		
+cây	tree, plant; (classifier for long things)	native									wiktionary -	Chiếc ô tô đâm vào cây cao su. / The car hit the rubber tree.	tatoeba #13860592	cây bút "a pen"	
+chuyển	to move, to transfer	same	轉	轉 chuyển/chuyến	zyun2 (also zyun3)	tsuán			zhuǎn (also zhuàn / zhuǎi)		wiktionary -	Tháng sau tôi chuyển nhà. / I'm moving house next month.	course lexicon: written		
+công ty	company	same	公司	公 công · 司 ti/tư	gung1 si1	kong-su		kong-si	gōngsī		wiktionary -	Công ty tôi ở Hà Nội. / My company is in Hanoi.	course lexicon: written		
+xã hội	society	same	社會	社 xã · 會 hội/cối	se5 wui2	siā-huē	unmarked		shèhuì		wiktionary -	Con người tạo thành xã hội. / People form society.	tatoeba #13340614		
+dân	people, citizens	same	民	民 dân	man4	bîn	unmarked		mín		wiktionary -	Dân Hà Nội rất thích phở. / Hanoians love phở.	course lexicon: written		
+tổng thống	president (of a republic)	same	總統	總 tổng · 統 thống	zung2 tung2	tsóng-thóng	unmarked		zǒngtǒng		wiktionary -	Tôi sẽ là một vị tổng thống hoà bình. / I will be a peace president.	tatoeba #13893846		
+một số	some, a number of	compound									wiktionary -	Bạn có cần một số lời khuyên không? / Do you need some advice?	tatoeba #11434842		
+quyết định	to decide; decision	same	決定	決 quyết · 定 định/đính	kyut3 ding6	kuat-tīng	unmarked		juédìng		wiktionary -	Tom đã quyết định ra về sớm hơn. / Tom decided to leave work early.	tatoeba #5144934		
+trẻ	young; child (trẻ em)										wiktionary -	Tôi đã cho bọn trẻ một ít kẹo. / I gave the children some candy.	tatoeba #11344718		
+xe	vehicle (car, bike, motorbike)	older-loan								車 車 xa	wiktionary 1	Tôi có một chiếc xe ô tô Đức. / I have a German car.	tatoeba #13580338	xe đạp "bicycle"	
+chết	to die; dead	native									wiktionary -	Tôi thà chết còn hơn là bỏ cuộc. / I'd rather die than give up.	tatoeba #8961940		
+quận	(urban) district	false-friend	郡	郡 quận	gwan6	kūn	unmarked		jùn		wiktionary -	Tôi sống ở quận Hoàn Kiếm. / I live in Hoàn Kiếm district.	course lexicon: written		In Chinese 郡 is a historical commandery or a county (outside China); in Vietnam a quận is an urban district
+cuối cùng	finally, at last; last	compound									wiktionary -	Đó là đề nghị cuối cùng của tôi. / That's my final offer.	tatoeba #4789667		
+bán	to sell	native									wiktionary 1	Họ đã bán những chiếc xe của họ. / They've already sold their cars.	tatoeba #10274114		
+lời	words, what is said										wiktionary 1	Không ai còn lời nào để nói cả. / No one had anything left to say.	tatoeba #11370067	lời khuyên "advice"	
+tiếng	language; sound, voice; hour (colloquial)	older-loan								聲 聲 thanh/thinh	wiktionary -	Cô ấy đã phải đợi hơn một tiếng. / She was made to wait for over an hour.	tatoeba #9014773	tiếng Việt "Vietnamese"; một tiếng "one hour"	
+dịch	to translate	same	譯	譯 dịch	jik6	i̍k	unmarked		yì		wiktionary 1	Tôi muốn dịch câu này sang tiếng Việt. / I want to translate this sentence into Vietnamese.	tatoeba #13340582		
+chẳng	not (at all)	native									wiktionary -	Tôi chẳng hiểu gì cả. / I don't understand anything at all.	course lexicon: written	More emphatic than không	
+phía	side, direction	native									wiktionary -	Nước Ý nằm ở phía nam châu âu. / Italy is in southern Europe.	tatoeba #10269473		
+tuy	although	same	雖	雖 tuy	seoi1	sui	unmarked		suī		wiktionary -	Nó tuy lùn nhưng chơi bóng rổ rất giỏi. / He is short, but good at basketball.	tatoeba #1568150	tuy … nhưng …	
+đồ	things, stuff; (đồ ăn) food	native									wiktionary 1	Bạn đã bao giờ ăn đồ Nhật chưa? / Have you ever eaten Japanese food?	tatoeba #9752278	đồ uống "drinks"	
+vùng	region, area	native									wiktionary 1	Yanni sống ở một vùng quê xinh đẹp. / Yanni lives in a pretty rural area.	tatoeba #10268468		
+khiến	to cause, to make (someone do)	older-loan								遣 遣 khiển/khán	wiktionary -	Thể dục khiến cho cơ thể khỏe mạnh. / Exercise makes the body healthy.	tatoeba #11338248		
+gây	to cause	native									wiktionary 1	Tom là người gây ra tai nạn. / Tom is the one that caused the accident.	tatoeba #13344244		
+khu vực	area, zone, region	same	區域	區 khu/âu · 域 vực	keoi1 wik6	khu-i̍k	unmarked	khu-hi̍k	qūyù		wiktionary -	Bạn có sống ở khu vực này không? / Do you live in this region?	tatoeba #13550889		
+hàng	goods; row, line	same	行	行 hàng/hành/hạnh/hạng/hãng	hong4 (also hong2 / hong6 / haang4 / hang4 / hang6)	hîng			háng (also xíng / héng)		wiktionary 1	Chúng tôi phải xếp hàng. / We had to queue.	course lexicon: written	cửa hàng "shop"	
+câu	sentence	same	句	句 câu/cú/cấu	gau1 (also ngau1 / geoi3)	kù	unmarked		gōu (also jù)		wiktionary 2	Câu đó được sửa lại ngay lập tức. / The sentence was corrected immediately.	tatoeba #13480540		
+trước khi	before (doing)	compound									wiktionary -	Trước khi đi ngủ đừng có uống bia! / Please don't drink beer before going to bed.	tatoeba #9726085		
+thi	to take an exam; to compete	older-loan								試 試 thí	wiktionary 2	Nó là một kỳ thi thật sự khó. / It's a really difficult exam.	tatoeba #11384935	kỳ thi "an exam"	
+đối với	towards, for, regarding	compound									wiktionary -	Tiền không phải tất cả đối với tôi. / Money isn't everything to me.	tatoeba #13921342	đối (對) + với "with"	
+sang	to cross (over), to go over (to)	native									wiktionary 2	Tuần sau tôi sang Pháp. / Next week I'm going over to France.	course lexicon: written	sang Pháp "to go (over) to France"	
+giáo viên	teacher	same	教員	教 giáo/giao · 員 viên/vân	gaau3 jyun4	kàu-uân			jiàoyuán		wiktionary -	Mẹ tôi là giáo viên dạy cấp 3. / My mother is a high school teacher.	tatoeba #10146673		
+thời	time, era	same	時	時 thời/thì	si4	sî	unmarked		shí		wiktionary -	Thời đó tôi còn là sinh viên. / At that time I was still a student.	course lexicon: written		
+kiểm tra	to check, to examine; test	same	檢查	檢 kiểm · 查 tra	gim2 caa4	kiám-tshâ	unmarked	kiám-tsa	jiǎnchá		wiktionary -	Hãy kiểm tra các vị trí của họ. / Check their positions.	tatoeba #11277744		
+khó	difficult	native									wiktionary -	Nó là một kỳ thi thật sự khó. / It's a really difficult exam.	tatoeba #11384935		
+trận	match, battle; (classifier for matches, storms)	same	陣	陣 trận	zan6	tsūn			zhèn		wiktionary -	Đội chúng tôi đã thua hết mọi trận. / Our team lost all its matches.	tatoeba #14083176	trận bóng đá "a football match"	
+bỏ	to leave, to quit; to put (in)	native									wiktionary 1	Bạn đã bỏ gì vào cà phê vậy? / What did you put in the coffee?	tatoeba #11274343	bỏ thuốc "to quit smoking"	
+chịu	to bear, to endure; to accept	older-loan								受 受 thụ/thọ	wiktionary -	Tôi sẽ chịu được. / I will endure.	tatoeba #3606828		
+phụ nữ	woman	same	婦女	婦 phụ · 女 nữ/nhữ/nứ	fu5 neoi5	hū-lú		hū-lí	fùnǚ		wiktionary -	Người phụ nữ đó có hai cái ví. / The woman has two wallets.	tatoeba #9012004		
+tiếp tục	to continue	same	接續	接 tiếp · 續 tục	zip3 zuk6	tsiap-sio̍k	unmarked		jiēxù		wiktionary -	Lorenzo tiếp tục làm bài tập về nhà. / Lorenzo continued his homework.	tatoeba #13426372		
+lý do	reason	same	理由	理 lý · 由 do	lei5 jau4	lí-iû	unmarked		lǐyóu		wiktionary -	Vì lí do đó, cô ấy mất việc. / For that reason, she lost her job.	tatoeba #14083121		
+chế độ	system, regime	same	制度	制 chế · 度 độ/đạc	zai3 dou6	tsè-tōo	unmarked		zhìdù		wiktionary -	Chế độ ăn của tôi rất đơn giản. / My diet is very simple.	course lexicon: written		
+đặc biệt	special; especially	same	特別	特 đặc · 別 biệt	dak6 bit6	ti̍k-pia̍t	unmarked		tèbié		wiktionary -	Tôi không có gì đặc biệt để nói. / I have nothing special to say.	tatoeba #3481596		
+rõ	clear										wiktionary -	Tôi nghe không rõ, làm ơn lặp lại. / I didn't hear you clearly. Would you please say it again?	tatoeba #1542508	rõ ràng "clear(ly)"	
+giống	to look like, to resemble, to be similar (to)										wiktionary 2	Vấn đề của tôi giống với anh ấy. / My problem is the same as his.	tatoeba #13502995	giống như "like"; giống "breed" is another etymology (種)	
+chạy	to run	native									wiktionary -	Còn chần chừ gì nữa, hãy chạy đi. / Please run away without hesitation.	tatoeba #13675708		
+chương trình	programme	false-friend	章程	章 chương · 程 trình	zoeng1 cing4	tsiong-thîng			zhāngchéng		wiktionary -	Chương trình Kabuki tháng tới là gì vậy. / What is the program of the Kabuki for next month?	tatoeba #1541858		In Chinese 章程 is the rules or statutes of an organisation; a programme is 節目 or 程序
+tàu	ship, boat; train (tàu hỏa)	older-loan								艚 艚 — (no Hán-Việt reading)	wiktionary 1	Tôi đến ga thì tàu chuẩn bị đi. / I arrived at the station and the train was about to leave.	tatoeba #13870202		
+triệu	million	false-friend	兆	兆 triệu	siu6	tiāu	unmarked		zhào		wiktionary -	Chúng nó lỗ tới một triệu yên lận. / Their losses reached one million yen.	tatoeba #1510764		In Chinese 兆 is "trillion" (10¹²) in Taiwan and "mega-" (million) in metric prefixes
+chống	to oppose, against; to prop up	native									wiktionary -	Tôi sẽ dùng thứ mà bạn ghét để chống lại bạn. / I am going to use what you hate against you.	tatoeba #5158979		
+bay	to fly	native									wiktionary 1	Cô ấy sắp bay qua một thành phố. / She's about to fly over a city.	tatoeba #11377124	máy bay "aeroplane"	
+nhớ	to remember; to miss (someone)	native									wiktionary -	Cô ấy không nhớ anh ấy là ai. / She didn't remember him.	tatoeba #9000528		
+bài	lesson; (written) piece, article; (classifier for songs, poems, texts)										wiktionary 2	Cô ấy đã đọc bài báo này chưa? / Has she read this article?	tatoeba #9731416	bài hát "a song"; bài tập "exercise"	
+khá	fairly, quite; good (enough)	older-loan								可 可 khả/khắc	wiktionary -	Chúng tôi là dân trượt băng khá giỏi. / We're pretty good skaters.	tatoeba #11393010		
+hình	picture, image; shape	same	形	形 hình	jing4	hîng	unmarked		xíng		wiktionary -	Tấm hình đẹp theo cách riêng của nó. / The picture is good in its way.	tatoeba #1548741		
+học sinh	pupil, (school) student	same	學生	學 học · 生 sinh/sanh (Southern variant)	hok6 saang1	ha̍k-sing			xuésheng		wiktionary -	Tôi vẫn đang là học sinh cấp ba. / I'm still a high school student.	tatoeba #13249769	A university student is sinh viên	
+sinh viên	(university) student	false-friend	生員	生 sinh/sanh (Southern variant) · 員 viên/vân	sang1 jyun4	sing-uân			shēngyuán		wiktionary -	Em là sinh viên. / I'm a (university) student.	course lexicon: written		生員 was a licentiate of the imperial examinations; a university student is 大學生 in Chinese
+chi	to spend, to pay out; branch	same	支	支 chi	zi1	tsi			zhī		wiktionary 1			chi tiêu "to spend"; in Central Vietnamese chi is also "what"	
+hắn	he, him (cool or contemptuous)	native									wiktionary -	Không hiểu sao, mọi người không ưa hắn. / He is unpopular for some reason.	tatoeba #6618616		
+xảy	to happen (xảy ra)										wiktionary -	Không có gì thật sự xảy ra cả. / Nothing really happened.	tatoeba #13339866		
+báo	newspaper; to report, to tell	same	報	報 báo	bou3	pò	unmarked		bào		wiktionary 2	Ông bố vừa đọc báo vừa ăn sáng. / Father reads the newspaper, eating his breakfast.	tatoeba #4604762	đọc báo "to read the paper"	
+cấp	level, grade	same	級	級 cấp	kap1	kip	unmarked		jí		wiktionary 1				
+cổ	neck	native									wiktionary 1	Hươu cao cổ có cái cổ dài. / Giraffes have very long necks.	tatoeba #13769876	cổ "ancient" (古) is another etymology	
+động vật	animal	same	動物	動 động · 物 vật	dung6 mat6	tōng-bu̍t			dòngwù		wiktionary -	Cá sấu là loài động vật bí ẩn. / Crocodiles are mysterious animals.	tatoeba #4302010		
+nam~south	south	same	南	南 nam	naam4 (also naa1)	lâm	unmarked		nán (also nā)		wiktionary 1	Chim bay về phía nam vào mùa đông. / Birds fly south in the winter.	tatoeba #3316849	miền Nam "the South"	
+nam	south	same	南	南 nam	naam4 (also naa1)	lâm	unmarked		nán (also nā)		wiktionary 1	Chim bay về phía nam vào mùa đông. / Birds fly south in the winter.	tatoeba #3316849	miền Nam "the South"	
+nam~male	male, man	same	男	男 nam	naam4	lâm	unmarked		nán		wiktionary 2	nam thanh niên / a young man	wiktionary		
+chắc	probably, surely; firm										wiktionary 1	Chắc có lẽ, đó là lỗi của tôi. / It's probably my fault.	tatoeba #9714612	chắc chắn "certain(ly)"	
+mở	to open; to turn on	native									wiktionary -	Bạn nên mở rèm ra thì tốt hơn. / You'd better open up the curtains.	tatoeba #3681120		
+nhóm	group										wiktionary 1	Chúng ta có cùng có chung nhóm bạn. / We have the same group of friends.	tatoeba #6546693		
+chính trị	politics; political	same	政治	政 chính/chinh/chánh (Southern variant) · 治 trị/trì	zing3 zi6	tsìng-tī	unmarked		zhèngzhì		wiktionary -	Tôi đang yêu cầu tị nạn chính trị. / I'm requesting political asylum.	tatoeba #10703656		
+thôi	to stop; that's all, only (… thôi)	older-loan								退 退 thoái/thối	wiktionary 1	Em chỉ có một câu hỏi thôi ạ. / I only have one question.	tatoeba #11584732	At the end: một chút thôi "just a little"	
+xin	to ask for; please (polite: xin mời)										wiktionary -	Xin cho biết tên phố này là gì? / What's the name of this street, please?	tatoeba #510405	xin lỗi "sorry"; xin chào "hello"	
+nhật bản	Japan	same	日本	日 nhật/nhựt (Southern variant) · 本 bản/bổn (Southern variant)	jat6 bun2	(ji̍t/li̍t)-pún	unmarked		Rìběn		wiktionary -	Tôi ước tôi có thể đến Nhật Bản / I wish I could go to Japan.	tatoeba #12534487		
+lạm phát	inflation	false-friend	濫發	濫 lạm/lãm/cãm · 發 phát	laam5 faat3				làn fā		wiktionary -				In Chinese 濫發 is "to issue excessively"; inflation is 通貨膨脹
+nghĩa trang	cemetery	false-friend	義莊	義 nghĩa/nghì/ngãi (Southern variant) · 莊 trang	ji6 zong1	gī-tsong	unmarked		yì zhuāng		wiktionary -	Nghĩa trang là chốn âm phủ. / Graveyards are chthonic places.	tatoeba #13900573		In Chinese 義莊 is a charitable estate (a clan's land for its poor); a cemetery is 墓地
+thông cảm	to sympathise, to understand	false-friend	通感	通 thông · 感 cảm	tung1 gam2	thong-kám	unmarked		(tōng/tòng) gǎn		wiktionary -				In Chinese 通感 is synaesthesia (a figure of speech)
+lịch sự	polite	hv-vn	歷事	歷 lịch · 事 sự	歷 lik6 · 事 si6	歷 li̍k · 事 sū	unmarked	歷 — · 事 —	歷 lì · 事 shì		wiktionary -	Người Anh là dân tộc lịch sự. / The English are polite.	tatoeba #620880	No such Chinese word: "polite" is 禮貌	
+ga	(railway) station	loan									wiktionary 1	Tôi đến ga thì tàu chuẩn bị đi. / I arrived at the station and the train was about to leave.	tatoeba #13870202	From French gare; nhà ga "station building"	
+ý	idea, opinion; meaning	same	意	意 ý	ji3	ì	unmarked		yì		wiktionary 1	Nói cho Tom biết bạn có ý gì. / Tell Tom what you mean.	tatoeba #4789663	ý kiến "opinion"; Ý (capital) is Italy	
+dậy	to get up, to wake up	native									wiktionary 1	Tiếng mưa đã đánh thức cô ấy dậy. / The sound of the rain woke her up.	tatoeba #11317053	thức dậy "to wake up"	
+biếu	to give (as a respectful gift)	older-loan								俵 俵 biểu	wiktionary 1	Tôi muốn biếu cô ấy một tặng phẩm nhân dịp sinh nhật cô. / I want to give her a gift for her birthday.	tatoeba #511649	To someone older or of higher status; tặng is the neutral word	
+kênh	canal; (TV) channel										wiktionary 1	Tôi xem kênh tin tức trên TV. / I watch the news channel on TV.	tatoeba #13844167		
+kinh	scripture, (Chinese) classic	same	經	經 kinh	ging1	king			jīng		wiktionary 2	đọc kinh / to read Buddhist chants/sutras / a Chinese classic / the Bible	wiktionary	kinh thánh "the Bible"; kinh "afraid" is another word, 驚	
+nôm	(chữ Nôm) the Vietnamese script made of Chinese characters	older-loan								南 南 nam	wiktionary -			chữ Nôm, the "southern" (Vietnamese) script; 南 itself is read nam the Hán-Việt way	
+thương	to love, to feel for, to pity										wiktionary 2	Lời nói thương cậu là lời thật lòng đấy. / I'm being sincere when I say that I love you.	tatoeba #11534302	Tender, protective love: thương con "to love one's child"; Southern also "to love (romantically)"	
+bức	(classifier for pictures, letters, walls)	same	幅	幅 bức/phúc	fuk1	hok			fú		wiktionary 2	Tôi đã đồng ý viết bức thư đó. / I agreed to write that letter.	tatoeba #8961933	bức ảnh "a photo", bức thư "a letter"	
+kỳ	period, term; session	same	期	期 kỳ/ky	kei4 (also gei1)	kî (also ki)	unmarked		qī		wiktionary 2	Năm ngoái là một thời kỳ không chắc chắn của nền kinh tế. / Last year was a period of economic uncertainty.	tatoeba #9005763	kỳ nghỉ "holiday", kỳ thi "exam (session)"	
+cố	to try (hard)										wiktionary 2	Hãy cố đi bộ nhiều nhất có thể. / Try to walk as much as possible.	tatoeba #13861501	cố gắng "to try hard"	
+dần	gradually										wiktionary 2			dần dần "little by little"	
+căn	(classifier for houses, flats, rooms)	older-loan								間 間 gian/gián	wiktionary 2	Anh ta nên mua lấy một căn nhà. / He should buy a house.	tatoeba #5404940	căn nhà "a house", căn hộ "a flat"	
+càng	the more (càng … càng … "the more … the more …"); all the more	older-loan								更 更 canh/cánh	wiktionary 1	Càng học nhiều toán, tôi càng hiểu ít đi. / The more I study math, the less I seem to understand.	tatoeba #13508478	càng ngày càng "more and more every day"	
+thị	Thị (middle name of women); she (literary)	same	氏	氏 thị/chi	si6 (also zi1)	sī	unmarked		shì (also zhī)		wiktionary 2			Nguyễn Thị Lan; in newspapers thị "she" is cold	
+cắt	to cut	native									wiktionary 1	Mẹ tôi cắt phô mai bằng dao. / My mother cut cheese with a knife.	tatoeba #13480483		
+chất	substance, matter; quality	same	質	質 chất/chí	zat1 (also zi3)	tsit	unmarked		zhì		wiktionary 1	lạm dụng chất / substance abuse	wiktionary	chất lượng "quality"	
+ngài	you, sir (very respectful); he (respectful)	native									wiktionary 1	Ngài có mấy chiếc xe ô tô? / How many cars do you have?	tatoeba #8834872	To or about a dignitary; also God	
+cơ	(final particle, insisting) really, actually										wiktionary 4	Em muốn cái màu đỏ cơ! / I want the RED one!	course lexicon: written	Northern speech: Em muốn cái kia cơ! "I want THAT one!"	
+cơ~muscle	muscle	same	肌	肌 cơ	gei1	ki	unmarked		jī		wiktionary 1	Con mèo nó không cử động cơ. / The cat didn't move a muscle.	tatoeba #3109183	cơ bắp "muscle"; cơ hội "opportunity" is 機, another character	
+tòa	(classifier for large buildings); court (tòa án)	older-loan								座 座 tọa	wiktionary -	Đám cháy đã đến gần những tòa nhà dân cư. / The fire came really close to residential buildings.	tatoeba #9000387	tòa nhà "a building"	
+cảnh	scenery, view; scene	same	景	景 cảnh	ging2 (also jing2)	kíng	unmarked		jǐng		wiktionary 1	Phòng này có cảnh nhìn ra đại dương. / This room has a view of the ocean.	tatoeba #11265042	phong cảnh "landscape"	
+nhờ	to ask (someone) a favour; thanks to	native									wiktionary 1	Tom đã đến nhờ chúng tôi giúp đỡ. / Tom came to ask us for our help.	tatoeba #1551992	nhờ anh … "could you please …"; nhờ có "thanks to"	
+đóng	to close, to shut; to build, to make (furniture)	doubtful								凍 凍 đống/đông	wiktionary -	Cái cổng bị đóng cả năm trời nay. / The gate is closed all the year round.	tatoeba #5145559	đóng cửa "to close the door"	
+con người	human being, man	compound									wiktionary -	Con người không bao giờ sống mãi mãi / Humans were never meant to live forever.	tatoeba #12534032		
+quay	to turn; to film	native									wiktionary -	Ông ấy quay lại một giờ sau đó. / He turned up an hour later.	tatoeba #1585470	quay lại "to turn back, to come back"	
+hoàn thành	to complete, to finish	same	完成	完 hoàn · 成 thành	jyun4 sing4	uân-sîng	unmarked		wánchéng		wiktionary -	Bạn có thể hoàn thành nó ở nhà. / You can finish it at home.	tatoeba #11266550		
+chắc chắn	certain, sure; firm	compound									wiktionary -	Nó sẽ xảy ra, tôi chắc chắn đấy. / It'll happen, I'm sure of it.	tatoeba #8978267	Reduplication of chắc	
+khả năng	ability; possibility	same	可能	可 khả/khắc · 能 năng/nai/nại	ho2 nang4	khó-lîng	unmarked		kěnéng		wiktionary -	Chiến tranh có khả năng sẽ xảy ra. / There's a possibility of war.	tatoeba #9007690		
+kế hoạch	plan	same	計畫	計 kế/kê · 畫 hoạch/họa	gai3 waak6	kè-uē	unmarked		jìhuà		wiktionary -	Kế hoạch dài hạn của bạn là gì? / What are your long term plans?	tatoeba #5150607		
+tưởng	to think (wrongly), to assume	same	想	想 tưởng	soeng2	sióng			xiǎng		wiktionary -	Tôi tưởng rằng Tom sẽ để tôi đi. / I thought that Tom would let me go.	tatoeba #11409770	Tôi tưởng anh đi rồi "I thought you had left"	
+tiêu	to spend (money)	same	消	消 tiêu	siu1	siau	unmarked		xiāo		wiktionary 1	Tôi không muốn tiêu nhiều hơn 10 Đô-la. / I don't want to spend more than $10.	tatoeba #9740839	tiêu tiền "to spend money"; hạt tiêu "pepper" is another word, 椒	
+bánh	cake, bread, pastry (any dish of dough)	older-loan								餅 餅 bính/bỉnh/bĩnh	wiktionary 1	Tôi biết ai đã ăn cái bánh đấy. / I know the one who ate the bread.	tatoeba #13525686	bánh mì "bread"; bánh xe "wheel" is listed by Wiktionary as another word	
+vô	to enter, to go in (Southern)										wiktionary 1	Vô nhà lấy con dao cho ba mày làm cá coi cu Thắng. / Thắng boy, go inside and fetch the knife so that your dad can start preparing some fish.	wiktionary	Southern for vào; vô (無) "without, un-" in compounds is another etymology	
+đàn	(string) instrument	same	彈	彈 đàn/đạn	taan4 (also daan2 / daan6)	tân (also tān)			tán (also dàn)		wiktionary 2			đàn ghi-ta "guitar"; đàn "flock, herd" is another, native word	
+phủ	to cover										wiktionary 1	Mặt đất đang phủ đầy tuyết. / The ground is covered with snow.	tatoeba #9037717		
+đại	big, great (in compounds)	same	大	大 đại/thái	daai6 (also taai3)	tāi			dài (also dà)		wiktionary 2	cỡ đại / size big	wiktionary	đại học "university"; làm đại "to do it any old how" is another word	
+sức khỏe	health	compound									wiktionary -	Tôi nghỉ hưu vì lí do sức khoẻ. / I resigned for health reasons.	tatoeba #13861507		
+châu âu	Europe	hv-vn	洲歐	洲 châu · 歐 âu/ẩu	洲 zau1 · 歐 au1 (also au2)	洲 tsiu · 歐 io	unmarked	洲 — · 歐 —	洲 zhōu · 歐 ōu		wiktionary -	Cô ấy là kẻ hủy diệt châu Âu. / She's the destroyer of Europe.	tatoeba #14039100	châu "continent" + Âu (歐羅巴); in Vietnamese order: Chinese says 歐洲	
+nước ngoài	abroad, foreign country	compound									wiktionary -	Tôi từng có ý định đi nước ngoài. / I had intended to go abroad.	tatoeba #9711941	A calque of Chinese 外國 (ngoại quốc)	
+hệ điều hành	operating system	hv-vn	系調行	系 hệ · 調 điều/điệu · 行 hành/hạnh/hàng/hạng/hãng	系 hai6 · 調 tiu4 (also diu6 / deu6) · 行 hang4 (also haang4 / hang6 / hong4 / hong2 / hong6)	系 hē · 調 tiâu (also tiau / tiāu / tiàu) · 行 hîng	unmarked	系 — · 調 — · 行 —	系 xì · 調 tiáo (also diào) · 行 xíng (also héng / háng)		wiktionary -	Leon đã tạo ra một hệ điều hành. / Leon created a new operating system.	tatoeba #13594937	A calque of English "operating system"; Chinese says 操作系統	
+cuốn	(classifier for books); to roll	older-loan								卷 卷 quyển/quyến/quyền	wiktionary -	Anh ấy đã đặt cuốn sách lên kệ. / He placed the book on the shelf.	tatoeba #11328630	cuốn sách "a book"	
+vì sao	why	compound									wiktionary 1	Vì sao chúng ta nên học tiếng Berber? / Why should we learn Berber?	tatoeba #8978170		
+giá	price	same	價	價 giá	gaa3	kà			jià (also jie)		wiktionary 1	Giá của nó đã tăng gấp ba lần. / Its price has gone up three-fold	tatoeba #13844996	giá bao nhiêu? "how much is it?"; giá đỗ "bean sprouts" is another etymology	
+công	work, labour (as paid)	same	工	工 công	gung1	kong			gōng		wiktionary 2	Bạn có được trả công hậu hĩnh không? / Are you being paid well?	tatoeba #13603229	tiền công "wages", công nhân "worker"; công "public" (công cộng) is another word, 公; công "peacock" is native	
+một cách	(makes an adverb: một cách nhanh chóng "quickly")	compound									wiktionary -	Tom đã trở nên rất nổi tiếng một cách nhanh chóng. / Tom became very famous quickly.	tatoeba #3549746	Before an adjective, in writing	
+thử	to try (out)	older-loan								試 試 thí	wiktionary -	Chị thử cái áo này nhé! / Try this top on!	course lexicon: written	mặc thử "to try on"	
+khỏi	to get well, to recover; (out) of, away from										wiktionary -	Tom vẫn chưa hồi phục khỏi nó. / Tom hasn't recovered from it yet.	tatoeba #13888025	khỏi bệnh "to get well"; ra khỏi nhà "to leave the house"	
+kết thúc	to end, to finish	same	結束	結 kết · 束 thúc/thú	git3 cuk1	kiat-sok	unmarked		jiéshù		wiktionary -	điều này sẽ không bao giờ kết thúc / This is never going to end.	tatoeba #9554241		
+lòng	heart, feelings; insides, guts	native									wiktionary -	Tôi phải học thuộc lòng bài thơ này. / I must learn this poem by heart.	tatoeba #703481	lòng tốt "kindness"	
+hội	festival; association	same	會	會 hội/cối	wui6 (also wui2 / wui5 / wui3 / kui2 / kui3)	huē (also kuè)	unmarked		huì (also kuài)		wiktionary 1	hội hè / a summer festival	wiktionary	lễ hội "festival"	
+quân	troops, army	same	軍	軍 quân	gwan1	kun	unmarked		jūn		wiktionary 1	Những người đã từng tham gia quân ngũ không cười trong rạp xiếc. / People who were in the army don't laugh at the circus.	tatoeba #8992835	quân đội "the army"	
+quán	café, small restaurant, eatery; stall	same	館	館 quán	gun2	kuán	unmarked		guǎn		wiktionary 1	Chị Lan ở quán cà phê. / Lan is at the café.	course lexicon: written	quán cà phê "café", quán phở "pho shop"; 館 as in 飯館, 茶館	
+chồng	husband	native									wiktionary 1	Đây là chồng chị. / This is my husband. (said by an older woman)	course lexicon: written	vợ "wife"; chồng chị "your (chị's) husband"	
+vợ	wife	native									wiktionary -	Vợ anh ấy là người Việt Nam. / His wife is Vietnamese.	course lexicon: written		
+đói	hungry	native									wiktionary -	Em đói chưa? / Are you hungry yet?	course lexicon: written	Anh đói chưa? "Are you hungry (yet)?"	
+tuần	week	false-friend	旬	旬 tuần/quân	ceon4	sûn	unmarked		xún		wiktionary 1	Tuần này em bận lắm. / I'm very busy this week.	course lexicon: written	tuần sau "next week", cuối tuần "weekend"	In Chinese 旬 is a period of ten days (上旬); Vietnamese tuần is a week of seven days
+buồn	sad	older-loan								煩 煩 phiền	wiktionary 1	Sao em buồn thế? / Why are you so sad?	course lexicon: written		
+cửa hàng	shop, store	compound									wiktionary -	Cửa hàng này có áo đẹp. / This shop has nice tops.	course lexicon: written	cửa "door" + hàng "goods"	
+áo	shirt, top, jacket (a garment for the upper body)	same	襖	襖 áo	ou3 (also ou2)	ò (also ù)	unmarked		ǎo		wiktionary -	Cái áo này đẹp quá! / This shirt is so nice!	course lexicon: written	áo dài; áo sơ mi "shirt"; 襖 is a lined jacket (棉襖), áo any upper garment	
+mặc	to wear, to put on (clothes)	native									wiktionary 1	Anh mặc áo trắng. / He is wearing a white shirt.	course lexicon: written	mặc áo "to put on a shirt"; mặc thử "to try on"	
+đen	black	native									wiktionary -	Cái áo màu đen này bao nhiêu tiền? / How much is this black shirt?	course lexicon: written		
+trắng	white	native									wiktionary -	Tôi muốn mua một cái áo trắng. / I want to buy a white shirt.	course lexicon: written		
+đỏ	red	native									wiktionary -	Áo đỏ hay áo đen? / The red top or the black one?	course lexicon: written		
+tặng	to give (as a present)	same	贈	贈 tặng	zang6	tsīng	unmarked		zèng		wiktionary -	Cháu tặng bác cái áo này. / This shirt is a present for you (to someone older).	course lexicon: written	tặng quà "to give a present"	
+sinh nhật	birthday	same	生日	生 sinh/sanh (Southern variant) · 日 nhật/nhựt (Southern variant)	saang1 jat6	sing-(ji̍t/li̍t)	unmarked	senn-ji̍t / sinn-li̍t	shēngrì		wiktionary -	Hôm nay là sinh nhật bác. / Today is your birthday (to someone older).	course lexicon: written	chúc mừng sinh nhật "happy birthday"	
+quà	present, gift										wiktionary -	Quà này cho bác ạ. / This present is for you (to someone older).	course lexicon: written	món quà "a present"; also a snack (quà sáng, Northern)	

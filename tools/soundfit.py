@@ -161,4 +161,5 @@ def order(con, hv, lang, readings):
     if len(readings) < 2 or not hv:
         return list(readings)
     sc = {r: score(con, hv, lang, r) for r in readings}
-    return sorted(readings, key=lambda r: (-round(sc[r], 6), readings.index(r)))
+    # a Mandarin neutral-tone reading (過 guo) is never a character's citation reading: last
+    return sorted(readings, key=lambda r: (lang == 'cmn' and tone('cmn', r) == 0, -round(sc[r], 6), readings.index(r)))

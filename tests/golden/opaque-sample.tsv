@@ -2,8 +2,10 @@
 # the older loans of the sample keep their own label). Judged by Claude, NOT a native speaker: T = a reader of Chinese
 # sees the word in the characters (the card may say same / gram), O = the link is not visible (the card must not say
 # same). tools/test_golden.py counts false opaque (T labelled opaque/doubtful) and false same (O labelled same/gram).
-# On 18 Nov 2026: fa4d343 false opaque 53 of 73, false same 0; after the rework 7 of 74 (孤 炒 縣 樣 依 眾 奧), 0.
-# max-false-opaque: 7
+# On 18 Nov 2026: fa4d343 false opaque 53 of 73, false same 0; after the rework 7 of 74 (孤 炒 縣 樣 依 眾 奧), 0;
+# after review 3 (synonyms, CC-CEDICT names for 奧 Austria) 2 of 74 (孤 "I, the ruler" and 依 "exactly like": no
+# source sense to match), 0.
+# max-false-opaque: 2
 key	chars	judgement
 từ	祠	T
 không	空	T

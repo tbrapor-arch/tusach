@@ -98,7 +98,7 @@ ok(card('điều').get('nan_layer') == 'unmarked', 'điều 條: the layer the M
 # finding 6: polyphonic readings ordered by fit with the card's Hán-Việt syllable
 for w, lang, first in (('hàng', 'yue', 'hong4'), ('hàng', 'cmn', 'háng'), ('chỉ~only', 'yue', 'zi2'),
                        ('chỉ~only', 'cmn', 'zhǐ'), ('số', 'cmn', 'shù'), ('thích', 'yue', 'sik1'),
-                       ('tiền', 'yue', 'cin4'), ('đang', 'cmn', 'dāng')):
+                       ('tiền', 'yue', 'cin4'), ('đang', 'cmn', 'dāng'), ('qua', 'cmn', 'guò')):
     got = card(w).get(lang, '')
     ok(got.startswith(first), f'{w}: {lang} {first} first (got {got})')
 ok('(also ' in card('hàng')['yue'], 'the other readings come after "also"')

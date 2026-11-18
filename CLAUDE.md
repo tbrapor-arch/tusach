@@ -39,21 +39,21 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
 8. The test fixture (`tools/fixtures/`) is not course content; a real lesson may not use a fixture-only word;
    `fixture: true` counts only there. Only `NN.yaml` files in `course/lessons/`.
 9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks and spellings (lý do, not lí do) follow the house style (lint).
-10. The course lexicon `course/lexicon.tsv` (Claude's, not native-checked; an honest `doubt` where unsure) decides a
-   word's English, sense, origin, characters, false-friend note; readings come from the database. Lint refuses a row
-   in conflict with the data unless overridden with a reason, and a lesson word of several senses without `~tag`.
-11. `make test` checks the built cards against `tests/golden/cards.tsv` (every lexicon row, the top 300) and the
-   opaque sample; after a deliberate change, `tools/test_golden.py --write` and read the diff before committing.
+10. The course lexicon `course/lexicon.tsv` (Claude's, not native-checked; honest `doubt`) decides a word's English,
+   sense, origin, characters, notes and example; readings come from the database. Lint refuses a conflict with the
+   data (each English item, characters vs etymology, "X only") unless overridden with a reason.
+11. `make test` checks the cards against `tests/golden/cards.tsv` (reviewed snapshot of what the learner sees);
+   after a deliberate change, `tools/test_golden.py --write` and read the diff.
+12. One plan source: `course/syllabus.yaml` + word list, `tools/plan.py --write` makes the rest; notes and planned
+   grammar use taught words or a `{preview}`; rule numbers only from `tools/bridge_rules.py --write`.
 
 ## Repository rules
-- Public repo: code and Claude's own lessons. Copyrighted material (books, transcripts, recordings he owns) lives
-  in the private companion `tusach-private`, loaded by the app with a token.
-- Never commit `data/raw`, `data/build`, `app/dist`, `*.db`, or anything in `reference/`.
-- Fixes shared with the other apps: `PORTING.md` (Tsheh-tû is the lead app).
+- Public repo: code and Claude's own lessons; what he owns (books, transcripts, recordings) goes to `tusach-private`.
+- Never commit `data/raw`, `data/build`, `app/dist`, `*.db`, `reference/`. Shared fixes: `PORTING.md` (Tsheh-tû leads).
 
 ## Working
-- Parallel sessions collide: `git fetch` and merge before building, and say which commit your work includes.
-- Run heavy steps one at a time; commit as you go.
+- Parallel sessions collide: `git fetch` and merge before building; say which commit your work includes; run heavy
+  steps one at a time; commit as you go.
 - Four documents, kept apart and short: this file (under 60 lines), `docs/REFERENCE.md`, `docs/STATE.md` (one small
   entry per module), `docs/HISTORY.md`. The repository is the source of truth; the claude.ai project points here.
 - Before a commit: `make lint`, `make test`, `make app`. After app or template changes: `make smoke`.

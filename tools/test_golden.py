@@ -5,11 +5,14 @@ contradicts tests/golden/cards.tsv, or when the dictionary labels contradict tes
     python3 -I tools/test_golden.py --write    # rewrite cards.tsv from the cards built now: READ the diff before
                                                # committing it (git diff tests/golden/cards.tsv): it is a review
 
-tests/golden/cards.tsv: one row per card of every course lexicon row (course/lexicon.tsv: tagged and untagged ids)
-and of the 300 most frequent words: card id, English lead (the first item), label, characters, the dictionary
-etymology the card uses (source and Wiktionary etymology number: the main etymology / the sense tag), and whether
-it has an example. Generated from the cards and reviewed by Claude (NOT a native speaker); the lexicon decides the
-first four for its words, so a row that changes means the lexicon, the join or the dictionary heuristics changed.
+tests/golden/cards.tsv (review 3, finding 7): a REVIEWED SNAPSHOT of what the learner sees on the cards of every
+course lexicon row (tagged and untagged ids), every word of the draft word list (course/syllabus.yaml draft) and the
+300 most frequent words: the English, the label, the characters, the readings in display order (Hán-Việt per
+character, Cantonese, Taigi literary and its layer, Taigi colloquial, Mandarin), the older loan's etymon, the
+dictionary etymology used, the example text and its source, the usage and false-friend notes. It protects what the
+lexicon does NOT state: a change of a dictionary rule, a reading order or an example filter that alters any of these
+fails `make test` until the diff is read and the snapshot rewritten (--write). Generated from the cards and read by
+Claude (NOT a native speaker).
 tests/golden/opaque-sample.tsv: review 2's sample of "opaque" Hán-Việt analyses judged T (transparent) or O; the
 dictionary layer's label (no lexicon) is counted: false same (O labelled same/gram) must be 0, false opaque (T
 labelled opaque/doubtful) may not exceed the number in the file's `max-false-opaque` line.
@@ -27,7 +30,8 @@ import vi  # noqa: E402
 
 GOLDEN = os.path.join(ROOT, 'tests/golden/cards.tsv')
 SAMPLE = os.path.join(ROOT, 'tests/golden/opaque-sample.tsv')
-COLS = ('id', 'en_lead', 'label', 'chars', 'ety', 'example')
+COLS = ('id', 'en', 'label', 'chars', 'hv', 'yue', 'nan', 'nan_layer', 'nan_coll', 'cmn', 'etymon', 'ety', 'ex', 'ex_src',
+        'use', 'ff')
 TOP = 300
 
 
@@ -37,6 +41,14 @@ def ids(con):
         if r['pos'] == 'name':
             continue
         for cid in (r['cid'], r['k']):
+            if cid not in out:
+                out.append(cid)
+    import plan
+    _, rows, _ = plan.load()
+    for r in rows:
+        if r['type'] != 'name':
+            base, _, tag = vi.nfc(r['word']).partition('~')
+            cid = vi.card_id(cards.canon(vi.key(base.replace('_', ' '))), tag or None)
             if cid not in out:
                 out.append(cid)
     for (k,) in con.execute("SELECT e.key FROM entry e JOIN source s ON s.id = e.source WHERE s.fixture = 0 AND "
@@ -51,9 +63,21 @@ def row(cid):
     got = cards.lookup(k, tag or None)
     c = cards.dictionary.get(got) if got else None
     if not c:
-        return {'id': cid, 'en_lead': '(no card)', 'label': '', 'chars': '', 'ety': '', 'example': ''}
-    return {'id': cid, 'en_lead': (c.get('en') or '').split('; ')[0], 'label': c.get('label', ''),
-            'chars': c.get('chars', ''), 'ety': c.get('ety', ''), 'example': 'yes' if c.get('ex') else 'no'}
+        return dict({x: '' for x in COLS}, id=cid, en='(no card)')
+    pc = c.get('per_char')
+    per = lambda x: ' · '.join(f"{p['c']} {p.get(x) or '—'}" for p in pc) if pc else c.get(x, '')  # noqa: E731
+    et = c.get('etymon') or {}
+    ex = c.get('ex') or {}
+    out = {'id': cid, 'en': c.get('en', ''), 'label': c.get('label', ''), 'chars': c.get('chars', ''),
+           'hv': c.get('hv', '') if not pc else ' · '.join(f"{p['c']} {p.get('hv', '')}" for p in pc),
+           'yue': per('yue'), 'nan': per('nan'), 'nan_layer': c.get('nan_layer', '') + (' ' + c['nan_flag'] if
+                                                                                    c.get('nan_flag') else ''),
+           'nan_coll': per('nan_coll') if pc else c.get('nan_coll', ''), 'cmn': per('cmn'),
+           'etymon': ' '.join(x for x in (et.get('chars', ''), et.get('hv', '')) if x), 'ety': c.get('ety', ''),
+           'ex': (ex.get('vi', '') + ' / ' + ex.get('en', '')) if ex else '',
+           'ex_src': (ex.get('src') or ('fixture' if ex else '')).split(' by ')[0], 'use': c.get('use', ''),
+           'ff': c.get('ff', '')}
+    return {x: str(v).replace('\t', ' ').replace('\n', ' ') for x, v in out.items()}
 
 
 def read(path=GOLDEN):
@@ -115,7 +139,7 @@ def main():
         r = row(g['id'])
         for c in COLS[1:]:
             if g[c] != r[c]:
-                errors.append(f'{g["id"]}: {c} {g[c]!r} -> {r[c]!r}')
+                errors.append(f'{g["id"]}: {c} {g[c][:70]!r} -> {r[c][:70]!r}')
     for cid in want:
         if cid not in have:
             errors.append(f'{cid}: a lexicon or top-{TOP} card with no golden row (tools/test_golden.py --write, then '
