@@ -2,6 +2,7 @@
 
 6   the Taigi vertical-line mark (U+030D: ha̍k, o̍) draws as a vertical stroke in the embedded font, and the build
     checks that every letter and mark on the page and on the cards is in the font and positioned on its letter.
+4   Lesson 0: the example word of a sound-table row shows that sound (nhé is not an example of n).
 1   lint: a first-person and a second-person kin term in one sentence must be a pair (anh–em, chị–em, bác–cháu…).
 14  lint: an exercise may not copy an earlier lesson's dialogue line or a note example of its own lesson.
 15  lint: Vietnamese in lesson notes and in new_words glosses is taught at or before the lesson, or marked {preview}.
@@ -70,6 +71,17 @@ ok('exercise sentence taken from lesson 1 line 1' in out, "lint: an exercise cop
 ok('mắc' in out and 'ơi' in out and 'dạ' not in out, 'lint: an untaught word in a note (mắc, ơi), a {preview} accepted')
 ok('gloss of ấy uses words not yet taught: cô' in out, 'lint: an untaught word in a new_words gloss (cô ấy)')
 ok('nán' not in out and ' o ' not in out, 'lint: Chinese readings and spelling letters in notes are not words')
+
+# 4. Lesson 0: a sound table's example word shows the sound of its row
+import lesson0  # noqa: E402
+bad0 = {'sections': [{'id': 'consonants', 'body': [{'table': {'head': ['Letter', 'Example'], 'rows': [
+    ['h, l, m, n', '[[mẹ]] mother · [[nhé]] OK?'], ['c, k, q', '[[quán]] café'], ['d, gi, r', '[[gì]] what']]}}]},
+    {'id': 'finals', 'body': [{'table': {'head': ['Final', 'Example'], 'rows': [['-nh, -ch', '[[anh]] · [[thích]]'],
+                                                                                 ['-ng', '[[năm~five]]']]}}]}]}
+pr = lesson0.example_problems(bad0)
+ok(len(pr) == 2 and 'nhé' in pr[0][1] and 'năm' in pr[1][1],
+   f'Lesson 0: nhé is not an example of n, năm not of -ng; quán (qu), gì (gi), anh, thích are fine {pr}')
+ok(lesson0.example_problems(lesson0.load()) == [], 'Lesson 0: every example word of the sound tables shows its sound')
 
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

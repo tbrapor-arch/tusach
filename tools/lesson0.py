@@ -124,6 +124,59 @@ def problems(d):
             out.append((where, f'"{m.group(0)}": a foreign sound is only ever close to a Vietnamese one'))
         if vi.CJK.search(''.join(SPAN.findall(str(t)))):
             out.append((where, 'chữ Hán inside [[…]]: Vietnamese words only'))
+    return out + example_problems(d)
+
+
+# the example words of the sound tables must show the sound of their row (review 5, finding 4: nhé was the example of
+# initial n): by section id, how a word is matched with the letters of the row's first cell
+INITIALS = sorted('ngh ng nh gh gi kh ph th tr ch qu b c d đ g h k l m n p r s t v x'.split(), key=len, reverse=True)
+CODAS = ('ch', 'nh', 'ng', 'c', 'm', 'n', 'p', 't')
+TONES = {'\u0300', '\u0301', '\u0303', '\u0309', '\u0323'}
+
+
+def _toneless(w):
+    import unicodedata as ud
+    return ud.normalize('NFC', ''.join(c for c in ud.normalize('NFD', w.lower()) if c not in TONES))
+
+
+def _initial(syl):
+    s = _toneless(syl)
+    i = next((x for x in INITIALS if s.startswith(x)), '')
+    return 'q' if i == 'qu' else i
+
+
+def _coda(syl):
+    s = _toneless(syl)
+    return next((c for c in CODAS if s.endswith(c)), '')
+
+
+def example_problems(d):
+    """(where, message) for a sound-table example word that does not show its row's sound: consonants and mergers by
+    the initial, finals by the final, vowels and diphthongs by the vowel letters (tone marks ignored)."""
+    out = []
+    for i, s in enumerate((d or {}).get('sections') or []):
+        kind = s.get('id')
+        if kind not in ('consonants', 'mergers', 'finals', 'vowels'):
+            continue
+        for j, b in enumerate(s.get('body') or []):
+            tb = b.get('table') if isinstance(b, dict) else None
+            if not tb:
+                continue
+            cols = [k for k, h in enumerate(tb.get('head') or []) if str(h).lower().startswith('example')]
+            for r, row in enumerate(tb.get('rows') or []):
+                letters = {x.strip('-').strip() for x in re.split(r'[,/]| ', str(row[0])) if x.strip('-').strip()}
+                for k in cols:
+                    for m in SPAN.finditer(str(row[k])):
+                        first = m.group(1).split('~')[0].split()[0].split('_')[0]
+                        if kind in ('consonants', 'mergers'):
+                            good = _initial(first) in letters
+                        elif kind == 'finals':
+                            good = _coda(first) in letters
+                        else:
+                            good = any(x in _toneless(first) for x in letters)
+                        if not good:
+                            out.append((f'sections[{i}].body[{j}].rows[{r}]', f'example [[{m.group(1)}]] does not '
+                                        f'show {", ".join(sorted(letters))}'))
     return out
 
 
