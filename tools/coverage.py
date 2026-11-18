@@ -163,11 +163,26 @@ print(f'\nThe {LIST} most frequent ones lacking a Chinese reading (of {len(lacki
 for r in lacking[:LIST]:
     print(f'  {r[1]:>5} {r[0]} {r[5]}: {why_missing(r[5], B[r[5]])}')
 
+unk = [r[0] for r in rows[:1000] if not r[6].get('label') and not (r[4] and not r[6].get('label'))]
+print(f'\nUnknown origin in the top 1000 (no etymology in the data; names left out): {len(unk)}')
+print('  ' + ', '.join(unk))
+
 # characters of the frequent Hán-Việt words that no source reads in Hán-Việt (shown "—" on the card, never "?")
 sys.path.insert(0, HERE)
 import bridge  # noqa: E402
 none = sorted({c for r in hv_rows[:TOP] for c in r[5] if not bridge.hv_readings(con, c)})
 print(f"\ncharacters with no Hán-Việt reading (top {TOP}): {len(none)}{': ' + ' '.join(none) if none else ''}")
+
+if LIST_FILE:
+    import course as course_  # noqa: E402
+    listed = set()
+    for r in course_.wordlist(LIST_FILE):
+        base = vi.nfc(r['word']).split('~')[0].replace('_', ' ')
+        listed.add(cards.canon(vi.key(base)))
+    print(f'\nWord list {LIST_FILE}: {len(listed)} distinct words')
+    for top in (100, 300, 500, 1000, 3000):
+        part = rows[:top]
+        print(f'  top {top:>4}: {sum(1 for r in part if r[0] in listed)}/{len(part)} in the list')
 
 # the lessons
 seen = set()

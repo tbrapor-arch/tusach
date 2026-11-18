@@ -55,7 +55,7 @@ smoke:
 	$(PY) tools/smoke.py
 
 coverage:
-	$(PY) tools/coverage.py
+	$(PY) tools/coverage.py $(if $(LIST),--list $(LIST))
 
 cutter:
 	$(PY) tools/cutter_test.py --max 30
