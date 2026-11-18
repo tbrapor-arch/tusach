@@ -769,11 +769,26 @@ def word_checks(con):
         else:
             rows.append(('', eid))
     con.executemany('UPDATE entry SET hv_check=? WHERE id=?', rows)
+    # review 3: an analysis whose differing syllables are Wiktionary's Nôm readings of their characters (công bằng 公平,
+    # thế cuộc 世局, tinh dầu 精油) is a word with an older (pre-Hán-Việt) reading: an older loan, its characters the
+    # etymon (shown as such), never a "same word" with a non-Hán-Việt reading
+    nom = defaultdict(set)
+    for ch, r in con.execute("SELECT char, reading FROM hanviet WHERE kind = 'nom'"):
+        nom[ch].add(rkey(r))
+    older = []
+    for eid, k, chars in con.execute("SELECT id, key, chars FROM entry WHERE hv_check = 'differs' AND origin = 'sino'"
+                                     ).fetchall():
+        syl = check_syllables(k)
+        if all(rkey(s) in hv[c] or rkey(s) in nom[c] for s, c in zip(syl, chars)):
+            older.append((chars + ' ' + ' '.join((bridge.hv_readings(con, c) or ['?'])[0] for c in chars), eid))
+    con.executemany("UPDATE entry SET origin = 'nonhv', etymon = ?, chars = '', hv_check = 'older', origin_note = "
+                    "'an older (Nôm) reading of the characters' WHERE id = ?", older)
     con.execute("UPDATE entry SET label='same' WHERE label='' AND origin='sino' AND hv_check NOT IN ('differs', 'length')")
     con.execute("UPDATE entry SET label='native' WHERE label='' AND origin='vietic'")
     c = Counter(r for r, _ in rows)
     if rows:
-        print(f"Sino-Vietnamese entries vs the Hán-Việt readings: {c['ok']} ok, {c['differs']} differ, "
+        print(f"Sino-Vietnamese entries vs the Hán-Việt readings: {c['ok']} ok, {c['differs'] - len(older)} differ, "
+              f"{len(older)} read with an older (Nôm) reading, now older loans, "
               f"{c['length']} with characters and syllables of different number (these two: suspects, `make lint`), "
               f"{c['']} not checkable")
     none = sorted({ch for (chars,) in con.execute("SELECT DISTINCT chars FROM entry WHERE chars != ''") for ch in chars
@@ -1143,10 +1158,12 @@ def attach_examples(con, cut, known, per_word=EX_PER_KEY):
     for v, en, ref, ws in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
         fl = example_flags(v, en, ws, known, south)
         flagged[fl] += 1
+        sw = {w[2] for w in ws if w[2] in south} | {k for k in re.findall(r'\w+ \w+', v.lower()) if k in south}
         for w in sorted({canon.get(w[2], w[2]) for w in ws}):
             if w in first and have[w] < per_word:
                 have[w] += 1
-                rows.append((first[w], 'tatoeba', v, en, ref, w, fl))
+                # a Southern word's own card may show it (xe hơi, tui): only OTHER Southern words refuse a sentence
+                rows.append((first[w], 'tatoeba', v, en, ref, w, '' if fl == 'southern' and sw <= {w} else fl))
     con.executemany('INSERT INTO example(entry_id, source, vi, en, ref, key, flags) VALUES (?,?,?,?,?,?,?)', rows)
     print(f'tatoeba: {len(rows)} example candidates on {len(have)} words (from {len(usable)} sentences of '
           f'{EX_MIN}-{EX_MAX} syllables; flagged: {dict((k, n) for k, n in flagged.items() if k)})')

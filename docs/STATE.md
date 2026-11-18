@@ -2,7 +2,7 @@
 
 ## Numbers (printed by `tools/state.py --write`; `make test` fails when they drift)
 <!-- state:numbers -->
-- Course lexicon: 534 rows (doubt 14, likely 94, sure 426; 51 with an override; 250 with an example written by Claude); golden cards: 550.
+- Course lexicon: 534 rows (doubt 14, likely 94, sure 426; 49 with an override; 250 with an example written by Claude); golden cards: 550.
 - Top 1,000 cards, labels: same 385, gram 7, hv-vn 13, doubtful 12, opaque 18, older-loan 111, loan 9, native 200, compound 111, false-friend 10, unknown 124.
 - Cards showing chữ Hán (Hán-Việt analysis) among the top 1,000 / 3,000 / 5,000: 433 / 1499 / 2569.
 - Taigi: 180 characters with a reading found colloquial (coda class or 麻 rhyme).

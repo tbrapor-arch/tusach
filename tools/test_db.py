@@ -104,9 +104,10 @@ with tempfile.TemporaryDirectory() as tmp:
     ok(('值', 'trị', 'hv', 'attested') in hv, 'real: a Hán-Nôm reading read so by a Sino-Vietnamese word (giá trị)')
     ok(('平', 'bằng', 'hv', 'attested') not in hv, 'real: a reading Wiktionary gives only as Nôm is not made Hán-Việt by '
        '2+ Sino-Vietnamese words (bằng, công bằng: review 3)')
-    chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE chars != '' AND source='wiktionary'"))
-    ok(chk.get('bằng') == 'differs' and chk.get('học sinh') == 'ok', 'real: bằng 平 is not a Hán-Việt reading (older '
-       'loan), học sinh 學生 is')
+    chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE source='wiktionary' AND hv_check != ''"))
+    ety = dict(con.execute("SELECT key, origin || ' ' || etymon FROM entry WHERE source='wiktionary' AND key='bằng'"))
+    ok(chk.get('bằng') == 'older' and ety.get('bằng', '').startswith('nonhv 平') and chk.get('học sinh') == 'ok',
+       'real: bằng 平 is read with a Nôm reading: an older loan of 平 (review 3); học sinh 學生 is Hán-Việt')
     import cards  # noqa: E402
     cards.init(cards.open_db('public', db), lex_rows=[])   # the dictionary layer alone
     lai, thich = (cards.dictionary[cards.lookup(k)] for k in ('lại', 'thích'))
