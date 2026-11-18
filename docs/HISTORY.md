@@ -173,3 +173,14 @@ tools/test_review3.py):
   đàn, đại, bánh), usage notes of năm, bốn, vậy / thế, bát, hay, cốc, xa. Examples: Southern words, self-harm and
   violence, misaligned wh-questions refused. Bridge notes: the word–character pair judged. Golden: a 550-card
   snapshot of everything shown. False opaque 7 -> 2.
+
+## Review 4 (19 Nov 2026, branch data-quality)
+- Origin notes (tools/etym.py): what the etymology says about THIS word (lăm: an alteration of năm after mười), a
+  cognate only with its form (taken from the text when the template has "-"), Vietnamese's own ancestors never
+  cognates (Middle Vietnamese "inherited from", a proto-form under {{cog}} "related to"), an ancestor identical to
+  the word no note. Variants (tools/bridge.py same_sound): a Unihan pair whose Cantonese or Mandarin readings share
+  nothing lends no reading (襖~澳, 癉~疸, 戧~創, 玟~玫).
+- Plan: L4 at a tea stall (no goods or mua needed), trứng for quả at L10, to / nhỏ at L13, particle strand (nào, đâu
+  L12, hả, nhá, với, dạ); the order check classifies every token (a lone mua is checked; Mai at a sentence start is
+  mai); rule tables show the best single guess beside a multi-outcome rule. Lexicon: examples (mặc, viết, sau),
+  notes (chồng, đấy, vậy, mà, to / lớn / nhỏ), rows to, trứng, chứ, hả, nha. Tests: tools/test_review4.py.
