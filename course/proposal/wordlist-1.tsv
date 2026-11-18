@@ -1,196 +1,196 @@
 lesson	word	english	freq_rank	type	characters	han_viet	cantonese	taigi_literary	mandarin	note
-1	chào	to greet, salute, say hello or goodbye to	1526	other borrowing						Used with a person term: chào anh, chào chị. Any time of day, hello and goodbye. [db: older loan of 朝 triều; yue ziu1 / ciu4 / zyu1, nan tiâu / tiau, cmn cháo / zhāo]
-1	anh	I/me, a male who's (presumably) slightly older than you, or still young enough relative …	50	native						Here "you" to a man a little older than the speaker; also "I" when he speaks to someone younger. Pronoun strand step 1.
-1	chị	I/me, your big sister; you, my big sister; I/me, your female cousin who's descended from …	211	native						"You" to a woman a little older; also "I" when she speaks to someone younger.
-1	em	pronoun used to refer to any person (oneself, the addressee, or any third person) …	113	native						"You" to someone younger; also "I" when speaking to someone older. Also used to call a waiter or shop assistant (L3).
-1	tôi	I/me (used by someone with status equal or higher than his or her conversational partner, …	32	native?						Neutral "I" with strangers and in formal speech; among family and friends a kinship term replaces it.
-1	là	to be	1	native						Links a noun to a noun (Tôi là Sam). Not used before an adjective (L9).
-1	tên	given name; name	75	native?						
-1	gì	what; whatever; anything	87	native?						Always after the verb: Anh tên là gì?
-1	không	Negates the meaning of the modified verb or adjective: not; not at all; idly	9	Hán-Việt	空	空 không/khống/khổng	hung1 / hung3	khong / khòng	kōng / kòng	Negation before a verb, and the question tag: ... không? The database analyses it as 空; true but opaque: not used as a bridge example.
-1	vâng	yes	3707	native?						Northern polite "yes". dạ (L13) is also used in the North, especially to elders. Not checked by a native speaker.
-1	ạ	Used at the end of the sentence to express formality or politeness, usually to older …	1297	native?						Polite final particle towards older people and strangers.
-1	cảm_ơn	alternative form of cám ơn (“thank you”)	916	Hán-Việt?						Northern form; cám ơn is the commoner Southern spelling. In the database only as "alternative form of cám ơn", with no chữ Hán (see to-check).
-1	rất	very (placed before the word to intensify)	41	native?						Before the adjective: rất vui.
-1	vui	merry; joyful; gay	325	native						
-1	được	to gain, to win; to obtain, to get (passively); to be (used to form passive tense, …	5	other borrowing						In the set phrase Rất vui được gặp anh "nice to meet you": được = get to. [db: older loan of 得 đắc; yue dak1, nan tik, cmn dé / de / děi / dè]
-1	gặp	to meet, to see	192	native						
-1	Sam			name						Name of the learner in the dialogues (not Vietnamese). Proposal; see decision D9.
-1	Lan	a female given name from Chinese; a female given name from Chinese, a middle name	1687	Hán-Việt	蘭	蘭 lan	laan4	lân	lán	(name) Name: chị Lan, who runs the guesthouse.
-2	người	person; people; physical state	14	native						người + nationality: người Pháp "a French person" (modifier after the noun).
-2	nước	short for đất nước (“country; polity”)	76	native?						"country" (same spelling as nước "water", L3 or later): Anh là người nước nào?
-2	nào	which; every, any	82	native?						After the noun: nước nào "which country".
-2	ở	to be, to live, to stay, to remain	12	native						"to live, to be at"; also "at, in" (preposition).
-2	đâu	where; from wherever	230	native?						Ở đâu? "where?"
-2	đến	to arrive, to come	19	native?						đến từ "to come from".
-2	từ	from, since; at, in (a time; indicating that the result of the action continues to the …	28	other borrowing						"from". The database also has từ 詞 "word" etc.; the card must show the right sense (homograph). [db: older loan of 自 tự; yue zi6, nan tsū, cmn zì]
-2	Việt_Nam	Vietnam (a country in Southeast Asia)	100	Hán-Việt	越南	越 việt/hoạt · 南 nam/nôm	jyut6 naam4	ua̍t-lâm	Yuènán	(name) First bridge word: 越南. Note the Chinese order (modifier first) inside Hán-Việt words.
-2	Pháp	France (a country located primarily in Western Europe); a male given name from Chinese	275	Hán-Việt	法	法 pháp	faat3 / fat3	huat	fǎ	(name) 法 = law/method; France is 法國 in Chinese, Pháp in Vietnamese.
-2	Trung_Quốc	China; the self-denomination of Vietnam during Nguyễn dynasty independence period (19ᵗʰ …	313	Hán-Việt	中國	中 trung/trúng · 國 quốc/quấc	zung1 gwok3	Tiong-kok	Zhōngguó	(name) 中國, read the Vietnamese way.
-2	Hà_Nội	Hanoi (a city, the capital city of Vietnam); Henei Commandery (in present day Jiaozuo, …	308	Hán-Việt	河內	河 hà · 內 nội/nạp	ho4 noi6	hô-luē	Hénèi	(name) 河內 "inside the rivers".
-2	tiếng_Việt	the Vietnamese language; Vietnamese	627	native?						tiếng + language name is one word (house style).
-2	nói	to speak, to talk, to say, to tell	74	native?						
-2	biết	to know; to be aware of; to learn about	63	other borrowing						Older loan from 別 (database etymon); everyday native-feeling verb. [db: older loan of 別 biệt; yue bit6 / bit3, nan pia̍t, cmn bié]
-2	cũng	also; too	24	other borrowing						Before the verb: Tôi cũng là người Pháp. [db: older loan of 共 cộng; yue gung6 / gung1 / gung2, nan kiōng, cmn gòng]
-2	học	to study; to learn	68	Hán-Việt	學	學 học	hok6	ha̍k	xué	學 hok6 / ha̍k / xué: the model bridge word.
-3	cà_phê	coffee	1034	other borrowing						From French café (Claude; the database has no etymology for it).
-3	trà	tea; dried tea	1389	Hán-Việt	茶	茶 trà	caa4	tê	chá	茶. Northern speakers also say chè for tea (the drink and the plant); Claude is not sure which is more natural in a Hà Nội café: native speaker to decide.
-3	sữa	milk (white liquid produced by female mammals); milk (white liquid from a vegetable …	1712	native						cà phê sữa đá: modifier after noun, three times.
-3	đá	rock, stone; ice as used for consumption or refrigeration; meth, methamphetamine	462	native						"ice" here (also "stone").
-3	cốc	glass, tumbler	1876	native?						Northern word for a glass; ly is Southern (decision D6). Database has no etymology.
-3	có	to have, to possess; there be	4	native						có ... không? "is there ... ?": the yes/no question frame.
-3	muốn	to want	88	native?						
-3	uống	to drink	269	native						
-3	cho	to give; to let; to make	10	native						Cho tôi ... "give me ... / I'll have ...".
-3	một	one	7	native						
-3	hai	two	83	native						
-3	đây	this place here; this thing/person; this time now	54	native?						"here; this (person/thing)": Đây là ...
-3	ơi	vocative particle; oh, hey	1775	native?						Calling someone: Em ơi! (to a young waiter).
-3	nhé	alright?; okay?; will you?	263	native?						Soft final particle: "OK?"
-3	chút	a very small, tiny portion or amount; a moment, an instant	869	native?						một chút "a little".
-3	ngồi	to sit; to be somewhere for a long period of time; to hold (a position)	406	native						
-4	ba	three	210	native						Also "father" in the South (bố in the North, L5).
-4	bốn	four	875	native						Northern; Southern speakers also say tư in some positions (Claude, to check).
-4	năm	five	30	native						Same spelling as năm "year" (L5).
-4	sáu	six	1202	native						
-4	bảy	seven	1880	native						
-4	tám	eight	1998	native						
-4	chín	nine	1615	native						
-4	mười	ten	971	native						
-4	mươi	ten	1921	native?						"-ty": hai mươi = 20. mười alone, mươi in tens.
-4	nghìn	thousand	2152	native?						Northern; ngàn is Southern (both understood).
-4	bao_nhiêu	how many?; how much?	516	native?						Bao nhiêu tiền? "How much?"
-4	tiền	money	125	Hán-Việt	錢	錢 tiền/tiễn	cin2 / cin4 / zin2	tsiân	qián	錢 tsiân: the HV form is the everyday word.
-4	đồng	copper; dong (currency of Vietnam, or of the historical state of South Vietnam); a …	324	Hán-Việt	銅	銅 đồng	tung4	tâng	tóng	The currency: 20 nghìn đồng. Card shows 銅 (copper). Homograph of đồng "field".
-4	mua	to buy; to purchase; to bribe	291	other borrowing						Older loan from 務 (database etymon); not a useful bridge. [db: older loan of 務 vụ; yue mou6, nan bū, cmn wù]
-4	đắt	expensive; dear; costly	2911	native?						Northern; mắc is the Southern word (Claude, decision D6).
-4	rẻ	cheap, inexpensive	2634	native?						
-4	quá	very, excessively	94	Hán-Việt	過	過 quá/qua	gwo3 / gwo1	kò / kòo	guò / guo	After or before the adjective: đắt quá! "too expensive!"
-4	quả	Refers to anything round, such as a piece of fruit.	299	Hán-Việt	果	果 quả	gwo2 / gu2	kó	guǒ	Classifier for fruit (Northern); trái is Southern. First classifier.
-4	cam	orange, such as Citrus × sinensis or Citrus aurantium (bitter orange); short for cam sành …	1456	Hán-Việt	柑	柑 cam	gam1 / kim4	kam	gān	柑 gam1 / kam: a good bridge word.
-5	gia_đình	an immediate family; a household	191	Hán-Việt	家庭	家 gia/cô · 庭 đình/thính	gaa1 ting4	ka-tîng	jiātíng	家庭.
-5	ảnh	image; reflection; photograph	251	Hán-Việt	影	影 ảnh	jing2 / jeng2	íng	yǐng	"photo": 影 jing2 / íng.
-5	bố	father	216	native						Northern; ba is Southern (L4 ba = three).
-5	mẹ	mother	189	native						Northern; má is Southern.
-5	ông	grandfather; old man; man, old or young	42	Hán-Việt	翁	翁 ông	jung1	ong	wēng	Also "you" to an older man (pronoun strand).
-5	bà	a grandmother; an old woman; an old lady	186	Hán-Việt	婆	婆 bà	po4	pô	pó	Also "you" to an older woman.
-5	anh_trai	elder brother	1877	native?						
-5	chị_gái	elder sister	3581	native?						
-5	em_gái	younger sister	1630	native?						em trai "younger brother" in the dialogue or L6 exercises (same pattern).
-5	ai	who; whoever, anyone; someone, someone else	147	native						
-5	của	of (belonging to or associated with)	3	native?						"of, belonging to": often dropped with family words (bố tôi). The rule is the reverse of Mandarin 的 order.
-5	con	child (daughter or son); build; stature	61	native						Also a pronoun (child to parent) and the classifier for animals.
-5	mấy	how much, how many	435	native						For small numbers (under ten): mấy tuổi?
-5	tuổi	age; a year of age; a year of tenure	205	other borrowing						Older loan from 歲 (database etymon). [db: older loan of 歲 tuế; yue seoi3, nan suè, cmn suì]
-5	năm~year	year	30	native						Homograph of năm "five" (L4): needs the ~year tag in lesson files.
-5	Minh	a male given name from Chinese; the Ming dynasty (1368–1644 CE)	769	Hán-Việt	明	明 minh	ming4	bîng	míng	(name) Name: anh Minh, Lan's husband (proposal).
-6	giờ	unit for specifying a point in time in terms of hours; hour; short for bây giờ (“now”)	279	other borrowing						"o'clock; hour". Older loan from 時 (database etymon). [db: older loan of 時 thì, thời; yue si4, nan sî, cmn shí]
-6	phút	minute (unit of time)	311	native?						Database has no etymology.
-6	rưỡi	and a half, half past	5625	native?						hai giờ rưỡi "half past two".
-6	bây_giờ	now; Indicates an imminent possibility	576	native?						
-6	hôm_nay	today (on the current day)	336	native?						
-6	ngày_mai	tomorrow; the future	389	native?						
-6	sáng	morning	293	native?						
-6	chiều	late afternoon; early evening	587	native?						
-6	tối	the duration from the late evening (around 6 PM) to the early night (around 8 PM)	271	native						"evening".
-6	đi	to go; to leave; to set out	44	native						đi làm "go to work", đi học "go to school" are two words (house style).
-6	làm	to do; to make; to act	25	native?						
-6	về	to come back or go back (to somewhere one belongs or to some place that is one's own)	27	native						về nhà "go home".
-6	nhà	house; home; dwelling	51	native						
-6	đang	marks the continuous, imperfect aspect of an action or state	56	Hán-Việt	當	當 đương/đáng/đang	dong1 / dong3	tong / tòng	dāng / dàng	Progressive. The database's 當 is a historical analysis; not used as a bridge example.
-6	sẽ	marks the future tense; marks a desire or a hypothetical	18	native?						
-6	đã	having completed this action, perfect aspect; having reached this state; indicates an …	13	native?						Past/perfect; often left out when the time is clear (decision on how much to explain: none needed).
-8	đường	road; street; path	122	Hán-Việt	唐	唐 đường	tong4	tông	táng	The database's 唐 analysis for "road" is doubtful as a bridge (see to-check).
-8	phố	street, with houses and buildings on both sides; townhouse, row house	722	Hán-Việt	舖	舖 phố/phô	pou3 / pou1	phòo	pù	Hà Nội street names: phố Huế. Database: 舖.
-8	xe_máy	a vehicle that is either a mô tô (“high capacity motorcycle”) or a xe gắn máy (“low …	411	native?						"motorbike".
-8	xe_buýt	bus	2114	other borrowing						From French bus (Claude; not in the database).
-8	đi_bộ	to walk	739	native?						
-8	rẽ	to turn (to another path); to cleave, to split (into branches)	3458	native?						Northern; quẹo is Southern (Claude, to check).
-8	trái	left (side, direction); reverse (side); morally wrong, unreasonable, illogical	521	native						Also "fruit" in the South: Northern speakers say quả for fruit.
-8	phải	right (side, direction) (in bên phải); correct; obverse	29	other borrowing						"right (side)"; the same word means "must" (L12). Older loan from 被 (database etymon), surprising: see to-check. [db: older loan of 被 bị; yue bei6 / pei5 / pei1, nan pī, cmn bèi]
-8	thẳng	straight; direct; nonstop	992	native?						đi thẳng "go straight on".
-8	gần	near; nearby; close (to)	261	native						
-8	xa	far	481	Hán-Việt	賒	賒 xa	se1	sia	shē	The database analyses xa "far" as 賒 (to buy on credit): a doubtful bridge (see to-check).
-8	hồ	lake	792	Hán-Việt	湖	湖 hồ	wu4	ôo	hú	湖 wu4 / ôo / hú.
-8	mất	to lose something; to pass away; to take (time)	208	native						"to take (time)": mất mười phút.
-8	khoảng	about; approximately	158	other borrowing						"about, approximately". [db: older loan of 曠 khoáng; yue kwong3 / kong3, nan khòng, cmn kuàng]
-8	Hoàn_Kiếm	a district of Hanoi, Vietnam	16284	Hán-Việt	還劍	還 hoàn/toàn · 劍 kiếm	(waan4/syun4) gim3	huân-kiàm	(hái/huán) jiàn	(name) Hồ Hoàn Kiếm (還劍 "returned sword") in the dialogue.
-8	bản_đồ	map	3207	Hán-Việt	版圖	版 bản · 圖 đồ	baan2 tou4	pán-tôo	bǎntú	版圖 (in Chinese: territory): a mild false friend.
-9	thời_tiết	weather	721	Hán-Việt	時節	時 thời/thì · 節 tiết/tiệt	si4 zit3	sî-tsiat	shíjié	時節 means "season" in Chinese: false friend.
-9	trời	sky; weather; Heaven, heavenly lord (personification of the sky)	361	native						"sky; weather": Trời nóng.
-9	nóng	hot (temperature); hot-tempered; quick-tempered	672	native						
-9	lạnh	cold (having a low temperature)	1077	other borrowing						Older loan from 冷 (database etymon). [db: older loan of 冷 lãnh; yue laang5, nan líng, cmn lěng]
-9	mưa	rain	1054	native						
-9	nắng	sunny	2884	native						
-9	mùa	season; each of the four divisions of a year: spring, summer, autumn (fall) and winter.; …	1010	other borrowing						Older loan from 務 (database etymon), doubtful as a bridge. [db: older loan of 務 vụ; yue mou6, nan bū, cmn wù]
-9	xuân	spring (season); synonym of tuổi (“years of young age”)	770	Hán-Việt	春	春 xuân	ceon1	tshun	chūn	春 ceon1 / tshun / chūn.
-9	hè	summer	2183	other borrowing						Older loan from 夏 (database etymon); mùa hè is Northern, mùa hạ more literary. [db: older loan of 夏 hạ; yue haa6 / gaa2, nan hā, cmn xià]
-9	thu	autumn; fall	888	Hán-Việt	秋	秋 thu	cau1	tshiu	qiū	秋.
-9	đông	winter	417	Hán-Việt	冬	冬 đông	dung1	tong	dōng	冬.
-9	lắm	very (placed after the word to intensify)	573	native?						After the adjective: nóng lắm. Spoken.
-9	hơi	slightly, somewhat, a little	583	native?						Before the adjective: hơi lạnh.
-9	hôm_qua	yesterday	381	native?						
-9	nhưng	but; yet	43	Hán-Việt	仍	仍 nhưng	jing4		réng	The database's 仍 analysis is opaque: not a bridge example.
-9	thế_nào	inevitably, somehow or other, one way or another; how; what	469	native?						"how?": Thời tiết thế nào? Northern; Southern speakers say sao / như thế nào (Claude, to check).
-10	ăn	to eat; to dine; to feast, to attend a feast, to celebrate, to commemorate	163	native						
-10	cơm	cooked non-glutinous rice; a rice meal; meat	3522	native						Anh ăn cơm chưa? "Have you eaten?" (a greeting, as 食飽未).
-10	phở	pho (a soup made with bánh phở noodles, usually served with beef, pork, or chicken, …	12581	native?						
-10	bát	bowl	2489	Hán-Việt	缽	缽 bát	but3	puat	bō	Northern; tô is Southern for a big bowl. Database: 缽 but3 / puat (a bowl): Claude cannot confirm this etymology.
-10	món	dish (food item); a thing, thingy	470	native?						
-10	ngon	delicious; tasty; succulent	623	native?						
-10	thịt	human or animal flesh, especially meat, but mostly except fish and shellfish	959	native						
-10	bò	bovine	1097	native						thịt bò "beef", phở bò.
-10	gà	chicken (bird)	1177	native						
-10	rau	leafy greens, leaf vegetable or culinary herb; vegetable	2165	native						
-10	đũa	chopstick (single eating utensil); wand	5220	other borrowing						Older loan from 箸 (database etymon), cf. Taigi tī, Cantonese zyu6. [db: older loan of 箸 trợ; yue zyu6 / zyu3, nan tī / tū, cmn zhù]
-10	no	full (of the stomach); saturated; full	1407	native						
-10	chưa	not yet; yet; Interrogative completive particle	108	native?						... chưa? "yet?" (question); chưa "not yet" (answer).
-10	rồi	already	104	native?						
-10	gọi	to call or hail; to call, name or dub	142	native?						"to order (food)" in a restaurant; also "to call".
-11	cuối_tuần	weekend	1360	native?						
-11	thứ_bảy	Saturday	2147	native?						Days are counted: thứ hai Monday ... thứ bảy Saturday.
-11	chủ_nhật	Sunday	955	Hán-Việt	主日	主 chủ/chúa · 日 nhật/nhựt (Southern variant)	zyu2 jat6	tsú-(ji̍t/li̍t)	zhǔrì	主日 "the Lord's day".
-11	rảnh	free; unoccupied; not busy	4942	native?						Northern also rỗi (Claude, to check which is commoner).
-11	bận	to get occupied doing something	2393	native?						"busy". Database has bận as a verb only; the adjective "busy" is missing (see to-check).
-11	thích	to like	80	Hán-Việt	適	適 thích/đích	sik1 / dik1 / tik1 / zaak3 / zaak6	sik	shì	The database's 適 analysis is opaque: not a bridge example.
-11	xem	to see; to look at; to watch	112	other borrowing						xem phim "watch a film". Older loan from 占 (database etymon). [db: older loan of 占 chiêm; yue zim1 / zem1 / zim3, nan tsiàm / tsiam, cmn zhàn / zhān]
-11	phim	film; any type of video involving cinematic elements, such as movies, TV series, …	248	other borrowing						From French film (Claude; not in the database).
-11	đọc	to read, to pronounce	372	other borrowing						Older loan from 讀 (database etymon): a nice bridge, 讀 duk6 / tho̍k. [db: older loan of 讀 độc; yue duk6 / dau6, nan tho̍k / tōo, cmn dú / dòu]
-11	sách	book	165	Hán-Việt	冊	冊 sách	caak3	tsheh	cè	冊 caak3. The Taigi column shows tsheh, which is colloquial (see to-check).
-11	chơi	to play (an instrument, a sport, etc.); to have fun; to hang out	202	native?						đi chơi "to go out".
-11	bạn	a friend, mate, buddy, ally, etc.	45	Hán-Việt	伴	伴 bạn	bun6 / pun2 / pun5	phuān	bàn	Also "you" between peers of the same age (pronoun strand).
-11	với	with; together with; along with	15	native?						
-11	hay	or	67	native?						In questions "or": ... hay ...? (hoặc in statements); hay also means "often" and "interesting".
-11	định	to fix; to appoint; to set	228	Hán-Việt	定	定 định/đính	ding6 / deng6 / ding3	tīng	dìng	"to intend to".
-11	bao_giờ	when, how long until; ever, at some unspecified time	447	native?						At the start: future; at the end: past (Claude, standard textbook rule).
-12	mệt	tired, fatigued, weary	1399	native?						
-12	ốm	ill; sick; skinny	3192	native						Northern "ill"; in the South ốm means "thin" (decision D6).
-12	đau	sore; aching; hurt	373	native?						đau đầu "headache".
-12	đầu	head; an end or extremity; compare mũi (“tip”)	95	Hán-Việt	頭	頭 đầu	tau4	thiô / thôo	tóu / tou	頭 tau4: the HV word is the everyday word.
-12	bụng	belly; personality; inner feelings, inner thoughts	1152	native						
-12	sốt	to have a fever; to have a temperature	2438	native?						
-12	bị	particle denoting the subject is negatively affected by the predicate; to be (used to …	37	Hán-Việt	被	被 bị/bí	bei6 / pei5 / pei1	pī	bèi	Adversative: bị ốm, bị sốt. 被: the bridge works.
-12	bác_sĩ	a medical doctor; a physician	399	Hán-Việt	博士	博 bác · 士 sĩ	bok3 si6	phok-sū	bóshì	False friend: 博士 is a PhD in Chinese; here a physician.
-12	bệnh_viện	hospital	686	Hán-Việt	病院	病 bệnh · 院 viện	beng6 jyun2	pīng-īnn	bìngyuàn	病院 (Mandarin says 醫院). Taigi colloquial/everyday: pēnn-īnn / pīnn-īnn.
-12	thuốc	medicine; medicament; drug	492	other borrowing						Older loan from 毒 (database etymon). [db: older loan of 毒 độc; yue duk6 / dou6 / doi6 / duk1, nan to̍k, cmn dú]
-12	nghỉ	to take a break; to get to temporarily leave work (e.g., for holiday/vacation, for …	622	native?						
-12	nên	to develop into; to change into; should	60	native?						"should": Anh nên nghỉ.
-12	phải~must	must, have to, should; to have to endure (something unpleasant)	29	other borrowing						Second sense of phải (L8 "right"). Whether a ~tag is needed is a tooling question (same etymology). [db: older loan of 被 bị; yue bei6 / pei5 / pei1, nan pī, cmn bèi]
-12	khám	to examine carefully (for evidence of crime, etc.); to search; to ransack	2703	Hán-Việt	勘	勘 khám	ham3 / ham1	kham / khàm	kān	khám bệnh "to see a doctor". The database's 勘 analysis: Claude is not sure (see to-check).
-12	khỏe	strong; healthy	1273	other borrowing						Anh có khỏe không? Older loan from 快 (database etymon). [db: older loan of 快 khoái; yue faai3, nan khuài / khuìnn, cmn kuài]
-13	điện_thoại	telephone	464	Hán-Việt	電話	電 điện · 話 thoại	din6 waa2	tiān-uē	diànhuà	電話.
-13	a_lô	alternative form of a-lô	4611	other borrowing						From French allô (Claude). Spelling a lô / alô / a-lô varies; database English is only "alternative form of a-lô".
-13	nghe	to hear (to perceive sounds through the ear); to listen (to use one's sense of hearing in …	209	native						
-13	số	number; size; amount	85	Hán-Việt	數	數 số/sác/sổ/xúc	sou2 / sou3 / sok3 / cuk1	sòo	shù / shǔ / shuò	數.
-13	nhắn	to send word; to leave a message	2063	native?						nhắn tin "to text" (two words here; the database has no nhắn tin, see to-check).
-13	tin	news	84	other borrowing						"message, news". Older loan from 信 (database etymon). [db: older loan of 信 tín; yue seon3 / san1, nan sìn, cmn xìn]
-13	chờ	to wait for; to await	711	native?						Northern also đợi (Claude).
-13	lát	moment; short while	1777	native?						một lát "a moment".
-13	lại	once more, indicates an action or state is resumed; again; reducing in volume, distance, …	26	native						gọi lại "call back".
-13	sau	later; afterwards	48	native						
-13	cháu	I/me, your nephew, niece or grandchild; I/me, someone who's not your child and who's a …	619	native						"I" to an older person of one's parents' generation (pronoun strand step 3).
-13	bác	you, someone who's presumably slightly older than one of my parents; he/him/she/her, …	781	native						"you" to someone older than one's parents.
-13	cô	I/me, your paternal aunt; I/me, a woman who's (presumably) slightly younger than either …	93	Hán-Việt	姑	姑 cô	gu1	koo	gū	"you" to a woman of one's parents' age (also a female teacher).
-13	chú	I/me, your father's younger brother; I/me, your mother's sister's husband; I/me, a man …	173	native						"you" to a man younger than one's father.
-13	dạ	yes (answers a question); An initial particle to express politeness and respect.	1873	native?						Polite "yes" to elders; Northern too.
-13	vừa	just, recently, at this moment	134	native?						vừa mới "just (now)".
+1	chào	to greet, salute, say hello or goodbye to; alas; ah	1473	older Chinese loan						Used with a person term: chào anh, chào chị. Any time of day, hello and goodbye. [db: older loan of 朝 (朝 triều/triêu/trào); yue ziu1 / ciu4 / zyu1, nan tiâu / tiau, cmn cháo / zhāo; older-loan: Wiktionary's etymology says: possible, possibly]
+1	anh	elder brother; a generic thing; I/me; I/me, your boyfriend older than you	51	native						Here "you" to a man a little older than the speaker; also "I" when he speaks to someone younger. Pronoun strand step 1. [db: origin native: inherited from Proto-Vietic *ʔɛːŋ]
+1	chị	I/me, your big sister; you, my big sister; I/me; you	210	native						"You" to a woman a little older; also "I" when she speaks to someone younger. [db: sense tag chị~your; origin native: inherited from Middle Vietnamese chị]
+1	em	younger sibling; cousin; person younger than oneself but of the same generation; child	113	native						"You" to someone younger; also "I" when speaking to someone older. Also used to call a waiter or shop assistant (L3). [db: origin native: inherited from Proto-Vietic *ʔɛːm]
+1	tôi	I/me; I/me (used when talking to one's friends); I/me (used by a man to a woman he …	32	native						Neutral "I" with strangers and in formal speech; among family and friends a kinship term replaces it. [db: origin native: cognate with Proto-Katuic *sool]
+1	là	to be; Used to indicate something is bound to happen whenever an event occurs	1	native						Links a noun to a noun (Tôi là Sam). Not used before an adjective (L9). [db: origin native: inherited from Proto-Vietic *laː]
+1	tên	given name; name; person; Indicates hostile people, such as soldiers, criminals, etc.	75	unknown						
+1	gì	what; whatever; anything; An interrogative expression nearly equivalent to “What?”	88	native						Always after the verb: Anh tên là gì? [db: origin native: cognate with Muong chi]
+1	không	Negates the meaning of the modified verb or adjective: not; not at all; zero; empty	9	Hán-Việt (opaque)	空	空 không/khống/khổng	hung1 / hung3	khong / khòng	kōng / kòng	Negation before a verb, and the question tag: ... không? The database analyses it as 空; true but opaque: not used as a bridge example. [db: sense tag không~negates; origin Hán-Việt; opaque: review (Claude, not native-checked): The negator and question tag (its use in lesson 1) is a grammaticalisation; 空 "empty" does not negate in Chinese. The data says "same" only because the card's first etymology entry is the number "zero".]
+1	vâng	yes; to obey; to listen to; to comply with	3650	unknown						Northern polite "yes". dạ (L13) is also used in the North, especially to elders. Not checked by a native speaker.
+1	ạ	to use the particle ạ when speaking to someone	1250	unknown						Polite final particle towards older people and strangers.
+1	cảm_ơn	to thank	882	older Chinese loan						Northern form; cám ơn is the commoner Southern spelling. In the database only as "alternative form of cám ơn", with no chữ Hán (see to-check). [db: older loan of 感恩 (感 cảm · 恩 ân/ơn); yue gam2 jan1, nan kám-un, cmn gǎn'ēn]
+1	rất	very (placed before the word to intensify)	41	unknown						Before the adjective: rất vui.
+1	vui	merry; joyful; gay	320	native						 [db: origin native: inherited from Proto-Vietic *t-puːj]
+1	được	to obtain, to get (passively); to be; to benefit from; to be all right, to be OK	5	older Chinese loan						In the set phrase Rất vui được gặp anh "nice to meet you": được = get to. [db: sense tag được~gain; older loan of 得 (得 đắc); yue dak1, nan tik, cmn dé / de / děi / dè]
+1	gặp	to meet, to see	191	native						 [db: origin native: inherited from Proto-Mon-Khmer *gəp]
+1	Sam			name						(name) Name of the learner in the dialogues (not Vietnamese). Proposal; see decision D9.
+1	Lan	a female given name from Chinese; a female given name from Chinese, a middle name		name	蘭	蘭 lan	laan4	lân	lán	(name) Name: chị Lan, who runs the guesthouse. [db: origin Hán-Việt]
+2	người	person; people; physical state; body	14	native						người + nationality: người Pháp "a French person" (modifier after the noun). [db: origin native: inherited from Proto-Vietic *ŋaːj]
+2	nước	water; liquid; fluid; the liquid part of a broth	76	native						"country" (same spelling as nước "water", L3 or later): Anh là người nước nào? [db: origin native: inherited from Proto-Vietic *ɗaːk]
+2	nào	which; every, any; come on; come on now	83	unknown						After the noun: nước nào "which country".
+2	ở	to be, to live, to stay, to remain; at, in	12	native						"to live, to be at"; also "at, in" (preposition). [db: origin native: inherited from Proto-Vietic *ʔəh]
+2	đâu	where; from wherever; no; not	224	unknown						Ở đâu? "where?"
+2	đến	to; Indicating a subject: about; to arrive, to come	19	native						đến từ "to come from". [db: origin native: cognate with Muong tểnh]
+2	từ	from, since; at, in	28	older Chinese loan						"from". The database also has từ 詞 "word" etc.; the card must show the right sense (homograph). [db: sense tag từ~from; older loan of 自 (自 tự); yue zi6, nan tsū, cmn zì]
+2	Việt_Nam	Vietnam (a country in Southeast Asia)	101	Hán-Việt	越南	越 việt/hoạt · 南 nam/nôm	jyut6 naam4	ua̍t-lâm	Yuènán	First bridge word: 越南. Note the Chinese order (modifier first) inside Hán-Việt words. [db: origin Hán-Việt]
+2	Pháp	France (a country located primarily in Western Europe); a male given name from Chinese; …	1393	Hán-Việt	法	法 pháp	faat3 / fat3	huat	fǎ	法 = law/method; France is 法國 in Chinese, Pháp in Vietnamese. [db: origin Hán-Việt]
+2	Trung_Quốc	China; the self-denomination of Vietnam during Nguyễn dynasty independence period.; …	3254	Hán-Việt	中國	中 trung/trúng · 國 quốc/quấc	zung1 gwok3	Tiong-kok	Zhōngguó	中國, read the Vietnamese way. [db: origin Hán-Việt]
+2	Hà_Nội	Hanoi (a city, the capital city of Vietnam); Henei Commandery (in present day Jiaozuo, …	299	Hán-Việt	河內	河 hà · 內 nội/nạp	ho4 noi6	hô-luē	Hénèi	河內 "inside the rivers". [db: origin Hán-Việt]
+2	tiếng_Việt	the Vietnamese language; Vietnamese	609	compound						tiếng + language name is one word (house style). [db: origin compound: formed in Vietnamese from tiếng + việt (see each syllable)]
+2	nói	to speak, to talk, to say, to tell	74	unknown						
+2	biết	to know; to be aware of; to know how to; to be able to	63	older Chinese loan						Older loan from 別 (database etymon); everyday native-feeling verb. [db: older loan of 別 (別 biệt); yue bit6 / bit3, nan pia̍t, cmn bié; older-loan: the sense "to know" is neither among CC-CEDICT's senses of 別 (to leave; to part (from); (literary) to differenti) nor in a translation table with 別]
+2	cũng	also; too	24	older Chinese loan						Before the verb: Tôi cũng là người Pháp. [db: older loan of 共 (共 cộng/cọng/cung); yue gung6 / gung1 / gung2, nan kiōng, cmn gòng; older-loan: grammaticalised adv: its English "also" is neither among CC-CEDICT's senses of 共 nor in a translation table with 共]
+2	học	to study; to learn; -logy; -graphy	68	Hán-Việt	學	學 học	hok6	ha̍k	xué	學 hok6 / ha̍k / xué: the model bridge word. [db: origin Hán-Việt]
+3	cà_phê	coffee	996	loan						From French café (Claude; the database has no etymology for it). [db: origin loan: borrowed from French café]
+3	trà	tea; dried tea	1336	Hán-Việt	茶	茶 trà	caa4	tê	chá	茶. Northern speakers also say chè for tea (the drink and the plant); Claude is not sure which is more natural in a Hà Nội café: native speaker to decide. [db: sense tag trà~tea; origin Hán-Việt]
+3	sữa	milk (white liquid produced by female mammals); milk (white liquid from a vegetable …	1656	native						cà phê sữa đá: modifier after noun, three times. [db: origin native: inherited from Proto-Vietic *p-rah]
+3	đá	rock, stone; ice as used for consumption or refrigeration; meth, methamphetamine	444	native						"ice" here (also "stone"). [db: origin native: inherited from Proto-Vietic *l-taːʔ]
+3	cốc	to drink; glass, tumbler	1823	loan						Northern word for a glass; ly is Southern (decision D6). Database has no etymology. [db: origin loan: borrowed from sit]
+3	có	to have, to possess; there be; the left side of the balance sheet records the existing …	4	native						có ... không? "is there ... ?": the yes/no question frame. [db: origin native: inherited from Proto-Vietic *kɔːʔ]
+3	muốn	to want	89	native						 [db: origin native: cognate with Middle Vietnamese muốn, muấn]
+3	uống	to drink	262	native						 [db: origin native: inherited from Proto-Vietic *ʔɔːŋʔ]
+3	cho	to give; to let; to make; to cause	10	native						Cho tôi ... "give me ... / I'll have ...". [db: sense tag cho~give; origin native: inherited from Proto-Vietic *cəː]
+3	một	one; only; sole; for one person	7	native						 [db: origin native: inherited from Proto-Vietic *moːc]
+3	hai	two; eldest or elder; firstborn	84	native						 [db: origin native: inherited from Proto-Vietic *haːr]
+3	đây	this place here; this thing/person; this time now; Emphasizes the very thing or person …	54	unknown						"here; this (person/thing)": Đây là ...
+3	ơi	vocative particle; oh, hey	1720	native						Calling someone: Em ơi! (to a young waiter). [db: origin native: cognate with Khmer អើយ]
+3	nhé	eh; alright?; okay?; will you?	256	unknown						Soft final particle: "OK?"
+3	chút	great-great-grandchild; a very small, tiny portion or amount; a moment, an instant	836	native						một chút "a little". [db: origin native: cognate with Mon အစုတ်]
+3	ngồi	to sit; to be somewhere for a long period of time; to hold (a position)	391	native						 [db: origin native: inherited from Proto-Vietic *ŋuːj]
+4	ba	three; some, an indefinite quantity greater than one; secondborn	209	native						Also "father" in the South (bố in the North, L5). [db: origin native: inherited from Proto-Vietic *paː]
+4	bốn	four	842	native						Northern; Southern speakers also say tư in some positions (Claude, to check). [db: origin native: inherited from Proto-Vietic *poːnʔ]
+4	năm	five	30	native						Same spelling as năm "year" (L5). [db: origin native: inherited from Proto-Vietic *ɗam]
+4	sáu	six	1148	native						 [db: origin native: inherited from Proto-Vietic *p-ruːʔ]
+4	bảy	seven	1826	native						 [db: origin native: inherited from Proto-Vietic *pəs]
+4	tám	eight	1944	native						 [db: origin native: inherited from Proto-Vietic *saːmʔ]
+4	chín	nine	1565	native						 [db: origin native: inherited from Proto-Vietic *ciːnʔ]
+4	mười	ten	933	native						 [db: origin native: inherited from Proto-Vietic *maːl]
+4	mươi	ten	1868	unknown						"-ty": hai mươi = 20. mười alone, mươi in tens.
+4	nghìn	thousand	2105	native						Northern; ngàn is Southern (both understood). [db: origin native: cognate with omx lṅim]
+4	bao_nhiêu	how many?; how much?	495	compound						Bao nhiêu tiền? "How much?" [db: origin compound: formed in Vietnamese from bao + nhiêu (see each syllable)]
+4	tiền	money	125	Hán-Việt	錢	錢 tiền/tiễn	cin2 / cin4 / zin2	tsiân	qián	錢 tsiân: the HV form is the everyday word. [db: origin Hán-Việt]
+4	đồng	copper; dong; a currency; a thousand dongs	348	Hán-Việt	銅	銅 đồng	tung4	tâng	tóng	The currency: 20 nghìn đồng. Card shows 銅 (copper). Homograph of đồng "field". [db: origin Hán-Việt]
+4	mua	to buy; to purchase; to bribe; to square	282	older Chinese loan						Older loan from 務 (database etymon); not a useful bridge. [db: older loan of 務 (務 vụ); yue mou6, nan bū, cmn wù; older-loan: the sense "to buy" is neither among CC-CEDICT's senses of 務 (affair; business; matter; to be engaged in; to att) nor in a translation table with 務]
+4	đắt	expensive; dear; costly; having plenty of business	2859	native						Northern; mắc is the Southern word (Claude, decision D6). [db: origin native: cognate with Khmer ដាច់]
+4	rẻ	cheap, inexpensive	2585	unknown						
+4	quá	very, excessively; to exceed	95	Hán-Việt	過	過 quá/qua	gwo3 / gwo1	kò / kòo	guò / guo	After or before the adjective: đắt quá! "too expensive!" [db: origin Hán-Việt]
+4	quả	Refers to anything round, such as a piece of fruit.; piece of fruit; something round; …	291	Hán-Việt (doubtful)	果	果 quả	gwo2 / gu2	kó	guǒ	Classifier for fruit (Northern); trái is Southern. First classifier. [db: sense tag quả~refers; origin Hán-Việt; doubtful: Wiktionary's etymology says: might be]
+4	cam	orange, such as Citrus × sinensis or Citrus aurantium; made of oranges; of the colour …	1402	Hán-Việt (opaque)	柑	柑 cam	gam1 / kim4	kam	gān	柑 gam1 / kam: a good bridge word. [db: origin Hán-Việt; opaque: the sense "orange, such as Citrus × sinensis or Cit" is neither among CC-CEDICT's senses of 柑 (large tangerine) nor in a translation table with 柑]
+5	gia_đình	home; an immediate family; a household	190	Hán-Việt	家庭	家 gia/cô · 庭 đình/thính	gaa1 ting4	ka-tîng	jiātíng	家庭. [db: origin Hán-Việt]
+5	ảnh	image; reflection; photograph; picture	245	Hán-Việt	影	影 ảnh	jing2 / jeng2	íng	yǐng	"photo": 影 jing2 / íng. [db: origin Hán-Việt]
+5	bố	father; I/me, your father; you, my father; he/him, your/my father	214	native						Northern; ba is Southern (L4 ba = three). [db: origin native: inherited from Proto-Vietic *poːʔ]
+5	mẹ	parent; mother; I/me, your mother; you, my mother	187	native						Northern; má is Southern. [db: origin native: inherited from Proto-Vietic *meːʔ]
+5	ông	one; you, my grandfather; you, an old man; you, a man about 40 or older	42	Hán-Việt (opaque)	翁	翁 ông	jung1	ong	wēng	Also "you" to an older man (pronoun strand). [db: origin Hán-Việt; opaque: grammaticalised pron: its English "one" is neither among CC-CEDICT's senses of 翁 nor in a translation table with 翁]
+5	bà	Mrs; a grandmother; an old woman; an old lady	186	Hán-Việt	婆	婆 bà	po4	pô	pó	Also "you" to an older woman. [db: origin Hán-Việt]
+5	anh_trai	elder brother; you; young man	1824	native						 [db: origin native: compound of native words: anh + trai]
+5	chị_gái	elder sister; you; young lady	3523	native						 [db: origin native: compound of native words: chị + gái]
+5	em_gái	younger sister	1581	native						em trai "younger brother" in the dialogue or L6 exercises (same pattern). [db: origin native: compound of native words: em + gái]
+5	ai	who; whoever, anyone; one, a person; someone, someone else	146	native						 [db: origin native: inherited from Proto-Vietic *ʔeː]
+5	của	of (belonging to or associated with); property; belongings; given kind of food	3	unknown						"of, belonging to": often dropped with family words (bố tôi). The rule is the reverse of Mandarin 的 order.
+5	con	child (daughter or son); son; build; stature	61	native						Also a pronoun (child to parent) and the classifier for animals. [db: origin native: inherited from Proto-Vietic *kɔːn]
+5	mấy	some, an indefinite quantity greater than one; how much, how many	417	native						For small numbers (under ten): mấy tuổi? [db: origin native: inherited from Proto-Vietic *ɓǝlʔ]
+5	tuổi	age; a year of age; a year of tenure; the Vietnamese zodiac equivalent of a zodiac sign	204	older Chinese loan						Older loan from 歲 (database etymon). [db: older loan of 歲 (歲 tuế); yue seoi3, nan suè, cmn suì]
+5	năm~year	year	30	native						Homograph of năm "five" (L4): needs the ~year tag in lesson files. [db: origin native: inherited from Proto-Vietic *c-nəm]
+5	Minh	a male given name from Chinese; the Ming dynasty (1368–1644 CE)		name	明	明 minh	ming4	bîng	míng	(name) Name: anh Minh, Lan's husband (proposal). [db: origin Hán-Việt]
+6	giờ	hour; unit for specifying a point in time in terms of hours	270	older Chinese loan						"o'clock; hour". Older loan from 時 (database etymon). [db: older loan of 時 (時 thời/thì); yue si4, nan sî, cmn shí]
+6	phút	minute (unit of time)	303	unknown						Database has no etymology.
+6	rưỡi	and a half, half past	5556	unknown						hai giờ rưỡi "half past two".
+6	bây_giờ	now; Indicates an imminent possibility	559	compound						 [db: origin compound: formed in Vietnamese from bây + giờ (see each syllable)]
+6	hôm_nay	today (on the current day)	327	unknown						
+6	ngày_mai	tomorrow; the future	377	unknown						
+6	sáng	light; bright; morning	285	native						 [db: origin native: cognate with Proto-Vietic *p-laːŋʔ]
+6	chiều	late afternoon; early evening	569	unknown						
+6	tối	the duration from the late evening to the early night; dark (lack of light); dark	264	native						"evening". [db: origin native: inherited from Proto-Vietic *suːlʔ]
+6	đi	to go; to go by; to board; to get on	44	native						đi làm "go to work", đi học "go to school" are two words (house style). [db: origin native: inherited from Proto-Vietic *tiː]
+6	làm	to do; to make; to act; to work	25	unknown						
+6	về	about; on; into; to return	27	native						về nhà "go home". [db: origin native: inherited from Proto-Vietic *veːr]
+6	nhà	house; home; dwelling; immediate family	50	native						 [db: origin native: inherited from Proto-Vietic *ɲaː]
+6	đang	marks the continuous, imperfect aspect of an action or state	56	Hán-Việt (opaque)	當	當 đương/đáng/đang	dong1 / dong3	tong / tòng	dāng / dàng	Progressive. The database's 當 is a historical analysis; not used as a bridge example. [db: origin Hán-Việt; opaque: grammaticalised particle: its English "marks the continuous, imperfect aspect o" is neither among CC-CEDICT's senses of 當 nor in a translation table with 當]
+6	sẽ	marks the future tense; marks a desire or a hypothetical	18	native						 [db: sense tag sẽ~marks; origin native: cognate with Muong khẽ]
+6	đã	already; having completed this action, perfect aspect; having reached this state; irrealis	13	unknown						Past/perfect; often left out when the time is clear (decision on how much to explain: none needed).
+8	đường	road; street; path; route	127	Hán-Việt (doubtful)	唐	唐 đường	tong4	tông	táng	The database's 唐 analysis for "road" is doubtful as a bridge (see to-check). [db: origin Hán-Việt; doubtful: Wiktionary's etymology says: alternatively, possibly]
+8	phố	street, with houses and buildings on both sides; townhouse, row house	697	Hán-Việt (opaque)	舖	舖 phố/phô	pou3 / pou1	phòo	pù	Hà Nội street names: phố Huế. Database: 舖. [db: origin Hán-Việt; opaque: rare character for a reader of Chinese: 舖]
+8	xe_máy	a vehicle that is either a mô tô or a xe gắn máy	395	compound						"motorbike". [db: origin compound: formed in Vietnamese from xe + máy (see each syllable)]
+8	xe_buýt	bus	2067	loan						From French bus (Claude; not in the database). [db: origin loan: borrowed from French bus]
+8	đi_bộ	to walk; organic; free-range	716	compound						 [db: origin compound: formed in Vietnamese from đi + bộ (see each syllable)]
+8	rẽ	to turn (to another path); to cleave, to split (into branches)	3398	unknown						Northern; quẹo is Southern (Claude, to check).
+8	trái	left (side, direction); reverse (side); morally wrong, unreasonable, illogical; inside out	500	native						Also "fruit" in the South: Northern speakers say quả for fruit. [db: origin native: inherited from Proto-Vietic *k-laːjʔ]
+8	phải	right (side, direction) (in bên phải); correct; obverse; must, have to, should	29	older Chinese loan						"right (side)"; the same word means "must" (L12). Older loan from 被 (database etymon), surprising: see to-check. [db: sense tag phải~right; older loan of 被 (被 bị/bí); yue bei6 / pei5 / pei1, nan pī, cmn bèi; older-loan: review (Claude, not native-checked): Wiktionary derives "must; right; correct" from 被 "to suffer" through a long semantic chain; a reader of Chinese sees none of these senses in 被.]
+8	thẳng	straight; direct; nonstop; heterosexual	955	unknown						đi thẳng "go straight on".
+8	gần	near; nearby; close (to); nearly	254	native						 [db: origin native: inherited from Proto-Vietic *t-kəɲ]
+8	xa	remote; far	466	Hán-Việt (opaque)	賒	賒 xa	se1	sia	shē	The database analyses xa "far" as 賒 (to buy on credit): a doubtful bridge (see to-check). [db: origin Hán-Việt; opaque: the sense "remote" is neither among CC-CEDICT's senses of 賒 (to buy or sell on credit; distant; long (time); to) nor in a translation table with 賒]
+8	hồ	lake	1193	Hán-Việt	湖	湖 hồ	wu4	ôo	hú	湖 wu4 / ôo / hú. [db: origin Hán-Việt]
+8	mất	to lose something; to take (time); to pass away	207	native						"to take (time)": mất mười phút. [db: origin native: inherited from Proto-Vietic *ɓǝt]
+8	khoảng	about; approximately; space; interval	158	older Chinese loan						"about, approximately". [db: sense tag khoảng~about; older loan of 曠 (曠 khoáng); yue kwong3 / kong3, nan khòng, cmn kuàng; older-loan: the sense "space" is neither among CC-CEDICT's senses of 曠 (to neglect; to skip (class or work); to waste (tim) nor in a translation table with 曠]
+8	Hoàn_Kiếm	a district of Hanoi, Vietnam	16067	Hán-Việt formed in Vietnamese	還劍	還 hoàn/toàn · 劍 kiếm	還 waan4 / syun4 · 劍 gim3 (per character)	還 huân · 劍 kiàm (per character)	還 hái / huán · 劍 jiàn (per character)	Hồ Hoàn Kiếm (還劍 "returned sword") in the dialogue. [db: origin Hán-Việt]
+8	bản_đồ	map	3154	Hán-Việt	版圖	版 bản · 圖 đồ	baan2 tou4	pán-tôo	bǎntú	版圖 (in Chinese: territory): a mild false friend. [db: origin Hán-Việt]
+9	thời_tiết	weather	696	Hán-Việt	時節	時 thời/thì · 節 tiết/tiệt	si4 zit3	sî-tsiat	shíjié	時節 means "season" in Chinese: false friend. [db: origin Hán-Việt]
+9	trời	sky; Heaven, heavenly lord (personification of the sky); weather; good Lord!, god, gee	346	native						"sky; weather": Trời nóng. [db: origin native: inherited from Proto-Vietic *b-ləːj]
+9	nóng	hot (temperature); hot; fresh; hot-tempered	648	native						 [db: origin native: inherited from Proto-Vietic *p-ɗuŋʔ]
+9	lạnh	cold (having a low temperature)	1031	older Chinese loan						Older loan from 冷 (database etymon). [db: older loan of 冷 (冷 lãnh); yue laang5, nan líng, cmn lěng]
+9	mưa	rain; to rain	1011	native						 [db: origin native: inherited from Proto-Vietic *k-maː]
+9	nắng	sunny; sunshine	2837	native						 [db: origin native: inherited from Proto-Vietic *ɗaŋʔ]
+9	mùa	sown at the beginning or middle of the rainy season; each of the four divisions of a …	971	older Chinese loan						Older loan from 務 (database etymon), doubtful as a bridge. [db: sense tag mùa~season; older loan of 務 (務 vụ); yue mou6, nan bū, cmn wù; older-loan: the sense "each of the four divisions of a year: sp" is neither among CC-CEDICT's senses of 務 (affair; business; matter; to be engaged in; to att) nor in a translation table with 務]
+9	xuân	spring (season); a unisex given name from Chinese	1340	Hán-Việt	春	春 xuân	ceon1	tshun	chūn	春 ceon1 / tshun / chūn. [db: origin Hán-Việt]
+9	hè	summer	2137	older Chinese loan						Older loan from 夏 (database etymon); mùa hè is Northern, mùa hạ more literary. [db: older loan of 夏 (夏 hạ/giạ/giá); yue haa6 / gaa2, nan hā, cmn xià]
+9	thu	autumn; fall	1032	Hán-Việt	秋	秋 thu	cau1	tshiu	qiū	秋. [db: origin Hán-Việt]
+9	đông	winter	597	Hán-Việt	冬	冬 đông	dung1	tong	dōng	冬. [db: origin Hán-Việt]
+9	lắm	many, much; a lot; very (placed after the word to intensify)	557	unknown						After the adjective: nóng lắm. Spoken.
+9	hơi	slightly, somewhat, a little	566	unknown						Before the adjective: hơi lạnh.
+9	hôm_qua	yesterday	367	unknown						
+9	nhưng	but; yet	43	Hán-Việt (opaque)	仍	仍 nhưng	jing4		réng	The database's 仍 analysis is opaque: not a bridge example. [db: origin Hán-Việt; opaque: grammaticalised conj: its English "but" is neither among CC-CEDICT's senses of 仍 nor in a translation table with 仍]
+9	thế_nào	how; what; in what manner; in what way	454	compound						"how?": Thời tiết thế nào? Northern; Southern speakers say sao / như thế nào (Claude, to check). [db: sense tag thế_nào~inevitably; origin compound: formed in Vietnamese from thế + nào (see each syllable)]
+10	ăn	to capture; to eat; to dine; to eat with (a utensil)	162	native						 [db: origin native: inherited from Proto-Vietic *ʔan]
+10	cơm	cooked non-glutinous rice; a rice meal; meat; flesh	3461	native						Anh ăn cơm chưa? "Have you eaten?" (a greeting, as 食飽未). [db: origin native: inherited from Proto-Vietic *kəːm]
+10	phở	pho.	12422	older Chinese loan						 [db: older loan of 牛肉粉 (牛 ngưu · 肉 nhục/nhụ/nậu · 粉 phấn); yue ngau4 juk6 fan2, nan giû-(jio̍k/lio̍k)-hún, cmn niú ròu fěn; older-loan: Wiktionary's etymology says: folk etymology]
+10	bát	bowl	2445	Hán-Việt	缽	缽 bát	but3	puat	bō	Northern; tô is Southern for a big bowl. Database: 缽 but3 / puat (a bowl): Claude cannot confirm this etymology. [db: origin Hán-Việt]
+10	món	dish (food item); a thing, thingy; Indicates food dishes and valuable things	453	unknown						
+10	ngon	delicious; tasty; succulent; good, great	606	native						 [db: origin native: cognate with Thavung]
+10	thịt	human or animal flesh; to butcher; to slaughter; to do harm to	921	native						 [db: origin native: inherited from Proto-Vietic *-siːt]
+10	bò	cow; bovine	1053	native						thịt bò "beef", phở bò. [db: origin native: inherited from Proto-Vietic *bɔː]
+10	gà	chicken (bird); to up the ante; to give away an answer (e.g., to a math exercise); newbie	1125	native						 [db: origin native: inherited from Proto-Vietic *r-kaː]
+10	rau	leafy greens, leaf vegetable or culinary herb; vegetable	2117	native						 [db: origin native: inherited from Proto-Vietic *-raw]
+10	đũa	chopstick (single eating utensil); wand	5143	older Chinese loan						Older loan from 箸 (database etymon), cf. Taigi tī, Cantonese zyu6. [db: older loan of 箸 (箸 trứ/trợ); yue zyu6 / zyu3, nan tī / tū, cmn zhù; older-loan: rare character for a reader of Chinese: 箸]
+10	no	full (of the stomach); saturated; full; complete	1553	native						 [db: origin native: inherited from Proto-Vietic *ɗɔː]
+10	chưa	not yet; yet; Interrogative completive particle	109	unknown						... chưa? "yet?" (question); chưa "not yet" (answer).
+10	rồi	already; then; afterwards; rest	105	unknown						
+10	gọi	to call or hail; to call, name or dub	141	unknown						"to order (food)" in a restaurant; also "to call".
+11	cuối_tuần	weekend	1308	compound						 [db: origin compound: formed in Vietnamese from cuối + tuần (see each syllable)]
+11	thứ_bảy	Saturday; seventh	2099	compound						Days are counted: thứ hai Monday ... thứ bảy Saturday. [db: origin compound: formed in Vietnamese from thứ + bảy (see each syllable)]
+11	chủ_nhật	Sunday	923	Hán-Việt	主日	主 chủ/chúa · 日 nhật/nhựt (Southern variant)	zyu2 jat6	tsú-(ji̍t/li̍t)	zhǔrì	主日 "the Lord's day". [db: origin Hán-Việt]
+11	rảnh	free; unoccupied; not busy	4868	unknown						Northern also rỗi (Claude, to check which is commoner).
+11	bận	busy; to get occupied doing something; time; occurrence	2344	native						"busy". Database has bận as a verb only; the adjective "busy" is missing (see to-check). [db: origin native: cognate with Muong]
+11	thích	to like	82	Hán-Việt (opaque)	適	適 thích/đích	sik1 / dik1 / tik1 / zaak3 / zaak6	sik	shì	The database's 適 analysis is opaque: not a bridge example. [db: origin Hán-Việt; opaque: the sense "to like" is neither among CC-CEDICT's senses of 適 (to fit; suitable; proper; just (now); comfortable;) nor in a translation table with 適]
+11	xem	to see; to look at; to watch; to read	112	older Chinese loan						xem phim "watch a film". Older loan from 占 (database etymon). [db: older loan of 占 (占 chiêm/chiếm); yue zim1 / zem1 / zim3, nan tsiàm / tsiam, cmn zhàn / zhān; older-loan: the sense "to see" is neither among CC-CEDICT's senses of 占 (to observe; to divine ; to take possession of; to ) nor in a translation table with 占]
+11	phim	movie; film; any type of video involving cinematic elements; a clip of footage	241	loan						From French film (Claude; not in the database). [db: origin loan: borrowed from French film]
+11	đọc	to read, to pronounce	359	older Chinese loan						Older loan from 讀 (database etymon): a nice bridge, 讀 duk6 / tho̍k. [db: older loan of 讀 (讀 độc/đậu); yue duk6 / dau6, nan tho̍k / tōo, cmn dú / dòu]
+11	sách	book	164	Hán-Việt	冊	冊 sách	caak3		cè	冊 caak3. The Taigi column shows tsheh, which is colloquial (see to-check). [db: Taigi colloquial only: tsheh; origin Hán-Việt]
+11	chơi	to play (an instrument, a sport, etc.); to have fun; to hang out; to spend time idly	202	native						đi chơi "to go out". [db: origin native: cognate with Muong chơl]
+11	bạn	a friend, mate, buddy, ally, etc.; you, a young person in their twenties; you	45	Hán-Việt (opaque)	伴	伴 bạn	bun6 / pun2 / pun5	phuān	bàn	Also "you" between peers of the same age (pronoun strand). [db: origin Hán-Việt; opaque: the sense "a friend, mate, buddy, ally, etc." is neither among CC-CEDICT's senses of 伴 (partner; companion; comrade; associate; to accompa) nor in a translation table with 伴]
+11	với	with; to or by; to; at the end of a sentence	15	native						 [db: origin native: cognate with Muong]
+11	hay	or	67	unknown						In questions "or": ... hay ...? (hoặc in statements); hay also means "often" and "interesting".
+11	định	to intend (to); to plan (to); to be about (to); to fix	227	Hán-Việt	定	定 định/đính	ding6 / deng6 / ding3	tīng	dìng	"to intend to". [db: origin Hán-Việt]
+11	bao_giờ	when, how long until; ever, at some unspecified time	427	compound						At the start: future; at the end: past (Claude, standard textbook rule). [db: origin compound: formed in Vietnamese from bao + giờ (see each syllable)]
+12	mệt	tired, fatigued, weary	1346	unknown						
+12	ốm	ill; sick; skinny; bony	3136	native						Northern "ill"; in the South ốm means "thin" (decision D6). [db: origin native: inherited from Proto-Vietic *ʔoːmʔ]
+12	đau	hurt; wounded; sore; aching	360	native						đau đầu "headache". [db: sense tag đau~sore; origin native: cognate with Muong tau]
+12	đầu	head; an end or extremity; compare mũi (“tip”); physical media player	96	Hán-Việt	頭	頭 đầu	tau4	thiô / thôo	tóu / tou	頭 tau4: the HV word is the everyday word. [db: origin Hán-Việt]
+12	bụng	belly; personality; inner feelings, inner thoughts	1104	native						 [db: origin native: inherited from Proto-Vietic *buːŋʔ]
+12	sốt	steaming hot; at all; to have a fever; to have a temperature	2391	unknown						
+12	bị	to be; particle denoting the subject is negatively affected by the predicate; plastic bag	36	Hán-Việt (opaque)	被	被 bị/bí	bei6 / pei5 / pei1	pī	bèi	Adversative: bị ốm, bị sốt. 被: the bridge works. [db: origin Hán-Việt; opaque: the sense "to be" is neither among CC-CEDICT's senses of 被 (quilt; to cover (with); (literary) to suffer (a mi) nor in a translation table with 被]
+12	bác_sĩ	a medical doctor; a physician	352	Hán-Việt	博士	博 bác · 士 sĩ	bok3 si6	phok-sū	bóshì	False friend: 博士 is a PhD in Chinese; here a physician. [db: origin Hán-Việt]
+12	bệnh_viện	hospital	661	Hán-Việt	病院	病 bệnh · 院 viện	beng6 jyun2		bìngyuàn	病院 (Mandarin says 醫院). [db: Taigi colloquial only: pēnn-īnn / pīnn-īnn; origin Hán-Việt]
+12	thuốc	medicine; medicament; drug; to poison	474	older Chinese loan						Older loan from 毒 (database etymon). [db: older loan of 毒 (毒 độc/đốc); yue duk6 / dou6 / doi6 / duk1, nan to̍k, cmn dú]
+12	nghỉ	to take a break; to get to temporarily leave work; to die	604	unknown						
+12	nên	should; ought to; to develop into; to change into	60	native						"should": Anh nên nghỉ. [db: origin native: cognate with Muong]
+12	phải~must	must, have to, should; to have to endure (something unpleasant); correct; obverse	29	older Chinese loan						Second sense of phải (L8 "right"). Whether a ~tag is needed is a tooling question (same etymology). [db: older loan of 被 (被 bị/bí); yue bei6 / pei5 / pei1, nan pī, cmn bèi; older-loan: review (Claude, not native-checked): Wiktionary derives "must; right; correct" from 被 "to suffer" through a long semantic chain; a reader of Chinese sees none of these senses in 被.]
+12	khám	to examine carefully; to search; to ransack; to check	2659	Hán-Việt (doubtful)	勘	勘 khám	ham3 / ham1	kham / khàm	kān	khám bệnh "to see a doctor". The database's 勘 analysis: Claude is not sure (see to-check). [db: origin Hán-Việt; doubtful: Wiktionary's etymology says: possibly, contaminated]
+12	khỏe	well; strong; healthy	1219	older Chinese loan						Anh có khỏe không? Older loan from 快 (database etymon). [db: older loan of 快 (快 khoái); yue faai3, nan khuài, cmn kuài; older-loan: the sense "well" is neither among CC-CEDICT's senses of 快 (rapid; quick; speed; rate; soon; almost; to make h) nor in a translation table with 快]
+13	điện_thoại	telephone; to telephone; to call	446	Hán-Việt	電話	電 điện · 話 thoại	din6 waa2	tiān-uē	diànhuà	電話. [db: origin Hán-Việt]
+13	a_lô	hello (when answering the telephone); testing 1-2-3 (to test intercoms and microphones); …	5288	loan						From French allô (Claude). Spelling a lô / alô / a-lô varies; database English is only "alternative form of a-lô". [db: origin loan: as a-lô (alternative form); borrowed from French allô]
+13	nghe	to hear (to perceive sounds through the ear); to listen; to sound; to smell	208	native						 [db: origin native: inherited from Proto-Vietic *ŋɛː]
+13	số	number; size; amount; count	86	Hán-Việt (doubtful)	數	數 số/sác/sổ/xúc	sou2 / sou3 / sok3 / cuk1	sòo	shù / shǔ / shuò	數. [db: origin Hán-Việt; doubtful: Wiktionary's etymology says: perhaps]
+13	nhắn	to send word; to leave a message	2016	unknown						nhắn tin "to text" (two words here; the database has no nhắn tin, see to-check).
+13	tin	to believe; to trust; to have faith; news	85	older Chinese loan						"message, news". Older loan from 信 (database etymon). [db: older loan of 信 (信 tín); yue seon3 / san1, nan sìn, cmn xìn]
+13	chờ	to wait for; to await	686	unknown						Northern also đợi (Claude).
+13	lát	moment; short while; minute; a kind of wood used to make furniture	1682	unknown						một lát "a moment". [db: sense tag lát~moment]
+13	lại	again; once more, indicates an action or state is resumed; reducing in volume; to come	26	native						gọi lại "call back". [db: origin native: inherited from Proto-Vietic *laːjʔ]
+13	sau	later; afterwards; behind; after	48	native						 [db: origin native: inherited from Proto-Mon-Khmer *krawʔ]
+13	cháu	grandchild; nephew or niece; I/me, your nephew, niece or grandchild; I/me	601	native						"I" to an older person of one's parents' generation (pronoun strand step 3). [db: origin native: inherited from Proto-Vietic *cuːʔ]
+13	bác	paternal uncle, father's elder brother; paternal aunt-in-law, father's elder brother's …	755	native						"you" to someone older than one's parents. [db: origin native: inherited from Proto-Vietic *paːk]
+13	cô	a paternal aunt (father's sister); I/me, your paternal aunt; I/me; you, my paternal aunt	94	Hán-Việt	姑	姑 cô	gu1	koo	gū	"you" to a woman of one's parents' age (also a female teacher). [db: origin Hán-Việt]
+13	chú	I/me, your father's younger brother; I/me, your mother's sister's husband; I/me; you	172	native						"you" to a man younger than one's father. [db: sense tag chú~your; origin native: inherited from Proto-Vietic *cuːʔ]
+13	dạ	yes (answers a question); An initial particle to express politeness and respect.; say …	1820	unknown						Polite "yes" to elders; Northern too.
+13	vừa	just, recently, at this moment; to fit, to suit; to satisfy, to please; reasonable, just …	134	unknown						vừa mới "just (now)".

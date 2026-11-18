@@ -1,0 +1,61 @@
+# Course English PROPOSED for words of the first word list (lessons 1-14), NOT in force: once the owner approves,
+# the rows move to the lessons' new_words (or course/glosses_en.tsv), which outrank the dictionary (tools/english.py).
+# Written by Claude on 18 Nov 2026, NOT checked by a native speaker. Columns: word (lesson spelling, ~tag for a
+# homograph or sense tag), proposed English, the card's English from the database (data-quality branch), why replaced.
+word	proposed_en	dictionary_en	why
+chào	hello; goodbye; to greet	to greet, salute, say hello or goodbye to; alas; ah	the card leads with "to greet, salute…", the use in the lessons is the greeting itself
+anh	you (to a young man a little older); I (said by him); elder brother	elder brother; a generic thing; I/me; I/me, your boyfriend older than you	pronoun use first, as taught in L1; the dictionary gives only "elder brother" and "a generic thing"
+chị	you (to a young woman a little older); I (said by her); elder sister	I/me, your big sister; you, my big sister; I/me; you	the dictionary gives "I/me, your big sister" phrasings that are hard to read on a card
+em	you (to someone younger); I (to someone older); younger sibling	younger sibling; cousin; person younger than oneself but of the same generation; child	the dictionary lacks the pronoun use in its first senses
+tôi	I, me (neutral)	I/me; I/me (used when talking to one's friends); I/me (used by a man to a woman he …	the dictionary sense is a 140-character usage note
+là	to be (noun = noun)	to be; Used to indicate something is bound to happen whenever an event occurs	the second sense shown is a grammatical description
+tên	name; to be called	given name; name; person; Indicates hostile people, such as soldiers, criminals, etc.	the fourth sense ("hostile people") is misleading on a beginner card
+gì	what	what; whatever; anything; An interrogative expression nearly equivalent to “What?”	four senses where one is taught
+không	not; no; (question tag) … or not?	Negates the meaning of the modified verb or adjective: not; not at all; zero; empty	the dictionary leads with a usage description and ends with "zero; empty"
+vâng	yes (polite)	yes; to obey; to listen to; to comply with	"to obey" is a rarer sense
+ạ	(polite final particle, to older people)	to use the particle ạ when speaking to someone	the dictionary gives "to use the particle ạ when speaking to someone"
+cảm_ơn	thank you; to thank	to thank	the dictionary has only "to thank"; the lesson uses the formula
+rất	very	very (placed before the word to intensify)	the dictionary adds a placement note in brackets
+được	can, may; to get; to be allowed to	to obtain, to get (passively); to be; to benefit from; to be all right, to be OK	the dictionary leads with "to obtain, to get (passively)"; the lessons use rất vui được gặp, được không?
+đâu	where	where; from wherever; no; not	"no; not" are the emphatic negative use, taught later
+đến	to come, to arrive; to (a place)	to; Indicating a subject: about; to arrive, to come	the dictionary leads with "to; Indicating a subject: about"
+từ~from	from	from, since; at, in	the card's main sense is 詞 "word"; the lesson needs từ~from
+học	to study, to learn	to study; to learn; -logy; -graphy	"-logy; -graphy" are bound uses
+trà~tea	tea	tea; dried tea	the card's main sense is "generation; crops of the same kind"; the lesson needs trà~tea
+sữa	milk	milk (white liquid produced by female mammals); milk (white liquid from a vegetable …	the dictionary sense is a definition in brackets
+đá	ice; stone	rock, stone; ice as used for consumption or refrigeration; meth, methamphetamine	the lesson uses cà phê đá; "meth" is slang
+cốc	glass, cup (Northern)	to drink; glass, tumbler	the dictionary leads with "to drink", a rare sense
+có	to have; there is; (question) … or not?	to have, to possess; there be; the left side of the balance sheet records the existing …	the third sense is a balance-sheet term
+cho	to give; for; to let	to give; to let; to make; to cause	the lesson uses cho tôi … "give me …"
+đây	here; this (one)	this place here; this thing/person; this time now; Emphasizes the very thing or person …	the fourth sense is a usage description
+chút	a little, a moment	great-great-grandchild; a very small, tiny portion or amount; a moment, an instant	the first sense shown is "great-great-grandchild"
+mươi	ten (in numbers from twenty on: hai mươi)	ten	the dictionary gives "ten" like mười; the difference is what is taught
+đồng	dong (the currency); copper	copper; dong; a currency; a thousand dongs	the lesson is about prices
+quả	fruit; (classifier for round things)	Refers to anything round, such as a piece of fruit.; piece of fruit; something round; …	the dictionary leads with a description
+cam	orange (fruit, colour)	orange, such as Citrus × sinensis or Citrus aurantium; made of oranges; of the colour …	the dictionary sense is a botanical definition
+ông	grandfather; you (to an older man); Mr	one; you, my grandfather; you, an old man; you, a man about 40 or older	the first sense shown is "one"
+của	of, belonging to	of (belonging to or associated with); property; belongings; given kind of food	the dictionary adds "property; given kind of food"
+tối	evening; dark	the duration from the late evening to the early night; dark (lack of light); dark	the dictionary sense is a 60-character definition
+đã	(past marker) already, did	already; having completed this action, perfect aspect; having reached this state; irrealis	the dictionary uses aspect terminology
+đang	(marks an action in progress) -ing	marks the continuous, imperfect aspect of an action or state	the dictionary sense is a grammatical description
+sẽ	(future marker) will	marks the future tense; marks a desire or a hypothetical	the dictionary sense is a grammatical description
+xe_máy	motorbike	a vehicle that is either a mô tô or a xe gắn máy	the dictionary defines it by two other Vietnamese words
+đi_bộ	to walk, to go on foot	to walk; organic; free-range	"organic; free-range" are other senses
+phải	right (side); correct	right (side, direction) (in bên phải); correct; obverse; must, have to, should	the lesson L8 teaches the direction; phải~must is the other row
+phải~must	must, to have to	must, have to, should; to have to endure (something unpleasant); correct; obverse	the card adds "to have to endure…; correct; obverse"
+khoảng	about, approximately	about; approximately; space; interval	"space; interval" are other senses
+mùa	season	sown at the beginning or middle of the rainy season; each of the four divisions of a …	the first sense shown is "sown at the beginning … of the rainy season"
+lắm	very (after the word); a lot	many, much; a lot; very (placed after the word to intensify)	order of the senses for the lesson
+ăn	to eat	to capture; to eat; to dine; to eat with (a utensil)	the dictionary sense first shown is "to capture" (board games)
+phở	pho (noodle soup)	pho.	the dictionary gives "pho."
+thịt	meat	human or animal flesh; to butcher; to slaughter; to do harm to	the dictionary leads with "human or animal flesh" and "to butcher"
+chưa	not yet; (question) … yet?	not yet; yet; Interrogative completive particle	the third sense is a grammatical description
+rồi	already; then	already; then; afterwards; rest	"rest" is another sense
+bạn	friend; you (to a peer)	a friend, mate, buddy, ally, etc.; you, a young person in their twenties; you	the dictionary phrase "a friend, mate, buddy, ally, etc."
+với	with	with; to or by; to; at the end of a sentence	"at the end of a sentence" is a usage note
+hay	or; good, interesting	or	the adjective "good, interesting" is not on the card
+bị	(passive, for something bad) to suffer, to get	to be; particle denoting the subject is negatively affected by the predicate; plastic bag	the dictionary sense "to be" is misleading alone
+a_lô	hello (on the phone)	hello (when answering the telephone); testing 1-2-3 (to test intercoms and microphones); …	the second sense is about testing microphones
+lát	a moment (một lát)	moment; short while; minute; a kind of wood used to make furniture	"a kind of wood" is another etymology
+dạ	yes (polite, to elders)	yes (answers a question); An initial particle to express politeness and respect.; say …	the second sense is a usage description
+vừa	just (now); to fit	just, recently, at this moment; to fit, to suit; to satisfy, to please; reasonable, just …	the dictionary gives four senses

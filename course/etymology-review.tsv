@@ -1,0 +1,7 @@
+# Etymology overrides for the card (tools/build_db.py etymology_states). Each row is CLAUDE'S JUDGEMENT, not checked by a
+# native speaker, and only where the data's own evidence does not reach the right state. word <TAB> chữ Hán (the
+# analysis or older-loan etymon) <TAB> verdict: same | doubtful | opaque <TAB> reason
+# opaque: the analysis is right as history but a reader of Chinese does not see the word; doubtful: the analysis
+# itself is uncertain. Neither is "same word in Chinese" on the card, and lint refuses them as bridge-note examples.
+không	空	opaque	The negator and question tag (its use in lesson 1) is a grammaticalisation; 空 "empty" does not negate in Chinese. The data says "same" only because the card's first etymology entry is the number "zero".
+phải	被	opaque	Wiktionary derives "must; right; correct" from 被 "to suffer" through a long semantic chain; a reader of Chinese sees none of these senses in 被.

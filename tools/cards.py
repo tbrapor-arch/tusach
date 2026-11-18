@@ -303,7 +303,8 @@ def lookup(k, tag=None, surface=None):
         card['fixture'] = 1
     if rows:
         card['src'] = sorted({r['source'] for r in rows})
-        rank = next((r['freq_rank'] for r in rows if r['freq_rank']), None)
+        named = main and all(r['pos'] == 'name' for r in main)      # a name never takes a common word's rank
+        rank = next((r['freq_rank'] for r in (main if named else rows) if r['freq_rank']), None)
         if rank:
             card['rank'] = rank
         # a whole sentence first (Tatoeba, chosen by build_db attach_examples), then Wiktionary's own examples, short
