@@ -58,12 +58,14 @@ F1 with the Wiktionary keys: reference (200, rules tuned on it) vi.cut() 0.955, 
 sentences, `tests/cutter/heldout.tsv`) vi.cut() 0.953, underthesea 0.928. Both sets cut by Claude, **not checked by a
 native speaker**.
 
-## Lessons
-None. `course/syllabus.yaml`: the one plan source (100 lessons, cast, the Northern particle strand, the draft word
-list); syllabus and word list 2 APPROVED by the owner on 19 Nov 2026 (no native speaker available: lessons are
-labelled unchecked; tendencies taught as tendencies). Proposal: `course/proposal/syllabus-proposal.md` (second
-version, revised after review 3; its rule tables and lesson tables generated); `wordlist-2.tsv` (counts above) and
-its to-check list. The build uses `tools/fixtures/lessons/00.yaml`.
+## Lessons (branch `lessons-01-07`, 19 Nov 2026; not merged: a second agent reviews it)
+Lesson 0 "Reading Vietnamese" (`course/lesson0.yaml`, page `#reading`, linked from home): alphabet, IPA and nearest
+sounds, Hà Nội mergers, finals (-nh/-ch, the lip rule), six tones, checked syllables, the bridge in five lines; no audio
+(the page says so). Lessons 1–7 (`course/lessons/01–07.yaml`, 7 a review): lines 7 7 7 7 8 8 8, new words 16 16 18 18
+17 17 0 + names Sacha, Lan, Thảo, Minh, Bin, Na; all from word list 2, each word taught before use (lint). NOT checked
+by a native speaker (labelled in the app); Claude's hesitations: `course/lessons/NOTES-for-native-speaker.md`.
+`course/syllabus.yaml`: the one plan source (100 lessons, cast, particle strand), syllabus and word list 2 APPROVED
+by the owner on 19 Nov 2026. Proposal: `course/proposal/syllabus-proposal.md`; `wordlist-2.tsv` and its to-check list.
 
 ## Audio
 No source of word recordings (TODO(audio)); cards say "No recording yet". The native-speaker recording page

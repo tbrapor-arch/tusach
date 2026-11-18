@@ -184,3 +184,20 @@ tools/test_review3.py):
   L12, hả, nhá, với, dạ); the order check classifies every token (a lone mua is checked; Mai at a sentence start is
   mai); rule tables show the best single guess beside a multi-outcome rule. Lexicon: examples (mặc, viết, sau),
   notes (chồng, đấy, vậy, mà, to / lớn / nhỏ), rows to, trứng, chứ, hả, nha. Tests: tools/test_review4.py.
+
+## 2026-11-19 — approvals, Mandarin first, Lesson 0 and lessons 1–7 (branch lessons-01-07)
+- The owner approved the syllabus and word list 2 (main fast-forwarded to 36f7440). No native speaker: lessons are
+  labelled unchecked; tendencies taught as such. Priority: Vietnamese first, the bridge bounded (CLAUDE.md).
+- Card order: Mandarin (pinyin), Cantonese (Jyutping), Taigi (Tâi-lô) from one constant, `cards.DISPLAY_LANGS`
+  (page, Bridge table, golden columns, lookup); the golden snapshot was rewritten with the same values, columns moved.
+- Lesson 0 as data (`course/lesson0.yaml`, `tools/lesson0.py`) rather than Markdown: the `markdown` package is not in
+  the locked requirements, and [[…]] spans let every example word go through `cards.tokenize` and lint. Sounds are
+  from published descriptions (Kirby 2011, Thompson 1965), not from listening; "exactly"-type claims are refused.
+- Lessons: written from word list 2 alone; no change to the plan or the lexicon was needed. Where a natural line
+  wanted an unlisted word (cũng in L1, bố mẹ / ông bà in L5, tiếng Pháp in L2, ừ for "yes" to a younger person),
+  the line was rewritten with listed words and the choice recorded in `course/lessons/NOTES-for-native-speaker.md`.
+- New checks found by writing: a several-syllable course word written without underscores (W; it caught Cảm ơn),
+  a lesson word no lesson up to it teaches (E). The copy check refuses an exercise ending in ", phải không?" while
+  the dialogue has one (a two-word clause is "contained"): exercises write the tag without the comma (NOTES L3 5).
+- Found and fixed: test_fetch's fixture-database build picked up the real course once lessons existed (make test
+  failed in CI from 26c5aa7 to 0729180); smoke's "Show English" loop skipped buttons as they removed themselves.
