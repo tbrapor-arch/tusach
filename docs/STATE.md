@@ -23,7 +23,7 @@ flagged), the card chooses by sense.
 Three layers (REFERENCE): the course lexicon `course/lexicon.tsv`, 508 rows (doubt 14, likely 86, sure 408; 4
 overrides; 0 open conflicts), Claude's, NOT native-checked; the dictionary for other words; the golden check (524
 cards) and the real-card compare. Top 1,000 cards: English not usable 33 (was 49 at fa4d343, 225 at dcaf84f); labels
-same 387, gram 7, hv-vn 13, doubtful 11, opaque 20, older-loan 111, loan 9, native 200, compound 111, false-friend 8,
+same 386, gram 7, hv-vn 13, doubtful 12, opaque 20, older-loan 111, loan 9, native 200, compound 111, false-friend 8,
 unknown 123. Spelling groups: orthographic only. Top 300 read against fa4d343: 118 better, 172 neutral, 10
 unchanged, 0 worse; against dcaf84f: 100 better, 193 neutral, 7 unchanged, 0 worse (Claude's reading).
 
