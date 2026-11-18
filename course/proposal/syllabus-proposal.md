@@ -339,3 +339,74 @@ IA aspiration (L22), IS sibilants (L23), IR tr, ch (L24), IR th, s, x (L25), IY 
 - IA: 平 bình, 頭 đầu, 情 tình, 前 tiền, 全 toàn, 茶 trà, 強 cường · 通 thông, 體 thể, 開 khai, 口 khẩu, 破 phá, 清 thanh, 出 xuất
 - Z: gi 家庭 gia đình, 教 giáo / d 陽 dương, 由 do · ch 正 chính, 主 chủ / tr 中國 Trung Quốc, 茶 trà · x 出 xuất, 春 xuân / s 生 sinh, 事 sự
 <!-- /bridge-examples -->
+
+## 6. Grammar, in teaching order
+
+Lessons in brackets; L1–13 agree with word list 2 (each word's lesson is the list's).
+
+**Stage A (1–21), the survival core**
+1. **là** between nouns (L1); **không** + verb (L2); **không phải là** (L3); adjectives need no là (L9).
+2. **The modifier follows the noun**: người Pháp, cà phê sữa đá, quán này (L2–3), the opposite of Chinese, and of
+   the Hán-Việt words themselves (Việt Nam 越南): B0 shows both orders side by side.
+3. **Questions**: có … không? (L3); gì (L1), nào (L2), ở đâu (L2), ai, mấy (L5), bao nhiêu (L4), bao giờ, hay
+   "or" (L11); **final particles** ạ (L1, politeness), nhé (L3, "OK?"), nhỉ (L9, "isn't it?"); ơi to call (L3).
+4. **Numbers** and mươi, nghìn (L4); **classifiers** quả (L4), cái (L13), quyển, tờ, chiếc, con (L17).
+5. **của**, dropped with family and close ties (L5); person term + ấy = he / she (L5); đây là (L5).
+6. **Time and aspect**: đang / sẽ (L6), usually left out when the context says it; **đã … chưa? / rồi / chưa**
+   (L10); rồi "then" (L8); sắp (L31); vừa mới (L47); đã từng (L26).
+7. **Degree**: rất (L1), lắm, quá, hơi (L9); comparison hơn / bằng / nhất (L15); càng … càng (L40).
+8. **Modals**: muốn (L3), định (L11), nên / phải (L12), có thể, verb + được, biết + verb (L18), cần (L33).
+9. **bị** for something bad (L12); **cho** "give, let, for" (L3, L19); tặng (L13); với "with", và "and" (L3, L11).
+10. Plural and quantity: các / những, mọi / mỗi (L23); cũng / đều, vừa … vừa (L20).
+
+**Stage B (22–49)**: thì, khi / lúc (L22); direction verbs (L24) and result complements (L25); thường / hay / luôn
+(L26); còn / vẫn / nữa / lại (L27); **passives được (good) and bị (bad)** with an agent (L29–30); nếu … thì (L33);
+vì … nên (L34); relative **mà** (L36); purpose **để** (L37); tuy … nhưng (L38); reported speech rằng (L39);
+không những … mà còn (L40); causatives làm cho / khiến (L43); particles chứ / mà / đâu / à (L44); register:
+apologies, quý khách, xin vui lòng (L45–46); khi … thì, bỗng (L47); past narration hồi, ngày xưa (L48).
+
+**Stage C (50–100)**: written register (L50); nominalisers sự / việc / cuộc (L51); reduplication (L53); four-syllable
+idioms (L55); softeners thôi / đi / mà (L59); trước khi / sau khi (L61); không được / cấm (L62); narrative
+connectors (L64, L72); dù … vẫn (L69); letter formulas (L76); nuances of phải / cần / nên (L79); argument and
+reporting (L89–90); formal speech (L99).
+
+**Pronouns and kinship** (its own strand; the cast's ages decide each choice):
+- L1 **tôi, anh, chị, em**: Sacha starts with tôi; chị Lan calls him em and says chị, and he switches to em.
+- L3 **em** to a young waiter; L5 **anh ấy, chị ấy**, family nouns (bố, mẹ, ông, bà, chồng, con, em gái).
+- L11 **bạn**, the neutral "you" between peers (Mai) and in writing (signs, forms, messages).
+- L12 **bác / cháu** with chị Lan's mother; L16 **chúng tôi** (without you) and **chúng ta** (with you), the
+  Taigi 阮 / 咱 split; anh trai, chị gái.
+- L19 **ông / bà** as "you" (ông Hùng); **cô, chú**: Bin and Na call Sacha chú, he calls them cháu.
+- L32 in-laws, nội / ngoại; L44 **mình** "I" among friends, **cậu / tớ**, and **mày / tao** only to recognise;
+  L58 con cháu, họ hàng; L60 anh / em between lovers; L100 the whole cast, each with the right term.
+
+## 7. Other strands
+
+**Older Chinese loans** (decision 5: on the card as an older layer with the etymon, apart from Hán-Việt). O1 (L10):
+giờ "hour" is an older reading of 時, whose Hán-Việt reading is thời; O2 (L33): biết (別 biệt), cũng (共 cộng),
+được (得 đắc), đọc (讀 độc). Word list 2 has 24 older loans (6 with a doubtful etymon, characters hidden).
+The etymons are not "same word" examples; the Hán-Việt words beside them are:
+<!-- bridge-examples -->
+- O1–O2: 時間 thời gian, 特別 đặc biệt, 共 cộng
+- C4–C6: 員 viên, 會員 hội viên, 士 sĩ, 化 hóa, 現代化 hiện đại hóa, 無 vô, 無數 vô số, 非 phi, 非常 phi thường, 不同 bất đồng
+<!-- /bridge-examples -->
+
+**Word-building notes** (C1–C24, one per lesson from L34; table in section 8): Hán-Việt order inside a word, native
+order outside; words made in Vietnam (hv-vn); surnames; suffixes -viên, -sĩ, -gia, -học, -hóa; prefixes bất-,
+vô-, phi-; Vietnamese words that are not the Mandarin ones; native and Hán-Việt pairs (nhà / gia, nước / quốc);
+idioms; then the vocabulary of institutions, medicine, science, law, Buddhism, history and literature.
+
+**False friends** (the `false_friend` column of `course/lexicon.tsv`; one line in the lesson that meets the word):
+thời tiết 時節 "weather", not a season (L9); tuần 旬 "week", not ten days (L11); bác sĩ 博士 "physician", not a PhD
+(L12); đầu tiên 頭先 "first" (Cantonese only, "just now") (L20); bản đồ 版圖 "map", not territory (L22); quận 郡
+"urban district" (L23); chương trình 章程 "programme", not statutes (L37); thông cảm 通感 "to sympathise" (L44);
+thực sự 實事 "really" (L45); trường 場 "school" (L52); triệu 兆 "million" (L59); lạm phát 濫發 "inflation" (L65);
+nôm 南 the Vietnamese script (L71); nghĩa trang 義莊 "cemetery" (L96). Candidates from the first proposal (thư
+"letter", sinh viên, tử tế, phương tiện, an ninh, tâm sự, khách sạn) get a lexicon row with evidence before use.
+
+**Southern usage** (decision 6): one line where the word differs: bố / ba, cốc / ly, quả / trái, đắt / mắc, nghìn
+/ ngàn, rẽ / quẹo, bát / tô, ốm "ill" / "thin", nhỉ / nhể, ha; vâng / dạ. L67 is set in Sài Gòn (sounds, words,
+the readings nhựt 日, sanh 生, chánh 正).
+
+**French** (decision 7): a line where it helps: loans (cà phê, phim, ga, ô tô, xà phòng: L3, L11, L94), and
+sounds in Lesson 0 (nh = gn, ê = é, ô = eau).
