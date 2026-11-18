@@ -150,8 +150,9 @@ LATE_SENSE = {'archaic', 'obsolete', 'rare', 'dialectal', 'Southern', 'Central',
 
 
 def sense_rows(entry):
-    """[(gloss, tags, examples, alt_of)] of an entry's senses: the last (most specific) gloss of each sense ("pronoun
-    used to refer to younger person…" rather than the general one before it); alt_of: the target of an "alternative
+    """[(gloss, tags, examples, alt_of)] of an entry's senses: of a sense with a general gloss and a more specific one
+    (kaikki's nested senses), the general one when it is short and not a usage description (với: "with", not its
+    sub-sense "to or by", which lost the card its main sense), else the last; alt_of: the target of an "alternative
     form/spelling of X" sense (kaikki's alt_of / form_of, or the gloss itself)."""
     out = []
     for s in entry.get('senses') or []:
@@ -165,16 +166,28 @@ def sense_rows(entry):
         if not alt and gl and english.FORM_OF.match(gl[-1]) and not english.SHORT_FOR.match(gl[-1]):
             m = re.search(r'\b(?:of|for) ([^\s(“"][^(“"]*?)(?:\s*\(|[.:]|$)', gl[-1])
             alt = vi.nfc(m.group(1).strip()) if m else ''
-        out.append((gl[-1] if gl else '', tags, len(s.get('examples') or []), alt))
+        if gl and TONE_PLACEMENT.match(gl[-1]):
+            continue          # "Traditional tone placement spelling of toà": the same key (vi.key), not a sense
+        if alt and ('pronunciation-spelling' in tags or PRON_SPELLING.search(gl[-1] if gl else '')):
+            tags = tags | {'pronunciation-spelling'}
+        g = gl[0] if len(gl) > 1 and not english.DESCRIPTION.match(gl[0]) and len(gl[0]) <= english.MAX_FIRST \
+            else (gl[-1] if gl else '')
+        out.append((g, tags, len(s.get('examples') or []), alt))
     return out
 
 
+TONE_PLACEMENT = re.compile(r'^(?:traditional|modern|new|old)?\s*tone[- ]placement (?:spelling|variant|form) of\b', re.I)
+PRON_SPELLING = re.compile(r'\b(?:pronunciation spelling|eye dialect|eye-dialect|dialectal spelling)\b', re.I)
+
+
 def alt_of(senses):
-    """(target key, 'spelling' | 'form') when every usable sense of an entry is an alternative spelling/form of one
-    word, else ('', '')."""
+    """(target key, 'spelling' | 'pron' | 'form') when every usable sense of an entry is an alternative spelling/form of
+    one word, else ('', ''). 'pron': a pronunciation / eye-dialect spelling (ga of ra, í of ấy, dậy of vậy): another
+    word's key, never pooled with it (review 2, finding 1)."""
     ss = [s for s in senses if s[0] and not english.SKIP_TAGS & s[1]]
     if ss and all(s[3] for s in ss):
-        kind = 'spelling' if any(re.search(r'\bspelling\b', s[0], re.I) for s in ss) else 'form'
+        kind = 'pron' if any('pronunciation-spelling' in s[1] for s in ss) else \
+            'spelling' if any(re.search(r'\bspelling\b', s[0], re.I) for s in ss) else 'form'
         return vi.key(ss[0][3]), kind
     return '', ''
 
@@ -186,7 +199,7 @@ def english_of(entry):
     for s in ss:
         for g in s.get('glosses') or []:
             g = g.strip()
-            if g and g not in gl:
+            if g and g not in gl and not TONE_PLACEMENT.match(g):
                 gl.append(g)
     return '; '.join(gl[:4])
 
@@ -771,11 +784,18 @@ def iy_key(k):
     return ' '.join(IY.sub(lambda m: m.group(1) + I_FOR_Y[m.group(2)], x) for x in k.split())
 
 
+def ortho_key(k):
+    """The key with only orthographic differences removed: i/y (iy_key), hyphens as syllable breaks, letter case."""
+    return iy_key(' '.join(k.lower().replace('-', ' ').split()))
+
+
 def spelling_groups(con, raw):
-    """Pool the spellings of one word into one key (table `spelling`, entry.key rewritten): keys equal but for i/y
-    (lí do / lý do, kĩ thuật / kỹ thuật, Mĩ / Mỹ), and keys joined by a Wiktionary "alternative / obsolete spelling
-    of" entry (tiến-hoá / tiến hoá). Not pooled: "alternative form of" (cảm ơn / cám ơn, tui / tôi: another
-    pronunciation, a word of its own; alt_forms() gives it its target's English and origin).
+    """Pool the SPELLINGS of one word into one key (table `spelling`, entry.key rewritten): keys equal but for the i/y
+    spelling of a syllable (lí do / lý do, kĩ thuật / kỹ thuật, Mĩ / Mỹ), hyphens or letter case (tiến-hoá / tiến hoá,
+    châu âu / châu Âu); tone-mark placement is already one key (vi.key). Nothing else is pooled (review 2, finding 1:
+    pooling every Wiktionary "alternative / pronunciation spelling of" pair merged ga into ra, ấy into ý, dậy into
+    vậy, nhỉ into nhờ): an alternative form, a pronunciation or eye-dialect spelling, a dialectal form keeps its own
+    key, senses and rank; its card shows the cross-reference only.
     The house spelling of a group (the key every entry of the group gets, the spelling lint asks for in lessons) is
     the most frequent one: wordfreq's estimate for the spelling as a phrase (tools/freq.py phrase_freq, English
     leakage removed, so `my` does not win over `mi` by the English word), ties to the spelling Wiktionary has its
@@ -796,14 +816,10 @@ def spelling_groups(con, raw):
             parent[max(ra, rb)] = min(ra, rb)
     by_iy = defaultdict(list)
     for k in keys:
-        by_iy[iy_key(k)].append(k)
+        by_iy[ortho_key(k)].append(k)
     for ks in by_iy.values():
         for k in ks[1:]:
             union(ks[0], k)
-    for k, target in con.execute("SELECT key, alt_of FROM entry WHERE alt_kind = 'spelling' AND alt_of != ''"):
-        t = ' '.join(target.replace('-', ' ').split()) if target not in parent else target
-        if t in parent and k in parent:
-            union(k, t)
     groups = defaultdict(list)
     for k in keys:
         groups[find(k)].append(k)
@@ -814,7 +830,7 @@ def spelling_groups(con, raw):
     for g in groups:
         canon = max(g, key=lambda k: (pf(k), k in main, '-' not in k, -len(k), k))
         for k in g:
-            how = 'iy' if iy_key(k) == iy_key(canon) else 'alt'
+            how = 'iy' if iy_key(k) == iy_key(canon) else 'ortho'
             rows.append((k, canon, how))
     con.executemany('INSERT INTO spelling VALUES (?,?,?)', rows)
     con.executemany('UPDATE entry SET key=?, tkey=?, toneless=? WHERE key=?',
@@ -830,9 +846,11 @@ def spelling_groups(con, raw):
 def alt_forms(con):
     """An "alternative form of X" entry (cảm ơn of cám ơn, tui of tôi) or an alternative spelling whose X is not
     pooled with it: it keeps its own key, card and frequency, and takes X's characters and origin when it has none
-    (note "as X"); its English is composed from X's senses (compose_english)."""
+    (note "as X"); its English is composed from X's senses (compose_english). A pronunciation / eye-dialect spelling
+    (alt_kind 'pron': ga of ra) takes nothing: its sense stays a cross-reference."""
     n = 0
-    for eid, target, pos in con.execute("SELECT id, alt_of, pos FROM entry WHERE alt_of != '' AND alt_of != key").fetchall():
+    for eid, target, pos in con.execute("SELECT id, alt_of, pos FROM entry WHERE alt_of != '' AND alt_of != key "
+                                        "AND alt_kind != 'pron'").fetchall():
         tk = con.execute('SELECT canon FROM spelling WHERE key=?', (target,)).fetchone()
         tk = tk[0] if tk else target
         t = con.execute("SELECT chars, origin, etymon, origin_note, hv_check FROM entry WHERE key=? AND alt_kind = '' "
@@ -872,58 +890,42 @@ def origins_after_load(con):
 
 
 def compose_english(con):
-    """entry.english and en_score of every Wiktionary entry, by tools/english.py compose(): senses reordered
-    (ordinary before archaic/dialectal/literary, a sense with an English word the English Wiktionary translates by
-    this word before one without), and, when no sense of any entry of the word contains such a word, the best one
-    first in ONE entry of the word: the first etymology's first entry of a matching part of speech whose senses are
-    not all archaic/dialectal (bận "busy"; not its Southern homograph "to wear"). An entry that is only "alternative
-    form of X" is composed from X's senses."""
+    """entry.english of every Wiktionary entry by tools/english.py compose() (Wiktionary's sense order; misspellings,
+    form-of senses beside real ones and long later senses left out; late senses last), and entry.en_score: how many
+    English Wiktionary translation tables give this word with an English word the entry's senses contain (evidence
+    for choosing between etymologies only, never a lead: review 2, finding 2). An entry that is only "alternative
+    form / spelling of X" is composed from X's senses; a pronunciation / eye-dialect spelling (alt_kind 'pron') keeps
+    its cross-reference ("pronunciation spelling of ra")."""
     canon = dict(con.execute('SELECT key, canon FROM spelling'))
-    ev_rows = defaultdict(list)
-    en_pos = {}
-    for en, pos, sense, k, tags, n in con.execute('SELECT en, pos, sense, key, tags, n_vi FROM translation'):
-        ev_rows[canon.get(k, k)].append((en, pos, sense, tags, n))
-        en_pos.setdefault(en, pos)
+    heads = defaultdict(Counter)
+    for en, k, tags in con.execute('SELECT en, key, tags FROM translation'):
+        if not english.late(filter(None, (tags or '').split(','))):
+            heads[canon.get(k, k)][en] += 1
     senses = defaultdict(list)
     for eid, g, tags, x, a in con.execute('SELECT entry_id, gloss, tags, examples, alt_of FROM sense ORDER BY entry_id, n'):
         senses[eid].append((g, set(filter(None, tags.split(','))), x, bool(a)))
     entries = defaultdict(list)
-    for r in con.execute("SELECT id, key, pos, alt_of, english, src_id FROM entry WHERE source='wiktionary' AND "
-                         "pos != 'character-reading'"):
+    for r in con.execute("SELECT id, key, pos, alt_of, english, src_id, alt_kind FROM entry WHERE source='wiktionary' "
+                         "AND pos != 'character-reading'"):
         entries[r[1]].append(r)
-    rows, changed, leads_n = [], 0, 0
+    rows, changed = [], 0
     for k, es in entries.items():
-        es.sort(key=lambda r: (int(r[5]) if str(r[5]).isdigit() else 10 ** 6, r[0]))
-        ss_of = {}
-        for eid, _, pos, alt_of, english_now, _ in es:
+        for eid, _, pos, alt_of, english_now, _, alt_kind in es:
+            if alt_of and not english_now and canon.get(alt_of, alt_of) == k:
+                rows.append(('', 0, eid))          # pooled spelling: its group has the English
+                continue
             ss = senses.get(eid, [])
-            if alt_of and ss and all(s[3] for s in ss if s[0]):
+            if alt_of and alt_kind != 'pron' and ss and all(s[3] for s in ss if s[0]):
                 t = canon.get(alt_of, alt_of)
                 if t != k:
                     ss = [s for c in entries.get(t, []) if not c[3] and c[2] == pos for s in senses.get(c[0], [])] or \
                          [s for c in entries.get(t, [])[:2] if not c[3] for s in senses.get(c[0], [])] or ss
-            ss_of[eid] = ss
-        glosses = [s[0] for ss in ss_of.values() for s in ss if s[0]]
-        given = False
-        for eid, _, pos, alt_of, english_now, _ in es:
-            if alt_of and not english_now and canon.get(alt_of, alt_of) == k:
-                rows.append(('', -9.0, eid))          # pooled spelling: its group has the English
-                continue
-            ss = ss_of[eid]
-            ev = english.evidence(ev_rows.get(k, []), pos)
-            leads = []
-            usable = [s for s in ss if s[0] and not english.SKIP_TAGS & s[1]]
-            if not given and pos != 'name' and usable and not all(english.late(s[1]) for s in usable):
-                leads = english.leads_for(ev, glosses)
-                given = bool(leads)
-                leads_n += given
-            text, score = english.compose(ss, ev, en_pos, leads)
+            text, _flags = english.compose(ss)
             if text != english_now:
                 changed += 1
-            rows.append((text or english_now, score, eid))
+            rows.append((text or english_now, english.support(text or english_now, heads.get(k, {})), eid))
     con.executemany('UPDATE entry SET english=?, en_score=? WHERE id=?', rows)
-    print(f'card English composed for {len(rows)} entries ({changed} changed by sense order and translation evidence; '
-          f'{leads_n} words given an English word their senses lacked)')
+    print(f'card English composed for {len(rows)} entries ({changed} differ from the loader\'s first four glosses)')
 
 
 def character_readings(con):
@@ -980,9 +982,25 @@ def frequencies(con, raw, corpus):
         return ''
     canon = dict(con.execute('SELECT key, canon FROM spelling'))
     pos = defaultdict(set)
-    for k, p in con.execute("SELECT key, pos FROM entry WHERE pos != 'character-reading'"):
+    lower_common = set()
+    for k, p, w in con.execute("SELECT key, pos, word FROM entry WHERE pos != 'character-reading'"):
         pos[k].add(p)
-    name_keys = {k for k, ps in pos.items() if 'name' in ps and ps - {'name'}}
+        if p != 'name' and w[:1].islower():
+            lower_common.add(k)
+    # a name sharing its key with a lower-case common word (Lan / lan "orchid"); not Trung Quốc, whose other entries
+    # (the adjective "Chinese") are written with capitals too (review 2, finding 7: Trung Quốc was ranked 3254)
+    name_keys = {k for k, ps in pos.items() if 'name' in ps and k in lower_common}
+    # not ranked: a common word + a name (tiếng Pháp, người Việt: free in the corpus, which is full of "speaks
+    # French") and keys of 4+ syllables (bài tập về nhà): phrases, whose rank would mislead (finding 7)
+    phrase = set()
+    for k, w in con.execute("SELECT DISTINCT key, word FROM entry WHERE pos != 'name'"):
+        ws = w.replace('-', ' ').split()
+        if (len(ws) > 1 and ws[0][:1].islower() and any(x[:1].isupper() for x in ws[1:])) or len(ws) >= 4:
+            phrase.add(k)
+    for k in phrase:
+        if k in fk and not ('name' in pos[k] and len(k.split()) < 4):
+            fk[k] = None
+    fkeys = sorted({f for f in fk.values() if f})
     cut, cdesc = freq.segmenter(set(keys) | set(canon), canon, name_keys)
     tokens = [fk.get(t) or t for s in corpus for t in cut(s)]
     est = freq.estimate(fkeys, F, tokens)
@@ -1006,27 +1024,146 @@ def frequencies(con, raw, corpus):
 
 
 EX_MIN, EX_BEST, EX_MAX = 4, 8, 20     # syllables of a card example: 4-20, the closest to 8 first
+EX_PER_KEY = 40                        # candidates kept per word; tools/cards.py chooses the one that fits the sense
+# a sentence a course card never shows (review 2, finding 6): profanity, sex, drugs (English side, the linked
+# translation; Vietnamese side for what a translation may soften)
+EX_UNSUITABLE_EN = re.compile(r"\b(?:fuck\w*|shit\w*|bitch\w*|damn\w*|bastard\w*|asshole|arse|sex\w*|stoned|high on|"
+                              r"drugs?|cocaine|heroin|marijuana|weed|joint|porn\w*|rape\w*|naked|nude|penis|vagina|"
+                              r"genital\w*|private parts|masturbat\w*|condom\w*|prostitut\w*|whore\w*|horny|erotic|"
+                              r"suicide|kill (?:my|him|her|your)self)\b", re.I)
+EX_UNSUITABLE_VI = re.compile(r'\b(?:đụ|địt|đéo|lồn|buồi|cặc|đĩ|phê thuốc|ma túy|ma tuý|cần sa|vùng kín|tình dục|'
+                              r'làm tình|khiêu dâm|hiếp|mẹ kiếp|chết tiệt|khốn nạn)\b', re.I)
 
 
-def attach_examples(con, sentences, known, per_word=2):
-    """Tatoeba sentences on the words they contain (cut by tools/vi.py cut(), the cutter of tools/cards.py), `per_word`
-    per word: sentences of EX_MIN-EX_MAX syllables, the closest to EX_BEST first (the shortest-first order gave one-word
-    lines such as "Chạy!" as examples), then by length of text and id, so the choice never depends on the run."""
+def cut_corpus(sentences, known):
+    """[(vi, en, ref, words)] of the Tatoeba sentences: words = the canonical keys vi.cut() finds (whole words only:
+    hơi is not a word of "xe hơi", chiều is one of "buổi chiều" only when the cutter leaves it alone)."""
+    out = []
+    for v, en, ref in sentences:
+        ws = [w for w in vi.words(vi.cut(v, known)) if w[0] == 'w']
+        out.append((v, en, ref, ws))
+    return out
+
+
+def example_flags(v, en, ws, known):
+    """Why a sentence is not shown on a card ('' when it can be): unsuitable (profanity, sex, drugs), slash
+    (alternatives "Cô ấy/Bà ấy"), unknown-word (a word no dictionary has: a typo such as "đên"; a capitalised word is
+    a name and passes)."""
+    if EX_UNSUITABLE_EN.search(en) or EX_UNSUITABLE_VI.search(v.lower()):
+        return 'unsuitable'
+    if '/' in v:
+        return 'slash'
+    if any(w[2] not in known and not w[1][:1].isupper() for w in ws):
+        return 'unknown-word'
+    return ''
+
+
+def attach_examples(con, cut, known, per_word=EX_PER_KEY):
+    """Tatoeba sentences on the words they contain as whole words (cut_corpus), up to `per_word` candidates per key
+    (table example, column key): sentences of EX_MIN-EX_MAX syllables, the closest to EX_BEST first, then by length
+    and id, so the choice never depends on the run. tools/cards.py picks among them the first one whose translation
+    matches the card's sense (review 2, finding 6). flags: example_flags()."""
     first = {}
     for k, eid in con.execute('SELECT key, min(id) FROM entry GROUP BY key'):
         first[k] = eid
     canon = dict(con.execute('SELECT key, canon FROM spelling'))
     have = Counter()
     rows = []
-    usable = [x for x in sentences if EX_MIN <= len(x[0].split()) <= EX_MAX]
-    for v, en, ref in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
-        for w in sorted({canon.get(w[2], w[2]) for w in vi.words(vi.cut(v, known)) if w[0] == 'w'}):
+    usable = [x for x in cut if EX_MIN <= len(x[0].split()) <= EX_MAX]
+    flagged = Counter()
+    for v, en, ref, ws in sorted(usable, key=lambda x: (abs(len(x[0].split()) - EX_BEST), len(x[0]), x[2])):
+        fl = example_flags(v, en, ws, known)
+        flagged[fl] += 1
+        for w in sorted({canon.get(w[2], w[2]) for w in ws}):
             if w in first and have[w] < per_word:
                 have[w] += 1
-                rows.append((first[w], 'tatoeba', v, en, ref))
-    con.executemany('INSERT INTO example(entry_id, source, vi, en, ref) VALUES (?,?,?,?,?)', rows)
-    print(f'tatoeba: {len(rows)} examples on {len(have)} words (from {len(usable)} sentences of {EX_MIN}-{EX_MAX} '
-          f'syllables)')
+                rows.append((first[w], 'tatoeba', v, en, ref, w, fl))
+    con.executemany('INSERT INTO example(entry_id, source, vi, en, ref, key, flags) VALUES (?,?,?,?,?,?,?)', rows)
+    print(f'tatoeba: {len(rows)} example candidates on {len(have)} words (from {len(usable)} sentences of '
+          f'{EX_MIN}-{EX_MAX} syllables; flagged: {dict((k, n) for k, n in flagged.items() if k)})')
+
+
+USE_STOP = {'to', 'a', 'an', 'the', 'of', 'one', 'someone', 'something', 'sb', 'sth', 'etc', 'used', 'it', 'its',
+            'oneself', 'i', 'you', 'he', 'she', 'we', 'they', 'me', 'him', 'her', 'us', 'them', 'such', 'as', 'or',
+            'and', 'in', 'on', 'at', 'by', 'for', 'out', 'up', 'that', 'this', 'which', 'who', 'what'}
+BE = {'is', 'are', 'was', 'were', 'am', 'been', 'being', 's', 'm', 're'}
+
+
+def gloss_words(text):
+    """The words of an English gloss, lower case, light stemming (plural / -ing / -ed), without USE_STOP; forms of
+    "be" count as be (là "to be")."""
+    out = set()
+    for w in re.findall(r"[a-z]+", (text or '').lower()):
+        if w in BE:
+            w = 'be'
+        if w in USE_STOP:
+            continue
+        for suf in ('ing', 'ed', 'es', 's'):
+            if len(w) > len(suf) + 3 and w.endswith(suf):
+                w = w[:-len(suf)]
+                break
+        out.add(w)
+    return out
+
+
+def etymology_usage(con, cut, min_n=3, ratio=2.0):
+    """Which etymology of a spelling is in use (review 2, finding 3), from the corpus: each Tatoeba sentence that has
+    the word (cut_corpus) counts for an etymology when its English translation contains a word of that etymology's
+    senses that no other etymology of the spelling has (từ: "from"/"since" for 自, "word" for 詞). entry.use_n: the
+    count of the entry's etymology; entry.use_main: 1 for every entry of the etymology with at least `min_n`
+    sentences and `ratio` times the next one, 0 for the others of that key; NULL where the evidence is weak (the card
+    then keeps Wiktionary's page order and says that it claims no main sense). Returns (strong, weak) key counts."""
+    groups = defaultdict(lambda: defaultdict(list))
+    for eid, k, src, sid, chars, origin, pos in con.execute(
+            "SELECT id, key, source, src_id, chars, origin, pos FROM entry WHERE source = 'wiktionary' AND pos NOT IN "
+            "('name', 'character-reading', 'combining_form') AND alt_kind != 'pron' ORDER BY id"):
+        groups[k][(src, sid, chars, origin)].append(eid)
+    multi = {k: g for k, g in groups.items() if len(g) > 1}
+    if not multi:
+        return 0, 0
+    words, unmeasurable = {}, set()
+    for k, g in multi.items():
+        for gk, ids in g.items():
+            ws = set()
+            for g_, tags in con.execute(f"SELECT gloss, tags FROM sense WHERE entry_id IN ({','.join('?' * len(ids))}) "
+                                        "ORDER BY entry_id, n", ids):
+                g_ = english.clean(g_)
+                if not g_ or 'alt-of' in tags or 'form-of' in tags or 'morpheme' in tags or english.late(
+                        filter(None, tags.split(','))) or english.FORM_OF.match(g_) or english.SHORT_FOR.match(g_):
+                    continue
+                if english.DESCRIPTION.match(g_) or re.search(r'\b(?:marker|particle|classifier)\b', g_, re.I):
+                    unmeasurable.add((k, gk))      # a usage description is never in a translation
+                    continue
+                gw = gloss_words(g_)
+                ws |= gw if len(g_) <= english.MAX_FIRST else set(sorted(gw, key=g_.lower().find)[:3])
+            words[(k, gk)] = ws
+    canon = dict(con.execute('SELECT key, canon FROM spelling'))
+    count = defaultdict(Counter)
+    for v, en, ref, ws in cut:
+        tw = gloss_words(en)
+        for k in {canon.get(w[2], w[2]) for w in ws} & multi.keys():
+            gs = list(multi[k])
+            for gk in gs:
+                own = words[(k, gk)] - set().union(*(words[(k, o)] for o in gs if o != gk))
+                if own & tw:
+                    count[k][gk] += 1
+    rows, strong, weak = [], 0, 0
+    for k, g in multi.items():
+        first = min(g, key=lambda gk: (int(gk[1]) if str(gk[1]).isdigit() else 10 ** 6, g[gk][0]))
+        ranked = sorted(g, key=lambda gk: (-count[k][gk], gk != first))
+        top, nxt = count[k][ranked[0]], count[k][ranked[1]]
+        is_strong = top >= min_n and top >= ratio * max(nxt, 1) if nxt else top >= min_n
+        if ranked[0] != first and (k, first) in unmeasurable:
+            is_strong = False         # các "Plural marker" cannot be counted: page order, no main claimed
+        strong += is_strong
+        weak += not is_strong
+        for gk in g:
+            main = (1 if gk == ranked[0] else 0) if is_strong else None
+            rows += [(count[k][gk], main, eid) for eid in g[gk]]
+    con.executemany('UPDATE entry SET use_n=?, use_main=? WHERE id=?', rows)
+    print(f'etymology in use (Tatoeba translations): {len(multi)} spellings with several etymologies; a main one '
+          f'attested for {strong}, weak evidence (page order, no main claimed) for {weak}')
+    return strong, weak
 
 
 FW_MIN = 200     # FrequencyWords syllables seen at least this often (3,588 syllables in vi_50k) validate the table
@@ -1057,14 +1194,27 @@ def validate_syllables(con, raw):
 
 
 # ---------------------------------------------------------------------------------------------- etymology states
-REVIEW = os.path.join(ROOT, 'course', 'etymology-review.tsv')
 FUNCTION_POS = {'particle', 'conj', 'prep', 'adv', 'pron', 'det', 'postp', 'intj', 'classifier'}
 STOP = {'to', 'a', 'an', 'the', 'of', 'be', 'is', 'one', 'sth', 'sb', 'something', 'someone', 'etc', 'used', 'in',
         'with', 'for', 'by', 'as', 'on', 'oneself', 'its', 'it', 'that', 'this', 'which', 'who', 'and', 'or', 'not',
         'no', 'from', 'into', 'at', 'up', 'out', 'very', 'thing', 'person', 'make', 'have', 'has', 'variant', 'old',
-        'literary', 'classical', 'surname', 'name', 'see', 'also', 'kind', 'type', 'form'}
-RARE_CHAR = 3        # a character used in fewer CC-CEDICT words than this is rare for a reader of Chinese
-FUNC_STOP = STOP - {'at', 'or', 'in', 'on', 'not', 'no', 'by', 'for', 'with', 'from', 'as', 'and', 'up', 'out'}
+        'literary', 'classical', 'surname', 'name', 'see', 'also', 'kind', 'type', 'form', 'abbr', 'used', 'cl',
+        'pr', 'esp', 'usually', 'often', 'certain', 'other', 'another'}
+# function words compared as such when the sense has no content word (như 如 "like, as", bị 被 "by", tự 自 "self")
+FUNC_KEEP = {'like', 'as', 'by', 'from', 'self', 'oneself', 'since', 'at', 'in', 'on', 'if', 'or', 'and', 'but', 'with',
+             'for', 'not', 'no', 'all', 'each', 'every', 'then', 'only', 'still', 'also', 'again', 'more', 'most'}
+RARE_CHAR = 3        # a character used in fewer CC-CEDICT words than this (variants counted) is rare for a reader
+# words that name the same sense in the two dictionaries' different wording (loose comparison)
+SENSE_SYN = [{'become', 'turn', 'into', 'achieve', 'accomplish', 'succeed'}, {'create', 'make', 'build', 'produce'},
+             {'far', 'distant', 'remote'}, {'old', 'elder', 'grandfather', 'venerable'}, {'friend', 'companion',
+             'partner', 'mate'}, {'number', 'count', 'figure', 'amount'}, {'part', 'portion', 'share', 'section'},
+             {'fruit', 'result'}, {'self', 'oneself', 'own', 'personally', 'from', 'since'}, {'like', 'as', 'if'},
+             {'suffer', 'passive', 'by', 'subject'}, {'member', 'staff', 'employee', 'personnel'},
+             {'feeling', 'emotion', 'love', 'affection', 'sentiment'}, {'mirror', 'lens', 'glass', 'glasses'},
+             {'shop', 'store', 'street', 'lane'}, {'county', 'district', 'prefecture'},
+             {'body', 'oneself', 'relative'}, {'occupy', 'seize', 'take'},
+             {'diploma', 'certificate', 'proof', 'evidence'}, {'front', 'before', 'previous', 'former'},
+             {'separate', 'apart', 'distance'}, {'orange', 'tangerine', 'mandarin'}]
 
 
 def _tokens(text, stop=True):
@@ -1072,47 +1222,41 @@ def _tokens(text, stop=True):
     for w in re.findall(r'[a-z]+', (text or '').lower()):
         if stop and (w in STOP or len(w) < 3):
             continue
-        for suf in ('ing', 'ed', 'es', 's', 'ly'):
+        for suf in ('ing', 'ied', 'ies', 'ed', 'es', 's', 'ly'):
             if len(w) > len(suf) + 3 and w.endswith(suf):
-                w = w[:-len(suf)]
+                w = w[:-len(suf)] + ('y' if suf in ('ied', 'ies') else '')
                 break
         out.add(w)
     return out
 
 
-def load_review(path=REVIEW):
-    """{(key, chars): (verdict, reason)} from course/etymology-review.tsv (Claude's judgement, not checked by a native
-    speaker): key <TAB> chars <TAB> verdict (same | doubtful | opaque) <TAB> reason. # starts a comment."""
-    out = {}
-    if os.path.exists(path):
-        for line in open(path, encoding='utf-8'):
-            if not line.strip() or line.startswith('#'):
-                continue
-            p = (line.rstrip('\n').split('\t') + ['', '', '', ''])[:4]
-            if p[2] in ('same', 'doubtful', 'opaque'):
-                out[(vi.key(p[0]), p[1].strip())] = (p[2], p[3].strip())
+def _loose(tokens):
+    out = set(tokens)
+    for syn in SENSE_SYN:
+        if out & syn:
+            out |= syn
     return out
 
 
 def etymology_states(con):
     """For each etymology of a word (its entries of one source, etymology number, characters and origin) that is a
     Sino-Vietnamese analysis (origin sino, characters matching the syllables) or an older Chinese loan:
-    entry.sino_kind (word: the characters are a word of CC-CEDICT, rime-cantonese or the MOE, or one character;
-    vn: a compound formed in Vietnamese or in Vietnamese order, 場學 trường học) and entry.doubt:
-      doubtful  Wiktionary's own etymology says possibly / perhaps / alternatively… (doubt_why keeps the words)
-      opaque    the analysis holds but a reader of Chinese would not see the word in it:
-                - a character is rare (used in fewer than RARE_CHAR CC-CEDICT words): 懃 cần, 隰 thấp;
-                - one character, and the sense is attested on neither side: no content word of the etymology's English
-                  is in CC-CEDICT's English of the character, and no English Wiktionary translation table that gives
-                  this Vietnamese word gives a Chinese word containing the character (xa 賒 "far": the table of "far"
-                  gives 遠; bạn 伴 "friend" passes through the table of "companion": 同伴);
-                - a grammaticalised function word: the etymology's main entry (best English score) is a particle,
-                  conjunction, preposition, adverb, determiner… and its first English is not in CC-CEDICT's English
-                  of the character nor supported by a table (không 空 "not", đang 當, nhưng 仍 "but").
-    course/etymology-review.tsv overrides both (Claude's judgement, each row with its reason). Then the label:
-    same (Hán-Việt, the same word in Chinese) | hv-vn (Hán-Việt formed in Vietnamese) | doubtful | opaque |
-    older-loan | loan | native | compound | '' (unknown). Returns a Counter of labels."""
-    review = load_review()
+    entry.sino_kind (word: the characters are a word of CC-CEDICT, rime-cantonese, the MOE or a Chinese row of the
+    English Wiktionary's translation tables, under their own or a Unihan variant spelling (tools/lexicon.py
+    attested), or one character; vn: none of them has it, a compound formed in Vietnamese: 場學 trường học) and
+    entry.doubt (rewritten after review 2, finding 4, so that it does not hide good bridges):
+      doubtful  Wiktionary's own etymology doubts the source (etym.doubt_words: the first sentence, or "Alternatively,
+                from …"), and the sense test below does not confirm it;
+      opaque    the analysis holds but a reader of Chinese would not see the word: a character rare in CC-CEDICT
+                (fewer than RARE_CHAR words, its variant forms counted: 爲, 墻, 舖 are not rare); or ONE character
+                whose senses, ALL of them, share no word (light stemming, SENSE_SYN synonyms) with ANY of CC-CEDICT's
+                senses of the character or of its variants, and no English Wiktionary translation table of the word
+                gives a Chinese word with the character. A function word compares its function words too (如 "like,
+                as", 被 "by", 自 "from, self"): when that is what matches, label `gram` (the same morpheme in a
+                grammatical use) instead of `same`.
+    Then the label: same | gram | hv-vn | doubtful | opaque | older-loan | loan | native | compound | '' (unknown).
+    The course lexicon (course/lexicon.tsv) decides the label of the words it has. Returns a Counter of labels."""
+    import lexicon
     ced = defaultdict(list)
     for ch, en in con.execute('SELECT chars, english FROM cedict_en'):
         ced[ch].append(en)
@@ -1122,22 +1266,25 @@ def etymology_states(con):
     zh_by_table = defaultdict(set)
     for en, pos, sense, w in con.execute('SELECT en, pos, sense, word FROM translation_zh'):
         zh_by_table[(en, pos, sense)].add(w)
-    tables = defaultdict(list)                        # vietnamese key -> [(english pos, table)]
-    for en, pos, sense, k in con.execute('SELECT en, pos, sense, key FROM translation'):
-        tables[k].append((pos, (en, pos, sense)))
+    tables = defaultdict(list)                        # vietnamese key -> [table]
     canon = dict(con.execute('SELECT key, canon FROM spelling'))
-    tables = {canon.get(k, k): v for k, v in tables.items()}
+    for en, pos, sense, k in con.execute('SELECT en, pos, sense, key FROM translation'):
+        tables[canon.get(k, k)].append((en, pos, sense))
+    senses_of = defaultdict(list)
+    for eid, g in con.execute('SELECT entry_id, gloss FROM sense'):
+        senses_of[eid].append(g)
 
-    def zh_support(k, c, pos=None):
-        ok = english.POS_OK.get(pos, None) if pos else None
-        return any(c in w for p, t in tables.get(k, []) if ok is None or p in ok for w in zh_by_table.get(t, ()))
-    bridge_rows = {r[0]: r for r in con.execute('SELECT chars, yue_by, nan_by, cmn_by, nan_coll FROM bridge')}
+    def forms(c):
+        return [c] + bridge.variants(con, c)
+
+    def zh_support(k, c):
+        return any(f in w for t in tables.get(k, []) for w in zh_by_table.get(t, ()) for f in forms(c))
     groups = defaultdict(list)
     for r in con.execute("SELECT id, key, pos, english, chars, origin, hv_check, etymon, doubt_why, en_score, source, "
                          "src_id FROM entry WHERE origin IN ('sino', 'nonhv') AND source != 'fixture' AND pos != "
                          "'character-reading'").fetchall():
         groups[(r[1], r[10], r[11], r[4], r[5])].append(r)
-    rows = []
+    rows, gram = [], []
     for (k, _src, _sid, chars, origin), rs in groups.items():
         etymon = next((r[7] for r in rs if r[7]), '')
         c = chars if origin == 'sino' else (re.match(etym.CJK + '+', etymon) or [''])[0]
@@ -1145,42 +1292,38 @@ def etymology_states(con):
             continue
         kind = ''
         if origin == 'sino' and chars and all(r[6] not in ('differs', 'length') for r in rs):
-            b = bridge_rows.get(chars)
-            kind = 'word' if len(chars) == 1 or (b and ('word' in (b[1], b[2], b[3]) or b[4])) else 'vn'
+            kind = 'word' if len(chars) == 1 or lexicon.attested(con, chars) else 'vn'
         why = next((r[8] for r in rs if r[8]), '')
         words = [r for r in rs if r[2] != 'name']
-        doubt, reason = '', ''
-        if why:
-            doubt, reason = 'doubtful', f"Wiktionary's etymology says: {why}"
-        elif words:
+        doubt, reason, is_gram = '', '', False
+        if words and ced:
+            cedict = ' ; '.join(x for ch in ([c] if len(c) > 1 else []) + list(c) for f in forms(ch)
+                                for x in ced.get(f, []))
+            mine_all = ' ; '.join([r[3] or '' for r in words] + [g for r in words for g in senses_of.get(r[0], [])])
+            content = _loose(_tokens(mine_all)) & _loose(_tokens(cedict))
+            func = ({w for w in _tokens(mine_all, stop=False) if w in FUNC_KEEP} &
+                    {w for w in _tokens(cedict, stop=False) if w in FUNC_KEEP})
             main = max(words, key=lambda r: (r[9] if r[9] is not None else -9, -r[0]))
-            cedict = ' ; '.join(ced.get(c, []) or [x for ch in c for x in ced.get(ch, [])])
-            ctoks = _tokens(cedict, stop=False)
-            rare = [ch for ch in c if use[ch] < RARE_CHAR] if use else []      # CC-CEDICT not loaded: no test
-            first = english.first_sense(main[3])
+            rare = [ch for ch in c if use and max(use[f] for f in forms(ch)) < RARE_CHAR]
+            supported = bool(content) or zh_support(k, c)
             if rare:
                 doubt, reason = 'opaque', f'rare character for a reader of Chinese: {"".join(rare)}'
-            elif not ced:
-                pass                                   # CC-CEDICT not loaded: no sense test
-            elif len(c) == 1 and main[2] in FUNCTION_POS:
-                # content words of its first English; a bare function word ("or", "at", "but") is compared as such
-                mine, theirs = _tokens(first), _tokens(cedict)
-                if not mine:
-                    mine, theirs = _tokens(first, stop=False) - FUNC_STOP, _tokens(cedict, stop=False) - FUNC_STOP
-                if not (mine & theirs) and not zh_support(k, c, main[2]):
+            elif len(c) == 1 and not supported:
+                if main[2] in FUNCTION_POS and func:
+                    is_gram = True
+                else:
                     doubt = 'opaque'
-                    reason = (f'grammaticalised {main[2]}: its English "{first[:40]}" is neither among CC-CEDICT\'s '
-                              f'senses of {c} nor in a translation table with {c}')
-            elif len(c) == 1:
-                mine = set().union(*(_tokens(r[3]) for r in words))
-                if mine and not (mine & ctoks) and not zh_support(k, c):
-                    doubt = 'opaque'
-                    reason = (f'the sense "{first[:40]}" is neither among CC-CEDICT\'s senses of {c} '
-                              f'({cedict[:50]}) nor in a translation table with {c}')
-        r = review.get((k, c))
-        if r:
-            doubt, reason = ('' if r[0] == 'same' else r[0]), f'review (Claude, not native-checked): {r[1]}'
+                    reason = (f'no sense of the word ("{english.first_sense(main[3])[:40]}"…) is among CC-CEDICT\'s '
+                              f'senses of {c} ({cedict[:50]}), nor in a translation table with {c}')
+            elif len(c) == 1 and main[2] in FUNCTION_POS and not content and func:
+                is_gram = True
+            if why and not doubt and not (len(c) == 1 and supported):
+                doubt, reason = 'doubtful', f"Wiktionary's etymology says: {why}"
+        elif why:
+            doubt, reason = 'doubtful', f"Wiktionary's etymology says: {why}"
         rows += [(kind, doubt, reason, x[0]) for x in rs]
+        if is_gram and not doubt:
+            gram += [(x[0],) for x in rs]
     con.executemany('UPDATE entry SET sino_kind=?, doubt=?, doubt_why=? WHERE id=?', rows)
     con.execute("UPDATE entry SET label = CASE "
                 "WHEN source = 'fixture' THEN label "
@@ -1188,6 +1331,7 @@ def etymology_states(con):
                 "  CASE WHEN doubt != '' THEN doubt WHEN sino_kind = 'vn' THEN 'hv-vn' ELSE 'same' END "
                 "WHEN origin = 'nonhv' THEN 'older-loan' WHEN origin = 'loan' THEN 'loan' "
                 "WHEN origin = 'vietic' THEN 'native' WHEN origin = 'compound' THEN 'compound' ELSE '' END")
+    con.executemany("UPDATE entry SET label='gram' WHERE id=? AND label='same'", gram)
     c = Counter(r for (r,) in con.execute("SELECT label FROM entry WHERE source != 'fixture'"))
     d = Counter(r for (r,) in con.execute("SELECT doubt FROM entry WHERE doubt != ''"))
     print(f'etymology labels (entries): {dict(c)}; doubtful/opaque analyses: {dict(d)}')
@@ -1200,7 +1344,11 @@ def taigi_layers(con):
     does, so an unmarked reading whose coda class differs from every Hán-Việt reading of the character is colloquial:
     -h (glottal stop) for a stop (冊 tsheh / sách), a nasal vowel -nn for -n/-ng (院 īnn / viện, 醬 tsiùnn / tương),
     a bare vowel for a nasal or stop. Classes: p, t, k (Hán-Việt -c/-ch), m, n, ng (Hán-Việt -nh), h, nn, vowel;
-    m/n, p/t and k/t agree (regular literary correspondences: 凡 phàm / huân, 法 pháp / huat, 直 trực / ti̍t).
+    m/n, p/t and k/t agree (regular literary correspondences: 凡 phàm / huân, 法 pháp / huat, 直 trực / ti̍t), and so
+    do a nasal vowel with an open rhyme (他 thann / tha) and -in with -ng (孕 īn / dựng): bridge.coda_agrees.
+    Blind spots (REFERENCE): a colloquial reading with the coda class of the literary one (條 tiâu beside liâu) is
+    not found; a colloquial nasalised open syllable (鼻 phīnn, 怕 phànn) is no longer found either; a character whose
+    Hán-Việt reading is irregular (呆 ngốc, 炸 tạc) is judged against it.
     Such readings get note 'colloquial' (chinese table): the bridge never shows them as literary; a character left
     with none is "colloquial only" on the card. Readings the MOE marks literary (1) are not touched. Returns the
     characters changed."""
@@ -1214,7 +1362,7 @@ def taigi_layers(con):
         if not hv:
             continue
         hcls = {bridge.coda_hv(x) for x in hv}
-        bad = [(rid, r) for rid, r in rs if not any(bridge.coda_agrees(h, bridge.coda_nan(r)) for h in hcls)]
+        bad = [(rid, r) for rid, r in rs if not any(bridge.coda_agrees(h, bridge.coda_nan(r), r) for h in hcls)]
         if bad:
             changed.add(ch)
             rows += [(rid,) for rid, _ in bad]
@@ -1302,13 +1450,15 @@ def main():
     taigi_layers(con)
     known = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry')} | \
         {k for (k,) in con.execute('SELECT key FROM spelling')}
+    cut = cut_corpus(sentences, known) if sentences else []
     if sentences:
-        attach_examples(con, sentences, known)
+        attach_examples(con, cut, known)
     # the corpus for word counts: Tatoeba, Wiktionary's examples (+ the Tatoeba Challenge copy in the private build)
     corpus = [v for v, _, _ in sentences] + [v for (v,) in con.execute(
         "SELECT vi FROM example WHERE source = 'wiktionary'")] + corpus
     fdesc = frequencies(con, raw, corpus)
     compose_english(con)
+    etymology_usage(con, cut)
     character_readings(con)
     build_bridge(con)
     etymology_states(con)

@@ -63,8 +63,9 @@ with tempfile.TemporaryDirectory() as tmp:
     cards.init(cards.open_db('public', db))
     sung = cards.dictionary[cards.lookup('sung')]
     ok(sung['en'] == 'cluster fig (Ficus racemosa)' and 'chars' not in sung and sung.get('label') == 'native'
-       and sung.get('other') == [{'en': 'to fill; to supplement', 'chars': '充'}],
-       'sung "cluster fig" does not get 充: one etymology per card sense, the other listed apart')
+       and sung.get('other') == [{'en': 'to fill, to supplement', 'chars': '充'}] and sung.get('no_main') == 1,
+       'sung "cluster fig" does not get 充: one etymology per card sense, the other listed apart; no corpus '
+       'evidence: no main sense claimed')
     sh = cards.dictionary[cards.lookup('sinh học')]
     ok('chars' not in sh and sh.get('label') != 'same', 'an analysis not matching the syllables is not shown as same word')
     chk = dict(con.execute("SELECT key, hv_check FROM entry WHERE source='wiktionary' AND chars != ''"))

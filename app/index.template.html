@@ -375,7 +375,7 @@ function streak() { let n = 0; const d = new Date(); if (!studyDays.has(ymd(d)))
 // the card label (handover section 5): same word in Chinese / false friend / native Vietnamese word
 const LABEL = { 'same': ['p-same', 'Same word in Chinese', 'c-same'], 'false-friend': ['p-ff', 'False friend', 'c-ff'], 'native': ['p-native', 'Native Vietnamese word', ''],
   'hv-vn': ['p-hvvn', 'Hán-Việt, formed in Vietnamese', ''], 'older-loan': ['p-old', 'Older Chinese loan', ''], 'loan': ['p-loan', 'Loanword', ''],
-  'compound': ['p-native', 'Compound', ''], 'doubtful': ['p-doubt', 'Etymology doubtful', ''], 'opaque': ['p-doubt', 'Opaque etymology', ''] };
+  'compound': ['p-native', 'Compound', ''], 'gram': ['p-same', 'Same morpheme in Chinese, grammatical use', 'c-same'], 'doubtful': ['p-doubt', 'Etymology doubtful', ''], 'opaque': ['p-doubt', 'Opaque etymology', ''] };
 const lab = id => LABEL[(DATA.dict[id] || {}).label] || ['', '', ''];
 const ICONS = {
   lessons: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 1 2-2h13"/></svg>',
@@ -591,7 +591,8 @@ function wireExercises(ex, root) {
 // Mandarin (pinyin); the label; an example; other words of the same spelling (other etymologies)
 function enSrc(c) {
   const s = c.en_src || '';
-  if (s === 'course' || s === 'written') return 'Written for the course · not checked by a native speaker';
+  if (s === 'course') return 'Written for the course · not checked by a native speaker';
+  if (s === 'lexicon') return `Course lexicon, written by Claude · not checked by a native speaker${c.conf && c.conf !== 'sure' ? ' · confidence: ' + esc(c.conf) : ''}`;
   if (s.startsWith('dict:')) return s.slice(5) === 'fixture' ? 'Test fixture' : 'Dictionary: ' + esc(s.slice(5));
   if (s === 'parts') return 'Automatic: from its syllables';
   return '';
@@ -609,6 +610,8 @@ function openCard(id, w) {
     sh.innerHTML = top(c.w, audio, addBtn) + `
       ${c.fixture ? '<div class="row"><span class="pill p-fx">Test fixture card · not course content</span></div>' : ''}
       <div class="wc-sec"><h3>English</h3><div class="wc-gloss">${esc(c.en || '')}</div>${enSrc(c) ? `<div class="wc-src">${enSrc(c)}</div>` : ''}</div>
+      ${c.use ? `<div class="wc-src">Usage: ${esc(c.use)}</div>` : ''}
+      ${c.no_main ? '<div class="wc-src">Several words share this spelling; the dictionary does not say which is the common one: all are shown.</div>' : ''}
       ${c.chars ? `<div class="wc-sec"><h3>${c.per_char ? 'Hán-Việt · characters (not a Chinese word)' : 'Hán-Việt · the Chinese word'}</h3><div class="wc-chars">${esc(c.chars)}</div>
         ${c.hv ? `<div class="wc-src">Hán-Việt: ${esc(c.hv)}</div>` : ''}
         ${c.per_char ? `<div class="wc-src">Formed in Vietnamese: each character's readings, not a word of Chinese.</div>${c.per_char.map(p => `<div class="zhgrid"><div><small>${esc(p.c)} ${esc(p.hv || '')}</small></div>${zh.map(([k, t]) => `<div><small>${t}</small><b>${esc(p[k] || (k === 'nan' && p.nan_coll ? p.nan_coll + ' (colloquial)' : '—'))}</b></div>`).join('')}</div>`).join('')}`

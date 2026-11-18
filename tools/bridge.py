@@ -94,11 +94,17 @@ def coda_nan(r):
 
 # regular literary correspondences that change the coda class: labial dissimilation (凡 phàm / huân, 法 pháp / huat,
 # 品 phẩm / phín) and Hokkien -k/-t crossings in the literary layer (直 trực / ti̍t, 室 thất / sik)
-CODA_PAIRS = ({'m', 'n'}, {'p', 't'}, {'k', 't'})
+# Review 2 (finding 8) added two: a nasal vowel for an open Hán-Việt rhyme (nasalised literary readings 他 thann,
+# 且 tshiánn, 打 tánn: nasalisation is found in both layers, so it decides nothing), and -in for -ng/-nh (孕 īn /
+# dựng, 拯 tsín / chửng: the literary -in of Middle Chinese -ing), checked on the reading itself (coda_agrees(…, r)).
+CODA_PAIRS = ({'m', 'n'}, {'p', 't'}, {'k', 't'}, {'v', 'nn'})
 
 
-def coda_agrees(hv_class, nan_class):
+def coda_agrees(hv_class, nan_class, nan_reading=''):
     """True when a Taigi reading's coda class can be the literary counterpart of a Hán-Việt coda class."""
+    if hv_class == 'ng' and nan_class == 'n' and \
+            _TONE_MARKS.sub('', unicodedata.normalize('NFD', nan_reading.lower())).endswith('in'):
+        return True
     return hv_class == nan_class or {hv_class, nan_class} in CODA_PAIRS
 
 

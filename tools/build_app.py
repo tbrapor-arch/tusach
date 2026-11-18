@@ -169,7 +169,7 @@ src = Counter((c.get('en_src') or 'none').split(':')[0] for c in dictionary.valu
 print('English on word cards:', ', '.join(f'{k} {v}' for k, v in src.most_common()))
 open(os.path.join(OUT, 'english-auto.txt'), 'w', encoding='utf-8').write(''.join(
     f"{c['w']}\t{c.get('en_src') or 'none'}\t{c.get('en') or ''}\n" for c in dictionary.values()
-    if c.get('en_src') not in ('course', 'written')))
+    if c.get('en_src') not in ('course', 'lexicon')))
 print(f'{out}: {len(lessons)} lessons, {len(dictionary)} cards ({sum(1 for c in dictionary.values() if c.get("chars"))} '
       f'Hán-Việt), {sum(1 for c in dictionary.values() if c.get("audio"))} with audio, {n_rec} recorded lines, '
       f'{n_letters} letters checked in the font, {os.path.getsize(out) // 1024} KB')

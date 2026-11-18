@@ -49,8 +49,10 @@ CREATE TABLE entry(
                           -- analysis holds but a Chinese reader would not see the word: sense not in CC-CEDICT's English
                           -- of the characters, a grammaticalised function word, a rare character)
   doubt_why TEXT DEFAULT '', -- the evidence for `doubt`, in words
-  en_score REAL           -- tools/english.py compose(): evidence for the entry's first English (the card puts the
-                          -- entry with the best score first among the entries of one etymology)
+  en_score REAL,          -- how many English Wiktionary translation tables give this word with an English word of the
+                          -- entry's English (tools/english.py support): evidence between etymologies only
+  use_n INT,              -- Tatoeba sentences whose translation has a word only this etymology's senses have
+  use_main INT            -- 1: the etymology in use (strong corpus evidence), 0: another one is, NULL: weak / single
 );
 CREATE INDEX entry_key ON entry(key);
 CREATE INDEX entry_tkey ON entry(tkey);
@@ -58,8 +60,12 @@ CREATE INDEX entry_toneless ON entry(toneless);
 CREATE INDEX entry_chars ON entry(chars);
 
 -- example sentences; ref: the source's sentence id and author where it has them (Tatoeba: '#123456 by user')
-CREATE TABLE example(id INTEGER PRIMARY KEY, entry_id INT, source TEXT, vi TEXT, en TEXT, ref TEXT);
+-- key: the word a Tatoeba sentence is a candidate for (whole word, tools/build_db.py attach_examples; tools/cards.py
+-- picks the one that matches the card's sense); flags: '' or why it is never shown (unsuitable | slash | unknown-word)
+CREATE TABLE example(id INTEGER PRIMARY KEY, entry_id INT, source TEXT, vi TEXT, en TEXT, ref TEXT, key TEXT DEFAULT '',
+                     flags TEXT DEFAULT '');
 CREATE INDEX example_entry ON example(entry_id);
+CREATE INDEX example_key ON example(key);
 
 -- readings of one character in quốc ngữ. kind: hv (Hán-Việt) | nom (Nôm reading) | hannom (Wiktionary's older shape,
 -- Hán-Việt and Nôm not told apart) | unchecked (Unihan kVietnamese: mixes both, last resort). ord: the source's order.

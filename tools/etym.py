@@ -10,7 +10,9 @@ The origin of an entry is decided by the first decisive piece of evidence, in th
      bor / der / lbor / obor / ubor / uder / psm from a Chinese variety (Middle, Old, Literary Chinese, Cantonese, Min…)
        -> nonhv (an older Chinese loan, etymon = the Chinese word given);
      the same from any other language -> loan ("borrowed from French gare");
-     cal (calque) -> vietic with the note "calque of …" (native material built on a foreign model).
+     cal (calque) -> compound with the note "calque of …" (formed in Vietnamese on a foreign model: hệ điều hành);
+     com / af / compound (a compound of Vietnamese words: hôm + nay) and vi-etym-redup (chắc chắn) -> compound;
+     a language code no table names (sit, omx) is named from the template's own expansion (Sino-Tibetan, Old Mon).
   3. the etymology text, when no template decided: "Nativisation of Chinese 感恩" / "nativized form of Chinese 感恩" /
      "borrowed from (Middle) Chinese X" -> nonhv; "From French …" -> loan; "From Proto-Vietic …" -> vietic.
   4. cognate evidence (cog templates or "Cognate with Muong …"): a cognate in a Vietic or other Austroasiatic language
@@ -18,7 +20,10 @@ The origin of an entry is decided by the first decisive piece of evidence, in th
   5. nothing: '' (unknown). Later steps of the build give an origin to alternative forms (that of their target) and to
      compounds whose syllables all have one (tools/build_db.py origins_after_load).
 
-`doubt_words(text)`: Wiktionary's own uncertainty about the etymology ("possibly", "perhaps", "alternatively"…).
+`doubt_words(text)`: Wiktionary's own uncertainty about the etymology ("possibly", "perhaps", "alternatively"…), in
+the sentence that gives the source (the first one) or in a sentence offering another source ("Alternatively, from
+Proto-Tai…"); a doubt about a later detail (the tone of phần, a deeper ancestry of mỗi's 每, a contaminated sense of
+khám) does not make the analysis doubtful (review 2, finding 4).
 """
 import re
 
@@ -57,8 +62,18 @@ DOUBT = re.compile(r'\b(possibl[ey]|perhaps|uncertain|unclear|disputed|doubtful|
                    r'or else from|folk etymology|contaminat\w*|not certain|obscure)\b', re.I)
 
 
-def _lang(code):
-    return LANG.get(code, code)
+def _lang(code, expansion='', word=''):
+    """A language's name: the table's, else the template's own expansion without the word ("Old Mon lṅim" -> "Old
+    Mon"), else "another language": a raw code (sit, omx) is never shown (review 2, finding 9)."""
+    if code in LANG:
+        return LANG[code]
+    e = (expansion or '').strip()
+    if word and word in e:
+        e = e[:e.index(word)].strip()
+    e = re.sub(r'\s*[(“].*$', '', e).strip()
+    e = re.sub(r'^(?:[Bb]orrowed from|[Ff]rom|[Cc]ognate with|[Cc]alque of|[Oo]f)\s+', '', e)
+    e = re.sub(r'\s+origin$', '', e)
+    return e if e and re.fullmatch(r"[A-Z][\w' -]*", e) else 'another language'
 
 
 def _word(args, i='3'):
@@ -67,32 +82,42 @@ def _word(args, i='3'):
 
 
 def classify(templates, text):
-    """(origin, note) of one Wiktionary etymology without {{vi-etym-sino}}: vietic | nonhv | loan | '' and the evidence
-    in words. For nonhv, the note starts with the Chinese etymon: '感恩 (Chinese)'."""
+    """(origin, note) of one Wiktionary etymology without {{vi-etym-sino}}: vietic | nonhv | loan | compound | '' and
+    the evidence in words. For nonhv, the note starts with the Chinese etymon: '感恩 (Chinese)'."""
     cognate = ''
-    for t in templates or []:
+    ts = list(templates or [])
+    for i, t in enumerate(ts):
         name, a = t.get('name'), t.get('args') or {}
+        exp = t.get('expansion') or ''
         src = a.get('2', '')
         if name in INHERIT and src.startswith(NATIVE_INH):
-            return 'vietic', f'inherited from {_lang(src)} {_word(a)}'.strip()
+            return 'vietic', f'inherited from {_lang(src, exp, _word(a))} {_word(a)}'.strip()
         if name in BORROW:
             if src in CHINESE:
                 w = _word(a)
+                if not re.fullmatch(CJK + '+', w):        # cuốn: {{der|vi|och}} then {{och-l|卷}}
+                    nxt = next((x for x in ts[i + 1:i + 3] if x.get('name', '').endswith('-l')), None)
+                    m = re.match(CJK + '+', (nxt or {}).get('args', {}).get('1', '') or '') if nxt else None
+                    w = m.group(0) if m else ''
                 if re.fullmatch(CJK + '+', w):
                     return 'nonhv', f'{w} ({_lang(src)})'
                 continue          # "from Chinese" with no characters: not decisive
             if src.startswith(NATIVE_INH):
-                return 'vietic', f'from {_lang(src)} {_word(a)}'.strip()
+                return 'vietic', f'from {_lang(src, exp, _word(a))} {_word(a)}'.strip()
             if src and src != 'vi':
-                return 'loan', f'borrowed from {_lang(src)} {_word(a)}'.strip()
+                return 'loan', f'borrowed from {_lang(src, exp, _word(a))} {_word(a)}'.strip()
+        if name in ('com', 'af', 'affix', 'compound', 'com+') and a.get('1') == 'vi' and exp:
+            return 'compound', re.sub(r'\s+', ' ', exp)
+        if name in ('vi-etym-redup', 'reduplication', 'rdp') and exp:
+            return 'compound', exp
         if name in ('cal', 'calque', 'clq') and src and src != 'vi':
-            return 'vietic', f'calque of {_lang(src)} {_word(a)}'.strip()
+            return 'compound', f'calque of {_lang(src, exp, _word(a))} {_word(a)}: formed in Vietnamese'.strip()
         if name in ('cog', 'cog-lite') and not cognate:
             c = a.get('1', '')
             if c in AA_COGNATE or c.startswith(NATIVE_INH):
-                cognate = f'cognate with {_lang(c)} {_word(a, "2")}'.strip()
+                cognate = f'cognate with {_lang(c, exp, _word(a, "2"))} {_word(a, "2")}'.strip()
     text = text or ''
-    m = CHINESE_TEXT.search(text)
+    m = CHINESE_TEXT.search(text) or OLD_CHINESE_TEXT.search(text.strip())
     if m:
         return 'nonhv', f'{m.group(1)} (Chinese)'
     m = LOAN_TEXT.search(text.strip())
@@ -105,16 +130,29 @@ def classify(templates, text):
     m = COGNATE_TEXT.search(text)
     if m:
         return 'vietic', m.group(0)[0].lower() + m.group(0)[1:]
+    m = COMPOUND_TEXT.match(text.strip())
+    if m:
+        return 'compound', m.group(0).rstrip('.')
     return '', ''
 
 
+OLD_CHINESE_TEXT = re.compile(r'^From (?:Late |Early )?(?:Old|Middle|Literary|Classical) Chinese (' + CJK + r'+)')
+COMPOUND_TEXT = re.compile(r'^[^\W\d_]+(?: [^\W\d_]+)?(?: \(“[^”]*”\))? \+ [^\W\d_]+(?: [^\W\d_]+)?(?: \(“[^”]*”\))?')
+
+
 def doubt_words(text):
-    """The words of an etymology text that express Wiktionary's own uncertainty ('' if none)."""
+    """The words of an etymology text that express Wiktionary's own uncertainty about the source ('' if none): in
+    its first sentence, or in a sentence that offers another source (starting "Alternatively", "Or", "Another")."""
+    t = (text or '').strip()
+    sents = re.split(r'(?<=[.])\s+|\n+', t)
+    scope = sents[:1] + [x for x in sents[1:] if re.match(r'(?:Alternatively|Or (?:from|perhaps|possibly)|Another|'
+                                                           r'Possibly|Perhaps|Maybe)\b', x)]
     found = []
-    for m in DOUBT.finditer(text or ''):
-        w = m.group(1).lower()
-        if w not in found:
-            found.append(w)
+    for x in scope:
+        for m in DOUBT.finditer(x):
+            w = m.group(1).lower()
+            if w not in found:
+                found.append(w)
     return ', '.join(found)
 
 
@@ -129,6 +167,18 @@ def _selftest():
     assert classify([], 'From French ga.')[0] == 'loan'
     assert doubt_words('Possible non-Sino-Vietnamese reading of Chinese 朝; thus, possibly a doublet') == 'possible, possibly'
     assert doubt_words('Sino-Vietnamese word from 冊.') == ''
+    assert doubt_words('Sino-Vietnamese word from 分. The tone here is rather problematic, alternatively x.') == ''
+    assert doubt_words('Sino-Vietnamese word from 唐. Doublet of đàng.\nAlternatively, from Proto-Tai *daːŋ.') == \
+        'alternatively'
+    assert classify([{'name': 'bor', 'args': {'1': 'vi', '2': 'sit'}, 'expansion': 'Sino-Tibetan'}], '') == \
+        ('loan', 'borrowed from Sino-Tibetan')
+    assert classify([{'name': 'cog', 'args': {'1': 'omx', '2': 'lṅim'}, 'expansion': 'Old Mon lṅim'}], '') == \
+        ('vietic', 'cognate with Old Mon lṅim')
+    assert classify([{'name': 'com', 'args': {'1': 'vi'}, 'expansion': 'hôm (“day”) + nay (“this; now”)'}], '')[0] \
+        == 'compound'
+    assert classify([{'name': 'der', 'args': {'1': 'vi', '2': 'och'}}, {'name': 'och-l', 'args': {'1': '卷'}}],
+                    '')[0] == 'nonhv'
+    assert classify([], 'vì (“because; for”) + sao (“why; how”).')[0] == 'compound'
     print('etym: self-test ok')
 
 
