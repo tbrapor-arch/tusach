@@ -219,7 +219,7 @@ def diff_cards(a, b, course, ranks, limit=20, out_path=None):
         elif x.get('en') != y.get('en'):
             add('English (later items) changed', w, json.dumps(x.get('en'), ensure_ascii=False),
                 json.dumps(y.get('en'), ensure_ascii=False))
-        for f in ('label', 'chars'):
+        for f in ('label', 'chars', 'origin', 'yue', 'nan', 'nan_coll', 'cmn'):    # origin, readings: review 4
             if (x.get(f) or '') != (y.get(f) or ''):
                 add(f'{f} changed', w, x.get(f) or '-', y.get(f) or '-')
         ex, ey = (x.get('ex') or {}).get('vi', ''), (y.get('ex') or {}).get('vi', '')

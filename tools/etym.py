@@ -111,6 +111,7 @@ def classify(templates, text, headword=''):
     """(origin, note) of one Wiktionary etymology without {{vi-etym-sino}}: vietic | nonhv | loan | compound | '' and
     the evidence in words. For nonhv, the note starts with the Chinese etymon: '感恩 (Chinese)'."""
     cognate = ''
+    formless = False         # a cognate given with no form
     native = None            # an inherited line that names no form other than the word itself (chị < MV chị)
     text = text or ''
     alt = ALTERATION_TEXT.match(text.strip())
@@ -164,6 +165,8 @@ def classify(templates, text, headword=''):
                     lang = _lang(c, exp, w)
                 if w:                           # a cognate is shown only with its form
                     cognate = f'cognate with {lang} {w}'
+                else:                           # still native evidence ("Compare Arem bæːh"), with no note
+                    formless = True
     if alt and native:
         return 'vietic', _alteration(alt)
     if native:
@@ -179,6 +182,8 @@ def classify(templates, text, headword=''):
         return 'vietic', (f'inherited from {m.group(1)} {m.group(2)}' if m.group(2) else '')
     if cognate:
         return 'vietic', cognate
+    if formless:
+        return 'vietic', ''
     m = COGNATE_TEXT.search(text)
     if m:
         return 'vietic', f'cognate with {m.group(1)} {m.group(2)}'
@@ -257,6 +262,8 @@ def _selftest():
         ('vietic', 'cognate with Proto-Katuic *sool')
     assert classify([{'name': 'cog', 'args': {'1': 'tou', '2': '-'}}], 'Cognate with Tho [Cuối Chăm] kʰrɐː⁶.', 'giữa') \
         == ('vietic', 'cognate with Tho [Cuối Chăm] kʰrɐː⁶')
+    assert classify([{'name': 'cog', 'args': {'1': 'aem', '2': '-'}}], 'Compare Arem bæːh ("day").', 'bữa') == \
+        ('vietic', '')
     print('etym: self-test ok')
 
 
