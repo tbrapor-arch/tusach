@@ -519,3 +519,27 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 98 | **Review 14** | recap 92–97 | — | 20 | — |
 | 99 | A farewell speech | formal speech | — | 20 | 10 / 13 / 1 |
 | 100 | Goodbye, Hà Nội | everything: a free conversation | — | 20 | 10 / 13 / 1 |
+
+## 9. Limits, plainly
+
+- **Written by Claude, not checked by a native speaker**: the Vietnamese (titles, examples), the Northern usage
+  notes, the tone descriptions, the course English, the word boundaries and the course lexicon. The choices a
+  lesson repeats most (tôi → em with chị Lan, bác for her mother, chú for the children, vâng or dạ, trà, nhỏ / lớn,
+  rảnh) are in `wordlist-2-to-check.md` for a native speaker, most important first.
+- **Frequency is biased**: a small, partly translated corpus (Tatoeba, Wiktionary examples); spoken particles,
+  numbers and food words rank low (vâng 3,663, nhỉ 2,207, phở 12,139); some ranks are junk. Ranks guide; the
+  situation decides, and every low-ranked word of the list says why it is there.
+- **The sound rules are measured, not proven**: 994 syllables of the top-3,000 Hán-Việt cards, whose labels the
+  review found partly wrong (opaque or Vietnam-made by mistake); Taigi literary readings are the MOE's, a few of
+  them colloquial; a syllable whose readings disagree is left out; some classes are small (nh ← Taigi j-: 4;
+  Cantonese 5 with an obstruent: 7). A rate is a guide for the learner, not a law.
+- **Etymologies are Wiktionary's**: 24 older loans in word list 2 (6 doubtful, characters hidden), 36 words with
+  no recorded origin. Tone descriptions in Lesson 0 come from published accounts, not from listening.
+
+## 10. Questions for the owner
+
+| # | Question | Recommendation |
+|---|---|---|
+| Q1 | Can a Hà Nội speaker read `wordlist-2-to-check.md` (its first four points) before lessons 1–7 are drafted? | **Yes, if at all possible**: those choices are repeated in every early dialogue; otherwise Claude drafts with its choices, labelled unchecked. |
+| Q2 | Teach the tendencies (60–80 %: ch, th, x, s, d, ngã → Chinese) or only the rules? | **Teach them, marked "tendency"**, each with its exception list: they still beat guessing for a reader of Chinese. |
+| Q3 | Initials take 12 bridge notes in L16–29: keep them together or spread to L50? | **Keep together**: the classes explain each other; reviews 21 and 28 recap them, and the second wave revisits them. |
