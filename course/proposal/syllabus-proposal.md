@@ -169,3 +169,34 @@ is a tendency**: about a quarter of ngã syllables are old voiced departing or r
 - T3 sắc: 過 quá, 世 thế, 意 ý, 信 tín · nặng: 病 bệnh, 定 định, 電 điện, 大 đại
 - T4 sắc: 法 pháp, 發 phát, 一 nhất, 北 bắc, 客 khách · nặng: 學 học, 實 thực, 力 lực, 立 lập, 物 vật
 <!-- /bridge-examples -->
+
+## 4. Finals and rhymes
+
+All zh→vi unless marked; same data and tool. Mandarin lost -p -t -k and merged -m into -n; Cantonese and Taigi kept
+them, and so did Hán-Việt.
+
+| Id | Rule | Hits | Main exceptions | Lesson |
+|---|---|---|---|---|
+| B0 | What Hán-Việt is: one syllable per character, Chinese order inside the word | — | — | L2 |
+| B1 | Cantonese -p → -p | 21 / 21, 100 % | — | L4 |
+| B1 | Cantonese -t → -t | 34 / 37, 92 % | 法 pháp, 壓 áp (old -p: Hán-Việt kept it, Cantonese and Taigi did not); 實 thực | L4 |
+| B1 | Cantonese -k → -c / -ch | 86 / 87, 99 % | 值 trị | L4 |
+| B2 | Cantonese -m → -m | 41 / 41, 100 % | — | L6 |
+| B2 | Taigi -m → -m | 40 / 42, 95 % | 填 điền, 忍 nhẫn | L6 |
+| B3 | vi→zh: Hán-Việt -nh / -ch → Cantonese -ng / -k | 74 / 74, 100 % | — | L8 |
+| B4 | Mandarin -ing → -nh | 46 / 54, 85 % | 憑 bằng, 平 bằng, 冰 băng, 興 hưng, 應 ứng, 凝 ngưng, 命 mạng | L32 |
+| V1 | Cantonese -oeng / -oek → -ương / -ươc | 31 / 33, 94 % | 樣 dạng, 雙 song | L30 |
+| V2 | Cantonese -in / -it → -iên / -iêt | 36 / 39, 92 % | 結 kết, 言 ngôn, 必 tất | L31 |
+
+**Dropped**: "Cantonese -ing / -ik → -nh / -ch" (57 / 85, 67 %: 仍 nhưng, 力 lực, 食 thực, 直 trực, 織 chức):
+the reverse (B3) is the useful direction; going forward the learner is told only that -nh / -ch need a Cantonese
+-ng / -k.
+<!-- bridge-examples -->
+- B0: 越南 Việt Nam, 中國 Trung Quốc, 法 Pháp, 學 học, 河內 Hà Nội
+- B1: 學習 học tập, 法律 pháp luật, 獨立 độc lập, 發展 phát triển, 國家 quốc gia
+- B2: 南 nam, 心 tâm, 感 cảm, 點 điểm, 音 âm, 參加 tham gia
+- B3: 生 sinh, 病 bệnh, 明白 minh bạch, 歷史 lịch sử, 客 khách
+- B4: 情 tình, 定 định, 平 bình, 影 ảnh, 經濟 kinh tế
+- V1: 想 tưởng, 洋 dương, 商 thương, 香 hương, 影響 ảnh hưởng, 戰略 chiến lược
+- V2: 電 điện, 先 tiên, 前 tiền, 年 niên, 研究 nghiên cứu, 節 tiết, 熱 nhiệt
+<!-- /bridge-examples -->
