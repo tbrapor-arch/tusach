@@ -47,3 +47,14 @@ described from published accounts, not from listening).
    common it is now.
 4. Note: **quá** after the adjective (Rẻ quá! exclamation) against before it (quá đắt "too expensive"): is the
    difference stated fairly?
+
+## Lesson 5
+1. Line 6: Sacha calls the older man in the photo (Minh's father, about 70) **bác này**, guessing he is of his
+   parents' generation. Natural, or would one say **ông này** for a man of 70? (bố mẹ and ông bà, one word each by
+   docs/SEGMENTATION.md, are not in word list 2, so the lesson avoids the pairs.)
+2. Line 4: **Hai cháu mấy tuổi ạ?** to the mother: natural without **rồi** (Hai cháu mấy tuổi rồi ạ?)?
+3. Line 7: **Mẹ chị đây!** as "here's my mother!" when she walks in; is **Mẹ chị đây này!** more natural?
+4. Line 3: **Đây là con chị, Bin và Na.** for "these are my children": natural, or **Còn đây là hai đứa nhà chị**?
+   (còn, đứa are not taught yet.)
+5. Note: **em ấy** for "he/she" (someone younger) is given beside anh ấy and chị ấy. In Hà Nội, is **cô ấy** /
+   **nó** more usual for a younger person (cô ấy is in the word list's gloss of ấy)?
