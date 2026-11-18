@@ -19,6 +19,13 @@ Checks (E = error, exit 1; W = warning; I = information)
   E  exercise sentence taken from the dialogue: equal to a line, contained in a line, or equal to one after removing a
      greeting / first clause (normalised: case, punctuation, word boundaries)
   W  exercise sentence very similar to a dialogue line (similarity >= SIMILAR): check it is a new sentence
+  E  (review 5) exercise sentence taken from an EARLIER lesson's dialogue line, or from a Vietnamese example in its
+     own lesson's notes (the same test as above)
+  W  (review 5) a first-person and a second-person kin term in one sentence (dialogue, exercise, note example) that
+     are not a pair of KIN_PAIRS: Anh … gặp chị (a man who says chị calls himself em); a term followed by a name,
+     ấy or này, or joined by và, is a third person and not counted
+  E  (review 5) a Vietnamese word in a lesson note or a new_words gloss that no lesson up to it teaches, unless
+     written {in braces} (a preview; shown without the braces); names of the cast and grammar terms excepted
   E  a word of a real lesson that is a new word of no lesson up to it (lessons teach their words, no others)
   W  a course word of several syllables (lexicon, word lists) written as separate words: a missing underscore?
   E  note pointing to a line the dialogue does not have
@@ -74,6 +81,34 @@ KEYS = {'top': {'id', 'title', 'review', 'setting', 'native_check', 'dialogue', 
         'new_words': {'w', 'en', 'tag', 'chars', 'label', 'name'}, 'translate': {'vi', 'en'},
         'fill': {'vi', 'answer', 'en'}, 'native_check': {'by', 'date'}}
 SIMILAR = 0.8
+# who says which kin term to whom (review 5, finding 1): a sentence's first-person and second-person terms form one of
+# these pairs (either order); tôi goes with anything
+KIN = {'tôi', 'anh', 'chị', 'em', 'bác', 'cháu', 'ông', 'bà', 'chú', 'cô', 'con', 'bố', 'mẹ'}
+KIN_PAIRS = {frozenset(p) for p in (('anh', 'em'), ('chị', 'em'), ('bác', 'cháu'), ('ông', 'cháu'), ('bà', 'cháu'),
+                                    ('chú', 'cháu'), ('cô', 'cháu'), ('bố', 'con'), ('mẹ', 'con'))}
+THIRD_AFTER = {'ấy', 'này', 'kia', 'đó', 'đấy'}
+
+
+def kin_mismatch(text):
+    """[(a, b)] of the sentences of `text` whose two person terms are not a pair of KIN_PAIRS (lint W, above)."""
+    out = []
+    for sent in re.split(r'[.!?…]+', vi.display(text)):
+        toks = [t for t in vi.words(sent) if t[0] == 'w']
+        terms = []
+        for i, t in enumerate(toks):
+            k = t[2]
+            if k not in KIN:
+                continue
+            nxt = toks[i + 1] if i + 1 < len(toks) else None
+            prv = toks[i - 1][2] if i else ''
+            if nxt and (nxt[1][:1].isupper() or nxt[2] in THIRD_AFTER or nxt[2] in KIN or nxt[2] == 'và') \
+                    or prv == 'và':
+                continue                     # chị Lan, anh ấy, bác này, mẹ chị, ông và bà: a third person
+            terms.append(k)
+        terms = [k for k in dict.fromkeys(terms) if k != 'tôi']
+        if len(terms) == 2 and frozenset(terms) not in KIN_PAIRS:
+            out.append(tuple(terms))
+    return out
 
 
 def norm_tokens(text):
@@ -418,6 +453,72 @@ def taught_order(loaded, msgs):
                                       'this one (a needed word means the plan is wrong: fix the word list)'))
 
 
+# what the order check of notes leaves out (review 5, finding 15): readings in Chinese romanisation, the letters and
+# spellings a pronunciation note talks about, and English / French words that are also Vietnamese spellings
+NOTE_ZH = re.compile(r'(?<=[\u3400-\u9fff\uf900-\ufaff])\s*\([^)]*\)|\([^)]*\b(?:Mandarin|Cantonese|Taigi)\b[^)]*\)')
+NOTE_LETTERS = set('a ă â b c d đ e ê g h i k l m n o ô ơ p q r s t u ư v x y gi ch tr nh ng ngh kh ph th qu gh'.split())
+NOTE_FOREIGN = {'may', 'am', 'si'}
+
+
+def note_order_text(text):
+    """A note's text for the order check: without Chinese readings, spelling letters and foreign look-alikes."""
+    text = NOTE_ZH.sub(' ', text)
+    return re.sub(r"(?<![\w{])[^\W\d_]+(?![\w}])",
+                  lambda m: ' ' if m.group(0).lower() in NOTE_LETTERS or m.group(0) in NOTE_FOREIGN else m.group(0), text)
+
+
+def notes_order_and_copies(loaded, msgs):
+    """Review 5 (findings 1, 14, 15), over the real lessons in order: the Vietnamese of a lesson's notes and new_words
+    glosses is taught at or before it (or a {preview}); a note example's person terms form a pair; an exercise is not an
+    earlier lesson's dialogue line nor an example of its own lesson's notes."""
+    import plan
+    names = set(course.syllabus().get('cast') or [])
+    for _, d in loaded:
+        names |= {vi.nfc(w['w']).replace('_', ' ') for w in d.get('new_words') or [] if w.get('name')}
+    W = plan.Words(D.con, names)
+    taught, earlier, syl_taught = {}, [], {}
+    for f, d in sorted(((f, d) for f, d in loaded if not d.get('fixture') and isinstance(d.get('id'), int)),
+                       key=lambda x: x[1]['id']):
+        n, rel = d['id'], os.path.relpath(f, ROOT)
+        for w in d.get('new_words') or []:
+            if w.get('w') and not w.get('name'):
+                k = vi.key(w['w'])
+                k = W.canon.get(k, k)
+                taught.setdefault(k, n)
+                for syl in k.split():            # a pronunciation note may cite one syllable of a taught word (cảm)
+                    syl_taught.setdefault(syl, n)
+        examples = []
+        for i, note in enumerate(d.get('notes') or []):
+            text = note.get('text') or ''
+            bad = W.late(note_order_text(text), n, {**syl_taught, **taught})
+            if bad:
+                msgs.append(('E', f'{rel}:notes[{i}]: E note uses words not yet taught: {", ".join(dict.fromkeys(bad))} '
+                                  '(teach them first, or mark {preview})'))
+            for run in W.runs(text):
+                ex = ' '.join(run)
+                examples.append(ex)
+                for a, b in kin_mismatch(ex):
+                    msgs.append(('W', f'{rel}:notes[{i}]: W person terms {a} and {b} in "{ex}" are not a pair'))
+        for j, w in enumerate(d.get('new_words') or []):
+            if w.get('name'):
+                continue
+            bad = W.late(note_order_text(w.get('en') or ''), n, taught)
+            if bad:
+                msgs.append(('E', f'{rel}:new_words[{j}]: E gloss of {w.get("w")} uses words not yet taught: '
+                                  f'{", ".join(dict.fromkeys(bad))} (mark {{preview}})'))
+        for kind, items in (d.get('exercises') or {}).items():
+            for j, it in enumerate(items or []):
+                text = (it.get('vi') or '').replace('___', str(it.get('answer', '')).replace(' ', '_'))
+                src = next((f'lesson {ln_id} line {ln}' for ln_id, ln, t in earlier if copied(text, t) == 'copy'), None)
+                if not src:
+                    src = next((f'a note example of this lesson ("{ex}")' for ex in examples
+                                if len(norm_tokens(ex)) >= 3 and copied(text, ex) == 'copy'), None)
+                if src:
+                    msgs.append(('E', f'{rel}:exercises.{kind}[{j}]: E exercise sentence taken from {src}: write a '
+                                      'new one'))
+        earlier += [(n, ln.get('n'), ln.get('vi') or '') for ln in d.get('dialogue') or []]
+
+
 def lint_lesson0(keys, tags, all_tags, names, msgs):
     """course/lesson0.yaml (tools/lesson0.py): its format, no overclaimed sound, every [[…]] span's words as a lesson
     line's, and the chữ Hán of its bridge section as a bridge note's (the same word in Chinese, all four readings)."""
@@ -490,6 +591,9 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
 
     def check_line(where, text):
         check_words(m, where, text, keys, tags, all_tags, names | lesson_names, used, real)
+        for a, b in kin_mismatch(text):
+            m('W', where, f'person terms {a} and {b} in one sentence are not a pair (anh–em, chị–em, bác–cháu, '
+                          f'ông/bà/chú/cô–cháu; tôi with any): who is speaking to whom?')
         # a course word of several syllables written as separate words (cảm ơn for cảm_ơn): usually a missing
         # underscore; a warning, since the free sequence can be meant (Tôi không có gì "I have nothing")
         ks = [t[2] for t in vi.words(text) if t[0] == 'w']
@@ -622,6 +726,7 @@ def main():
         lint(f, d, keys, tags, all_tags, names, msgs, spellings)
     plan_checks(loaded, msgs)
     taught_order(loaded, msgs)
+    notes_order_and_copies(loaded, msgs)
     lint_lesson0(keys, tags, all_tags, names, msgs)
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded

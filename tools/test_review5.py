@@ -41,5 +41,35 @@ ok(any('lacks U+1AB0' in x for x in p), 'a mark the font lacks is an error')
 p, _ = appfont.font_problems(['µ̍'], patched)
 ok(any('no mark positioning' in x for x in p), 'a mark with no positioning on its letter is an error')
 
+# 1. person terms in pairs
+import lint  # noqa: E402
+ok(lint.kin_mismatch('Anh rất vui được gặp chị.') == [('anh', 'chị')], 'lint: "Anh … gặp chị" is not a pair')
+ok(not lint.kin_mismatch('Em rất vui được gặp chị ạ.') and not lint.kin_mismatch('Cháu chào bác ạ!')
+   and not lint.kin_mismatch('Tôi rất vui được gặp chị Lan.') and not lint.kin_mismatch('Chị ơi! Cho em hai cốc trà.'),
+   'lint: em–chị, cháu–bác, tôi with any are pairs')
+ok(not lint.kin_mismatch('Ông và bà ở Hà_Nội.') and not lint.kin_mismatch('Mẹ chị đây!')
+   and not lint.kin_mismatch('Anh ấy là chồng chị.') and not lint.kin_mismatch('Bác này là bố chị à?'),
+   'lint: ông và bà, mẹ chị, anh ấy, bác này are third persons, not counted')
+
+# 14, 15. copies from earlier lessons and from note examples; Vietnamese in notes and glosses taught first
+lint.D = lint.DB_(lint.DB)
+L1 = {'id': 1, 'dialogue': [{'n': 1, 'vi': 'Cháu chào bác ạ!'}],
+      'notes': [{'ref': 1, 'text': 'Before a noun: Thảo không phải là người Pháp "Thảo is not French". {dạ} is Southern.'}],
+      'new_words': [{'w': 'cháu', 'en': 'grandchild'}, {'w': 'chào', 'en': 'hello'}, {'w': 'bác', 'en': 'uncle'},
+                    {'w': 'ạ', 'en': '(polite)'}],
+      'exercises': {'translate': [{'vi': 'Thảo không phải là người Pháp.', 'en': 'x'}]}}
+L2 = {'id': 2, 'dialogue': [{'n': 1, 'vi': 'Chào em.'}],
+      'notes': [{'ref': 1, 'text': 'The South says mắc for "expensive"; ơi calls (Mandarin nán); the letter o.'}],
+      'new_words': [{'w': 'ấy', 'en': 'that (cô ấy she)'}],
+      'exercises': {'fill': [{'vi': 'Cháu ___ bác ạ!', 'answer': 'chào', 'en': 'x'}]}}
+msgs = []
+lint.notes_order_and_copies([('/x/01.yaml', L1), ('/x/02.yaml', L2)], msgs)
+out = '\n'.join(m for _, m in msgs)
+ok('exercise sentence taken from a note example of this lesson' in out, 'lint: an exercise copying a note example')
+ok('exercise sentence taken from lesson 1 line 1' in out, "lint: an exercise copying an earlier lesson's line")
+ok('mắc' in out and 'ơi' in out and 'dạ' not in out, 'lint: an untaught word in a note (mắc, ơi), a {preview} accepted')
+ok('gloss of ấy uses words not yet taught: cô' in out, 'lint: an untaught word in a new_words gloss (cô ấy)')
+ok('nán' not in out and ' o ' not in out, 'lint: Chinese readings and spelling letters in notes are not words')
+
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

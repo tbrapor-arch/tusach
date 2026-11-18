@@ -13,6 +13,7 @@ import datetime
 import hashlib
 import json
 import os
+import re
 import sys
 import unicodedata
 
@@ -72,6 +73,11 @@ def check_font(texts):
     return n
 
 
+def unbrace(text):
+    """A note or gloss as shown: a {preview} (a word not yet taught, marked for lint) without its braces."""
+    return re.sub(r'\{([^{}]*)\}', r'\1', text)
+
+
 # ---- lessons: every line, exercise and new word through the one word pipeline
 lessons, all_tokens, extra_ids = [], [], []
 for d in raw:
@@ -99,11 +105,12 @@ for d in raw:
     for w in d.get('new_words') or []:
         surf = vi.nfc(w['w']).replace('_', ' ')
         cid = cards.name_card(surf) if w.get('name') else cards.lookup(vi.key(surf), w.get('tag'), surf)
-        new_words.append({'w': surf, 'en': w.get('en'), 'id': cid})
+        new_words.append({'w': surf, 'en': unbrace(w.get('en') or ''), 'id': cid})
         extra_ids.append(cid)
     lessons.append({'id': d['id'], 'title': d['title'], 'review': bool(d.get('review')), 'setting': d.get('setting', ''),
                     'fixture': bool(d.get('fixture')), 'native_check': d.get('native_check'),
-                    'lines': lines, 'notes': d.get('notes') or [], 'new_words': new_words, 'exercises': ex})
+                    'lines': lines, 'notes': [dict(n, text=unbrace(n.get('text') or '')) for n in d.get('notes') or []],
+                    'new_words': new_words, 'exercises': ex})
 
 # ---- Lesson 0, "Reading Vietnamese" (course/lesson0.yaml, tools/lesson0.py): its Vietnamese words through the same
 # pipeline, their cards in module `lessons`
