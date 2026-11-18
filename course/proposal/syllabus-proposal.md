@@ -41,12 +41,12 @@ he lands with no Vietnamese and rents a room in chị Lan's family house near th
 | Bin and Na, her children | 8, 5 | children | cháu / chú |
 | Thảo, Lan's younger sister, a student | 24 | 3 years younger | em / anh |
 | anh Tuấn, his manager | 41 | older | anh / em |
-| Mai, a colleague | 27 | same age | bạn / tôi, later mình |
+| Mai, a colleague | 27 | same age | bạn / bạn (and tôi, later mình, for "I") |
 | ông Hùng, the old neighbour | 78 | grandparents' generation | ông / cháu |
 
 **trà or chè.** The previous session's lexicon row (trà~tea, kept): trà is the usual word, Hà Nội included (trà đá,
-trà chanh, trà sữa at every café and stall), and is 20 times more frequent in the corpus (60,092 against 2,989 per
-billion words, chè counting the dessert). The card adds: in the North chè is also tea, at home and for the leaf
+trà chanh, trà sữa at every café and stall), and is more frequent: rank 1,345 against 11,198 in the course ranks
+(wordfreq's raw syllable counts: 75,900 against 12,900 per billion, chè counting the dessert). The card adds: in the North chè is also tea, at home and for the leaf
 (nước chè, chè xanh), and everywhere chè is a sweet dessert soup. Who still says chè at home in Hà Nội is not
 checked (to-check list, item 1).
 
@@ -465,7 +465,7 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 | 44 | An argument with Mai | chứ / mà / đâu (contradiction); à | FF thông cảm | 14 | 10 / 8 / 2 |
 | 45 | Making up | apologies by register | FF thực sự | 14 | 10 / 8 / 2 |
 | 46 | At the post office | formal register: quý khách, xin vui lòng | C8 Hán-Việt on signs | 14 | 10 / 8 / 2 |
-| 47 | Floods in the rainy season | khi … thì; sudden events (bỗng, tự nhiên) | — | 15 | 10 / 8 / 2 |
+| 47 | Floods in the rainy season | khi … thì; vừa mới; sudden events (bỗng, tự nhiên) | — | 15 | 10 / 8 / 2 |
 | 48 | Hà Nội then and now | hồi, ngày xưa: past narration | — | 15 | 10 / 8 / 2 |
 | 49 | **Review 7** | recap 43–48 | — | 15 | — |
 | 50 | Sacha writes an email | written register (second wave starts) | C9 native and Hán-Việt pairs: nhà / gia, nước / quốc | 15 | 10 / 9 / 1 |

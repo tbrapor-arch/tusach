@@ -54,7 +54,7 @@ lessons:
   - {n: 44, en: "An argument with Mai", grammar: "chứ / mà / đâu (contradiction); à", bridge: "FF thông cảm", strand: "mình; cậu / tớ; mày / tao to recognise only", lines: 14, new_words: {native: 12, hv: 8}}
   - {n: 45, en: "Making up", grammar: "apologies by register", bridge: "FF thực sự", lines: 14, new_words: {native: 12, hv: 8}}
   - {n: 46, en: "At the post office", grammar: "formal register: quý khách, xin vui lòng", bridge: "C8 Hán-Việt on signs", lines: 14, new_words: {native: 12, hv: 8}}
-  - {n: 47, en: "Floods in the rainy season", grammar: "khi … thì; sudden events (bỗng, tự nhiên)", lines: 15, new_words: {native: 12, hv: 8}}
+  - {n: 47, en: "Floods in the rainy season", grammar: "khi … thì; vừa mới; sudden events (bỗng, tự nhiên)", lines: 15, new_words: {native: 12, hv: 8}}
   - {n: 48, en: "Hà Nội then and now", grammar: "hồi, ngày xưa: past narration", lines: 15, new_words: {native: 12, hv: 8}}
   - {n: 49, en: "Review 7", review: true, grammar: "recap 43–48", lines: 15, new_words: {native: 0, hv: 0}}
   - {n: 50, en: "Sacha writes an email", grammar: "written register (second wave starts)", bridge: "C9 native and Hán-Việt pairs: nhà / gia, nước / quốc", lines: 15, new_words: {native: 11, hv: 9}}
