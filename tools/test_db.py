@@ -260,5 +260,22 @@ ok('WRITTEN AND CUT BY CLAUDE, NOT CHECKED BY A NATIVE SPEAKER' in head, 'the re
 ok(freq.segmenter({'học sinh'})[1].startswith('tools/vi.py cut()') and freq.segmenter({'học sinh'})[0]('Tôi là học sinh.')
    == ['tôi', 'là', 'học sinh'], 'the frequency counts use the project\'s own cutter, not underthesea')
 
+
+# 18 Nov 2026 (data quality): spelling groups, Taigi coda layers, sense tags
+import build_db  # noqa: E402
+import bridge as bridge_  # noqa: E402
+ok(build_db.iy_key('lý do') == build_db.iy_key('lí do') and build_db.iy_key('quý') == 'quí'
+   and build_db.iy_key('tuy') == 'tuy' and build_db.iy_key('ý') == 'ý', 'i/y spellings of one syllable are one key')
+ok(not bridge_.coda_agrees(bridge_.coda_hv('sách'), bridge_.coda_nan('tsheh'))
+   and not bridge_.coda_agrees(bridge_.coda_hv('viện'), bridge_.coda_nan('īnn'))
+   and bridge_.coda_agrees(bridge_.coda_hv('phẩm'), bridge_.coda_nan('phín'))
+   and bridge_.coda_agrees(bridge_.coda_hv('học'), bridge_.coda_nan('ha̍k')),
+   'Taigi: -h / -nn readings are colloquial where Hán-Việt has a stop / nasal; m/n and p/t agree')
+import cards as cards_  # noqa: E402
+_rows = [{'source': 'w', 'src_id': '1', 'chars': '', 'origin': '', 'pos': 'num', 'english': 'five', 'id': 1},
+         {'source': 'w', 'src_id': '2', 'chars': '', 'origin': '', 'pos': 'noun', 'english': 'year', 'id': 2}]
+ok(cards_.sense_tag(_rows, 'year') is _rows[1] and cards_.sense_tag(_rows, 'num') is _rows[0]
+   and cards_.sense_tag(_rows, 'cat') is None, 'a sense tag names a part of speech or a word of one etymology')
+
 print(f'\n{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

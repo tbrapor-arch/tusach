@@ -1,59 +1,60 @@
 # Word list 1 (lessons 1–14): rows to check
 
-Written by Claude on 18 Nov 2026 from `data/build/vi.db` (built from dcaf84f). Nothing here was fixed by hand: each
-item says what the database gives and what looks wrong. **Not checked by a native speaker.**
+Rewritten by Claude on 18 Nov 2026 after the data-quality work (branch `data-quality`), from `data/build/vi.db` and
+the cards (`tools/wordlist.py` regenerated every database column of `wordlist-1.tsv`; the words did not change).
+Nothing was fixed by hand in the database. **Not checked by a native speaker.**
 
-## Missing from the database (3)
-| Lesson | Word | Problem |
+## Summary
+Of the 26 rows named in the first version, **18 are now resolved by data and code**, 2 by a reviewed judgement of
+Claude's (`course/etymology-review.tsv`), and **6 remain** (below). Of the 69 rows typed `native?`, **31 now have an
+origin from evidence** (20 native, 9 compound, 1 loan, 1 older Chinese loan) and **38 remain unknown**: Wiktionary has
+no etymology for them, and the Vietnamese Wiktionary would not help (tools/eval_viwikt.py).
+English usable on a card (tools/english.py problems): 34 rows unusable before, 5 by the same measure now (lan, mươi,
+đang, mùa, thịt: description or no attested English word); `glosses-proposed.tsv` (56 rows, not in force) proposes
+course English for these and for other rows whose dictionary English is long or ordered for a dictionary, not a lesson.
+
+## Resolved by data (18)
+| Word | Before | Now (database, card) |
 |---|---|---|
-| 1 | Sam | Not a Vietnamese word (the learner's name in the dialogues); declare it with `name: true`. The key `sam` exists only as "horseshoe crab". |
-| 13 | nhắn tin | "to text, send a message": the database has no such word; the list uses nhắn + tin as two words. A native speaker should say whether it is one word (house style would then write nhắn_tin). |
-| 1 | cảm ơn (chữ Hán) | In the database only as "alternative form of cám ơn", no chữ Hán and no English of its own. cảm ơn is the Northern form and the one the course should use. 感恩 is the usual analysis (Claude, not from the database): no bridge row is shown. |
+| cảm_ơn | "alternative form of cám ơn", no chữ Hán | "to thank"; older Chinese loan of 感恩 with its readings (gam2 jan1 / kám-un / gǎn'ēn): Wiktionary's "nativisation of Chinese 感恩" read from the etymology text. "thank you" is proposed as course English. |
+| a_lô | "alternative form of a-lô" | "hello (when answering the telephone)…"; loan from French allô (as a-lô). |
+| bận | verb senses only | "busy" first (English Wiktionary translation table of "busy"). |
+| thế_nào | "inevitably" first | "how; what; in what manner" (a Northern-tagged sense is not dialectal for this course; senses with attested English first). |
+| đồng | "copper; dong (currency…)" | "copper; dong; a currency; a thousand dongs" (long senses shortened). |
+| đường | 唐 shown as the same word | label **doubtful**: Wiktionary's own etymology says "alternatively, possibly"; lint refuses it as a bridge example. đường~sugar (糖) is "same". |
+| xa | 賒 shown as the same word | label **opaque**: "far" is in neither CC-CEDICT's English of 賒 nor a translation table with 賒. |
+| khám | 勘 | label **doubtful**: Wiktionary says "possibly contaminated by khán 看". |
+| phải~must | no tag possible | the sense tag `phải~must` names the verb entry (cards.sense_tag); English "must, have to, should". |
+| đang | 當 "same" | **opaque**: grammaticalised particle, its English is not among 當's senses. |
+| nhưng | 仍 "same", no Taigi | **opaque**: conjunction "but", not 仍's sense. |
+| thích | 適 "same" | **opaque**: "to like" is not among 適's senses. |
+| sách | Taigi literary tsheh | tsheh is now **colloquial only** (its -h does not match sách's -ch): literary column empty, the card says so. |
+| bệnh_viện | Taigi literary pīng-īnn | 院 īnn is colloquial only (-nn against viện's -n): literary column empty, colloquial pēnn-īnn shown as such. |
+| năm, năm~year | needed a tag the database did not define | `năm~year` resolves by sense tag; năm alone is "five". |
+| Lan, Minh | ranked as the common words lan, minh | a name sharing a key with a common word has no rank; the list shows none. |
 
-## English in the database too poor for the card (5): course English needed in `new_words`
-| Lesson | Word | Database English | Suggested |
-|---|---|---|---|
-| 1 | cảm_ơn | alternative form of cám ơn ("thank you") | thank you; to thank |
-| 13 | a_lô | alternative form of a-lô | hello (on the phone). Spelling a lô / a-lô / alô varies: pick one |
-| 11 | bận | verb senses only ("to get occupied doing something") | busy |
-| 9 | thế_nào | first sense "inevitably, somehow or other" | how?; what … like? |
-| 4 | đồng | "copper; dong (currency of Vietnam…)" under 銅 | dong (the currency) |
+## Resolved by Claude's reviewed judgement (2), `course/etymology-review.tsv`
+- **không 空**: opaque (the negator is a grammaticalisation). The data alone says "same": the card's first entry by
+  attested English is the number "zero", whose sense matches 空.
+- **phải 被**: older loan, opaque (no sense of 被 a reader of Chinese would see in "must; right").
 
-## Doubtful Sino-Vietnamese analyses (6): the card would show these characters
-| Lesson | Word | Database | Doubt |
-|---|---|---|---|
-| 8 | đường "road" | 唐 tong4 / tông / táng | An old etymology; no Chinese reader sees "road" in 唐. Keep off bridge notes; perhaps hide the characters for this sense. |
-| 8 | xa "far" | 賒 se1 / sia / shē ("buy on credit") | Looks wrong or at least opaque. |
-| 12 | khám "to examine (a patient)" | 勘 ham3 / kham / kān | Plausible (勘 "to survey") but Claude cannot confirm. |
-| 10 | bát "bowl" | 缽 but3 / puat / bō | Plausible; Claude cannot confirm. |
-| 8, 12 | phải "right; must" | older loan of 被 (etymon) | Surprising; leave out of bridge notes. |
-| 1, 6, 9, 11 | không 空, đang 當, nhưng 仍, thích 適 | sino, all three readings (nhưng: no Taigi) | Correct as history but grammaticalised or opaque: not used as bridge examples. |
+## Still to check (6)
+| Word | Why it remains |
+|---|---|
+| Sam | Not a Vietnamese word: declare it with `name: true` in the lesson (decision D9). |
+| nhắn (tin) | nhắn tin "to text" is not in the database; whether it is one word (nhắn_tin) needs a native speaker. |
+| a_lô (spelling) | a lô / a-lô / alô: the database pools no spelling here (a lô is an "alternative form"); a native speaker should choose. |
+| bát | 缽 stays "same": no evidence of doubt in the data, and Claude cannot confirm it either. |
+| vâng, dạ | Ranks 3650 and 1820: the written, translated corpus underrates spoken politeness words (corpus bias, not corrected). |
+| phở | Rank 12422 (corpus bias); in the list for the topic. Its older-loan etymon 牛肉粉 is marked doubtful (Wiktionary: "folk etymology"). |
 
-## Taigi "literary" column showing a colloquial reading (2 in this list)
-The MOE marks no literary reading for some characters, so the database takes the unmarked one, which is the
-colloquial reading here. Claude's knowledge, to confirm with the MOE dictionary:
-| Lesson | Word | Database Taigi | Literary reading expected |
-|---|---|---|---|
-| 11 | sách 冊 | tsheh | tshik |
-| 12 | bệnh_viện 病院 | pīng-īnn | pīng-uān (院 uān) |
+## Types still `unknown` (38)
+tên, vâng, ạ, rất, nào, đâu, nói, đây, nhé, mươi, rẻ, của, phút, rưỡi, hôm_nay, ngày_mai, chiều, làm, đã, rẽ, thẳng,
+lắm, hơi, hôm_qua, món, chưa, rồi, gọi, rảnh, hay, mệt, sốt, nghỉ, nhắn, chờ, lát, dạ, vừa. Wiktionary gives these no
+etymology (or one that names no source language); compounds such as hôm_nay stay unknown when one syllable is. Claude
+believes most are native; that is not evidence and is not recorded.
 
-## Ranks to read with care (4)
-| Word | Rank | Why |
-|---|---|---|
-| vâng | 3707 | Everyday spoken "yes"; the written, translated corpus underrates it. Same for dạ (1873). |
-| Lan, Minh, Hoa | 1687, 769, 224 | The rank is the key's (lan "orchid", minh 明, hoa "flower"), not the name's. |
-| phở | 12581 | Corpus bias; it is in the list for the topic. |
-| không, các… | 9, 6 | Fine; listed only because their analysis is opaque (above). |
-
-## Types: 69 rows marked `native?`
-The database gives no origin for them (Wiktionary has no `inh` etymology). Claude believes most are native; a few
-may be old Chinese loans not recorded. Not checked.
-
-## Homographs needing a tag (2)
-năm (five, L4) / năm~year (L5) and phải (right, L8) / phải~must (L12): same spelling, different sense in the course.
-For năm the two are different words; for phải the database has one etymology with two senses (see "tooling needed" in
-the proposal: a tag that the database does not define).
-
-Total: 26 rows of the 195 are named above (Sam, nhắn, cảm_ơn, a_lô, bận, thế_nào, đồng, đường, xa, khám, bát,
-phải, phải~must, không, đang, nhưng, thích, sách, bệnh_viện, vâng, dạ, Lan, Minh, phở, năm, năm~year); the 69
-`native?` types are counted apart.
+## Sense tags the lessons should write
+The regenerated list names a sense tag in the note where the card's main sense is not the one drafted: `từ~from`,
+`trà~tea`, `sẽ~marks` (a poor tag: the course should write sẽ~future once glosses are in force). Homographs: `đường~road` / `đường~sugar`,
+`năm~year`, `phải~must`.

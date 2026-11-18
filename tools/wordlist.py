@@ -34,10 +34,18 @@ def short(en, n=90):
     return en if len(en) <= n else en[:n].rsplit(' ', 1)[0] + ' …'
 
 
+STALE = re.compile(r'[Dd]atabase|to-check|[Cc]ard shows|[Tt]he Taigi column')
+
+
 def human_note(note):
+    """The part of a note a person wrote: without the [db: …] part and without the sentences that described the
+    database as it was when the note was drafted ("Database has bận as a verb only …", "see to-check"): those facts
+    are now in [db: …]."""
     note = re.sub(r'\s*\[db:[^\]]*\]', '', note)
     note = re.sub(r'\s*Taigi colloquial/everyday: [^.]*\.', '', note)
-    return re.sub(r'^\(name\)\s*', '', note).strip()
+    note = re.sub(r'^\(name\)\s*', '', note).strip()
+    parts = re.split(r'(?<=[.;])\s+(?=[A-Z"(])', note)
+    return ' '.join(x for x in parts if not STALE.search(x)).strip()
 
 
 def sense_of(k, english):
@@ -53,7 +61,7 @@ def sense_of(k, english):
         return None
     want = next((g for g in groups if first in (cards._group_en(g) or '').lower()
                  or any(first in (x['english'] or '').lower() for x in g)), None)
-    if not want:
+    if not want or want is groups[0]:
         return None
     for t in [w for w in re.findall(r'[a-z]+', first) if len(w) >= 3] + sorted({x['pos'] for x in want}):
         hit = cards.sense_tag(rows, t)

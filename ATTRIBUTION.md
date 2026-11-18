@@ -9,6 +9,7 @@ source is added here only after its licence is checked on its own page; non-comm
 | Dataset | Rights holder / maintainer | Licence | Version pinned | Commercial use | How it is used |
 |---|---|---|---|---|---|
 | English Wiktionary, Vietnamese entries, via [kaikki.org](https://kaikki.org/dictionary/Vietnamese/) (wiktextract) | Wiktionary contributors; extraction by Tatu Ylonen | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and [GFDL 1.1+](https://www.gnu.org/licenses/fdl-1.3.html) (dual); used under CC BY-SA 4.0 | our own snapshot, release `data-2026-11-17` of this repository (`.github/workflows/snapshot.yml`, run 44179962577), `kaikki.org-dictionary-Vietnamese.jsonl`, SHA-256 `186cd0a6…` in `data/fetch.sh` | yes | Words, English glosses, Sino-Vietnamese words and their characters (`vi-etym-sino`), Hán-Việt and Nôm readings of characters (tags `han-viet-reading`, `nom-reading`), example sentences. |
+| English Wiktionary, the Vietnamese (and, of the same tables, Chinese) translations of English entries, filtered from kaikki.org's raw extraction ([raw data](https://kaikki.org/dictionary/rawdata.html)) by `.github/snapshot-translations.py` | Wiktionary contributors; extraction by Tatu Ylonen | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and GFDL (same as the row above: the same wiki) | snapshot release `data-2026-11-18.2`, `en-translations.tsv.gz`, SHA-256 in `data/fetch.sh` (NOTES.md names the raw file and its SHA-256) | yes | Card English: which sense of a word is the main one, and its English when its own senses lack it (bận "busy"); the Chinese rows: the sense check of Hán-Việt analyses |
 | Thiều Chửu, *Hán Việt tự điển*, digitised text via [catusf/tudien](https://github.com/catusf/tudien) (`dict/TudienThienChuu.tab`) | Thiều Chửu (Nguyễn Hữu Kha, 1902–1954); digitisation: catusf | Public domain in Vietnam (author died 1954; life + 50 years). Repository marked CC0 1.0 | commit `a7dd918`, SHA-256 `62668619…` | yes | Hán-Việt readings of characters: cross-check of Wiktionary's, and fallback for characters it lacks. Readings only, no definitions. |
 | Unihan `kVietnamese`, `kMandarin`, `kSemanticVariant`, `kZVariant` (Unicode 18.0.0), via [unicode-org/unicodetools](https://github.com/unicode-org/unicodetools) | Unicode, Inc. | [Unicode License v3](https://www.unicode.org/license.txt) | commit `ccc86e5`, each file by SHA-256 (`data/fetch.sh`) | yes | kVietnamese: last resort for a character no Hán-Việt source reads, labelled "unchecked, Unihan" (it mixes Hán-Việt and Nôm readings). kMandarin: first key of the pinyin order. kSemanticVariant/kZVariant: a word written with a variant character (爲, 祕, 墻) finds its Chinese readings under the other form; the card says so. |
 | rime-cantonese ([rime/rime-cantonese](https://github.com/rime/rime-cantonese)) | CanCLID (粵語計算語言學基礎建設組) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (files used); `jyut6ping3.maps` is ODbL 1.0 and is not read | commit `259f0e48` (same as the Cantonese app) | yes | Jyutping of characters (with rime's share of each reading) and of words. |
@@ -36,6 +37,13 @@ with their ids.
 Romanisations: Vietnamese quốc ngữ; Cantonese Jyutping (LSHK); Taigi Tâi-lô (Ministry of Education); Mandarin Hanyu
 Pinyin.
 
+Evaluated, not used: the **Vietnamese Wiktionary** (vi.wiktionary.org) as kaikki extracts it (`vi-extract.jsonl.gz`,
+snapshot `data-2026-11-18.2`, fetched only with `TUSACH_FETCH_EVAL=1`, read only by `tools/eval_viwikt.py`). Its licence
+could not be read on a primary page on 18 Nov 2026 (vi.wiktionary.org and meta.wikimedia.org were not reachable; kaikki's
+pages state no licence; the Wikimedia dumps' legal page, GFDL + CC BY-SA 4.0 for all wikis, was read only on a mirror,
+wikimedia.mirror.clarkson.edu/legal.html): **UNVERIFIED**, so nothing of it is in a database. It would add little anyway:
+of the 159 top-1000 words with no known origin it would class 4 (eval_viwikt.py).
+
 Not used, on purpose: the Free Vietnamese Dictionary Project and the Open Vietnamese Dictionary Project (GPL-2.0, not
 compatible with CC BY-SA content); the Piper `vivos` voice (CC BY-NC-SA data) and `25hours_single` (data licence
 unknown); Tatoeba audio (licence per contributor).
@@ -47,7 +55,7 @@ unknown); Tatoeba audio (licence per contributor).
 2. **Wiktionary**: CC BY-SA 4.0 + GFDL read on Wiktionary:Copyrights through a mirror host; kaikki.org states "the
    same licenses as Wiktionary", without a version.
 3. **kaikki pin**: the per-language file is marked deprecated, with no dated archive: pinned through our own snapshot
-   release `data-2026-11-17` (downloaded from kaikki.org by the snapshot workflow; the release's NOTES.md names the URL).
+   release `data-2026-11-18.2` (same Vietnamese file as `data-2026-11-17`; downloaded from kaikki.org by the snapshot workflow; the release's NOTES.md names the URL).
 4. **Unihan kVietnamese**: provisional field, no Hán-Việt/Nôm distinction (UAX #38 rev. 41, read on a staging host).
 5. **Tatoeba**: the per-language export URLs worked (snapshot of 17 Nov 2026); the per-sentence CC0 list is not read (all sentences are treated
    as CC BY 2.0 FR, which is safe). The Helsinki-NLP copy has the licence conflict stated in the table.
