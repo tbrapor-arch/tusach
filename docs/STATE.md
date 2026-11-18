@@ -11,10 +11,11 @@
 <!-- /state -->
 
 ## Repository (18 Nov 2026)
-Branch `data-quality` (pushed; not merged): from a clean clone with nothing missing, `make data db db-nc lint test app
-check coverage cutter` and `tools/smoke.py` (with TUSACH_PRIVATE) pass (data 34 s, each database ~80 s, test 165 s).
-Next steps: the owner approves the syllabus proposal and word list 2 (course/proposal/); a native speaker reads
-wordlist-2-to-check.md and the cutter sets → lessons 1–7.
+Branch `data-quality` (pushed; not merged), review 3 fixed (HISTORY). From a clean clone with nothing missing,
+`make data db db-nc lint test app check coverage cutter` and `tools/smoke.py` (with TUSACH_PRIVATE) pass; `make lint`
+also checks the plan, the draft word list and the proposal (tools/plan.py, tools/bridge_rules.py). Next steps: the
+owner approves the syllabus proposal and word list 2 (course/proposal/); a native speaker reads
+wordlist-2-to-check.md (18 points), the lexicon's examples and the cutter sets → lessons 1–7.
 
 ## Data sources (18 Nov 2026)
 `data/fetch.sh` pins every source by content (ATTRIBUTION.md). kaikki (Wiktionary), Tatoeba and the English
@@ -23,27 +24,26 @@ Wiktionary's translation tables (`en-translations.tsv.gz`, derived on the runner
 snapshotted (the old release still carries it, licence unverified: the owner may delete the asset). Unihan adds kSemanticVariant/kZVariant (same commit).
 
 ## Database
-Wiktionary: 35,526 entries (29,349 keys; 3,025 names), 10,793 keys with chữ Hán (10,674 matching their syllables),
-905 older borrowings read the non-Hán-Việt way (origin nonhv). Hán-Việt readings for 10,618 characters (2,099 tagged by
-Wiktionary). Suspects in `make lint` (verify_words): 259 (148 analyses whose readings differ, 112 of another length, 20
-characters with no reading…). Tatoeba: 22,181 sentence pairs used; 45,475 example candidates on 6,093 words (473
-flagged), the card chooses by sense.
+Wiktionary: 35,526 entries (29,349 keys; 3,025 names), 10,793 keys with chữ Hán, 905 older borrowings read the
+non-Hán-Việt way (origin nonhv) and 38 Sino-Vietnamese analyses read with a Nôm reading, now older loans. Hán-Việt readings for 10,618 characters (2,099 tagged by
+Wiktionary). Suspects in `make lint` (verify_words): 248. Tatoeba: 22,181 sentence pairs used; 45,475 example candidates on 6,093 words (flagged:
+unsuitable, Southern, misaligned, unknown word…), the card chooses by sense; a lexicon example wins.
 
 ## Cards (branch data-quality, 18 Nov 2026)
-Three layers (REFERENCE): the course lexicon `course/lexicon.tsv`, 522 rows (doubt 14, likely 88, sure 420; 4
-overrides; 0 open conflicts), Claude's, NOT native-checked; the dictionary for other words; the golden check (538
-cards) and the real-card compare. Top 1,000 cards: English not usable 33 (was 49 at fa4d343, 225 at dcaf84f); labels
-same 386, gram 7, hv-vn 13, doubtful 12, opaque 20, older-loan 111, loan 9, native 200, compound 111, false-friend 8,
-unknown 123. Spelling groups: orthographic only. Top 300 read against fa4d343: 118 better, 172 neutral, 10
-unchanged, 0 worse; against dcaf84f: 100 better, 193 neutral, 7 unchanged, 0 worse (Claude's reading).
+Three layers (REFERENCE): the course lexicon `course/lexicon.tsv` (Claude's, NOT native-checked; English, sense,
+origin, characters, notes, and an example for every word of word list 2 and 44 frequent cards), the dictionary for
+other words, the golden snapshot of everything a card shows (550 cards) and the real-card compare. Counts: the
+generated block above. Against 16c8b24 (Claude's reading of the word-list and top-300 cards): examples 175 better,
+84 neutral, 0 worse; readings better on 行 數 適 錢 轉 現 屬, worse on 句 câu, 省 tỉnh, 襖 áo (irregular).
 
 ## Bridge and labels
-Join on characters in `tools/bridge.py`: Taigi literary reading (literary MOE readings only when a character has one)
-with the colloquial word reading apart (167 characters colloquial by the coda rule, 149 colloquial only); Hán-Việt
-readings by use, Northern first; Unihan variants (195 rows). 12,347 spellings: 3 readings 11,239, 2 1,024, 1 60, 0 24.
-False friends: the lexicon's false_friend column (14 rows: bác sĩ, thời tiết, tuần, bản đồ, trường, quận, đầu tiên…).
-Sound rules: `tools/bridge_rules.py` measures them on 994 Hán-Việt syllables of the top 3,000 cards (tones from
-Cantonese 801 / 850, from Taigi 856 / 915; initials by old class, each with its direction). Drills: TODO(bridge).
+Join on characters in `tools/bridge.py`: Taigi literary reading with the colloquial word reading apart (coda rule
+and 麻 rhyme; "layer not marked by the MOE" where no rule decides); Hán-Việt readings by use, Northern first, never a
+Nôm-only reading (38 Nôm-read analyses are older loans); a card orders a polyphonic character's readings by
+measured fit with its syllable and the source's preference (tools/soundfit.py: 93 of the first 100 polyphonic
+one-character cards right in both languages, Claude's judgement). False friends: the lexicon's false_friend column.
+Sound rules: `tools/bridge_rules.py` (main / strict / lenient rates; numbers above and in the proposal). Drills:
+TODO(bridge).
 
 ## Word frequency and coverage
 Ranks: `tools/freq.py` (vi.cut() over Tatoeba + Wiktionary examples, wordfreq prior less English leakage; names
@@ -57,12 +57,10 @@ sentences, `tests/cutter/heldout.tsv`) vi.cut() 0.953, underthesea 0.928. Both s
 native speaker**.
 
 ## Lessons
-None. `course/syllabus.yaml`: the 100-lesson plan (lines, new words native / hv, grammar, bridge, strand); syllabus
-and word list NOT approved (both null). Proposal: `course/proposal/syllabus-proposal.md` (second version, 18 Nov
-2026: the owner's twelve decisions, Sacha and the cast, measured sound rules, Lesson 0 outline, 100 lessons);
-`wordlist-2.tsv` (L1–13, 194 words + 3 names; Hán-Việt 37, older loans 24) and its to-check list. Next: the
-owner's approval (and, if possible, a native reading of the to-check list), then lessons 1–7. The build uses
-`tools/fixtures/lessons/00.yaml`.
+None. `course/syllabus.yaml`: the one plan source (100 lessons, cast, the Northern particle strand, the draft word
+list); syllabus and word list NOT approved (both null). Proposal: `course/proposal/syllabus-proposal.md` (second
+version, revised after review 3; its rule tables and lesson tables generated); `wordlist-2.tsv` (counts above) and
+its to-check list. The build uses `tools/fixtures/lessons/00.yaml`.
 
 ## Audio
 No source of word recordings (TODO(audio)); cards say "No recording yet". The native-speaker recording page
