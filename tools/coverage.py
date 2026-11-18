@@ -60,7 +60,7 @@ by construction); wordfreq leans to Wikipedia/web text (administrative words, na
 
 
 import english  # noqa: E402
-LABELS = ('same', 'hv-vn', 'doubtful', 'opaque', 'older-loan', 'loan', 'native', 'compound', 'false-friend', 'name',
+LABELS = ('same', 'gram', 'hv-vn', 'doubtful', 'opaque', 'older-loan', 'loan', 'native', 'compound', 'false-friend', 'name',
           'unknown')
 MISSING = {}
 TR = sqlite3.connect(':memory:')        # the translation table: this build's, or (an older build) read from data/raw
@@ -166,6 +166,17 @@ for r in lacking[:LIST]:
 unk = [r[0] for r in rows[:1000] if not r[6].get('label') and not (r[4] and not r[6].get('label'))]
 print(f'\nUnknown origin in the top 1000 (no etymology in the data; names left out): {len(unk)}')
 print('  ' + ', '.join(unk))
+
+# Taigi layers (review 2, finding 8): the coda rule (tools/build_db.py taigi_layers) cannot see a colloquial reading
+# whose coda class is the literary one's (條 tiâu beside liâu, 老). The characters where the MOE itself marks both
+# layers need no rule; the blind spot is the characters with 2+ readings, none marked, all of one coda class.
+both = [c for (c,) in con.execute("SELECT DISTINCT chars FROM chinese WHERE lang='nan' AND level='char' AND "
+                                  "note = 'literary' ORDER BY chars")]
+blind = [c for (c,) in con.execute("SELECT chars FROM chinese WHERE lang='nan' AND level='char' AND note = 'unmarked' "
+                                   "GROUP BY chars HAVING count(DISTINCT reading) > 1 ORDER BY chars")]
+print(f'\nTaigi layers: the MOE marks the literary reading (文讀) of {len(both)} characters: those need no rule (the '
+      f'build loads only their literary readings); blind spot of the coda rule, characters with 2+ unmarked readings '
+      f'that all agree with Hán-Việt (one may be colloquial, as 條 tiâu beside liâu): {len(blind)}: {"".join(blind)}')
 
 # characters of the frequent Hán-Việt words that no source reads in Hán-Việt (shown "—" on the card, never "?")
 sys.path.insert(0, HERE)
