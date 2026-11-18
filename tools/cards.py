@@ -309,9 +309,14 @@ def lookup(k, tag=None, surface=None):
             card['rank'] = rank
         # a whole sentence first (Tatoeba, chosen by build_db attach_examples), then Wiktionary's own examples, short
         # ones first; one over 200 characters is not shown (a usage note of Wiktionary's, 32 lines on chị)
-        ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE entry_id IN ({','.join('?' * len(main))}) "
+        # Tatoeba sentences are attached to the word (build_db attach_examples: its first entry), not to a sense: any
+        # entry of the key gives them; Wiktionary's own examples only from the etymology shown
+        ids = [r['id'] for r in main]
+        allids = [r['id'] for r in rows]
+        ex = con.execute(f"SELECT vi, en, source, ref FROM example WHERE ((source = 'tatoeba' AND entry_id IN "
+                         f"({','.join('?' * len(allids))})) OR entry_id IN ({','.join('?' * len(ids))})) "
                          "AND length(vi) <= 200 ORDER BY source != 'tatoeba', length(vi), id LIMIT 1",
-                         [r['id'] for r in main]).fetchone()
+                         allids + ids).fetchone()
         if ex:
             card['ex'] = {'vi': ex[0], 'en': ex[1]}
             if ex[2] != 'fixture':        # attribution: Tatoeba names the sentence and its author
