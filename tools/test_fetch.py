@@ -128,7 +128,9 @@ with tempfile.TemporaryDirectory() as tmp:
 
     # 7. the publication gate: build_app refuses such a database unless allowed; site.py refuses its page
     out_dir = os.path.join(tmp, 'dist')
-    benv = dict(env, TUSACH_DB=db, TUSACH_OUT=out_dir, TUSACH_STORE=os.path.join(tmp, 'cards.json'))
+    # the fixture database has only the fixture's words: build the fixture lesson, not the course (lessons, Lesson 0)
+    benv = dict(env, TUSACH_DB=db, TUSACH_OUT=out_dir, TUSACH_STORE=os.path.join(tmp, 'cards.json'),
+                TUSACH_COURSE=os.path.join(ROOT, 'tools/fixtures/lessons'), TUSACH_LESSON0=os.path.join(tmp, 'none.yaml'))
     r = subprocess.run([sys.executable, '-I', 'tools/build_app.py'], cwd=ROOT, env=benv, capture_output=True, text=True)
     ok(r.returncode != 0 and 'REFUSED' in r.stdout + r.stderr, 'build_app refuses a database with meta.missing')
     r = subprocess.run([sys.executable, '-I', 'tools/build_app.py'], cwd=ROOT, env=dict(benv, TUSACH_ALLOW_MISSING=allow),
