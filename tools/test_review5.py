@@ -72,6 +72,17 @@ ok('mắc' in out and 'ơi' in out and 'dạ' not in out, 'lint: an untaught wor
 ok('gloss of ấy uses words not yet taught: cô' in out, 'lint: an untaught word in a new_words gloss (cô ấy)')
 ok('nán' not in out and ' o ' not in out, 'lint: Chinese readings and spelling letters in notes are not words')
 
+# 5. compare reads a card's sources and blocks on the test fixture in a real card
+import compare  # noqa: E402
+import contextlib  # noqa: E402
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    nb = compare.diff_cards({'học': {'en': 'to study', 'src': ['fixture', 'wiktionary']}},
+                            {'học': {'en': 'to study', 'src': ['wiktionary']}}, set(), {})
+    nb2 = compare.diff_cards({}, {'tôi': {'en': 'I', 'src': ['fixture', 'wiktionary']}}, set(), {})
+ok(nb == 0 and 'sources changed: 1' in buf.getvalue() and nb2 == 1 and 'FIXTURE IN A REAL CARD' in buf.getvalue(),
+   'compare lists a changed card source and blocks on a fixture source in a real card')
+
 # 4. Lesson 0: a sound table's example word shows the sound of its row
 import lesson0  # noqa: E402
 bad0 = {'sections': [{'id': 'consonants', 'body': [{'table': {'head': ['Letter', 'Example'], 'rows': [

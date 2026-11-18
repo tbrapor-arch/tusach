@@ -13,7 +13,7 @@ import sqlite3
 import sys
 
 FIELDS = ('en', 'en_src', 'chars', 'label', 'origin', 'doubt', 'ex', 'other', 'yue', 'nan', 'nan_coll', 'cmn', 'rank',
-          'no_main', 'ff', 'per_char', 'etymon')
+          'no_main', 'ff', 'per_char', 'etymon', 'src', 'fixture')
 
 
 def main():

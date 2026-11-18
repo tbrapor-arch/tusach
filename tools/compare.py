@@ -33,7 +33,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import english  # noqa: E402
 
-FIELDS = ('en', 'en_src', 'chars', 'hv', 'yue', 'nan', 'nan_coll', 'cmn', 'via', 'label', 'ex', 'other')
+FIELDS = ('en', 'en_src', 'chars', 'hv', 'yue', 'nan', 'nan_coll', 'cmn', 'via', 'label', 'ex', 'other', 'src')
 
 
 def page_data(page):
@@ -197,7 +197,8 @@ def lead(c):
 
 
 def diff_cards(a, b, course, ranks, limit=20, out_path=None):
-    """Prints the real-card differences; returns the number of blocking ones (a course word that lost its card)."""
+    """Prints the real-card differences; returns the number of blocking ones (a course word that lost its card, a
+    card with something from the test fixture)."""
     classes = {}
     rows = []
 
@@ -219,13 +220,19 @@ def diff_cards(a, b, course, ranks, limit=20, out_path=None):
         elif x.get('en') != y.get('en'):
             add('English (later items) changed', w, json.dumps(x.get('en'), ensure_ascii=False),
                 json.dumps(y.get('en'), ensure_ascii=False))
+        if 'src' in x and 'src' in y and sorted(x['src']) != sorted(y['src']):    # the card's sources: review 5
+            add('sources changed', w, ', '.join(sorted(x.get('src') or [])) or '-', ', '.join(sorted(y.get('src') or [])) or '-')
         for f in ('label', 'chars', 'origin', 'yue', 'nan', 'nan_coll', 'cmn'):    # origin, readings: review 4
             if (x.get(f) or '') != (y.get(f) or ''):
                 add(f'{f} changed', w, x.get(f) or '-', y.get(f) or '-')
         ex, ey = (x.get('ex') or {}).get('vi', ''), (y.get('ex') or {}).get('vi', '')
         if ex != ey:
             add('example lost' if not ey else 'example gained' if not ex else 'example changed', w, ex or '-', ey or '-')
-    blocking = len(classes.get('CARD LOST', []))
+    for w in sorted(b):                     # the test fixture never reaches a real card (review 5, finding 5)
+        y = b[w] or {}
+        if 'fixture' in (y.get('src') or []) or y.get('fixture') or y.get('en_src') == 'dict:fixture':
+            add('FIXTURE IN A REAL CARD', w, '', ', '.join(y.get('src') or []))
+    blocking = len(classes.get('CARD LOST', [])) + len(classes.get('FIXTURE IN A REAL CARD', []))
     print(f'== real cards: {len(a)} words before, {len(b)} after ({len(course)} course words)')
     for cls in sorted(classes, key=lambda c: (not c.isupper(), c)):
         print(f'== {cls}: {len(classes[cls])}')
