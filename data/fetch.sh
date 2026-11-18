@@ -11,16 +11,26 @@ mkdir -p "$RAW"
 
 # --- Our own snapshots (.github/workflows/snapshot.yml) of the sources whose publisher keeps no dated copy: release
 # assets of tbrapor-arch/tusach, tag data-YYYY-MM-DD, pinned by SHA-256 here (tools/pin_snapshot.py TAG writes the
-# lines). Never fetched from the moving upstream URL. Pinned: release data-2026-11-17 (its NOTES.md names each
+# lines). Never fetched from the moving upstream URL. Pinned: release data-2026-11-18 (its NOTES.md names each
 # upstream URL and the workflow run that downloaded it).
 # Wiktionary via kaikki.org (CC BY-SA 4.0 / GFDL): words, English, Sino-Vietnamese etymologies (vi-etym-sino), Hán-Việt
 # and Nôm readings of characters. Upstream: https://kaikki.org/dictionary/Vietnamese/kaikki.org-dictionary-Vietnamese.jsonl
-snap wiktionary kaikki/kaikki.org-dictionary-Vietnamese.jsonl kaikki.org-dictionary-Vietnamese.jsonl data-2026-11-17 186cd0a62d876dada70c9761bc05e598c8cf7b9a48e0aa518bab6c649e28d945
+snap wiktionary kaikki/kaikki.org-dictionary-Vietnamese.jsonl kaikki.org-dictionary-Vietnamese.jsonl data-2026-11-18 186cd0a62d876dada70c9761bc05e598c8cf7b9a48e0aa518bab6c649e28d945
 # Tatoeba (CC BY 2.0 FR; some sentences CC0): example sentences with id and author.
 # Upstream: https://downloads.tatoeba.org/exports/per_language/{vie,eng}/…
-snap tatoeba tatoeba/vie_sentences_detailed.tsv.bz2 vie_sentences_detailed.tsv.bz2 data-2026-11-17 f15928ff0f8ea2ae2ccf6ccd7899fde1a8da3089334e4c552a9dc69fd92ea319
-snap tatoeba tatoeba/eng_sentences_detailed.tsv.bz2 eng_sentences_detailed.tsv.bz2 data-2026-11-17 f3a08a0af8deef3f50777cf0ccd7666f39e619f70fadae4327b7c29119468313
-snap tatoeba tatoeba/vie-eng_links.tsv.bz2 vie-eng_links.tsv.bz2 data-2026-11-17 2ce34380b020054111724f500e5036955afabd99313c9317df14c361f03a4c60
+snap tatoeba tatoeba/vie_sentences_detailed.tsv.bz2 vie_sentences_detailed.tsv.bz2 data-2026-11-18 f15928ff0f8ea2ae2ccf6ccd7899fde1a8da3089334e4c552a9dc69fd92ea319
+snap tatoeba tatoeba/eng_sentences_detailed.tsv.bz2 eng_sentences_detailed.tsv.bz2 data-2026-11-18 f3a08a0af8deef3f50777cf0ccd7666f39e619f70fadae4327b7c29119468313
+snap tatoeba tatoeba/vie-eng_links.tsv.bz2 vie-eng_links.tsv.bz2 data-2026-11-18 2ce34380b020054111724f500e5036955afabd99313c9317df14c361f03a4c60
+# The English Wiktionary's Vietnamese translations of English entries ("busy" -> bận), with the Chinese translations
+# of the same tables, CC BY-SA 4.0 / GFDL: one row per translation, DERIVED by .github/snapshot-translations.py on the
+# snapshot runner from kaikki's raw extraction (its upstream URL and SHA-256 are in the release's NOTES.md). Card
+# English (which sense is the main one) and the sense check of Hán-Việt analyses.
+snap wiktionary-tr kaikki/en-translations.tsv.gz en-translations.tsv.gz PENDING 0
+# The Vietnamese Wiktionary (vi.wiktionary.org) as kaikki extracts it: EVALUATED only (tools/eval_viwikt.py), never
+# loaded into a database: its licence was not read on a primary page (ATTRIBUTION.md). Only with TUSACH_FETCH_EVAL=1.
+if [ "${TUSACH_FETCH_EVAL:-0}" = 1 ]; then
+snap viwiktionary kaikki/vi-extract.jsonl.gz vi-extract.jsonl.gz data-2026-11-18 f2139c262f45cbe32dbc8e7478369fbc936ff6640deec0d2b6e7ad647d58f273
+fi
 
 # --- Thiều Chửu, Hán Việt tự điển (public domain in Vietnam; repository CC0 1.0): Hán-Việt readings per character.
 get thieuchuu thieuchuu/TudienThienChuu.tab \

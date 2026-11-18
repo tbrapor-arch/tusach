@@ -2,3 +2,4 @@
 # unversioned sources). Write the date and the reason on a new line.
 2026-11-18 first snapshot (kaikki Vietnamese JSONL, Tatoeba vie/eng sentences and links)
 2026-11-18 data-quality: Vietnamese Wiktionary extract (vi-extract.jsonl.gz) and the English Wiktionary's Vietnamese translations (en-vi-translations.tsv.gz)
+2026-11-18 data-quality: English Wiktionary translations with their Chinese rows (en-translations.tsv.gz)

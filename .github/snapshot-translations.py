@@ -4,6 +4,9 @@ translation of an English-language entry:
 
   english_word  pos  sense_number  sense  vietnamese  tags
 
+With --lang vi,cmn,yue,nan,zh: one row per translation into any of these languages, with the language code as a 7th
+column (the Chinese rows of the tables that have a Vietnamese one: the sense check of Hán-Việt analyses).
+
 sense_number is the 1-based index of the English sense the translation table belongs to when wiktextract attached it
 to a sense (else 0); sense is the translation table's own gloss (else the sense's first gloss). Nothing else of the
 raw file is kept. Licence: English Wiktionary, CC BY-SA 4.0 (ATTRIBUTION.md).
@@ -16,11 +19,22 @@ def clean(s):
     return ' '.join(str(s or '').split())
 
 
+LANGS = {'vi'}
+
+
+def code(t):
+    return t.get('lang_code') or t.get('code') or ''
+
+
 def is_vi(t):
-    return t.get('lang_code') == 'vi' or t.get('code') == 'vi'
+    return code(t) in LANGS
 
 
 def main():
+    global LANGS
+    multi = '--lang' in sys.argv
+    if multi:
+        LANGS = set(sys.argv[sys.argv.index('--lang') + 1].split(','))
     out = sys.stdout
     n = 0
     for line in sys.stdin:
@@ -43,8 +57,9 @@ def main():
             w = clean(t.get('word'))
             if not w:
                 continue
-            out.write('\t'.join([clean(e['word']), clean(e.get('pos')), str(i), clean(sense), w,
-                                 ','.join(clean(x) for x in t.get('tags') or [])]) + '\n')
+            cols = [clean(e['word']), clean(e.get('pos')), str(i), clean(sense), w,
+                    ','.join(clean(x) for x in t.get('tags') or [])]
+            out.write('\t'.join(cols + ([code(t)] if multi else [])) + '\n')
             n += 1
     print(f'snapshot-translations: {n} rows', file=sys.stderr)
 

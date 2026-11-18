@@ -42,7 +42,7 @@ def rewrite(text, tag, sums):
 
 def main():
     args = [a for i, a in enumerate(sys.argv[1:], 1) if not a.startswith('--') and sys.argv[i - 1] != '--sums']
-    if len(args) != 1 or not re.fullmatch(r'data-\d{4}-\d\d-\d\d', args[0]):
+    if len(args) != 1 or not re.fullmatch(r'data-\d{4}-\d\d-\d\d(\.\d+)?', args[0]):
         sys.exit(__doc__)
     tag = args[0]
     if '--sums' in sys.argv:
