@@ -36,3 +36,14 @@ described from published accounts, not from listening).
 5. Exercises: **Chị là người Hà Nội phải không?** and **Anh muốn uống cà phê phải không?** are written without the
    comma before phải không (lint's copy check refuses the comma-separated tag while the dialogue has one); both
    spellings are common in print, as far as Claude knows.
+
+## Lesson 4
+1. Prices: **trà đá 5,000 đồng** a glass at a pavement stall and **35,000** for tea at a café, as of 2026: plausible
+   for Hà Nội? (Claude's estimate.)
+2. Line 7: paying with **Mười lăm nghìn ạ. Cảm ơn chị!** (naming the sum while handing it over): natural, or would
+   one say **Em gửi chị** (not yet taught)?
+3. Note on numbers: **hai mươi tư** / **hai mươi bốn** are both given for 24, and **mười bốn** for 14 (tư only after
+   mươi). Is that the Hà Nội usage? Claude has left out the spoken contraction **hăm** (hăm lăm 25), unsure how
+   common it is now.
+4. Note: **quá** after the adjective (Rẻ quá! exclamation) against before it (quá đắt "too expensive"): is the
+   difference stated fairly?

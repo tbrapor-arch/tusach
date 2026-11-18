@@ -1,0 +1,57 @@
+id: 4
+title: {vi: "Bao nhiêu tiền?", en: Paying at the tea stall}
+review: false
+setting: >-
+  On the way home, Sacha, Thảo and Lan stop at a pavement tea stall: a kettle, a low table, tiny stools. Sacha wants
+  to pay this time. The woman who runs the stall is about forty.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Chị ơi, một cốc trà đá~ice bao_nhiêu tiền?", en: "Excuse me, how much is a glass of iced tea?", lit: "elder-sister hey, one glass tea ice how-much money?"}
+- {n: 2, speaker: Stall owner, vi: "Năm~five nghìn một cốc.", en: "Five thousand a glass.", lit: "five thousand one glass."}
+- {n: 3, speaker: Sacha, vi: "Rẻ quá! Ở quán cà_phê, một cốc trà ba~three mươi lăm nghìn.", en: "That's so cheap! At the café a glass of tea is thirty-five thousand.", lit: "cheap so! at café coffee, one glass tea three ten five thousand."}
+- {n: 4, speaker: Stall owner, vi: "Ba~three mươi lăm nghìn à? Đắt quá!", en: "Thirty-five thousand? That's so expensive!", lit: "three ten five thousand (surprised)? expensive so!"}
+- {n: 5, speaker: Sacha, vi: "Vâng. Cho em ba~three cốc trà đá~ice.", en: "Yes. Three iced teas, please.", lit: "yes. give younger-sibling three glass tea ice."}
+- {n: 6, speaker: Stall owner, vi: "Ba~three cốc, mười lăm nghìn.", en: "Three glasses: fifteen thousand.", lit: "three glass, ten five thousand."}
+- {n: 7, speaker: Sacha, vi: "Mười lăm nghìn ạ. Cảm_ơn chị!", en: "Fifteen thousand. Thank you!", lit: "ten five thousand (polite). thank elder-sister!"}
+notes:
+- {ref: 1, topic: grammar, text: "bao nhiêu \"how much, how many\" + tiền \"money\" asks a price: Một cốc trà đá bao nhiêu tiền? \"a glass of iced tea is how much money?\" Like every question word, it stands where the answer goes."}
+- {ref: 1, topic: grammar, text: "cốc counts drinks: một cốc trà đá \"one glass of iced tea\", ba cốc \"three glasses\": number + glass + drink. Once the drink is known, the glass alone is enough."}
+- {ref: 2, topic: grammar, text: "Năm nghìn một cốc \"five thousand (for) one glass\": no word for \"per\". Prices are in đồng and usually said in thousands, without the word đồng."}
+- {ref: 2, topic: numbers, text: "One to ten: một, hai, ba, bốn, năm, sáu, bảy, tám, chín, mười. A hundred is trăm, a thousand nghìn (the South says ngàn): một trăm nghìn \"100,000\", một trăm năm mươi nghìn \"150,000\"."}
+- {ref: 3, topic: numbers, text: "Tens: mười is \"ten\" alone and in 11-19 (mười một 11, mười hai 12); from twenty the word is mươi, with the level tone: hai mươi 20, ba mươi 30. After mười and mươi, năm \"five\" becomes lăm: mười lăm 15, ba mươi lăm 35 (mười năm would be \"ten years\"). After mươi, một becomes mốt (hai mươi mốt 21) and bốn may become tư (hai mươi tư 24); mười một 11 keeps một."}
+- {ref: 3, topic: grammar, text: "Rẻ quá! \"so cheap!\": quá after an adjective is an exclamation. Before it, quá đắt is closer to \"too expensive\". A price needs no verb: một cốc trà ba mươi lăm nghìn \"a glass of tea (is) 35,000\"."}
+- {ref: 4, topic: particles, text: "à after a number you have just heard shows surprise: Ba mươi lăm nghìn à? \"35,000?!\""}
+- {ref: 5, topic: usage, text: "đắt \"expensive\" and rẻ \"cheap\" are the Northern words; the South says mắc for \"expensive\"."}
+- {ref: 1, topic: bridge, text: "tiền is 錢 (Mandarin qián), the same word. Final -p -t -c: where Mandarin ends in a vowel, a Hán-Việt word often keeps the old stop, as Cantonese does: 學 học (xué, Cantonese hok6), 法 Pháp (fǎ, faat3)."}
+- {ref: 0, topic: pronunciation, text: "Keep the pairs apart: mười (huyền, low falling) and mươi (ngang, level); năm and lăm; bốn, sáu, tám, chín (sắc, rising); bảy (hỏi, low). một, like every syllable in -t, has a short tone: here nặng, low and cut off."}
+new_words:
+- {w: bốn, en: four}
+- {w: năm, tag: five, en: five}
+- {w: sáu, en: six}
+- {w: bảy, en: seven}
+- {w: tám, en: eight}
+- {w: chín, en: nine}
+- {w: mười, en: ten}
+- {w: mươi, en: "ten (in tens from twenty on: hai mươi)"}
+- {w: lăm, en: "five (after mười and mươi)"}
+- {w: mốt, en: "one (after mươi)"}
+- {w: tư, en: "four (after mươi, and in thứ tư, phần tư)"}
+- {w: trăm, en: hundred}
+- {w: nghìn, en: thousand}
+- {w: bao_nhiêu, en: "how much, how many"}
+- {w: tiền, en: money}
+- {w: đắt, en: expensive}
+- {w: rẻ, en: cheap}
+- {w: quá, en: "too, very (much); to go past"}
+exercises:
+  translate:
+  - {vi: "Cà_phê ở quán này bao_nhiêu tiền?", en: "How much is coffee at this café?"}
+  - {vi: "Ba~three mươi mốt nghìn.", en: "Thirty-one thousand."}
+  - {vi: "Bốn mươi tư nghìn một cốc.", en: "Forty-four thousand a glass."}
+  - {vi: "Đắt quá, một trăm sáu mươi nghìn!", en: "So expensive: a hundred and sixty thousand!"}
+  - {vi: "Bảy cốc trà là ba~three mươi lăm nghìn.", en: "Seven glasses of tea come to thirty-five thousand."}
+  - {vi: "Cà_phê sữa đá~ice ở Pháp không rẻ.", en: "Iced coffee with milk is not cheap in France."}
+  fill:
+  - {vi: "Hai mươi ___ nghìn.", answer: lăm, en: "Twenty-five thousand."}
+  - {vi: "Một cốc sữa ___ tiền?", answer: "bao nhiêu", en: "How much is a glass of milk?"}
+  - {vi: "Trà ở quán này ___ quá!", answer: rẻ, en: "The tea at this café is so cheap!"}
+  - {vi: "Tám mươi ___ nghìn.", answer: chín, en: "Eighty-nine thousand."}
