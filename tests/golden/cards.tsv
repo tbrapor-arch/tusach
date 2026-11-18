@@ -1,0 +1,475 @@
+# Golden word cards (tools/test_golden.py): generated from the cards on 2026-11-18 and reviewed by Claude, NOT checked by a native speaker.
+id	en_lead	label	chars	ety	example
+chào	hello	doubtful		wiktionary -	yes
+anh	elder brother	native		wiktionary 1	yes
+chị	elder sister	native		wiktionary -	yes
+em	younger sibling	native		wiktionary -	yes
+tôi	I, me (neutral)	native		wiktionary 1	yes
+là	to be (noun = noun)	native		wiktionary 2	yes
+tên	name			wiktionary 1	yes
+gì	what	native		wiktionary -	yes
+không	not	opaque	空	wiktionary -	yes
+vâng	yes (polite)			wiktionary -	yes
+ạ	(polite final particle, to older people)			wiktionary 2	yes
+cảm ơn	thank you	older-loan		wiktionary -	yes
+rất	very			wiktionary -	yes
+vui	happy, glad	native		wiktionary -	yes
+được	to get, to obtain	older-loan		wiktionary -	yes
+gặp	to meet	native		wiktionary -	yes
+người	person, people	native		wiktionary -	yes
+nước~water	water	native		wiktionary 1	yes
+nước	water	native		wiktionary 1	yes
+nước~country	country, nation	native		wiktionary 2	yes
+nào	which			wiktionary -	yes
+ở	at, in	native		wiktionary -	yes
+đâu	where			wiktionary -	yes
+đến	to come, to arrive	native		wiktionary -	yes
+từ~from	from	older-loan		wiktionary 1	yes
+từ	from	older-loan		wiktionary 1	yes
+từ~word	word	same	詞	wiktionary 2	yes
+việt nam	Vietnam	same	越南	wiktionary -	yes
+pháp	France	same	法	wiktionary -	yes
+trung quốc	China	same	中國	wiktionary -	yes
+hà nội	Hanoi	same	河內	wiktionary -	yes
+tiếng việt	Vietnamese (the language)	compound		wiktionary -	yes
+nói	to speak			wiktionary -	yes
+biết	to know	older-loan		wiktionary -	yes
+cũng	also, too	older-loan		wiktionary -	yes
+học	to study, to learn	same	學	wiktionary -	yes
+cà phê	coffee	loan		wiktionary -	yes
+trà~tea	tea	same	茶	wiktionary 2	yes
+trà	tea	same	茶	wiktionary 2	yes
+sữa	milk	native		wiktionary 1	yes
+đá~ice	ice	native		wiktionary 1	yes
+đá	ice	native		wiktionary 1	yes
+đá~kick	to kick	native		wiktionary 2	yes
+cốc	glass, cup (Northern)	loan		wiktionary 1	yes
+có	to have	native		wiktionary 1	yes
+muốn	to want	native		wiktionary -	yes
+uống	to drink	native		wiktionary -	yes
+cho	to give	native		wiktionary -	yes
+một	one	native		wiktionary -	yes
+hai	two	native		wiktionary 1	yes
+đây	here			wiktionary -	yes
+ơi	hey (calling someone): em ơi!	native		wiktionary -	yes
+nhé	…, OK? (friendly final particle)			wiktionary -	yes
+chút	a little, a bit	native		wiktionary -	yes
+ngồi	to sit	native		wiktionary -	yes
+ba~three	three	native		wiktionary 2	yes
+ba	three	native		wiktionary 2	yes
+ba~father	father, dad (Southern)			wiktionary 1	yes
+bốn	four	native		wiktionary -	yes
+năm~year	year	native		wiktionary 2	yes
+năm	year	native		wiktionary 2	yes
+năm~five	five	native		wiktionary 1	yes
+sáu	six	native		wiktionary -	yes
+bảy	seven	native		wiktionary -	yes
+tám	eight	native		wiktionary 1	yes
+chín	nine	native		wiktionary 1	yes
+mười	ten	native		wiktionary -	yes
+mươi	ten (in tens from twenty on: hai mươi)			wiktionary 1	yes
+nghìn	thousand	native		wiktionary -	yes
+bao nhiêu	how much, how many	compound		wiktionary -	yes
+tiền	money	same	錢	wiktionary 1	yes
+đồng	dong (the currency)	same	銅	wiktionary 3	yes
+mua	to buy	doubtful		wiktionary 1	yes
+đắt	expensive	native		wiktionary -	yes
+rẻ	cheap			wiktionary -	yes
+quá	too, very (much)	same	過	wiktionary -	yes
+quả	fruit	same	果	wiktionary 1	yes
+cam	orange (fruit, colour)	same	柑	wiktionary 1	yes
+gia đình	family	same	家庭	wiktionary -	yes
+ảnh	photo, picture	same	影	wiktionary 1	yes
+bố	father, dad (Northern)	native		wiktionary 1	yes
+mẹ	mother, mum	native		wiktionary -	yes
+ông	grandfather	same	翁	wiktionary -	yes
+bà	grandmother	same	婆	wiktionary -	yes
+anh trai	elder brother	compound		wiktionary -	yes
+chị gái	elder sister	compound		wiktionary -	yes
+em gái	younger sister	compound		wiktionary -	yes
+ai	who	native		wiktionary 1	yes
+của	of, belonging to			wiktionary -	yes
+con	child	native		wiktionary -	yes
+mấy	how many (small numbers)	native		wiktionary -	yes
+tuổi	age	older-loan		wiktionary -	yes
+giờ	hour	older-loan		wiktionary -	yes
+phút	minute			wiktionary -	yes
+rưỡi	and a half (after a number or unit)			wiktionary -	yes
+bây giờ	now	compound		wiktionary -	yes
+hôm nay	today	compound		wiktionary -	yes
+ngày mai	tomorrow	compound		wiktionary -	yes
+sáng	morning	native		wiktionary 1	yes
+chiều~afternoon	afternoon			wiktionary 1	yes
+chiều	afternoon			wiktionary 1	yes
+tối	evening	native		wiktionary 1	yes
+đi	to go	native		wiktionary -	yes
+làm	to do			wiktionary -	yes
+về	to go back, to return (home)	native		wiktionary 1	yes
+nhà	house, home	native		wiktionary -	yes
+đang	(action in progress) be …-ing, now	gram	當	wiktionary -	yes
+sẽ	will (future)	native		wiktionary 1	yes
+đã	(past) did, already			wiktionary -	yes
+chiều~direction	direction			wiktionary 2	yes
+đường~road	road, street	doubtful	唐	wiktionary 1	yes
+đường	road, street	doubtful	唐	wiktionary 1	yes
+đường~sugar	sugar	same	糖	wiktionary 2	yes
+phố	street (in town)	same	舖	wiktionary 1	yes
+xe máy	motorbike	compound		wiktionary -	yes
+xe buýt	bus	loan		wiktionary -	yes
+đi bộ	to walk, to go on foot	compound		wiktionary -	yes
+rẽ	to turn (left or right)			wiktionary 1	yes
+trái	left (side)	native		wiktionary 1	yes
+phải~right	right (side)	doubtful		wiktionary -	yes
+phải	right (side)	doubtful		wiktionary -	yes
+phải~must	must, to have to	doubtful		wiktionary -	yes
+thẳng	straight (ahead)			wiktionary -	yes
+gần	near, close (to)	native		wiktionary -	yes
+xa	far	same	賒	wiktionary 1	yes
+hồ	lake	same	湖	wiktionary 1	yes
+mất	to lose	native		wiktionary -	yes
+khoảng	about, approximately	older-loan		wiktionary -	yes
+hoàn kiếm	Hoàn Kiếm (the lake of the returned sword, in Hanoi)	hv-vn	還劍	wiktionary -	no
+bản đồ	map	false-friend	版圖	wiktionary -	yes
+thời tiết	weather	false-friend	時節	wiktionary -	yes
+trời	sky	native		wiktionary -	yes
+nóng	hot	native		wiktionary -	yes
+lạnh	cold	older-loan		wiktionary -	yes
+mưa	rain	native		wiktionary -	yes
+nắng	sunshine	native		wiktionary -	yes
+mùa	season	older-loan		wiktionary -	yes
+xuân	spring	same	春	wiktionary -	yes
+hè	summer (Northern)	older-loan		wiktionary 1	yes
+thu~autumn	autumn	same	秋	wiktionary 1	no
+thu	autumn	same	秋	wiktionary 1	no
+thu~collect	to collect, to receive	same	收	wiktionary 2	no
+đông~winter	winter	same	冬	wiktionary 1	yes
+đông	winter	same	冬	wiktionary 1	yes
+đông~crowded	crowded	doubtful		wiktionary 3	yes
+đông~east	east	same	東	wiktionary 2	yes
+lắm	very (after the word)			wiktionary -	yes
+hơi	a bit, slightly (before an adjective)			wiktionary 1	yes
+hôm qua	yesterday	compound		wiktionary -	yes
+nhưng	but	gram	仍	wiktionary -	yes
+thế nào	how	compound		wiktionary -	yes
+ăn	to eat	native		wiktionary -	yes
+cơm	(cooked) rice	native		wiktionary -	yes
+phở	pho (rice-noodle soup)	older-loan		wiktionary 1	yes
+bát	bowl (Northern)	same	缽	wiktionary 1	no
+món	dish (of food)			wiktionary 1	no
+ngon	tasty, delicious	native		wiktionary -	yes
+thịt	meat	native		wiktionary -	yes
+bò	cow, ox	native		wiktionary 1	yes
+gà	chicken	native		wiktionary -	yes
+rau	vegetables, greens	native		wiktionary -	yes
+đũa	chopsticks	older-loan		wiktionary -	yes
+no	full (after eating)	native		wiktionary -	yes
+chưa	not yet			wiktionary -	yes
+rồi	already			wiktionary -	yes
+gọi	to call			wiktionary -	yes
+cuối tuần	weekend	compound		wiktionary -	yes
+thứ bảy	Saturday	compound		wiktionary -	yes
+chủ nhật	Sunday	same	主日	wiktionary -	yes
+rảnh	free, not busy			wiktionary -	yes
+bận	busy	native		wiktionary 1	yes
+thích	to like	opaque	適	wiktionary 1	yes
+xem	to watch, to look at	older-loan		wiktionary -	yes
+phim	film, movie	loan		wiktionary -	yes
+đọc	to read	older-loan		wiktionary -	yes
+sách	book	same	冊	wiktionary 1	yes
+chơi	to play	native		wiktionary -	yes
+bạn	friend	same	伴	wiktionary 1	yes
+với	with	native		wiktionary 2	yes
+hay~or	or			wiktionary 4	yes
+hay	or			wiktionary 4	yes
+hay~good	good, interesting (a film, a book)			wiktionary 2	yes
+hay~often	often			wiktionary 3	yes
+định	to intend to, to plan to	same	定	wiktionary -	yes
+bao giờ	when	compound		wiktionary -	yes
+mệt	tired			wiktionary -	yes
+ốm	ill, sick (Northern)	native		wiktionary -	yes
+đau	to hurt, painful	native		wiktionary -	yes
+đầu	head	same	頭	wiktionary -	yes
+bụng	belly, stomach	native		wiktionary -	yes
+sốt	fever			wiktionary 1	yes
+bị	(passive, for something bad) to suffer, to get	gram	被	wiktionary 1	yes
+bác sĩ	doctor (physician)	false-friend	博士	wiktionary -	yes
+bệnh viện	hospital	same	病院	wiktionary -	yes
+thuốc	medicine	doubtful		wiktionary -	yes
+nghỉ	to rest			wiktionary 1	yes
+nên	should	native		wiktionary -	yes
+khám	to examine (a patient)	same	勘	wiktionary 2	no
+khỏe	well, healthy	older-loan		wiktionary -	yes
+điện thoại	telephone	same	電話	wiktionary -	yes
+a lô	hello (on the phone)	loan		wiktionary -	yes
+nghe	to hear, to listen	native		wiktionary -	yes
+số	number	same	數	wiktionary -	yes
+nhắn	to leave a message, to text			wiktionary -	yes
+tin	news, message	older-loan		wiktionary -	yes
+chờ	to wait			wiktionary 1	yes
+lát	a moment (một lát)			wiktionary -	yes
+lại	again	native		wiktionary -	yes
+sau	after	native		wiktionary -	yes
+cháu	grandchild	native		wiktionary -	yes
+bác	uncle, aunt (older than one's parent)	native		wiktionary 1	yes
+cô	aunt (father's sister)	same	姑	wiktionary 1	yes
+chú	uncle (father's younger brother)	native		wiktionary 1	yes
+dạ	yes (polite, to elders)			wiktionary 1	yes
+vừa	just (now), recently			wiktionary -	yes
+này	this	native		wiktionary -	yes
+ấy	that (anh ấy he, cô ấy she)			wiktionary -	yes
+đó	that	native		wiktionary 1	yes
+ngày	day	native		wiktionary -	yes
+nhiều	many, much, a lot	older-loan		wiktionary -	yes
+tốt	good	native		wiktionary 1	yes
+nhỏ	small, little			wiktionary 1	yes
+lớn	big, large			wiktionary -	yes
+đẹp	beautiful, good-looking			wiktionary -	yes
+xin lỗi	sorry	compound		wiktionary -	yes
+nhỉ	…, isn't it? (tag particle)			wiktionary -	yes
+và	and	older-loan		wiktionary 1	yes
+các	(plural marker) the …s, all the	gram	各	wiktionary 1	yes
+trong	in, inside	native		wiktionary 2	yes
+để	in order to, so that			wiktionary -	yes
+những	(plural marker) some, the …s	older-loan		wiktionary -	yes
+họ	they, them	older-loan		wiktionary -	yes
+vào	to go in, to enter	native		wiktionary -	yes
+ra	to go out, to come out	native		wiktionary 1	yes
+mà	but	native		wiktionary -	yes
+thì	then (nếu … thì)			wiktionary 2	yes
+trên	on, above	native		wiktionary -	yes
+có thể	can, may	compound		wiktionary -	yes
+như	like, as	gram	如	wiktionary -	yes
+khi	when	native		wiktionary 1	yes
+chỉ~only	only, just	same	只	wiktionary 2	yes
+chỉ	only, just	same	只	wiktionary 2	yes
+chỉ~point	to point (to)	same	指	wiktionary 3	yes
+còn	to remain, still (to have)	native		wiktionary -	yes
+hơn	more (than), -er	native		wiktionary -	yes
+mình	oneself	native		wiktionary -	yes
+điều	matter, thing (something to say or do)	same	條	wiktionary 1	yes
+nó	he, she, it (familiar, or for a child, an animal, a thing)			wiktionary -	yes
+theo	to follow			wiktionary -	yes
+nếu	if			wiktionary -	yes
+cần	to need	doubtful	懃	wiktionary 1	yes
+lên	to go up, to get on	native		wiktionary -	yes
+tại	at, in	same	在	wiktionary 1	yes
+sự	(makes a noun of a verb or adjective: sự thật "the truth")	gram	事	wiktionary -	yes
+vì	because	older-loan		wiktionary 1	yes
+thấy	to see	older-loan		wiktionary -	yes
+nhất	most, -est	same	一	wiktionary -	yes
+mới	new	native		wiktionary -	yes
+việc	work, job	older-loan		wiktionary -	yes
+khác	other, different	older-loan		wiktionary -	yes
+cả	all, whole	native		wiktionary 1	yes
+tới	to come, to arrive	doubtful		wiktionary -	yes
+trước	before	native		wiktionary 1	yes
+vẫn	still			wiktionary -	yes
+hoặc	or	same	或	wiktionary 1	yes
+bằng~by	by (means of), with	same	憑	wiktionary 2	yes
+bằng	by (means of), with	same	憑	wiktionary 2	yes
+bằng~equal	equal (to), as … as	same	平	wiktionary 1	yes
+rằng	that (after say, think, know)			wiktionary -	yes
+vậy	so, thus			wiktionary -	yes
+cái	(classifier for things) thing	native		wiktionary 1	yes
+lần	time (occurrence)	older-loan		wiktionary 1	yes
+ta	we, us (including you)	doubtful		wiktionary 1	yes
+thứ	order, rank (thứ hai "Monday, second")	same	次	wiktionary 1	yes
+thế	so, thus			wiktionary 1	yes
+không thể	cannot, to be unable to	compound		wiktionary -	yes
+chính	main, chief	same	正	wiktionary 1	yes
+thêm	more, extra	older-loan		wiktionary -	yes
+giúp	to help			wiktionary -	yes
+mọi	every, all	older-loan		wiktionary 1	yes
+tìm	to look for, to search	older-loan		wiktionary -	yes
+sống	to live	native		wiktionary 2	yes
+cao	tall, high	same	高	wiktionary 1	yes
+tháng	month	native		wiktionary -	yes
+bộ	set, series	same	部	wiktionary 1	yes
+lúc	moment, time			wiktionary 1	yes
+ngoài	outside	older-loan		wiktionary -	yes
+cách~way	way, manner	same	格	wiktionary 1	yes
+cách	way, manner	same	格	wiktionary 1	yes
+cách~distance	to be (some distance) away from, distant from	same	隔	wiktionary 2	yes
+phần	part, portion, share	same	分	wiktionary 1	yes
+đều	both, all (alike)	older-loan		wiktionary -	yes
+bảo	to tell (someone to), to say	older-loan		wiktionary 1	yes
+hãy	(imperative) do …			wiktionary 1	yes
+loại	kind, type, sort	same	類	wiktionary 1	yes
+chúng ta	we, us (including you)	compound		wiktionary -	yes
+qua	through, across	same	過	wiktionary 1	yes
+cùng	together	older-loan		wiktionary 2	yes
+sử dụng	to use	same	使用	wiktionary -	yes
+nơi	place			wiktionary -	yes
+do	because of, due to	same	由	wiktionary -	yes
+thường	usually, often	same	常	wiktionary 1	yes
+làm việc	to work	compound		wiktionary -	yes
+đưa	to give, to hand			wiktionary -	yes
+từng	ever, once (đã từng)	older-loan		wiktionary 1	yes
+trường	school	false-friend	場	wiktionary 1	yes
+nhìn	to look (at)			wiktionary -	yes
+bắt đầu	to begin, to start	compound		wiktionary -	yes
+dưới	under, below	native		wiktionary -	yes
+nữa	more, further			wiktionary -	yes
+ngay	right (away), immediately	native		wiktionary -	yes
+nhanh	fast, quick	native		wiktionary -	yes
+vụ	case, affair (vụ án)	same	務	wiktionary 1	yes
+giữa	between	native		wiktionary -	yes
+thực sự	really, truly	false-friend	實事	wiktionary -	yes
+bên	side	older-loan		wiktionary -	yes
+thành phố	city	hv-vn	城舖	wiktionary -	yes
+thời gian	time	same	時間	wiktionary -	yes
+hết	to run out, to be finished	native		wiktionary -	yes
+thành	to become	same	成	wiktionary 1	yes
+tay	hand, arm	native		wiktionary -	yes
+chúng tôi	we, us (not including you)	compound		wiktionary -	yes
+khu	area, zone, district	same	區	wiktionary 1	no
+nhận	to receive	same	認	wiktionary 1	yes
+luôn	always			wiktionary -	yes
+dùng	to use	older-loan		wiktionary 1	yes
+sinh	to be born	same	生	wiktionary -	yes
+tất cả	all, everything, everyone	compound		wiktionary -	yes
+đủ	enough	native		wiktionary -	yes
+chiếc	(classifier for vehicles and single objects)	older-loan		wiktionary -	yes
+sao~why	why			wiktionary 1	yes
+sao	why			wiktionary 1	yes
+sao~star	star	native		wiktionary 2	yes
+yêu	to love	native		wiktionary 1	yes
+thế giới	world	same	世界	wiktionary -	yes
+hiểu	to understand	same	曉	wiktionary -	yes
+phòng	room	same	房	wiktionary 1	yes
+tổ chức	to organise, to hold (an event)	same	組織	wiktionary -	yes
+tự	(by) oneself, self-	gram	自	wiktionary 3	yes
+lịch sử	history	same	歷史	wiktionary -	yes
+vị~taste	taste, flavour	same	味	wiktionary 1	yes
+vị	taste, flavour	same	味	wiktionary 1	yes
+vị~person	(respectful classifier for persons)	same	位	wiktionary 3	yes
+nhau	each other			wiktionary 1	yes
+điểm	point	same	點	wiktionary -	yes
+như thế	like that, so	compound		wiktionary -	yes
+lấy	to take	native		wiktionary -	yes
+tỉnh	province	same	省	wiktionary 1	yes
+nguyễn	Nguyễn (the commonest surname)	same	阮	wiktionary -	no
+bởi	by			wiktionary -	yes
+công việc	work, job	compound		wiktionary -	yes
+đúng	right, correct	older-loan		wiktionary -	yes
+tại sao	why	compound		wiktionary -	yes
+độ	degree	same	度	wiktionary -	yes
+đánh	to hit, to beat	older-loan		wiktionary -	yes
+mang	to carry, to bring	native		wiktionary 1	yes
+thật	true, real	same	實	wiktionary -	yes
+cảm	to feel	same	感	wiktionary 1	yes
+vấn đề	problem, issue, question	same	問題	wiktionary -	yes
+phát triển	to develop	same	發展	wiktionary -	yes
+viết	to write	native		wiktionary -	yes
+quốc gia	nation, country	same	國家	wiktionary -	yes
+cuộc	(classifier for events and processes: cuộc họp "a meeting", cuộc sống "life")	older-loan		wiktionary -	yes
+màu	colour	older-loan		wiktionary -	yes
+nay	this (present): hôm nay "today", năm nay "this year"			wiktionary -	yes
+đầu tiên	first	false-friend	頭先	wiktionary -	yes
+tạo	to create, to make	same	造	wiktionary 1	yes
+mỗi	each, every	same	每	wiktionary -	yes
+xuống	to go down, to get off	native		wiktionary -	yes
+cá	fish	native		wiktionary 1	yes
+trở thành	to become	compound		wiktionary -	yes
+tính	to calculate, to count	doubtful	併	wiktionary 1	yes
+đặt	to put, to place	native		wiktionary -	yes
+hoạt động	activity	same	活動	wiktionary -	yes
+dài	long	native		wiktionary -	yes
+huyện	(rural) district, a subdivision of a province	same	縣	wiktionary -	yes
+thuộc	to belong to	same	屬	wiktionary 1	yes
+đội	team	same	隊	wiktionary 1	yes
+nghĩ	to think	older-loan		wiktionary -	yes
+nằm	to lie (down)	native		wiktionary -	yes
+hoa	flower	same	花	wiktionary 1	yes
+tăng	to increase	same	增	wiktionary 1	yes
+hiện	currently, now	same	現	wiktionary -	yes
+cứ	just (go on), keep on	doubtful	據	wiktionary -	yes
+sau khi	after (doing)	compound		wiktionary -	yes
+quan trọng	important	hv-vn	關重	wiktionary -	yes
+dù~although	although, even if			wiktionary 2	yes
+dù	although, even if			wiktionary 2	yes
+dù~umbrella	umbrella	native		wiktionary 1	yes
+mặt	face	native		wiktionary -	yes
+giữ	to keep, to hold	native		wiktionary -	yes
+quyền	right, power	same	權	wiktionary 1	yes
+thay đổi	to change	compound		wiktionary -	yes
+đêm	night	native		wiktionary -	yes
+cầu	bridge	older-loan		wiktionary 2	yes
+hỏi	to ask			wiktionary -	yes
+cây	tree, plant	native		wiktionary -	yes
+chuyển	to move, to transfer	same	轉	wiktionary -	yes
+công ty	company	same	公司	wiktionary -	yes
+xã hội	society	same	社會	wiktionary -	yes
+dân	people, citizens	same	民	wiktionary -	yes
+tổng thống	president (of a republic)	same	總統	wiktionary -	yes
+một số	some, a number of	compound		wiktionary -	yes
+quyết định	to decide	same	決定	wiktionary -	yes
+trẻ	young			wiktionary -	yes
+xe	vehicle (car, bike, motorbike)	older-loan		wiktionary 1	yes
+chết	to die	native		wiktionary -	yes
+quận	(urban) district	false-friend	郡	wiktionary -	yes
+cuối cùng	finally, at last	compound		wiktionary -	yes
+bán	to sell	native		wiktionary 1	yes
+lời	words, what is said			wiktionary 1	yes
+tiếng	language	older-loan		wiktionary -	yes
+dịch	to translate	same	譯	wiktionary 1	yes
+chẳng	not (at all)	native		wiktionary -	yes
+phía	side, direction	native		wiktionary -	yes
+tuy	although	same	雖	wiktionary -	yes
+đồ	things, stuff	native		wiktionary 1	yes
+vùng	region, area	native		wiktionary 1	yes
+khiến	to cause, to make (someone do)	older-loan		wiktionary -	yes
+gây	to cause	native		wiktionary 1	yes
+khu vực	area, zone, region	same	區域	wiktionary -	yes
+hàng	goods	same	行	wiktionary 1	yes
+câu	sentence	same	句	wiktionary 2	yes
+trước khi	before (doing)	compound		wiktionary -	yes
+thi	to take an exam	older-loan		wiktionary 2	yes
+đối với	towards, for, regarding	compound		wiktionary -	yes
+sang	to cross (over), to go over (to)	native		wiktionary 2	yes
+giáo viên	teacher	same	教員	wiktionary -	yes
+thời	time, era	same	時	wiktionary -	yes
+kiểm tra	to check, to examine	same	檢查	wiktionary -	yes
+khó	difficult	native		wiktionary -	yes
+trận	match, battle	same	陣	wiktionary -	yes
+bỏ	to leave, to quit	native		wiktionary 1	yes
+chịu	to bear, to endure	older-loan		wiktionary -	yes
+phụ nữ	woman	same	婦女	wiktionary -	yes
+tiếp tục	to continue	same	接續	wiktionary -	yes
+lý do	reason	same	理由	wiktionary -	yes
+chế độ	system, regime	same	制度	wiktionary -	yes
+đặc biệt	special	same	特別	wiktionary -	yes
+rõ	clear			wiktionary -	yes
+giống	to look like, to resemble, to be similar (to)			wiktionary 2	yes
+chạy	to run	native		wiktionary -	yes
+chương trình	programme	false-friend	章程	wiktionary -	yes
+tàu	ship, boat	older-loan		wiktionary 1	yes
+triệu	million	false-friend	兆	wiktionary -	yes
+chống	to oppose, against	native		wiktionary -	yes
+bay	to fly	native		wiktionary 1	yes
+nhớ	to remember	native		wiktionary -	yes
+bài	lesson			wiktionary 2	yes
+khá	fairly, quite	older-loan		wiktionary -	yes
+hình	picture, image	same	形	wiktionary -	yes
+học sinh	pupil, (school) student	same	學生	wiktionary -	yes
+chi	to spend, to pay out	same	支	wiktionary 1	no
+hắn	he, him (cool or contemptuous)	native		wiktionary -	yes
+xảy	to happen (xảy ra)			wiktionary -	yes
+báo	newspaper	same	報	wiktionary 2	yes
+cấp	level, grade	same	級	wiktionary 1	no
+cổ	neck	native		wiktionary 1	yes
+động vật	animal	same	動物	wiktionary -	yes
+nam~south	south	same	南	wiktionary 1	yes
+nam	south	same	南	wiktionary 1	yes
+nam~male	male, man	same	男	wiktionary 2	yes
+chắc	probably, surely			wiktionary 1	yes
+mở	to open	native		wiktionary -	yes
+nhóm	group			wiktionary 1	yes
+chính trị	politics	same	政治	wiktionary -	yes
+thôi	to stop	older-loan		wiktionary 1	yes
+xin	to ask for			wiktionary -	yes
+nhật bản	Japan	same	日本	wiktionary -	yes
+lạm phát	inflation	false-friend	濫發	wiktionary -	no
+nghĩa trang	cemetery	false-friend	義莊	wiktionary -	yes
+thông cảm	to sympathise, to understand	false-friend	通感	wiktionary -	no
+lịch sự	polite	hv-vn	歷事	wiktionary -	yes

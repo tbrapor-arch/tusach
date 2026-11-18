@@ -1218,7 +1218,17 @@ SENSE_SYN = [{'become', 'turn', 'into', 'achieve', 'accomplish', 'succeed'}, {'c
              {'shop', 'store', 'street', 'lane'}, {'county', 'district', 'prefecture'},
              {'body', 'oneself', 'relative'}, {'occupy', 'seize', 'take'},
              {'diploma', 'certificate', 'proof', 'evidence'}, {'front', 'before', 'previous', 'former'},
-             {'separate', 'apart', 'distance'}, {'orange', 'tangerine', 'mandarin'}]
+             {'separate', 'apart', 'distance'}, {'orange', 'tangerine', 'mandarin'}, {'walk', 'foot', 'step', 'pace'},
+             {'pre', 'early', 'front', 'before', 'former'}, {'cloth', 'fabric', 'textile', 'burlap'},
+             {'fist', 'punch', 'boxing'}, {'true', 'truth', 'truly', 'real', 'really', 'genuine'},
+             {'shape', 'appearance', 'pattern', 'manner', 'style'}, {'suppose', 'assume', 'presume', 'think', 'believe'},
+             {'steal', 'rob', 'plagiarize', 'thief', 'rip'}, {'plural', 'many', 'numerous', 'crowd', 'multitude'},
+             {'palace', 'hall', 'temple', 'shrine'}, {'expect', 'anticipate', 'guess', 'consider', 'reckon'},
+             {'practice', 'practise', 'perform', 'carry'}, {'cop', 'police', 'policeman'},
+             {'mathematics', 'math', 'maths', 'calculate', 'compute', 'arithmetic'}, {'quarter', 'season'},
+             {'torso', 'trunk', 'body'}, {'acre', 'hectare', 'mu'}, {'original', 'intact', 'unchanged', 'whole'},
+             {'govern', 'control', 'jurisdiction', 'administrative', 'administer'}, {'one', 'first', 'single'},
+             {'despise', 'slight', 'bully', 'cheat', 'deceive'}, {'rash', 'spot', 'speck'}]
 
 
 def _tokens(text, stop=True):
@@ -1230,16 +1240,25 @@ def _tokens(text, stop=True):
             if len(w) > len(suf) + 3 and w.endswith(suf):
                 w = w[:-len(suf)] + ('y' if suf in ('ied', 'ies') else '')
                 break
+        if len(w) > 4 and w.endswith('e'):
+            w = w[:-1]                                   # separate / separated, increase / increased
         out.add(w)
+        if len(w) > 5 and w.endswith('an'):              # Austrian / Austria, Italian / Italy
+            out.add(w[:-1])
+            out.add(w[:-2])
     return out
 
 
 def _loose(tokens):
+    """The tokens with their SENSE_SYN synonyms (both sides stemmed by _tokens)."""
     out = set(tokens)
-    for syn in SENSE_SYN:
+    for syn in SENSE_SYN_T:
         if out & syn:
             out |= syn
     return out
+
+
+SENSE_SYN_T = [set().union(*(_tokens(w, stop=False) for w in syn)) for syn in SENSE_SYN]
 
 
 def etymology_states(con):

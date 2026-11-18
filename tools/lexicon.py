@@ -73,7 +73,8 @@ SYNONYMS = [{'mother', 'mom', 'mum', 'mama'}, {'father', 'dad', 'papa'}, {'glass
             {'tired', 'weary'}, {'ill', 'sick'}, {'begin', 'start'}, {'finish', 'complete', 'end'},
             {'look', 'see', 'watch'}, {'speak', 'say', 'talk', 'tell'}, {'road', 'street', 'way'},
             {'lake', 'pond'}, {'hot', 'warm'}, {'right', 'correct'}, {'reason', 'cause'}, {'ok', 'okay', 'alright'},
-            {'programme', 'program'}, {'colour', 'color'}, {'say', 'said', 'tell'}]
+            {'programme', 'program'}, {'colour', 'color'}, {'say', 'said', 'tell'},
+            {'cow', 'ox', 'bovine', 'cattle', 'beef'}, {'busy', 'occupied'}]
 
 
 def load(path=PATH):
@@ -167,10 +168,15 @@ def words(text, stop=None):
         if len(w) > 4 and w.endswith('e'):
             w = w[:-1]
         out.add(w)
-    for syn in SYNONYMS:
-        if out & syn:
-            out |= syn
+    if _SYN:
+        for syn in _SYN:
+            if out & syn:
+                out |= syn
     return out
+
+
+_SYN = []
+_SYN.extend(set().union(*(words(w, set()) for w in syn)) for syn in SYNONYMS)     # stemmed like the text
 
 
 def rkey(s):

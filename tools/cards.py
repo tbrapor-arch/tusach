@@ -228,7 +228,10 @@ def sense_tag(rows, tag):
 
 def lex_group(groups, row):
     """The database etymology a lexicon row names: the one with its characters (or a variant spelling of them) or its
-    etymon, else the one whose English shares most words with the row's English (none: None)."""
+    etymon, else the one whose English shares most words with the row's English, else the key's only word-etymology
+    (none: None). Fixture entries only when the key has no real one."""
+    real = [g for g in groups if g and not g[0]['fixture']]
+    groups = real or groups
     if not groups:
         return None
     if row['chars']:
@@ -240,10 +243,19 @@ def lex_group(groups, row):
         for g in groups:
             if any(r.get('etymon') and row['etymon'] in r['etymon'] for r in g):
                 return g
-    mine = lexicon.words(row['en'])
-    best = max(groups, key=lambda g: (len(mine & lexicon.words(' '.join(r['english'] or '' for r in g))),
-                                      -groups.index(g)))
-    return best if mine & lexicon.words(' '.join(r['english'] or '' for r in best)) else None
+    mine = lexicon.cue_words(row['en'])
+    text = lambda g: ' '.join(r['english'] or '' for r in g)       # noqa: E731
+
+    def score(g):
+        first = lexicon.all_words(english.first_sense(g[0]['english'] or ''))
+        return (len(mine & first) / len(mine | first) if mine | first else 0, len(mine & lexicon.all_words(text(g))),
+                -groups.index(g))
+    best = max(groups, key=score)
+    if mine & lexicon.all_words(text(best)):
+        return best
+    word = [g for g in groups if not all(r.get('pos') in ('name', 'character-reading') or r.get('alt_kind') == 'pron'
+                                         for r in g)]
+    return word[0] if len(word) == 1 else None      # the only word-etymology of the key (đã, xe máy)
 
 
 FUNCTION_POS = {'prep', 'conj', 'particle', 'det', 'classifier'}
@@ -421,6 +433,8 @@ def lookup(k, tag=None, surface=None):
         card['etymon'] = {'chars': ec, 'hv': j['hv'], **{x: j[x] for x in bridge.LANGS if j[x]}}
     if label:
         card['label'] = label
+    if main:
+        card['ety'] = f"{main[0]['source']} {main[0]['src_id'] or '-'}"   # the dictionary etymology the card uses
     if not claimed:
         card['no_main'] = 1          # several words share the spelling; the corpus does not say which is in use
     if rows and all(r['fixture'] for r in rows):     # only the test fixture has the word: the card says so

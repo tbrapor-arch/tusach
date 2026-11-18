@@ -43,6 +43,7 @@ test: db db-nc
 	$(PY) tools/test_fetch.py
 	$(PY) tools/test_pipeline.py
 	$(PY) tools/test_db.py
+	$(PY) tools/test_golden.py
 	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'
 	-$(PY) tools/cutter_test.py --max 5
 	-$(PY) tools/cutter_test.py --set heldout --max 5

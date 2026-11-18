@@ -1,0 +1,81 @@
+# Review 2's sample of cards labelled opaque (the first 130 rows of its opaque3000.txt, Hán-Việt analyses only: 74;
+# the older loans of the sample keep their own label). Judged by Claude, NOT a native speaker: T = a reader of Chinese
+# sees the word in the characters (the card may say same / gram), O = the link is not visible (the card must not say
+# same). tools/test_golden.py counts false opaque (T labelled opaque/doubtful) and false same (O labelled same/gram).
+# On 18 Nov 2026: fa4d343 false opaque 53 of 73, false same 0; after the rework 7 of 74 (孤 炒 縣 樣 依 眾 奧), 0.
+# max-false-opaque: 7
+key	chars	judgement
+từ	祠	T
+không	空	T
+bị	被	T
+như	如	T
+khi	欺	T
+ông	翁	T
+nhưng	仍	T
+bạn	伴	T
+đang	當	T
+nhất	一	T
+ý	意	T
+bằng	憑	T
+cô	孤	T
+thế	勢	T
+bộ	步	T
+cách	隔	T
+tiền	前	T
+thành	成	T
+sao	炒	T
+tự	自	T
+vị	爲	T
+bố	布	T
+tạo	造	T
+hoa	華	T
+huyện	縣	T
+quyền	拳	T
+cầu	球	T
+đồ	徒	T
+ban	斑	T
+chân	真	T
+dạng	樣	T
+thị	氏	T
+viên	員	T
+tưởng	想	T
+bức	幅	T
+xa	賒	T
+y	依	T
+đạo	盜	T
+chúng	眾	T
+điện	殿	T
+liệu	料	T
+toàn	全	T
+hành	行	T
+cảnh	警	T
+sai	差	T
+toán	算	T
+quý	季	T
+thân	身	T
+áo	奧	T
+phố	舖	T
+mẫu	畝	T
+nguyên	原	T
+hạt	轄	T
+tường	墻	T
+tình	情	T
+chỉ	紙	O
+cần	懃	O
+thích	適	O
+trường	場	O
+thành phố	城庯	O
+tính	併	O
+cứ	據	O
+bài	排	O
+đáng	當	O
+kiểu	矯	O
+thấp	隰	O
+cố	錮	O
+kênh	巠	O
+súng	銃	O
+hộ	護	O
+cần thiết	懃切	O
+tỷ	秭	O
+thiết	切	O
+án	按	O
