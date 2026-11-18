@@ -11,11 +11,11 @@
 <!-- /state -->
 
 ## Repository (19 Nov 2026)
-Branch `data-quality` (pushed; not merged), reviews 3 and 4 fixed (HISTORY). From a clean clone with nothing missing,
+Branch `data-quality` merged into `main` on 19 Nov 2026 with the owner's approvals; reviews 3 and 4 fixed (HISTORY). From a clean clone with nothing missing,
 `make data db db-nc lint test app check coverage cutter` and `tools/smoke.py` (with TUSACH_PRIVATE) pass; `make lint`
-also checks the plan, the draft word list and the proposal (tools/plan.py, tools/bridge_rules.py). Next steps: the
-owner approves the syllabus proposal and word list 2 (course/proposal/); a native speaker reads
-wordlist-2-to-check.md (18 points), the lexicon's examples and the cutter sets → lessons 1–7.
+also checks the plan, the draft word list and the proposal (tools/plan.py, tools/bridge_rules.py). Next steps:
+lessons 1–7 (branch `lessons-01-07`); a native speaker, when one is found, reads wordlist-2-to-check.md (18 points),
+the lexicon's examples and the cutter sets.
 
 ## Data sources (18 Nov 2026)
 `data/fetch.sh` pins every source by content (ATTRIBUTION.md). kaikki (Wiktionary), Tatoeba and the English
@@ -60,7 +60,8 @@ native speaker**.
 
 ## Lessons
 None. `course/syllabus.yaml`: the one plan source (100 lessons, cast, the Northern particle strand, the draft word
-list); syllabus and word list NOT approved (both null). Proposal: `course/proposal/syllabus-proposal.md` (second
+list); syllabus and word list 2 APPROVED by the owner on 19 Nov 2026 (no native speaker available: lessons are
+labelled unchecked; tendencies taught as tendencies). Proposal: `course/proposal/syllabus-proposal.md` (second
 version, revised after review 3; its rule tables and lesson tables generated); `wordlist-2.tsv` (counts above) and
 its to-check list. The build uses `tools/fixtures/lessons/00.yaml`.
 

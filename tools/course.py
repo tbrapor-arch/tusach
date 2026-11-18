@@ -60,7 +60,8 @@ def lessons():
 
 
 def syllabus():
-    p = os.path.join(ROOT, 'course/syllabus.yaml')
+    """course/syllabus.yaml; TUSACH_SYLLABUS=FILE reads another copy (tests: a syllabus not yet approved)."""
+    p = os.environ.get('TUSACH_SYLLABUS') or os.path.join(ROOT, 'course/syllabus.yaml')
     return load(p) if os.path.exists(p) else {}
 
 

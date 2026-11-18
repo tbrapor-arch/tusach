@@ -1,12 +1,13 @@
 # The course plan. No lesson may be drafted before the owner approves the syllabus AND the first word list
 # (fixed decision, 17 Nov 2026): tools/lint.py refuses any file in course/lessons/ while either is not approved.
-# Proposal: course/proposal/syllabus-proposal.md (second version, 18 Nov 2026, NOT approved); word list:
-# course/proposal/wordlist-2.tsv (lessons 1-13). Pronunciation: Northern (Hà Nội). Lesson language: English.
+# Proposal: course/proposal/syllabus-proposal.md (second version, 18 Nov 2026); word list:
+# course/proposal/wordlist-2.tsv (lessons 1-13). Both APPROVED by the owner on 19 Nov 2026 (below).
+# Pronunciation: Northern (Hà Nội). Lesson language: English.
 # lessons: the plan lint checks a written lesson against (lines; new_words native / hv, where native counts every
 # word that is not Hán-Việt, older and Western loans included). L1-13 new_words are word list 2's real counts.
 approved:
-  syllabus: null        # e.g. {by: owner, date: 2026-11-20}
-  word_list: null       # e.g. {by: owner, date: 2026-11-20, file: course/proposal/wordlist-2.tsv}
+  syllabus: {by: owner, date: 2026-11-19}
+  word_list: {by: owner, date: 2026-11-19, file: course/proposal/wordlist-2.tsv}
 # the draft the owner is asked to approve: tools/plan.py checks it against this plan (make lint)
 draft: {word_list: course/proposal/wordlist-2.tsv, proposal: course/proposal/syllabus-proposal.md}
 cast: [Sacha, Lan, Minh, Thảo, Hùng, Tuấn, Mai, Bin, Na]

@@ -1,7 +1,9 @@
 # Tủ sách — syllabus proposal (second version)
 
-**For the owner to approve.** Nothing is approved and no lesson is drafted. Written by Claude, 18 Nov 2026, branch
-`data-quality`; **not checked by a native speaker**. Word list: `wordlist-2.tsv` (lessons 1–13), its doubts in
+**Approved by the owner on 19 Nov 2026** (with word list 2; `course/syllabus.yaml` records both). His answers to
+section 10: no native speaker is available, so lessons are drafted and labelled unchecked (Q1); tendencies are taught,
+labelled as such (Q2). Priority: Vietnamese first; the Chinese bridge helps, bounded (CLAUDE.md). Written by Claude,
+18 Nov 2026, branch `data-quality`; **not checked by a native speaker**. Word list: `wordlist-2.tsv` (lessons 1–13), its doubts in
 `wordlist-2-to-check.md`. Sound rules measured with `tools/bridge_rules.py` (numbers below are its output).
 
 **What changed since the first proposal**

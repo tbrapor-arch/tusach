@@ -4,6 +4,7 @@
 """
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -128,7 +129,12 @@ exercises:
 with tempfile.TemporaryDirectory() as tmp:
     open(os.path.join(tmp, '01.yaml'), 'w', encoding='utf-8').write(BAD.replace('Thử', unicodedata.normalize('NFD', 'Thử')))
     open(os.path.join(tmp, 'notes.yaml'), 'w', encoding='utf-8').write('x: 1\n')
-    r = run(['tools/lint.py'], {'TUSACH_COURSE': tmp})
+    # the approval check runs on a copy of the syllabus without the owner's approvals (approved 19 Nov 2026)
+    syl = re.sub(r'(?m)^(  (?:syllabus|word_list):) .*$', r'\1 null',
+                 open(os.path.join(ROOT, 'course/syllabus.yaml'), encoding='utf-8').read())
+    syl_path = os.path.join(tempfile.mkdtemp(), 'syllabus.yaml')
+    open(syl_path, 'w', encoding='utf-8').write(syl)
+    r = run(['tools/lint.py'], {'TUSACH_COURSE': tmp, 'TUSACH_SYLLABUS': syl_path})
     out = r.stdout
     ok(r.returncode == 1, 'lint fails on a bad lesson')
     for needle, what in [('before the owner approved', 'a lesson before the syllabus and word list are approved'),

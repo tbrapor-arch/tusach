@@ -1,13 +1,14 @@
 # Tủ sách — rules in force
 
-A Vietnamese course app for one learner (English lessons; Cantonese, Mandarin and Taigi as a bridge). Forked from
+A Vietnamese course app for one learner (English lessons; Mandarin, Cantonese and Taigi as a bridge). Forked from
 Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past methods: `docs/HISTORY.md`.
+**Priority (owner, 19 Nov 2026): Vietnamese first.** The Chinese bridge is a bounded help: Mandarin first; a bridge
+remark is one or two lines on a word he knows; no more Cantonese / Taigi reading passes unless a card is plainly wrong.
 
 ## Fixed decisions
 - Northern (Hà Nội) pronunciation. Lesson language: English.
 - Lessons are written from scratch by Claude. A course book the owner owns goes to the private repository only.
-- The owner approves the syllabus and the first word list before any lesson is drafted: `tools/lint.py` refuses
-  any file in `course/lessons/` until both approvals are recorded in `course/syllabus.yaml`.
+- Syllabus and word list 2 approved by the owner (19 Nov 2026, `course/syllabus.yaml`; lint refuses lessons without).
 - Text is quốc ngữ in Unicode NFC. Word boundaries are written in the source (`học_sinh`), never guessed.
 - Chữ Hán appear on word cards and in the bridge, never in lesson lines.
 
@@ -26,9 +27,8 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
 3. Two databases: `make db` → `vi.db` for the public page, `make db-nc` → `vi-nc.db` for the private module.
    `cards.open_db()` refuses the wrong one. A non-commercial source has `commercial_ok: False`.
 4. A partial build adds to the shared card file (`cards.Store.replace_module`). Never restore generated files.
-5. The card check ends every build and runs on every push: no word without a card, no card lost, no card
-   with poorer English (lower rank, or a gloss that drops senses unless recorded in `app/english-changes.tsv`).
-   The private module never replaces a public card unless its English rank is strictly better.
+5. The card check ends every build and runs on every push: no word without a card, no card lost, no poorer English
+   (lower rank; a gloss dropping senses needs `app/english-changes.tsv`); private beats public only if strictly better.
    After publishing: `python3 tools/published_ids.py`, commit both `app/published-*` files.
 6. Any change to the dictionary, the cutter or the pipeline: `python3 -I tools/compare.py run` (pages and the real
    cards of the top 3,000 and all course words) before publishing; read the changed cards. For anything risky, a
@@ -55,5 +55,5 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
 - Parallel sessions collide: `git fetch` and merge before building; say which commit your work includes; run heavy
   steps one at a time; commit as you go.
 - Four documents, kept apart and short: this file (under 60 lines), `docs/REFERENCE.md`, `docs/STATE.md` (one small
-  entry per module), `docs/HISTORY.md`. The repository is the source of truth; the claude.ai project points here.
+  entry per module), `docs/HISTORY.md`. The repository is the source of truth.
 - Before a commit: `make lint`, `make test`, `make app`. After app or template changes: `make smoke`.
