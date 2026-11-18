@@ -2,8 +2,8 @@
 
   python3 -I tools/test_bridge_rules.py
 
-No database: the syllable splitters, the tone readers, the rule kinds and measure() on hand-made items, including
-the items whose readings disagree (left out of a rule, never counted as an exception).
+No database: the syllable splitters, the tone readers, the learner-side conditions, the changed-tone rule, the main /
+strict / lenient rates, the best single guess and the rule kinds, on hand-made items (review 3, findings 2 and 3).
 """
 import os
 import sys
@@ -37,47 +37,84 @@ ok(br.tone('cmn', 'xué') == 2 and br.tone('cmn', 'shuǐ') == 3 and br.tone('cmn
 ok(br.tone('nan', 'ha̍k') == 8 and br.tone('nan', 'kok') == 4 and br.tone('nan', 'sim') == 1, 'Taigi checked and level')
 ok(br.tone('nan', 'lâm') == 5 and br.tone('nan', 'pīng') == 7 and br.tone('nan', 'kám') == 2, 'Taigi marked tones')
 
-# features of one item: Hán-Việt tone, coda, sonorant initial; a feature the readings disagree on is None
+# features: the Chinese side's own sonorant initial and checked final (what the learner has)
 f = br.features({'ch': '南', 'hv': 'nam', 'yue': ['naam4'], 'nan': ['lâm'], 'cmn': ['nán']})
-ok(f['ht'] == 'ngang' and f['son'] and f['coda'] == 'm' and f['yt'] == 4 and f['nt'] == 5, '南 nam features')
+ok(f['ht'] == 'ngang' and f['yson'] and f['nson'] and f['mson'] and f['ychk'] is False and f['yt'] == 4, '南 features')
+f = br.features({'ch': '形', 'hv': 'hình', 'yue': ['jing4'], 'nan': ['hîng'], 'cmn': ['xíng']})
+ok(f['yson'] and not f['nson'] and f['son'] is False, '形 hình: Cantonese j- counts as sonorant, Taigi h- does not')
 f = br.features({'ch': '行', 'hv': 'hành', 'yue': ['hang4', 'hong4'], 'nan': ['hîng'], 'cmn': ['xíng', 'háng']})
 ok(f['yi'] == 'h' and f['yr'] is None and f['mi'] is None and f['mt'] == 2, 'disagreeing readings give None')
 
-# the whole tone prediction: the sonorant split of Cantonese 4 / 5 and Taigi 5 / 2, checked syllables
-for hv, yue, nan, want_y, want_n in (('nam', 'naam4', 'lâm', 'ngang', 'ngang'), ('trà', 'caa4', 'tê', 'huyền', 'huyền'),
-                                     ('mã', 'maa5', 'má', 'ngã', 'ngã'), ('cảm', 'gam2', 'kám', 'hỏi', 'hỏi'),
+# the tone prediction from Cantonese / Taigi alone (review 3: no Vietnamese initial in a zh>vi condition)
+for hv, yue, nan, want_y, want_n in (('nam', 'naam4', 'lâm', 'ngang', 'ngang'), ('trà', 'caa4', 'tsâ', 'huyền', 'huyền'),
+                                     ('mã', 'maa5', 'bé', 'ngã', 'ngã'), ('cảm', 'gam2', 'kám', 'hỏi', 'hỏi'),
                                      ('động', 'dung6', 'tōng', 'nặng', 'nặng'), ('học', 'hok6', 'ha̍k', 'nặng', 'nặng'),
-                                     ('quốc', 'gwok3', 'kok', 'sắc', 'sắc')):
+                                     ('quốc', 'gwok3', 'kok', 'sắc', 'sắc'), ('hình', 'jing4', 'hîng', 'ngang', 'huyền')):
     f = br.features({'ch': '?', 'hv': hv, 'yue': [yue], 'nan': [nan], 'cmn': []})
-    ok(br.yue_tone(f) == want_y and br.nan_tone(f) == want_n, f'{hv}: {want_y} from {yue}, {want_n} from {nan}')
+    ok(br.yue_tone(f) == want_y and br.nan_tone(f) == want_n, f'{hv}: {want_y} from {yue}, {want_n} from {nan} '
+                                                             f'(got {br.yue_tone(f)}, {br.nan_tone(f)})')
 
-# kind(): the syllabus's thresholds
+# changed tones: tone 2 beside a low tone of the same syllable is the 變音; beside tone 3 it is a word of its own
+ok(br.changed_tone('cin2', ['cin2', 'cin4', 'zin2']) == 'cin4', '錢 cin2 is a changed tone of cin4 (whatever the order)')
+ok(br.changed_tone('wui2', ['wui6', 'wui5', 'wui2']) == 'wui6', '會 wui2 -> wui6')
+ok(br.changed_tone('hou2', ['hou2', 'hou3']) is None, '好 hou2 / hou3: not a changed tone')
+ok(br.changed_tone('cin4', ['cin4', 'cin2']) is None, 'a low tone is never a changed tone')
+
+# kind(): the thresholds on the main rate; a set of outcomes whose best single guess is under 60 % "narrows"
 ok(br.kind('zh>vi', 80, 100) == 'rule' and br.kind('zh>vi', 79, 100) == 'tendency', '80 % is a rule, 79 % a tendency')
 ok(br.kind('vi>zh', 60, 100) == 'tendency' and br.kind('vi>zh', 59, 100) == 'drop', '60 % is a tendency')
 ok(br.kind('drop', 100, 100) == 'drop' and br.kind('zh>vi', 0, 0) == 'drop', 'a dropped or empty rule is dropped')
+ok(br.kind('zh>vi', 94, 100, ('tr', 49)) == 'narrows' and br.kind('zh>vi', 94, 100, ('th', 76)) == 'rule',
+   'ch or tr ← zh- (tr 49 %) narrows; th or s ← sh- (th 76 %) is a rule with th as the guess')
+ok(br.kind('fact', 166, 166) == 'fact', '-p -t -c -ch → sắc / nặng is a fact of spelling, not a rule')
 
-# every rule has a known direction and an id
-ok(all(len(r) == 5 and r[1] in ('zh>vi', 'vi>zh', 'spell', 'drop') and r[0] for r in br.RULES), 'rules well formed')
+# every rule is well formed; no zh>vi condition reads a Vietnamese feature (circularity, review 3 finding 3)
+ok(all(len(r) == 7 and r[1] in ('zh>vi', 'vi>zh', 'spell', 'fact', 'drop') and r[0] and r[2] for r in br.RULES),
+   'rules well formed')
+probe = br.features({'ch': '?', 'hv': 'nam', 'yue': ['naam4'], 'nan': ['lâm'], 'cmn': ['nán']})
+leaks = []
+for rid, way, _, text, cond, _, _ in br.RULES:
+    if way != 'zh>vi':
+        continue
+    for k in ('hi', 'son', 'coda', 'chk', 'ht', 'front'):
+        g = dict(probe)
+        g[k] = {'hi': 'zz', 'son': not probe['son'], 'coda': 'zz', 'chk': not probe['chk'], 'ht': 'zz',
+                'front': not probe['front']}[k]
+        if br._ev(cond, g) != br._ev(cond, probe):
+            leaks.append(f'{text} reads {k}')
+ok(not leaks, 'no zh>vi condition depends on the Vietnamese syllable' + (f': {leaks}' if leaks else ''))
 
 
-def item(hi, mi, ni='', yi='', mt=1, yt=1):
-    return {'ch': '?', 'hv': hi + 'a', 'hi': hi, 'mi': mi, 'ni': ni, 'yi': yi, 'mt': mt, 'yt': yt}
+# measure(): main, strict and lenient rates and the best single guess on hand-made items
+def item(hv, yue, cmn, nan=None, main=None):
+    d = {'ch': hv[:1], 'hv': hv, 'words': [hv], 'yue': yue, 'cmn': cmn, 'nan': nan or [],
+         'yue_main': (main or yue)[0], 'cmn_main': cmn[0] if cmn else None, 'nan_main': (nan or [None])[0],
+         'yue_changed': False}
+    return d
 
 
-# measure(): hits, total, exceptions; an undetermined feature leaves the item out on either side of the rule
 saved = br.RULES
 try:
-    br.RULES = [('T', 'zh>vi', 'ph ← Mandarin f-', br.MI('f'), br.HV('ph')),
-                ('T', 'vi>zh', 'ph → Mandarin f-', br.HV('ph'), br.MI('f')),
-                ('T', 'spell', 'd or gi: gi when Cantonese g-', *br._spell(('gi', 'd'), br.YI('g')))]
-    fs = [item('ph', 'f'), item('b', 'f'), item('ph', None), item('ph', 'p'),
-          item('gi', 'j', yi='g'), item('d', 'y', yi='j'), item('gi', 'j', yi=None), item('d', 'y', yi='g')]
-    (_, _, _, h1, t1, e1), (_, _, _, h2, t2, e2), (_, _, _, h3, t3, e3) = br.measure(fs)
-    ok((h1, t1) == (1, 2) and e1 == ['? ba'], f'forward rule 1 / 2 with exception b (got {h1}/{t1} {e1})')
-    ok((h2, t2) == (1, 2), f'reverse rule 1 / 2, the undetermined Mandarin left out (got {h2}/{t2})')
-    ok((h3, t3) == (2, 3), f'spelling rule 2 / 3, the undetermined Cantonese left out (got {h3}/{t3})')
+    br.RULES = [('T2', 'zh>vi', 'g', 'Cantonese 2 → hỏi', br._all(br.YOPEN, br.YT(2)), br.HT('hỏi'), None),
+                ('IR', 'zh>vi', 'g', 'ch or tr ← Mandarin zh-', br.MI('zh'), br.HV('ch', 'tr'), 'hi')]
+    data = [item('cảm', ['gam2'], ['gǎn']),
+            item('tiền', ['cin2', 'cin4'], ['qián'], main=['cin4']),    # changed tone: main cin4, out of the rule
+            item('hội', ['wui2', 'wui6'], ['huì']),                      # main wui2 (no base given): an exception
+            item('trung', ['zung1'], ['zhōng']), item('chủ', ['zyu2'], ['zhǔ']), item('chính', ['zing3'], ['zhèng']),
+            item('sạn', ['zaan6'], ['zhàn'])]
+    t2, ir = br.measure(data)
+    ok((t2['hit'], t2['tot']) == (2, 3), f"main: 錢 counted with its base tone, 會 wui2 an exception (got "
+                                         f"{t2['hit']}/{t2['tot']})")
+    ok(t2['strict'] == (2, 4) and t2['lenient'] == (2, 4), f"strict and lenient count every reading (got "
+                                                           f"{t2['strict']} {t2['lenient']})")
+    ok((ir['hit'], ir['tot']) == (3, 4) and ir['best'] == ('ch', 2), f"ch or tr ← zh-: 3 / 4, best single guess ch 2 "
+                                                                     f"(got {ir['hit']}/{ir['tot']} {ir['best']})")
 finally:
     br.RULES = saved
+
+# the proposal's tables are rewritten between markers, nothing else
+text = 'a\n<!-- rules:x -->\nold\n<!-- /rules -->\nb'
+ok(br.rewrite(text, {'x': 'new'}) == 'a\n<!-- rules:x -->\nnew\n<!-- /rules -->\nb', 'rewrite() replaces a block only')
 
 print(f'{len(failures)} failure(s)')
 sys.exit(1 if failures else 0)

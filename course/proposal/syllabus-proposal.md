@@ -104,20 +104,36 @@ French, English, Mandarin, Cantonese or Taigi. Not the text, which is to be writ
 
 ## 3. The tone strand (Hán-Việt words only)
 
-Measured on the Hán-Việt syllables of the top 3,000 cards (`tools/bridge_rules.py`, "hits / total"). Native words and
-older loans follow none of this. **Direction**: "zh→vi" guesses the Vietnamese tone from the Chinese he knows;
-"vi→zh" goes from a tone he hears to the Chinese tone. "Sonorant" means the Vietnamese syllable starts with
-m n nh ng l v d (old m n ŋ l ɲ and the glides): he predicts the initial first (section 5), then the tone.
+**How the rules are measured** (`tools/bridge_rules.py`; every number in sections 3–5 is its output, written into
+this file by `tools/bridge_rules.py --write`, and `make lint` fails when they differ). The data: the Hán-Việt
+syllables of the top 3,000 cards; native words and older loans follow none of this.
+<!-- rules:summary -->
+993 syllables (character + Hán-Việt reading) of 1499 Hán-Việt cards of rank <= 3000. 132 measured: 91 rules, 14 tendencies, 16 that narrow the choice, 2 facts of spelling, 9 dropped. Every tone from Cantonese: main 910 / 993, 92 %, strict 797 / 993, 80 %; from Taigi: main 878 / 959, 92 %, strict 853 / 959, 89 %.
+<!-- /rules -->
+- **The reading he would use.** For each character, the word's own reading when the source has the word (rime,
+  CC-CEDICT, the MOE); else the character's most frequent reading in the source's own order (rime's share; the MOE's
+  literary reading; Unihan's customary Mandarin reading). A Cantonese **changed tone** (變音: 錢 cin2, 社會 se5 wui2,
+  where the source also has cin4, wui6) is counted with its base tone, as Hán-Việt is: the learner is told that a
+  tone-2 word he also knows in a low tone is a changed tone.
+- **Main, strict, lenient.** "Main" uses that reading; "strict" requires every reading the item could have (all the
+  character's readings when the word is not in the source) to fit; "lenient" (from the Vietnamese side only) one of
+  them. The thresholds apply to the **main** rate: a **rule** at 80 % or more, a **tendency** from 60 %, else
+  dropped. A rule whose outcome is a set of letters is also given its **best single guess** (the most frequent
+  letter's share): under 60 % it is taught as **"narrows it to these letters"**, not as a prediction.
+- **Only what he has.** A zh→vi rule uses only the Chinese side: "sonorant initial" is the Cantonese initial
+  (m n ng l j w or none), the Taigi one (m n ng l j b g or none) or the Mandarin one (m n l r y w or none), and
+  "not -p -t -k" is the Cantonese final. The second proposal's "Cantonese 4 with a sonorant initial → ngang" used
+  the Vietnamese initial (circular: 100 %); with the Cantonese initial it misses the 匣 words (形 hình, 黃 hoàng,
+  和 hòa), whose Cantonese initial is h- or w- but whose old initial was a voiced fricative. A vi→zh rule uses only
+  the Vietnamese he hears.
 
 **The old classes.** Hán-Việt splits each of the four old tones by the old initial, but **not the way Cantonese and
 Taigi do** (the first proposal said "exactly the split Cantonese and Taigi made": false). Two differences matter:
 - **Level tone, sonorant initial → ngang**, with the voiceless ones (nam 南, minh 明, dân 民), where Cantonese
-  (4), Taigi (5) and Mandarin (2) put them with the voiced obstruents. The first proposal (and review 2) said
-  huyền: wrong for these.
+  (4), Taigi (5) and Mandarin (2) put them with the voiced obstruents.
 - **Rising tone**: Hán-Việt has three outcomes (hỏi voiceless, ngã sonorant, nặng voiced obstruent). Cantonese
-  keeps 2 / 5 / 6; Taigi has one rising tone (2) for the first two and moved the third to 7; Mandarin has 3 / 3 / 4.
-  So **động 動 and hậu 後 are regular** (old voiced obstruent, rising → nặng, Cantonese 6, Taigi 7), not
-  exceptions as the first proposal said.
+  keeps 2 / 5 / 6 (some old voiced obstruents are 5); Taigi has one rising tone (2) for the first two and moved the
+  third to 7; Mandarin has 3 / 3 / 4. So **động 動 and hậu 後 are regular** (old voiced obstruent, rising → nặng).
 
 | Old class | Hán-Việt | Cantonese | Taigi lit. | Mandarin |
 |---|---|---|---|---|
@@ -132,73 +148,117 @@ Taigi do** (the first proposal said "exactly the split Cantonese and Taigi made"
 | entering (-p -t -c), voiceless | sắc | 1 / 3 | 4 | any |
 | entering, voiced | nặng | 6 | 8 | any |
 
-**From Cantonese (zh→vi)**, all six rules together: **801 / 850 = 94 %**.
+Each of Cantonese and Taigi needs the Chinese initial for two tones (Cantonese 4 and 5, Taigi 5 and 2), Mandarin
+for 2 and 3; Mandarin 4 does not tell sắc from nặng, and Mandarin has no checked syllables: there Cantonese or
+Taigi decides.
 
-| Cantonese tone | Hán-Việt | Hits | Main exceptions |
-|---|---|---|---|
-| 1 (open) | ngang | 163 / 168, 97 % | 監 giám, 擔 đảm, 胞 bào |
-| 4, obstruent initial | huyền | 82 / 85, 96 % | 查 tra, 郵 bưu, 華 hoa |
-| 4, sonorant initial | ngang | 72 / 72, 100 % | — |
-| 2 | hỏi | 96 / 109, 88 % | 會 hội, 統 thống, 話 thoại, 院 viện, 館 quán |
-| 5, sonorant initial | ngã | 26 / 32, 81 % | 理 lý, 李 lý, 里 lý, 與 dự, 議 nghị |
-| 5, obstruent initial | nặng | 5 / 7, 71 % (tendency, few) | 社 xã, 有 hữu |
-| 3 | sắc | 103 / 109, 94 % | 間 gian, 計 kê, 醬 tương |
-| 6 | nặng | 110 / 120, 92 % | 問 vấn, 士 sĩ, 義 nghĩa, 技 kỹ, 靜 tĩnh (→ ngã) |
-| checked 1 / 3 | sắc | 74 / 76, 97 % | 絡 lạc, 協 hiệp |
-| checked 6 | nặng | 70 / 72, 97 % | 隰 thấp, 摘 trích |
+**From Cantonese (zh→vi)**
+<!-- rules:tones-yue -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| T1 | Cantonese 1, not -p -t -k → ngang | zh→vi | 183 / 195, 94 % | 188 / 224, 84 % |  |  | **rule** | 分 phần 當 đáng 監 giám 坊 phường 將 tướng 擔 đảm 分 phận 胞 bào |
+| T1 | Cantonese 4, initial m n ng l j w or none → ngang | zh→vi | 78 / 90, 87 % | 81 / 97, 84 % |  |  | **rule** | 形 hình 完 hoàn 壺 hồ 回 hồi 和 hòa 黃 hoàng 型 hình 湖 hồ |
+| T1 | Cantonese 4, other initial → huyền | zh→vi | 85 / 89, 96 % | 88 / 105, 84 % |  |  | **rule** | 重 trọng 查 tra 長 trưởng 傳 truyện |
+| T2 | Cantonese 2 → hỏi | zh→vi | 106 / 117, 91 % | 113 / 168, 67 % |  |  | **rule** | 數 số 統 thống 少 thiếu 襖 áo 館 quán 許 hứa 棗 táo 使 sứ |
+| T2 | Cantonese 5, initial m n ng l j w or none → ngã | zh→vi | 35 / 42, 83 % | 35 / 43, 81 % |  |  | **rule** | 會 hội 理 lý 與 dự 議 nghị 濫 lạm 李 lý 里 lý |
+| T2 | Cantonese 5, other initial → nặng (old voiced 上) | zh→vi | 6 / 8, 75 % | 11 / 18, 61 % |  |  | **tendency** | 社 xã 妥 thỏa |
+| T3 | Cantonese 3, not -p -t -k → sắc | zh→vi | 122 / 137, 89 % | 139 / 180, 77 % |  |  | **rule** | 過 qua 間 gian 轉 chuyển 句 câu 處 xử 載 tải 計 kê 撰 soạn |
+| T3 | Cantonese 6, not -p -t -k → nặng | zh→vi | 134 / 149, 90 % | 144 / 180, 80 % |  |  | **rule** | 問 vấn 士 sĩ 義 nghĩa 互 hỗ 調 điều 靜 tĩnh 技 kỹ 彈 đàn |
+| T4 | Cantonese -p -t -k in tone 1 or 3 → sắc | zh→vi | 83 / 85, 98 % | 88 / 99, 89 % |  |  | **rule** | 絡 lạc 協 hiệp |
+| T4 | Cantonese -p -t -k in tone 2 4 5 6 → nặng | zh→vi | 78 / 81, 96 % | 83 / 88, 94 % |  |  | **rule** | 隰 thấp 率 suất 摘 trích |
+| T* | every tone from Cantonese (the rules above together) | zh→vi | 910 / 993, 92 % | 797 / 993, 80 % |  |  | **rule** | 數 số 分 phần 過 qua 間 gian 問 vấn 重 trọng 轉 chuyển 社 xã |
+| T1x | Cantonese 4 → huyền, whatever the initial (first proposal) | dropped | 97 / 179, 54 % | 100 / 200, 50 % |  |  | **drop** | 如 như 仍 nhưng 南 nam 由 do 重 trọng 民 dân 員 viên 查 tra |
+| T1x | Cantonese 4 → ngang when the VIETNAMESE initial is m n nh ng l v d (proposal 2: circular) | dropped | 76 / 76, 100 % | 77 / 79, 97 % |  |  | **drop** | — |
 
-**From Taigi (zh→vi)**, all together: **856 / 915 = 94 %**. Taigi 1 → ngang 95 %; 5 → huyền 97 % (obstruent) or
-ngang 100 % (sonorant); 2 → hỏi 89 % (obstruent; 有 hữu, 少 thiếu, 館 quán) or ngã 86 % (sonorant; 理 lý, 研
-nghiên); 3 → sắc 90 % (過 qua, 句 câu); 7 → nặng 90 % (問 vấn, 社 xã, 士 sĩ, 義 nghĩa); checked 4 → sắc 100 %,
-8 → nặng 95 % (的 đích, 複 phức). Taigi needs the Vietnamese initial twice (5 and 2), Cantonese once (4, 5).
+Changed tones: 18 items of the Cantonese total have a changed tone (變音: 錢 cin2, 社會 se5 wui2) in the word; the main rate uses the base tone (cin4, wui6), as the tones of Hán-Việt do; the strict rate counts the changed tone too.
+<!-- /rules -->
 
-**From Mandarin (zh→vi)**: 1 → ngang 94 %; 2 with an obstruent → huyền 96 %; 3 with a sonorant → ngã 91 %. Tone 4
-does not tell sắc from nặng, and entering syllables are scattered: here Cantonese or Taigi decides.
+**From Taigi (zh→vi)**
+<!-- rules:tones-nan -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| T1 | Taigi 1 → ngang | zh→vi | 180 / 195, 92 % | 182 / 201, 91 % |  |  | **rule** | 分 phần 組 tổ 當 đáng 勝 thắng 技 kỹ 坊 phường 將 tướng 擔 đảm |
+| T1 | Taigi 5, initial m n ng l j b g or none → ngang | zh→vi | 71 / 74, 96 % | 71 / 74, 96 % |  |  | **rule** | 條 điều 完 hoàn 湖 hồ |
+| T1 | Taigi 5, other initial → huyền | zh→vi | 90 / 95, 95 % | 92 / 99, 93 % |  |  | **rule** | 重 trọng 查 tra 傳 truyện 彈 đạn 降 giáng |
+| T2 | Taigi 2, initial m n ng l j b g or none → ngã | zh→vi | 33 / 44, 75 % | 33 / 44, 75 % |  |  | **tendency** | 影 ảnh 理 lý 研 nghiên 與 dự 穩 ổn 擁 ủng 委 ủy 隱 ẩn |
+| T2 | Taigi 2, other initial → hỏi | zh→vi | 97 / 110, 88 % | 99 / 114, 87 % |  |  | **rule** | 統 thống 少 thiếu 轉 chuyến 輔 phụ 館 quán 處 xứ 許 hứa 棗 táo |
+| T3 | Taigi 3 → sắc | zh→vi | 114 / 129, 88 % | 124 / 152, 82 % |  |  | **rule** | 過 qua 現 hiện 句 câu 棧 sạn 附 phụ 弊 tệ 卷 quyển 載 tải |
+| T3 | Taigi 7 → nặng | zh→vi | 137 / 151, 91 % | 141 / 161, 88 % |  |  | **rule** | 問 vấn 社 xã 士 sĩ 義 nghĩa 互 hỗ 靜 tĩnh 態 thái 俱 câu |
+| T4 | Taigi 4 → sắc | zh→vi | 79 / 80, 99 % | 79 / 81, 98 % |  |  | **rule** | 屬 thuộc |
+| T4 | Taigi 8 → nặng | zh→vi | 77 / 81, 95 % | 79 / 83, 95 % |  |  | **rule** | 的 đích 複 phức 築 trúc 洩 tiết |
+| T* | every tone from Taigi (the rules above together) | zh→vi | 878 / 959, 92 % | 853 / 959, 89 % |  |  | **rule** | 條 điều 分 phần 過 qua 組 tổ 問 vấn 屬 thuộc 現 hiện 重 trọng |
+<!-- /rules -->
 
-**From the Vietnamese tone heard (vi→zh)**: huyền → Cantonese 4 (99 %); ngang → Cantonese 1, or 4 after a sonorant
-(98 %); hỏi → Cantonese 2 (97 %); sắc (open) → Cantonese 3 (89 %); nặng (open) → Cantonese 6 (89 %), Mandarin 4
-(96 %); a syllable in -p -t -c -ch is sắc or nặng (166 / 166). **ngã → Cantonese 5 (72 %) or Mandarin 3 (78 %)
-is a tendency**: about a quarter of ngã syllables are old voiced departing or rising ones (士 sĩ, 義 nghĩa, 技 kỹ).
+**From Mandarin (zh→vi)**
+<!-- rules:tones-cmn -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| T1 | Mandarin 1 → ngang | zh→vi | 179 / 216, 83 % | 185 / 237, 78 % |  |  | **rule** | 一 nhất 分 phần 織 chức 發 phát 接 tiếp 究 cứu 當 đáng 出 xuất |
+| T1 | Mandarin 1, not -p -t -k in Cantonese → ngang | zh→vi | 179 / 196, 91 % | 185 / 217, 85 % |  |  | **rule** | 分 phần 究 cứu 當 đáng 期 kỳ 監 giám 擁 ủng 坊 phường 將 tướng |
+| T1 | Mandarin 2, initial m n l r y w or none → ngang | zh→vi | 74 / 75, 99 % | 75 / 78, 96 % |  |  | **rule** | 完 hoàn |
+| T1 | Mandarin 2, other initial → huyền | zh→vi | 91 / 94, 97 % | 96 / 112, 86 % |  |  | **rule** | 查 tra 傳 truyện 華 hoa |
+| T2 | Mandarin 3, initial m n l r y w or none → ngã | zh→vi | 35 / 43, 81 % | 35 / 45, 78 % |  |  | **rule** | 影 ảnh 理 lý 襖 áo 穩 ổn 委 ủy 隱 ẩn 飲 ẩm 里 lý |
+| T2 | Mandarin 3, other initial → hỏi | zh→vi | 102 / 127, 80 % | 104 / 134, 78 % |  |  | **rule** | 場 trường 屬 thuộc 統 thống 少 thiếu 導 đạo 北 bắc 轉 chuyến 給 cấp |
+| T3 | Mandarin 4, not -p -t -k in Cantonese → sắc or nặng | zh→vi | 264 / 290, 91 % | 282 / 330, 85 % |  | nặng 50 % | **narrows** | 過 qua 社 xã 句 câu 士 sĩ 差 sai 義 nghĩa 互 hỗ 調 điều |
+<!-- /rules -->
+
+**From the Vietnamese tone heard (vi→zh)**: here the lenient rate is the fair one (any of his readings will do).
+A syllable in -p -t -c -ch takes only sắc or nặng: a fact of Vietnamese spelling, not a correspondence; which of
+the two is told by Cantonese (1 / 3 or 6) or Taigi (4 or 8), above.
+<!-- rules:tones-vi -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| T5 | huyền → Cantonese 4 | vi→zh | 97 / 102, 95 % | 81 / 102, 79 % | 100 / 102, 98 % |  | **rule** | 分 phần 調 điều 彈 đàn 坊 phường 胞 bào |
+| T5 | ngang → Cantonese 1, or 4 after m n nh ng l v d | vi→zh | 259 / 268, 97 % | 235 / 268, 88 % | 262 / 268, 98 % |  | **rule** | 過 qua 間 gian 句 câu 查 tra 計 kê 郵 bưu 華 hoa 醬 tương |
+| T5 | hỏi → Cantonese 2 | vi→zh | 106 / 116, 91 % | 95 / 116, 82 % | 113 / 116, 97 % |  | **rule** | 轉 chuyển 長 trưởng 比 tỷ 處 xử 擔 đảm 載 tải 妥 thỏa 汰 thải |
+| T5 | ngã → Cantonese 5 | vi→zh | 36 / 47, 77 % | 28 / 47, 60 % | 36 / 47, 77 % |  | **tendency** | 士 sĩ 義 nghĩa 互 hỗ 靜 tĩnh 技 kỹ 纇 lỗi 櫃 quỹ 浪 lãng |
+| T5 | ngã → Mandarin 3 | vi→zh | 37 / 47, 79 % | 35 / 47, 74 % | 37 / 47, 79 % |  | **tendency** | 社 xã 士 sĩ 義 nghĩa 互 hỗ 靜 tĩnh 技 kỹ 纇 lỗi 櫃 quỹ |
+| T5 | sắc, open syllable → Cantonese 3 | vi→zh | 121 / 142, 85 % | 103 / 142, 73 % | 129 / 142, 91 % |  | **rule** | 數 số 問 vấn 統 thống 理 lý 當 đáng 少 thiếu 襖 áo 監 giám |
+| T5 | nặng, open syllable → Cantonese 6 | vi→zh | 135 / 152, 89 % | 109 / 152, 72 % | 141 / 152, 93 % |  | **rule** | 重 trọng 會 hội 婦 phụ 市 thị 與 dự 傳 truyện 議 nghị 旱 hạn |
+| T5 | nặng, open syllable → Mandarin 4 | vi→zh | 144 / 152, 95 % | 135 / 152, 89 % | 146 / 152, 96 % |  | **rule** | 係 hệ 量 lượng 導 đạo 值 trị 傳 truyện 輔 phụ 分 phận 儉 kiệm |
+| T4f | a syllable in -p -t -c -ch has sắc or nặng (a fact of Vietnamese spelling) | fact | 166 / 166, 100 % | 166 / 166, 100 % |  |  | **fact** | — |
+<!-- /rules -->
 
 **Teaching order**: T1 level tones (L9), T2 rising (L11), T3 departing (L12), T4 checked (L13), T5 heard → Chinese
 (L15). Examples, each the same word in Chinese with all four readings in the database:
 <!-- bridge-examples -->
-- T1 ngang: 心 tâm, 東 đông, 公 công, 音 âm · ngang after a sonorant: 南 nam, 民 dân, 文明 văn minh, 門 môn, 陽 dương
-  · huyền: 茶 trà, 湖 hồ, 頭 đầu, 平 bình, 情 tình
+- T1 ngang: 心 tâm, 東 đông, 中 trung, 音 âm · ngang after a sonorant: 南 nam, 民 dân, 文明 văn minh, 門 môn, 陽 dương
+  · huyền: 湖 hồ, 頭 đầu, 平 bình, 情 tình, 和平 hòa bình
 - T2 hỏi: 感 cảm, 點 điểm, 水 thủy, 主 chủ, 口 khẩu · ngã: 馬 mã, 女 nữ, 美 mỹ · nặng: 動 động, 後 hậu, 部 bộ, 道 đạo
-- T3 sắc: 過 quá, 世 thế, 意 ý, 信 tín · nặng: 病 bệnh, 定 định, 電 điện, 大 đại
+- T3 sắc: 過 quá, 世界 thế giới, 意 ý, 信 tín · nặng: 病 bệnh, 定 định, 電 điện, 大 đại
 - T4 sắc: 法 pháp, 發 phát, 一 nhất, 北 bắc, 客 khách · nặng: 學 học, 實 thực, 力 lực, 立 lập, 物 vật
 <!-- /bridge-examples -->
 
 ## 4. Finals and rhymes
 
 All zh→vi unless marked; same data and tool. Mandarin lost -p -t -k and merged -m into -n; Cantonese and Taigi kept
-them, and so did Hán-Việt.
+them, and so did Hán-Việt. Lessons: B0 (what Hán-Việt is: one syllable per character, Chinese order inside the
+word) L2, B1 L4, B2 L6, B3 L8, B4 L32, V1 L30, V2 L31.
+<!-- rules:finals -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| B1 | Cantonese -p → -p | zh→vi | 22 / 22, 100 % | 22 / 22, 100 % |  |  | **rule** | — |
+| B1 | Cantonese -t → -t | zh→vi | 41 / 44, 93 % | 41 / 46, 89 % |  |  | **rule** | 實 thực 法 pháp 壓 áp |
+| B1 | Cantonese -k → -c / -ch | zh→vi | 99 / 100, 99 % | 100 / 108, 93 % |  | c 70 % | **rule** | 值 trị |
+| B2 | Cantonese -m → -m | zh→vi | 42 / 43, 98 % | 43 / 46, 93 % |  |  | **rule** | 禪 thiền |
+| B2 | Taigi -m → -m | zh→vi | 40 / 42, 95 % | 40 / 42, 95 % |  |  | **rule** | 填 điền 忍 nhẫn |
+| B3 | Hán-Việt -nh / -ch → Cantonese -ng / -k | vi→zh | 95 / 95, 100 % | 94 / 95, 99 % | 95 / 95, 100 % |  | **rule** | — |
+| B4 | Mandarin -ing → -nh | zh→vi | 46 / 54, 85 % | 47 / 56, 84 % |  |  | **rule** | 憑 bằng 行 hàng 命 mạng 興 hưng 冰 băng 應 ứng 興 hứng 凝 ngưng |
+| B3x | Cantonese -ing / -ik → -nh / -ch | dropped | 72 / 102, 71 % | 75 / 106, 71 % |  |  | **drop** | 仍 nhưng 認 nhận 織 chức 域 vực 勝 thắng 力 lực 食 thực 直 trực |
+| V1 | Cantonese -oeng / -oek → -ương / -ươc | zh→vi | 33 / 35, 94 % | 33 / 35, 94 % |  |  | **rule** | 樣 dạng 雙 song |
+| V2 | Cantonese -in / -it → -iên / -iêt | zh→vi | 40 / 43, 93 % | 41 / 45, 91 % |  |  | **rule** | 結 kết 言 ngôn 必 tất |
+<!-- /rules -->
 
-| Id | Rule | Hits | Main exceptions | Lesson |
-|---|---|---|---|---|
-| B0 | What Hán-Việt is: one syllable per character, Chinese order inside the word | — | — | L2 |
-| B1 | Cantonese -p → -p | 21 / 21, 100 % | — | L4 |
-| B1 | Cantonese -t → -t | 34 / 37, 92 % | 法 pháp, 壓 áp (old -p: Hán-Việt kept it, Cantonese and Taigi did not); 實 thực | L4 |
-| B1 | Cantonese -k → -c / -ch | 86 / 87, 99 % | 值 trị | L4 |
-| B2 | Cantonese -m → -m | 41 / 41, 100 % | — | L6 |
-| B2 | Taigi -m → -m | 40 / 42, 95 % | 填 điền, 忍 nhẫn | L6 |
-| B3 | vi→zh: Hán-Việt -nh / -ch → Cantonese -ng / -k | 74 / 74, 100 % | — | L8 |
-| B4 | Mandarin -ing → -nh | 46 / 54, 85 % | 憑 bằng, 平 bằng, 冰 băng, 興 hưng, 應 ứng, 凝 ngưng, 命 mạng | L32 |
-| V1 | Cantonese -oeng / -oek → -ương / -ươc | 31 / 33, 94 % | 樣 dạng, 雙 song | L30 |
-| V2 | Cantonese -in / -it → -iên / -iêt | 36 / 39, 92 % | 結 kết, 言 ngôn, 必 tất | L31 |
-
-**Dropped**: "Cantonese -ing / -ik → -nh / -ch" (57 / 85, 67 %: 仍 nhưng, 力 lực, 食 thực, 直 trực, 織 chức):
-the reverse (B3) is the useful direction; going forward the learner is told only that -nh / -ch need a Cantonese
--ng / -k.
+"Cantonese -ing / -ik → -nh / -ch" is dropped: the reverse (B3) is the useful direction; going forward the learner
+is told only that -nh / -ch need a Cantonese -ng / -k. B1's 法 pháp, 壓 áp kept an old -p that Cantonese turned to -t.
 <!-- bridge-examples -->
 - B0: 越南 Việt Nam, 中國 Trung Quốc, 法 Pháp, 學 học, 河內 Hà Nội
 - B1: 學習 học tập, 法律 pháp luật, 獨立 độc lập, 發展 phát triển, 國家 quốc gia
 - B2: 南 nam, 心 tâm, 感 cảm, 點 điểm, 音 âm, 參加 tham gia
 - B3: 生 sinh, 病 bệnh, 明白 minh bạch, 歷史 lịch sử, 客 khách
 - B4: 情 tình, 定 định, 平 bình, 影 ảnh, 經濟 kinh tế
-- V1: 想 tưởng, 洋 dương, 商 thương, 香 hương, 影響 ảnh hưởng, 戰略 chiến lược
-- V2: 電 điện, 先 tiên, 前 tiền, 年 niên, 研究 nghiên cứu, 節 tiết, 熱 nhiệt
+- V1: 想 tưởng, 洋 dương, 香 hương, 影響 ảnh hưởng, 戰略 chiến lược
+- V2: 電 điện, 先 tiên, 年 niên, 研究 nghiên cứu, 節 tiết, 熱 nhiệt
 <!-- /bridge-examples -->
 
 ## 5. Initials, by old class
@@ -206,138 +266,170 @@ the reverse (B3) is the useful direction; going forward the learner is told only
 Grouped by the Middle Chinese initial behind each Hán-Việt letter; each rule keyed to whichever of Cantonese, Taigi
 or Mandarin predicts best, measured in its direction (**zh→vi**: from the Chinese he knows to a guess of the
 Vietnamese; **vi→zh**: from a Vietnamese word heard or read to the Chinese; **spell**: which letter to write for a
-sound Hà Nội merges). Hit rate = matching / all Hán-Việt syllables of the top 3,000 the rule covers (readings that
-disagree are left out). **Rule** at 80 % or more, **tendency** 60–80 %, dropped below.
+sound Hà Nội merges, he hears the sound). Where a rule only narrows the choice, a second condition from another of
+his languages is measured beside it (zh- with Taigi t- → tr, with Taigi ts- → ch; Mandarin j q with Cantonese g- →
+c, or gi before Cantonese aa / o).
 
 **Labials** (old p ph b; f-series; m)
-
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| ph ← Mandarin f- | zh→vi | 40 / 41, 98 % | 幅 bức |
-| b ← Mandarin b- | zh→vi | 37 / 41, 90 % | 標 tiêu, 比 tỷ, 必 tất, 弊 tệ (→ t) |
-| b ← Taigi p- | zh→vi | 42 / 47, 89 % | the same four, 房 phòng |
-| ph → Mandarin f- or p- | vi→zh | 50 / 50, 100 % | — |
-| b → Mandarin b- or p- | vi→zh | 44 / 47, 94 % | 幅 bức, 祕 bí |
-| m ← Mandarin m- | zh→vi | 30 / 35, 86 % | 民 dân, 面 diện, 名 danh, 滅 diệt (→ d) |
-| m → Mandarin m- | vi→zh | 30 / 30, 100 % | — |
-| v ← Cantonese m- with Mandarin w- | zh→vi | 11 / 11, 100 % | — |
-| v → Mandarin w- or y- | vi→zh | 26 / 27, 96 % | 榮 vinh |
-
-Mandarin p- splits by tone (see "Aspiration"): tone 2 → b (平 bình), other tones → ph (破 phá).
+<!-- rules:labials -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IP | ph ← Mandarin f- | zh→vi | 41 / 42, 98 % | 41 / 42, 98 % |  |  | **rule** | 幅 bức |
+| IP | b ← Mandarin b- | zh→vi | 38 / 42, 90 % | 39 / 43, 91 % |  |  | **rule** | 標 tiêu 比 tỷ 弊 tệ 必 tất |
+| IP | b ← Taigi p- | zh→vi | 42 / 47, 89 % | 42 / 47, 89 % |  |  | **rule** | 房 phòng 標 tiêu 比 tỷ 弊 tệ 必 tất |
+| IP | ph → Mandarin f- or p- | vi→zh | 50 / 50, 100 % | 50 / 50, 100 % | 50 / 50, 100 % | f 82 % | **rule** | — |
+| IP | b → Mandarin b- or p- | vi→zh | 44 / 48, 92 % | 44 / 48, 92 % | 45 / 48, 94 % | b 79 % | **rule** | 幅 bức 祕 bí 秘 bí 郵 bưu |
+| IM | m ← Mandarin m- | zh→vi | 31 / 37, 84 % | 31 / 37, 84 % |  |  | **rule** | 民 dân 祕 bí 面 diện 名 danh 滅 diệt 秘 bí |
+| IM | m → Mandarin m- | vi→zh | 31 / 31, 100 % | 30 / 31, 97 % | 31 / 31, 100 % |  | **rule** | — |
+| IM | v ← Cantonese m- with Mandarin w- | zh→vi | 11 / 11, 100 % | 11 / 12, 92 % |  |  | **rule** | — |
+| IM | v ← Mandarin w- (alone) | zh→vi | 15 / 24, 62 % | 15 / 26, 58 % |  |  | **tendency** | 翁 ông 完 hoàn 唯 duy 危 nguy 穩 ổn 委 ủy 外 ngoại 維 duy |
+| IM | v → Mandarin w- or y- | vi→zh | 26 / 27, 96 % | 26 / 27, 96 % | 26 / 27, 96 % | w 56 % | **narrows** | 榮 vinh |
+<!-- /rules -->
 
 **Dentals** (old t th d; n l)
-
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| đ ← Mandarin d- | zh→vi | 41 / 41, 100 % | — |
-| đ ← Mandarin t- in tone 2 | zh→vi | 17 / 17, 100 % | — |
-| th ← Mandarin t- in tones 1 3 4 | zh→vi | 16 / 19, 84 % | 特 đặc, 突 đột, 推 suy |
-| đ ← Taigi t- with Mandarin d- / t- | zh→vi | 53 / 53, 100 % | — (Taigi t- with zh- / ch- is tr, below) |
-| đ → Mandarin d- or t- | vi→zh | 61 / 61, 100 % | — |
-| n ← Mandarin n- · l ← Mandarin l- | zh→vi | 14 / 15 · 50 / 50 | 凝 ngưng |
-| n → Mandarin n- · l → Mandarin l- | vi→zh | 14 / 14 · 50 / 50 | — |
-| Taigi l- → l or n (Mandarin decides) | zh→vi | 58 / 59, 98 % | 冗 nhũng |
+<!-- rules:dentals -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| ID | đ ← Mandarin d- | zh→vi | 46 / 46, 100 % | 46 / 47, 98 % |  |  | **rule** | — |
+| ID | đ ← Mandarin t- in tone 2 | zh→vi | 18 / 18, 100 % | 22 / 22, 100 % |  |  | **rule** | — |
+| ID | th ← Mandarin t- in tones 1 3 4 | zh→vi | 16 / 19, 84 % | 16 / 19, 84 % |  |  | **rule** | 特 đặc 突 đột 推 suy |
+| ID | đ ← Taigi t- with Mandarin d- / t- | zh→vi | 58 / 58, 100 % | 59 / 60, 98 % |  |  | **rule** | — |
+| ID | đ → Mandarin d- or t- | vi→zh | 66 / 66, 100 % | 65 / 66, 98 % | 66 / 66, 100 % | d 70 % | **rule** | — |
+| ID | n ← Mandarin n- | zh→vi | 14 / 15, 93 % | 14 / 15, 93 % |  |  | **rule** | 凝 ngưng |
+| ID | l ← Mandarin l- | zh→vi | 50 / 52, 96 % | 50 / 52, 96 % |  |  | **rule** | 樂 nhạc 率 suất |
+| ID | n → Mandarin n- | vi→zh | 14 / 14, 100 % | 14 / 14, 100 % | 14 / 14, 100 % |  | **rule** | — |
+| ID | l → Mandarin l- | vi→zh | 50 / 50, 100 % | 50 / 50, 100 % | 50 / 50, 100 % |  | **rule** | — |
+| ID | Taigi l- → l or n (Mandarin decides) | zh→vi | 59 / 61, 97 % | 59 / 70, 84 % |  | l 74 % | **rule** | 條 điều 冗 nhũng |
+<!-- /rules -->
 
 **Retroflex series** (old ʈ- and tʂ- / tɕ- series: Mandarin zh ch sh)
+<!-- rules:retroflex -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IR | ch or tr ← Mandarin zh- | zh→vi | 70 / 74, 95 % | 73 / 79, 92 % |  | tr 49 % | **narrows** | 棧 sạn 者 giả 殖 thực 撰 soạn |
+| IR | tr ← Mandarin zh- / ch- with Taigi t- / th- | zh→vi | 37 / 37, 100 % | 37 / 38, 97 % |  |  | **rule** | — |
+| IR | ch ← Mandarin zh- with Taigi ts- | zh→vi | 34 / 47, 72 % | 34 / 50, 68 % |  |  | **tendency** | 陣 trận 爭 tranh 助 trợ 棧 sạn 狀 trạng 妝 trang 者 giả 站 trạm |
+| IR | ch → Mandarin zh- | vi→zh | 34 / 34, 100 % | 34 / 34, 100 % | 34 / 34, 100 % |  | **rule** | — |
+| IR | tr → Mandarin zh- or ch- | vi→zh | 51 / 52, 98 % | 50 / 52, 96 % | 51 / 52, 98 % | zh 69 % | **rule** | 責 trách |
+| IR | th or s ← Mandarin sh- | zh→vi | 68 / 71, 96 % | 70 / 73, 96 % |  | th 76 % | **rule** | 省 tỉnh 社 xã 賒 xa |
+| IR | x or s ← Mandarin ch- in tones 1 3 4 | zh→vi | 17 / 18, 94 % | 17 / 18, 94 % |  | x 56 % | **narrows** | 場 trường |
+| IR | x ← Mandarin ch- in tones 1 3 4 with Taigi tsh- | zh→vi | 9 / 16, 56 % | 9 / 16, 56 % |  |  | **drop** | 場 trường 銃 súng 差 sai 超 siêu 礎 sở 充 sung 創 sáng |
+| IR | tr or th ← Mandarin ch- in tone 2 | zh→vi | 22 / 23, 96 % | 26 / 28, 93 % |  | tr 61 % | **rule** | 察 sát |
+| IR | tr ← Mandarin ch- in tone 2 with Taigi t- | zh→vi | 6 / 6, 100 % | 9 / 10, 90 % |  |  | **rule** | — |
+| IR | th ← Mandarin ch- in tone 2 with Taigi s- / tsh- | zh→vi | 7 / 10, 70 % | 7 / 13, 54 % |  |  | **tendency** | 查 tra 察 sát 持 trì |
+| IR | x → Mandarin ch- | vi→zh | 10 / 15, 67 % | 10 / 15, 67 % | 10 / 15, 67 % |  | **tendency** | 社 xã 確 xác 賒 xa 殼 xác 侵 xâm |
+| IR | s → Mandarin sh- or ch- | vi→zh | 22 / 31, 71 % | 21 / 31, 68 % | 23 / 31, 74 % | sh 45 % | **narrows** | 冊 sách 所 sở 色 sắc 策 sách 棧 sạn 率 suất 撰 soạn 推 suy |
+<!-- /rules -->
 
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| tr ← Mandarin zh- / ch- with Taigi t- / th- | zh→vi | 31 / 31, 100 % | — |
-| ch or tr ← Mandarin zh- | zh→vi | 66 / 70, 94 % | 棧 sạn, 者 giả, 殖 thực, 撰 soạn |
-| ch ← Mandarin zh- with Taigi ts- | zh→vi | 34 / 47, 72 %: **tendency** | 爭 tranh, 助 trợ, 狀 trạng, 陣 trận, 站 trạm |
-| ch → Mandarin zh- | vi→zh | 34 / 34, 100 % | — |
-| tr → Mandarin zh- or ch- | vi→zh | 44 / 45, 98 % | 責 trách |
-| th or s ← Mandarin sh- | zh→vi | 66 / 68, 97 % | 社 xã, 賒 xa |
-| th ← Mandarin sh- | zh→vi | 52 / 68, 76 %: **tendency** | s in 事 sự, 數 số, 使 sử, 生 sinh, 史 sử, 士 sĩ |
-| x or s ← Mandarin ch- in tones 1 3 4 | zh→vi | 13 / 13, 100 % | — |
-| tr or th ← Mandarin ch- in tone 2 | zh→vi | 18 / 19, 95 % | 察 sát |
-| x → Mandarin ch- | vi→zh | 10 / 14, 71 %: **tendency** | 社 xã, 確 xác, 侵 xâm |
-| s → Mandarin sh- or ch- | vi→zh | 21 / 29, 72 %: **tendency** | 冊 sách, 所 sở, 色 sắc, 策 sách |
-
-The exceptions to "ch" and "th" are one old group (the 莊 series: 爭 助 狀 莊 → tr; 事 生 史 使 士 → s). None of
-his three varieties marks it, so it is taught as a list, not a rule.
+The exceptions to "ch" and "th" are mostly one old group, the 莊 series (爭 助 狀 莊 → tr; 事 生 史 使 士 → s).
+Mandarin marks part of it: where the other series have zh ch sh, some 莊 words have z c s (所 suǒ sở, 色 sè sắc,
+策 cè sách, 冊 cè sách, 責 zé trách), and these go with the dental sibilants' exceptions below; the rest of the
+group is marked by none of his three varieties and is taught as a list.
 
 **Dental sibilants** (old ts tsh dz s z: Mandarin z c s, or j q x before i / ü)
-
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| t ← Mandarin z- | zh→vi | 28 / 29, 97 % | 責 trách |
-| Mandarin j q x with Cantonese z c s → t or th | zh→vi | 64 / 66, 97 % | 需 nhu, 侵 xâm |
-| … with Taigi ts- / s- → t | zh→vi | 93 / 98, 95 % | 所 sở, 色 sắc, 責 trách |
-| … with Taigi tsh- → th | zh→vi | 13 / 16, 81 % | 策 sách, 侵 xâm, 縱 tung |
-| t → Mandarin z c s j q x | vi→zh | 107 / 112, 96 % | 標 tiêu, 比 tỷ, 必 tất, 弊 tệ, 慧 tuệ |
-| t → Cantonese z c s | vi→zh | 104 / 109, 95 % | the same |
+<!-- rules:sibilants -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IS | t ← Mandarin z- | zh→vi | 28 / 29, 97 % | 29 / 30, 97 % |  |  | **rule** | 責 trách |
+| IS | t or th ← Mandarin j q x with Cantonese z c s | zh→vi | 69 / 71, 97 % | 70 / 72, 97 % |  | t 85 % | **rule** | 需 nhu 侵 xâm |
+| IS | t ← Mandarin z c s j q x with Cantonese z c s and Taigi ts- / s- | zh→vi | 103 / 108, 95 % | 104 / 109, 95 % |  |  | **rule** | 所 sở 責 trách 色 sắc 需 nhu 搜 sưu |
+| IS | th ← Mandarin z c s j q x with Cantonese z c s and Taigi tsh- | zh→vi | 14 / 17, 82 % | 14 / 19, 74 % |  |  | **rule** | 策 sách 侵 xâm 縱 tung |
+| IS | t → Mandarin z c s j q x | vi→zh | 110 / 116, 95 % | 110 / 116, 95 % | 111 / 116, 96 % | x 29 % | **narrows** | 省 tỉnh 標 tiêu 比 tỷ 弊 tệ 必 tất 慧 tuệ |
+| IS | t + i y ê iê ư ươ → Mandarin j q x | vi→zh | 37 / 52, 71 % | 37 / 52, 71 % | 38 / 52, 73 % | x 35 % | **narrows** | 自 tự 省 tỉnh 司 ty 秭 tỷ 標 tiêu 比 tỷ 資 tư 詞 từ |
+| IS | t + other vowels → Mandarin z c s | vi→zh | 39 / 64, 61 % | 39 / 64, 61 % | 40 / 64, 62 % | z 36 % | **narrows** | 續 tục 旬 tuần 全 toàn 心 tâm 進 tấn 集 tập 絕 tuyệt 宣 tuyên |
+| IS | t → Cantonese z c s | vi→zh | 111 / 116, 96 % | 110 / 116, 95 % | 111 / 116, 96 % | z 48 % | **narrows** | 標 tiêu 比 tỷ 弊 tệ 必 tất 慧 tuệ |
+<!-- /rules -->
 
 **Velars and h** (old k kh g; ŋ; x ɣ)
-
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| c / k / q ← Mandarin g- | zh→vi | 45 / 46, 98 % | 概 khái |
-| c / k / q or gi ← Taigi k- | zh→vi | 119 / 124, 96 % | 縣 huyện, 枯 khô, 緊 khẩn |
-| Mandarin j q x with Cantonese g k h → c, kh, h, gi (never t) | zh→vi | 112 / 113, 99 % | 確 xác |
-| gi ← Mandarin j- with Cantonese g- + aa / o | zh→vi | 18 / 18, 100 % | — |
-| kh ← Cantonese h- / f- with Mandarin k- / q- | zh→vi | 23 / 24, 96 % | 況 huống |
-| kh ← Taigi kh- | zh→vi | 25 / 34, 74 %: **tendency** | 權 quyền, 確 xác, 擒 cầm, 吸 hấp |
-| c / k / q → Mandarin g j k q | vi→zh | 109 / 109, 100 % | — |
-| kh → Mandarin k- or q- · → Taigi kh- | vi→zh | 27 / 29, 93 % · 25 / 29, 86 % | 緊 khẩn, 概 khái |
-| gi → Mandarin j- with Cantonese g- | vi→zh | 18 / 19, 95 % | 者 giả |
-| ng / ngh ← Taigi g- | zh→vi | 23 / 24, 96 % | 牙 nha |
-| ng / ngh → Taigi g- | vi→zh | 23 / 25, 92 % | 伍 ngũ, 偶 ngẫu |
-| h ← Mandarin h- / x- with Cantonese h f w j | zh→vi | 76 / 78, 97 % | 話 thoại, 慧 tuệ |
-| Taigi h- → h, but ph when Mandarin has f- | zh→vi | 113 / 115, 98 % | 幅 bức, 慧 tuệ |
-| h → Mandarin h- or x- · → Taigi h- | vi→zh | 80 / 84, 95 % · 76 / 85, 89 % | 完 hoàn, 有 hữu |
+<!-- rules:velars -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IK | c / k / q ← Mandarin g- | zh→vi | 45 / 46, 98 % | 46 / 50, 92 % |  |  | **rule** | 概 khái |
+| IK | c / k / q or gi ← Taigi k- | zh→vi | 119 / 124, 96 % | 120 / 126, 95 % |  | c 81 % | **rule** | 縣 huyện 枯 khô 緊 khẩn 概 khái 券 khoán |
+| IK | c, kh, h or gi ← Mandarin j q x with Cantonese g k h | zh→vi | 125 / 126, 99 % | 125 / 127, 98 % |  | c 51 % | **narrows** | 確 xác |
+| IK | gi ← Mandarin j- with Cantonese g- + aa / o | zh→vi | 19 / 19, 100 % | 19 / 19, 100 % |  |  | **rule** | — |
+| IK | c ← Mandarin j- / q- with Cantonese g- / k- (not + aa / o) | zh→vi | 64 / 69, 93 % | 64 / 69, 93 % |  |  | **rule** | 區 khu 曲 khúc 緊 khẩn 頃 khoảnh 券 khoán |
+| IK | kh ← Cantonese h- / f- with Mandarin k- / q- | zh→vi | 23 / 25, 92 % | 23 / 25, 92 % |  |  | **rule** | 殼 xác 況 huống |
+| IK | kh ← Taigi kh- | zh→vi | 25 / 34, 74 % | 25 / 34, 74 % |  |  | **tendency** | 權 quyền 確 xác 擒 cầm 殼 xác 吸 hấp 俱 câu 儉 kiệm 昆 côn |
+| IK | c / k / q → Mandarin g j k q | vi→zh | 110 / 110, 100 % | 110 / 110, 100 % | 110 / 110, 100 % | j 49 % | **narrows** | — |
+| IK | c / k / q + i y ê iê ư ươ → Mandarin j q | vi→zh | 34 / 35, 97 % | 34 / 35, 97 % | 34 / 35, 97 % | j 89 % | **rule** | 剛 cương |
+| IK | c / k / q + other vowels → Mandarin g k | vi→zh | 45 / 75, 60 % | 45 / 75, 60 % | 46 / 75, 61 % | g 59 % | **narrows** | 權 quyền 決 quyết 郡 quận 句 câu 級 cấp 警 cảnh 軍 quân 機 cơ |
+| IK | c / k / q → Taigi k- | vi→zh | 101 / 107, 94 % | 101 / 107, 94 % | 101 / 107, 94 % |  | **rule** | 權 quyền 擒 cầm 俱 câu 儉 kiệm 昆 côn 琴 cầm |
+| IK | kh → Mandarin k- or q- | vi→zh | 28 / 30, 93 % | 28 / 30, 93 % | 28 / 30, 93 % | k 60 % | **rule** | 緊 khẩn 概 khái |
+| IK | kh → Taigi kh- | vi→zh | 25 / 29, 86 % | 25 / 29, 86 % | 25 / 29, 86 % |  | **rule** | 枯 khô 緊 khẩn 概 khái 券 khoán |
+| IK | gi → Mandarin j- with Cantonese g- | vi→zh | 19 / 20, 95 % | 18 / 20, 90 % | 19 / 20, 95 % |  | **rule** | 者 giả |
+| IG | ng / ngh ← Taigi g- | zh→vi | 23 / 25, 92 % | 23 / 25, 92 % |  |  | **rule** | 樂 nhạc 牙 nha |
+| IG | ng / ngh → Taigi g- | vi→zh | 23 / 25, 92 % | 23 / 25, 92 % | 23 / 25, 92 % |  | **rule** | 伍 ngũ 偶 ngẫu |
+| IH | h ← Mandarin h- / x- with Cantonese h- / f- / w- / j- | zh→vi | 81 / 83, 98 % | 81 / 84, 96 % |  |  | **rule** | 話 thoại 慧 tuệ |
+| IH | Taigi h- → h, but ph when Mandarin has f- | zh→vi | 116 / 119, 97 % | 116 / 119, 97 % |  |  | **rule** | 幅 bức 降 giáng 慧 tuệ |
+| IH | h → Mandarin h- or x- | vi→zh | 82 / 86, 95 % | 80 / 86, 93 % | 82 / 86, 95 % | h 53 % | **narrows** | 完 hoàn 有 hữu 況 huống 友 hữu |
+| IH | h → Taigi h- | vi→zh | 77 / 86, 90 % | 76 / 86, 88 % | 77 / 86, 90 % |  | **rule** | 縣 huyện 完 hoàn 畫 hoạch 有 hữu 吸 hấp 湖 hồ 畫 họa 友 hữu |
+<!-- /rules -->
 
 So Mandarin j q x, which Mandarin merged, split again by Cantonese: g k h → c kh h gi; z c s → t th.
 
 **No initial, v, d, nh** (old ʔ, the glides, ɲ)
+<!-- rules:glides -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IY | nh ← Mandarin r- | zh→vi | 13 / 16, 81 % | 13 / 16, 81 % |  |  | **rule** | 阮 nguyễn 容 dung 榮 vinh |
+| IY | nh → Mandarin r-, y- or none | vi→zh | 19 / 21, 90 % | 19 / 21, 90 % | 20 / 21, 95 % | r 62 % | **rule** | 樂 nhạc 需 nhu |
+| IY | nh ← Taigi j- | zh→vi | 12 / 12, 100 % | 12 / 12, 100 % |  |  | **rule** | — |
+| IY | d ← Mandarin y- with Cantonese j- in tone 4 5 6, Taigi no initial | zh→vi | 25 / 33, 76 % | 25 / 33, 76 % |  |  | **tendency** | 越 việt 員 viên 有 hữu 園 viên 宇 vũ 羽 vũ 郵 bưu 友 hữu |
+| IY | d → Mandarin y- | vi→zh | 27 / 34, 79 % | 27 / 34, 79 % | 27 / 34, 79 % |  | **tendency** | 民 dân 唯 duy 面 diện 容 dung 名 danh 滅 diệt 維 duy |
+| IY | d → Cantonese j- | vi→zh | 27 / 34, 79 % | 26 / 34, 76 % | 27 / 34, 79 % |  | **tendency** | 民 dân 唯 duy 面 diện 名 danh 滅 diệt 遺 di 維 duy |
+| IY | no initial ← Mandarin y- / w- / none with Cantonese j- / w- / none in tone 1 2 3 | zh→vi | 32 / 35, 91 % | 32 / 41, 78 % |  |  | **rule** | 一 nhất 因 nhân 姻 nhân |
+| IY | no initial → Mandarin y-, w- or none | vi→zh | 32 / 32, 100 % | 32 / 32, 100 % | 32 / 32, 100 % | y 62 % | **rule** | — |
+| IY | no Hán-Việt syllable starts with r | fact | 993 / 993, 100 % | 993 / 993, 100 % |  |  | **fact** | — |
+<!-- /rules -->
 
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| nh ← Mandarin r- | zh→vi | 13 / 16, 81 % | 阮 nguyễn, 容 dung, 榮 vinh |
-| nh → Mandarin r-, y- or none | vi→zh | 19 / 20, 95 % (r- alone 65 %, tendency) | 需 nhu |
-| nh ← Taigi j- | zh→vi | 4 / 4 (few: most Taigi readings here have l- or none) | — |
-| d ← Mandarin y- with Cantonese j- in tone 4 5 6, Taigi no initial | zh→vi | 21 / 28, 75 %: **tendency** | 越 việt, 員 viên, 宇 vũ (→ v); 有 hữu |
-| d → Mandarin y- · → Cantonese j- | vi→zh | 27 / 34 · 26 / 33, 79 %: **tendency** | 民 dân, 面 diện, 名 danh (m-); 唯 duy (w-) |
-| no initial ← Mandarin y- / w- / none with Cantonese in tone 1 2 3 | zh→vi | 24 / 28, 86 % | 一 nhất, 因 nhân, 院 viện |
-| no initial → Mandarin y-, w- or none | vi→zh | 31 / 31, 100 % | — |
-| no Hán-Việt syllable starts with r | vi→zh | 994 / 994 | — |
-
-**Aspiration across the classes** (the old voiced stops lost their voice: Cantonese and Mandarin aspirate some)
-
-| Rule | Dir | Hits | Main exceptions |
-|---|---|---|---|
-| Cantonese p t k kw c in tone 4 / 5 → b đ c t tr ch gi | zh→vi | 55 / 55, 100 % | — |
-| Mandarin p t k q c ch in tone 2 → b đ c t tr ch gi | zh→vi | 56 / 64, 88 % | 常 thường, 城 thành, 成 thành, 船 thuyền (old fricatives) |
-| Mandarin p t k q c ch in tones 1 3 4 → ph th kh x s | zh→vi | 79 / 84, 94 % | 特 đặc, 突 đột, 期 kỳ |
+**Aspiration across the classes** (the old voiced stops lost their voice; Cantonese and Mandarin aspirate some):
+these only narrow the letter to a set; the class rules above choose within it.
+<!-- rules:aspiration -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| IA | Cantonese p t k kw c in tone 4 / 5 → b đ c t tr ch gi (old voiced) | zh→vi | 69 / 70, 99 % | 82 / 89, 92 % |  | tr 27 % | **narrows** | 妥 thỏa |
+| IA | Mandarin p t k q c ch in tone 2 → b đ c t tr ch gi (old voiced) | zh→vi | 59 / 69, 86 % | 69 / 79, 87 % |  | đ 26 % | **narrows** | 常 thường 城 thành 成 thành 察 sát 殼 xác 船 thuyền 承 thừa 誠 thành |
+| IA | Mandarin p t k q c ch in tones 1 3 4 → ph th kh x s | zh→vi | 90 / 96, 94 % | 91 / 98, 93 % |  | th 32 % | **narrows** | 場 trường 特 đặc 期 kỳ 突 đột 況 huống 昆 côn |
+<!-- /rules -->
 
 **Spelling what Hà Nội merges** (the Chinese decides the letter; native words are learnt by heart)
+<!-- rules:spelling -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| Z1 | d or gi: gi when Cantonese has g- | spell | 53 / 54, 98 % | 53 / 54, 98 % |  |  | **rule** | 者 giả |
+| Z1 | d or gi: gi when Mandarin has j- | spell | 53 / 54, 98 % | 52 / 54, 96 % |  |  | **rule** | 者 giả |
+| Z2 | tr or ch: ch when Taigi has ts- | spell | 74 / 85, 87 % | 72 / 85, 85 % |  |  | **rule** | 陣 trận 爭 tranh 責 trách 助 trợ 狀 trạng 妝 trang 站 trạm 莊 trang |
+| Z3 | s or x: x when Mandarin has ch- | spell | 33 / 46, 72 % | 33 / 46, 72 % |  |  | **tendency** | 社 xã 察 sát 產 sản 確 xác 賒 xa 銃 súng 差 sai 殼 xác |
+| Z3 | s or x: x when Taigi has tsh- | spell | 32 / 44, 73 % | 31 / 44, 70 % |  |  | **tendency** | 社 xã 察 sát 確 xác 賒 xa 銃 súng 差 sai 殼 xác 超 siêu |
+<!-- /rules -->
 
-| Rule | Hits | Main exceptions |
-|---|---|---|
-| Z1 [z]: gi when Cantonese has g- (= Mandarin j-), else d; never r | 52 / 53, 98 % | 者 giả |
-| Z2 [c]: ch when Taigi has ts-, else tr | 73 / 84, 87 % | 陣 trận, 爭 tranh, 責 trách, 助 trợ, 莊 trang |
-| Z3 [s]: x when Mandarin has ch-, else s | 32 / 43, 74 %: **tendency** | 社 xã, 察 sát, 產 sản, 確 xác |
-
-**Dropped from the first proposal** (measured, zh→vi): kh ← Cantonese h- 18 / 58, 31 % (學 học, 河 hà: most are
-h); ph ← Cantonese f- 37 / 56, 66 % (花 hoa, 化 hóa, 科 khoa), replaced by Mandarin f-; v ← Cantonese m- 11 / 45,
-24 %; v ← Mandarin w- alone 15 / 24, 62 %; gi ← Mandarin j- 18 / 91, 20 %; d ← Mandarin y- 27 / 83, 33 %; s / x by
-Mandarin sh / ch 24 / 33, 73 % (now Z3, a tendency); tr / ch by Taigi t / ts 65 / 76, 86 % (kept as Z2 in a form
-that covers more words).
+**Dropped from the first proposal** (measured, zh→vi; "v ← Mandarin w- alone", a tendency, is now among the
+labials; "s / x by Mandarin sh / ch" and "tr / ch by Taigi t / ts" became Z3 and Z2)
+<!-- rules:dropped -->
+| Id | Rule | Dir | Main | Strict | Lenient | Best single guess | Kind | Main exceptions |
+|---|---|---|---|---|---|---|---|---|
+| I1x | kh ← Cantonese h- | dropped | 18 / 63, 29 % | 18 / 63, 29 % |  |  | **drop** | 學 học 曉 hiểu 行 hàng 河 hà 系 hệ 行 hành 係 hệ 向 hướng |
+| I2x | ph ← Cantonese f- (replaced by ph ← Mandarin f-, which misses one) | dropped | 42 / 61, 69 % | 42 / 66, 64 % |  |  | **drop** | 花 hoa 化 hóa 科 khoa 幅 bức 婚 hôn 塊 khối 枯 khô 款 khoản |
+| I3x | v ← Cantonese m- (replaced by v ← Cantonese m- with Mandarin w-) | dropped | 11 / 46, 24 % | 11 / 46, 24 % |  |  | **drop** | 每 mỗi 民 dân 明 minh 門 môn 目 mục 密 mật 媒 môi 命 mạng |
+| I4x | gi ← Mandarin j- | dropped | 19 / 96, 20 % | 19 / 96, 20 % |  |  | **drop** | 決 quyết 郡 quận 句 câu 檢 kiểm 接 tiếp 級 cấp 究 cứu 經 kinh |
+| I7x | d ← Mandarin y- | dropped | 27 / 83, 33 % | 27 / 84, 32 % |  |  | **drop** | 一 nhất 越 việt 影 ảnh 域 vực 員 viên 研 nghiên 藝 nghệ 意 ý |
+<!-- /rules -->
 
 **Teaching order**: IK velars (L16), IH h and IG ng (L17), IP labials (L18), IM m, v (L19), ID dentals (L20),
 IA aspiration (L22), IS sibilants (L23), IR tr, ch (L24), IR th, s, x (L25), IY nh, d, none (L26), Z spelling
 (L27), recap from the Vietnamese side (L29).
 <!-- bridge-examples -->
-- IK: 公 công, 國家 quốc gia, 金 kim, 經濟 kinh tế · kh: 客 khách, 開 khai, 口 khẩu, 氣 khí, 起 khởi · gi: 家庭 gia đình, 教 giáo, 間 gian, 江山 giang sơn, 交通 giao thông
+- IK: 公司 công ty, 國家 quốc gia, 金 kim, 經濟 kinh tế · kh: 客 khách, 開 khai, 口 khẩu, 氣 khí, 起 khởi · gi: 家庭 gia đình, 教 giáo, 間 gian, 江山 giang sơn, 交通 giao thông
 - IH: 學 học, 花 hoa, 海外 hải ngoại, 香 hương, 現在 hiện tại · IG: 言語 ngôn ngữ, 業 nghiệp, 外 ngoại, 研究 nghiên cứu, 月 nguyệt
 - IP: 法 pháp, 方 phương, 發 phát, 飛機 phi cơ, 破 phá, 片 phiến · b: 北 bắc, 部 bộ, 病 bệnh, 平 bình, 盤 bàn
 - IM: 馬 mã, 美 mỹ, 門 môn, 明白 minh bạch · v: 文化 văn hóa, 物 vật, 萬 vạn, 味 vị, 問題 vấn đề, 運 vận, 越 việt, 王 vương
 - ID: 東 đông, 大學 đại học, 點 điểm, 電 điện · 頭 đầu, 題 đề, 同意 đồng ý · th: 通 thông, 體 thể, 天然 thiên nhiên, 太陽 thái dương · 南 nam, 女 nữ, 年 niên, 力 lực, 法律 pháp luật
-- IR: 中國 Trung Quốc, 茶 trà, 長 trường, 政治 chính trị, 傳 truyền, 知識 tri thức · ch: 正 chính, 主 chủ, 真 chân, 戰 chiến · th: 書 thư, 水 thủy, 世 thế, 商 thương, 常 thường, 城 thành · s: 生 sinh, 事 sự, 史 sử, 產品 sản phẩm · x: 出 xuất, 春 xuân, 車 xa
-- IS: 自 tự, 作品 tác phẩm, 現在 hiện tại, 心 tâm, 新 tân, 先 tiên, 前 tiền, 錢 tiền, 節 tiết, 情 tình, 想 tưởng · th: 清 thanh, 參加 tham gia
+- IR: 中國 Trung Quốc, 政治 chính trị, 傳 truyền, 知識 tri thức · ch: 正 chính, 主 chủ, 真 chân, 戰 chiến · th: 書 thư, 水 thủy, 世界 thế giới, 常 thường, 成 thành · s: 生 sinh, 事 sự, 史 sử, 產品 sản phẩm · x: 出 xuất, 春 xuân
+- IS: 自 tự, 作品 tác phẩm, 現在 hiện tại, 心 tâm, 新 tân, 先 tiên, 錢 tiền, 節 tiết, 情 tình, 想 tưởng · th: 清 thanh, 參加 tham gia
 - IY: 人民 nhân dân, 日 nhật, 熱 nhiệt, 自然 tự nhiên · d: 陽 dương, 洋 dương, 由 do, 使用 sử dụng · none: 意 ý, 音 âm, 安 an, 影 ảnh, 印象 ấn tượng, 醫 y
-- IA: 平 bình, 頭 đầu, 情 tình, 前 tiền, 全 toàn, 茶 trà, 強 cường · 通 thông, 體 thể, 開 khai, 口 khẩu, 破 phá, 清 thanh, 出 xuất
-- Z: gi 家庭 gia đình, 教 giáo / d 陽 dương, 由 do · ch 正 chính, 主 chủ / tr 中國 Trung Quốc, 茶 trà · x 出 xuất, 春 xuân / s 生 sinh, 事 sự
+- IA: 平 bình, 頭 đầu, 情 tình, 全 toàn, 強 cường · 通 thông, 體 thể, 開 khai, 口 khẩu, 破 phá, 清 thanh, 出 xuất
+- Z: gi 家庭 gia đình, 教 giáo / d 陽 dương, 由 do · ch 正 chính, 主 chủ / tr 中國 Trung Quốc · x 出 xuất, 春 xuân / s 生 sinh, 事 sự
 <!-- /bridge-examples -->
 
 ## 6. Grammar, in teaching order
@@ -384,11 +476,12 @@ reporting (L89–90); formal speech (L99).
 
 **Older Chinese loans** (decision 5: on the card as an older layer with the etymon, apart from Hán-Việt). O1 (L10):
 giờ "hour" is an older reading of 時, whose Hán-Việt reading is thời; O2 (L33): biết (別 biệt), cũng (共 cộng),
-được (得 đắc), đọc (讀 độc). Word list 2 has 24 older loans (6 with a doubtful etymon, characters hidden).
+được (得 đắc), đọc (讀 độc); also nôm (南, Hán-Việt nam: L71) and bằng "equal" (平, Hán-Việt bình: L15), which the
+second proposal wrongly gave as Hán-Việt. Word list 2's older loans are counted in section 1.
 The etymons are not "same word" examples; the Hán-Việt words beside them are:
 <!-- bridge-examples -->
 - O1–O2: 時間 thời gian, 特別 đặc biệt, 共 cộng
-- C4–C6: 員 viên, 會員 hội viên, 士 sĩ, 化 hóa, 現代化 hiện đại hóa, 無 vô, 無數 vô số, 非 phi, 不同 bất đồng
+- C4–C6: 員 viên, 會員 hội viên, 士 sĩ, 化 hóa, 現代化 hiện đại hóa, 無數 vô số, 非 phi, 不同 bất đồng
 <!-- /bridge-examples -->
 
 **Word-building notes** (C1–C24, one per lesson from L34; table in section 8): Hán-Việt order inside a word, native
@@ -398,11 +491,12 @@ idioms; then the vocabulary of institutions, medicine, science, law, Buddhism, h
 
 **False friends** (the `false_friend` column of `course/lexicon.tsv`; one line in the lesson that meets the word):
 thời tiết 時節 "weather", not a season (L9); tuần 旬 "week", not ten days (L11); bác sĩ 博士 "physician", not a PhD
-(L12); đầu tiên 頭先 "first" (Cantonese only, "just now") (L20); bản đồ 版圖 "map", not territory (L22); quận 郡
+(L12); sinh viên 生員 "university student", not an examination licentiate (L8); đầu tiên 頭先 "first", where
+Cantonese and Taigi 頭先 is "just now" (L20); bản đồ 版圖 "map", not territory (L22); quận 郡
 "urban district" (L23); chương trình 章程 "programme", not statutes (L37); thông cảm 通感 "to sympathise" (L44);
 thực sự 實事 "really" (L45); trường 場 "school" (L52); triệu 兆 "million" (L59); lạm phát 濫發 "inflation" (L65);
-nôm 南 the Vietnamese script (L71); nghĩa trang 義莊 "cemetery" (L96). Candidates from the first proposal (thư
-"letter", sinh viên, tử tế, phương tiện, an ninh, tâm sự, khách sạn) get a lexicon row with evidence before use.
+nghĩa trang 義莊 "cemetery" (L96). Candidates from the first proposal (thư "letter", tử tế, phương tiện, an ninh,
+tâm sự, khách sạn) get a lexicon row with evidence before use.
 
 **Southern usage** (decision 6): one line where the word differs: bố / ba, cốc / ly, quả / trái, đắt / mắc, nghìn
 / ngàn, rẽ / quẹo, bát / tô, ốm "ill" / "thin", nhỉ / nhể, ha; vâng / dạ. L67 is set in Sài Gòn (sounds, words,
@@ -529,17 +623,19 @@ L1–13 are word list 2, later lessons are targets for each word list. The same 
 - **Frequency is biased**: a small, partly translated corpus (Tatoeba, Wiktionary examples); spoken particles,
   numbers and food words rank low (vâng 3,663, nhỉ 2,207, phở 12,139); some ranks are junk. Ranks guide; the
   situation decides, and every low-ranked word of the list says why it is there.
-- **The sound rules are measured, not proven**: 994 syllables of the top-3,000 Hán-Việt cards, whose labels the
-  review found partly wrong (opaque or Vietnam-made by mistake); Taigi literary readings are the MOE's, a few of
-  them colloquial; a syllable whose readings disagree is left out; some classes are small (nh ← Taigi j-: 4;
-  Cantonese 5 with an obstruent: 7). A rate is a guide for the learner, not a law.
-- **Etymologies are Wiktionary's**: 24 older loans in word list 2 (6 doubtful, characters hidden), 36 words with
-  no recorded origin. Tone descriptions in Lesson 0 come from published accounts, not from listening.
+- **The sound rules are measured, not proven**: the Hán-Việt syllables of the top-3,000 cards (section 3), whose
+  labels reviews found partly wrong; Taigi literary readings are the MOE's, and where the MOE marks no layer the
+  app's classification (by the final consonant and the 麻 rhyme) may be wrong; the main rate depends on the stated
+  choice of reading, the strict rate shows how much; some classes are small (Cantonese 5 with an obstruent). A rate
+  is a guide for the learner, not a law.
+- **Etymologies are Wiktionary's**: word list 2's older loans and words with no recorded origin are counted in
+  section 1 ("no etymology recorded" says nothing about the origin). Tone descriptions in Lesson 0 come from
+  published accounts, not from listening.
 
 ## 10. Questions for the owner
 
 | # | Question | Recommendation |
 |---|---|---|
 | Q1 | Can a Hà Nội speaker read `wordlist-2-to-check.md` (its first four points) before lessons 1–7 are drafted? | **Yes, if at all possible**: those choices are repeated in every early dialogue; otherwise Claude drafts with its choices, labelled unchecked. |
-| Q2 | Teach the tendencies (60–80 %: ch, th, x, s, d, ngã → Chinese) or only the rules? | **Teach them, marked "tendency"**, each with its exception list: they still beat guessing for a reader of Chinese. |
+| Q2 | Teach the tendencies (60–80 % on the main rate) and the rules that only narrow the letter to a set (best single guess under 60 %), or only the rules? | **Teach them, marked "tendency" or "narrows it to these letters"**, each with its exception list and its strict rate: they still beat guessing for a reader of Chinese. |
 | Q3 | Initials take 12 bridge notes in L16–29: keep them together or spread to L50? | **Keep together**: the classes explain each other; reviews 21 and 28 recap them, and the second wave revisits them. |
