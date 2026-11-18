@@ -164,23 +164,29 @@ def senses(rows):
     groups = {}
     real = [r for r in rows if r.get('english') or r.get('chars') or not r.get('alt_kind')]
     for r in (real or rows):         # an "alternative spelling" row pooled with its word has no English of its own
-        groups.setdefault((r['source'], r['src_id'], r['chars'], r.get('origin') or ''), []).append(r)
+        groups.setdefault((r['source'], r['src_id'], r['chars'], r.get('origin') or '',
+                           r.get('pos') == 'character-reading'), []).append(r)
     order = {s: i for i, s in enumerate(english.SOURCE_RANK)}
 
     def k(item):
-        (src, sid, _, _), rs = item
+        (src, sid, _, _, _), rs = item
         # an entry with no etymology number on a page that has numbered ones (thích 釋, a surname) comes after them;
         # a character reading (tam~三) and an English-less group come last
         return (rs[0]['fixture'], all(r.get('pos') == 'character-reading' for r in rs),
-                not any(r.get('english') for r in rs), order.get(src, len(order)),
-                int(sid) if str(sid).isdigit() else 10 ** 6, all(r.get('pos') == 'name' for r in rs), rs[0]['id'])
+                not any(r.get('english') for r in rs), all(r.get('pos') == 'name' for r in rs),
+                order.get(src, len(order)), int(sid) if str(sid).isdigit() else 10 ** 6, rs[0]['id'])
     out = [rs for _, rs in sorted(groups.items(), key=k)]
-    # a later etymology with English the English Wiktionary attests (en_score >= 3) goes before a first one whose
-    # senses are all archaic/dialectal/literary (score <= -2): khám "to examine" before the Southern khám "jail"
+    # the evidence of use before page order: a later etymology goes first when its English is well attested by the
+    # English Wiktionary's translations (en_score >= 4.5) and better than the first one's by 1.5 (là "to be" before
+    # là "fine silk", với "with" before với "to reach"), or when the first one's senses are all archaic/dialectal/
+    # literary, or none is attested (score <= 0), and the later one's English is attested (>= 3): khám "to examine"
+    # before the Southern khám "jail", báo "newspaper" before báo "leopard". Name-only etymologies come last.
     score = lambda g: max((r['en_score'] if r.get('en_score') is not None else -9) for r in g)  # noqa: E731
-    if len(out) > 1 and score(out[0]) <= -2 and not out[0][0]['fixture']:
-        best = max(range(len(out)), key=lambda i: (score(out[i]) >= 3, -i))
-        if score(out[best]) >= 3 and not all(r.get('pos') in ('name', 'character-reading') for r in out[best]):
+    if len(out) > 1 and not out[0][0]['fixture']:
+        cand = [i for i in range(1, len(out)) if not all(r.get('pos') in ('name', 'character-reading') for r in out[i])]
+        best = max(cand, key=lambda i: (score(out[i]), -i), default=None)
+        if best is not None and ((score(out[0]) <= 0 and score(out[best]) >= 3) or
+                                 (score(out[best]) >= 4.5 and score(out[best]) - score(out[0]) >= 1.5)):
             out.insert(0, out.pop(best))
     # inside one etymology, the entry with the best English evidence first (tools/english.py compose: bận "busy"
     # before the literary noun "time; occurrence"), then the source order
@@ -223,7 +229,8 @@ def sense_tag(rows, tag):
     hit = [r for r in rows if (r.get('pos') or '') == t]
     if not hit:
         hit = [r for r in rows if r.get('english') and english.has_word(r['english'], t)]
-    keys = {(r['source'], r['src_id'], r['chars'], r.get('origin') or '') for r in hit}
+    keys = {(r['source'], r['src_id'], r['chars'], r.get('origin') or '', r.get('pos') == 'character-reading')
+            for r in hit}
     return hit[0] if len(keys) == 1 else None
 
 

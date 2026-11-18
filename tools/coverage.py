@@ -77,27 +77,20 @@ else:
         pass
 
 
-def main_english(k):
-    """The best-attested English word the English Wiktionary translates by this word (english.evidence), if the
-    card's English lacks it: the "missing main sense" measure."""
-    if k in MISSING:
-        return MISSING[k]
+def main_english(k, en):
+    """english.missing_main of the card's English against the English Wiktionary's translations of the word."""
     rows_ = TR.execute('SELECT en, pos, sense, tags, n_vi FROM translation WHERE key=?', (k,)).fetchall()
-    best = sorted(english.evidence(rows_, None).items(), key=lambda x: -x[1]) if rows_ else []
-    MISSING[k] = best[0][0] if best and best[0][1] >= 4.5 else ''
-    return MISSING[k]
+    return english.missing_main(en, rows_) if rows_ else ''
 
 
 def english_problems(r):
     """Why the card's English of row r is not usable (tools/english.py problems): form-of, description, too-long,
-    missing-main (the English Wiktionary's best-attested English word for the word, zipf - log2(rivals) >= 4.5, is
-    not in the card's English)."""
+    missing-main (none of the English words the English Wiktionary translates by the word is in the card's English)."""
     c = r[6]
     if r[4] and not c.get('label'):
         return []                     # a name: its English is the name
     en = c.get('en', '')
-    m = main_english(r[0])
-    return english.problems(en, missing=m if m and not english.has_word(en, m) else '')
+    return english.problems(en, missing=main_english(r[0], en))
 
 
 def table(part):

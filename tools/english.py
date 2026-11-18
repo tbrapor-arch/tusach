@@ -107,6 +107,16 @@ POS_OK = {'noun': {'noun', 'name'}, 'verb': {'verb', 'adj'}, 'adj': {'adj', 'ver
           'classifier': {'noun'}, 'det': {'det', 'pron'}, 'postp': {'prep'}, 'name': set(), 'character': {'num', 'noun'}}
 
 
+def late(tags):
+    """True for a sense the card puts after the ordinary ones (archaic, dialectal, Southern…). A sense tagged Northern
+    is the course's own variety (Hà Nội): Wiktionary's "dialectal" beside "Northern" does not make it late (thế nào
+    "how" is tagged Northern, dialectal)."""
+    t = set(tags)
+    if 'Northern' in t:
+        t -= {'dialectal', 'Northern', 'Vietnam'}
+    return bool(LATE_TAGS & t)
+
+
 def first_sense(text):
     return (text or '').split('; ')[0].strip()
 
@@ -115,7 +125,7 @@ def problems(text, missing=''):
     """Why an English text is not usable on a card ([] if it is): form-of (an alternative form / spelling / short
     for…, no English of its own), description (a usage description in place of a translation: "Used to…",
     "Negates…"), too-long (first sense over MAX_FIRST characters), missing-main (the English Wiktionary translates
-    `missing`, a frequent English word, by this word, and the text lacks it), empty."""
+    `missing` by this word, and the text has none of its attested English words: missing_main()), empty."""
     t = first_sense(text)
     out = []
     if not t:
@@ -129,6 +139,17 @@ def problems(text, missing=''):
     if missing:
         out.append('missing-main')
     return out
+
+
+def missing_main(text, rows):
+    """The best-attested English word (evidence(), any part of speech) when the text contains NONE of the English
+    words the English Wiktionary translates by this word (là "fine silk" lacks "be"), else ''. A text that contains
+    one of them ("to drink" for uống) is not missing its main sense even if a more frequent English homonym ("take")
+    is attested too."""
+    ev = evidence(rows, None)
+    if not ev or any(has_word(text, w) for w in ev):
+        return ''
+    return max(ev.items(), key=lambda x: (x[1], x[0]))[0]
 
 
 PHRASE_STOP = {'have', 'with', 'from', 'into', 'about', 'that', 'this', 'what', 'some', 'very', 'more', 'most'}
@@ -162,7 +183,7 @@ def evidence(rows, pos):
     out = {}
     heads = {r[0] for r in rows}
     for en, en_pos, sense, tags, n_vi in rows:
-        if (ok is not None and en_pos not in ok) or LATE_TAGS & set(filter(None, (tags or '').split(','))):
+        if (ok is not None and en_pos not in ok) or late(filter(None, (tags or '').split(','))):
             continue
         if any(h != en and has_word(sense, h) for h in heads):
             continue      # a table defined by another English word of the same Vietnamese word: "love" (tennis) = "zero"
@@ -193,12 +214,13 @@ def compose(senses, ev, en_pos=None, leads=()):
 
     def match(g):
         return max((sc for w, sc in ev.items() if has_word(g, w)), default=0.0)
-    order = sorted(range(len(ss)), key=lambda i: (bool(LATE_TAGS & ss[i][1]), match(ss[i][0]) == 0, i))
+    order = sorted(range(len(ss)), key=lambda i: (late(ss[i][1]), match(ss[i][0]) == 0, i))
     gl = []
     for i in order:
         if ss[i][0] not in gl:
             gl.append(ss[i][0])
     lead = [head_text(w, (en_pos or {}).get(w)) for w in leads]
+    gl = [shorten(g) for g in gl]
     items = []
     for g in lead + gl:
         if g not in items and (not items or len('; '.join(items + [g])) <= MAX_TOTAL) and len(items) < 4:
@@ -207,8 +229,23 @@ def compose(senses, ev, en_pos=None, leads=()):
     if not text:
         return '', -9.0
     top = max([ev.get(w, 0.0) for w in leads] + [match(items[0])])
-    late = bool(order) and not leads and bool(LATE_TAGS & ss[order[0]][1])
-    return text, top - (5 if 'form-of' in problems(text) else 0) - (2 if late else 0)
+    first_late = bool(order) and not leads and late(ss[order[0]][1])
+    pr = problems(text)
+    return text, top - (5 if 'form-of' in pr else 0) - (3 if 'description' in pr else 0) - (2 if first_late else 0)
+
+
+def shorten(g):
+    """A sense over MAX_FIRST characters, for the card: without its parenthetical explanations ("I/me (used by
+    someone with status…)" -> "I/me"), else cut before its first comma or dash when what is left has 3+ letters
+    ("good, as in high-quality, well-made…" -> "good"). The whole sense stays in the database (table sense)."""
+    if len(g) <= MAX_FIRST:
+        return g
+    t = re.sub(r'\s*\([^()]*\)', '', g).strip()
+    if len(t) >= 3 and len(t) <= MAX_FIRST:
+        return t
+    t = t if len(t) >= 3 else g
+    m = re.match(r'(.{3,}?)(?:,| —| -|;)\s', t)
+    return m.group(1).strip() if m else t
 
 
 def leads_for(ev, glosses, n=1):
@@ -235,6 +272,10 @@ def _selftest():
     assert problems('Negates the meaning of the modified verb') == ['description']
     assert problems('busy') == []
     assert problems('a' * 70) == ['too-long']
+    assert shorten("I/me (used by someone with status equal or higher than his or her conversational partner)") == 'I/me'
+    assert shorten('good, as in high-quality, well-made, well executed, good-natured or ethical') == 'good'
+    assert missing_main('fine silk', [('be', 'verb', 'x', '', 1)]) == 'be'
+    assert missing_main('to drink', [('take', 'verb', 'x', '', 1), ('drink', 'verb', 'y', '', 1)]) == ''
     print('english: self-test ok')
 
 

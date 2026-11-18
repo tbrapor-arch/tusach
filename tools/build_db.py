@@ -913,7 +913,7 @@ def compose_english(con):
             ev = english.evidence(ev_rows.get(k, []), pos)
             leads = []
             usable = [s for s in ss if s[0] and not english.SKIP_TAGS & s[1]]
-            if not given and pos != 'name' and usable and not all(english.LATE_TAGS & s[1] for s in usable):
+            if not given and pos != 'name' and usable and not all(english.late(s[1]) for s in usable):
                 leads = english.leads_for(ev, glosses)
                 given = bool(leads)
                 leads_n += given
@@ -1163,8 +1163,11 @@ def etymology_states(con):
             elif not ced:
                 pass                                   # CC-CEDICT not loaded: no sense test
             elif len(c) == 1 and main[2] in FUNCTION_POS:
-                mine = _tokens(first, stop=False) - FUNC_STOP
-                if not (mine & (_tokens(cedict, stop=False) - FUNC_STOP)) and not zh_support(k, c, main[2]):
+                # content words of its first English; a bare function word ("or", "at", "but") is compared as such
+                mine, theirs = _tokens(first), _tokens(cedict)
+                if not mine:
+                    mine, theirs = _tokens(first, stop=False) - FUNC_STOP, _tokens(cedict, stop=False) - FUNC_STOP
+                if not (mine & theirs) and not zh_support(k, c, main[2]):
                     doubt = 'opaque'
                     reason = (f'grammaticalised {main[2]}: its English "{first[:40]}" is neither among CC-CEDICT\'s '
                               f'senses of {c} nor in a translation table with {c}')
