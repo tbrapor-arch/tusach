@@ -260,7 +260,7 @@ def plan_checks(loaded, msgs):
                 cid = cards.lookup(k, w.get('tag')) if cards.con else None
                 card = (cards.dictionary.get(cid) or {}) if cid else {}
                 lab = w.get('label') or card.get('label', '')
-                if lab in ('same', 'hv-vn', 'doubtful', 'opaque', 'false-friend') and not card.get('etymon'):
+                if lab in ('same', 'gram', 'hv-vn', 'doubtful', 'opaque', 'false-friend') and not card.get('etymon'):
                     hv += 1
                 else:
                     nat += 1
