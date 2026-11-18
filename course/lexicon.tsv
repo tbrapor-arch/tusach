@@ -56,13 +56,13 @@ một	num	one; a, an	native					sure	wikt: one	en-item: the article use is gramm
 hai	num	two	native					sure	wikt: two		Hai cà phê sữa đá nhé!	Two iced milk coffees, please!
 đây	pron	here; this (one)	unknown				đây là … "this is …"	sure	wikt: this place here; this thing/person		Đây là bố mẹ tôi.	These are my parents.
 ơi	intj	hey (calling someone): em ơi!	native				After the name or person term, to call someone	sure	wikt: hey		Em ơi, cho anh một trà đá!	Excuse me (to a young waiter), an iced tea for me!
-nhé	particle	…, OK? (friendly final particle)	unknown				A suggestion or promise, friendly: Mai gặp nhé	sure	wikt: alright?, okay?, will you?		Hai cốc trà đá nhé!	Two glasses of iced tea, OK?
+nhé	particle	…, OK? (friendly final particle)	unknown				A suggestion or promise, friendly: Hai cà phê sữa đá nhé	sure	wikt: alright?, okay?, will you?		Hai cốc trà đá nhé!	Two glasses of iced tea, OK?
 chút	noun	a little, a bit; a moment	native				một chút "a little"; chờ một chút "wait a moment"	sure	wikt: a very small portion or amount; a moment			
 ngồi	verb	to sit	native					sure	wikt: to sit			
 ba~three	num	three	native					sure	wikt ety 2: three		Cho tôi ba cốc trà đá.	Three glasses of iced tea, please.
 ba~father	noun	father, dad (Southern)	unknown				Southern; the North says bố	likely	wikt ety 1: father			
 bốn	num	four	native				After mươi both are said: hai mươi bốn or hai mươi tư; tư is the form in {thứ tư} "Wednesday, fourth" and {một phần tư} "a quarter"; mười bốn (14) is always bốn	sure	wikt: four		Bốn mươi nghìn ạ.	Forty thousand (dong).
-năm~year	noun	year	native				năm nay "this year"; năm 2024	sure	wikt ety 2: year		Tôi ở Hà Nội một năm.	I'm in Hanoi for a year.
+năm~year	noun	year	native				năm {nay} "this year"; năm 2024	sure	wikt ety 2: year		Tôi ở Hà Nội một năm.	I'm in Hanoi for a year.
 năm~five	num	five	native				After mười and mươi it becomes lăm: mười lăm (15), hai mươi lăm (25); Hà Nội speech also says {nhăm}	sure	wikt ety 1: five		Năm nghìn một cốc.	Five thousand a glass.
 sáu	num	six	native					sure	wikt: six		Sáu mươi nghìn ạ.	Sixty thousand (dong).
 bảy	num	seven	native					sure	wikt: seven		Bảy mươi nghìn, đắt quá!	Seventy thousand, that's too expensive!
@@ -96,15 +96,15 @@ chị gái	noun	elder sister	compound					sure	wikt: elder sister
 em gái	noun	younger sister	compound					sure	wikt: younger sister			
 ai	pron	who; anyone, someone	native					sure	wikt: who; whoever, anyone		Đây là ai?	Who is this?
 của	prep	of, belonging to	unknown				After the thing owned: ảnh của tôi "my photo"	sure	wikt: of (belonging to)		Đây là ảnh của ai?	Whose photo is this?
-con	noun	child; (classifier for animals)	native				con {mèo} "a cat"; con trai "son"	sure	wikt: child; son		Chị có hai con.	I have two children. (said by a woman)
+con	noun	child; (classifier for animals)	native				con {mèo} "a cat"; con {trai} "son"	sure	wikt: child; son		Chị có hai con.	I have two children. (said by a woman)
 mấy	det	how many (small numbers); a few	native				Mấy tuổi? "how old (a child)?"; for larger numbers bao nhiêu	sure	wikt: how many; a few	en-item: "a few" (mấy ngày "a few days") is everyday use	Con chị mấy tuổi?	How old is your child?
 tuổi	noun	age; years old	older-loan		歲		Anh bao nhiêu tuổi? "How old are you?"	sure	wikt: age; a year of age (non-Hán-Việt reading of 歲)		Em hai mươi tư tuổi.	I'm twenty-four.
 giờ	noun	hour; o'clock; time, now	older-loan		時		Mấy giờ {rồi}? "What time is it?"	sure	wikt: hour (non-Hán-Việt reading of 時)	en-item: "o'clock" (ba giờ) is everyday use	Bây giờ là mấy giờ?	What time is it now?
 phút	noun	minute	unknown					sure	wikt: minute		Tám giờ mười lăm phút.	A quarter past eight.
 rưỡi	num	and a half (after a number or unit)	unknown				hai giờ rưỡi "half past two"	sure	wikt: and a half		Bảy giờ rưỡi.	Half past seven.
 bây giờ	adv	now	compound					sure	wikt: now		Bây giờ tôi đi làm.	I'm going to work now.
-hôm nay	adv	today	compound				hôm "day" + nay "this, now"	sure	wikt: today (hôm + nay)		Hôm nay anh làm gì?	What are you doing today?
-ngày mai	adv	tomorrow	compound				{ngày} "day" + mai "morning"	sure	wikt: tomorrow (ngày + mai)		Ngày mai em về Hà Nội.	Tomorrow I'm going back to Hanoi.
+hôm nay	adv	today	compound				{hôm} "day" + {nay} "this, now"	sure	wikt: today (hôm + nay)		Hôm nay anh làm gì?	What are you doing today?
+ngày mai	adv	tomorrow	compound				{ngày} "day" + {mai} "morning"	sure	wikt: tomorrow (ngày + mai)		Ngày mai em về Hà Nội.	Tomorrow I'm going back to Hanoi.
 sáng	noun	morning; bright	native				{buổi sáng} "(in the) morning"	sure	wikt: morning; light, bright		Tám giờ sáng tôi đi làm.	I go to work at eight in the morning.
 chiều~afternoon	noun	afternoon	unknown				{buổi chiều} "(in the) afternoon", from about noon to dusk	sure	wikt: afternoon		Ba giờ chiều chị về nhà.	I go home at three in the afternoon.
 tối	noun	evening; dark	native				{buổi tối} "(in the) evening"	sure	wikt: evening; dark		Bảy giờ tối anh về nhà.	I come home at seven in the evening.
@@ -210,8 +210,8 @@ tin	noun	news, message; to believe	older-loan		信		tin nhắn "a text message"	
 chờ	verb	to wait	unknown				Chờ một chút "Wait a moment"; Northern also đợi	sure	wikt: to wait			
 lát	noun	a moment (một lát)	unknown				một lát "a moment", lát nữa "in a moment"	sure	wikt: moment, short while			
 lại	adv	again; back	native				gọi lại "to call back"	sure	wikt: again; once more			
-sau	adv	after; behind; later	native				sau đó "after that"	sure	wikt: later; after; behind		Ba ngày sau anh ấy khỏe.	Three days later he was well.
-cháu	noun	grandchild; niece, nephew; I (to someone of one's parents' or grandparents' generation)	native				The young person's "I" to bác, cô, {chú}, ông, bà, who call him cháu "you"	sure	wikt: grandchild; nephew, niece	en-item: the pronoun use is the course's point	Cháu mấy tuổi?	How old are you? (to a child)
+sau	adv	after; behind; later	native				sau đó "after that"	sure	wikt: later; after; behind		Tôi đi làm, sau đó về nhà.	I go to work, and after that I go home.
+cháu	noun	grandchild; niece, nephew; I (to someone of one's parents' or grandparents' generation)	native				The young person's "I" to bác, {cô}, {chú}, ông, bà, who call him cháu "you"	sure	wikt: grandchild; nephew, niece	en-item: the pronoun use is the course's point	Cháu mấy tuổi?	How old are you? (to a child)
 bác	noun	uncle, aunt (older than one's parent); you (to a person older than one's parents)	native					sure	wikt: uncle (parent's elder brother)		Cháu chào bác ạ.	Hello! (politely, to someone older than one's parents)
 cô	pron	aunt (father's sister); Miss; you (to a young woman, a female teacher); she (cô ấy)	hv	姑				sure	wikt: a paternal aunt		Cô ấy là bạn tôi.	She is my friend.
 chú	noun	uncle (father's younger brother); you (to a man of one's father's age)	native					sure	wikt: paternal uncle			
@@ -220,14 +220,19 @@ vừa	adv	just (now), recently; to fit	unknown				Tôi vừa {đến} "I have ju
 này	det	this; (calling) hey	native				After the noun: {cái} này "this one"	sure	wikt: this		Quán này rất vui.	This café is great fun.
 ấy	det	that (anh ấy he, cô ấy she)	unknown				After a person term it makes "he, she": anh ấy, {cô} ấy; Southern speech often says ảnh, {cổ}	sure	wikt: that, those (Northern)		Anh ấy là chồng chị Lan.	He is Lan's husband.
 đó	pron	that; there	native				{cái} đó "that one"; ở đó "there"	sure	wikt: that person/thing over there		Quán cà phê ở đó.	The café is there.
-đấy	particle	(final particle in questions, friendly); there, that (Northern)	unknown				Northern: Anh đi đâu đấy? "Where are you off to?"; also "there, that", as {đó}	sure	wikt: there, that; sentence-final particle used in questions		Chị đi đâu đấy?	Where are you off to?
+đấy	particle	(final particle in questions, friendly); (in statements) stressing; there, that (Northern)	unknown				Northern: Anh đi đâu đấy? "Where are you off to?"; in a statement it stresses what one says: {Đẹp} đấy! "It's lovely!"; also "there, that", as {đó}	sure	wikt: there, that; sentence-final particle used in questions	en-item: the statement use (Đẹp đấy!) is grammar the dictionary does not describe	Chị đi đâu đấy?	Where are you off to?
 ngày	noun	day	native				{mỗi} ngày "every day"	sure	wikt: day		Một tuần có bảy ngày.	A week has seven days.
 nhiều	adj	many, much, a lot	older-loan		饒			likely	wikt: many, much (non-Hán-Việt reading of 饒)		Mùa hè Hà Nội mưa nhiều.	It rains a lot in Hanoi in summer.
 tốt	adj	good	native					sure	wikt: good		Thuốc này tốt lắm.	This medicine is very good.
-nhỏ	adj	small, little	unknown				Northern also {bé}	sure	wikt: small, little		Cái này hơi nhỏ.	This one is a bit small.
-lớn	adj	big, large; to grow up	unknown				Northern also to	sure	wikt: big, large; grown-up		Áo này lớn quá.	This top is too big.
+nhỏ	adj	small, little	unknown				Northern also {bé}; for size Hà Nội speech pairs to / nhỏ (or {bé})	sure	wikt: small, little		Cái này hơi nhỏ.	This one is a bit small.
+lớn	adj	big, large; to grow up	unknown				For size, more formal or written than {to}, and the usual word in the South; Hà Nội speech says {to}. Also "to grow up"	sure	wikt: big, large; grown-up		Con chị lớn quá!	Your child has grown so big!
+to	adj	big, large (in size)	native				Hà Nội speech: to / nhỏ (or {bé}) for size; {lớn} is the more formal or written word, and the usual one in the South	sure	wikt: big, large		Áo này to quá.	This top is too big.
+trứng	noun	egg	native				quả trứng "an egg"; {trứng gà} "hen's egg"	sure	wikt: egg		Cho tôi thêm một quả trứng.	One more egg for me, please.
+chứ	particle	(final particle) of course, surely; …, right?	unknown				Insisting or expecting agreement: {Được chứ!} "Of course!"; {Anh khỏe chứ?} "You're well, I hope?"	likely	wikt: Compares a predicate or clause stated before it to its supposed alternative	en-unsupported: the final-particle uses are grammar the dictionary describes in other words | en-item: the same	Được chứ!	Of course!
+hả	particle	…, eh? (familiar question particle)	unknown				Familiar, to equals or younger people; to someone older say à or ạ: {Thật hả?} "Really?"	sure	wikt: interrogative particle: isn't it, aren't you		Anh về rồi hả?	You're back, eh?
+nha	particle	…, OK? (Southern friendly final particle)	unknown				Southern; Hà Nội says nhé	sure	wikt: alright?, okay?, will you?
 đẹp	adj	beautiful, good-looking	unknown					sure	wikt: beautiful		Hồ Hoàn Kiếm đẹp lắm.	Hoàn Kiếm Lake is very beautiful.
-xin lỗi	intj	sorry; excuse me	compound				xin "to ask for" + {lỗi} "fault"	sure	wikt: sorry		Xin lỗi, anh là người nước nào?	Excuse me, which country are you from?
+xin lỗi	intj	sorry; excuse me	compound				{xin} "to ask for" + {lỗi} "fault"	sure	wikt: sorry		Xin lỗi, anh là người nước nào?	Excuse me, which country are you from?
 nhỉ	particle	…, isn't it? (tag particle)	unknown				Northern; seeking agreement: Đẹp nhỉ! "Lovely, isn't it?"	sure	wikt: Used to create a tag question	en-item: a particle, described in English	Hôm nay đẹp trời nhỉ!	Lovely weather today, isn't it!
 và	conj	and	older-loan		和			likely	wikt: and (non-Hán-Việt reading of 和)		Cho tôi một cà phê và một trà.	A coffee and a tea, please.
 các	det	(plural marker) the …s, all the	hv-gram	各			Before a noun: các bạn "you (plural), friends"; in Chinese 各 is "each, every"	likely	wikt ety 1: Plural marker (各)	en-item: a plural marker, described in English	Các bạn có khỏe không?	How are you all?
@@ -237,7 +242,7 @@ những	det	(plural marker) some, the …s	older-loan		仍		Before a noun: nhữ
 họ	pron	they, them; family name	older-loan		戶		họ tên "full name"	likely	wikt: family name, surname; they/them (戶 for the family name)			
 vào	verb	to go in, to enter; into, in, at (a time)	native				vào lúc 8 giờ "at eight"	sure	wikt: to enter; in, into, upon		Mời anh vào nhà.	Please come in.
 ra	verb	to go out, to come out; out	native				After a verb: mở ra "to open (up)"	sure	wikt ety 1: to go out, to leave		Anh ấy ra ngoài rồi.	He's gone out.
-mà	conj	but; that, which (relative); (emphatic final particle)	native					sure	wikt: but, however; which, whom, that			
+mà	conj	but; that, which (relative); (emphatic final particle)	native				"but" with a contrast, often unexpected: {Rẻ mà ngon} "cheap but good"; as a final particle it insists: {Em biết mà!} "I told you!"; "that, which" before a clause, mostly written ({người mà}…)	sure	wikt: but, however; which, whom, that
 thì	conj	then (nếu … thì); as for	unknown				nếu … thì … "if … then …"; after a topic: Tôi thì không "as for me, no"	likely	wikt ety 2 (no etymology given): as for …; in that case, then	en-item: "as for" (Tôi thì …) is everyday use		
 trên	prep	on, above; over	native				trên bàn "on the table"	sure	wikt: on; upper, higher			
 có thể	verb	can, may; possibly	compound				Before the verb: Tôi có thể giúp "I can help"	sure	wikt: possibly			
@@ -270,7 +275,7 @@ hoặc	conj	or	hv	或			Mostly in statements; in questions hay	sure	wikt ety 1: 
 bằng~by	prep	by (means of), with; made of	hv	憑			đi bằng xe buýt "to go by bus"; 憑 "to rely on, by"; bằng also means a diploma (文憑)	likely	wikt ety 2: by, by means of; made of; diploma			
 bằng~equal	adj	equal (to), as … as	older-loan		平		cao bằng anh "as tall as you"	likely	wikt ety 1: flat; equal (平, whose Hán-Việt reading is bình; bằng is a Nôm, older reading)			
 rằng	conj	that (after say, think, know)	unknown				nói rằng … "to say that …"	sure	wikt: that			
-vậy	adv	so, thus; (final particle) then	unknown				Southern and neutral; Hà Nội speech says thế ({Sao vậy?} in the South, {Sao thế?} in the North); {vì vậy} "therefore" is used everywhere	sure	wikt: so, thus	en-item: a particle, described in English		
+vậy	adv	so, thus; (final particle) then	unknown				As a final particle ({Sao vậy?}) it is the Southern counterpart of Hà Nội's thế ({Sao thế?}); in {vì vậy} "therefore" and {như vậy} "like that" it is general, North and South	sure	wikt: so, thus	en-item: a particle, described in English
 cái	classifier	(classifier for things) thing; the	native				cái {bàn} "a table", cái này "this one"	sure	wikt ety 1: indicates an inanimate, tangible thing	en-item: the determiner use (cái này) is grammar	Tôi lấy cái này.	I'll take this one.
 lần	noun	time (occurrence)	older-loan		輪		lần đầu "the first time"; ba lần "three times"	likely	wikt ety 1: time, instance, occurrence (輪)			
 ta	pron	we, us (including you); I (haughty); (after a person term) he, she	older-loan		咱		chúng ta "we"; anh ta "he", cô ta "she" (cooler than anh ấy)	doubt: the older-loan analysis (咱) is Wiktionary's; the pronoun uses are clear	wikt ety 1-2: our; I/me	en-item: the pronoun uses are described in English	Anh ta là người Pháp.	He is French.
@@ -358,7 +363,7 @@ thật	adj	true, real; really	hv	實				sure	wikt: real, true; really		Thật kh
 cảm	verb	to feel; (to catch) a cold	hv	感			cảm {thấy} "to feel"; bị cảm "to have a cold"	sure	wikt: to feel; cold, flu		Cháu bị cảm rồi.	I've caught a cold.
 vấn đề	noun	problem, issue, question	hv	問題				sure	wikt: problem; issue			
 phát triển	verb	to develop; development	hv	發展				sure	wikt: to develop			
-viết	verb	to write	native					sure	wikt: to write		Em viết tên anh ở đây nhé.	Write your name here, please.
+viết	verb	to write	native					sure	wikt: to write		Anh viết tên ở đây nhé.	Write your name here, please.
 quốc gia	noun	nation, country; national	hv	國家				sure	wikt: state, nation, country			
 cuộc	classifier	(classifier for events and processes: cuộc họp "a meeting", cuộc sống "life")	older-loan		局			likely	wikt: an event that involves several people (局)			
 màu	noun	colour	older-loan		貌		màu đỏ "red"	likely	wikt: colour (貌)		Em thích màu đỏ.	I like red.
@@ -523,14 +528,14 @@ lòng	noun	heart, feelings; insides, guts	native				lòng tốt "kindness"	sure	
 hội	noun	festival; association	hv	會			lễ hội "festival"	sure	wikt ety 1: a festival; an assembly	en-item: "association" (hội sinh viên) is everyday use		
 quân	noun	troops, army	hv	軍			quân đội "the army"	sure	wikt ety 1: troops, army			
 quán	noun	café, small restaurant, eatery; stall	hv	館			quán cà phê "café", quán {phở} "pho shop"; 館 as in 飯館, 茶館	sure	wikt: an eating establishment with place to sit	en-item: "stall" (quán nước) is everyday use	Chị Lan ở quán cà phê.	Lan is at the café.
-chồng	noun	husband	native				vợ "wife"; chồng chị "your (chị's) husband"	sure	wikt ety 1: husband		Đây là chồng chị.	This is my husband. (said by an older woman)
+chồng	noun	husband	native				vợ "wife"; chồng chị "your (chị's) husband"	sure	wikt ety 1: husband		Đây là chồng chị.	This is my husband. (said by a woman to someone younger)
 vợ	noun	wife	native					sure	wikt: wife		Vợ anh ấy là người Việt Nam.	His wife is Vietnamese.
 đói	adj	hungry	native				Anh đói chưa? "Are you hungry (yet)?"	sure	wikt: hungry		Em đói chưa?	Are you hungry yet?
 tuần	noun	week	hv	旬		In Chinese 旬 is a period of ten days (上旬); Vietnamese tuần is a week of seven days	tuần {sau} "next week", cuối tuần "weekend"	sure	wikt: week (any period of seven consecutive days)		Tuần này em bận lắm.	I'm very busy this week.
 buồn	adj	sad	older-loan		煩			likely: Wiktionary gives 煩 without hedging; the tone fits, nothing else supports the rhyme	wikt: sad (non-Sino-Vietnamese reading of 煩)		Sao em buồn thế?	Why are you so sad?
 cửa hàng	noun	shop, store	compound				{cửa} "door" + {hàng} "goods"	sure	wikt: shop, store		Cửa hàng này có áo đẹp.	This shop has nice tops.
 áo	noun	shirt, top, jacket (a garment for the upper body)	hv	襖			{áo dài}; áo {sơ} mi "shirt"; 襖 is a lined jacket (棉襖), áo any upper garment	likely	wikt: top; outfit (from 襖)		Cái áo này đẹp quá!	This shirt is so nice!
-mặc	verb	to wear, to put on (clothes)	native				mặc áo "to put on a shirt"; mặc thử "to try on"	sure	wikt ety 1: to wear or put on		Anh mặc áo trắng.	He is wearing a white shirt.
+mặc	verb	to wear, to put on (clothes)	native				mặc áo "to put on a shirt"; mặc thử "to try on"	sure	wikt ety 1: to wear or put on		Anh ấy mặc áo trắng.	He is wearing a white shirt.
 đen	adj	black	native					sure	wikt: of the color black		Cái áo màu đen này bao nhiêu tiền?	How much is this black shirt?
 trắng	adj	white	native					sure	wikt: white		Tôi muốn mua một cái áo trắng.	I want to buy a white shirt.
 đỏ	adj	red	native					sure	wikt: red		Áo đỏ hay áo đen?	The red top or the black one?

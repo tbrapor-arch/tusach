@@ -179,9 +179,23 @@ def _nan_char(con, chars, colloquial=False):
     return real or [r for r, _ in rows]
 
 
+def same_sound(con, ch, form):
+    """True when a variant may lend `ch` its readings: in Cantonese and in Mandarin, wherever both characters have a
+    character reading, they share one. Unihan's kSemanticVariant pairs characters a single dictionary calls variants in
+    SOME sense (襖 ǎo "lined coat" ~ 澳 ào "bay", after Matthews alone): the readings of such a pair differ, and the
+    variant's Taigi reading is not the character's (review 4, B: 襖 had been read ò "via 澳")."""
+    for lang in ('yue', 'cmn'):
+        a, b = ({r.lower() for (r,) in con.execute("SELECT reading FROM chinese WHERE chars=? AND lang=? AND "
+                                                    "level='char'", (x, lang))} for x in (ch, form))
+        if a and b and not a & b:
+            return False
+    return True
+
+
 def _char_rows(con, ch, lang, level_first, names=False, colloquial=False):
-    """(readings, the form they were found under) of one character: its own, else a variant's."""
-    for form in [ch] + variants(con, ch):
+    """(readings, the form they were found under) of one character: its own, else a variant's that sounds the same
+    (same_sound)."""
+    for form in [ch] + [v for v in variants(con, ch) if same_sound(con, ch, v)]:
         if lang == 'nan':
             rs = _uniq(_nan_char(con, form, colloquial))
         else:
@@ -212,7 +226,7 @@ def lang_reading(con, chars, lang, names=False, syls=None):
 
 def unmarked_layer(con, ch):
     """True when the character's Taigi readings used as literary are the MOE's unmarked ones (no 文讀 reading)."""
-    for form in [ch] + variants(con, ch):
+    for form in [ch] + [v for v in variants(con, ch) if same_sound(con, ch, v)]:
         notes = {n for (n,) in con.execute("SELECT note FROM chinese WHERE chars=? AND lang='nan' AND level='char' AND "
                                            "note != 'colloquial'", (form,))}
         if notes:
