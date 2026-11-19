@@ -254,3 +254,13 @@ tools/test_review3.py):
   a sentence start (not after : or a quote) and when that word is taught (reverses review 4 C's "Mai gặp nhé" case).
 - Lexicon: nào's English has the urging sense; sao~why's usage Không sao (đâu); đau's usage (body part after).
 - NOTES-for-native-speaker.md: the 40 rows with the reviewer's judgement, eight first (B1–B8).
+
+## 2026-11-19 — word list 3 drafted (branch wordlist-3, from ac5ae29; not approved)
+- 221 words for L15–27 (L21, L28 reviews: none), chosen per scene for the lesson's grammar, particle and bridge,
+  read on the real cards first; native / Hán-Việt counts exactly the plan's (13 + 5, 13 + 6); older and Western
+  loans 1–5 a lesson where the plan guessed 2 (many basic words are older loans: kia, cũ, tìm, đọc, tầng…).
+- Lexicon: 128 new rows and 74 examples on existing rows, each example using only words taught by its lesson.
+- Tools: `approved.word_list.file` may be a list; plan, lint and the to-check list read the approved lists, then the
+  draft (`course.plan_word_lists`), so list 3's notes may use list 2's words and a word of list 2 is refused in list 3.
+- Found by the plan check: pinyin and Jyutping in a note are read as Vietnamese (notes give characters only); "an"
+  is read as English, so "an toàn" cannot be quoted in a note (its card example is flagged I, a false positive).
