@@ -1,25 +1,55 @@
 # Word list 3 (lessons 15–28): drafter's notes
 
 Working notes of the drafting session (Claude, 19 Nov 2026, branch `wordlist-3` from main ac5ae29). NOT approved by the
-owner; NOT checked by a native speaker. Kept short; the list itself is `wordlist-3.tsv`, its doubts and overrides
-`wordlist-3-to-check.md`.
+owner; NOT checked by a native speaker. The list is `wordlist-3.tsv`, its doubts and overrides `wordlist-3-to-check.md`.
 
 ## Method
 - One scene per lesson (syllabus.yaml title), words chosen for that scene's natural dialogue, the lesson's grammar
-  points and particle (thôi L15, hả / nhá L16, với L17, chứ L18, dạ L19, mà L27), and its bridge topic (bridge
-  examples are Hán-Việt words of this list or list 2, same word in Chinese, not false friends).
-- Counts aimed at the plan as it stood before `tools/plan.py --write`: L15–20 and L22 13 native (2 of them older or
-  Western loans) + 5 Hán-Việt; L23–27 13 + 6. Reviews L21, L28: no word.
-- No word of word list 2 (lint checks both lists together, see "Tool change"). Northern forms (bể bơi, thìa, ngõ,
-  hiệu sách, đỗ…); spelling and tone placement as lint asks.
-- Candidates read on the real cards (`tools/cards.py` through a scratch script outside the repository) before choosing.
+  points and particle (thôi L15, hả / nhá L16, với L17, chứ L18, dạ L19, mà L27), and its bridge topic. Bridge words
+  named in the notes are Hán-Việt words of list 2 or 3, the same word in Chinese, never a false friend.
+- Counts: native / Hán-Việt exactly the plan's (L15–20, L22: 13 + 5; L23–27: 13 + 6; L21, L28 none). The plan's guess
+  of 2 older or Western loans per lesson is not kept: the list has 1–5 (L15 5, L16 1, L17 5, L18 3, L19 2, L20 4,
+  L22 3, L23 4, L24 2, L25 3, L26 2, L27 3): many basic words are older loans (kia, cũ, tìm, đọc, tầng, thuê, muộn…).
+  `tools/plan.py --write` wrote these into syllabus.yaml.
+- No word of word list 2 (the plan check now refuses one). Northern forms: bể bơi, thìa, ngõ, hiệu sách, muộn, quyển,
+  chén; the Southern ones only as {previews} in notes.
+- Every candidate was read on its real card first (a scratch script calling tools/cards.py, outside the repository).
+- Lexicon: 127 new rows; 75 existing rows got an example. Every example uses only words taught by its lesson
+  (`tools/plan.py --check --verbose`: the one remaining I-line, an toàn, is a false positive: "an" is read as English).
+
+## Tool change (tested, documented)
+`approved.word_list.file` may be a list. `course.plan_word_lists()` = the approved lists, then the draft; plan.py, lint
+(lessons against the union of approved lists; compound check), wordlist.py --to-check and state.py read them together.
+A word already in an earlier list is an error. When the owner approves list 3:
+`word_list: {by: owner, date: …, file: [course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}`.
+Tests: tools/test_plan.py (6 new cases).
+
+## Decisions
+- L15 triệu taught now (phone prices); its false-friend note stays on the card; the syllabus's FF remark is L59.
+- L16 em gái rather than em trai (Thảo is Lan's younger sister); em trai later.
+- L17 truyện, bút, giấy, vở left out to keep 5 Hán-Việt; truyện can come at L26/L27 later lists.
+- L18 nông "shallow" left out (homograph with 農 and others); sâu alone.
+- L19 trường (false friend 場) taught for "Ông dạy văn ở trường"; the syllabus's FF remark is L52.
+- L24 bình tĩnh and kinh nghiệm instead of kỹ (opaque 技).
+- L25 tính tiền (compound) rather than thanh toán (清算 is "to liquidate" in Chinese).
+- L27 mà: the card example shows "but" (main sense, Rẻ mà ngon); the insisting particle is in its usage note.
+
+## Doubts (for the owner / a native speaker)
+- máy for "the phone" in a shop (Máy này bao nhiêu tiền?): Claude's reading of shop talk.
+- tờ 詞 and vé 貨: Wiktionary's etymons, marked doubt.
+- kỷ niệm 紀念: Chinese "commemorate, souvenir"; "memories" is the Vietnamese sense (false-friend note on the card).
+  verify_words flags 紀 as read kỉ, not kỷ: the i/y spelling of the same syllable (the lexicon check accepts it).
+- văn phòng, sở thích, thực đơn are Hán-Việt formed in Vietnam (counted Hán-Việt, not bridge words).
+- toa: origin unknown in the data (not claimed French).
+- Hà Nội usage to confirm: suất (một suất bún chả), chén for tea, nghỉ hưu / về hưu, chờ / đợi, rạp alone for a cinema.
 
 ## Status
-- [ ] wordlist-3.tsv (lesson, word, note) and database columns (tools/wordlist.py)
-- [ ] lexicon rows for every new word (example with words taught by that lesson)
-- [ ] syllabus draft pointer + tool change (plan reads approved lists + draft)
-- [ ] plan --write, to-check, golden, state
-- [ ] make lint / test / app
+- [x] wordlist-3.tsv, database columns from tools/wordlist.py
+- [x] lexicon rows and examples
+- [x] syllabus draft pointer (approved untouched) + tool change, test, REFERENCE
+- [x] plan --write, to-check, golden (diff read: only examples and three usage notes of existing cards), state
+- [x] make lint 0 errors (verify_words: 350 suspects, the same as main: none from this work); the tests of `make
+  test` run one by one without the db rebuild (all pass); make app: card check 0 errors
 
-## Decisions and doubts
-(filled in as the work goes)
+## Left
+- The owner's approval (then `approved.word_list.file` as a list, above). Lessons 15–27 are not written.
