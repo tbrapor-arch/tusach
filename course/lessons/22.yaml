@@ -50,10 +50,10 @@ exercises:
   translate:
   - {vi: "Khi trời mưa thì Bin không đi bơi.", en: "When it rains, Bin doesn't go swimming."}
   - {vi: "Anh Minh đi làm lúc bảy giờ rưỡi.", en: "Minh goes to work at half past seven."}
-  - {vi: "Bà Lan ngủ sớm, chín giờ tối.", en: "Mrs Lan goes to bed early, at nine in the evening."}
+  - {vi: "Bà ngủ sớm, chín giờ tối.", en: "Grandma goes to bed early, at nine in the evening."}
   - {vi: "Thảo đi từ~from nhà đến trường mười lăm phút.", en: "It takes Thảo fifteen minutes to get from home to school."}
   - {vi: "Chị Lan thì thích trà, anh Minh thì thích cà_phê.", en: "Lan likes tea; Minh likes coffee."}
   fill:
   - {vi: "Em ___ chị ở quán cà_phê nhé.", answer: chờ, en: "I'll wait for you at the café. (to someone older)"}
-  - {vi: "___ nào anh về Pháp?", answer: lúc, en: "When are you going back to France? (to a young man a little older)"}
+  - {vi: "Na đi ngủ ___ tám giờ tối.", answer: lúc, en: "Na goes to bed at eight in the evening."}
   - {vi: "Chỗ này có người ___?", answer: chưa, en: "Is this seat taken yet?"}

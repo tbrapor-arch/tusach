@@ -8,7 +8,7 @@ setting: >-
 dialogue:
 - {n: 1, speaker: Landlady, vi: "Chào hai cháu. Phòng ở tầng ba~three. Mời hai cháu xem.", en: "Hello, both of you. The room is on the third floor. Have a look.", lit: "greet two grandchild. room at floor three. invite two grandchild look."}
 - {n: 2, speaker: Thảo, vi: "Phòng này rộng quá! Cửa_sổ cũng to.", en: "This room is so big! And the window is big too.", lit: "room this spacious so! window also big."}
-- {n: 3, speaker: Sacha, vi: "Phòng này có bếp không ạ?", en: "Does the room have a kitchen?", lit: "room this have kitchen not (polite)?"}
+- {n: 3, speaker: Sacha, vi: "Cô ơi, phòng này có bếp không ạ?", en: "Does the room have a kitchen?", lit: "aunt hey, room this have kitchen not (polite)?"}
 - {n: 4, speaker: Landlady, vi: "Đây là phòng_ngủ, trong phòng có giường. Bếp và nhà_vệ_sinh ở tầng hai.", en: "This is the bedroom: there's a bed in it. The kitchen and the bathroom are on the second floor.", lit: "here be bedroom, in room have bed. kitchen and toilet at floor two."}
 - {n: 5, speaker: Thảo, vi: "Các phòng ở đây đều sạch quá! Mỗi tháng bao_nhiêu tiền ạ?", en: "All the rooms here are so clean! How much is it a month?", lit: "(plural) room at here all clean so! each month how-much money (polite)?"}
 - {n: 6, speaker: Landlady, vi: "Phòng này ba~three triệu mỗi tháng. Mọi người ở đây đều là sinh_viên.", en: "This room is three million a month. Everyone here is a student.", lit: "room this three million each month. every person at here all be student."}
@@ -18,7 +18,7 @@ dialogue:
 - {n: 10, speaker: Landlady, vi: "Những phòng đó nhỏ hơn, nhưng rẻ hơn: hai triệu.", en: "Those rooms are smaller, but cheaper: two million.", lit: "(plural) room that small more, but cheap more: two million."}
 - {n: 11, speaker: Thảo, vi: "Cháu thuê phòng này ạ. Ở quận Hoàn_Kiếm, ba~three triệu là rẻ lắm.", en: "I'll take this room. In Hoàn Kiếm district, three million is very cheap.", lit: "grandchild rent room this (polite). at district Hoàn Kiếm, three million be cheap very."}
 notes:
-- {ref: 1, topic: pronouns, text: "Chào hai cháu: the landlady, of their parents' generation, says cháu to Thảo and Sacha; they call her cô (lesson 19) and say cháu. hai cháu \"you two\". chủ nhà \"landlord, landlady\" (the owner of the house)."}
+- {ref: 1, topic: pronouns, text: "Chào hai cháu: the landlady, of their parents' generation, says cháu to Thảo and Sacha; they call her cô (lesson 19: Cô ơi, line 3) and say cháu. hai cháu \"you two\". chủ nhà \"landlord, landlady\" (the owner of the house)."}
 - {ref: 1, topic: usage, text: "tầng \"floor, storey\": tầng một is the ground floor, so tầng ba is \"the third floor\" counted from the street, the second above it. A Hà Nội house is often narrow and tall, a room or two on each tầng."}
 - {ref: 2, topic: grammar, text: "rộng \"spacious, wide\" (of a room or a street); to \"big\" (lesson 13) fits the window: Cửa sổ cũng to. cửa sổ \"window\"; phòng ngủ \"bedroom\" (line 4); bếp \"kitchen\"; nhà vệ sinh \"toilet, bathroom\", the polite word."}
 - {ref: 4, topic: grammar, text: "trong phòng có giường \"there's a bed in the room\": trong \"in, inside\" + a place, then có \"there is\"."}

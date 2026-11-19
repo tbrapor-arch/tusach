@@ -11,9 +11,9 @@ dialogue:
 - {n: 4, speaker: Sacha, vi: "Em đi ra ngõ ạ?", en: "Do I go out into the lane?", lit: "younger-sibling go out lane (polite)?"}
 - {n: 5, speaker: Minh, vi: "Đi ra ngõ, rồi rẽ phải~right, sang phố kia. Đi chậm thôi!", en: "Out into the lane, then turn right and cross to that street. Slowly!", lit: "go out lane, then turn right, cross street that. go slow only!"}
 - {n: 6, speaker: Sacha, vi: "Anh ơi, xe_máy nhiều quá! Giao_thông Hà_Nội nguy_hiểm lắm.", en: "So many motorbikes! The traffic in Hà Nội is really dangerous.", lit: "elder-brother hey, motorbike many so! traffic Hà Nội dangerous very."}
-- {n: 7, speaker: Minh, vi: "Chú_ý! Xe_máy ở trước! Phanh đi!", en: "Watch out! There's a motorbike in front! Brake!", lit: "pay-attention! motorbike at front! brake (urging)!"}
+- {n: 7, speaker: Minh, vi: "Cẩn_thận! Có xe_máy ở trước! Phanh đi!", en: "Careful! There's a motorbike in front! Brake!", lit: "careful! have motorbike at front! brake (urging)!"}
 - {n: 8, speaker: Sacha, vi: "Em phanh rồi. Tốc_độ này được không ạ?", en: "I've braked. Is this speed all right?", lit: "younger-sibling brake already. speed this can not (polite)?"}
-- {n: 9, speaker: Minh, vi: "Được. Cẩn_thận, đừng ngã nhé! Bây_giờ đi về nhà.", en: "Fine. Careful, don't fall off! Now let's go home.", lit: "can. careful, don't fall OK! now go return house."}
+- {n: 9, speaker: Minh, vi: "Được. Chú_ý nhé, đừng ngã! Bây_giờ đi về nhà.", en: "Fine. Pay attention, don't fall off! Now let's go home.", lit: "can. pay-attention OK, don't fall! now go return house."}
 - {n: 10, speaker: Sacha, vi: "Về nhà rồi! Em xuống đây ạ.", en: "We're home! I'll get off here.", lit: "return house already! younger-sibling go-down here (polite)."}
 - {n: 11, speaker: Minh, vi: "Giỏi lắm! Vào nhà đi. Ngày_mai em chở anh đi làm nhé!", en: "Well done! Let's go in. Tomorrow you can take me to work!", lit: "clever very! enter house (urging). tomorrow younger-sibling carry elder-brother go work OK!"}
 notes:
@@ -22,10 +22,10 @@ notes:
 - {ref: 3, topic: grammar, text: "Direction verbs: lên \"to go up, to get on\" (lên xe máy), xuống \"to go down, to get off\" (Em xuống đây, line 10), ra \"to go out\", vào \"to go in\" (Vào nhà đi!, line 11), về \"to go back, home\", sang \"to cross, to go over\" (sang phố kia, line 5)."}
 - {ref: 4, topic: grammar, text: "Em đi ra ngõ: after đi (or another verb of movement), ra, vào, lên, xuống, về, sang give the direction: đi ra \"go out\", đi vào \"go in\", đi về \"go back\". ngõ \"a lane\": Hà Nội houses stand on a ngõ off a phố."}
 - {ref: 5, topic: particles, text: "Đi chậm thôi! \"slowly now!\": thôi after an order softens it, \"just\". chậm \"slow, slowly\", the opposite of nhanh."}
-- {ref: 7, topic: grammar, text: "Chú ý! \"watch out!\": chú ý \"to pay attention (to)\". Xe máy ở trước \"a motorbike in front\": trước \"in front (of); before\", sau \"behind; after\" (line 3). Phanh đi! \"brake!\": phanh \"brake; to brake\" (from French frein)."}
+- {ref: 7, topic: grammar, text: "Cẩn thận! \"careful, watch out!\": cẩn thận \"careful\". Có xe máy ở trước \"there's a motorbike in front\": trước \"in front (of); before\", sau \"behind; after\" (line 3). Phanh đi! \"brake!\": phanh \"brake; to brake\" (from French frein)."}
 - {ref: 8, topic: usage, text: "Tốc độ này được không? \"is this speed all right?\": tốc độ \"speed\"; được alone is \"all right, OK\" (Được. line 9). giao thông \"traffic\" (line 6)."}
-- {ref: 9, topic: grammar, text: "Cẩn thận, đừng ngã nhé! \"careful, don't fall!\": cẩn thận \"careful\"; ngã \"to fall\" (also the name of the tone ngã). Ngày mai em chở anh đi làm (line 11): chở \"to carry, to give (someone) a lift\" on a motorbike."}
-- {ref: 7, topic: bridge, text: "tr and ch: Mandarin zh- usually gives ch or tr, and Taigi often decides: chú ý is 注意 (Mandarin zhùyì, Taigi tsù-ì): with Taigi ts-, ch. 中 trung (Mandarin zhōng, Taigi tiong), as in trung tâm: with Taigi t-, tr."}
+- {ref: 9, topic: grammar, text: "Chú ý nhé, đừng ngã! \"pay attention, don't fall off!\": chú ý \"to pay attention (to)\"; ngã \"to fall\" (also the name of the tone ngã). Ngày mai em chở anh đi làm (line 11): chở \"to carry, to give (someone) a lift\" on a motorbike."}
+- {ref: 9, topic: bridge, text: "tr and ch: Mandarin zh- usually gives ch or tr, and Taigi often decides: chú ý is 注意 (Mandarin zhùyì, Taigi tsù-ì): with Taigi ts-, ch. 中 trung (Mandarin zhōng, Taigi tiong), as in trung tâm: with Taigi t-, tr."}
 new_words:
 - {w: ra, en: "to go out, to come out; out"}
 - {w: vào, en: "to go in, to enter; into, in, at (a time)"}

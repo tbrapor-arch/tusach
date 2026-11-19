@@ -2,7 +2,7 @@ id: 18
 title: {vi: Ở bể bơi, en: At the swimming pool}
 review: false
 setting: >-
-  Sunday morning, hot again. Thảo has never learnt to swim, and Sacha has offered to teach her. They go to a public
+  Sunday morning, hot again. Sacha has asked Thảo to come swimming with him. They go to a public
   swimming pool; a woman of about forty sells the tickets.
 dialogue:
 - {n: 1, speaker: Sacha, vi: "Chị ơi, cho em hai vé.", en: "Two tickets, please.", lit: "elder-sister hey, give younger-sibling two ticket."}
@@ -47,11 +47,11 @@ new_words:
 exercises:
   translate:
   - {vi: "Bin biết bơi, nhưng Na không biết bơi.", en: "Bin can swim, but Na can't."}
-  - {vi: "Tối, chị Lan dạy Bin đọc sách.", en: "In the evenings Lan teaches Bin to read."}
+  - {vi: "Tối, chị Lan dạy Na đọc sách.", en: "In the evenings Lan teaches Na to read."}
   - {vi: "Anh có_thể mua vé ở đây.", en: "You can buy tickets here. (to a young man)"}
   - {vi: "Em không hiểu ngữ_pháp này.", en: "I don't understand this grammar. (to someone older)"}
   - {vi: "Hôm_nay trời mát, đi_bộ đi!", en: "It's cool today: let's walk!"}
   fill:
   - {vi: "Cháu nói tiếng_Việt ___ không?", answer: được, en: "Can you speak Vietnamese? (an elder to a younger person)"}
-  - {vi: "Phở ở đây ngon ___?", answer: chứ, en: "The phở here is good, isn't it?"}
+  - {vi: "Anh nói tiếng_Việt được ___!", answer: chứ, en: "Of course I can speak Vietnamese! (to someone younger)"}
   - {vi: "Na ___ mèo đen.", answer: sợ, en: "Na is afraid of black cats."}

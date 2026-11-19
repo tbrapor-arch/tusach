@@ -6,21 +6,21 @@ setting: >-
   everyone sits round. Bác cooked. Before anyone eats, the children invite the grown-ups to start, the eldest first.
 dialogue:
 - {n: 1, speaker: Bin, vi: "Cháu mời bà ăn cơm ạ! Con mời bố mẹ ăn cơm ạ!", en: "Grandma, please eat! Mum, Dad, please eat!", lit: "grandchild invite grandmother eat rice (polite)! child invite father mother eat rice (polite)!"}
-- {n: 2, speaker: Bác, vi: "Mời cả nhà ăn cơm! Sacha, cháu ngồi đây. Cháu không phải~right là khách đâu, chúng_ta là người một nhà.", en: "Let's eat, everyone! Sacha, sit here. You're not a guest: we're one family.", lit: "invite whole house eat rice! Sacha, grandchild sit here. grandchild not be guest (at-all), we-all be person one house."}
+- {n: 2, speaker: Bác, vi: "Cả nhà ăn cơm đi! Sacha, cháu ngồi đây. Cháu không phải~right là khách đâu, chúng_ta là người một nhà.", en: "Let's eat, everyone! Sacha, sit here. You're not a guest: we're one family.", lit: "whole house eat rice (urging)! Sacha, grandchild sit here. grandchild not be guest (at-all), we-all be person one house."}
 - {n: 3, speaker: Sacha, vi: "Vâng ạ. Canh ngon quá! Bác nấu ạ?", en: "Thank you. The soup is delicious! Did you make it?", lit: "yes (polite). soup tasty so! uncle-aunt cook (polite)?"}
 - {n: 4, speaker: Lan, vi: "Mẹ chị nấu đấy. Ở Pháp em có ăn canh không?", en: "My mother made it. Do you eat soup in France?", lit: "mother elder-sister cook (you-see). at France younger-sibling (yes) eat soup not?"}
 - {n: 5, speaker: Sacha, vi: "Có ạ, nhưng chúng_tôi không ăn canh với cơm.", en: "Yes, but we don't eat soup with rice.", lit: "have (polite), but we-not-you not eat soup with rice."}
 - {n: 6, speaker: Lan, vi: "Na, đũa đây, ăn đi nhá! Bin, con no rồi hả?", en: "Na, here are your chopsticks: eat up, OK? Bin, are you full already?", lit: "Na, chopsticks here, eat (urging) OK! Bin, child full already (eh)?"}
-- {n: 7, speaker: Bin, vi: "Con no rồi ạ. Hôm_qua kiểm_tra, con được mười điểm!", en: "Yes, I'm full. I got ten out of ten in the test yesterday!", lit: "child full already (polite). yesterday test, child get ten point!"}
+- {n: 7, speaker: Bin, vi: "Con no rồi ạ. Hôm_qua con kiểm_tra được mười điểm!", en: "Yes, I'm full. I got ten out of ten in the test yesterday!", lit: "child full already (polite). yesterday child test get ten point!"}
 - {n: 8, speaker: Minh, vi: "Bin là học_sinh giỏi đấy! Sacha, em có anh_trai, chị_gái không?", en: "Bin is a good pupil, you know! Sacha, do you have brothers or sisters?", lit: "Bin be pupil clever (you-see)! Sacha, younger-sibling have elder-brother, elder-sister not?"}
 - {n: 9, speaker: Sacha, vi: "Em có một anh_trai và một em_gái. Ở Hà_Nội, chị Lan là chị_gái em!", en: "I have an elder brother and a younger sister. In Hà Nội, Lan is my big sister!", lit: "younger-sibling have one elder-brother and one younger-sister. at Hà Nội, elder-sister Lan be elder-sister younger-sibling!"}
 notes:
 - {ref: 1, topic: usage, text: "Cháu mời bà ăn cơm ạ: before a family meal the children invite each elder in turn, the oldest first: mời \"to invite; please (do)\". Bin is cháu to his grandmother and con to his parents. ăn cơm \"to eat rice\" is \"to have a meal\"."}
-- {ref: 2, topic: grammar, text: "Mời cả nhà ăn cơm! \"let's eat, everyone!\": cả \"whole, all\" before a noun: cả nhà \"the whole family\". ngồi \"to sit\": Cháu ngồi đây \"sit here\". khách \"guest\"; không phải là khách đâu: đâu makes the \"not\" stronger (lesson 12)."}
+- {ref: 2, topic: grammar, text: "Cả nhà ăn cơm đi! \"let's eat, everyone!\": the eldest answers the children's mời by starting the meal. cả \"whole, all\" before a noun: cả nhà \"the whole family\". ngồi \"to sit\": Cháu ngồi đây \"sit here\". khách \"guest\"; không phải là khách đâu: đâu makes the \"not\" stronger (lesson 12)."}
 - {ref: 2, topic: pronouns, text: "chúng ta is \"we\" WITH the listener: chúng ta là người một nhà \"we (you and I) are one family\". chúng tôi is \"we\" WITHOUT the listener (line 5): Sacha speaks for the French, not for Lan. The same split as Taigi 咱 / 阮."}
 - {ref: 3, topic: grammar, text: "Canh ngon quá! Bác nấu ạ?: canh is the clear soup of a family meal, eaten with the rice; nấu \"to cook\". A question can be a bare statement + ạ to an elder: Bác nấu ạ? \"you made it?\"."}
 - {ref: 6, topic: particles, text: "Ăn đi nhá! \"eat up, OK?\": nhá is the familiar nhé, to children and close friends. Con no rồi hả? \"are you full already?\": hả is a blunt, familiar question, to equals and younger people; to someone older, à or ạ. đũa \"chopsticks\"."}
-- {ref: 7, topic: grammar, text: "Con được mười điểm \"I got ten\": được \"to get\" (lesson 1, được gặp). điểm \"point, mark\": Vietnamese schools mark out of ten. kiểm tra \"to check; a test\": Hôm qua kiểm tra \"in yesterday's test\"."}
+- {ref: 7, topic: grammar, text: "Con được mười điểm \"I got ten\": được \"to get\" (lesson 1, được gặp). điểm \"point, mark\": Vietnamese schools mark out of ten. kiểm tra \"to check; to test, a test\": con kiểm tra được mười điểm \"I got ten in the test\"."}
 - {ref: 8, topic: grammar, text: "học sinh \"a pupil\" (at school; a university student is sinh viên, lesson 8). giỏi \"good at, clever\": học sinh giỏi \"a good pupil\", học giỏi \"to do well at school\"."}
 - {ref: 9, topic: pronouns, text: "anh trai \"elder brother\", chị gái \"elder sister\", em gái \"younger sister\": trai \"male\", gái \"female\" tell what anh, chị, em leave open. Alone, anh, chị, em are also \"you\" and \"I\"; anh trai, chị gái are only family words."}
 - {ref: 2, topic: bridge, text: "Velars: khách is 客 (Mandarin kè, Cantonese haak3): kh with Mandarin k- and Cantonese h-. canh is 羹 (gēng): c, k, q with Mandarin g-. gi with Mandarin j- and Cantonese g- before aa: gia đình 家庭 (jiātíng, gaa1)."}
@@ -52,5 +52,5 @@ exercises:
   - {vi: "Chị Lan nấu cơm cho cả nhà.", en: "Lan cooks dinner for the whole family."}
   fill:
   - {vi: "Na là ___ Bin.", answer: em_gái, en: "Na is Bin's younger sister."}
-  - {vi: "Con đói rồi ___?", answer: hả, en: "Hungry already, eh? (a parent to a child)"}
-  - {vi: "Ngày_mai đi chơi với mẹ ___!", answer: nhá, en: "We'll go out tomorrow, you and me, OK? (a mother to her child)"}
+  - {vi: "Con đói rồi ___?", answer: hả, en: "Hungry already, eh? (a parent to a child: the blunt, familiar particle)"}
+  - {vi: "Ngày_mai đi chơi với mẹ ___!", answer: nhá, en: "We'll go out tomorrow, you and me, OK? (a mother to her child: the familiar form)"}

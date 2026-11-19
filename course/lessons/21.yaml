@@ -2,14 +2,14 @@ id: 21
 title: {vi: Quyển sách cho Na, en: Review 3}
 review: true
 setting: >-
-  Sunday evening at home. Sacha gives Na the book about a cat he bought at the bookshop. Bin has a literature test
+  Sunday evening at home. Sacha gives Na the book about a cat he bought at the bookshop. Bin has a Vietnamese test
   tomorrow, and dinner is almost ready. Nothing new in this dialogue: every word comes from lessons 1–20. The notes
   gather what lessons 15–20 brought.
 dialogue:
 - {n: 1, speaker: Na, vi: "Chú ơi, quyển sách này hay~good quá! Chú mua cho cháu ạ?", en: "This book is lovely! Did you buy it for me?", lit: "uncle hey, (volume) book this good so! uncle buy for grandchild (polite)?"}
 - {n: 2, speaker: Sacha, vi: "Chú mua cho cháu đấy. Cháu thích mèo, phải~right không?", en: "I bought it for you. You like cats, don't you?", lit: "uncle buy for grandchild (you-see). grandchild like cat, right not?"}
 - {n: 3, speaker: Na, vi: "Dạ, cháu thích mèo nhất! Cảm_ơn chú ạ.", en: "Yes, I like cats best! Thank you.", lit: "yes (polite), grandchild like cat most! thank uncle (polite)."}
-- {n: 4, speaker: Bin, vi: "Chú ơi, giúp cháu với! Ngày_mai cháu có kiểm_tra môn văn.", en: "Please help me! I've got a literature test tomorrow.", lit: "uncle hey, help grandchild (please)! tomorrow grandchild have test subject literature."}
+- {n: 4, speaker: Bin, vi: "Chú ơi, giúp cháu với! Ngày_mai cháu có kiểm_tra tiếng_Việt.", en: "Please help me! I've got a Vietnamese test tomorrow.", lit: "uncle hey, help grandchild (please)! tomorrow grandchild have test Vietnamese."}
 - {n: 5, speaker: Sacha, vi: "Được chứ! Nhưng Bin đọc tiếng_Việt giỏi hơn chú đấy.", en: "Of course! But you read Vietnamese better than I do.", lit: "can (of-course)! but Bin read Vietnamese clever more uncle (you-see)."}
 - {n: 6, speaker: Bin, vi: "Chú đọc với cháu được không ạ?", en: "Can you read with me?", lit: "uncle read with grandchild can not (polite)?"}
 - {n: 7, speaker: Lan, vi: "Bin, con đọc với chú Sacha đi, rồi ăn cơm nhá!", en: "Bin, read with Sacha, then we'll eat, OK?", lit: "Bin, child read with uncle Sacha (urging), then eat rice OK!"}
@@ -38,5 +38,5 @@ exercises:
   fill:
   - {vi: "Cho em hai ___ sách này.", answer: quyển, en: "Two of these books, please."}
   - {vi: "Cái áo này đẹp ___ cái áo kia.", answer: "bằng~equal", en: "This top is as pretty as that one."}
-  - {vi: "Anh Minh ơi, tìm quyển từ_điển cho em ___!", answer: với, en: "Minh, please find the dictionary for me!"}
-  - {vi: "Con ăn no rồi ___?", answer: hả, en: "Full already, are you? (a parent to a child)"}
+  - {vi: "Anh Minh ơi, tìm quyển từ_điển cho em ___!", answer: với, en: "Minh, please find the dictionary for me! (a plea for help)"}
+  - {vi: "Con ăn no rồi ___?", answer: hả, en: "Full already, are you? (a parent to a child: the blunt, familiar particle)"}

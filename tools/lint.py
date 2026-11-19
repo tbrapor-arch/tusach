@@ -109,8 +109,8 @@ def kin_mismatch(text):
             nxt = toks[i + 1] if i + 1 < len(toks) else None
             prv = toks[i - 1][2] if i else ''
             if nxt and (nxt[1][:1].isupper() or nxt[2] in THIRD_AFTER or nxt[2] in KIN or nxt[2] == 'và') \
-                    or prv == 'và':
-                continue                     # chị Lan, anh ấy, bác này, mẹ chị, ông và bà: a third person
+                    or prv in ('và', 'một'):
+                continue                     # chị Lan, anh ấy, bác này, mẹ chị, ông và bà, một cháu: a third person
             terms.append(k)
         terms = [k for k in dict.fromkeys(terms) if k != 'tôi']
         if len(terms) == 2 and frozenset(terms) not in KIN_PAIRS:

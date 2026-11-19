@@ -3,7 +3,7 @@ title: {vi: Phòng mới của Thảo, en: Review 4}
 review: true
 setting: >-
   Monday evening. Thảo moves into her new room. Sacha, who can ride Minh's motorbike now, carries her and her bag
-  there. The landlady lives in the same house. Nothing new in this dialogue: every word comes from lessons
+  there. The landlady lives in the same house; they stay for dinner with her. Nothing new in this dialogue: every word comes from lessons
   1–27. The notes gather what lessons 22–27 brought.
 dialogue:
 - {n: 1, speaker: Thảo, vi: "Anh Sacha ơi, anh chở em đến phòng mới được không?", en: "Sacha, could you take me to my new room?", lit: "elder-brother Sacha hey, elder-brother carry younger-sibling arrive room new can not?"}
@@ -11,27 +11,27 @@ dialogue:
 - {n: 3, speaker: Thảo, vi: "Đến rồi! Phòng em ở tầng ba~three. Anh lên với em nhé.", en: "Here we are! My room is on the third floor. Come up with me.", lit: "arrive already! room younger-sibling at floor three. elder-brother go-up with younger-sibling OK."}
 - {n: 4, speaker: Sacha, vi: "Hành_lý của em nặng quá! Trong này có những gì?", en: "Your bag is so heavy! What have you got in here?", lit: "luggage of younger-sibling heavy so! in this have (plural) what?"}
 - {n: 5, speaker: Thảo, vi: "Sách của em đấy. Mỗi tối em vẫn đọc sách.", en: "My books. I still read every evening.", lit: "book of younger-sibling (you-see). each evening younger-sibling still read book."}
-- {n: 6, speaker: Landlady, vi: "Chào hai cháu! Khi các cháu xong thì xuống ăn cơm với cô nhé.", en: "Hello, you two! When you've finished, come down and eat with me.", lit: "greet two grandchild! when (plural) grandchild finish then go-down eat rice with aunt OK."}
+- {n: 6, speaker: Landlady, vi: "Chào hai cháu! Khi các cháu làm xong thì xuống ăn cơm với cô nhé.", en: "Hello, you two! When you've finished, come down and eat with me.", lit: "greet two grandchild! when (plural) grandchild do finish then go-down eat rice with aunt OK."}
 - {n: 7, speaker: Sacha, vi: "Dạ, cảm_ơn cô ạ. Mấy giờ ạ?", en: "Thank you. What time?", lit: "yes (polite), thank aunt (polite). how-many hour (polite)?"}
 - {n: 8, speaker: Landlady, vi: "Lúc bảy giờ. Mọi người ở đây thường ăn cơm ở bếp tầng hai.", en: "At seven. Everyone here usually eats in the kitchen on the second floor.", lit: "at seven hour. every person at here usually eat rice at kitchen floor two."}
-- {n: 9, speaker: Thảo, vi: "Em ăn hết rồi, em không ăn được nữa!", en: "I've eaten it all: I can't eat any more!", lit: "younger-sibling eat all already, younger-sibling not eat can more!"}
+- {n: 9, speaker: Thảo, vi: "Cơm ngon quá! Em ăn hết rồi, em không ăn được nữa!", en: "That was so good! I've eaten it all: I can't eat any more!", lit: "rice tasty so! younger-sibling eat all already, younger-sibling not eat can more!"}
 - {n: 10, speaker: Sacha, vi: "Anh cũng thế. Thôi, anh về nhé. Ngày_mai anh lại đến.", en: "Me too. Right, I'm off home. I'll come again tomorrow.", lit: "elder-brother also so. stop, elder-brother return OK. tomorrow elder-brother again come."}
 - {n: 11, speaker: Thảo, vi: "Anh về cẩn_thận nhé! Ngõ này tối lắm.", en: "Go home carefully! This lane is very dark.", lit: "elder-brother return careful OK! lane this dark very."}
 notes:
 - {ref: 2, topic: particles, text: "Anh lái xe máy giỏi rồi mà! \"I'm a good rider now, you know!\": mà at the end insists (lesson 27). The particles so far, all Northern: ạ, à, ơi, nhé, đấy, đi, nào, nhỉ, thế, đâu, thôi, hả, nhá, với, chứ, dạ, mà."}
-- {ref: 0, topic: grammar, text: "Time (lesson 22): lúc + a clock time (lúc bảy giờ); khi \"when\" + an event; thì marks the main clause after it: Khi các cháu xong thì xuống ăn cơm. thì after a noun sets it apart: Tôi thì …"}
+- {ref: 0, topic: grammar, text: "Time (lesson 22): lúc + a clock time (lúc bảy giờ); khi \"when\" + an event; thì marks the main clause after it: Khi các cháu làm xong thì xuống ăn cơm. thì after a noun sets it apart: Tôi thì …"}
 - {ref: 0, topic: grammar, text: "Plurals (lesson 23): các + noun, the whole group (các cháu \"you all\"); những + noun, some of them (những gì \"what things\"); mọi + noun \"every\" (mọi người); mỗi + noun \"each\" (mỗi tối \"every evening\")."}
 - {ref: 0, topic: grammar, text: "Direction verbs (lesson 24): ra, vào, lên, xuống, về, sang, alone (Anh lên với em) or after a verb of movement (đi ra, đi vào); xuống ăn cơm \"come down to eat\"."}
 - {ref: 0, topic: grammar, text: "Results (lesson 25): xong \"finished\", hết \"all, used up\", thấy (nhìn thấy, nghe thấy), được \"can, manage\": Em ăn hết rồi, em không ăn được nữa."}
 - {ref: 0, topic: grammar, text: "How often (lesson 26), before the verb: luôn, thường, hay, thỉnh thoảng, ít khi. đã từng + verb \"have ever\"; with chưa it asks: Em đã từng … chưa?"}
 - {ref: 0, topic: grammar, text: "Lesson 27: còn \"still (not over)\" (bà còn nhỏ); vẫn \"still, as before\" (Mỗi tối em vẫn đọc sách); nữa \"more\" after the verb (không ăn được nữa); lại \"again\", before the verb (lại đến) or after it (kể lại)."}
-- {ref: 6, topic: pronouns, text: "The landlady says cô and cháu to Thảo and Sacha (lesson 19), and các cháu to both. Sacha answers Dạ, cảm ơn cô ạ. Between themselves Thảo and Sacha keep em / anh."}
+- {ref: 6, topic: pronouns, text: "The landlady calls herself cô and Thảo and Sacha cháu, các cháu or hai cháu for both (lesson 19); Sacha answers Dạ, cảm ơn cô ạ. Between themselves Thảo and Sacha keep em / anh."}
 - {ref: 0, topic: bridge, text: "Initials of lessons 22–26, usually: Mandarin aspirated p t k q c ch in tone 2 → b đ c t tr ch gi (đầu 頭); Mandarin z, or j q x with Cantonese z c s, → t (tâm 心); zh → ch with Taigi ts- (chú ý 注意), tr with Taigi t- (trung 中); sh → th or s (thiếu 少); r → nh (nhân 人)."}
 new_words: []
 exercises:
   translate:
   - {vi: "Khi Bin về nhà thì Na đang ngủ.", en: "When Bin got home, Na was asleep."}
-  - {vi: "Mỗi buổi Thảo bơi khoảng một giờ.", en: "Thảo swims for about an hour each session."}
+  - {vi: "Mỗi buổi Thảo bơi khoảng ba~three mươi phút.", en: "Thảo swims for about thirty minutes each session."}
   - {vi: "Các em ơi, ăn xong chưa?", en: "Have you finished eating, everyone? (to younger people)"}
   - {vi: "Chị Lan đã từng leo núi ở Lào_Cai.", en: "Lan has been hiking in Lào Cai."}
   - {vi: "Anh Minh vẫn thích đi xe_đạp.", en: "Minh still likes riding a bicycle."}

@@ -11,13 +11,13 @@ dialogue:
 - {n: 4, speaker: Tuấn, vi: "Hai em đã từng leo núi chưa?", en: "Have you two ever been hiking in the mountains?", lit: "two younger-sibling (past) ever climb mountain not-yet?"}
 - {n: 5, speaker: Sacha, vi: "Em đã từng leo núi ở Pháp, nhưng ở Việt_Nam thì chưa.", en: "I've been hiking in France, but not yet in Vietnam.", lit: "younger-sibling (past) ever climb mountain at France, but at Vietnam then not-yet."}
 - {n: 6, speaker: Tuấn, vi: "Anh tham_gia một câu_lạc_bộ leo núi. Tháng sau chúng_ta đi nhé?", en: "I belong to a hiking club. Shall we go next month?", lit: "elder-brother take-part one club climb mountain. month after we-all go OK?"}
-- {n: 7, speaker: Mai, vi: "Em không có thời_gian, anh ạ. Cuối_tuần em luôn bận.", en: "I haven't got the time. I'm always busy at weekends.", lit: "younger-sibling not have time, elder-brother (polite). weekend younger-sibling always busy."}
+- {n: 7, speaker: Mai, vi: "Tháng sau em bận lắm, anh ạ. Em không có thời_gian.", en: "I'm very busy next month. I haven't got the time.", lit: "month after younger-sibling busy very, elder-brother (polite). younger-sibling not have time."}
 - {n: 8, speaker: Tuấn, vi: "Sacha thì sao~why?", en: "What about you, Sacha?", lit: "Sacha then how?"}
 - {n: 9, speaker: Sacha, vi: "Em muốn đi lắm! Em thích vẽ, em sẽ vẽ núi Việt_Nam.", en: "I'd love to go! I like drawing: I'll draw the mountains of Vietnam.", lit: "younger-sibling want go very! younger-sibling like draw, younger-sibling will draw mountain Vietnam."}
-- {n: 10, speaker: Tuấn, vi: "Hay~good quá! Anh thì hay~often xem bóng_đá, nhưng không biết vẽ.", en: "Great! Me, I often watch football, but I can't draw.", lit: "good so! elder-brother (as-for) often watch football, but not know draw."}
+- {n: 10, speaker: Tuấn, vi: "Hay~good quá! Anh thì tối thứ_bảy luôn xem bóng_đá, nhưng không biết vẽ.", en: "Great! Me, I always watch football on Saturday evenings, but I can't draw.", lit: "good so! elder-brother (as-for) evening Saturday always watch football, but not know draw."}
 - {n: 11, speaker: Mai, vi: "Thế thì lần sau em cũng đi!", en: "In that case, next time I'm coming too!", lit: "so then time after younger-sibling also go!"}
 notes:
-- {ref: 1, topic: grammar, text: "How often, before the verb: luôn \"always\" (line 7), thường \"usually\", hay \"often\" (line 3), thỉnh thoảng \"sometimes\" (at the start or before the verb), ít khi \"rarely\". Bạn thường làm gì? \"what do you usually do?\"."}
+- {ref: 1, topic: grammar, text: "How often, before the verb: luôn \"always\" (line 10), thường \"usually\", hay \"often\" (line 3), thỉnh thoảng \"sometimes\" (at the start or before the verb), ít khi \"rarely\". Bạn thường làm gì? \"what do you usually do?\"."}
 - {ref: 2, topic: usage, text: "chạy \"to run\": chạy ở hồ \"to go running at the lake\". đi rạp xem phim \"to go to the cinema\": rạp \"cinema, theatre\", in full {rạp chiếu phim}."}
 - {ref: 3, topic: grammar, text: "Sở thích của tôi là âm nhạc \"my hobby is music\": sở thích \"hobby\", âm nhạc \"music\" (as an art; to listen to music is nghe nhạc, lesson 20). hát \"to sing\", nhảy \"to dance\"."}
 - {ref: 3, topic: usage, text: "hay is three words: \"often\" before a verb (tôi hay hát); \"or\" between two choices (lesson 11); \"good, interesting\" after a noun or in Hay quá! \"great!\" (line 10)."}
@@ -51,7 +51,7 @@ exercises:
   - {vi: "Bin thường đi học lúc bảy giờ.", en: "Bin usually goes to school at seven."}
   - {vi: "Chị Lan đã từng sống ở Pháp.", en: "Lan once lived in France."}
   - {vi: "Ông Hùng luôn uống trà với bạn.", en: "Ông Hùng always drinks tea with his friends."}
-  - {vi: "Thỉnh_thoảng Thảo đi bơi với anh Minh.", en: "Sometimes Thảo goes swimming with Minh."}
+  - {vi: "Thỉnh_thoảng Thảo đi bơi với Sacha.", en: "Sometimes Thảo goes swimming with Sacha."}
   - {vi: "Na thích hát, Bin thích bóng_đá.", en: "Na likes singing; Bin likes football."}
   fill:
   - {vi: "Anh đã ___ ăn bún_chả chưa?", answer: từng, en: "Have you ever eaten bún chả? (to a young man a little older)"}

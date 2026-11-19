@@ -7,24 +7,24 @@ setting: >-
 dialogue:
 - {n: 1, speaker: Mai, vi: "Chào Sacha! Hôm_nay bạn đến sớm thế!", en: "Hi Sacha! You're early today!", lit: "greet Sacha! today you arrive early so!"}
 - {n: 2, speaker: Sacha, vi: "Chín giờ có họp. Tôi không muốn đến muộn.", en: "There's a meeting at nine. I don't want to be late.", lit: "nine hour have meeting. I not want arrive late."}
-- {n: 3, speaker: Mai, vi: "Tôi cũng thế. Chúng_ta đều phải~must gửi báo_cáo cho sếp.", en: "Me neither. We both have to send our reports to the boss.", lit: "I also so. we-all both must send report to boss."}
+- {n: 3, speaker: Mai, vi: "Tôi cũng thế. Hôm_qua chúng_ta đều phải~must gửi báo_cáo cho sếp.", en: "Me neither. Yesterday we both had to send our reports to the boss.", lit: "I also so. yesterday we-all both must send report to boss."}
 - {n: 4, speaker: Tuấn, vi: "Chào hai em! Chúng_ta bắt_đầu họp nhé. Hai em gửi báo_cáo chưa?", en: "Morning, both of you! Let's start the meeting. Have you sent your reports?", lit: "greet two younger-sibling! we-all begin meet OK. two younger-sibling send report not-yet?"}
 - {n: 5, speaker: Mai, vi: "Em gửi rồi ạ. Sacha cũng gửi rồi.", en: "I've sent mine. Sacha has sent his too.", lit: "younger-sibling send already (polite). Sacha also send already."}
 - {n: 6, speaker: Tuấn, vi: "Tốt. Sacha, đây là tháng đầu_tiên của em ở văn_phòng. Công_việc thế_nào?", en: "Good. Sacha, this is your first month at the office. How's work?", lit: "good. Sacha, here be month first of younger-sibling at office. work how?"}
 - {n: 7, speaker: Sacha, vi: "Công_việc khó, máy_tính cũ, nhưng đồng_nghiệp đều tốt lắm ạ!", en: "The work is hard and the computer is old, but my colleagues are all very kind!", lit: "work difficult, computer old, but colleague all good very (polite)!"}
-- {n: 8, speaker: Mai, vi: "Sacha ơi, đi ăn_trưa đi! Vừa ăn vừa nói_chuyện.", en: "Sacha, let's go and have lunch! We can talk while we eat.", lit: "Sacha hey, go have-lunch (urging)! while eat while talk."}
+- {n: 8, speaker: Mai, vi: "Mười hai giờ rồi! Sacha ơi, đi ăn_trưa đi! Vừa ăn vừa nói_chuyện.", en: "Twelve o'clock already! Sacha, let's go and have lunch! We can talk while we eat.", lit: "ten two hour already! Sacha hey, go have-lunch (urging)! while eat while talk."}
 - {n: 9, speaker: Sacha, vi: "Mai ơi, bạn vừa làm_việc vừa nghe nhạc, phải~right không?", en: "Mai, you work and listen to music at the same time, don't you?", lit: "Mai hey, you while work while listen music, right not?"}
 - {n: 10, speaker: Mai, vi: "Tôi thích nghe nhạc lắm. Nghe nhạc, tôi làm_việc nhanh hơn!", en: "I love listening to music. With music on, I work faster!", lit: "I like listen music very. listen music, I work fast more!"}
 notes:
 - {ref: 1, topic: grammar, text: "Hôm nay bạn đến sớm thế! \"you're early today!\": đến \"to come, to arrive\" (lesson 19) + sớm \"early\" or muộn \"late\" (line 2): đến muộn \"to be late\". muộn is Northern; the South says {trễ}."}
 - {ref: 2, topic: grammar, text: "Chín giờ có họp \"there's a meeting at nine\": họp \"to meet, to have a meeting\" is a verb; có + verb says that it takes place. bắt đầu \"to begin\" (line 4): bắt đầu họp \"to start the meeting\"."}
-- {ref: 3, topic: grammar, text: "cũng and đều both go before the verb. cũng is \"also, too\": Tôi cũng thế \"me too\" (here \"me neither\"). đều is \"all, both (alike)\" and needs a plural subject: Chúng ta đều phải gửi báo cáo \"we both have to send reports\"; đồng nghiệp đều tốt \"my colleagues are all kind\" (line 7)."}
+- {ref: 3, topic: grammar, text: "cũng and đều both go before the verb. cũng is \"also, too\": Tôi cũng thế \"me too\" (here \"me neither\"). đều is \"all, both (alike)\" and needs a plural subject: Hôm qua chúng ta đều phải gửi báo cáo \"yesterday we both had to send reports\"; đồng nghiệp đều tốt \"my colleagues are all kind\" (line 7)."}
 - {ref: 3, topic: usage, text: "Office words: sếp \"boss\" (from French chef, everyday speech); gửi \"to send\": gửi báo cáo cho sếp \"to send a report to the boss\" (cho \"to\", lesson 19); báo cáo \"a report\"; máy tính \"computer\" (line 7)."}
 - {ref: 4, topic: pronouns, text: "Chào hai em! Tuấn, 41, says em to each of them and anh for himself; they say anh and em. Between themselves, Mai and Sacha keep tôi and bạn (lesson 11). Line 5: to Tuấn, Mai says em gửi rồi ạ."}
 - {ref: 6, topic: grammar, text: "Công việc thế nào? \"how's work?\": công việc \"work, a job\" (a noun); làm việc \"to work\" (a verb, line 9). văn phòng \"office\". đầu tiên \"first\" follows the noun: tháng đầu tiên \"the first month\"."}
 - {ref: 8, topic: grammar, text: "Vừa ăn vừa nói chuyện \"eat and talk at the same time\": vừa … vừa … before two verbs, two things at once. vừa alone was \"to fit\" (lesson 13). ăn trưa \"to have lunch\"; nói chuyện \"to talk, to chat\"; nghe nhạc \"to listen to music\" (line 9)."}
 - {ref: 6, topic: false-friend, text: "đầu tiên is 頭先, but in Cantonese and Taigi 頭先 is \"just now\"; \"first\" in Chinese is 首先 or 最先."}
-- {ref: 3, topic: bridge, text: "Dentals: đồng nghiệp is 同業 (Mandarin tóngyè): đ answers Mandarin d-, and t- in tone 2. n and l answer Mandarin n- and l-: loại is 類 (lèi)."}
+- {ref: 3, topic: bridge, text: "Dentals: đồng nghiệp is 同業 (Mandarin tóngyè): đ answers Mandarin d-, and t- in tone 2; th answers Mandarin t- in tones 1, 3, 4. n and l answer Mandarin n- and l-: loại is 類 (lèi)."}
 new_words:
 - {w: đều, en: "both, all (alike); evenly"}
 - {w: họp, en: "to meet, to have a meeting"}
@@ -55,4 +55,4 @@ exercises:
   fill:
   - {vi: "Anh Minh và chị Lan ___ làm ở Hà_Nội.", answer: đều, en: "Minh and Lan both work in Hà Nội."}
   - {vi: "Na vừa ăn ___ xem phim.", answer: vừa, en: "Na eats while she watches a film."}
-  - {vi: "Đây là lần ___ em ăn phở.", answer: đầu_tiên, en: "This is the first time I've eaten phở. (to someone older)"}
+  - {vi: "Bin là học_sinh ___ đến trường.", answer: đầu_tiên, en: "Bin is the first pupil to arrive at school."}
