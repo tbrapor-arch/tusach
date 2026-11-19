@@ -99,7 +99,7 @@ THIRD_AFTER = {'ấy', 'này', 'kia', 'đó', 'đấy'}
 def kin_mismatch(text):
     """[(a, b)] of the sentences of `text` whose two person terms are not a pair of KIN_PAIRS (lint W, above)."""
     out = []
-    for sent in re.split(r'[.!?…]+', vi.display(text)):
+    for sent in re.split(r'[.!?…]+', vi.nfc(text)):   # raw: chú_ý keeps its underscore (review 7, finding 22)
         toks = [t for t in vi.words(sent) if t[0] == 'w']
         terms = []
         for i, t in enumerate(toks):

@@ -48,6 +48,9 @@ ok(lint.kin_mismatch('Anh rất vui được gặp chị.') == [('anh', 'chị')
 ok(not lint.kin_mismatch('Em rất vui được gặp chị ạ.') and not lint.kin_mismatch('Cháu chào bác ạ!')
    and not lint.kin_mismatch('Tôi rất vui được gặp chị Lan.') and not lint.kin_mismatch('Chị ơi! Cho em hai cốc trà.'),
    'lint: em–chị, cháu–bác, tôi with any are pairs')
+ok(not lint.kin_mismatch('Em chú_ý nhé, anh ngồi sau.') and not lint.kin_mismatch('Phải~must chú_ý nhé, em!')
+   and lint.kin_mismatch('Chú ơi, anh đi đâu?') == [('chú', 'anh')],
+   'lint: chú in chú_ý is not the kin term chú (review 7, finding 22)')
 ok(not lint.kin_mismatch('Ông và bà ở Hà_Nội.') and not lint.kin_mismatch('Mẹ chị đây!')
    and not lint.kin_mismatch('Anh ấy là chồng chị.') and not lint.kin_mismatch('Bác này là bố chị à?'),
    'lint: ông và bà, mẹ chị, anh ấy, bác này are third persons, not counted')
