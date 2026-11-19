@@ -82,3 +82,9 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L11.4 the note: bao giờ first asks about the future, last about the past ("usually") | kept | not reviewed | yes, low |
 | L11.5 Cuối tuần đi chơi với tôi và bạn tôi nhé! (line 9) | kept | not reviewed | yes |
 | L11.6 Tôi thích xem phim. Mấy giờ? (line 4): Có! as an eager yes to Bạn có muốn đi không? | kept | not reviewed | yes, low |
+| L12.1 Đầu cháu đau lắm (line 2) rather than Cháu đau đầu quá: đau đầu is one word by docs/SEGMENTATION.md and not in word list 2 | Đầu cháu đau lắm | not reviewed | yes |
+| L12.2 Cháu sao thế? Cháu không khỏe à? (line 1) from bác at his door | kept | not reviewed | yes, low |
+| L12.3 bị cảm and Cháu có phải gặp bác sĩ không ạ? (lines 3–4; word list point 10) | kept | not reviewed | yes |
+| L12.4 Không sao đâu (line 5) for "it's nothing, don't worry" before advice to take medicine | kept | not reviewed | yes, low |
+| L12.5 Nghỉ một ngày, ngày mai cháu sẽ khỏe. Uống thuốc đi! (line 9): bác's bare imperative to cháu | kept | not reviewed | yes, low |
+| L12.6 the bridge note: Cantonese tone 6 → nặng, tone 3 → sắc "usually" (rules at 89–90 %, proposal section 3) | kept | not reviewed | no (measured) |
