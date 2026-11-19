@@ -127,3 +127,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L15.4 prices: 2 million đồng second-hand, 5 million new (2026) | kept | – | yes, low |
 | L15.5 Máy trắng này (line 7) without màu, like áo đỏ (L13) | kept | – | yes, low |
 | L15.6 Pin máy kia: pin cũng tốt hơn (line 5) "the battery is better too" | kept | – | yes, low |
+| L16.1 Cháu mời bà ăn cơm ạ! Con mời bố mẹ ăn cơm ạ! (line 1): Bin's invitation, cháu to his grandmother, con to his parents | kept | – | yes |
+| L16.2 Cháu không phải là khách đâu, chúng ta là người một nhà (line 2) from bác: natural, or too long for one breath? | kept | – | yes, low |
+| L16.3 Bác nấu ạ? (line 3) as a question to an elder without à | kept | – | yes |
+| L16.4 Có ạ, nhưng chúng tôi không ăn canh với cơm (line 5): chúng tôi for "we French" | kept | – | yes, low |
+| L16.5 Hôm qua kiểm tra, con được mười điểm (line 7); or Hôm qua con kiểm tra được mười điểm | kept | – | yes |
+| L16.6 Ở Hà Nội, chị Lan là chị gái em! (line 9): chị gái used warmly for someone who is not a sister | kept | – | yes |
+| L16.7 Ngày mai đi chơi với mẹ nhá! (fill 3) from a mother to a child | kept | – | yes, low |
