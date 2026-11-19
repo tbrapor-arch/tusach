@@ -21,6 +21,11 @@ Checks (E = error, exit 1; W = warning; I = information)
   W  exercise sentence very similar to a dialogue line (similarity >= SIMILAR): check it is a new sentence
   E  (review 5) exercise sentence taken from an EARLIER lesson's dialogue line, or from a Vietnamese example in its
      own lesson's notes (the same test as above)
+  E  (review 6) exercise sentence taken from the example of a card of one of its words (the course lexicon's example
+     or the Tatoeba sentence the card shows): tapping the word would show the answer
+  E  (review 6) a false-friend note (topic false-friend): its chữ Hán must be a course lexicon row's characters, written
+     next to that row's word, the row having a false-friend note; other characters must come from that note (博士 …
+     醫生); at most one false-friend note per lesson (not counted as a bridge remark; no same-word test)
   W  (review 5) a first-person and a second-person kin term in one sentence (dialogue, exercise, note example) that
      are not a pair of KIN_PAIRS: Anh … gặp chị (a man who says chị calls himself em); a term followed by a name,
      ấy or này, or joined by và, is a third person and not counted
@@ -494,7 +499,7 @@ def notes_order_and_copies(loaded, msgs):
             if bad:
                 msgs.append(('E', f'{rel}:notes[{i}]: E note uses words not yet taught: {", ".join(dict.fromkeys(bad))} '
                                   '(teach them first, or mark {preview})'))
-            for run in W.runs(text):
+            for run in W.runs(text, {**syl_taught, **taught}, n):
                 ex = ' '.join(run)
                 examples.append(ex)
                 for a, b in kin_mismatch(ex):
@@ -517,6 +522,49 @@ def notes_order_and_copies(loaded, msgs):
                     msgs.append(('E', f'{rel}:exercises.{kind}[{j}]: E exercise sentence taken from {src}: write a '
                                       'new one'))
         earlier += [(n, ln.get('n'), ln.get('vi') or '') for ln in d.get('dialogue') or []]
+
+
+def false_friend_problem(text):
+    """'' when a false-friend note's chữ Hán are a lexicon false friend (lint, review 6), else why not."""
+    pairs = cjk_pairs(text)
+    if not pairs:
+        return 'a false-friend note names the characters of the false friend'
+    rows = []
+    for run, word in pairs:
+        for r in LEX_KEY.get(vi.key(word), []) if word else []:
+            if r.get('chars') == run and r.get('false_friend'):
+                rows.append(r)
+    if not rows:
+        return ('no characters written next to a course lexicon word that has them and a false-friend note '
+                f'({", ".join(f"{run} {word}".strip() for run, word in pairs)})')
+    allowed = ''.join(r['chars'] + r['false_friend'] for r in rows)
+    other = [run for run, _ in pairs if run not in allowed]
+    if other:
+        return f'{", ".join(other)}: not in the lexicon row\'s characters or false-friend note'
+    return ''
+
+
+def card_example_copies(loaded, msgs):
+    """Review 6, finding 8: an exercise may not be the example of a card of one of its words (the lexicon's own
+    example or the Tatoeba sentence the card shows): the learner taps a word and sees the answer."""
+    import cards
+    real = [(f, d) for f, d in loaded if not d.get('fixture') and isinstance(d.get('id'), int)]
+    cards.init(D.con, cards.course_words([d for _, d in real]))
+    for f, d in real:
+        rel = os.path.relpath(f, ROOT)
+        for kind, items in (d.get('exercises') or {}).items():
+            for j, it in enumerate(items or []):
+                text = (it.get('vi') or '').replace('___', str(it.get('answer', '')).replace(' ', '_'))
+                try:
+                    ids = cards.ids_of(cards.tokenize(text))
+                except Exception:          # noqa: BLE001 - a word without a card is reported by the other checks
+                    continue
+                for cid in dict.fromkeys(ids):
+                    ex = ((cards.dictionary.get(cid) or {}).get('ex') or {}).get('vi') or ''
+                    if ex and copied(text, ex) == 'copy':
+                        msgs.append(('E', f'{rel}:exercises.{kind}[{j}]: E exercise sentence is the example of the '
+                                          f'card {cid} ("{ex}"): tapping the word shows the answer; write a new one'))
+                        break
 
 
 def lint_lesson0(keys, tags, all_tags, names, msgs):
@@ -617,11 +665,17 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
             m('E', f'notes[{i}]', f"note ref {note.get('ref')} is not a line of the dialogue (use 0 for a recap note)")
         if not note.get('text'):
             m('E', f'notes[{i}]', 'empty note')
+        if note.get('topic') == 'false-friend':
+            why = false_friend_problem(note.get('text') or '')
+            if why:
+                m('E', f'notes[{i}]', f'false-friend note: {why}')
         if note.get('topic') == 'bridge':
             for run, word in sorted(set(cjk_pairs(note.get('text') or ''))):
                 why = D.bridge_example(run, word or None)
                 if why:
                     m('E', f'notes[{i}]', f'bridge example {run} {word}: {why}')
+    if sum(1 for note in d.get('notes') or [] if note.get('topic') == 'false-friend') > 1:
+        m('E', 'notes', 'more than one false-friend note in the lesson (at most one, review 6)')
     for kind, items in (d.get('exercises') or {}).items():
         if kind not in ('translate', 'fill'):
             m('E', f'exercises.{kind}', 'unknown exercise kind (translate, fill)')
@@ -727,6 +781,10 @@ def main():
     plan_checks(loaded, msgs)
     taught_order(loaded, msgs)
     notes_order_and_copies(loaded, msgs)
+    try:
+        card_example_copies(loaded, msgs)
+    except Exception as e:               # noqa: BLE001 - an old database without the card tables
+        msgs.append(('W', f'lint: W card examples not checked against the exercises ({e})'))
     lint_lesson0(keys, tags, all_tags, names, msgs)
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded

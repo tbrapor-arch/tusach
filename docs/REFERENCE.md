@@ -101,7 +101,9 @@ the FrequencyWords syllables seen 200+ times (`build_db.py validate_syllables`, 
 Chữ Hán never appear in `vi` lines or titles; notes may use them (bridge notes). Quote any text with a comma in a
 flow mapping (`{w: tôi, en: "I, me"}`): lint refuses unknown keys, which is what an unquoted comma makes. Exercises
 must be new: lint refuses one equal to, contained in, or equal after a greeting/first clause to a dialogue line, and
-warns at a similarity of 0.8. Every word of a real lesson must be a new word of that lesson or an earlier one (lint error: a needed word means the
+warns at a similarity of 0.8; nor may it be the example a card of one of its words shows (lexicon or Tatoeba;
+review 6). A `false-friend` note (at most one per lesson, beside the bridge remark) writes a lexicon false friend's
+characters next to its word (tuần is 旬); other characters only from that row's false-friend note (醫生). Every word of a real lesson must be a new word of that lesson or an earlier one (lint error: a needed word means the
 plan is wrong). Lint warns when a course word of several syllables (lexicon, word lists) is written
 as separate words (cảm ơn for cảm_ơn): usually a missing underscore.
 
@@ -258,7 +260,7 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 | `tools/state.py [--write\|--check]` | prints docs/STATE.md's numbers from the build; --check in `make test` |
 | `tools/soundfit.py` | measured fit of a Chinese reading with a Hán-Việt syllable (reading order on cards; splitters for bridge_rules) |
 | `tools/carddump.py TREE DB OUT KEYS` | real cards through a tree's own `cards.py` (used by compare; by hand for any list) |
-| `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences) + `tools/test_bridge_rules.py` (the sound-rule measure, no database) + `tools/test_plan.py` (plan checks, review 3's cases) + `tools/test_review3.py` (review 3's reproduced card cases) + `tools/test_golden.py` (golden snapshot, opaque sample) + `tools/state.py --check`, then the cutter report |
+| `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences) + `tools/test_bridge_rules.py` (the sound-rule measure, no database) + `tools/test_plan.py` (plan checks, review 3's cases) + `tools/test_review3.py` (review 3's reproduced card cases) + `tools/test_review6.py` (exercise vs card example, false-friend notes) + `tools/test_golden.py` (golden snapshot, opaque sample) + `tools/state.py --check`, then the cutter report |
 | `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv` and (`--set heldout`) `heldout.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
 | `make check` | the card check alone: no word without a card, no card lost, no card without English, no lower English rank, no published gloss that drops senses (unless in `app/english-changes.tsv`); a changed gloss within its rank is a warning |

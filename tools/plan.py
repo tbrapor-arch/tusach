@@ -149,11 +149,13 @@ class Words:
         # as the word (review 4, C)
         self.common = {k for (k,) in con.execute('SELECT DISTINCT key FROM entry WHERE freq_rank <= ?', (COMMON_RANK,))}
 
-    def runs(self, text):
+    def runs(self, text, taught=None, n=None):
         """[[syllable, …]] of the Vietnamese runs of `text` (module docstring). Every token is classified on its own
         (review 4, C: a lone mua, cho, ba, ai, xa is a Vietnamese word, checked like any other); a capitalised name
-        of the cast keeps its capital (exempt) except at the start of a sentence when it is also a common word, where
-        it is lower-cased and checked as that word ("Mai gặp nhé" uses mai "tomorrow")."""
+        of the cast keeps its capital (exempt) except at the start of a sentence (after . ! ? ; or a line break, not
+        after a colon or a quote: review 6) when it is also a common word that lesson n teaches (`taught`: key ->
+        lesson), where it is lower-cased and read as that word ("Mai gặp nhé" with mai "tomorrow" taught). A name
+        whose common word is not taught yet stays a name: "…: Minh is anh" is no error."""
         text = re.sub(r'\{[^}]*\}', ' ', vi.nfc(text))          # {preview}
         text = re.sub(vi.CJK.pattern + '+', ' ', text)
         out, run, last = [], [], None
@@ -169,9 +171,11 @@ class Words:
                 low in self.known and low not in EN_COMMON | EN_MORE and not vi.syllable_problems(low))
             if t[:1].isupper() and vi.key(t) in self.names:
                 viet = True
-                before = text[:m.start()].rstrip(' "“‘\'(')
-                if (not before or before[-1] in '.!?:;\n') and vi.key(t) in self.common:
-                    t = low                                  # sentence-initial: the common word, checked
+                before = text[:m.start()].rstrip(' ')
+                k = self.canon.get(vi.key(t), vi.key(t))
+                if (not before or before[-1] in '.!?;\n') and vi.key(t) in self.common and taught is not None \
+                        and taught.get(k, 999) <= (n or 0):
+                    t = low                                  # sentence-initial and taught: the common word
             gap = text[last.end():m.start()] if last else ''
             if not viet or (run and re.search(r'[^\s]', gap)):
                 flush()
@@ -185,7 +189,7 @@ class Words:
         """The words of `text` not taught by lesson n: (surface, the lesson that teaches them or None)."""
         bad = []
         multi = [k.split() for k, w in taught.items() if w <= n and ' ' in k]
-        for run in self.runs(text):
+        for run in self.runs(text, taught, n):
             syl = [vi.key(x) for x in run]
             covered = [False] * len(syl)
             for i, s in enumerate(syl):

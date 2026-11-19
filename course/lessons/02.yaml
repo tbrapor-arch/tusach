@@ -43,11 +43,11 @@ new_words:
 exercises:
   translate:
   - {vi: "Chị Lan là người Hà_Nội.", en: "Lan is from Hà Nội."}
-  - {vi: "Tôi không nói tiếng_Việt.", en: "I don't speak Vietnamese."}
+  - {vi: "Sacha không nói tiếng_Việt à?", en: "Sacha doesn't speak Vietnamese?"}
   - {vi: "Chị là người Việt_Nam à?", en: "You're Vietnamese, are you? (to a young woman a little older)"}
   - {vi: "Anh cũng biết chị Lan.", en: "I know Lan too. (a young man to someone younger)"}
   - {vi: "Em học tiếng_Việt ở Pháp.", en: "I study Vietnamese in France. (to someone older)"}
   fill:
   - {vi: "Chị ___ là người Pháp à?", answer: cũng, en: "So you're French too?"}
-  - {vi: "Anh ở ___?", answer: đâu, en: "Where do you live?"}
+  - {vi: "Chị Lan ở ___?", answer: đâu, en: "Where does Lan live?"}
   - {vi: "Em ___ biết chị Lan.", answer: không, en: "I don't know Lan."}

@@ -45,7 +45,7 @@ exercises:
   translate:
   - {vi: "Công_ty anh Minh ở gần hồ Hoàn_Kiếm.", en: "Minh's company is near Hoàn Kiếm lake."}
   - {vi: "Đừng đi xe_máy! Đi_bộ đi.", en: "Don't take the motorbike! Walk."}
-  - {vi: "Đi thẳng đường~road này khoảng năm~five phút, rồi rẽ phải~right.", en: "Go straight along this road for about five minutes, then turn right."}
+  - {vi: "Đi thẳng đường~road này khoảng năm~five phút, rồi rẽ trái ở hồ.", en: "Go straight along this road for about five minutes, then turn left at the lake."}
   - {vi: "Chị Lan không phải~right là sinh_viên.", en: "Lan is not a student."}
   - {vi: "Quán cà_phê ở đó rất rẻ.", en: "The café over there is very cheap."}
   fill:

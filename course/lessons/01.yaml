@@ -44,8 +44,8 @@ new_words:
 exercises:
   translate:
   - {vi: "Chào anh ạ!", en: "Hello! (politely, to a young man a little older)"}
-  - {vi: "Anh tên là gì?", en: "What's your name? (to a young man)"}
-  - {vi: "Cảm_ơn anh!", en: "Thank you! (to a young man a little older)"}
+  - {vi: "Tôi tên là Lan.", en: "My name is Lan. (neutral)"}
+  - {vi: "Cảm_ơn em!", en: "Thank you! (to someone younger)"}
   - {vi: "Tôi rất vui được gặp anh.", en: "I'm very glad to meet you. (neutral, to a man a little older)"}
   - {vi: "Chị Lan rất vui.", en: "Lan is very happy."}
   fill:

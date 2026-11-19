@@ -53,5 +53,5 @@ exercises:
   - {vi: "Chị Lan tặng Na một cái áo.", en: "Lan gave Na a top."}
   fill:
   - {vi: "Em mặc ___ cái áo này nhé?", answer: thử, en: "Shall I try this top on?"}
-  - {vi: "Cái áo này ___ lắm!", answer: vừa, en: "This top fits perfectly!"}
-  - {vi: "Em ___ cái màu đen.", answer: lấy, en: "I'll take the black one. (to an older stallholder)"}
+  - {vi: "Cái áo trắng này không ___.", answer: vừa, en: "This white top doesn't fit."}
+  - {vi: "Anh ___ cái màu trắng nhé?", answer: lấy, en: "Shall I take the white one? (to someone younger)"}

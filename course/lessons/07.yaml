@@ -32,7 +32,7 @@ exercises:
   - {vi: "Bin và Na không uống cà_phê.", en: "Bin and Na don't drink coffee."}
   - {vi: "Bây_giờ là mười giờ rưỡi sáng.", en: "It's half past ten in the morning."}
   - {vi: "Bảy giờ tối anh Minh về nhà.", en: "Minh comes home at seven in the evening."}
-  - {vi: "Xin_lỗi, quán này có trà đá~ice không?", en: "Excuse me, does this café have iced tea?"}
+  - {vi: "Xin_lỗi, quán này có cà_phê sữa không?", en: "Excuse me, does this café have white coffee?"}
   - {vi: "Mẹ chị Lan cũng là người Hà_Nội à?", en: "So Lan's mother is from Hà Nội too?"}
   fill:
   - {vi: "Chị ấy là ___? – Chị Thảo, em chị Lan.", answer: ai, en: "Who is she? – Thảo, Lan's younger sister."}

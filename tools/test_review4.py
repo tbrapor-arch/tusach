@@ -46,7 +46,9 @@ taught = {'mua': 13, 'cho': 3, 'tôi': 1, 'gặp': 1, 'nhé': 3, 'chị': 1}
 assert any(x.startswith('mua') for x in W.late('mua; bao nhiêu', 4, taught)), W.late('mua; bao nhiêu', 4, taught)
 assert W.late('mua', 13, taught) == []
 assert any(x.startswith('cho') for x in W.late('cho', 2, taught))
-assert any(x.startswith('mai') for x in W.late('Mai gặp nhé', 3, taught)), W.late('Mai gặp nhé', 3, taught)
+# review 6, finding 15 changed C: a sentence-initial cast name is read as its common word only when that word is
+# taught (else it is the name: no false error in English notes); tools/test_plan.py has the cases
+assert W.late('Mai gặp nhé', 3, taught) == [], W.late('Mai gặp nhé', 3, taught)
 assert W.late('Tôi gặp chị Mai', 3, taught) == [], W.late('Tôi gặp chị Mai', 3, taught)
 m = {'way': 'zh>vi', 'hit': 22, 'tot': 23, 'best': ('tr', 14), 'text': 'tr or th ← Mandarin ch- in tone 2'}
 assert bridge_rules.kind_cell(m) == '**rule** (one guess: tr 61 %)', bridge_rules.kind_cell(m)

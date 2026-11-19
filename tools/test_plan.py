@@ -81,6 +81,14 @@ ok(any('usage' in m and 'quá' in m for m in run(L, base, lex=lex)), 'a lexicon 
 w = plan.Words(con, ['Lan'])
 ok(w.runs('the word quán cà phê, a café') == [['quán', 'cà', 'phê']], 'runs: English words and "café" are left out')
 ok(not w.late('Hán-Việt, sắc and nặng', 1, {}), 'metalanguage (Hán-Việt, tone names) is not a lesson word')
+# review 6, finding 15: a cast name is read as its common word only at a sentence start and when that word is taught
+w = plan.Words(con, ['Lan', 'Minh', 'Mai'])
+ok(not w.late('With Lan: Minh is anh.', 5, {'anh': 1}), 'runs: "…: Minh is anh" (after a colon) is the name Minh')
+ok(not w.late('He says: "Minh is anh".', 5, {'anh': 1}), 'runs: a name after an opening quote is the name')
+ok(not w.late('Minh is older. Mai is 27.', 11, {}), 'runs: a sentence-initial name whose common word is not taught')
+ok(w.runs('Bye. Mai gặp nhé', {'mai': 6, 'gặp': 1, 'nhé': 3}, 6)[-1][0] == 'mai',
+   'runs: a sentence-initial name whose common word is taught is read as that word (mai "tomorrow")')
+ok(w.runs('Bye. Mai gặp nhé', {'gặp': 1, 'nhé': 3}, 6)[-1][0] == 'Mai', 'runs: … and stays the name when it is not')
 
 # the real files
 real = [m for lv, m in plan.check(con) if lv == 'E']

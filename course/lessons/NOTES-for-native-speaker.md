@@ -54,48 +54,64 @@ Choice = what the lesson now says. Reviewer: keep / change (done) / native. Nati
 | L7.4 (new) Em đi đâu về đấy? as a greeting on the way home; Anh là anh Minh à? | Claude's choice | not reviewed | yes |
 | L0 (new) anh and uô + ng in Hà Nội | Lesson 0 describes anh ≈ [ajŋ]; uống taken out of the lip rule | native | yes (A7) |
 
-## Lessons 8–14 (drafted by Claude 19 Nov 2026; not yet reviewed)
-Same columns. Reviewer: "not reviewed" until the independent reading.
+## Lessons 8–14 (drafted by Claude 19 Nov 2026; reviewed by a second agent, review 6, the same day)
+Same columns. Reviewer = review 6's judgement: keep / change (done) / native. Neither writer nor reviewer is a native
+speaker. The reviewer's file names no ranking of its own: the eight below are its "native" rows and the medium-confidence
+rows a native speaker alone can settle, ranked by the writer.
+
+### B. A native speaker first (lessons 8–14; B1–B8 in the table)
+1. **tôi / bạn or mình / bạn** (L11) between colleagues of 27 at a friendly lunch-break invitation: the reviewer finds
+   tôi stiff (mình comes at L44; the note now says tôi is still a little formal).
+2. **to / nhỏ for clothes** (L13 line 8): Cái này hơi nhỏ. Chị có cái to không? Or rộng / chật, cỡ to hơn?
+3. **Em khỏe chưa?** (L14 line 6) six days after the cold, or Em đỡ chưa? (đỡ not taught).
+4. **Cháu tặng bác cái áo này ạ** (L14 line 1), or Cháu biếu bác … (biếu, the respectful "give", previewed in the note).
+5. **Hồ đây à?** (L8 line 7, was Hồ đó à?) for a lake just come into view; or Hồ kia à?
+6. **Cháu đau đầu lắm** (L12 line 2, was Đầu cháu đau lắm): the reviewer's ordinary symptom form.
+7. **Vâng ạ, trời nóng thế!** (L9 line 2, was Vâng ạ, nóng thế!) as an agreeing reply; or Vâng ạ, nóng quá!
+8. **Sao phải đi?** (L12 line 7, was Tại sao?) from bác to cháu who wants to go to work ill.
 
 | Point | Choice | Reviewer | Native |
 |---|---|---|---|
-| L8.1 Hồ Hoàn Kiếm or Hồ Gươm in everyday speech | Hoàn Kiếm (the word list's name) | not reviewed | yes, low |
-| L8.2 Đi bộ khoảng mười lăm phút (line 2): time after "on foot", no verb | kept | not reviewed | yes, low |
-| L8.3 Anh đi thẳng phố này (line 4) "along this street"; or đường này, or cứ đi thẳng | phố này | not reviewed | yes |
-| L8.4 Anh đừng rẽ ở đây! Đi thẳng đi. (line 6) from Thảo, 24, to Sacha, 27: polite enough without ạ / anh ơi? | kept; the note says the person term in front "tends to" soften | not reviewed | yes |
-| L8.5 Hồ đó à? (line 7) for a lake just come into view; or Hồ đây à? / Hồ kia à? | đó (the lesson's word) | not reviewed | yes |
-| L8.6 Vâng, hồ Hoàn Kiếm đấy! (line 8) to point something out | kept | not reviewed | yes, low |
-| L9.1 Vâng ạ, nóng thế! (line 2) as a reply that agrees, thế as an exclamation | kept | not reviewed | yes |
-| L9.2 Ở Pháp bây giờ trời hơi lạnh (line 2) for late September in France; mát "cool" is not taught yet | hơi lạnh | not reviewed | yes, low |
-| L9.3 mùa hè, mùa đông written as two words (the word list teaches mùa and hè, đông); the dictionary has mùa hè as one word | two words | not reviewed | no (a convention point for the reviewer) |
-| L9.4 Hôm nay có mưa không ạ? (line 6) without trời or sẽ | kept | not reviewed | yes, low |
-| L9.5 hè as the everyday Northern "summer" (word list point 12) | hè | not reviewed | yes |
-| L10.1 Em đã ăn phở Hà Nội chưa? (line 1) for a first taste; or … bao giờ chưa? (bao giờ comes at L11) | đã … chưa? | not reviewed | yes, low |
-| L10.2 Thêm hai quả trứng nhé! (line 5): eggs added to phở in Hà Nội, counted with quả | kept | not reviewed | yes |
-| L10.3 Chị ơi from Minh, 38, to the phở-shop owner in her forties (or cô?) | chị | not reviewed | yes |
-| L10.4 Ngon không? (line 6) for Có ngon không? | kept | not reviewed | yes, low |
-| L10.5 Anh gọi thêm thịt nhé? (line 6): extra meat ordered on its own | kept | not reviewed | yes, low |
-| L10.6 cơm gà (line 4) as an everyday office lunch in Hà Nội | kept | not reviewed | yes, low |
-| L11.1 bạn / tôi between Sacha and Mai, colleagues of 27 (word list point 5) | bạn / tôi | not reviewed | yes |
-| L11.2 với bạn tôi (line 3) for "with a friend of mine"; or với một người bạn | bạn tôi | not reviewed | yes, low |
-| L11.3 Bao giờ bạn về Pháp? (line 7) from a new colleague: friendly, or does it sound like "when are you leaving?" | kept | not reviewed | yes |
-| L11.4 the note: bao giờ first asks about the future, last about the past ("usually") | kept | not reviewed | yes, low |
-| L11.5 Cuối tuần đi chơi với tôi và bạn tôi nhé! (line 9) | kept | not reviewed | yes |
-| L11.6 Tôi thích xem phim. Mấy giờ? (line 4): Có! as an eager yes to Bạn có muốn đi không? | kept | not reviewed | yes, low |
-| L12.1 Đầu cháu đau lắm (line 2) rather than Cháu đau đầu quá: đau đầu is one word by docs/SEGMENTATION.md and not in word list 2 | Đầu cháu đau lắm | not reviewed | yes |
-| L12.2 Cháu sao thế? Cháu không khỏe à? (line 1) from bác at his door | kept | not reviewed | yes, low |
-| L12.3 bị cảm and Cháu có phải gặp bác sĩ không ạ? (lines 3–4; word list point 10) | kept | not reviewed | yes |
-| L12.4 Không sao đâu (line 5) for "it's nothing, don't worry" before advice to take medicine | kept | not reviewed | yes, low |
-| L12.5 Nghỉ một ngày, ngày mai cháu sẽ khỏe. Uống thuốc đi! (line 9): bác's bare imperative to cháu | kept | not reviewed | yes, low |
-| L12.6 the bridge note: Cantonese tone 6 → nặng, tone 3 → sắc "usually" (rules at 89–90 %, proposal section 3) | kept | not reviewed | no (measured) |
-| L13.1 to / nhỏ for clothes (word list point 6): Cái này hơi nhỏ. Chị có cái to không? (line 8); cái to hơn waits for hơn (L15); or rộng / chật? | to / nhỏ | not reviewed | yes |
-| L13.2 Cái này vừa. (line 9) for "this one fits" | kept | not reviewed | yes |
-| L13.3 Áo này cũng có màu trắng và màu đen (line 6) for "also comes in white and black" | kept | not reviewed | yes, low |
-| L13.4 Đừng mua ở cửa hàng, đắt lắm! Đi chợ đi. (line 4) from Thảo to Sacha | kept | not reviewed | yes, low |
-| L13.5 the price: 200,000 đồng for a top at a Hà Nội market (2026) | kept | not reviewed | yes, low |
-| L13.6 Một cái áo (line 3) as a present for a woman of 62: is áo the natural word, or áo len, khăn …? | áo (the word list's) | not reviewed | yes, low |
-| L14.1 Cháu tặng bác cái áo này. (line 1) when handing over a present; or Cháu biếu bác … (biếu, the respectful "give", is not taught yet) | tặng | not reviewed | yes |
-| L14.2 Bác mặc thử đi ạ! (line 3): verb + đi ạ to an elder | kept | not reviewed | yes |
-| L14.3 Vừa lắm! Đẹp nhỉ! (line 4) from bác about her own present | kept | not reviewed | yes, low |
-| L14.4 Em khỏe chưa? (line 6) for "are you better yet?" | kept | not reviewed | yes, low |
-| L14.5 Đi ăn phở với anh chị nhé! (line 8): Lan's anh chị for "Minh and me" | kept | not reviewed | yes, low |
+| L8.1 Hồ Hoàn Kiếm or Hồ Gươm in everyday speech | Hoàn Kiếm (the word list's name) | keep | yes, low |
+| L8.2 Đi bộ khoảng mười lăm phút (line 2): time after "on foot", no verb | kept | keep | yes, low |
+| L8.3 Anh đi thẳng phố này (line 4) "along this street"; or đường này, or cứ đi thẳng | phố này | keep | yes |
+| L8.4 Anh đừng rẽ ở đây! Đi thẳng đi. (line 6) from Thảo, 24, to Sacha, 27: polite enough without ạ / anh ơi? | kept; the note says the person term in front "tends to" soften | keep | yes |
+| L8.5 Hồ đó à? (line 7) for a lake just come into view; or Hồ đây à? / Hồ kia à? | changed to Hồ đây à? (đây from L5); the note says đây points at what is in front of you | change (done) | yes (B5) |
+| L8.6 Vâng, hồ Hoàn Kiếm đấy! (line 8) to point something out | kept | keep | yes, low |
+| L9.1 Vâng ạ, nóng thế! (line 2) as a reply that agrees, thế as an exclamation | changed to Vâng ạ, trời nóng thế! | change (done) | yes (B7) |
+| L9.2 Ở Pháp bây giờ trời hơi lạnh (line 2) for late September in France; mát "cool" is not taught yet | hơi lạnh | keep | yes, low |
+| L9.3 mùa hè, mùa đông written as two words (the word list teaches mùa and hè, đông); the dictionary has mùa hè as one word | two words | keep | no |
+| L9.4 Hôm nay có mưa không ạ? (line 6) without trời or sẽ | kept | keep | yes, low |
+| L9.5 hè as the everyday Northern "summer" (word list point 12) | hè | keep | yes |
+| L10.1 Em đã ăn phở Hà Nội chưa? (line 1) for a first taste; or … bao giờ chưa? (bao giờ comes at L11) | đã … chưa? | keep | yes, low |
+| L10.2 Thêm hai quả trứng nhé! (line 5): eggs added to phở in Hà Nội, counted with quả | kept | keep | yes |
+| L10.3 Chị ơi from Minh, 38, to the phở-shop owner in her forties (or cô?) | chị | keep | yes |
+| L10.4 Ngon không? (line 6) for Có ngon không? | kept | keep | yes, low |
+| L10.5 Anh gọi thêm thịt nhé? (line 6): extra meat ordered on its own | kept | keep | yes, low |
+| L10.6 cơm gà (line 4) as an everyday office lunch in Hà Nội | kept | keep | yes, low |
+| L11.1 bạn / tôi between Sacha and Mai, colleagues of 27 (word list point 5) | bạn / tôi; the note now says tôi is still a little formal (friends say mình, L44) | native | yes (B1) |
+| L11.2 với bạn tôi (line 3) for "with a friend of mine"; or với một người bạn | bạn tôi | keep | yes, low |
+| L11.3 Bao giờ bạn về Pháp? (line 7) from a new colleague: friendly, or does it sound like "when are you leaving?" | kept | keep | yes |
+| L11.4 the note: bao giờ first asks about the future, last about the past ("usually") | kept | keep | yes, low |
+| L11.5 Cuối tuần đi chơi với tôi và bạn tôi nhé! (line 9) | changed to Một năm à? Bạn sẽ thích Hà Nội lắm! (the repeated invitation and "at weekends" gone) | change (done) | yes |
+| L11.6 Tôi thích xem phim. Mấy giờ? (line 4): Có! as an eager yes to Bạn có muốn đi không? | kept | keep | yes, low |
+| L12.1 Đầu cháu đau lắm (line 2) rather than Cháu đau đầu quá | changed to Cháu đau đầu lắm; đau + body part is now two words (docs/SEGMENTATION.md) | change (done) | yes (B6) |
+| L12.2 Cháu sao thế? Cháu không khỏe à? (line 1) from bác at his door | kept | keep | yes, low |
+| L12.3 bị cảm and Cháu có phải gặp bác sĩ không ạ? (lines 3–4; word list point 10) | kept | keep | yes |
+| L12.4 Không sao đâu (line 5) for "it's nothing, don't worry" before advice to take medicine | kept; sao's card now has the usage Không sao (đâu) "it's nothing, no problem" | keep | yes, low |
+| L12.5 Nghỉ một ngày, ngày mai cháu sẽ khỏe. Uống thuốc đi! (line 9): bác's bare imperative to cháu | kept | keep | yes, low |
+| L12.6 the bridge note: Cantonese tone 6 → nặng, tone 3 → sắc "usually" (rules at 89–90 %, proposal section 3) | kept; Mandarin tone 4 now "usually" sắc or nặng | keep | no (measured) |
+| L13.1 to / nhỏ for clothes (word list point 6): Cái này hơi nhỏ. Chị có cái to không? (line 8); cái to hơn waits for hơn (L15); or rộng / chật? | to / nhỏ | native | yes (B2) |
+| L13.2 Cái này vừa. (line 9) for "this one fits" | kept | keep | yes |
+| L13.3 Áo này cũng có màu trắng và màu đen (line 6) for "also comes in white and black" | kept | keep | yes, low |
+| L13.4 Đừng mua ở cửa hàng, đắt lắm! Đi chợ đi. (line 4) from Thảo to Sacha | kept; the English is now "Let's go to the market." | keep | yes, low |
+| L13.5 the price: 200,000 đồng for a top at a Hà Nội market (2026) | kept | keep | yes, low |
+| L13.6 Một cái áo (line 3) as a present for a woman of 62: is áo the natural word, or áo len, khăn …? | áo (the word list's) | keep | yes, low |
+| L14.1 Cháu tặng bác cái áo này. (line 1) when handing over a present; or Cháu biếu bác … | changed to … cái áo này ạ.; biếu previewed in the note | change (done) | yes (B4) |
+| L14.2 Bác mặc thử đi ạ! (line 3): verb + đi ạ to an elder | kept | keep | yes |
+| L14.3 Vừa lắm! Đẹp nhỉ! (line 4) from bác about her own present | kept | keep | yes, low |
+| L14.4 Em khỏe chưa? (line 6) for "are you better yet?" | kept; đỡ chưa is the usual question (not taught) | native | yes (B3) |
+| L14.5 Đi ăn phở với anh chị nhé! (line 8): Lan's anh chị for "Minh and me" | kept | keep | yes, low |
+| L12.7 (new) Sao phải đi? (line 7) from bác instead of a bare Tại sao? | Claude's choice after review 6 | change (done) | yes (B8) |
+| L13.7 (new) Thảo ơi, ngày mai là sinh nhật mẹ em, phải không? (line 1): Sacha checks the date with Thảo | review 6's line | change (done) | yes, low |
+| L14.6 (new) Mấy giờ ạ? – Bảy giờ rưỡi sáng, ở quán phở gần nhà. (lines 9–10): a clock time recycled from L6 | Claude's line after review 6 | not reviewed | yes, low |
