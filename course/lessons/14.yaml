@@ -1,0 +1,41 @@
+id: 14
+title: {vi: Sinh nhật bác, en: Review 2}
+review: true
+setting: >-
+  Sunday evening, the birthday dinner of chị Lan's mother, at home: Lan, Minh, the children, Thảo and Sacha. Sacha
+  gives her the red top he bought with Thảo the day before. Nothing new in this dialogue: every word comes from
+  lessons 1–13. The notes gather what lessons 8–13 brought.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Cháu chào bác ạ. Cháu tặng bác cái áo này.", en: "Good evening. This top is a present for you.", lit: "grandchild greet uncle-aunt (polite). grandchild give-as-present uncle-aunt (thing) top this."}
+- {n: 2, speaker: Bác, vi: "Cảm_ơn cháu! Áo đẹp thế! Cháu mua ở đâu đấy?", en: "Thank you! What a lovely top! Where did you buy it?", lit: "thank grandchild! top beautiful so! grandchild buy at where (friendly)?"}
+- {n: 3, speaker: Sacha, vi: "Cháu mua ở chợ, với Thảo ạ. Bác mặc thử đi ạ!", en: "At the market, with Thảo. Do try it on!", lit: "grandchild buy at market, with Thảo (polite). uncle-aunt wear try (urging) (polite)!"}
+- {n: 4, speaker: Bác, vi: "Vừa lắm! Đẹp nhỉ! Sao~why cháu biết bác thích màu đỏ?", en: "It fits perfectly! Lovely, isn't it? How did you know I like red?", lit: "fit very! beautiful (isn't-it)! how grandchild know uncle-aunt like colour red?"}
+- {n: 5, speaker: Sacha, vi: "Vì Thảo nói với cháu ạ.", en: "Because Thảo told me.", lit: "because Thảo say with grandchild (polite)."}
+- {n: 6, speaker: Minh, vi: "Em khỏe chưa? Ăn thêm thịt gà đi!", en: "Are you better yet? Have some more chicken!", lit: "younger-sibling well not-yet? eat more meat chicken (urging)!"}
+- {n: 7, speaker: Sacha, vi: "Em khỏe rồi ạ, không sao~why đâu. Em uống thuốc và nghỉ một ngày.", en: "I'm well now, it was nothing. I took some medicine and rested for a day.", lit: "younger-sibling well already (polite), not how (not-at-all). younger-sibling drink medicine and rest one day."}
+- {n: 8, speaker: Lan, vi: "Thứ_bảy tuần sau em có rảnh không? Đi ăn phở với anh chị nhé!", en: "Are you free next Saturday? Come and have phở with Minh and me!", lit: "Saturday week after younger-sibling (yes) free not? go eat phở with elder-brother elder-sister, OK!"}
+- {n: 9, speaker: Sacha, vi: "Vâng ạ! Em thích phở lắm.", en: "Yes! I like phở a lot.", lit: "yes (polite)! younger-sibling like phở very."}
+notes:
+- {ref: 1, topic: pronouns, text: "Cháu tặng bác cái áo này: cháu and bác, as in lessons 5, 6, 9 and 12. Bác says bác for \"I\" (line 4: bác thích màu đỏ \"I like red\"); to Minh and Lan, Sacha is em (lines 6–8)."}
+- {ref: 0, topic: pronouns, text: "Pronouns so far. tôi: neutral, with strangers. bạn / tôi: people of the same age (Sacha and Mai). anh / em: Sacha with Minh (he is em) and with Thảo (he is anh). chị / em: Sacha with Lan; a customer with an older stallholder (Chị ơi!). bác / cháu: Sacha with Lan's mother. The word for \"I\" changes with the listener: to Sacha, Minh says anh; to the phở-shop owner, em. \"Your mum\", to Thảo: mẹ em. in line 8, anh chị is \"Minh and I\"."}
+- {ref: 0, topic: grammar, text: "Orders and suggestions (lesson 8): verb + đi urges (Đi thẳng đi!, Ăn thêm thịt gà đi!); đừng + verb is \"don't\" (Đừng rẽ!); nào urges, the speaker included (Đi nào!). With a person term in front it tends to sound softer: Bác mặc thử đi ạ!"}
+- {ref: 0, topic: grammar, text: "Adjectives (lesson 9) need no là: Trời nóng, Áo đẹp. Degree: rất đẹp, đẹp lắm, đẹp quá!, hơi nhỏ \"a bit small\"; thế \"so\" (Nóng thế!); nhỉ asks the listener to agree (Nóng nhỉ!)."}
+- {ref: 0, topic: grammar, text: "Has it happened? (lesson 10): đã … chưa? \"… yet?\"; Chưa \"not yet\"; rồi after the verb or adjective, \"already, now\": Em khỏe rồi. Between two actions rồi is \"then\" (lesson 8)."}
+- {ref: 0, topic: grammar, text: "Days and plans (lesson 11): thứ bảy, chủ nhật; tuần sau \"next week\"; tháng tám \"August\"; bao giờ \"when\"; định + verb \"to plan to\"; thích \"to like\"; hay \"or\" in a question; với \"with\" (với Thảo, nói với cháu \"told me\")."}
+- {ref: 0, topic: grammar, text: "Health and reasons (lesson 12): bị + something bad (bị cảm, bị ốm); nên \"should\", phải \"must\"; sao / tại sao \"why?\" – vì \"because\"; Sao thế? \"what's wrong?\"; Không sao đâu \"it's nothing\"."}
+- {ref: 0, topic: grammar, text: "Counting and shopping (lessons 10, 13): cái for most things (một cái áo, cái này \"this one\"), quả for round things (hai quả trứng), bát and cốc as counters (hai bát phở). Colours follow the noun (áo đỏ). to / nhỏ for size, vừa \"to fit\"; mua \"buy\", lấy \"take\", tặng \"give as a present\"."}
+- {ref: 0, topic: bridge, text: "Tones of Hán-Việt words so far: Mandarin tone 1 usually ngang; tone 2 huyền (ngang after m, n, l, r, y, w or no initial); tone 3 usually hỏi (ngã after the same initials); tone 4 sắc or nặng, Cantonese 3 or 6 deciding; a syllable in -p, -t, -c, -ch has only sắc or nặng."}
+new_words: []
+exercises:
+  translate:
+  - {vi: "Hôm_qua trời mưa, nhưng hôm_nay trời đẹp nhỉ!", en: "It rained yesterday, but it's lovely today, isn't it!"}
+  - {vi: "Em đã ăn cơm chưa? – Em ăn rồi ạ.", en: "Have you eaten yet? – Yes, I have. (asked by an older person, answered by a younger one)"}
+  - {vi: "Đi thẳng phố này, rồi rẽ phải~right ở chợ.", en: "Go straight along this street, then turn right at the market."}
+  - {vi: "Tại_sao chị Lan không mua cái áo trắng?", en: "Why didn't Lan buy the white top?"}
+  - {vi: "Thứ_bảy anh Minh định đi chợ với Bin.", en: "On Saturday Minh is planning to go to the market with Bin."}
+  - {vi: "Bao_giờ chị Lan về nhà?", en: "When will Lan come home?"}
+  fill:
+  - {vi: "Em ăn ___ đi!", answer: thêm, en: "Have some more! (to someone younger)"}
+  - {vi: "Bạn thích màu trắng ___ màu đen?", answer: "hay~or", en: "Do you like white or black? (to someone of your age)"}
+  - {vi: "Cháu bị cảm, cháu ___ nghỉ ở nhà.", answer: nên, en: "You've caught a cold: you should rest at home. (bác to cháu)"}
+  - {vi: "Hôm_nay trời ___ lạnh.", answer: hơi, en: "It's a bit cold today."}

@@ -94,3 +94,8 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L13.4 Đừng mua ở cửa hàng, đắt lắm! Đi chợ đi. (line 4) from Thảo to Sacha | kept | not reviewed | yes, low |
 | L13.5 the price: 200,000 đồng for a top at a Hà Nội market (2026) | kept | not reviewed | yes, low |
 | L13.6 Một cái áo (line 3) as a present for a woman of 62: is áo the natural word, or áo len, khăn …? | áo (the word list's) | not reviewed | yes, low |
+| L14.1 Cháu tặng bác cái áo này. (line 1) when handing over a present; or Cháu biếu bác … (biếu, the respectful "give", is not taught yet) | tặng | not reviewed | yes |
+| L14.2 Bác mặc thử đi ạ! (line 3): verb + đi ạ to an elder | kept | not reviewed | yes |
+| L14.3 Vừa lắm! Đẹp nhỉ! (line 4) from bác about her own present | kept | not reviewed | yes, low |
+| L14.4 Em khỏe chưa? (line 6) for "are you better yet?" | kept | not reviewed | yes, low |
+| L14.5 Đi ăn phở với anh chị nhé! (line 8): Lan's anh chị for "Minh and me" | kept | not reviewed | yes, low |
