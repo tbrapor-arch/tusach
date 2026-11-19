@@ -12,8 +12,8 @@ dialogue:
 - {n: 4, speaker: Thảo, vi: "Đừng mua ở cửa_hàng, đắt lắm! Đi chợ đi.", en: "Don't buy it in a shop, it's very expensive! Go to the market.", lit: "don't buy at shop, expensive very! go market (urging)."}
 - {n: 5, speaker: Sacha, vi: "Chị ơi, cái áo đỏ này bao_nhiêu tiền?", en: "Excuse me, how much is this red top?", lit: "elder-sister hey, (thing) top red this how-much money?"}
 - {n: 6, speaker: Stall owner, vi: "Hai trăm nghìn. Áo này cũng có màu trắng và màu đen.", en: "Two hundred thousand. This top also comes in white and black.", lit: "two hundred thousand. top this also have colour white and colour black."}
-- {n: 7, speaker: Thảo, vi: "Mẹ em thích màu đỏ. Chị ơi, em mặc thử nhé?", en: "My mother likes red. Can I try it on?", lit: "mother younger-sibling like colour red. elder-sister hey, younger-sibling wear try, OK?"}
-- {n: 8, speaker: Sacha, vi: "Cái này hơi nhỏ. Chị có cái to không?", en: "This one is a bit small. Do you have a bigger one?", lit: "(thing) this slightly small. elder-sister have (thing) big not?"}
+- {n: 7, speaker: Thảo, vi: "Mẹ em thích màu đỏ. Chị ơi, em mặc thử nhé?", en: "My mother likes red. Excuse me, can I try it on?", lit: "mother younger-sibling like colour red. elder-sister hey, younger-sibling wear try, OK?"}
+- {n: 8, speaker: Sacha, vi: "Cái này hơi nhỏ. Chị có cái to không?", en: "This one is a bit small. Do you have a big one?", lit: "(thing) this slightly small. elder-sister have (thing) big not?"}
 - {n: 9, speaker: Thảo, vi: "Cái này vừa. Anh lấy cái này đi!", en: "This one fits. Take this one!", lit: "(thing) this fit. elder-brother take (thing) this (urging)!"}
 notes:
 - {ref: 1, topic: pronouns, text: "sinh nhật mẹ em \"your mother's birthday\": the owner last. To Thảo, Sacha says mẹ em \"your mum\"; to her mother herself, he says bác."}
