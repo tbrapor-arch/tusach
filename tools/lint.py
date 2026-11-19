@@ -46,7 +46,8 @@ Checks (E = error, exit 1; W = warning; I = information)
      lexicon row has them) a database word with them labelled same / gram; and all four readings (Hán-Việt,
      Cantonese, Taigi literary, Mandarin)
   E  a conflict of the course lexicon with the data (tools/lexicon.py) that the row does not override with a reason
-  E  (once the owner approved a word list: approved.word_list.file in course/syllabus.yaml) a new_words entry not in
+  E  (once the owner approved a word list: approved.word_list.file in course/syllabus.yaml, one path or a list of
+     paths read together) a new_words entry not in
      that list, or listed for another lesson; W a word the list gives the lesson that its new_words lacks; E the list
      not in the 11-column format (tools/course.py WORDLIST_COLS), a row listed twice, a lesson number that is not a
      lesson of the syllabus
@@ -54,7 +55,8 @@ Checks (E = error, exit 1; W = warning; I = information)
      new_words {native, hv}); W a written lesson whose dialogue length or new words (native / Hán-Việt) leave the
      plan by more than one, or whose Hán-Việt share is more than 0.2 from the plan's
   I  lesson not checked by a native speaker (no native_check: {by, date}); the app labels it
-  E  (review 3) the draft word list (draft.word_list in course/syllabus.yaml) against the plan: tools/plan.py's checks
+  E  (review 3) the draft word list (draft.word_list in course/syllabus.yaml), read after the approved ones, against
+     the plan: tools/plan.py's checks (a word already in an earlier list is an error)
      (no word in a review lesson, counts, no Vietnamese word in a note, usage note or planned grammar before it is
      taught unless marked {preview}, the particle strand) and its generated blocks; the proposal's sound-rule tables
      as tools/bridge_rules.py measures them; its bridge examples, each word with its characters
@@ -386,8 +388,8 @@ def compounds():
     if _COMPOUNDS is None:
         out = {r['k'] for r in LEX if ' ' in r['k']}
         syl = course.syllabus()
-        for f in {(syl.get('draft') or {}).get('word_list'), ((syl.get('approved') or {}).get('word_list') or {}).get('file')}:
-            if f and os.path.exists(os.path.join(ROOT, f)):
+        for f in course.plan_word_lists(syl):
+            if os.path.exists(os.path.join(ROOT, f)):
                 for r in course.wordlist(f):
                     if r['type'] != 'name':
                         k = vi.key(vi.nfc(r['word']).partition('~')[0].replace('_', ' '))
@@ -741,11 +743,15 @@ def main():
         pass
     msgs = []
     syl = course.syllabus().get('approved') or {}
-    wl = (syl.get('word_list') or {}).get('file') if isinstance(syl.get('word_list'), dict) else None
-    if wl:
+    wls = course.approved_word_lists()            # one file, or several approved one after another
+    if wls:
         try:
-            listed = word_list_ids(wl)
+            listed = collections.defaultdict(set)
+            for wl in wls:
+                for cid, ls in word_list_ids(wl).items():
+                    listed[cid] |= ls
         except (OSError, ValueError) as e:
+            listed = None
             msgs.append(('E', f'course/syllabus.yaml: E approved word list: {e}'))
     reals = [f for f in files if not course.load(f).get('fixture')] if files else []
     if reals and not (syl.get('syllabus') and syl.get('word_list')):

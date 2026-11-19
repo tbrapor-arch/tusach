@@ -69,6 +69,24 @@ def syllabus():
     return load(p) if os.path.exists(p) else {}
 
 
+def approved_word_lists(syl=None):
+    """The approved word lists: approved.word_list.file of course/syllabus.yaml, one path or a list of paths (the owner
+    approves one list after another: [course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv])."""
+    syl = syllabus() if syl is None else syl
+    wl = (syl.get('approved') or {}).get('word_list')
+    f = wl.get('file') if isinstance(wl, dict) else None
+    return [x for x in ([f] if isinstance(f, str) else list(f or [])) if x]
+
+
+def plan_word_lists(syl=None):
+    """Every word list of the plan, in order: the approved ones, then the draft (draft.word_list) unless it is one of
+    them. The plan, its checks and lint read them together: a word list builds on the ones before it."""
+    syl = syllabus() if syl is None else syl
+    out = approved_word_lists(syl)
+    d = (syl.get('draft') or {}).get('word_list')
+    return out + ([d] if d and d not in out else [])
+
+
 WORDLIST_COLS = ('lesson', 'word', 'english', 'freq_rank', 'type', 'characters', 'han_viet', 'cantonese',
                  'taigi_literary', 'mandarin', 'note')
 PLAN_KEYS = {'n', 'en', 'vi', 'review', 'grammar', 'bridge', 'strand', 'lines', 'new_words'}

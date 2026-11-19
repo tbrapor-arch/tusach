@@ -107,7 +107,11 @@ def to_check(list_path, out_path):
     """The to-check list of a word list: the course lexicon's rows with confidence doubt and its overrides."""
     import lexicon
     rows = lexicon.load()
-    wl = {r['word'].replace('_', ' '): r['lesson'] for r in course.wordlist(list_path)}
+    wl = {}                     # the lesson that teaches each word, in every list of the plan and this one
+    for p in course.plan_word_lists() + [list_path]:
+        if os.path.exists(p if os.path.isabs(p) else os.path.join(os.path.dirname(HERE), p)):
+            for r in course.wordlist(p):
+                wl.setdefault(r['word'].replace('_', ' '), r['lesson'])
 
     def lesson(r):
         for k in (r['key'], r['key'].split('~')[0]):

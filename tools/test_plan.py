@@ -78,6 +78,25 @@ ok(any('particle quá' in m and 'L9' in m for m in run(
 lex = [{'key': 'đắt', 'k': 'đắt', 'cid': 'đắt', 'pos': 'adj', 'usage': 'Đắt quá!', 'false_friend': '', 'n': 1,
         'example': '', 'tag': None}]
 ok(any('usage' in m and 'quá' in m for m in run(L, base, lex=lex)), 'a lexicon usage note of the lesson is checked too')
+# word list 3 (19 Nov 2026): several word lists read together, the approved ones and then the draft
+import course  # noqa: E402
+ok(course.approved_word_lists({'approved': {'word_list': {'file': 'a.tsv'}}}) == ['a.tsv'], 'approved list: one path')
+ok(course.approved_word_lists({'approved': {'word_list': {'file': ['a.tsv', 'b.tsv']}}}) == ['a.tsv', 'b.tsv'],
+   'approved lists: several paths, in order')
+ok(course.plan_word_lists({'approved': {'word_list': {'file': 'a.tsv'}}, 'draft': {'word_list': 'b.tsv'}})
+   == ['a.tsv', 'b.tsv'], 'the plan reads the approved list, then the draft')
+ok(course.plan_word_lists({'approved': {'word_list': {'file': ['a.tsv', 'b.tsv']}}, 'draft': {'word_list': 'b.tsv'}})
+   == ['a.tsv', 'b.tsv'], 'a draft already approved is read once')
+ok(course.plan_word_lists({'approved': {'word_list': None}, 'draft': {'word_list': 'b.tsv'}}) == ['b.tsv'],
+   'nothing approved: the draft alone')
+two = [dict(r, file='a.tsv') for r in base] + [dict(wrow(13, 'rẻ', note='Đắt quá!'), file='b.tsv')]
+L13 = L + [lesson(13, native=1)]
+e = [m for m in run(L13, two) if 'not yet taught' in m]
+ok(not e, f'a note of list b may use the words list a teaches (got {e[:2]})')
+dup = two + [dict(wrow(13, 'chào'), file='b.tsv')]
+L13d = L + [lesson(13, native=2)]
+ok(any('already in a.tsv' in m for m in run(L13d, dup)), 'a word of list a listed again in list b is refused')
+ok(plan.list_counts(two).count('Word list') == 2, 'list_counts: one sentence per list')
 w = plan.Words(con, ['Lan'])
 ok(w.runs('the word quán cà phê, a café') == [['quán', 'cà', 'phê']], 'runs: English words and "café" are left out')
 ok(not w.late('Hán-Việt, sắc and nặng', 1, {}), 'metalanguage (Hán-Việt, tone names) is not a lesson word')
@@ -92,7 +111,7 @@ ok(w.runs('Bye. Mai gặp nhé', {'gặp': 1, 'nhé': 3}, 6)[-1][0] == 'Mai', 'r
 
 # the real files
 real = [m for lv, m in plan.check(con) if lv == 'E']
-ok(not real, f'the plan, word list 2 and the notes agree (got {real[:3]})')
+ok(not real, f'the plan, the word lists and the notes agree (got {real[:3]})')
 outs = plan.outputs(con)
 stale = [p for p, t in outs.items() if open(p, encoding='utf-8').read() != t]
 ok(not stale, f'syllabus.yaml, the proposal and the to-check list are as plan.py --write writes them ({stale})')

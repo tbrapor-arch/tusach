@@ -54,10 +54,12 @@ PLAN_ORDER = ('n', 'en', 'vi', 'review', 'grammar', 'bridge', 'strand', 'lines',
 
 # ---------------------------------------------------------------------------------------------------------- data
 def load():
+    """(syllabus, rows of every word list of the plan, the last list's path): the approved lists and the draft
+    (course.plan_word_lists), read together; each row keeps its `file`."""
     syl = course.syllabus()
-    wl_path = (syl.get('draft') or {}).get('word_list') or ((syl.get('approved') or {}).get('word_list') or {}).get('file')
-    rows = course.wordlist(wl_path) if wl_path else []
-    return syl, rows, wl_path
+    paths = course.plan_word_lists(syl)
+    rows = [dict(r, file=p) for p in paths for r in course.wordlist(p)]
+    return syl, rows, (paths[-1] if paths else None)
 
 
 def kind(t):
@@ -231,12 +233,19 @@ def check(con, verbose=False):
     reviews = {n for n, L in plans.items() if L.get('review')}
     cnt = counts(rows)
     last = max(cnt) if cnt else 0
+    first = {}
     for r in rows:
         n = int(r['lesson'])
+        f = r.get('file') or wl
         if n in reviews:
-            msgs.append(('E', f'{wl}:{r["line"]}: E {r["word"]}: lesson {n} is a review: no new word'))
+            msgs.append(('E', f'{f}:{r["line"]}: E {r["word"]}: lesson {n} is a review: no new word'))
         if n not in plans:
-            msgs.append(('E', f'{wl}:{r["line"]}: E {r["word"]}: lesson {n} is not in the plan'))
+            msgs.append(('E', f'{f}:{r["line"]}: E {r["word"]}: lesson {n} is not in the plan'))
+        cid = (r['type'] == 'name', base_key(r['word']), vi.nfc(r['word']).partition('~')[2])
+        if cid in first and first[cid][0] != f:
+            msgs.append(('E', f'{f}:{r["line"]}: E {r["word"]} is already in {first[cid][0]} (line {first[cid][1]}): '
+                              'a word list teaches only new words'))
+        first.setdefault(cid, (f, r['line']))
     for n, L in plans.items():
         nw = L.get('new_words') or {}
         if n in reviews and (nw.get('native') or nw.get('hv')):
@@ -267,7 +276,7 @@ def check(con, verbose=False):
         n = int(r['lesson'])
         bad = late(wordlist.human_note(r['note']).replace('(name) ', ''), n)
         if bad:
-            msgs.append(('E', f'{wl}:{r["line"]}: E {r["word"]} (L{n}) note uses words not yet taught: '
+            msgs.append(('E', f'{r.get("file") or wl}:{r["line"]}: E {r["word"]} (L{n}) note uses words not yet taught: '
                               f'{", ".join(dict.fromkeys(bad))} (teach them first, or mark {{preview}})'))
         if r['type'] == 'name':
             continue
@@ -339,7 +348,20 @@ def particle_table(syl):
     return '\n'.join(out)
 
 
+def list_name(path, syl=None):
+    """"Word list 2" for course/proposal/wordlist-2.tsv; ", draft" when the owner has not approved it."""
+    m = re.search(r'wordlist-(\d+)', path or '')
+    name = f'Word list {m.group(1)}' if m else f'Word list {os.path.basename(path or "")}'
+    return name, (path not in course.approved_word_lists(syl)) if path else False
+
+
 def list_counts(rows):
+    """One sentence per word list of the plan (rows grouped by their `file`)."""
+    files = list(dict.fromkeys(r.get('file') for r in rows))
+    return ' '.join(_list_counts([r for r in rows if r.get('file') == f], f) for f in files)
+
+
+def _list_counts(rows, path):
     cnt = counts(rows)
     names = sum(1 for r in rows if r['type'] == 'name')
     words = len(rows) - names
@@ -349,7 +371,8 @@ def list_counts(rows):
     doubt = sum(1 for r in rows if r['type'] == 'older Chinese loan (doubtful)')
     unknown = sum(1 for r in rows if r['type'] == 'unknown')
     per = ', '.join(f"L{n} {c['native'] + c['hv']}" for n, c in sorted(cnt.items()))
-    return (f"Word list 2 (L1–{max(cnt)}): {words} words + {names} names ({per}); Hán-Việt {hv} "
+    name, draft = list_name(path) if path else ('Word list 2', False)
+    return (f"{name} ({'draft, not approved; ' if draft else ''}L{min(cnt)}–{max(cnt)}): {words} words + {names} names ({per}); Hán-Việt {hv} "
             f"({100 * hv / words:.0f} %), older Chinese loans {older} ({doubt} with a doubtful etymon, characters hidden), "
             f"Western loans {other - older}, the rest native, compounds and {unknown} with no etymology recorded.")
 

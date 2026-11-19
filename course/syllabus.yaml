@@ -9,7 +9,7 @@ approved:
   syllabus: {by: owner, date: 2026-11-19}
   word_list: {by: owner, date: 2026-11-19, file: course/proposal/wordlist-2.tsv}
 # the draft the owner is asked to approve: tools/plan.py checks it against this plan (make lint)
-draft: {word_list: course/proposal/wordlist-2.tsv, proposal: course/proposal/syllabus-proposal.md}
+draft: {word_list: course/proposal/wordlist-3.tsv, proposal: course/proposal/syllabus-proposal.md}
 cast: [Sacha, Lan, Minh, Thảo, Hùng, Tuấn, Mai, Bin, Na]
 # the Northern particle strand: each particle, the lesson that brings it in (its grammar names it), its use
 particles:
