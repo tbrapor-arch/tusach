@@ -211,3 +211,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L27.6 bà to the children, bác to Sacha, in one scene (lines 8, 10) | kept | – | yes |
 | L27.7 Bác vẫn nhớ nhiều kỷ niệm lắm ạ (line 9) | kept | – | yes, low |
 | L27.8 Em nói lại đi, anh không nghe thấy (fill 2) | kept | – | yes, low |
+| L28.1 Bây giờ anh lái xe máy giỏi rồi mà! (line 2) | kept | – | yes, low |
+| L28.2 Trong này có những gì? (line 4) "what have you got in here?" | kept | – | yes |
+| L28.3 Khi các cháu xong thì xuống ăn cơm với cô nhé (line 6): xong alone, with no verb before it | kept | – | yes |
+| L28.4 Mọi người ở đây thường ăn cơm ở bếp tầng hai (line 8): tenants eating with the landlady | kept | – | yes, low |
+| L28.5 Em ăn hết rồi, em không ăn được nữa! (line 9) | kept | – | yes, low |
+| L28.6 Anh về cẩn thận nhé! Ngõ này tối lắm (line 11): tối "dark" | kept | – | yes, low |
+| L28.7 Mỗi buổi Thảo bơi khoảng một giờ (translate 2): một giờ for a duration ("an hour"), where Hà Nội speech often says một tiếng (not taught) | kept | – | yes |

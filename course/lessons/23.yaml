@@ -2,8 +2,9 @@ id: 23
 title: {vi: Phòng cho Thảo, en: A room for Thảo}
 review: false
 setting: >-
-  Saturday morning. Thảo wants a room of her own, closer to the centre than her student hostel. Sacha goes with her to
-  see one in a tall, narrow house on a street in Hoàn Kiếm district. The landlady is a woman of about fifty-five.
+  The Saturday after the trip to Lào Cai. Thảo wants a room of her own, closer to the centre than her student
+  hostel. Sacha goes with her to see one in a tall, narrow house on a street in Hoàn Kiếm district. The landlady is a
+  woman of about fifty-five.
 dialogue:
 - {n: 1, speaker: Landlady, vi: "Chào hai cháu. Phòng ở tầng ba~three. Mời hai cháu xem.", en: "Hello, both of you. The room is on the third floor. Have a look.", lit: "greet two grandchild. room at floor three. invite two grandchild look."}
 - {n: 2, speaker: Thảo, vi: "Phòng này rộng quá! Cửa_sổ cũng to.", en: "This room is so big! And the window is big too.", lit: "room this spacious so! window also big."}
