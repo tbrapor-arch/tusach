@@ -167,3 +167,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L21.3 Bin, con đọc với chú Sacha đi, rồi ăn cơm nhá! (line 7): Lan names Sacha chú Sacha to her son | kept | – | yes |
 | L21.4 Con và Na đều đói rồi! (line 8) from Bin, 8, to his mother (or Con với Na) | kept | – | yes, low |
 | L21.5 Hôm nay có canh cháu thích nhất đấy! (line 10): a relative clause with no linking word | kept | – | yes |
+| L22.1 Chú ơi, cho cháu hỏi: … có đi đúng giờ không ạ? (line 3): Sacha, 27, to a railway worker in his fifties | kept | – | yes |
+| L22.2 Khi tàu đến thì cháu xem số giường trên vé nhé (line 4) | kept | – | yes, low |
+| L22.3 Hành lý của bạn đâu? (line 5): bare đâu after the noun | kept | – | yes, low |
+| L22.4 Tôi thì ngủ ở đâu cũng được! (line 8): thì as "as for me" + ở đâu cũng được "anywhere" | kept | – | yes |
+| L22.5 Tàu từ ga Hà Nội đến Lào Cai lúc sáu giờ sáng (line 9): a night train Hà Nội–Lào Cai arriving about six | kept (timetables not checked) | – | yes, low |
+| L22.6 Chỗ này có người chưa? (fill 3) for "is this seat taken?" | kept | – | yes |
+| L22.7 the bridge note: "Mandarin aspirated p t k q c ch in tone 2 → b đ c t tr ch gi, and huyền" combines IA (86 %, narrows) with T1 (Mandarin 2 → huyền, 97 %) | kept | – | no (measured) |

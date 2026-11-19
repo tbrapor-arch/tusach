@@ -1,0 +1,59 @@
+id: 22
+title: {vi: Ở ga Hà Nội, en: At Hà Nội station}
+review: false
+setting: >-
+  Friday evening, Hà Nội station. Mai and Sacha are going away for the weekend: the night train takes them to Lào Cai,
+  in the mountains of the north. They have two berths in a sleeping car. A railway worker in his fifties stands on the
+  platform.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Mai ơi, chuyến tàu của chúng_ta đi lúc mấy giờ?", en: "Mai, what time does our train leave?", lit: "Mai hey, trip train of we-all go at how-many hour?"}
+- {n: 2, speaker: Mai, vi: "Lúc mười giờ đêm. Bây_giờ là chín giờ, chúng_ta chờ ở đây nhé.", en: "At ten at night. It's nine now: let's wait here.", lit: "at ten hour night. now be nine hour, we-all wait at here OK."}
+- {n: 3, speaker: Sacha, vi: "Chú ơi, cho cháu hỏi: chuyến tàu đi Lào_Cai có đi đúng_giờ không ạ?", en: "Excuse me, may I ask: is the Lào Cai train on time?", lit: "uncle hey, let grandchild ask: trip train go Lào Cai (yes) go on-time not (polite)?"}
+- {n: 4, speaker: Railway worker, vi: "Có. Khi tàu đến thì cháu xem số giường trên vé nhé.", en: "Yes. When the train comes in, look at the berth number on your ticket.", lit: "have. when train arrive then grandchild look number bed on ticket OK."}
+- {n: 5, speaker: Mai, vi: "Giường số mười hai và mười ba~three đây. Hành_lý của bạn đâu?", en: "Here are berths twelve and thirteen. Where's your luggage?", lit: "bed number ten two and ten three here. luggage of you where?"}
+- {n: 6, speaker: Sacha, vi: "Đây. Chỗ này nhỏ quá, nhưng không sao~why.", en: "Here. It's very small, but never mind.", lit: "here. place this small so, but not how."}
+- {n: 7, speaker: Mai, vi: "Bạn ngủ trên tàu được không?", en: "Can you sleep on a train?", lit: "you sleep on train can not?"}
+- {n: 8, speaker: Sacha, vi: "Tôi thì ngủ ở đâu cũng được!", en: "Me? I can sleep anywhere!", lit: "I (as-for) sleep at where also can!"}
+- {n: 9, speaker: Mai, vi: "Đây là bản_đồ. Tàu từ~from ga Hà_Nội đến Lào_Cai lúc sáu giờ sáng.", en: "Here's the map. The train from Hà Nội station gets to Lào Cai at six in the morning.", lit: "here be map. train from station Hà Nội arrive Lào Cai at six hour morning."}
+- {n: 10, speaker: Sacha, vi: "Đây là lần đầu tôi đi du_lịch ở Việt_Nam!", en: "This is my first trip in Vietnam!", lit: "here be time first I go travel at Vietnam!"}
+notes:
+- {ref: 1, topic: grammar, text: "lúc \"at\" before a clock time: đi lúc mấy giờ? \"leave at what time?\", lúc mười giờ đêm \"at ten at night\". đêm \"night\" (after about ten): tàu đêm \"the night train\". chuyến \"a trip, a service\" of a train or bus: chuyến tàu."}
+- {ref: 2, topic: grammar, text: "chờ \"to wait\": chúng ta chờ ở đây \"let's wait here\". The North also says {đợi}. ga \"station\" (from French gare); tàu \"train\" (also \"ship\")."}
+- {ref: 3, topic: usage, text: "Cho cháu hỏi … \"may I ask …\": cho \"to let\" + hỏi \"to ask\", the polite opening of a question to a stranger. Sacha says chú to a man in his fifties. đúng giờ \"on time\"."}
+- {ref: 4, topic: grammar, text: "Khi tàu đến thì … \"when the train comes in, …\": khi \"when\" opens the time clause; thì often marks where the main clause starts. lúc is a point in time (lúc sáu giờ); khi a time set by an event."}
+- {ref: 4, topic: usage, text: "số \"number\": số giường \"berth number\", giường số mười hai \"berth twelve\" (số + the number, after the noun). giường \"bed\" is also a berth on a sleeper train. trên vé \"on the ticket\"."}
+- {ref: 6, topic: grammar, text: "Chỗ này nhỏ quá \"this place is so small\": chỗ \"place, spot; seat\". Hành lý của bạn đâu? (line 5) \"where's your luggage?\": a bare đâu after the noun asks where it is."}
+- {ref: 8, topic: grammar, text: "Tôi thì ngủ ở đâu cũng được \"as for me, I can sleep anywhere\": thì after a subject sets it apart from others, \"as for me\". ở đâu cũng … \"anywhere\": a question word + cũng is \"any-\". ngủ \"to sleep\"."}
+- {ref: 9, topic: false-friend, text: "bản đồ is 版圖, but in Chinese 版圖 is a country's territory; a map is 地圖."}
+- {ref: 10, topic: bridge, text: "Old voiced stops: a Mandarin aspirated p t k q c ch in tone 2 usually gives b đ c t tr ch gi, and the tone huyền: đầu is 頭 (Mandarin tóu). In tones 1, 3, 4 it gives ph th kh x s: khách is 客 (kè)."}
+new_words:
+- {w: thì, en: "then ({nếu} … thì); as for"}
+- {w: khi, en: when}
+- {w: lúc, en: "moment, time; at (a time)"}
+- {w: ga, en: "(railway) station"}
+- {w: tàu, en: "ship, boat; train ({tàu hỏa})"}
+- {w: chờ, en: to wait}
+- {w: từ, tag: from, en: "from; since"}
+- {w: ngủ, en: to sleep}
+- {w: giường, en: "bed (also a berth on a train)"}
+- {w: đêm, en: night}
+- {w: hỏi, en: to ask}
+- {w: chỗ, en: "place, spot; seat"}
+- {w: đúng_giờ, en: "on time, punctual"}
+- {w: bản_đồ, en: map}
+- {w: hành_lý, en: luggage}
+- {w: du_lịch, en: "to travel (for pleasure); tourism"}
+- {w: số, en: number}
+- {w: chuyến, en: "trip, journey (of a train or a bus)"}
+- {w: Lào_Cai, en: "Lào Cai (a town and province in the north-west)", name: true}
+exercises:
+  translate:
+  - {vi: "Khi trời mưa thì Bin không đi bơi.", en: "When it rains, Bin doesn't go swimming."}
+  - {vi: "Anh Minh đi làm lúc bảy giờ rưỡi.", en: "Minh goes to work at half past seven."}
+  - {vi: "Bà Lan ngủ sớm, chín giờ tối.", en: "Mrs Lan goes to bed early, at nine in the evening."}
+  - {vi: "Thảo đi từ~from nhà đến trường mười lăm phút.", en: "It takes Thảo fifteen minutes to get from home to school."}
+  - {vi: "Chị Lan thì thích trà, anh Minh thì thích cà_phê.", en: "Lan likes tea; Minh likes coffee."}
+  fill:
+  - {vi: "Em ___ chị ở quán cà_phê nhé.", answer: chờ, en: "I'll wait for you at the café. (to someone older)"}
+  - {vi: "___ nào anh về Pháp?", answer: lúc, en: "When are you going back to France? (to a young man a little older)"}
+  - {vi: "Chỗ này có người ___?", answer: chưa, en: "Is this seat taken yet?"}
