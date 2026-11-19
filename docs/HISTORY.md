@@ -290,3 +290,18 @@ tools/test_review3.py):
 - Checks: make lint 0 errors (verify_words 421 suspects, the new ones all free sequences: verb + direction, mọi +
   noun, numerals; thế thì kept as two words); every test of make test without the db rebuild passes; state.py
   --check agrees; make app: card check 0 errors. Hesitations: rows L15.1–L28.7 in NOTES-for-native-speaker.md.
+
+## 2026-11-19 — review 7 (lessons 15–28) applied (branch lessons-15-28, from 10bbfe6)
+- An independent reading of lessons 15–28 (`course/proposal/lessons-15-28-review.md`: 2 high, 11 medium, 12 low),
+  then fixed by the same reviewer. High: Bin, 8, had "môn văn" (primary school teaches tiếng Việt; L19, L21); two
+  pronoun notes said what no line does (L28 the landlady's cô / cháu reversed, L23 cô never said). Medium: L20 scene
+  order (reports already sent; lunch at nine), L26 Mai "always busy at weekends" after her L22 weekend trip, L19 Ông là
+  giáo viên for a retired teacher, L24 Chú ý! Xe máy ở trước! (now Cẩn thận! Có xe máy …), L17 a stranger told about
+  "Na", bridge claims (Cantonese did not lose ng-; th missing from ID in L20; s / x from Z in L27), four fills with
+  two right answers, "Bà Lan" (Mrs Lan) in two exercises. Low: lines made more natural (Cả nhà ăn cơm đi!, kiểm tra
+  được mười điểm, nói về, lên thành phố, làm xong), duration in minutes not giờ, register hints in fills.
+- Lint: the person-term check split lines after `vi.display()`, so chú_ý counted as chú (the writer had rewritten a
+  line round it); now on the raw line, and một + term is a third person (test_review5). SEGMENTATION: thế thì is
+  two words. Left: the cutter joins cả_nhà and ăn_cơm where lessons write two words (NOTES L28.8).
+- Checks: make lint 0 errors 0 warnings (verify_words 422 suspects, new ones benign); every make test step without
+  the db rebuild passes; state.py --check agrees; make app card check 0 errors; no golden change.
