@@ -247,7 +247,8 @@ tools/test_review3.py):
   博士 / 醫生.
 - Segmentation (decision 6a): đau + body part is two words (đau đầu, đau bụng); vi.cut() rule 10; reference line 63
   follows. Reference F1 vi.cut() 0.955 (unchanged), underthesea 0.930 → 0.929; held-out 0.953 (unchanged). Effect on
-  the cards: đau đầu loses its Tatoeba example (the cutter no longer finds the word in it); no other card changed.
+  the cards (compare.py against origin/main): đau đầu loses its Tatoeba example (the cutter no longer finds the word
+  in it); nào's English is the intended change; 0 blocking.
 - Lint: an exercise equal to the example a card of its words shows is an error (nine found, also in L1, L2, L7);
   false-friend notes checked against the lexicon; a cast name in an English note is read as the common word only at
   a sentence start (not after : or a quote) and when that word is taught (reverses review 4 C's "Mai gặp nhé" case).
