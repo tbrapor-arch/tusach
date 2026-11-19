@@ -137,7 +137,7 @@ TERMS = {'hán việt', 'hán', 'việt', 'nôm', 'chữ nôm', 'chữ hán', 'q
          'ngã', 'nặng'}   # metalanguage, not lesson words
 EN_MORE = {'the', 'café', 'cafe', 'pho', 'no', 'ha', 'ma', 'me', 'he', 'be', 'see', 'ten', 'tea', 'sang', 'pan', 'bang',
            'long', 'tan', 'can', 'ban', 'dan', 'man', 'nam', 'van', 'ton', 'non', 'chi', 'yin', 'tai', 'lo', 'ho', 'do',
-           'day', 'loan', 'don', 'ti', 'hen'}
+           'day', 'loan', 'don', 'ti', 'hen', 'run'}
 
 
 class Words:

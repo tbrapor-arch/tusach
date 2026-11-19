@@ -195,3 +195,11 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L25.5 Tôi ăn xong rồi. Bún chả ngon quá, tôi ăn hết! (line 8) | kept | – | yes, low |
 | L25.6 Hai suất một trăm hai mươi nghìn (line 10): 60,000 a portion in 2026 | kept | – | yes, low |
 | L25.7 the bridge note gives th / s only (x has no Hán-Việt word taught yet: word list 3 review finding 18) | kept | – | no |
+| L26.1 Tôi thường chạy ở hồ Hoàn Kiếm (line 2) for jogging round the lake | kept | – | yes, low |
+| L26.2 Sở thích của tôi là âm nhạc: tôi hay hát và nhảy (line 3): âm nhạc is bookish for a hobby (word list 3 review finding 19) | kept | – | yes |
+| L26.3 Hai em đã từng leo núi chưa? (line 4) and leo núi for hiking | kept | – | yes |
+| L26.4 … nhưng ở Việt Nam thì chưa (line 5) | kept | – | yes, low |
+| L26.5 Anh tham gia một câu lạc bộ leo núi (line 6) for "I belong to a hiking club" | kept | – | yes |
+| L26.6 Sacha thì sao? (line 8); Thế thì lần sau em cũng đi! (line 11) | kept | – | yes, low |
+| L26.7 Ông Hùng luôn uống trà với bạn (translate 3): bạn for an old man's friends | kept | – | yes, low |
+| L26.8 Tool: "run" (English, in the glosses of chạy) was read as the Vietnamese run; added to plan.py EN_MORE | a lint point | – | no |
