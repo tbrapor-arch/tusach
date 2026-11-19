@@ -229,7 +229,7 @@ tools/test_review3.py):
   Không sao đâu), L13 a present at the market (cái, colours, to / nhỏ, vừa, mua / lấy / tặng), L14 Review 2 (the
   birthday dinner, recap notes, updated pronoun summary). One bridge note each (B3, T1, O1, T2, T3, T4, a tone
   recap); the false friends thời tiết, tuần, bác sĩ, sinh viên stay on their cards (lint refuses a false friend as
-  a bridge example). No plan change. Hesitations: 39 rows in NOTES-for-native-speaker.md.
+  a bridge example). No plan change. Hesitations: 40 rows in NOTES-for-native-speaker.md.
 - Data: nào's lexicon usage note gives the urging use (Đi nào!; golden snapshot updated); đi's already did.
 - Checks: make lint 0 errors 0 warnings; make test, make app, make check, tools/smoke.py (with TUSACH_PRIVATE) pass;
   tools/compare.py against origin/main (same database both sides: build_db and sources unchanged): 120 lines and 118
