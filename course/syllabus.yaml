@@ -7,7 +7,7 @@
 # word that is not Hán-Việt, older and Western loans included). L1-13 new_words are word list 2's real counts.
 approved:
   syllabus: {by: owner, date: 2026-11-19}
-  word_list: {by: owner, date: 2026-11-19, file: course/proposal/wordlist-2.tsv}
+  word_list: {by: owner, date: 2026-11-19, file: [course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}
 # the draft the owner is asked to approve: tools/plan.py checks it against this plan (make lint)
 draft: {word_list: course/proposal/wordlist-3.tsv, proposal: course/proposal/syllabus-proposal.md}
 cast: [Sacha, Lan, Minh, Thảo, Hùng, Tuấn, Mai, Bin, Na]

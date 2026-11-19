@@ -1,7 +1,7 @@
 # Word list 3 (lessons 15–28): drafter's notes
 
-Working notes of the drafting session (Claude, 19 Nov 2026, branch `wordlist-3` from main ac5ae29). NOT approved by the
-owner; NOT checked by a native speaker. The list is `wordlist-3.tsv`, its doubts and overrides `wordlist-3-to-check.md`.
+Working notes of the drafting session (Claude, 19 Nov 2026, branch `wordlist-3` from main ac5ae29). APPROVED by the
+owner on 19 Nov 2026 after the review and fix pass; NOT checked by a native speaker. The list is `wordlist-3.tsv`, its doubts and overrides `wordlist-3-to-check.md`.
 
 ## Method
 - One scene per lesson (syllabus.yaml title), words chosen for that scene's natural dialogue, the lesson's grammar
