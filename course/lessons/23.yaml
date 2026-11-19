@@ -1,0 +1,59 @@
+id: 23
+title: {vi: Phòng cho Thảo, en: A room for Thảo}
+review: false
+setting: >-
+  Saturday morning. Thảo wants a room of her own, closer to the centre than her student hostel. Sacha goes with her to
+  see one in a tall, narrow house on a street in Hoàn Kiếm district. The landlady is a woman of about fifty-five.
+dialogue:
+- {n: 1, speaker: Landlady, vi: "Chào hai cháu. Phòng ở tầng ba~three. Mời hai cháu xem.", en: "Hello, both of you. The room is on the third floor. Have a look.", lit: "greet two grandchild. room at floor three. invite two grandchild look."}
+- {n: 2, speaker: Thảo, vi: "Phòng này rộng quá! Cửa_sổ cũng to.", en: "This room is so big! And the window is big too.", lit: "room this spacious so! window also big."}
+- {n: 3, speaker: Sacha, vi: "Phòng này có bếp không ạ?", en: "Does the room have a kitchen?", lit: "room this have kitchen not (polite)?"}
+- {n: 4, speaker: Landlady, vi: "Đây là phòng_ngủ, trong phòng có giường. Bếp và nhà_vệ_sinh ở tầng hai.", en: "This is the bedroom: there's a bed in it. The kitchen and the bathroom are on the second floor.", lit: "here be bedroom, in room have bed. kitchen and toilet at floor two."}
+- {n: 5, speaker: Thảo, vi: "Các phòng ở đây đều sạch quá! Mỗi tháng bao_nhiêu tiền ạ?", en: "All the rooms here are so clean! How much is it a month?", lit: "(plural) room at here all clean so! each month how-much money (polite)?"}
+- {n: 6, speaker: Landlady, vi: "Phòng này ba~three triệu mỗi tháng. Mọi người ở đây đều là sinh_viên.", en: "This room is three million a month. Everyone here is a student.", lit: "room this three million each month. every person at here all be student."}
+- {n: 7, speaker: Sacha, vi: "Phố này có ồn không ạ?", en: "Is this street noisy?", lit: "street this (yes) noisy not (polite)?"}
+- {n: 8, speaker: Landlady, vi: "Không ồn đâu, yên_tĩnh lắm. Ở đây gần trung_tâm, đi chợ cũng tiện.", en: "Not at all, it's very quiet. It's near the centre, and handy for the market too.", lit: "not noisy (at-all), quiet very. at here near centre, go market also convenient."}
+- {n: 9, speaker: Thảo, vi: "Những phòng ở tầng hai thì sao~why ạ?", en: "What about the rooms on the second floor?", lit: "(plural) room at floor two then how (polite)?"}
+- {n: 10, speaker: Landlady, vi: "Những phòng đó nhỏ hơn, nhưng rẻ hơn: hai triệu.", en: "Those rooms are smaller, but cheaper: two million.", lit: "(plural) room that small more, but cheap more: two million."}
+- {n: 11, speaker: Thảo, vi: "Cháu thuê phòng này ạ. Ở quận Hoàn_Kiếm, ba~three triệu là rẻ lắm.", en: "I'll take this room. In Hoàn Kiếm district, three million is very cheap.", lit: "grandchild rent room this (polite). at district Hoàn Kiếm, three million be cheap very."}
+notes:
+- {ref: 1, topic: pronouns, text: "Chào hai cháu: the landlady, of their parents' generation, says cháu to Thảo and Sacha; they call her cô (lesson 19) and say cháu. hai cháu \"you two\". chủ nhà \"landlord, landlady\" (the owner of the house)."}
+- {ref: 1, topic: usage, text: "tầng \"floor, storey\": tầng một is the ground floor, so tầng ba is \"the third floor\" counted from the street, the second above it. A Hà Nội house is often narrow and tall, a room or two on each tầng."}
+- {ref: 2, topic: grammar, text: "rộng \"spacious, wide\" (of a room or a street); to \"big\" (lesson 13) fits the window: Cửa sổ cũng to. cửa sổ \"window\"; phòng ngủ \"bedroom\" (line 4); bếp \"kitchen\"; nhà vệ sinh \"toilet, bathroom\", the polite word."}
+- {ref: 4, topic: grammar, text: "trong phòng có giường \"there's a bed in the room\": trong \"in, inside\" + a place, then có \"there is\"."}
+- {ref: 5, topic: grammar, text: "Plurals: các + noun is \"the …s, all the …\", the whole group: các phòng ở đây \"the rooms here\". những + noun picks out some of them: những phòng ở tầng hai \"the rooms on the second floor\" (line 9). Without either, a noun can be one or many."}
+- {ref: 5, topic: grammar, text: "mỗi + noun is \"each\": mỗi tháng \"each month, a month\" (ba triệu mỗi tháng). mọi + noun is \"every, all\": mọi người \"everyone\". Both are often followed by đều: Mọi người ở đây đều là sinh viên."}
+- {ref: 8, topic: grammar, text: "Không ồn đâu \"not noisy at all\": ồn \"noisy\", yên tĩnh \"quiet\". trung tâm \"the centre\"; tiện \"convenient, handy\": đi chợ cũng tiện \"handy for the market too\"."}
+- {ref: 11, topic: false-friend, text: "quận is 郡, but in Chinese 郡 is a historical commandery, or a county outside China; in Vietnam a quận is an urban district (quận Hoàn Kiếm)."}
+- {ref: 8, topic: bridge, text: "The old ts- and s- series: yên tĩnh is 安靜 (Mandarin ānjìng, Cantonese on1 zing6); trung tâm is 中心 (zhōngxīn, zung1 sam1). Mandarin z c s, or j q x with Cantonese z c s, usually give t; some, where Taigi has tsh-, give th."}
+new_words:
+- {w: những, en: "(plural marker) some, the …s"}
+- {w: mọi, en: "every, all"}
+- {w: thuê, en: "to rent; to hire"}
+- {w: phòng_ngủ, en: bedroom}
+- {w: bếp, en: "kitchen; stove"}
+- {w: nhà_vệ_sinh, en: "toilet, bathroom"}
+- {w: tầng, en: "floor, storey"}
+- {w: cửa_sổ, en: window}
+- {w: rộng, en: "spacious, wide, large"}
+- {w: sạch, en: clean}
+- {w: ồn, en: noisy}
+- {w: chủ_nhà, en: "landlord, landlady; host"}
+- {w: trong, en: "in, inside; during"}
+- {w: các, en: "(plural marker) the …s, all the"}
+- {w: mỗi, en: "each, every"}
+- {w: quận, en: "(urban) district"}
+- {w: yên_tĩnh, en: "quiet, peaceful"}
+- {w: tiện, en: convenient}
+- {w: trung_tâm, en: "centre (of a town)"}
+exercises:
+  translate:
+  - {vi: "Mỗi ngày Thảo đi_bộ đến trường.", en: "Thảo walks to school every day."}
+  - {vi: "Chủ_nhà sống ở tầng một.", en: "The landlady lives on the ground floor."}
+  - {vi: "Các bạn ơi, chúng_ta đi ăn phở nhé!", en: "Hey everyone, let's go and eat phở!"}
+  - {vi: "Phòng_ngủ của Bin nhỏ hơn phòng_ngủ của bà.", en: "Bin's bedroom is smaller than Grandma's."}
+  - {vi: "Trong bếp có mèo.", en: "There's a cat in the kitchen."}
+  fill:
+  - {vi: "___ người đều thích Na.", answer: mọi, en: "Everybody likes Na."}
+  - {vi: "Phố này ồn quá, phố kia ___ hơn.", answer: yên_tĩnh, en: "This street is so noisy; that one is quieter."}
+  - {vi: "Thảo muốn ___ một phòng gần trường.", answer: thuê, en: "Thảo wants to rent a room near her university."}

@@ -174,3 +174,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L22.5 Tàu từ ga Hà Nội đến Lào Cai lúc sáu giờ sáng (line 9): a night train Hà Nội–Lào Cai arriving about six | kept (timetables not checked) | – | yes, low |
 | L22.6 Chỗ này có người chưa? (fill 3) for "is this seat taken?" | kept | – | yes |
 | L22.7 the bridge note: "Mandarin aspirated p t k q c ch in tone 2 → b đ c t tr ch gi, and huyền" combines IA (86 %, narrows) with T1 (Mandarin 2 → huyền, 97 %) | kept | – | no (measured) |
+| L23.1 Chào hai cháu … Mời hai cháu xem (line 1) from a landlady of about 55 to people of 24 and 27 (cô / cháu) | kept | – | yes |
+| L23.2 Đây là phòng ngủ, trong phòng có giường (line 4) for a single rented room | kept | – | yes, low |
+| L23.3 Các phòng ở đây đều sạch quá! (line 5): các for all the rooms of the house; những for some (line 9) | kept | – | yes |
+| L23.4 Phòng này ba triệu mỗi tháng (line 6), mỗi after the price; or Mỗi tháng ba triệu | kept | – | yes, low |
+| L23.5 Những phòng ở tầng hai thì sao ạ? (line 9) "what about …?" | kept | – | yes, low |
+| L23.6 Ở quận Hoàn Kiếm, ba triệu là rẻ lắm (line 11); the price of a student room in Hoàn Kiếm in 2026 | kept | – | yes |
+| L23.7 tầng một = the ground floor (note) | kept | – | yes, low |
