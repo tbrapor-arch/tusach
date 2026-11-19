@@ -61,7 +61,7 @@ F1 with the Wiktionary keys: reference (200, rules tuned on it) vi.cut() 0.955, 
 sentences, `tests/cutter/heldout.tsv`) vi.cut() 0.953, underthesea 0.928. Both sets cut by Claude, **not checked by a
 native speaker**.
 
-## Lessons (19 Nov 2026; 1–7 after review 5, 8–14 after review 6, in main)
+## Lessons (19 Nov 2026; 1–7 after review 5, 8–14 after review 6, in main; 15–28 on lessons-15-28)
 Lesson 0 "Reading Vietnamese" (`course/lesson0.yaml`, page `#reading`): alphabet, IPA and nearest sounds, Hà Nội
 mergers, finals (-nh/-ch, the lip rule), six tones in one line each, checked syllables; no audio (the page says so);
 its sound-table examples are checked against their row. Lessons 1–7 (`course/lessons/01–07.yaml`, 7 a review):
@@ -71,6 +71,10 @@ word list 2, each word (lines, exercises, notes, glosses) taught before use (lin
 Lessons 8–14 (19 Nov 2026, after review 6; 14 a review): lines 8 8 8 9 9 9 10, notes 9
 each (one false-friend clause in L11 and L12), new words 16 17 18 18 18 18 0 + name Mai, exactly word list 2's; the week after lesson 7 (Tuesday walk to Hoàn
 Kiếm with Thảo … Sunday birthday of Lan's mother); their points for a native speaker in the same file.
+Lessons 15–28 (19 Nov 2026, branch `lessons-15-28`, NOT reviewed; 21 and 28 reviews): lines 9 9 10 10 10 10 10 10
+11 11 11 11 11 11, notes 9 each (false-friend clause in L20 đầu tiên, L22 bản đồ, L23 quận), new words 18 18 18 18
+18 18 0 18 19 19 19 19 19 0 + names Hùng, Tuấn, Lào Cai, exactly word list 3's (approved 19 Nov 2026); the weeks
+after the birthday (phone shop … Thảo's new room); their points for a native speaker in the same file (L15–L28 rows).
 `course/syllabus.yaml`: the one plan source (100 lessons, cast, particle strand), syllabus and word list 2 APPROVED
 by the owner on 19 Nov 2026. Proposal: `course/proposal/syllabus-proposal.md`; `wordlist-2.tsv` and its to-check list.
 

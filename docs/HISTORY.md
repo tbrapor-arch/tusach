@@ -275,3 +275,18 @@ tools/test_review3.py):
   its first "]" (sạch's note grew at each run). Counts on plan (13 + 5 / 13 + 6).
 - 19 Nov 2026: the owner approved word list 3 (after review and fix, 8381c89); approved.word_list.file lists
   wordlist-2.tsv and wordlist-3.tsv. test_plan builds its draft / approved syllabi from the real file, whatever it holds.
+
+## 2026-11-19 — lessons 15–28 (branch lessons-15-28, from wordlist-3 8381c89, merged 567a4e9; not reviewed)
+- Written against word list 3 (a draft at first, linted with a temporary approval never committed; the owner approved
+  it during the work, merged in, plain `make lint` 0 errors since). One scene per plan title, the story going on from
+  L14: phone shop with Thảo (L15), family dinner (L16), bookshop (L17), pool (L18), ông Hùng (L19), office with Mai and
+  Tuấn (L20), Na's book (L21), night train to Lào Cai with Mai (L22), Thảo's room (L23), Minh's motorbike lesson (L24),
+  bún chả (L25), hobbies (L26), bà's stories (L27), Thảo moves in (L28). No plan or lexicon change.
+- Lint lessons: an English contraction ("I've", "we've") leaves "ve", read as Vietnamese, and English "run" was read
+  as Vietnamese run (now in plan.py EN_MORE); the person-term check reads chú in chú_ý as the kin term; buổi sáng is
+  one word in SEGMENTATION but not taught as one, so the lessons avoid it (NOTES L18.7). Bridge notes avoid
+  romanisations that are Vietnamese syllables (gam2, tau4, tóng, sim) and name Taigi by its initial where its tone
+  mark makes it look Vietnamese (tsiàn).
+- Checks: make lint 0 errors (verify_words 421 suspects, the new ones all free sequences: verb + direction, mọi +
+  noun, numerals; thế thì kept as two words); every test of make test without the db rebuild passes; state.py
+  --check agrees; make app: card check 0 errors. Hesitations: rows L15.1–L28.7 in NOTES-for-native-speaker.md.
