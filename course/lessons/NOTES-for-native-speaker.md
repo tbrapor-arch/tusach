@@ -76,3 +76,9 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L10.4 Ngon không? (line 6) for Có ngon không? | kept | not reviewed | yes, low |
 | L10.5 Anh gọi thêm thịt nhé? (line 6): extra meat ordered on its own | kept | not reviewed | yes, low |
 | L10.6 cơm gà (line 4) as an everyday office lunch in Hà Nội | kept | not reviewed | yes, low |
+| L11.1 bạn / tôi between Sacha and Mai, colleagues of 27 (word list point 5) | bạn / tôi | not reviewed | yes |
+| L11.2 với bạn tôi (line 3) for "with a friend of mine"; or với một người bạn | bạn tôi | not reviewed | yes, low |
+| L11.3 Bao giờ bạn về Pháp? (line 7) from a new colleague: friendly, or does it sound like "when are you leaving?" | kept | not reviewed | yes |
+| L11.4 the note: bao giờ first asks about the future, last about the past ("usually") | kept | not reviewed | yes, low |
+| L11.5 Cuối tuần đi chơi với tôi và bạn tôi nhé! (line 9) | kept | not reviewed | yes |
+| L11.6 Tôi thích xem phim. Mấy giờ? (line 4): Có! as an eager yes to Bạn có muốn đi không? | kept | not reviewed | yes, low |
