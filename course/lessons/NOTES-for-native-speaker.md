@@ -154,3 +154,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L19.5 cô ở trường cháu (line 7) for Bin's teacher, as cô giáo (not taught) is left out | kept | – | yes |
 | L19.6 Cháu đến chơi, ông kể cho cháu về Hà Nội nhé (line 10): kể cho cháu without nghe (nghe is L20) | kept; the lexicon's kể example has the same choice | – | yes |
 | L19.7 the note: children call any woman teacher cô; a woman of one's parents' generation is cô too (in the North, a mother's younger sister is dì: not said) | kept | – | yes, low |
+| L20.1 Chín giờ có họp (line 2) for "there's a meeting at nine" | kept | – | yes, low |
+| L20.2 Tôi cũng thế (line 3) agreeing with a negative ("me neither"); or Tôi cũng vậy / Tôi cũng không | kept | – | yes |
+| L20.3 Chào hai em! (line 4) from a manager of 41 to two staff of 27 | kept | – | yes |
+| L20.4 Công việc khó, máy tính cũ, nhưng đồng nghiệp đều tốt lắm ạ! (line 7): tốt for "kind" of colleagues | kept | – | yes |
+| L20.5 Vừa ăn vừa nói chuyện (line 8) without a subject, as a suggestion | kept | – | yes, low |
+| L20.6 Nghe nhạc, tôi làm việc nhanh hơn! (line 10): a bare verb phrase as "with music on" | kept | – | yes |
+| L20.7 Hôm qua tôi làm việc muộn, chín giờ tối mới về nhà (translate 4): mới "only then", met in L15's word list only | kept | – | yes, low |
