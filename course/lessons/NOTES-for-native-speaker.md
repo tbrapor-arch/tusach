@@ -134,3 +134,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L16.5 Hôm qua kiểm tra, con được mười điểm (line 7); or Hôm qua con kiểm tra được mười điểm | kept | – | yes |
 | L16.6 Ở Hà Nội, chị Lan là chị gái em! (line 9): chị gái used warmly for someone who is not a sister | kept | – | yes |
 | L16.7 Ngày mai đi chơi với mẹ nhá! (fill 3) from a mother to a child | kept | – | yes, low |
+| L17.1 Chị ơi, giúp em với! (line 1) to a bookseller: pleading enough for a simple request in a shop, or too much? | kept (the plan's với) | – | yes |
+| L17.2 Sách ngữ pháp ở trên kia (line 2) for "up there" (a high shelf) | kept | – | yes, low |
+| L17.3 Em đọc và viết tiếng Việt à? Giỏi quá! (line 4) and the modest Không đâu ạ (line 5) | kept | – | yes, low |
+| L17.4 Quyển này về một con mèo (line 6): về "about" with no verb | kept | – | yes |
+| L17.5 Năm nghìn một tờ (line 8): a newspaper price; and 350,000 for three books and a paper (line 10) | kept | – | yes, low |
+| L17.6 Chiếc điện thoại này của em, phải không? (line 10): chiếc for a phone; or cái | chiếc (the plan's classifier) | – | yes |
+| L17.7 hiệu sách (Northern) rather than nhà sách in Hà Nội in 2026 | hiệu sách (word list 3) | – | yes |

@@ -1,0 +1,57 @@
+id: 17
+title: {vi: Ở hiệu sách, en: At the bookshop}
+review: false
+setting: >-
+  Saturday afternoon. Sacha goes to a bookshop on a street near the lake: he wants a dictionary and a grammar book,
+  and a present for Na. The bookseller is a woman of about forty. He puts his new phone down on the counter.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Chị ơi, giúp em với! Em tìm từ_điển và sách ngữ_pháp tiếng_Việt.", en: "Excuse me, could you help me? I'm looking for a dictionary and a Vietnamese grammar book.", lit: "elder-sister hey, help younger-sibling (please)! younger-sibling look-for dictionary and book grammar Vietnamese."}
+- {n: 2, speaker: Bookseller, vi: "Từ_điển ở đây. Sách ngữ_pháp ở trên kia, em ạ.", en: "The dictionaries are here. The grammar books are up there.", lit: "dictionary at here. book grammar at above there, younger-sibling (polite)."}
+- {n: 3, speaker: Sacha, vi: "Ngữ_pháp tiếng_Việt khó quá! Có quyển nào dễ không ạ?", en: "Vietnamese grammar is so hard! Is there an easy one?", lit: "grammar Vietnamese difficult so! have (volume) which easy not (polite)?"}
+- {n: 4, speaker: Bookseller, vi: "Quyển này dễ đọc lắm. Em đọc và viết tiếng_Việt à? Giỏi quá!", en: "This one is very easy to read. You read and write Vietnamese? How clever!", lit: "(volume) this easy read very. younger-sibling read and write Vietnamese (surprised)? clever so!"}
+- {n: 5, speaker: Sacha, vi: "Không đâu ạ, viết khó lắm! Em cũng muốn mua sách cho Na, năm~five tuổi. Na thích mèo.", en: "Not at all, writing is really hard! I'd also like to buy a book for Na: she's five. She likes cats.", lit: "not (at-all) (polite), write difficult very! younger-sibling also want buy book for Na, five age. Na like cat."}
+- {n: 6, speaker: Bookseller, vi: "Quyển này về một con mèo, hay~good lắm!", en: "This one is about a cat. It's lovely!", lit: "(volume) this about one (animal) cat, good very!"}
+- {n: 7, speaker: Sacha, vi: "Em lấy hai quyển này và quyển từ_điển. Chị có bán báo không?", en: "I'll take these two and the dictionary. Do you sell newspapers?", lit: "younger-sibling take two (volume) this and (volume) dictionary. elder-sister have sell newspaper not?"}
+- {n: 8, speaker: Bookseller, vi: "Có, báo đây. Năm~five nghìn một tờ.", en: "Yes, here they are. Five thousand each.", lit: "have, newspaper here. five thousand one (sheet)."}
+- {n: 9, speaker: Sacha, vi: "Cho em một tờ. Bao_nhiêu tiền ạ?", en: "One, please. How much is that?", lit: "give younger-sibling one (sheet). how-much money (polite)?"}
+- {n: 10, speaker: Bookseller, vi: "Ba~three trăm năm~five mươi nghìn. Chiếc điện_thoại này của em, phải~right không?", en: "Three hundred and fifty thousand. This phone is yours, isn't it?", lit: "three hundred five ten thousand. (item) telephone this of younger-sibling, right not?"}
+notes:
+- {ref: 1, topic: particles, text: "Giúp em với! \"please help me!\": với at the end softens a request for help, a little pleading. In lesson 11 với was \"with\". giúp \"to help\"; tìm \"to look for\"."}
+- {ref: 2, topic: grammar, text: "ở trên kia \"up there\": trên \"on, above\" + kia \"over there\". từ điển \"dictionary\"; ngữ pháp \"grammar\"; sách \"book\". hiệu sách \"bookshop\" is the Northern word."}
+- {ref: 3, topic: grammar, text: "Classifiers. A number or này / nào with a noun usually needs a classifier: quyển for books (một quyển sách, quyển nào \"which one\"); tờ for flat paper (một tờ báo \"a newspaper\"); con for animals (một con mèo, line 6); chiếc for single objects and vehicles (chiếc điện thoại, line 10); cái for most other things (lesson 13)."}
+- {ref: 3, topic: grammar, text: "khó \"difficult\", dễ \"easy\". Before a verb they mean \"hard to …, easy to …\": dễ đọc \"easy to read\" (line 4), khó viết \"hard to write\"."}
+- {ref: 4, topic: grammar, text: "Em đọc và viết tiếng Việt à?: đọc \"to read\", viết \"to write\". A verb can be the subject with nothing added: Viết khó lắm \"writing is very hard\" (line 5). Giỏi quá! \"how clever!\" praises; the polite answer turns it down: Không đâu ạ."}
+- {ref: 5, topic: grammar, text: "sách cho Na \"a book for Na\": cho \"for\" (lesson 3: cho tôi \"give me\"). Na, năm tuổi \"Na, who is five\": an age needs no verb. mèo \"cat\"; Na thích mèo \"Na likes cats\": no classifier when one speaks of cats in general."}
+- {ref: 6, topic: grammar, text: "Quyển này về một con mèo \"this one is about a cat\": về \"about\" (lesson 6 về \"to go back\"). hay \"good, interesting\" (of a book, a film) is spelt like hay \"or\" (lesson 11): another word."}
+- {ref: 7, topic: grammar, text: "Chị có bán báo không? \"do you sell newspapers?\": có … không? around the verb. bán \"to sell\", the opposite of mua \"to buy\". báo \"newspaper\"; Năm nghìn một tờ \"five thousand each\": the price, then một + classifier."}
+- {ref: 2, topic: bridge, text: "h and ng: học is 學 (Mandarin xué, Cantonese hok6), hồ is 湖 (hú): h usually answers Mandarin h- or x-. Mandarin and Cantonese lost an old ng- that Taigi keeps as g-: 語 ngữ (Mandarin yǔ, Taigi gú), as in ngữ pháp."}
+new_words:
+- {w: quyển, en: "(classifier for books)"}
+- {w: tờ, en: "(classifier for sheets of paper, newspapers); a sheet"}
+- {w: chiếc, en: "(classifier for vehicles and single objects)"}
+- {w: giúp, en: to help}
+- {w: tìm, en: "to look for, to search; to find"}
+- {w: hiệu_sách, en: bookshop}
+- {w: đọc, en: to read}
+- {w: viết, en: to write}
+- {w: hay, tag: good, en: "good, interesting (a film, a book)"}
+- {w: bán, en: to sell}
+- {w: trên, en: "on, above; over"}
+- {w: dễ, en: easy}
+- {w: khó, en: difficult}
+- {w: mèo, en: cat}
+- {w: sách, en: book}
+- {w: báo, en: "newspaper; to report, to tell"}
+- {w: từ_điển, en: dictionary}
+- {w: ngữ_pháp, en: grammar}
+exercises:
+  translate:
+  - {vi: "Anh Minh đọc báo ở quán cà_phê.", en: "Minh reads the paper at the café."}
+  - {vi: "Bin có hai quyển từ_điển.", en: "Bin has two dictionaries."}
+  - {vi: "Phim này hay~good lắm, em xem đi!", en: "This film is really good: watch it! (to someone younger)"}
+  - {vi: "Chị Lan viết tên Na trên quyển sách.", en: "Lan writes Na's name on the book."}
+  - {vi: "Hiệu_sách này có bán sách tiếng_Việt không?", en: "Does this bookshop sell Vietnamese books?"}
+  fill:
+  - {vi: "Bà ơi, giúp cháu ___!", answer: với, en: "Grandma, please help me!"}
+  - {vi: "Na thích con ___ đen.", answer: mèo, en: "Na likes the black cat."}
+  - {vi: "Anh Minh mua hai ___ báo.", answer: tờ, en: "Minh buys two newspapers."}
