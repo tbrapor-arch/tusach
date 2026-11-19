@@ -203,3 +203,11 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L26.6 Sacha thì sao? (line 8); Thế thì lần sau em cũng đi! (line 11) | kept | – | yes, low |
 | L26.7 Ông Hùng luôn uống trà với bạn (translate 3): bạn for an old man's friends | kept | – | yes, low |
 | L26.8 Tool: "run" (English, in the glosses of chạy) was read as the Vietnamese run; added to plan.py EN_MORE | a lint point | – | no |
+| L27.1 Bà ơi, bà kể chuyện cho cháu nghe đi! (line 1) | kept | – | yes, low |
+| L27.2 Khi đó có chiến tranh ạ? (line 3) from Bin, 8; and the dates: bà, 62 in 2026, a small child before 1975 | kept | – | yes |
+| L27.3 Ngày đó "in those days" (lines 4, 6, 10); or Hồi đó (hồi is planned at L48) | ngày đó | – | yes |
+| L27.4 Rồi hòa bình. (line 6) as "then came peace" | kept | – | yes |
+| L27.5 Bà kể chuyện này rồi mà! / Bà già rồi mà! (lines 7–8): mà insisting, and as an excuse | kept (the plan's mà) | – | yes |
+| L27.6 bà to the children, bác to Sacha, in one scene (lines 8, 10) | kept | – | yes |
+| L27.7 Bác vẫn nhớ nhiều kỷ niệm lắm ạ (line 9) | kept | – | yes, low |
+| L27.8 Em nói lại đi, anh không nghe thấy (fill 2) | kept | – | yes, low |
