@@ -70,3 +70,9 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L9.3 mùa hè, mùa đông written as two words (the word list teaches mùa and hè, đông); the dictionary has mùa hè as one word | two words | not reviewed | no (a convention point for the reviewer) |
 | L9.4 Hôm nay có mưa không ạ? (line 6) without trời or sẽ | kept | not reviewed | yes, low |
 | L9.5 hè as the everyday Northern "summer" (word list point 12) | hè | not reviewed | yes |
+| L10.1 Em đã ăn phở Hà Nội chưa? (line 1) for a first taste; or … bao giờ chưa? (bao giờ comes at L11) | đã … chưa? | not reviewed | yes, low |
+| L10.2 Thêm hai quả trứng nhé! (line 5): eggs added to phở in Hà Nội, counted with quả | kept | not reviewed | yes |
+| L10.3 Chị ơi from Minh, 38, to the phở-shop owner in her forties (or cô?) | chị | not reviewed | yes |
+| L10.4 Ngon không? (line 6) for Có ngon không? | kept | not reviewed | yes, low |
+| L10.5 Anh gọi thêm thịt nhé? (line 6): extra meat ordered on its own | kept | not reviewed | yes, low |
+| L10.6 cơm gà (line 4) as an everyday office lunch in Hà Nội | kept | not reviewed | yes, low |

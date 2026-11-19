@@ -1,0 +1,56 @@
+id: 10
+title: {vi: Một bát phở, en: A bowl of phở}
+review: false
+setting: >-
+  Thursday, a quarter to seven in the morning. Anh Minh, who leaves early for work, has taken Sacha to the phở shop
+  at the corner of their street. They sit at a low table on the pavement; the woman who runs the shop, in her
+  forties, is busy at the big pot.
+dialogue:
+- {n: 1, speaker: Minh, vi: "Em đã ăn phở Hà_Nội chưa?", en: "Have you had Hà Nội phở yet?", lit: "younger-sibling (past) eat phở Hà Nội not-yet?"}
+- {n: 2, speaker: Sacha, vi: "Chưa ạ. Em đói quá!", en: "Not yet. I'm so hungry!", lit: "not-yet (polite). younger-sibling hungry so!"}
+- {n: 3, speaker: Minh, vi: "Quán này có phở bò và phở gà. Em ăn món nào?", en: "This place has beef phở and chicken phở. Which will you have?", lit: "shop this have phở beef and phở chicken. younger-sibling eat dish which?"}
+- {n: 4, speaker: Sacha, vi: "Phở bò ạ. Hôm_qua em đã ăn cơm gà.", en: "Beef phở, please. Yesterday I had chicken and rice.", lit: "phở beef (polite). yesterday younger-sibling (past) eat rice chicken."}
+- {n: 5, speaker: Minh, vi: "Chị ơi, cho em hai bát phở bò. Thêm hai quả trứng nhé!", en: "Excuse me, two bowls of beef phở, please. With two extra eggs!", lit: "elder-sister hey, give younger-sibling two bowl phở beef. add two (round) egg, OK!"}
+- {n: 6, speaker: Minh, vi: "Ngon không? Anh gọi thêm thịt nhé?", en: "Is it good? Shall I order more meat?", lit: "tasty not? elder-brother order more meat, OK?"}
+- {n: 7, speaker: Sacha, vi: "Ngon lắm ạ, nhưng em no rồi.", en: "It's delicious, but I'm full.", lit: "tasty very (polite), but younger-sibling full already."}
+- {n: 8, speaker: Minh, vi: "Anh chưa no. Chị ơi, cho em thêm một bát!", en: "I'm not full yet. Excuse me, one more bowl, please!", lit: "elder-brother not-yet full. elder-sister hey, give younger-sibling more one bowl!"}
+notes:
+- {ref: 1, topic: grammar, text: "Em đã ăn phở Hà Nội chưa? \"have you had Hà Nội phở yet?\": đã … chưa? asks whether something has happened yet; đã is often left out. The answers: Chưa \"not yet\" (line 2), or the verb + rồi: Ăn rồi \"I have\"."}
+- {ref: 2, topic: grammar, text: "chưa before a verb or an adjective is \"not yet\": Anh chưa no \"I'm not full yet\" (line 8). đói \"hungry\", no \"full (after eating)\"."}
+- {ref: 3, topic: grammar, text: "Em ăn món nào? \"which dish will you have?\": món is a dish. phở bò \"beef phở\", phở gà \"chicken phở\": the describing word follows, as in cà phê sữa. bò is \"cow, beef\", gà \"chicken\"; thịt \"meat\" (line 6): thịt bò, thịt gà."}
+- {ref: 4, topic: grammar, text: "Hôm qua em đã ăn cơm gà: đã marks the past; with hôm qua \"yesterday\" it can be left out (Hôm qua em ăn cơm gà). cơm is cooked rice, and also a meal."}
+- {ref: 5, topic: grammar, text: "hai bát phở bò \"two bowls of beef phở\": bát \"bowl\" counts like cốc (lesson 4). hai quả trứng \"two eggs\": quả is the classifier for round things: fruit, eggs. thêm \"extra, more\" goes before what is added: thêm hai quả trứng."}
+- {ref: 6, topic: grammar, text: "Anh gọi thêm thịt nhé? gọi is \"to call\" and, in a restaurant, \"to order\". thêm can also follow the verb: gọi thêm \"order more\", ăn thêm \"eat more\"."}
+- {ref: 7, topic: grammar, text: "Em no rồi \"I'm full\": rồi after a verb or an adjective says that it has happened: \"already\", often not translated. In lesson 8, rồi between two actions was \"then\"."}
+- {ref: 8, topic: pronouns, text: "Anh chưa no. Chị ơi, cho em …: to Sacha, Minh says anh; to the woman who runs the shop, older than him, he says em. The word for \"I\" changes with each listener."}
+- {ref: 0, topic: bridge, text: "giờ \"hour\" (lesson 6) and thời (thời tiết, lesson 9) are one character, 時 (Mandarin shí): thời is its Hán-Việt reading, giờ an older one, from an earlier layer of borrowing."}
+new_words:
+- {w: ăn, en: to eat}
+- {w: phở, en: "pho (rice-noodle soup)"}
+- {w: cơm, en: "(cooked) rice; a meal"}
+- {w: bát, en: "bowl (Northern)"}
+- {w: món, en: "dish (of food); item"}
+- {w: ngon, en: "tasty, delicious"}
+- {w: thịt, en: meat}
+- {w: bò, en: "cow, ox; beef"}
+- {w: gà, en: chicken}
+- {w: đã, en: "(past) did, already; had"}
+- {w: chưa, en: "not yet; (question) … yet?"}
+- {w: "no", en: "full (after eating)"}
+- {w: đói, en: hungry}
+- {w: gọi, en: "to call; to order (food)"}
+- {w: thêm, en: "more, extra; to add"}
+- {w: hôm_qua, en: yesterday}
+- {w: quả, en: "fruit; (classifier for round things: quả cam)"}
+- {w: trứng, en: egg}
+exercises:
+  translate:
+  - {vi: "Hôm_qua chị Lan ăn phở gà.", en: "Yesterday Lan had chicken phở."}
+  - {vi: "Em ăn cơm chưa?", en: "Have you eaten yet? (to someone younger)"}
+  - {vi: "Na ăn hai quả trứng.", en: "Na eats two eggs."}
+  - {vi: "Cho tôi thêm một cốc trà đá~ice.", en: "Another glass of iced tea, please."}
+  - {vi: "Món này ngon, nhưng hơi đắt.", en: "This dish is tasty, but a bit expensive."}
+  fill:
+  - {vi: "Em đã uống cà_phê ___?", answer: chưa, en: "Have you had a coffee yet? (to someone younger)"}
+  - {vi: "Cho em hai ___ phở gà.", answer: bát, en: "Two bowls of chicken phở, please."}
+  - {vi: "Na ___ rồi, Na không ăn thêm.", answer: "no", en: "Na is full: she won't eat any more."}
