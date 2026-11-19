@@ -53,3 +53,15 @@ Choice = what the lesson now says. Reviewer: keep / change (done) / native. Nati
 | L7.3 làm ở một công ty Pháp ở Hà Nội | now Em làm ở một công ty Pháp (one ở) | – | yes, low |
 | L7.4 (new) Em đi đâu về đấy? as a greeting on the way home; Anh là anh Minh à? | Claude's choice | not reviewed | yes |
 | L0 (new) anh and uô + ng in Hà Nội | Lesson 0 describes anh ≈ [ajŋ]; uống taken out of the lip rule | native | yes (A7) |
+
+## Lessons 8–14 (drafted by Claude 19 Nov 2026; not yet reviewed)
+Same columns. Reviewer: "not reviewed" until the independent reading.
+
+| Point | Choice | Reviewer | Native |
+|---|---|---|---|
+| L8.1 Hồ Hoàn Kiếm or Hồ Gươm in everyday speech | Hoàn Kiếm (the word list's name) | not reviewed | yes, low |
+| L8.2 Đi bộ khoảng mười lăm phút (line 2): time after "on foot", no verb | kept | not reviewed | yes, low |
+| L8.3 Anh đi thẳng phố này (line 4) "along this street"; or đường này, or cứ đi thẳng | phố này | not reviewed | yes |
+| L8.4 Anh đừng rẽ ở đây! Đi thẳng đi. (line 6) from Thảo, 24, to Sacha, 27: polite enough without ạ / anh ơi? | kept; the note says the person term in front "tends to" soften | not reviewed | yes |
+| L8.5 Hồ đó à? (line 7) for a lake just come into view; or Hồ đây à? / Hồ kia à? | đó (the lesson's word) | not reviewed | yes |
+| L8.6 Vâng, hồ Hoàn Kiếm đấy! (line 8) to point something out | kept | not reviewed | yes, low |

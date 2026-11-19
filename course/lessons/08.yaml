@@ -1,0 +1,55 @@
+id: 8
+title: {vi: Hồ Hoàn Kiếm, en: Around Hoàn Kiếm lake}
+review: false
+setting: >-
+  Tuesday morning, Sacha's day at home. Thảo, who studies at a university in Hà Nội, comes by and offers to show him
+  Hoàn Kiếm lake. She has left her motorbike at the house: they walk. At the first corner Sacha starts to turn too
+  early; after the next one they see the water.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Thảo ơi, hồ Hoàn_Kiếm có xa không?", en: "Thảo, is Hoàn Kiếm lake far?", lit: "Thảo hey, lake Hoàn Kiếm (yes) far not?"}
+- {n: 2, speaker: Thảo, vi: "Không xa. Đi_bộ khoảng mười lăm phút. Đi nào!", en: "It isn't far. About fifteen minutes on foot. Let's go!", lit: "not far. walk about ten five minute. go (come on)!"}
+- {n: 3, speaker: Sacha, vi: "Em là sinh_viên, hôm_nay em không đi học à?", en: "You're a student: aren't you going to class today?", lit: "younger-sibling be student, today younger-sibling not go study (surprised)?"}
+- {n: 4, speaker: Thảo, vi: "Chiều~afternoon em đi học. Anh đi thẳng phố này, rồi rẽ trái.", en: "I go to class this afternoon. Go straight along this street, then turn left.", lit: "afternoon younger-sibling go study. elder-brother go straight street this, then turn left."}
+- {n: 5, speaker: Sacha, vi: "Rẽ trái ở đây à?", en: "Do I turn left here?", lit: "turn left at here (checking)?"}
+- {n: 6, speaker: Thảo, vi: "Anh đừng rẽ ở đây! Đi thẳng đi.", en: "Don't turn here! Keep going straight.", lit: "elder-brother don't turn at here! go straight (urging)."}
+- {n: 7, speaker: Sacha, vi: "Hồ đó à? Gần quá!", en: "Is that the lake? It's so close!", lit: "lake that (checking)? near so!"}
+- {n: 8, speaker: Thảo, vi: "Vâng, hồ Hoàn_Kiếm đấy!", en: "Yes, that's Hoàn Kiếm lake!", lit: "yes, lake Hoàn Kiếm (you see)!"}
+notes:
+- {ref: 1, topic: grammar, text: "Hồ Hoàn Kiếm có xa không? \"is Hoàn Kiếm lake far?\": xa \"far\" and gần \"near\" are asked like verbs, with có … không?; the answer is the bare word: Không xa \"not far\", Gần quá! \"so close!\" (line 7). hồ \"lake\" comes before the name."}
+- {ref: 2, topic: grammar, text: "Đi bộ khoảng mười lăm phút \"on foot, about fifteen minutes\": khoảng \"about\" goes before a number. đi bộ is \"to walk, to go on foot\"; with a vehicle: đi xe máy \"to go by motorbike\"."}
+- {ref: 2, topic: particles, text: "Đi nào! \"let's go!\": nào at the end of a sentence urges, the speaker included: \"come on, let's\". After a noun, nào is \"which\" (lesson 2: nước nào)."}
+- {ref: 3, topic: usage, text: "sinh viên is a university student. đi học \"to go to class, to school\", like đi làm \"to go to work\" (lesson 6)."}
+- {ref: 4, topic: grammar, text: "Directions: đi thẳng \"go straight on\", rẽ trái \"turn left\", rẽ phải \"turn right\" (phải as in lesson 3). rồi between two actions is \"then\": đi thẳng, rồi rẽ trái. phố is a street in a town; đường is a road or street of any kind."}
+- {ref: 6, topic: grammar, text: "Anh đừng rẽ ở đây! \"don't turn here!\": đừng before a verb is \"don't\". Thảo is younger: to someone older, an order with the person term in front (Anh đừng …) tends to sound softer than the bare verb."}
+- {ref: 6, topic: particles, text: "Đi thẳng đi! \"go straight on!\": đi after the verb, at the end of the sentence, urges: \"go on, do it\". The first đi is \"go\", the second only urges."}
+- {ref: 7, topic: grammar, text: "Hồ đó? \"that lake?\": đó after a noun is \"that\", like này \"this\" (lesson 3); ở đó is \"there\", ở đây \"here\". Hồ Hoàn Kiếm đấy! \"that's Hoàn Kiếm lake (you see)!\": đấy at the end of a statement points something out."}
+- {ref: 4, topic: pronunciation, text: "rẽ, rồi: in Hà Nội, r is said [z], like d and gi (Lesson 0); the spelling keeps them apart."}
+- {ref: 3, topic: bridge, text: "A Hán-Việt -nh answers a Chinese -ng: sinh is 生 (Mandarin shēng, Cantonese sang1). A Hán-Việt -ch answers a Cantonese -k: {khách} is 客 (Mandarin kè, Cantonese haak3)."}
+new_words:
+- {w: đường, tag: road, en: "road, street; way"}
+- {w: phố, en: "street (in town)"}
+- {w: hồ, en: lake}
+- {w: Hoàn_Kiếm, en: "Hoàn Kiếm (the lake of the returned sword, in Hanoi)"}
+- {w: xe_máy, en: motorbike}
+- {w: đi_bộ, en: "to walk, to go on foot"}
+- {w: rẽ, en: "to turn (left or right)"}
+- {w: trái, en: "left (side)"}
+- {w: thẳng, en: "straight (ahead)"}
+- {w: gần, en: "near, close (to); nearly"}
+- {w: xa, en: far}
+- {w: đó, en: "that; there"}
+- {w: khoảng, en: "about, approximately; space, interval"}
+- {w: rồi, en: "already; then"}
+- {w: đừng, en: "don't (do)"}
+- {w: sinh_viên, en: "(university) student"}
+exercises:
+  translate:
+  - {vi: "Công_ty anh Minh ở gần hồ Hoàn_Kiếm.", en: "Minh's company is near Hoàn Kiếm lake."}
+  - {vi: "Đừng đi xe_máy! Đi_bộ đi.", en: "Don't take the motorbike! Walk."}
+  - {vi: "Đi thẳng đường~road này khoảng năm~five phút, rồi rẽ phải~right.", en: "Go straight along this road for about five minutes, then turn right."}
+  - {vi: "Chị Lan không phải~right là sinh_viên.", en: "Lan is not a student."}
+  - {vi: "Quán cà_phê ở đó rất rẻ.", en: "The café over there is very cheap."}
+  fill:
+  - {vi: "Nhà chị Lan không ___ hồ Hoàn_Kiếm.", answer: xa, en: "Lan's house is not far from Hoàn Kiếm lake."}
+  - {vi: "Em ___ uống cà_phê, uống trà đi!", answer: đừng, en: "Don't drink coffee, drink tea! (to someone younger)"}
+  - {vi: "Đi thẳng, ___ rẽ trái ở phố đó.", answer: rồi, en: "Go straight on, then turn left at that street."}
