@@ -234,3 +234,22 @@ tools/test_review3.py):
 - Checks: make lint 0 errors 0 warnings; make test, make app, make check, tools/smoke.py (with TUSACH_PRIVATE) pass;
   tools/compare.py against origin/main (same database both sides: build_db and sources unchanged): 120 lines and 118
   cards added, no existing card changed in the compared fields (usage is not one of them), 0 blocking.
+
+## 2026-11-19 — review 6 (lessons 8–14) applied; merged into main
+- An independent reading of lessons 8–14 (28 faults, `review6/faults.tsv`, outside the repository); all applied.
+  Bridge wording now matches tools/bridge_rules.py: Mandarin tone 2 "usually" huyền / ngang, checked syllables apart
+  (節 tiết, L9) and first (L14 recap); Mandarin tone 4 "usually" (L12); Cantonese checked syllables 1 or 3 sắc, 6 nặng
+  (L13; rule T4 is now "tone 6", the same 78 / 81: no checked syllable has tone 2, 4 or 5); 時: thì the dictionaries'
+  reading, thời a variant (L10). Story: L13 line 1 Thảo ơi, ngày mai là sinh nhật mẹ em, phải không?; L11 line 9 no
+  repeated invitation; L14 line 10 recycles a clock time (bảy giờ rưỡi sáng). Lines: L8 Hồ đây à?, L9 trời nóng thế,
+  L12 Cháu đau đầu lắm and Sao phải đi?, L14 … cái áo này ạ ({biếu} previewed). L8 9 notes (1,478 characters), L14
+  1,534. False friends (decision 6b): one clause, at most one per lesson, topic `false-friend`: L11 tuần 旬, L12 bác sĩ
+  博士 / 醫生.
+- Segmentation (decision 6a): đau + body part is two words (đau đầu, đau bụng); vi.cut() rule 10; reference line 63
+  follows. Reference F1 vi.cut() 0.955 (unchanged), underthesea 0.930 → 0.929; held-out 0.953 (unchanged). Effect on
+  the cards: đau đầu loses its Tatoeba example (the cutter no longer finds the word in it); no other card changed.
+- Lint: an exercise equal to the example a card of its words shows is an error (nine found, also in L1, L2, L7);
+  false-friend notes checked against the lexicon; a cast name in an English note is read as the common word only at
+  a sentence start (not after : or a quote) and when that word is taught (reverses review 4 C's "Mai gặp nhé" case).
+- Lexicon: nào's English has the urging sense; sao~why's usage Không sao (đâu); đau's usage (body part after).
+- NOTES-for-native-speaker.md: the 40 rows with the reviewer's judgement, eight first (B1–B8).
