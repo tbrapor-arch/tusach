@@ -147,3 +147,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L18.4 Anh dạy em bơi được không? (line 7) as a request; Được chứ! as the answer | kept (the plan's chứ) | – | yes |
 | L18.5 Em làm thế này nhé (line 8) for "do it like this" | kept | – | yes |
 | L18.6 Tuần sau chúng ta tập thêm hai buổi nhé (line 10): buổi for two swimming sessions | kept | – | yes, low |
+| L19.1 Chú ơi! Ông Hùng mời chú đến uống trà (line 1): Na, 5, passing on an invitation with mời | kept | – | yes, low |
+| L19.2 Dạ, cháu đây ạ! (line 3) from Sacha, 27, to a neighbour of 78 who calls him from his door | kept (the plan's dạ) | – | yes |
+| L19.3 Ông pha trà rồi. Mời cháu uống chén trà (line 4): mời from an elder to a younger guest | kept | – | yes |
+| L19.4 Năm mươi năm rồi. Ông là giáo viên, dạy môn văn … (line 6): là giáo viên for a retired teacher (or Ông là giáo viên dạy văn, or Ngày xưa ông dạy văn) | kept; the English says "I was" | – | yes |
+| L19.5 cô ở trường cháu (line 7) for Bin's teacher, as cô giáo (not taught) is left out | kept | – | yes |
+| L19.6 Cháu đến chơi, ông kể cho cháu về Hà Nội nhé (line 10): kể cho cháu without nghe (nghe is L20) | kept; the lexicon's kể example has the same choice | – | yes |
+| L19.7 the note: children call any woman teacher cô; a woman of one's parents' generation is cô too (in the North, a mother's younger sister is dì: not said) | kept | – | yes, low |

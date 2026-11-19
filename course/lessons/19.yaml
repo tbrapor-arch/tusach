@@ -1,0 +1,58 @@
+id: 19
+title: {vi: Uống trà với ông Hùng, en: Tea with ông Hùng}
+review: false
+setting: >-
+  Tuesday evening. Ông Hùng, the old man who lives next door, is 78. He sits in front of his house with a tea pot and
+  small cups, and sends Na to fetch Sacha. Bin comes too.
+dialogue:
+- {n: 1, speaker: Na, vi: "Chú ơi! Ông Hùng mời chú đến uống trà.", en: "Sacha! Ông Hùng says come and have tea.", lit: "uncle hey! grandfather Hùng invite uncle come drink tea."}
+- {n: 2, speaker: Ông Hùng, vi: "Sacha ơi! Đến đây uống trà với ông!", en: "Sacha! Come and have some tea with me!", lit: "Sacha hey! come here drink tea with grandfather!"}
+- {n: 3, speaker: Sacha, vi: "Dạ, cháu đây ạ! Cháu chào ông ạ.", en: "Coming! Good evening.", lit: "yes (polite), grandchild here (polite)! grandchild greet grandfather (polite)."}
+- {n: 4, speaker: Ông Hùng, vi: "Ngồi đi cháu. Ông pha trà rồi. Mời cháu uống chén trà.", en: "Sit down. I've made the tea. Have a cup.", lit: "sit (urging) grandchild. grandfather make tea already. invite grandchild drink cup tea."}
+- {n: 5, speaker: Sacha, vi: "Trà thơm quá! Ông sống ở phố này bao_nhiêu năm~year rồi ạ?", en: "What fragrant tea! How many years have you lived on this street?", lit: "tea fragrant so! grandfather live at street this how-many year already (polite)?"}
+- {n: 6, speaker: Ông Hùng, vi: "Năm~five mươi năm~year rồi. Ông là giáo_viên, dạy môn văn ở trường kia. Bây_giờ ông già rồi, nghỉ_hưu rồi.", en: "Fifty years. I was a teacher: I taught literature at the school over there. Now I'm old, I've retired.", lit: "five ten year already. grandfather be teacher, teach subject literature at school that. now grandfather old already, retire already."}
+- {n: 7, speaker: Bin, vi: "Ông ơi, cô ở trường cháu cũng dạy văn ạ!", en: "Grandpa, my teacher at school teaches literature too!", lit: "grandfather hey, aunt at school grandchild also teach literature (polite)!"}
+- {n: 8, speaker: Ông Hùng, vi: "Thế à? Sacha, quê cháu ở đâu? Cháu có nhớ nhà không?", en: "Really? Sacha, where are you from? Do you miss home?", lit: "so (surprised)? Sacha, home-town grandchild at where? grandchild (yes) miss house not?"}
+- {n: 9, speaker: Sacha, vi: "Dạ, quê cháu ở Pháp. Cháu nhớ nhà lắm ạ.", en: "I'm from France. I miss home a lot.", lit: "yes (polite), home-town grandchild at France. grandchild miss house very (polite)."}
+- {n: 10, speaker: Ông Hùng, vi: "Chúng_ta là hàng_xóm. Cháu đến chơi, ông kể cho cháu về Hà_Nội nhé.", en: "We're neighbours. Come round, and I'll tell you about Hà Nội.", lit: "we-all be neighbour. grandchild come play, grandfather tell for grandchild about Hà Nội OK."}
+notes:
+- {ref: 1, topic: pronouns, text: "Chú ơi! Bin and Na call Sacha chú \"uncle\": a man of their father's generation; he calls them cháu. cô \"aunt\" is the woman's term (line 7): children call any woman teacher cô, and a woman of one's parents' generation is cô too."}
+- {ref: 2, topic: pronouns, text: "ông \"grandfather\" (lesson 5) is the \"you\" for a man of one's grandparents' generation, and his \"I\": Uống trà với ông! \"have tea with me!\". bà is the same for a woman. Sacha says cháu, as with bác."}
+- {ref: 3, topic: particles, text: "Dạ, cháu đây ạ! \"coming!\": dạ answers a call from an elder, and is the respectful \"yes\" to elders (line 9). vâng is a plainer yes; dạ is warmer and more polite."}
+- {ref: 4, topic: grammar, text: "Ông pha trà rồi \"I have made the tea\": pha \"to make (tea, coffee)\". chén \"a small cup\": Northern tea is drunk from a chén. Mời cháu uống chén trà \"have a cup of tea\": mời to a younger person is a warm offer."}
+- {ref: 5, topic: grammar, text: "Ông sống ở phố này bao nhiêu năm rồi? \"how many years have you lived on this street?\": bao nhiêu năm + rồi asks how long until now. sống \"to live\". thơm \"fragrant\"."}
+- {ref: 6, topic: usage, text: "giáo viên \"teacher\" (the job), dạy môn văn \"to teach literature\": môn \"school subject\", văn \"literature\". trường \"school\". già \"old\" (of people; things are cũ, lesson 15); nghỉ hưu \"to retire\"."}
+- {ref: 8, topic: grammar, text: "Quê cháu ở đâu? \"where are you from?\": quê is one's home town or village, the first thing an elder asks. nhớ \"to miss; to remember\": Cháu có nhớ nhà không? \"do you miss home?\". Thế à? \"really?\"."}
+- {ref: 10, topic: grammar, text: "Ông kể cho cháu về Hà Nội \"I'll tell you about Hà Nội\": cho \"for, to\" names who receives: kể cho cháu \"tell (to) you\", pha trà cho cháu \"make tea for you\". kể \"to tell\"; đến \"to come\"; đến chơi \"to come round, to visit\". hàng xóm \"neighbour\"."}
+- {ref: 6, topic: bridge, text: "m and v: môn is 門 (Mandarin mén): m answers Mandarin m-. văn is 文 (Mandarin wén, Cantonese man4): Cantonese m- with Mandarin w- gives v."}
+new_words:
+- {w: dạ, en: "yes (polite, to elders)"}
+- {w: chú, en: "uncle (father's younger brother); you (to a man of one's father's age)"}
+- {w: cô, en: "aunt (father's sister); Miss; you (to a woman of one's parents' generation, a female teacher); she (cô ấy)"}
+- {w: hàng_xóm, en: neighbour}
+- {w: già, en: "old (of people, animals)"}
+- {w: sống, en: "to live; alive; raw"}
+- {w: nghỉ_hưu, en: to retire}
+- {w: chén, en: "small cup (for tea, rice wine)"}
+- {w: pha, en: "to make (tea, coffee); to mix"}
+- {w: thơm, en: "fragrant, sweet-smelling"}
+- {w: quê, en: "home town, home village; the countryside"}
+- {w: kể, en: "to tell (a story, about something)"}
+- {w: nhớ, en: "to remember; to miss (someone)"}
+- {w: đến, en: "to come, to arrive; to (a place, a time)"}
+- {w: môn, en: "subject (at school), discipline"}
+- {w: văn, en: "literature (the school subject); writing"}
+- {w: giáo_viên, en: teacher}
+- {w: trường, en: school}
+- {w: Hùng, en: "Hùng (a man's name)", name: true}
+exercises:
+  translate:
+  - {vi: "Bà Lan sống ở Hà_Nội.", en: "Mrs Lan lives in Hà Nội."}
+  - {vi: "Chú ơi, chú có biết bơi không?", en: "Do you know how to swim? (a child to a man of his father's age)"}
+  - {vi: "Quê ông Hùng xa lắm.", en: "Ông Hùng's home village is very far away."}
+  - {vi: "Chị Lan pha cà_phê cho anh Minh.", en: "Lan makes coffee for Minh."}
+  - {vi: "Cô ơi, cô dạy môn gì ạ?", en: "What subject do you teach? (to a woman teacher)"}
+  fill:
+  - {vi: "Cháu đi học chưa? – ___, cháu đi rồi ạ.", answer: dạ, en: "Have you been to school yet? – Yes, I have. (a child to an elder)"}
+  - {vi: "Ông kể ___ cháu về Pháp nhé.", answer: cho, en: "I'll tell you about France. (an old man to a child)"}
+  - {vi: "Thảo ___ chị Lan lắm.", answer: nhớ, en: "Thảo misses Lan a lot."}
