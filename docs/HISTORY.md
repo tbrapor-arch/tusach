@@ -220,3 +220,17 @@ tools/test_review3.py):
   tools/test_review5.py, test_pipeline.py.
 - Kept, with the reason in NOTES-for-native-speaker.md: L3 line 3 Anh muốn một cà phê sữa đá and L5 line 6 bác này
   (the reviewer left both to a native speaker), L4 prices.
+
+## 2026-11-19 — lessons 8–14 (branch lessons-08-14, from 467c499; not merged, for review)
+- Written from scratch to the plan and word list 2 with the lessons of review 5 applied from the start: L8 Hồ Hoàn
+  Kiếm (directions, đừng, verb + đi, nào, rồi, đó, khoảng), L9 weather (adjective predicates, rất / lắm / quá / hơi,
+  thế, nhỉ, nhưng), L10 phở (đã … chưa? / rồi / chưa, hôm qua, thêm, quả), L11 the weekend with Mai (days, months,
+  dates, bao giờ, hay, với, định, thích; bạn / tôi), L12 a cold (bị, nên / phải, sao / tại sao – vì, Sao thế?,
+  Không sao đâu), L13 a present at the market (cái, colours, to / nhỏ, vừa, mua / lấy / tặng), L14 Review 2 (the
+  birthday dinner, recap notes, updated pronoun summary). One bridge note each (B3, T1, O1, T2, T3, T4, a tone
+  recap); the false friends thời tiết, tuần, bác sĩ, sinh viên stay on their cards (lint refuses a false friend as
+  a bridge example). No plan change. Hesitations: 39 rows in NOTES-for-native-speaker.md.
+- Data: nào's lexicon usage note gives the urging use (Đi nào!; golden snapshot updated); đi's already did.
+- Checks: make lint 0 errors 0 warnings; make test, make app, make check, tools/smoke.py (with TUSACH_PRIVATE) pass;
+  tools/compare.py against origin/main (same database both sides: build_db and sources unchanged): 120 lines and 118
+  cards added, no existing card changed in the compared fields (usage is not one of them), 0 blocking.

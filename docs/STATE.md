@@ -12,10 +12,11 @@
 
 ## Repository (19 Nov 2026)
 `main` has the owner's approvals, reviews 3–5 (HISTORY) and lessons 0–7 (branch `lessons-01-07`, merged after review
-5). From a clean clone with nothing missing, `make data db db-nc lint test app check` and `tools/smoke.py` (with
-TUSACH_PRIVATE) pass; `make lint` also checks the plan, the draft word list and the proposal. Next steps: lessons
-8–13; a native speaker, when one is found, reads NOTES-for-native-speaker.md (the eight first), wordlist-2-to-check.md
-(18 points), the lexicon's examples and the cutter sets.
+5). Branch `lessons-08-14` (from 467c499, NOT merged: an independent review first) adds lessons 8–14. From a clean
+clone with nothing missing, `make data db db-nc lint test app check` and `tools/smoke.py` (with TUSACH_PRIVATE)
+pass; `make lint` also checks the plan, the draft word list and the proposal. Next steps: review of lessons 8–14;
+word list 3 (L15–20); a native speaker, when one is found, reads NOTES-for-native-speaker.md (the eight first),
+wordlist-2-to-check.md (18 points), the lexicon's examples and the cutter sets.
 
 ## Data sources (18 Nov 2026)
 `data/fetch.sh` pins every source by content (ATTRIBUTION.md). kaikki (Wiktionary), Tatoeba and the English
@@ -58,13 +59,16 @@ F1 with the Wiktionary keys: reference (200, rules tuned on it) vi.cut() 0.955, 
 sentences, `tests/cutter/heldout.tsv`) vi.cut() 0.953, underthesea 0.928. Both sets cut by Claude, **not checked by a
 native speaker**.
 
-## Lessons (19 Nov 2026; review 5 applied, merged into main)
+## Lessons (19 Nov 2026; 1–7 after review 5, in main; 8–14 on a branch)
 Lesson 0 "Reading Vietnamese" (`course/lesson0.yaml`, page `#reading`): alphabet, IPA and nearest sounds, Hà Nội
 mergers, finals (-nh/-ch, the lip rule), six tones in one line each, checked syllables; no audio (the page says so);
 its sound-table examples are checked against their row. Lessons 1–7 (`course/lessons/01–07.yaml`, 7 a review):
 lines 7 7 7 7 8 8 9, notes 9 each, new words 16 16 18 18 17 17 0 + names Sacha, Lan, Thảo, Minh, Bin, Na; all from
 word list 2, each word (lines, exercises, notes, glosses) taught before use (lint). NOT checked by a native speaker
 (labelled in the app); open questions, the reviewer's eight first: `course/lessons/NOTES-for-native-speaker.md`.
+Lessons 8–14 (branch `lessons-08-14`, 19 Nov 2026, not yet reviewed; 14 a review): lines 8 8 8 9 9 9 9, notes 9
+each, new words 16 17 18 18 18 18 0 + name Mai, exactly word list 2's; the week after lesson 7 (Tuesday walk to Hoàn
+Kiếm with Thảo … Sunday birthday of Lan's mother); their points for a native speaker in the same file.
 `course/syllabus.yaml`: the one plan source (100 lessons, cast, particle strand), syllabus and word list 2 APPROVED
 by the owner on 19 Nov 2026. Proposal: `course/proposal/syllabus-proposal.md`; `wordlist-2.tsv` and its to-check list.
 
