@@ -116,106 +116,112 @@ rows a native speaker alone can settle, ranked by the writer.
 | L13.7 (new) Thảo ơi, ngày mai là sinh nhật mẹ em, phải không? (line 1): Sacha checks the date with Thảo | review 6's line | change (done) | yes, low |
 | L14.6 (new) Mấy giờ ạ? – Bảy giờ rưỡi sáng, ở quán phở gần nhà. (lines 9–10): a clock time recycled from L6 | Claude's line after review 6 | not reviewed | yes, low |
 
-## Lessons 15–28 (drafted by Claude 19 Nov 2026 against word list 3, a DRAFT the owner has not approved; not reviewed)
-Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who read them is a native speaker.
+## Lessons 15–28 (drafted by Claude 19 Nov 2026 against word list 3, approved the same day; reviewed by a second agent, review 7)
+Same columns. Reviewer = review 7's judgement (`course/proposal/lessons-15-28-review.md`): keep / change (done) /
+native. Neither the writer nor the reviewer is a native speaker.
 
 | Point | Choice | Reviewer | Native |
 |---|---|---|---|
-| L15.1 máy for "the phone" in a shop (Máy này rẻ nhất, máy kia, máy trắng này; word list 3 doubt) | máy throughout, điện thoại once (line 1) | – | yes |
-| L15.2 Máy này rẻ nhất anh ạ, hai triệu thôi (line 2): a young assistant's anh ạ in mid-sentence | kept | – | yes, low |
-| L15.3 Thôi, anh lấy máy trắng này (line 9): Thôi at the start, "right, that's it", closing the choice | kept; the note explains it beside the planned "only" | – | yes |
-| L15.4 prices: 2 million đồng second-hand, 5 million new (2026) | kept | – | yes, low |
-| L15.5 Máy trắng này (line 7) without màu, like áo đỏ (L13) | kept | – | yes, low |
-| L15.6 Pin máy kia: pin cũng tốt hơn (line 5) "the battery is better too" | kept | – | yes, low |
-| L16.1 Cháu mời bà ăn cơm ạ! Con mời bố mẹ ăn cơm ạ! (line 1): Bin's invitation, cháu to his grandmother, con to his parents | kept | – | yes |
-| L16.2 Cháu không phải là khách đâu, chúng ta là người một nhà (line 2) from bác: natural, or too long for one breath? | kept | – | yes, low |
-| L16.3 Bác nấu ạ? (line 3) as a question to an elder without à | kept | – | yes |
-| L16.4 Có ạ, nhưng chúng tôi không ăn canh với cơm (line 5): chúng tôi for "we French" | kept | – | yes, low |
-| L16.5 Hôm qua kiểm tra, con được mười điểm (line 7); or Hôm qua con kiểm tra được mười điểm | kept | – | yes |
-| L16.6 Ở Hà Nội, chị Lan là chị gái em! (line 9): chị gái used warmly for someone who is not a sister | kept | – | yes |
-| L16.7 Ngày mai đi chơi với mẹ nhá! (fill 3) from a mother to a child | kept | – | yes, low |
-| L17.1 Chị ơi, giúp em với! (line 1) to a bookseller: pleading enough for a simple request in a shop, or too much? | kept (the plan's với) | – | yes |
-| L17.2 Sách ngữ pháp ở trên kia (line 2) for "up there" (a high shelf) | kept | – | yes, low |
-| L17.3 Em đọc và viết tiếng Việt à? Giỏi quá! (line 4) and the modest Không đâu ạ (line 5) | kept | – | yes, low |
-| L17.4 Quyển này về một con mèo (line 6): về "about" with no verb | kept | – | yes |
-| L17.5 Năm nghìn một tờ (line 8): a newspaper price; and 350,000 for three books and a paper (line 10) | kept | – | yes, low |
-| L17.6 Chiếc điện thoại này của em, phải không? (line 10): chiếc for a phone; or cái | chiếc (the plan's classifier) | – | yes |
-| L17.7 hiệu sách (Northern) rather than nhà sách in Hà Nội in 2026 | hiệu sách (word list 3) | – | yes |
-| L18.1 Một trăm nghìn em nhé (line 2) from the cashier: "em nhé" after a price | kept | – | yes |
-| L18.2 Khăn và kính ở phòng kia (line 2): towels and goggles handed out or hired at a Hà Nội public pool? | kept | – | yes, low |
-| L18.3 Em biết bơi không? without có (line 4) | kept | – | yes, low |
-| L18.4 Anh dạy em bơi được không? (line 7) as a request; Được chứ! as the answer | kept (the plan's chứ) | – | yes |
-| L18.5 Em làm thế này nhé (line 8) for "do it like this" | kept | – | yes |
-| L18.6 Tuần sau chúng ta tập thêm hai buổi nhé (line 10): buổi for two swimming sessions | kept | – | yes, low |
-| L19.1 Chú ơi! Ông Hùng mời chú đến uống trà (line 1): Na, 5, passing on an invitation with mời | kept | – | yes, low |
-| L19.2 Dạ, cháu đây ạ! (line 3) from Sacha, 27, to a neighbour of 78 who calls him from his door | kept (the plan's dạ) | – | yes |
-| L19.3 Ông pha trà rồi. Mời cháu uống chén trà (line 4): mời from an elder to a younger guest | kept | – | yes |
-| L19.4 Năm mươi năm rồi. Ông là giáo viên, dạy môn văn … (line 6): là giáo viên for a retired teacher (or Ông là giáo viên dạy văn, or Ngày xưa ông dạy văn) | kept; the English says "I was" | – | yes |
-| L19.5 cô ở trường cháu (line 7) for Bin's teacher, as cô giáo (not taught) is left out | kept | – | yes |
-| L19.6 Cháu đến chơi, ông kể cho cháu về Hà Nội nhé (line 10): kể cho cháu without nghe (nghe is L20) | kept; the lexicon's kể example has the same choice | – | yes |
-| L19.7 the note: children call any woman teacher cô; a woman of one's parents' generation is cô too (in the North, a mother's younger sister is dì: not said) | kept | – | yes, low |
-| L20.1 Chín giờ có họp (line 2) for "there's a meeting at nine" | kept | – | yes, low |
-| L20.2 Tôi cũng thế (line 3) agreeing with a negative ("me neither"); or Tôi cũng vậy / Tôi cũng không | kept | – | yes |
-| L20.3 Chào hai em! (line 4) from a manager of 41 to two staff of 27 | kept | – | yes |
-| L20.4 Công việc khó, máy tính cũ, nhưng đồng nghiệp đều tốt lắm ạ! (line 7): tốt for "kind" of colleagues | kept | – | yes |
-| L20.5 Vừa ăn vừa nói chuyện (line 8) without a subject, as a suggestion | kept | – | yes, low |
-| L20.6 Nghe nhạc, tôi làm việc nhanh hơn! (line 10): a bare verb phrase as "with music on" | kept | – | yes |
-| L20.7 Hôm qua tôi làm việc muộn, chín giờ tối mới về nhà (translate 4): mới "only then", met in L15's word list only | kept | – | yes, low |
-| L18.7 buổi sáng, buổi tối: SEGMENTATION makes them one word (buổi_sáng), but word list 3 teaches buổi alone; the lessons use buổi only with a number (hai buổi) and sáng / tối alone for "in the morning / evening" (Tối, chị Lan dạy Bin đọc sách) | kept (no plan change) | – | yes, low (and a word-list point: buổi sáng as a word later) |
-| L21.1 Chú mua cho cháu đấy (line 2): Sacha to Na, 5 | kept | – | yes, low |
-| L21.2 Nhưng Bin đọc tiếng Việt giỏi hơn chú đấy (line 5): the child's name for "you" when talking to a child | kept | – | yes |
-| L21.3 Bin, con đọc với chú Sacha đi, rồi ăn cơm nhá! (line 7): Lan names Sacha chú Sacha to her son | kept | – | yes |
-| L21.4 Con và Na đều đói rồi! (line 8) from Bin, 8, to his mother (or Con với Na) | kept | – | yes, low |
-| L21.5 Hôm nay có canh cháu thích nhất đấy! (line 10): a relative clause with no linking word | kept | – | yes |
-| L22.1 Chú ơi, cho cháu hỏi: … có đi đúng giờ không ạ? (line 3): Sacha, 27, to a railway worker in his fifties | kept | – | yes |
-| L22.2 Khi tàu đến thì cháu xem số giường trên vé nhé (line 4) | kept | – | yes, low |
-| L22.3 Hành lý của bạn đâu? (line 5): bare đâu after the noun | kept | – | yes, low |
-| L22.4 Tôi thì ngủ ở đâu cũng được! (line 8): thì as "as for me" + ở đâu cũng được "anywhere" | kept | – | yes |
-| L22.5 Tàu từ ga Hà Nội đến Lào Cai lúc sáu giờ sáng (line 9): a night train Hà Nội–Lào Cai arriving about six | kept (timetables not checked) | – | yes, low |
-| L22.6 Chỗ này có người chưa? (fill 3) for "is this seat taken?" | kept | – | yes |
-| L22.7 the bridge note: "Mandarin aspirated p t k q c ch in tone 2 → b đ c t tr ch gi, and huyền" combines IA (86 %, narrows) with T1 (Mandarin 2 → huyền, 97 %) | kept | – | no (measured) |
-| L23.1 Chào hai cháu … Mời hai cháu xem (line 1) from a landlady of about 55 to people of 24 and 27 (cô / cháu) | kept | – | yes |
-| L23.2 Đây là phòng ngủ, trong phòng có giường (line 4) for a single rented room | kept | – | yes, low |
-| L23.3 Các phòng ở đây đều sạch quá! (line 5): các for all the rooms of the house; những for some (line 9) | kept | – | yes |
-| L23.4 Phòng này ba triệu mỗi tháng (line 6), mỗi after the price; or Mỗi tháng ba triệu | kept | – | yes, low |
-| L23.5 Những phòng ở tầng hai thì sao ạ? (line 9) "what about …?" | kept | – | yes, low |
-| L23.6 Ở quận Hoàn Kiếm, ba triệu là rẻ lắm (line 11); the price of a student room in Hoàn Kiếm in 2026 | kept | – | yes |
-| L23.7 tầng một = the ground floor (note) | kept | – | yes, low |
-| L24.1 Mũ bảo hiểm đây (line 1) without đội "to put on (a hat)", which is not taught | kept | – | yes, low |
-| L24.2 Em lên xe máy đi, anh ngồi sau (line 3): the teacher on the back seat | kept | – | yes |
-| L24.3 Đi ra ngõ, rồi rẽ phải, sang phố kia. Đi chậm thôi! (line 5) | kept | – | yes |
-| L24.4 Chú ý! Xe máy ở trước! Phanh đi! (line 7) | kept | – | yes |
-| L24.5 Tốc độ này được không ạ? (line 8): tốc độ in a learner's question | kept (word list 3's tốc độ; review finding 22 had the same doubt) | – | yes |
-| L24.6 Về nhà rồi! Em xuống đây ạ. (line 10) and Vào nhà đi (line 11) | kept | – | yes, low |
-| L24.7 Lint: the person-term check reads chú in chú_ý as the kin term chú (line 7 rewritten to avoid the warning) | a lint point, not Vietnamese | – | no |
-| L25.1 Em ơi, cho chị xem thực đơn (line 1): a menu at a bún chả place, which often serves one dish; and a "special" bún chả (line 2) | kept (word list 3's thực đơn, đặc biệt) | – | yes |
-| L25.2 Dạ from a young waitress to customers (lines 2, 10) | kept | – | yes, low |
-| L25.3 Bạn cho rau, ớt và chanh vào nước mắm nhé (line 5): how bún chả is eaten (herbs into the bowl) | kept | – | yes |
-| L25.4 Nhân viên ở đây phục vụ nhanh thế! (line 6) | kept | – | yes, low |
-| L25.5 Tôi ăn xong rồi. Bún chả ngon quá, tôi ăn hết! (line 8) | kept | – | yes, low |
-| L25.6 Hai suất một trăm hai mươi nghìn (line 10): 60,000 a portion in 2026 | kept | – | yes, low |
-| L25.7 the bridge note gives th / s only (x has no Hán-Việt word taught yet: word list 3 review finding 18) | kept | – | no |
-| L26.1 Tôi thường chạy ở hồ Hoàn Kiếm (line 2) for jogging round the lake | kept | – | yes, low |
-| L26.2 Sở thích của tôi là âm nhạc: tôi hay hát và nhảy (line 3): âm nhạc is bookish for a hobby (word list 3 review finding 19) | kept | – | yes |
-| L26.3 Hai em đã từng leo núi chưa? (line 4) and leo núi for hiking | kept | – | yes |
-| L26.4 … nhưng ở Việt Nam thì chưa (line 5) | kept | – | yes, low |
-| L26.5 Anh tham gia một câu lạc bộ leo núi (line 6) for "I belong to a hiking club" | kept | – | yes |
-| L26.6 Sacha thì sao? (line 8); Thế thì lần sau em cũng đi! (line 11) | kept | – | yes, low |
-| L26.7 Ông Hùng luôn uống trà với bạn (translate 3): bạn for an old man's friends | kept | – | yes, low |
-| L26.8 Tool: "run" (English, in the glosses of chạy) was read as the Vietnamese run; added to plan.py EN_MORE | a lint point | – | no |
-| L27.1 Bà ơi, bà kể chuyện cho cháu nghe đi! (line 1) | kept | – | yes, low |
-| L27.2 Khi đó có chiến tranh ạ? (line 3) from Bin, 8; and the dates: bà, 62 in 2026, a small child before 1975 | kept | – | yes |
-| L27.3 Ngày đó "in those days" (lines 4, 6, 10); or Hồi đó (hồi is planned at L48) | ngày đó | – | yes |
-| L27.4 Rồi hòa bình. (line 6) as "then came peace" | kept | – | yes |
-| L27.5 Bà kể chuyện này rồi mà! / Bà già rồi mà! (lines 7–8): mà insisting, and as an excuse | kept (the plan's mà) | – | yes |
-| L27.6 bà to the children, bác to Sacha, in one scene (lines 8, 10) | kept | – | yes |
-| L27.7 Bác vẫn nhớ nhiều kỷ niệm lắm ạ (line 9) | kept | – | yes, low |
-| L27.8 Em nói lại đi, anh không nghe thấy (fill 2) | kept | – | yes, low |
-| L28.1 Bây giờ anh lái xe máy giỏi rồi mà! (line 2) | kept | – | yes, low |
-| L28.2 Trong này có những gì? (line 4) "what have you got in here?" | kept | – | yes |
-| L28.3 Khi các cháu xong thì xuống ăn cơm với cô nhé (line 6): xong alone, with no verb before it | kept | – | yes |
-| L28.4 Mọi người ở đây thường ăn cơm ở bếp tầng hai (line 8): tenants eating with the landlady | kept | – | yes, low |
-| L28.5 Em ăn hết rồi, em không ăn được nữa! (line 9) | kept | – | yes, low |
-| L28.6 Anh về cẩn thận nhé! Ngõ này tối lắm (line 11): tối "dark" | kept | – | yes, low |
-| L28.7 Mỗi buổi Thảo bơi khoảng một giờ (translate 2): một giờ for a duration ("an hour"), where Hà Nội speech often says một tiếng (not taught) | kept | – | yes |
-| L26.9 Thế thì (line 11) "in that case" written as two words (a fixed connective like vì vậy? not taught as one word) | two words | – | yes, low |
+| L15.1 máy for "the phone" in a shop (Máy này rẻ nhất, máy kia, máy trắng này; word list 3 doubt) | máy throughout, điện thoại once (line 1) | keep: the shop's and everyday word | yes, low |
+| L15.2 Máy này rẻ nhất anh ạ, hai triệu thôi (line 2): a young assistant's anh ạ in mid-sentence | kept | keep | yes, low |
+| L15.3 Thôi, anh lấy máy trắng này (line 9): Thôi at the start, "right, that's it", closing the choice | kept; the note explains it beside the planned "only" | keep | yes, low |
+| L15.4 prices: 2 million đồng second-hand, 5 million new (2026) | kept | keep | yes, low |
+| L15.5 Máy trắng này (line 7) without màu, like áo đỏ (L13) | kept | keep | yes, low |
+| L15.6 Pin máy kia: pin cũng tốt hơn (line 5) "the battery is better too" | kept | keep | yes, low |
+| L16.1 Cháu mời bà ăn cơm ạ! Con mời bố mẹ ăn cơm ạ! (line 1): Bin's invitation, cháu to his grandmother, con to his parents | kept | keep | yes |
+| L16.2 Cháu không phải là khách đâu, chúng ta là người một nhà (line 2) from bác: natural, or too long for one breath? | kept | keep | yes, low |
+| L16.3 Bác nấu ạ? (line 3) as a question to an elder without à | kept | keep | yes |
+| L16.4 Có ạ, nhưng chúng tôi không ăn canh với cơm (line 5): chúng tôi for "we French" | kept | keep | yes, low |
+| L16.5 Hôm qua kiểm tra, con được mười điểm (line 7); or Hôm qua con kiểm tra được mười điểm | changed: Hôm qua con kiểm tra được mười điểm! | change (done) | yes, low |
+| L16.6 Ở Hà Nội, chị Lan là chị gái em! (line 9): chị gái used warmly for someone who is not a sister | kept | keep | yes |
+| L16.7 Ngày mai đi chơi với mẹ nhá! (fill 3) from a mother to a child | kept | keep | yes, low |
+| L17.1 Chị ơi, giúp em với! (line 1) to a bookseller: pleading enough for a simple request in a shop, or too much? | kept (the plan's với) | keep (a little pleading, heard in shops) | yes |
+| L17.2 Sách ngữ pháp ở trên kia (line 2) for "up there" (a high shelf) | kept | keep | yes, low |
+| L17.3 Em đọc và viết tiếng Việt à? Giỏi quá! (line 4) and the modest Không đâu ạ (line 5) | kept | keep | yes, low |
+| L17.4 Quyển này về một con mèo (line 6): về "about" with no verb | changed: Quyển này nói về một con mèo | change (done) | no |
+| L17.5 Năm nghìn một tờ (line 8): a newspaper price; and 350,000 for three books and a paper (line 10) | kept | keep | yes, low |
+| L17.6 Chiếc điện thoại này của em, phải không? (line 10): chiếc for a phone; or cái | chiếc (the plan's classifier) | keep | yes |
+| L17.7 hiệu sách (Northern) rather than nhà sách in Hà Nội in 2026 | hiệu sách (word list 3) | keep | yes |
+| L18.1 Một trăm nghìn em nhé (line 2) from the cashier: "em nhé" after a price | kept | keep | yes |
+| L18.2 Khăn và kính ở phòng kia (line 2): towels and goggles handed out or hired at a Hà Nội public pool? | kept | keep | yes, low |
+| L18.3 Em biết bơi không? without có (line 4) | kept | keep | yes, low |
+| L18.4 Anh dạy em bơi được không? (line 7) as a request; Được chứ! as the answer | kept (the plan's chứ) | keep | yes |
+| L18.5 Em làm thế này nhé (line 8) for "do it like this" | kept | keep | yes |
+| L18.6 Tuần sau chúng ta tập thêm hai buổi nhé (line 10): buổi for two swimming sessions | kept | keep | yes, low |
+| L19.1 Chú ơi! Ông Hùng mời chú đến uống trà (line 1): Na, 5, passing on an invitation with mời | kept | keep | yes, low |
+| L19.2 Dạ, cháu đây ạ! (line 3) from Sacha, 27, to a neighbour of 78 who calls him from his door | kept (the plan's dạ) | keep; English now "Yes, here I am!" | yes |
+| L19.3 Ông pha trà rồi. Mời cháu uống chén trà (line 4): mời from an elder to a younger guest | kept | keep | yes |
+| L19.4 Năm mươi năm rồi. Ông là giáo viên, dạy môn văn … (line 6): là giáo viên for a retired teacher (or Ông là giáo viên dạy văn, or Ngày xưa ông dạy văn) | changed: Ông dạy môn văn ở trường kia ba mươi năm … ông là giáo viên nghỉ hưu | change (done) | yes, low |
+| L19.5 cô ở trường cháu (line 7) for Bin's teacher, as cô giáo (not taught) is left out | cô ở trường cháu, now teaching tiếng Việt (primary school has no môn văn) | keep the term; subject changed (done) | yes |
+| L19.6 Cháu đến chơi, ông kể cho cháu về Hà Nội nhé (line 10): kể cho cháu without nghe (nghe is L20) | kept; the lexicon's kể example has the same choice | keep | yes |
+| L19.7 the note: children call any woman teacher cô; a woman of one's parents' generation is cô too (in the North, a mother's younger sister is dì: not said) | kept | keep | yes, low |
+| L20.1 Chín giờ có họp (line 2) for "there's a meeting at nine" | kept | keep | yes, low |
+| L20.2 Tôi cũng thế (line 3) agreeing with a negative ("me neither"); or Tôi cũng vậy / Tôi cũng không | kept | keep: cũng thế agrees with a negative too | yes, low |
+| L20.3 Chào hai em! (line 4) from a manager of 41 to two staff of 27 | kept | keep | yes |
+| L20.4 Công việc khó, máy tính cũ, nhưng đồng nghiệp đều tốt lắm ạ! (line 7): tốt for "kind" of colleagues | kept | keep | yes |
+| L20.5 Vừa ăn vừa nói chuyện (line 8) without a subject, as a suggestion | kept | keep | yes, low |
+| L20.6 Nghe nhạc, tôi làm việc nhanh hơn! (line 10): a bare verb phrase as "with music on" | kept | keep | yes |
+| L20.7 Hôm qua tôi làm việc muộn, chín giờ tối mới về nhà (translate 4): mới "only then", met in L15's word list only | kept | keep | yes, low |
+| L18.7 buổi sáng, buổi tối: SEGMENTATION makes them one word (buổi_sáng), but word list 3 teaches buổi alone; the lessons use buổi only with a number (hai buổi) and sáng / tối alone for "in the morning / evening" (Tối, chị Lan dạy Bin đọc sách) | kept (no plan change) | keep: the rule is right; teach buổi_sáng in a later word list | no (a word-list point) |
+| L21.1 Chú mua cho cháu đấy (line 2): Sacha to Na, 5 | kept | keep | yes, low |
+| L21.2 Nhưng Bin đọc tiếng Việt giỏi hơn chú đấy (line 5): the child's name for "you" when talking to a child | kept | keep | yes |
+| L21.3 Bin, con đọc với chú Sacha đi, rồi ăn cơm nhá! (line 7): Lan names Sacha chú Sacha to her son | kept | keep | yes |
+| L21.4 Con và Na đều đói rồi! (line 8) from Bin, 8, to his mother (or Con với Na) | kept | keep | yes, low |
+| L21.5 Hôm nay có canh cháu thích nhất đấy! (line 10): a relative clause with no linking word | kept | keep | yes |
+| L22.1 Chú ơi, cho cháu hỏi: … có đi đúng giờ không ạ? (line 3): Sacha, 27, to a railway worker in his fifties | kept | keep | yes |
+| L22.2 Khi tàu đến thì cháu xem số giường trên vé nhé (line 4) | kept | keep | yes, low |
+| L22.3 Hành lý của bạn đâu? (line 5): bare đâu after the noun | kept | keep | yes, low |
+| L22.4 Tôi thì ngủ ở đâu cũng được! (line 8): thì as "as for me" + ở đâu cũng được "anywhere" | kept | keep | yes |
+| L22.5 Tàu từ ga Hà Nội đến Lào Cai lúc sáu giờ sáng (line 9): a night train Hà Nội–Lào Cai arriving about six | kept (timetables not checked) | keep | yes, low |
+| L22.6 Chỗ này có người chưa? (fill 3) for "is this seat taken?" | kept | keep | yes |
+| L22.7 the bridge note: "Mandarin aspirated p t k q c ch in tone 2 → b đ c t tr ch gi, and huyền" combines IA (86 %, narrows) with T1 (Mandarin 2 → huyền, 97 %) | kept | keep | no (measured) |
+| L23.1 Chào hai cháu … Mời hai cháu xem (line 1) from a landlady of about 55 to people of 24 and 27 (cô / cháu) | kept | keep | yes |
+| L23.2 Đây là phòng ngủ, trong phòng có giường (line 4) for a single rented room | kept | keep | yes, low |
+| L23.3 Các phòng ở đây đều sạch quá! (line 5): các for all the rooms of the house; những for some (line 9) | kept | keep | yes |
+| L23.4 Phòng này ba triệu mỗi tháng (line 6), mỗi after the price; or Mỗi tháng ba triệu | kept | keep | yes, low |
+| L23.5 Những phòng ở tầng hai thì sao ạ? (line 9) "what about …?" | kept | keep | yes, low |
+| L23.6 Ở quận Hoàn Kiếm, ba triệu là rẻ lắm (line 11); the price of a student room in Hoàn Kiếm in 2026 | kept | keep | yes |
+| L23.7 tầng một = the ground floor (note) | kept | keep | yes, low |
+| L24.1 Mũ bảo hiểm đây (line 1) without đội "to put on (a hat)", which is not taught | kept | keep | yes, low |
+| L24.2 Em lên xe máy đi, anh ngồi sau (line 3): the teacher on the back seat | kept | keep | yes |
+| L24.3 Đi ra ngõ, rồi rẽ phải, sang phố kia. Đi chậm thôi! (line 5) | kept | keep | yes |
+| L24.4 Chú ý! Xe máy ở trước! Phanh đi! (line 7) | changed: Cẩn thận! Có xe máy ở trước! Phanh đi! (line 7); Chú ý nhé, đừng ngã! (line 9) | change (done) | yes |
+| L24.5 Tốc độ này được không ạ? (line 8): tốc độ in a learner's question | kept (word list 3's tốc độ; review finding 22 had the same doubt) | keep | yes |
+| L24.6 Về nhà rồi! Em xuống đây ạ. (line 10) and Vào nhà đi (line 11) | kept | keep | yes, low |
+| L24.7 Lint: the person-term check reads chú in chú_ý as the kin term chú (line 7 rewritten to avoid the warning) | lint fixed: kin_mismatch keeps word boundaries (test_review5) | change (done) | no |
+| L25.1 Em ơi, cho chị xem thực đơn (line 1): a menu at a bún chả place, which often serves one dish; and a "special" bún chả (line 2) | kept (word list 3's thực đơn, đặc biệt) | keep | yes |
+| L25.2 Dạ from a young waitress to customers (lines 2, 10) | kept | keep | yes, low |
+| L25.3 Bạn cho rau, ớt và chanh vào nước mắm nhé (line 5): how bún chả is eaten (herbs into the bowl) | kept | keep | yes |
+| L25.4 Nhân viên ở đây phục vụ nhanh thế! (line 6) | kept | keep | yes, low |
+| L25.5 Tôi ăn xong rồi. Bún chả ngon quá, tôi ăn hết! (line 8) | kept | keep | yes, low |
+| L25.6 Hai suất một trăm hai mươi nghìn (line 10): 60,000 a portion in 2026 | kept | keep | yes, low |
+| L25.7 the bridge note gives th / s only (x has no Hán-Việt word taught yet: word list 3 review finding 18) | th / s only in L25; s / x now in L27 (bridge Z) | change (done) | no |
+| L26.1 Tôi thường chạy ở hồ Hoàn Kiếm (line 2) for jogging round the lake | kept | keep | yes, low |
+| L26.2 Sở thích của tôi là âm nhạc: tôi hay hát và nhảy (line 3): âm nhạc is bookish for a hobby (word list 3 review finding 19) | kept | keep | yes |
+| L26.3 Hai em đã từng leo núi chưa? (line 4) and leo núi for hiking | kept | keep | yes |
+| L26.4 … nhưng ở Việt Nam thì chưa (line 5) | kept | keep | yes, low |
+| L26.5 Anh tham gia một câu lạc bộ leo núi (line 6) for "I belong to a hiking club" | kept | keep | yes |
+| L26.6 Sacha thì sao? (line 8); Thế thì lần sau em cũng đi! (line 11) | kept | keep | yes, low |
+| L26.7 Ông Hùng luôn uống trà với bạn (translate 3): bạn for an old man's friends | kept | keep | yes, low |
+| L26.8 Tool: "run" (English, in the glosses of chạy) was read as the Vietnamese run; added to plan.py EN_MORE | a lint point | keep | no |
+| L27.1 Bà ơi, bà kể chuyện cho cháu nghe đi! (line 1) | kept | keep | yes, low |
+| L27.2 Khi đó có chiến tranh ạ? (line 3) from Bin, 8; and the dates: bà, 62 in 2026, a small child before 1975 | kept | keep | yes |
+| L27.3 Ngày đó "in those days" (lines 4, 6, 10); or Hồi đó (hồi is planned at L48) | ngày đó | keep: ngày đó / ngày ấy are ordinary | yes, low |
+| L27.4 Rồi hòa bình. (line 6) as "then came peace" | kept | keep | yes |
+| L27.5 Bà kể chuyện này rồi mà! / Bà già rồi mà! (lines 7–8): mà insisting, and as an excuse | kept (the plan's mà) | keep | yes |
+| L27.6 bà to the children, bác to Sacha, in one scene (lines 8, 10) | kept | keep: right | no |
+| L27.7 Bác vẫn nhớ nhiều kỷ niệm lắm ạ (line 9) | kept | keep | yes, low |
+| L27.8 Em nói lại đi, anh không nghe thấy (fill 2) | kept | keep | yes, low |
+| L28.1 Bây giờ anh lái xe máy giỏi rồi mà! (line 2) | kept | keep | yes, low |
+| L28.2 Trong này có những gì? (line 4) "what have you got in here?" | kept | keep | yes |
+| L28.3 Khi các cháu xong thì xuống ăn cơm với cô nhé (line 6): xong alone, with no verb before it | changed: Khi các cháu làm xong thì … | change (done) | yes, low |
+| L28.4 Mọi người ở đây thường ăn cơm ở bếp tầng hai (line 8): tenants eating with the landlady | kept | keep | yes, low |
+| L28.5 Em ăn hết rồi, em không ăn được nữa! (line 9) | changed: Cơm ngon quá! Em ăn hết rồi, … (setting: they stay for dinner) | change (done) | yes, low |
+| L28.6 Anh về cẩn thận nhé! Ngõ này tối lắm (line 11): tối "dark" | kept | keep | yes, low |
+| L28.7 Mỗi buổi Thảo bơi khoảng một giờ (translate 2): một giờ for a duration ("an hour"), where Hà Nội speech often says một tiếng (not taught) | changed: khoảng ba mươi phút (no duration with giờ) | change (done) | no |
+| L26.9 Thế thì (line 11) "in that case" written as two words (a fixed connective like vì vậy? not taught as one word) | two words (thế + thì, as in nếu thế thì); SEGMENTATION says so | keep (decided) | yes, low |
+| L16.8 Cả nhà ăn cơm đi! (line 2) from the grandmother answering the children's mời (was Mời cả nhà ăn cơm!) | changed (review 7) | change (done) | yes, low |
+| L20.8 Hôm qua chúng ta đều phải gửi báo cáo (line 3) and Mười hai giờ rồi! (line 8): the scene's order | changed (review 7) | change (done) | no |
+| L26.10 Tháng sau em bận lắm (line 7) and Anh thì tối thứ bảy luôn xem bóng đá (line 10), luôn moved | changed (review 7: Mai went away for a weekend in L22) | change (done) | yes, low |
+| L27.9 bà lên thành phố học (line 6); Chuyện ngày đó bác không quên đâu (line 10), object first | changed (review 7) | change (done) | yes |
+| L28.8 cả nhà, ăn cơm: the cutter joins them (dictionary entries cả nhà, ăn cơm); the lessons write two words (quantifier + noun; ăn cơm as L10, L14, cutter reference line 109) | lessons unchanged | native, and a cutter point | yes, low |

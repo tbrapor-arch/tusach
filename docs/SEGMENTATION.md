@@ -25,7 +25,8 @@ grammar. Two free words that combine in the ordinary way stay two words, even wh
 Notes: `mọi người`, `các bạn`, `những người` are a quantifier or plural marker + noun (two words). A generic noun
 before a name stays apart (hồ Hoàn_Kiếm, bệnh_viện Bạch_Mai) unless the name needs it (Hồ_Tây, "West Lake").
 Productive `bao` + adjective (bao xa, bao lâu) is two words; bao_giờ and bao_nhiêu are one. `người ta`
-("one, people") is one word (fixed pronoun). Time words of fixed form are one word (hôm_nay, ngày_mai, bây_giờ,
+("one, people") is one word (fixed pronoun). `thế thì`, `vậy thì` ("in that case") are thế / vậy + the main-clause
+thì, two words (nếu thế thì shows the parts free; review 7). Time words of fixed form are one word (hôm_nay, ngày_mai, bây_giờ,
 buổi_sáng); `sáng nay`, `tối qua` (noun + deictic) are two. `đau` + a body part (đau đầu "to have a headache", đau bụng) is the
 ordinary way to state a symptom, verb + object: two words (decided 19 Nov 2026, review 6); đau_đầu is one word only in
 its figurative sense, "troublesome, a headache of a problem" (no lesson teaches it yet).
