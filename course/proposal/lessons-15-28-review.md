@@ -7,7 +7,7 @@ NOTES-for-native-speaker.md (rows L15–L28), every line of lessons 15–28, the
 (`tools/bridge_rules.py` output) and the writer's tool change. Words looked up on the built database (`make lookup`,
 `data/build/vi.db`). NOT checked by a native speaker: the Northern-usage judgements below are Claude's.
 
-Fix pass: commits b56e61f..(this file's last commit) on the same branch.
+Fix pass: commits b56e61f..378bff6 on the same branch.
 
 Checks on 10bbfe6 (no db rebuild): `make lint` 0 errors (28 I lines: not native-checked); verify_words 421 suspects
 (read with `--all`: the L15–28 ones are free sequences, numerals, names after a title, a sentence boundary (Có. Khi),
