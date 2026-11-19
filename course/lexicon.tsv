@@ -31,7 +31,7 @@ nào	det	which; any; (at the end) come on, let's	unknown				After the noun: ngư
 đâu	pron	where; (emphatic) not at all	unknown				ở đâu? "where?"; không … đâu "not at all"	sure	wikt: where; no, not		Anh ở đâu?	Where do you live?
 à	particle	(final particle: checking or surprised) so …?; oh	unknown				Anh là người Pháp à? "So you're French?"; {Thế à?} "Really?"	sure	wikt: question particle; surprise or a sudden recollection	en-item: a particle, described in English	Anh là người Pháp à?	So you're French?
 đến	verb	to come, to arrive; to (a place, a time)	native					sure	wikt: to arrive, to come; to		Ngày mai cháu đến nhé.	Come over tomorrow (an elder to a young person).
-từ~from	prep	from; since	older-loan		自		từ Pháp "from France"; từ hôm qua "since yesterday"	likely	wikt ety 1: from, since (non-Hán-Việt reading of 自)			
+từ~from	prep	from; since	older-loan		自		từ Pháp "from France"; từ hôm qua "since yesterday"	likely	wikt ety 1: from, since (non-Hán-Việt reading of 自)		Tàu này từ đâu đến?	Where does this train come from?
 từ~word	noun	word	hv	詞				sure	wikt ety 2: word			
 Việt Nam	noun	Vietnam	hv	越南				sure	wikt: Vietnam		Tôi rất vui ở Việt Nam.	I'm very happy in Vietnam.
 Pháp	noun	France; French	hv	法			Short for 法蘭西; người Pháp, {tiếng Pháp}	sure	wikt: France		Tôi học tiếng Pháp.	I study French.
@@ -58,7 +58,7 @@ hai	num	two	native					sure	wikt: two		Hai cà phê sữa đá nhé!	Two iced mi
 ơi	intj	hey (calling someone): em ơi!	native				After the name or person term, to call someone	sure	wikt: hey		Em ơi, cho anh một trà đá!	Excuse me (to a young waiter), an iced tea for me!
 nhé	particle	…, OK? (friendly final particle)	unknown				A suggestion or promise, friendly: Hai cà phê sữa đá nhé	sure	wikt: alright?, okay?, will you?		Hai cốc trà đá nhé!	Two glasses of iced tea, OK?
 chút	noun	a little, a bit; a moment	native				một chút "a little"; chờ một chút "wait a moment"	sure	wikt: a very small portion or amount; a moment			
-ngồi	verb	to sit	native					sure	wikt: to sit			
+ngồi	verb	to sit	native				Ngồi đi! "Sit down!" (to an equal or someone younger); to an elder Mời bác ngồi ạ	sure	wikt: to sit		Cả nhà ngồi ăn cơm đi!	Come and sit down to eat, everyone!
 ba~three	num	three	native					sure	wikt ety 2: three		Cho tôi ba cốc trà đá.	Three glasses of iced tea, please.
 ba~father	noun	father, dad (Southern)	unknown				Southern; the North says bố	likely	wikt ety 1: father			
 bốn	num	four	native				After mươi both are said: hai mươi bốn or hai mươi tư; tư is the form in {thứ tư} "Wednesday, fourth" and {một phần tư} "a quarter"; mười bốn (14) is always bốn	sure	wikt: four		Bốn mươi nghìn ạ.	Forty thousand (dong).
@@ -213,7 +213,7 @@ lại	adv	again; back	native				gọi lại "to call back"	sure	wikt: again; onc
 sau	adv	after; behind; later	native				sau đó "after that"	sure	wikt: later; after; behind		Tôi đi làm, sau đó về nhà.	I go to work, and after that I go home.
 cháu	noun	grandchild; niece, nephew; I (to someone of one's parents' or grandparents' generation)	native				The young person's "I" to bác, {cô}, {chú}, ông, bà, who call him cháu "you"	sure	wikt: grandchild; nephew, niece	en-item: the pronoun use is the course's point	Cháu mấy tuổi?	How old are you? (to a child)
 bác	noun	uncle, aunt (older than one's parent); you (to a person older than one's parents)	native					sure	wikt: uncle (parent's elder brother)		Cháu chào bác ạ.	Hello! (politely, to someone older than one's parents)
-cô	pron	aunt (father's sister); Miss; you (to a young woman, a female teacher); she (cô ấy)	hv	姑				sure	wikt: a paternal aunt		Cô ấy là bạn tôi.	She is my friend.
+cô	pron	aunt (father's sister); Miss; you (to a woman of one's parents' generation, a female teacher); she (cô ấy)	hv	姑				sure	wikt: a paternal aunt		Cô ấy là bạn tôi.	She is my friend.
 chú	noun	uncle (father's younger brother); you (to a man of one's father's age)	native					sure	wikt: paternal uncle		Chú ơi, chú đi đâu đấy?	Where are you off to? (a child to a man of his father's age)
 dạ	intj	yes (polite, to elders)	unknown				Also answers a call politely	sure	wikt: yes (answers a question)		Dạ, cháu đây ạ.	Yes, I'm here (answering an elder's call).
 vừa	adv	just (now), recently; to fit	unknown				Tôi vừa {đến} "I have just arrived"; vừa … vừa … "both … and …"	sure	wikt: just, recently; to fit		Cái áo này vừa lắm.	This shirt fits well.
@@ -236,7 +236,7 @@ xin lỗi	intj	sorry; excuse me	compound				{xin} "to ask for" + {lỗi} "fault"
 nhỉ	particle	…, isn't it? (tag particle)	unknown				Northern; seeking agreement: Đẹp nhỉ! "Lovely, isn't it?"	sure	wikt: Used to create a tag question	en-item: a particle, described in English	Hôm nay đẹp trời nhỉ!	Lovely weather today, isn't it!
 và	conj	and	older-loan		和			likely	wikt: and (non-Hán-Việt reading of 和)		Cho tôi một cà phê và một trà.	A coffee and a tea, please.
 các	det	(plural marker) the …s, all the	hv-gram	各			Before a noun: các bạn "you (plural), friends"; in Chinese 各 is "each, every"	likely	wikt ety 1: Plural marker (各)	en-item: a plural marker, described in English	Các bạn có khỏe không?	How are you all?
-trong	prep	in, inside; during	native					sure	wikt ety 2: in, inside, within			
+trong	prep	in, inside; during	native				trong + place: trong nhà "in the house"; trong "clear (water)" is another sense	sure	wikt ety 2: in, inside, within		Trong phòng có hai giường.	There are two beds in the room.
 để	conj	in order to, so that; to put, to leave	unknown				để + verb "(in order) to"; để đó "leave it there"	sure	wikt: in order to, so that; to place; to leave		Tôi học tiếng Việt để nói chuyện với bạn.	I am learning Vietnamese to talk with you.
 những	det	(plural marker) some, the …s	older-loan		仍		Before a noun: những người này "these people"	likely	wikt: Plural marker (non-Hán-Việt reading of 仍)	en-item: a plural marker, described in English	Những người này là bạn tôi.	These people are my friends.
 họ	pron	they, them; family name	older-loan		戶		họ tên "full name"	likely	wikt: family name, surname; they/them (戶 for the family name)			
@@ -263,13 +263,13 @@ tại	prep	at, in; because of (tại vì)	hv	在				sure	wikt: to be located at;
 sự	noun	(makes a noun of a verb or adjective: sự thật "the truth"); matter, affair	hv-gram	事				sure	wikt: affairs; nominalizes verbs or adjectives			
 vì	conj	because; for (the sake of)	older-loan		爲		{vì vậy} "therefore"	likely	wikt ety 1: because (non-Hán-Việt reading of 爲)	en-item: "for (the sake of)" (vì con "for the children") is Wiktionary's prep sense in other words	Em nghỉ vì bị ốm.	I'm off because I'm ill.
 thấy	verb	to see; to feel, to find	older-loan		視		tôi thấy … "I feel/find that …"	likely	wikt: to perceive through the senses (視)		Em không nhìn thấy anh.	I can't see you.
-nhất	adv	most, -est; first	hv	一			After the adjective: đẹp nhất "the most beautiful"; {thứ nhất} "first"	sure	wikt: first; the most		Cái này rẻ nhất.	This one is the cheapest.
+nhất	adv	most, -est; first	hv	一			After the adjective: đẹp nhất "the most beautiful"; {thứ nhất} "first". In Chinese 一 is "one, first"; the superlative is 最	sure	wikt: first; the most		Cái này rẻ nhất.	This one is the cheapest.
 mới	adj	new; just (recently); only then	native					sure	wikt: new; have just; only after		Em mua điện thoại mới à?	Did you buy a new phone?
 việc	noun	work, job; matter, thing (to do)	older-loan		役		làm việc "to work"	likely	wikt: job, work; matter (non-Hán-Việt reading of 役)			
 khác	adj	other, different	older-loan		各		After the noun: người khác "other people"	likely	wikt: different, other (各)			
 cả	det	all, whole; even	native				cả ngày "all day"; cả … cũng "even …"	sure	wikt ety 1: whole; at all	en-item: "even" (cả anh ấy cũng …) is everyday use	Mời cả nhà ăn cơm!	Let's eat, everyone!
 tới	verb	to come, to arrive; to, until; next	older-loan		逮		tuần tới "next week"	doubt: Wiktionary's 逮 is the only source given	wikt: to (indicating destination); to arrive			
-trước	prep	before; in front of; ago	native					sure	wikt ety 1: before; in front of; ago		Hai năm trước tôi ở Lyon.	Two years ago I lived in Lyon.
+trước	prep	before; in front of; ago	native				trước nhà "in front of the house"; ngồi trước "to sit in front"; hai năm trước "two years ago"	sure	wikt ety 1: before; in front of; ago		Hai năm trước tôi ở Lyon.	Two years ago I lived in Lyon.
 vẫn	adv	still	unknown				Before the verb: Tôi vẫn ở đây	sure	wikt: still, yet		Bà vẫn sống ở phố này.	I still live on this street.
 hoặc	conj	or	hv	或			Mostly in statements; in questions hay	sure	wikt ety 1: or		Tôi sẽ đi thứ bảy hoặc chủ nhật.	I'll go on Saturday or Sunday.
 bằng~by	prep	by (means of), with; made of	hv	憑			đi bằng xe buýt "to go by bus"; 憑 "to rely on, by"; bằng also means a diploma (文憑)	likely	wikt ety 2: by, by means of; made of; diploma			
@@ -334,12 +334,12 @@ dùng	verb	to use; to have (food or drink, polite)	older-loan		用			sure	wikt e
 sinh	verb	to be born; to give birth	hv	生			sinh năm 1990 "born in 1990"	sure	wikt: to give birth			
 tất cả	det	all, everything, everyone	compound					likely	wikt: all, everything, everybody		Tất cả chúng tôi đều là người Pháp.	We are all French.
 đủ	adj	enough	native					sure	wikt: sufficiently, enough			
-chiếc	classifier	(classifier for vehicles and single objects)	older-loan		隻		chiếc xe máy "a motorbike", {chiếc giày} "a shoe"	sure	wikt: Indicates vehicles; a single one (隻)		Chị cho em một chiếc túi nhé.	Could I have a bag, please?
+chiếc	classifier	(classifier for vehicles and single objects)	older-loan		隻		chiếc xe máy "a motorbike", {chiếc giày} "a shoe"	sure	wikt: Indicates vehicles; a single one (隻)		Em muốn mua chiếc áo kia.	I'd like to buy that shirt.
 sao~why	adv	why; how (Sao thế? "What's wrong?")	unknown				Northern Sao thế? "What's wrong?", Southern {Sao vậy?}; Không sao (đâu) "it's nothing, no problem"	sure	wikt ety 1: why; how		Sao thế, cháu?	What's wrong?
 sao~star	noun	star	native					sure	wikt ety 2: star			
 yêu	verb	to love	native					sure	wikt: to love		Anh ấy yêu vợ lắm.	He loves his wife very much.
 thế giới	noun	world	hv	世界				sure	wikt: world			
-hiểu	verb	to understand	hv	曉				sure	wikt: to understand			
+hiểu	verb	to understand	hv	曉			Em không hiểu "I don't understand"	sure	wikt: to understand		Em có hiểu không?	Do you understand?
 phòng	noun	room	hv	房				sure	wikt ety 1: a room		Phòng này to quá.	This room is very big.
 tổ chức	verb	to organise, to hold (an event); organisation	hv	組織				sure	wikt: to organize; organization			
 tự	adv	(by) oneself, self-	hv-gram	自			Before the verb: tự làm "to do (it) oneself"	sure	wikt ety 3: by oneself, on one's own			
@@ -585,7 +585,7 @@ chén	noun	small cup (for tea, rice wine)	older-loan		盞		Northern tea is drunk
 pha	verb	to make (tea, coffee); to mix	native				pha trà "to make tea"	sure	wikt: to mix, to mingle; to make certain drinks		Ông pha trà ngon lắm.	He makes very good tea.
 thơm	adj	fragrant, sweet-smelling	native					sure	wikt: fragrant, sweet-smelling		Trà này thơm quá!	This tea smells wonderful!
 quê	noun	home town, home village; the countryside	native				Quê anh ở đâu? "Where are you from?" (asked by elders)	sure	wikt: hometown; the countryside		Quê cháu ở đâu?	Where is your home town? (an elder to a young person)
-kể	verb	to tell (a story, about something)	older-loan		計		kể cho + person: kể cho cháu	likely	wikt: to tell (non-Hán-Việt reading of 計)		Ông kể cho cháu về Hà Nội nhé.	Tell me about Hanoi, will you? (to an old man)
+kể	verb	to tell (a story, about something)	older-loan		計		kể cho + person: kể cho cháu	likely	wikt: to tell (non-Hán-Việt reading of 計)		Ông kể cho cháu về Hà Nội đi ạ.	Please tell me about Hanoi (to an old man).
 văn	noun	literature (the school subject); writing	hv	文			dạy văn "to teach literature"	sure	wikt: writing; language		Ông dạy văn.	He teaches literature.
 họp	verb	to meet, to have a meeting	older-loan		合			likely	wikt: to meet, to gather, to convene (合)		Chín giờ chúng ta họp.	We have a meeting at nine.
 sếp	noun	boss	french				From French chef; everyday speech	sure	wikt: chief, boss (French chef)		Sếp em là người Pháp.	My boss is French.
@@ -595,7 +595,7 @@ gửi	verb	to send	native				gửi cho + person	sure	wikt: to send		Em gửi bá
 muộn	adj	late	older-loan		晚		Northern; the South says {trễ}	sure	wikt: late, tardy (晚)		Xin lỗi, em đến muộn.	Sorry, I'm late.
 sớm	adj	early; soon	native					sure	wikt: early; soon		Hôm nay anh đến sớm thế!	You're early today!
 nói chuyện	verb	to talk, to chat	compound				nói chuyện với … "to talk with …"	sure	wikt: to talk, to speak; conversation		Hai người đang nói chuyện.	The two of them are chatting.
-đồng nghiệp	noun	colleague	hv	同業				sure	wikt: colleague, coworker		Anh Tuấn là đồng nghiệp của em.	Tuấn is my colleague.
+đồng nghiệp	noun	colleague	hv	同業			In Chinese 同業 is someone in the same trade; a colleague is 同事	sure	wikt: colleague, coworker		Anh Tuấn là đồng nghiệp của em.	Tuấn is my colleague.
 văn phòng	noun	office	hv-vn	文房			In Chinese 文房 is a study; an office is 辦公室	likely	wikt: office (room used for non-manual work)		Văn phòng em gần hồ Hoàn Kiếm.	My office is near Hoàn Kiếm lake.
 báo cáo	noun	report; to report	hv	報告				sure	wikt: to report, to inform		Em đang viết báo cáo.	I'm writing a report.
 nhạc	noun	music	hv	樂			nghe nhạc "to listen to music"	sure	wikt: music		Em vừa làm vừa nghe nhạc.	I listen to music while I work.
@@ -616,7 +616,7 @@ cửa sổ	noun	window	compound					sure	wikt: window		Phòng này có cửa s�
 rộng	adj	spacious, wide, large	native					sure	wikt: spacious, wide, broad		Phòng này rộng quá!	This room is so spacious!
 sạch	adj	clean	native					sure	wikt: clean		Phòng này sạch lắm.	This room is very clean.
 ồn	adj	noisy	unknown					sure	wikt: loud, noisy		Phố này ồn quá.	This street is very noisy.
-chủ nhà	noun	landlord, landlady; host	compound					sure	wikt: host		Chủ nhà là một bà rất vui.	The landlady is a very cheerful woman.
+chủ nhà	noun	landlord, landlady; host	compound					sure	wikt: host		Chủ nhà là một bà rất tốt.	The landlady is a very kind woman.
 chật	adj	cramped, tight, narrow	native				Too small (a room, a garment); the opposite of rộng	sure	wikt: cramped, tight, narrow		Phòng này hơi chật.	This room is a bit cramped.
 yên tĩnh	adj	quiet, peaceful	hv	安靜				sure	wikt: quiet, peaceful		Phòng này yên tĩnh lắm.	This room is very quiet.
 tiện	adj	convenient	hv	便				sure	wikt: convenient		Ở đây gần chợ, tiện lắm.	It's near the market here, very convenient.
@@ -643,7 +643,7 @@ thìa	noun	spoon	older-loan		匙		Northern; the South says {muỗng}	sure	wikt: 
 tính tiền	verb	to pay, to settle the bill; The bill, please!	compound				To the waiter: Em ơi, tính tiền!	sure	wikt: to pay; The bill, please!		Em ơi, tính tiền!	The bill, please!
 trả	verb	to pay; to give back	native				trả tiền "to pay"	sure	wikt: to return, to give back; to pay		Hôm nay anh trả nhé.	I'll pay today.
 cay	adj	spicy, hot	native					sure	wikt: burning (spicy)		Món này cay quá!	This dish is really spicy!
-suất	noun	a portion, a serving	hv	率			Northern: một suất cơm "one portion of rice and dishes"	likely	wikt: portion; rate		Cho em hai suất bún chả.	Two portions of bún chả, please.
+suất	noun	a portion, a serving	hv	率		In Chinese 率 is a rate, a ratio, or "to lead"; a portion is 份	Northern: một suất cơm "one portion of rice and dishes"	likely	wikt: portion; rate		Cho em hai suất bún chả.	Two portions of bún chả, please.
 thực đơn	noun	menu	hv-vn	食單			A menu is 菜單 in Chinese	likely	wikt: menu		Cho em xem thực đơn.	Can I see the menu, please?
 phục vụ	verb	to serve; (the) service, waiter	hv	服務				sure	wikt: to serve, to attend to		Quán này phục vụ nhanh lắm.	The service in this place is very quick.
 nhân viên	noun	employee, staff member	hv	人員				sure	wikt: an employee		Anh ấy là nhân viên ở quán này.	He works at this café.
@@ -661,7 +661,7 @@ sở thích	noun	hobby, pastime	hv-vn	所適			A hobby is 愛好 in Chinese	like
 âm nhạc	noun	music (as an art, a subject)	hv	音樂				sure	wikt: music		Em thích âm nhạc Việt Nam.	I love Vietnamese music.
 tham gia	verb	to take part (in), to join	hv	參加				sure	wikt: to participate, to take part		Em muốn tham gia câu lạc bộ này.	I'd like to join this club.
 câu lạc bộ	noun	club (association)	hv	俱樂部				sure	wikt: a club (association of members)		Anh có tham gia câu lạc bộ nào không?	Are you in any club?
-chuyện	noun	story; matter, affair	older-loan		傳		kể chuyện "to tell a story"; also "what's up": Có chuyện gì thế?	likely	wikt: a story, a tale, an anecdote; matters, affairs (傳)		Bà kể chuyện cho cháu nhé.	Tell me a story, Grandma.
+chuyện	noun	story; matter, affair	older-loan		傳		kể chuyện "to tell a story"; also "what's up": Có chuyện gì thế?	likely	wikt: a story, a tale, an anecdote; matters, affairs (傳)		Bà ơi, kể chuyện cho cháu nghe đi!	Grandma, tell me a story!
 quên	verb	to forget	native					sure	wikt: to forget		Cháu quên rồi.	I've forgotten.
 nghèo	adj	poor	unknown					sure	wikt: poor		Ngày đó nhà bà nghèo lắm.	In those days my family was very poor.
 làng	noun	village	loan				A loan from the Hmong-Mien languages, Wiktionary says	sure	wikt: village (borrowed from Hmong-Mien)		Quê bà là một làng nhỏ.	My home is a small village.
@@ -669,4 +669,7 @@ xe đạp	noun	bicycle	compound					sure	wikt: bicycle		Ngày đó cả phố đ
 chiến tranh	noun	war	hv	戰爭				sure	wikt: war		Khi có chiến tranh, bà còn nhỏ.	When the war came, I was still little.
 khổ	adj	hard, miserable (of a life)	hv	苦				sure	wikt: miserable, painful		Ngày đó khổ lắm.	Life was very hard in those days.
 hạnh phúc	adj	happy; happiness	hv	幸福			A happy life, a happy family; a happy moment is vui	sure	wikt: happy; happiness		Bây giờ bà hạnh phúc lắm.	I'm very happy now.
-kỷ niệm	noun	memories; souvenir, keepsake	hv	紀念	In Chinese 紀念 is "to commemorate", 紀念品 a souvenir; memories are 回憶			likely	wikt: memory, memories; souvenir, keepsake		Bà có nhiều kỷ niệm ở phố này.	I have many memories of this street.
+kỷ niệm	noun	memories; souvenir, keepsake	hv	紀念		In Chinese 紀念 is "to commemorate", 紀念品 a souvenir; memories are 回憶		likely	wikt: memory, memories; souvenir, keepsake		Bà có nhiều kỷ niệm ở phố này.	I have many memories of this street.
+mèo	noun	cat	native				con mèo "a cat" (classifier con)	sure	wikt: cat		Na có một con mèo.	Na has a cat.
+môn	noun	subject (at school), discipline	hv	門			môn văn "literature (as a subject)"; 門 is "door, gate" in Chinese, and the measure word of a subject (一門課)	sure	wikt: subject, discipline		Ông dạy môn văn.	He teaches literature.
+hòa bình	noun	peace; peaceful	hv	和平				sure	wikt: peace; peaceful		Ngày đó có chiến tranh, bây giờ hòa bình rồi.	In those days there was war; now there is peace.

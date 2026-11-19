@@ -374,7 +374,7 @@ def _list_counts(rows, path):
     name, draft = list_name(path) if path else ('Word list 2', False)
     return (f"{name} ({'draft, not approved; ' if draft else ''}L{min(cnt)}–{max(cnt)}): {words} words + {names} names ({per}); Hán-Việt {hv} "
             f"({100 * hv / words:.0f} %), older Chinese loans {older} ({doubt} with a doubtful etymon, characters hidden), "
-            f"Western loans {other - older}, the rest native, compounds and {unknown} with no etymology recorded.")
+            f"other loans (French and others) {other - older}, the rest native, compounds and {unknown} with no etymology recorded.")
 
 
 def blocks(con):

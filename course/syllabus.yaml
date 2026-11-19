@@ -56,7 +56,7 @@ lessons:
   - {n: 19, en: Tea with ông Hùng, grammar: "ông / bà as \"you\"; cho \"for, to\"; dạ (answering an elder: Dạ, cháu đây ạ.)", bridge: "IM m, v", strand: "ông, bà; cô, chú (Bin and Na call Sacha chú)", lines: 10, new_words: {native: 13, hv: 5, other: 2}}
   - {n: 20, en: A day at the office, grammar: "vừa … vừa; cũng / đều", bridge: "ID đ, th, n, l; FF đầu tiên", lines: 10, new_words: {native: 13, hv: 5, other: 4}}
   - {n: 21, en: Review 3, review: true, grammar: "recap 15–20", lines: 10, new_words: {native: 0, hv: 0}}
-  - {n: 22, en: At Hà Nội station, grammar: "thì; khi / lúc", bridge: "IA aspiration and the old voiced tones; FF bản đồ", lines: 10, new_words: {native: 13, hv: 5, other: 3}}
+  - {n: 22, en: At Hà Nội station, grammar: "thì; khi / lúc", bridge: "IA aspiration and the old voiced tones; FF bản đồ", lines: 10, new_words: {native: 13, hv: 5, other: 4}}
   - {n: 23, en: A room for Thảo, grammar: "các / những; mọi / mỗi", bridge: "IS t, th from the old ts- s- series; FF quận", lines: 11, new_words: {native: 13, hv: 6, other: 4}}
   - {n: 24, en: Learning to ride a motorbike, grammar: direction verbs ra / vào / lên / xuống / về / sang, bridge: "IR tr, ch", lines: 11, new_words: {native: 13, hv: 6, other: 2}}
   - {n: 25, en: Lunch near the office, grammar: "result complements xong, hết, thấy, được", bridge: "IR th, s, x", lines: 11, new_words: {native: 13, hv: 6, other: 3}}

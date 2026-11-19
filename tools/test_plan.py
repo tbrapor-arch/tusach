@@ -97,6 +97,41 @@ dup = two + [dict(wrow(13, 'chào'), file='b.tsv')]
 L13d = L + [lesson(13, native=2)]
 ok(any('already in a.tsv' in m for m in run(L13d, dup)), 'a word of list a listed again in list b is refused')
 ok(plan.list_counts(two).count('Word list') == 2, 'list_counts: one sentence per list')
+# word list 3 review, finding 9: lint counts only the approved lists; a draft word in a lesson is refused
+import re, subprocess, tempfile  # noqa: E401,E402
+ROOT = os.path.dirname(HERE)
+L15 = """id: 15
+title: {vi: Thử, en: Test}
+review: false
+setting: test
+dialogue:
+- {n: 1, speaker: Lan, vi: "Cái này rẻ hơn.", en: "This one is cheaper."}
+notes: []
+new_words:
+- {w: hơn, en: "more (than), -er"}
+"""
+real_syl = open(os.path.join(ROOT, 'course/syllabus.yaml'), encoding='utf-8').read()
+both = re.sub(r'(?m)^(  word_list: \{.*file: )course/proposal/wordlist-2.tsv\}',
+              r'\1[course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}', real_syl)
+ok(both != real_syl, 'test syllabus: list 3 added to approved.word_list.file')
+with tempfile.TemporaryDirectory() as tmp:
+    les = os.path.join(tmp, 'lessons')
+    os.mkdir(les)
+    open(os.path.join(les, '15.yaml'), 'w', encoding='utf-8').write(L15)
+    outs_ = {}
+    for name, text in (('draft', real_syl), ('approved', both)):
+        sp = os.path.join(tmp, name + '.yaml')
+        open(sp, 'w', encoding='utf-8').write(text)
+        r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'lint.py')], cwd=ROOT, capture_output=True,
+                           text=True, env=dict(os.environ, TUSACH_COURSE=les, TUSACH_SYLLABUS=sp))
+        outs_[name] = r.stdout + r.stderr
+ok('hơn is not in the approved word list' in outs_['draft'], 'lint: a word of the draft list 3 is not approved')
+ok('hơn is not in the approved word list' not in outs_['approved'] and 'approved word list:' not in outs_['approved'],
+   'lint: with file: [list 2, list 3] the word is approved (both lists read)')
+# a [db: …] part holding brackets is cut whole (word list 3 review, finding 24: sạch's note grew at each run)
+import wordlist  # noqa: E402
+ok(wordlist.human_note('clean. [db: cognate with Tho [Cuối Chăm] pʰrɛːk⁸]') == 'clean.',
+   'human_note: a [db: …] part with brackets inside is removed whole')
 w = plan.Words(con, ['Lan'])
 ok(w.runs('the word quán cà phê, a café') == [['quán', 'cà', 'phê']], 'runs: English words and "café" are left out')
 ok(not w.late('Hán-Việt, sắc and nặng', 1, {}), 'metalanguage (Hán-Việt, tone names) is not a lesson word')

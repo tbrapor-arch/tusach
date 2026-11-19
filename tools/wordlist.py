@@ -43,7 +43,7 @@ def human_note(note):
     """The part of a note a person wrote: without the [db: …] part and without the sentences that described the
     database as it was when the note was drafted ("Database has bận as a verb only …", "see to-check"): those facts
     are now in [db: …]."""
-    note = re.sub(r'\s*\[db:[^\]]*\]', '', note)
+    note = re.sub(r'\s*\[db:.*\Z', '', note, flags=re.S)   # the [db: …] part ends the note; it may hold brackets
     note = re.sub(r'\s*Taigi colloquial/everyday: [^.]*\.', '', note)
     note = re.sub(r'^\(name\)\s*', '', note).strip()
     parts = re.split(r'(?<=[.;])\s+(?=[A-Z"(])', note)
