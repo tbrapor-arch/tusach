@@ -1,0 +1,56 @@
+id: 15
+title: {vi: "Máy nào rẻ hơn?", en: "Which phone is cheaper?"}
+review: false
+setting: >-
+  Monday evening, a week after the birthday dinner. Sacha's phone is old and its battery dies by lunchtime. Thảo
+  takes him to a phone shop on a street near the house. The shop assistant is a young man of about twenty.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Em ơi, anh muốn mua điện_thoại. Loại nào rẻ nhất?", en: "Hello, I'd like to buy a phone. Which kind is the cheapest?", lit: "younger-sibling hey, elder-brother want buy telephone. kind which cheap most?"}
+- {n: 2, speaker: Assistant, vi: "Máy này rẻ nhất anh ạ, hai triệu thôi. Máy cũ, nhưng tốt lắm.", en: "This one is the cheapest, only two million. It's second-hand, but it's very good.", lit: "machine this cheap most elder-brother (polite), two million only. machine old, but good very."}
+- {n: 3, speaker: Thảo, vi: "Máy cũ à? Anh ơi, máy kia mới, chụp ảnh đẹp hơn.", en: "Second-hand? Look, that one is new, and it takes better photos.", lit: "machine old (surprised)? elder-brother hey, machine that new, snap photo beautiful more."}
+- {n: 4, speaker: Sacha, vi: "Máy kia giá bao_nhiêu, em?", en: "How much is that one?", lit: "machine that price how-much, younger-sibling?"}
+- {n: 5, speaker: Assistant, vi: "Năm~five triệu ạ. Máy kia nhanh hơn, pin cũng tốt hơn.", en: "Five million. That one is faster, and the battery is better too.", lit: "five million (polite). machine that fast more, battery also good more."}
+- {n: 6, speaker: Sacha, vi: "Nhưng máy kia nặng quá! Có loại nào nhẹ hơn không?", en: "But that one is so heavy! Is there a lighter kind?", lit: "but machine that heavy so! have kind which light more not?"}
+- {n: 7, speaker: Assistant, vi: "Máy trắng này nhẹ nhất, và nhanh bằng~equal máy kia. Giá cũng năm~five triệu.", en: "This white one is the lightest, and as fast as that one. It's five million too.", lit: "machine white this light most, and fast equal machine that. price also five million."}
+- {n: 8, speaker: Thảo, vi: "Anh chọn máy trắng đi! Đẹp nhất đấy.", en: "Go for the white one! It's the nicest.", lit: "elder-brother choose machine white (urging)! beautiful most (you-see)."}
+- {n: 9, speaker: Sacha, vi: "Thôi, anh lấy máy trắng này.", en: "Right, that's it: I'll take this white one.", lit: "stop, elder-brother take machine white this."}
+notes:
+- {ref: 1, topic: grammar, text: "Loại nào rẻ nhất? \"which kind is the cheapest?\": adjective + nhất is \"the most …, -est\": rẻ nhất, nhẹ nhất (line 7), đẹp nhất (line 8). loại \"kind, type\"; loại nào \"which kind\"."}
+- {ref: 2, topic: particles, text: "Hai triệu thôi \"only two million\": thôi at the end says \"that's all, no more\". At the start of a sentence, Thôi closes a matter, \"right, that's it\" (line 9). triệu \"million\": prices of phones are in millions of {đồng}."}
+- {ref: 2, topic: usage, text: "máy \"machine\" is what a phone shop calls the phone itself: máy này \"this one\" (as in xe máy, \"motorbike\"). The full word is điện thoại \"telephone\". cũ \"old, used\" (of things: máy cũ \"a second-hand phone\"); mới \"new\"."}
+- {ref: 3, topic: grammar, text: "Chụp ảnh đẹp hơn \"takes better photos\": adjective + hơn is \"more …, -er\". What it is compared with follows: Máy này nhẹ hơn máy kia \"this one is lighter than that one\". chụp ảnh \"to take a photo\"."}
+- {ref: 3, topic: grammar, text: "máy kia \"that one (over there)\": kia after a noun points further away than này, and often at the other one of two: cái này, cái kia \"this one, that one\"."}
+- {ref: 4, topic: grammar, text: "Máy kia giá bao nhiêu? \"how much is that one?\": giá \"price\" + bao nhiêu. In a shop one also hears Bao nhiêu tiền? (lesson 4). The person term at the end (…, em?) is friendly."}
+- {ref: 6, topic: grammar, text: "Có loại nào nhẹ hơn không? \"is there a lighter kind?\": có … không? around \"which kind, lighter\". nặng \"heavy\" (the name of the tone nặng), nhẹ \"light\"; nhanh \"fast\"."}
+- {ref: 7, topic: grammar, text: "nhanh bằng máy kia \"as fast as that one\": adjective + bằng + the other is \"as … as\". With không it is \"not as … as\": Máy này không nhẹ bằng máy kia. Line 8: chọn \"to choose\" + đi urges; Đẹp nhất đấy: đấy points it out."}
+- {ref: 1, topic: bridge, text: "From the tone you hear to the Chinese one: điện thoại is 電話 (Mandarin diànhuà, Cantonese din6 waa6): a nặng syllable usually has Mandarin tone 4 and Cantonese 6. Usually also: sắc → Cantonese 3 (giá 價, gaa3), hỏi → Cantonese 2 (chủ 主, zyu2), huyền → Cantonese 4 (hồ 湖, wu4)."}
+new_words:
+- {w: hơn, en: "more (than), -er"}
+- {w: bằng, tag: equal, en: "equal (to), as … as"}
+- {w: nhất, en: "most, -est; first"}
+- {w: thôi, en: "to stop; that's all, only (… thôi)"}
+- {w: kia, en: "that (over there); the other"}
+- {w: cũ, en: "old (of things), used, secondhand; former"}
+- {w: mới, en: "new; just (recently); only then"}
+- {w: nhanh, en: "fast, quick"}
+- {w: chọn, en: "to choose, to pick"}
+- {w: chụp, en: "to photograph (chụp ảnh); to catch, to seize"}
+- {w: pin, en: battery}
+- {w: máy, en: "machine; (in a phone shop) the phone, the device"}
+- {w: nặng, en: heavy}
+- {w: nhẹ, en: "light (in weight); gentle, mild"}
+- {w: điện_thoại, en: "telephone; phone call"}
+- {w: giá, en: price}
+- {w: loại, en: "kind, type, sort"}
+- {w: triệu, en: million}
+exercises:
+  translate:
+  - {vi: "Hôm_nay trời nóng hơn hôm_qua.", en: "It's hotter today than yesterday."}
+  - {vi: "Cái áo đỏ đắt nhất, ba~three trăm nghìn.", en: "The red top is the most expensive: three hundred thousand."}
+  - {vi: "Điện_thoại của chị Lan cũ lắm.", en: "Lan's phone is very old."}
+  - {vi: "Một cốc trà đá~ice năm~five nghìn thôi.", en: "A glass of iced tea is only five thousand."}
+  - {vi: "Phở ở quán kia ngon bằng~equal phở ở quán này.", en: "The phở at that place is as good as the phở here."}
+  fill:
+  - {vi: "Cái áo trắng nhẹ ___ cái áo đen.", answer: hơn, en: "The white top is lighter than the black one."}
+  - {vi: "Quán phở này ngon ___ Hà_Nội!", answer: nhất, en: "This phở place is the best in Hà Nội!"}
+  - {vi: "Máy cũ không nhanh ___ máy mới.", answer: "bằng~equal", en: "The old phone isn't as fast as the new one."}

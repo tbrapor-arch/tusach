@@ -115,3 +115,15 @@ rows a native speaker alone can settle, ranked by the writer.
 | L12.7 (new) Sao phải đi? (line 7) from bác instead of a bare Tại sao? | Claude's choice after review 6 | change (done) | yes (B8) |
 | L13.7 (new) Thảo ơi, ngày mai là sinh nhật mẹ em, phải không? (line 1): Sacha checks the date with Thảo | review 6's line | change (done) | yes, low |
 | L14.6 (new) Mấy giờ ạ? – Bảy giờ rưỡi sáng, ở quán phở gần nhà. (lines 9–10): a clock time recycled from L6 | Claude's line after review 6 | not reviewed | yes, low |
+
+## Lessons 15–28 (drafted by Claude 19 Nov 2026 against word list 3, a DRAFT the owner has not approved; not reviewed)
+Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who read them is a native speaker.
+
+| Point | Choice | Reviewer | Native |
+|---|---|---|---|
+| L15.1 máy for "the phone" in a shop (Máy này rẻ nhất, máy kia, máy trắng này; word list 3 doubt) | máy throughout, điện thoại once (line 1) | – | yes |
+| L15.2 Máy này rẻ nhất anh ạ, hai triệu thôi (line 2): a young assistant's anh ạ in mid-sentence | kept | – | yes, low |
+| L15.3 Thôi, anh lấy máy trắng này (line 9): Thôi at the start, "right, that's it", closing the choice | kept; the note explains it beside the planned "only" | – | yes |
+| L15.4 prices: 2 million đồng second-hand, 5 million new (2026) | kept | – | yes, low |
+| L15.5 Máy trắng này (line 7) without màu, like áo đỏ (L13) | kept | – | yes, low |
+| L15.6 Pin máy kia: pin cũng tốt hơn (line 5) "the battery is better too" | kept | – | yes, low |
