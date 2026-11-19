@@ -161,3 +161,4 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L20.5 Vừa ăn vừa nói chuyện (line 8) without a subject, as a suggestion | kept | – | yes, low |
 | L20.6 Nghe nhạc, tôi làm việc nhanh hơn! (line 10): a bare verb phrase as "with music on" | kept | – | yes |
 | L20.7 Hôm qua tôi làm việc muộn, chín giờ tối mới về nhà (translate 4): mới "only then", met in L15's word list only | kept | – | yes, low |
+| L18.7 buổi sáng, buổi tối: SEGMENTATION makes them one word (buổi_sáng), but word list 3 teaches buổi alone; the lessons use buổi only with a number (hai buổi) and sáng / tối alone for "in the morning / evening" (Tối, chị Lan dạy Bin đọc sách) | kept (no plan change) | – | yes, low (and a word-list point: buổi sáng as a word later) |

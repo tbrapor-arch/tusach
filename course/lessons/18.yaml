@@ -47,7 +47,7 @@ new_words:
 exercises:
   translate:
   - {vi: "Bin biết bơi, nhưng Na không biết bơi.", en: "Bin can swim, but Na can't."}
-  - {vi: "Buổi tối chị Lan dạy Bin đọc sách.", en: "In the evenings Lan teaches Bin to read."}
+  - {vi: "Tối, chị Lan dạy Bin đọc sách.", en: "In the evenings Lan teaches Bin to read."}
   - {vi: "Anh có_thể mua vé ở đây.", en: "You can buy tickets here. (to a young man)"}
   - {vi: "Em không hiểu ngữ_pháp này.", en: "I don't understand this grammar. (to someone older)"}
   - {vi: "Hôm_nay trời mát, đi_bộ đi!", en: "It's cool today: let's walk!"}

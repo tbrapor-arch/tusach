@@ -13,7 +13,7 @@ dialogue:
 - {n: 6, speaker: Tuấn, vi: "Tốt. Sacha, đây là tháng đầu_tiên của em ở văn_phòng. Công_việc thế_nào?", en: "Good. Sacha, this is your first month at the office. How's work?", lit: "good. Sacha, here be month first of younger-sibling at office. work how?"}
 - {n: 7, speaker: Sacha, vi: "Công_việc khó, máy_tính cũ, nhưng đồng_nghiệp đều tốt lắm ạ!", en: "The work is hard and the computer is old, but my colleagues are all very kind!", lit: "work difficult, computer old, but colleague all good very (polite)!"}
 - {n: 8, speaker: Mai, vi: "Sacha ơi, đi ăn_trưa đi! Vừa ăn vừa nói_chuyện.", en: "Sacha, let's go and have lunch! We can talk while we eat.", lit: "Sacha hey, go have-lunch (urging)! while eat while talk."}
-- {n: 9, speaker: Sacha, vi: "Buổi sáng bạn vừa làm_việc vừa nghe nhạc, phải~right không?", en: "In the mornings you work and listen to music at the same time, don't you?", lit: "session morning you while work while listen music, right not?"}
+- {n: 9, speaker: Sacha, vi: "Mai ơi, bạn vừa làm_việc vừa nghe nhạc, phải~right không?", en: "Mai, you work and listen to music at the same time, don't you?", lit: "Mai hey, you while work while listen music, right not?"}
 - {n: 10, speaker: Mai, vi: "Tôi thích nghe nhạc lắm. Nghe nhạc, tôi làm_việc nhanh hơn!", en: "I love listening to music. With music on, I work faster!", lit: "I like listen music very. listen music, I work fast more!"}
 notes:
 - {ref: 1, topic: grammar, text: "Hôm nay bạn đến sớm thế! \"you're early today!\": đến \"to come, to arrive\" (lesson 19) + sớm \"early\" or muộn \"late\" (line 2): đến muộn \"to be late\". muộn is Northern; the South says {trễ}."}
