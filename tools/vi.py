@@ -290,7 +290,9 @@ def card_id(k, tag=None):
 #  7. numerals together (hai mươi, năm năm): each numeral is a word (numerals count as grammatical words in rule 3);
 #  8. a person term + ấy / ta / này / kia / đó (anh ấy, cô ta): a pronoun phrase, two words (added 18 Nov 2026 on the
 #     first real build: Wiktionary lists anh ấy, cô ấy, ông ấy, which put them in the frequency top 300);
-#  9. mọi / mỗi + what follows (mọi người, mọi lúc, mỗi ngày): quantifier + noun, two words, except LEXICALISED (mọi rợ).
+#  9. mọi / mỗi + what follows (mọi người, mọi lúc, mỗi ngày): quantifier + noun, two words, except LEXICALISED (mọi rợ);
+# 10. đau + a body part (đau đầu, đau bụng, đau chân): the ordinary symptom, verb + object, two words (decided 19 Nov
+#     2026, review 6); the cutter cannot tell the figurative đau_đầu "troublesome", so it never joins them.
 MAX = 4
 QUESTION = {'gì', 'ai', 'đâu'}
 CLASSIFIERS = set('con cái chiếc căn cây quyển cuốn tờ bức ngôi tấm đứa trận tòa ngọn sợi hòn'.split())
@@ -306,6 +308,7 @@ DEICTIC = set('nay qua ngoái sau trước tới kia'.split())
 PERSON = set('anh chị em cô chú bác ông bà cậu mợ dì thím thằng con nó hắn bạn'.split())
 POST_PERSON = set('ấy ta này kia đó'.split())
 QUANT = {'mọi', 'mỗi'}
+BODY = set('đầu bụng chân tay lưng răng mắt họng cổ tai ngực vai gối'.split())
 LEXICALISED = {key(x) for x in '''con người|con cái|con trai|con gái|con số|con tin|con dấu|con đường mòn|cây cối|cây số|
 cái chết|vì vậy|vì thế|cho nên|bởi vì|như vậy|như thế|tại sao|vì sao|thế nào|trước khi|sau khi|trong khi|khi nào|
 nhưng mà|hay là|có khi|đôi khi|cho đến|từ khi|hôm nay|hôm qua|hôm kia|ngày nay|bây giờ|sau này|trước đây|lúc này|
@@ -325,7 +328,7 @@ def joinable(k):
     if len(syl) == 2 and ((syl[0] in TIME_NOUNS and syl[1] in DEICTIC) or syl[1] in COMPLEMENTS or syl[1] in PRONOUNS
                           or (syl[0] in PERSON and syl[1] in POST_PERSON)):
         return False
-    if syl[0] in QUANT:
+    if syl[0] in QUANT or (len(syl) == 2 and syl[0] == 'đau' and syl[1] in BODY):
         return False
     return True
 
@@ -402,6 +405,8 @@ def _test():
     assert cut('đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi', {'đứng lên', 'làm xong', 'tìm thấy', 'nhà tôi',
                                                                 'hai mươi'}) == 'đứng lên, làm xong, tìm thấy, nhà tôi, hai mươi'
     assert cut('Anh ấy và cô ta gặp mọi người.', {'anh ấy', 'cô ta', 'mọi người'}) == 'Anh ấy và cô ta gặp mọi người.'
+    assert cut('Tôi đau đầu, đau bụng; đau lòng quá.', {'đau đầu', 'đau bụng', 'đau lòng'}) == \
+        'Tôi đau đầu, đau bụng; đau_lòng quá.'
     assert cut('Người ta nói chúng ta mọi rợ.', {'người ta', 'chúng ta', 'mọi rợ'}) == 'Người_ta nói chúng_ta mọi_rợ.'
     print('vi.py: all tests passed')
 

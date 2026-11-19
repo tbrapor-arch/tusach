@@ -6,7 +6,7 @@ setting: >-
   the washing and looks up at the sky as Sacha comes down.
 dialogue:
 - {n: 1, speaker: Bác, vi: "Hôm_nay trời nóng nhỉ!", en: "It's hot today, isn't it!", lit: "today sky hot (isn't-it)!"}
-- {n: 2, speaker: Sacha, vi: "Vâng ạ, nóng thế! Ở Pháp bây_giờ trời hơi lạnh.", en: "Yes, it's so hot! In France it's a bit cold now.", lit: "yes (polite), hot so! at France now sky slightly cold."}
+- {n: 2, speaker: Sacha, vi: "Vâng ạ, trời nóng thế! Ở Pháp bây_giờ trời hơi lạnh.", en: "Yes, it's so hot! In France it's a bit cold now.", lit: "yes (polite), sky hot so! at France now sky slightly cold."}
 - {n: 3, speaker: Bác, vi: "Thời_tiết ở Pháp thế_nào? Có mưa nhiều không?", en: "What's the weather like in France? Does it rain a lot?", lit: "weather at France how? (yes) rain much not?"}
 - {n: 4, speaker: Sacha, vi: "Có ạ. Mùa đông~winter lạnh lắm, nhưng mùa hè rất đẹp.", en: "Yes. Winter is very cold, but summer is lovely.", lit: "have (polite). season winter cold very, but season summer very beautiful."}
 - {n: 5, speaker: Bác, vi: "Ở Hà_Nội, mùa hè nóng và mưa nhiều.", en: "In Hà Nội, summer is hot and it rains a lot.", lit: "at Hà Nội, season summer hot and rain much."}
@@ -16,13 +16,13 @@ dialogue:
 notes:
 - {ref: 1, topic: grammar, text: "Trời nóng \"it is hot\": an adjective is the predicate by itself, with no là (là joins two nouns). trời \"sky\" stands for the weather: trời nóng, trời nắng \"it is sunny\", trời đẹp \"it is lovely weather\"."}
 - {ref: 1, topic: particles, text: "Hôm nay trời nóng nhỉ! \"it's hot today, isn't it!\": nhỉ at the end asks the listener to agree. It is everyday small talk; the answer agrees: Vâng."}
-- {ref: 2, topic: particles, text: "Nóng thế! \"so hot!\": thế after an adjective is \"so, like this\", an exclamation about what one feels or sees."}
+- {ref: 2, topic: particles, text: "Trời nóng thế! \"it's so hot!\": thế after an adjective is \"so, like this\", an exclamation about what one feels or sees."}
 - {ref: 4, topic: grammar, text: "Degree words: rất before the adjective (rất đẹp \"very lovely\"); lắm after it, more colloquial (lạnh lắm \"very cold\"); quá after it in an exclamation (nóng quá! \"so hot!\"); hơi before it, \"a bit\" (hơi lạnh)."}
 - {ref: 3, topic: grammar, text: "Thời tiết ở Pháp thế nào? \"what is the weather like in France?\": thế nào \"how, what … like\" stands at the end, where the answer goes. thời tiết is \"the weather\"; in speech, trời often does the job."}
 - {ref: 3, topic: grammar, text: "Có mưa nhiều không? \"does it rain a lot?\": mưa is both \"rain\" and \"to rain\". nhiều \"a lot, much\" follows the verb: mưa nhiều."}
 - {ref: 4, topic: usage, text: "mùa \"season\" + its name: mùa hè \"summer\", mùa đông \"winter\". hè is the everyday Northern word. nhưng \"but\" joins two clauses: Mùa đông lạnh lắm, nhưng mùa hè rất đẹp."}
 - {ref: 6, topic: grammar, text: "Hôm nay có mưa không? \"will it rain today?\": the verb does not change for the future; hôm nay and the situation say it. In line 7 sẽ makes the coming rain explicit."}
-- {ref: 4, topic: bridge, text: "Level tones: đông is 冬 (Mandarin dōng): a Mandarin tone 1 usually gives ngang. hồ (lesson 8) is 湖 (hú): a Mandarin tone 2 gives huyền, but ngang after m, n, l, r, y, w or no initial: 南 nam (Mandarin nán)."}
+- {ref: 4, topic: bridge, text: "Level tones: đông is 冬 (Mandarin dōng): a Mandarin tone 1 usually gives ngang. hồ (lesson 8) is 湖 (hú): a Mandarin tone 2 usually gives huyền, ngang after m, n, l, r, y, w or no initial (南 nam, Mandarin nán). Syllables in -p, -t, -c, -ch go their own way (lesson 13): 節 (Mandarin jié) is tiết in thời tiết."}
 new_words:
 - {w: thời_tiết, en: weather}
 - {w: trời, en: "sky; weather; heaven"}

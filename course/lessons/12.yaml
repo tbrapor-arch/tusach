@@ -6,24 +6,24 @@ setting: >-
   he is still at home, and chị Lan's mother knocks at his door.
 dialogue:
 - {n: 1, speaker: Bác, vi: "Cháu sao~why thế? Cháu không khỏe à?", en: "What's wrong? Aren't you well?", lit: "grandchild why so? grandchild not well (surprised)?"}
-- {n: 2, speaker: Sacha, vi: "Cháu mệt quá, bác ạ. Đầu cháu đau lắm.", en: "I'm so tired. My head hurts a lot.", lit: "grandchild tired so, uncle-aunt (polite). head grandchild hurt very."}
+- {n: 2, speaker: Sacha, vi: "Cháu mệt quá, bác ạ. Cháu đau đầu lắm.", en: "I'm so tired. I have a bad headache.", lit: "grandchild tired so, uncle-aunt (polite). grandchild hurt head very."}
 - {n: 3, speaker: Bác, vi: "Cháu bị cảm rồi. Hôm_qua trời mưa nhiều quá.", en: "You've caught a cold. It rained so much yesterday.", lit: "grandchild suffer cold already. yesterday sky rain much so."}
 - {n: 4, speaker: Sacha, vi: "Cháu có phải~must gặp bác_sĩ không ạ?", en: "Do I have to see a doctor?", lit: "grandchild (yes) must meet doctor not (polite)?"}
 - {n: 5, speaker: Bác, vi: "Không sao~why đâu. Cháu nên uống thuốc, rồi nghỉ ở nhà.", en: "It's nothing. You should take some medicine, then rest at home.", lit: "not how (not-at-all). grandchild should drink medicine, then rest at house."}
 - {n: 6, speaker: Sacha, vi: "Nhưng hôm_nay cháu phải~must đi làm ạ.", en: "But I have to go to work today.", lit: "but today grandchild must go work (polite)."}
-- {n: 7, speaker: Bác, vi: "Tại_sao? Cháu ốm, cháu nên nghỉ.", en: "Why? You're ill: you should rest.", lit: "why? grandchild ill, grandchild should rest."}
+- {n: 7, speaker: Bác, vi: "Sao~why phải~must đi? Cháu ốm, cháu nên nghỉ.", en: "Why do you have to go? You're ill: you should rest.", lit: "why must go? grandchild ill, grandchild should rest."}
 - {n: 8, speaker: Sacha, vi: "Vì hôm_nay cháu bận lắm ạ.", en: "Because I'm very busy today.", lit: "because today grandchild busy very (polite)."}
 - {n: 9, speaker: Bác, vi: "Nghỉ một ngày, ngày_mai cháu sẽ khỏe. Uống thuốc đi!", en: "Rest for a day and you'll be well tomorrow. Take your medicine!", lit: "rest one day, tomorrow grandchild will well. drink medicine (urging)!"}
 notes:
 - {ref: 1, topic: particles, text: "Cháu sao thế? \"what's wrong?\": sao \"why, how\" + thế, the Northern way to ask what has happened. Cháu không khỏe à? \"aren't you well?\"; the ordinary question is Cháu có khỏe không? \"are you well?, how are you?\"."}
-- {ref: 2, topic: grammar, text: "Đầu cháu đau lắm \"my head hurts a lot\": đau \"to hurt\" follows what hurts. mệt \"tired\", ốm \"ill\" (the Northern word, line 7), khỏe \"well, healthy\"."}
+- {ref: 2, topic: grammar, text: "Cháu đau đầu lắm \"I have a bad headache\": đau \"to hurt\" + the body part says what hurts: đau đầu, {đau bụng} \"to have a stomach ache\". mệt \"tired\", ốm \"ill\" (the Northern word, line 7), khỏe \"well, healthy\"."}
 - {ref: 3, topic: grammar, text: "Cháu bị cảm rồi \"you have caught a cold\": bị before a verb or a noun marks something bad that happens to you: bị cảm \"to have a cold\", bị ốm \"to fall ill\". rồi says it has happened."}
 - {ref: 4, topic: grammar, text: "phải + verb is \"must, to have to\": Cháu có phải gặp bác sĩ không? \"do I have to see a doctor?\". The same spelling as phải \"right\" (lesson 3), another sense."}
 - {ref: 5, topic: particles, text: "Không sao đâu \"it's nothing, don't worry\": đâu at the end makes a negative stronger, \"not at all\". In ở đâu (lesson 2) it is \"where\"."}
 - {ref: 5, topic: grammar, text: "nên + verb is \"should\": advice, softer than phải. uống thuốc \"to take medicine\" (uống \"to drink\"), also said of pills."}
-- {ref: 7, topic: grammar, text: "Tại sao? – Vì …: tại sao \"why\" asks for a reason and vì \"because\" gives it (line 8). sao alone also asks \"why\", more colloquially: Sao cháu không nghỉ?"}
-- {ref: 4, topic: usage, text: "bác sĩ \"doctor\" and bác \"uncle, aunt\" (lesson 5) are different words with the same first syllable. Sacha still calls chị Lan's mother bác and himself cháu."}
-- {ref: 3, topic: bridge, text: "Departing tones: bị is 被 (Mandarin bèi, Cantonese bei6). A Mandarin tone 4 gives sắc or nặng, and Cantonese usually tells which: tone 6 nặng (定 định, ding6), tone 3 sắc (過 quá, gwo3)."}
+- {ref: 7, topic: grammar, text: "Sao phải đi? \"why do you have to go?\": sao \"why\", the everyday word, before the verb. tại sao \"why\" is fuller; vì \"because\" gives the reason (line 8): Tại sao …? – Vì …"}
+- {ref: 4, topic: false-friend, text: "bác sĩ \"doctor\" is 博士, but Chinese 博士 is a PhD; a physician is 醫生. bác \"uncle, aunt\" (lesson 5) is another word."}
+- {ref: 3, topic: bridge, text: "Departing tones: bị is 被 (Mandarin bèi, Cantonese bei6). A Mandarin tone 4 usually gives sắc or nặng, and Cantonese usually tells which: tone 6 nặng (定 định, ding6), tone 3 sắc (過 quá, gwo3)."}
 new_words:
 - {w: mệt, en: tired}
 - {w: ốm, en: "ill, sick (Northern)"}
@@ -46,7 +46,7 @@ new_words:
 exercises:
   translate:
   - {vi: "Chị Lan bị ốm, hôm_nay chị ấy nghỉ ở nhà.", en: "Lan is ill: she's staying at home today."}
-  - {vi: "Sao~why em buồn thế?", en: "Why are you so sad? (to someone younger)"}
+  - {vi: "Na buồn vì Bin không chơi với Na.", en: "Na is sad because Bin won't play with her."}
   - {vi: "Thuốc này rất tốt.", en: "This medicine is very good."}
   - {vi: "Bin bị cảm. Hai ngày sau, Bin đi học.", en: "Bin had a cold. Two days later, he went to school."}
   - {vi: "Tại_sao anh Minh không ăn phở?", en: "Why isn't Minh eating phở?"}

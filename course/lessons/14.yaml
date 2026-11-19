@@ -6,7 +6,7 @@ setting: >-
   gives her the red top he bought with Thảo the day before. Nothing new in this dialogue: every word comes from
   lessons 1–13. The notes gather what lessons 8–13 brought.
 dialogue:
-- {n: 1, speaker: Sacha, vi: "Cháu chào bác ạ. Cháu tặng bác cái áo này.", en: "Good evening. This top is a present for you.", lit: "grandchild greet uncle-aunt (polite). grandchild give-as-present uncle-aunt (thing) top this."}
+- {n: 1, speaker: Sacha, vi: "Cháu chào bác ạ. Cháu tặng bác cái áo này ạ.", en: "Good evening. This top is a present for you.", lit: "grandchild greet uncle-aunt (polite). grandchild give-as-present uncle-aunt (thing) top this (polite)."}
 - {n: 2, speaker: Bác, vi: "Cảm_ơn cháu! Áo đẹp thế! Cháu mua ở đâu đấy?", en: "Thank you! What a lovely top! Where did you buy it?", lit: "thank grandchild! top beautiful so! grandchild buy at where (friendly)?"}
 - {n: 3, speaker: Sacha, vi: "Cháu mua ở chợ, với Thảo ạ. Bác mặc thử đi ạ!", en: "At the market, with Thảo. Do try it on!", lit: "grandchild buy at market, with Thảo (polite). uncle-aunt wear try (urging) (polite)!"}
 - {n: 4, speaker: Bác, vi: "Vừa lắm! Đẹp nhỉ! Sao~why cháu biết bác thích màu đỏ?", en: "It fits perfectly! Lovely, isn't it? How did you know I like red?", lit: "fit very! beautiful (isn't-it)! how grandchild know uncle-aunt like colour red?"}
@@ -14,17 +14,18 @@ dialogue:
 - {n: 6, speaker: Minh, vi: "Em khỏe chưa? Ăn thêm thịt gà đi!", en: "Are you better yet? Have some more chicken!", lit: "younger-sibling well not-yet? eat more meat chicken (urging)!"}
 - {n: 7, speaker: Sacha, vi: "Em khỏe rồi ạ, không sao~why đâu. Em uống thuốc và nghỉ một ngày.", en: "I'm well now, it was nothing. I took some medicine and rested for a day.", lit: "younger-sibling well already (polite), not how (not-at-all). younger-sibling drink medicine and rest one day."}
 - {n: 8, speaker: Lan, vi: "Thứ_bảy tuần sau em có rảnh không? Đi ăn phở với anh chị nhé!", en: "Are you free next Saturday? Come and have phở with Minh and me!", lit: "Saturday week after younger-sibling (yes) free not? go eat phở with elder-brother elder-sister, OK!"}
-- {n: 9, speaker: Sacha, vi: "Vâng ạ! Em thích phở lắm.", en: "Yes! I like phở a lot.", lit: "yes (polite)! younger-sibling like phở very."}
+- {n: 9, speaker: Sacha, vi: "Vâng ạ! Em thích phở lắm. Mấy giờ ạ?", en: "Yes! I like phở a lot. What time?", lit: "yes (polite)! younger-sibling like phở very. how-many hour (polite)?"}
+- {n: 10, speaker: Lan, vi: "Bảy giờ rưỡi sáng, ở quán phở gần nhà.", en: "Half past seven in the morning, at the phở place near the house.", lit: "seven hour half morning, at shop phở near house."}
 notes:
-- {ref: 1, topic: pronouns, text: "Cháu tặng bác cái áo này: cháu and bác, as in lessons 5, 6, 9 and 12. Bác says bác for \"I\" (line 4: bác thích màu đỏ \"I like red\"); to Minh and Lan, Sacha is em (lines 6–8)."}
-- {ref: 0, topic: pronouns, text: "Pronouns so far. tôi: neutral, with strangers. bạn / tôi: people of the same age (Sacha and Mai). anh / em: Sacha with Minh (he is em) and with Thảo (he is anh). chị / em: Sacha with Lan; a customer with an older stallholder (Chị ơi!). bác / cháu: Sacha with Lan's mother. The word for \"I\" changes with the listener: to Sacha, Minh says anh; to the phở-shop owner, em. \"Your mum\", to Thảo: mẹ em. in line 8, anh chị is \"Minh and I\"."}
-- {ref: 0, topic: grammar, text: "Orders and suggestions (lesson 8): verb + đi urges (Đi thẳng đi!, Ăn thêm thịt gà đi!); đừng + verb is \"don't\" (Đừng rẽ!); nào urges, the speaker included (Đi nào!). With a person term in front it tends to sound softer: Bác mặc thử đi ạ!"}
-- {ref: 0, topic: grammar, text: "Adjectives (lesson 9) need no là: Trời nóng, Áo đẹp. Degree: rất đẹp, đẹp lắm, đẹp quá!, hơi nhỏ \"a bit small\"; thế \"so\" (Nóng thế!); nhỉ asks the listener to agree (Nóng nhỉ!)."}
-- {ref: 0, topic: grammar, text: "Has it happened? (lesson 10): đã … chưa? \"… yet?\"; Chưa \"not yet\"; rồi after the verb or adjective, \"already, now\": Em khỏe rồi. Between two actions rồi is \"then\" (lesson 8)."}
-- {ref: 0, topic: grammar, text: "Days and plans (lesson 11): thứ bảy, chủ nhật; tuần sau \"next week\"; tháng tám \"August\"; bao giờ \"when\"; định + verb \"to plan to\"; thích \"to like\"; hay \"or\" in a question; với \"with\" (với Thảo, nói với cháu \"told me\")."}
-- {ref: 0, topic: grammar, text: "Health and reasons (lesson 12): bị + something bad (bị cảm, bị ốm); nên \"should\", phải \"must\"; sao / tại sao \"why?\" – vì \"because\"; Sao thế? \"what's wrong?\"; Không sao đâu \"it's nothing\"."}
-- {ref: 0, topic: grammar, text: "Counting and shopping (lessons 10, 13): cái for most things (một cái áo, cái này \"this one\"), quả for round things (hai quả trứng), bát and cốc as counters (hai bát phở). Colours follow the noun (áo đỏ). to / nhỏ for size, vừa \"to fit\"; mua \"buy\", lấy \"take\", tặng \"give as a present\"."}
-- {ref: 0, topic: bridge, text: "Tones of Hán-Việt words so far: Mandarin tone 1 usually ngang; tone 2 huyền (ngang after m, n, l, r, y, w or no initial); tone 3 usually hỏi (ngã after the same initials); tone 4 sắc or nặng, Cantonese 3 or 6 deciding; a syllable in -p, -t, -c, -ch has only sắc or nặng."}
+- {ref: 1, topic: pronouns, text: "Cháu tặng bác cái áo này ạ: cháu to bác; ạ keeps it polite (to an elder, {biếu} is the respectful \"give\"). Bác says bác for \"I\" (line 4)."}
+- {ref: 0, topic: pronouns, text: "Pronouns so far. tôi: neutral. bạn / tôi: the same age (Sacha, Mai). anh / em: Sacha is em to Minh, anh to Thảo. chị / em: Sacha with Lan. bác / cháu: Sacha with Lan's mother. In line 8, anh chị is \"Minh and I\"."}
+- {ref: 0, topic: grammar, text: "Orders (lesson 8): verb + đi urges (Ăn thêm thịt gà đi!); đừng + verb \"don't\"; nào urges, the speaker included (Đi nào!). A person term in front softens: Bác mặc thử đi ạ!"}
+- {ref: 0, topic: grammar, text: "Adjectives (lesson 9) need no là: Áo đẹp. Degree: rất đẹp, đẹp lắm, đẹp quá!, hơi nhỏ; thế \"so\" (Áo đẹp thế!); nhỉ asks the listener to agree."}
+- {ref: 0, topic: grammar, text: "Lesson 10: đã … chưa? \"… yet?\"; Chưa \"not yet\"; rồi after the verb: Em khỏe rồi."}
+- {ref: 0, topic: grammar, text: "Days and plans (lesson 11): thứ bảy, chủ nhật; tuần sau \"next week\" (new here: tuần + sau); bao giờ \"when\"; định + verb; hay \"or\" in a question. Times as in lesson 6: bảy giờ rưỡi sáng."}
+- {ref: 0, topic: grammar, text: "Health and reasons (lesson 12): bị + something bad (bị cảm); nên \"should\", phải \"must\"; sao / tại sao \"why?\" – vì \"because\"; Không sao đâu \"it's nothing\"."}
+- {ref: 0, topic: grammar, text: "Shopping (lessons 10, 13): cái for most things (cái này \"this one\"), quả for round things, bát and cốc as counters. Colours follow the noun (áo đỏ). vừa \"to fit\"; lấy \"take\"."}
+- {ref: 0, topic: bridge, text: "Hán-Việt tones. First, a syllable in -p, -t, -c, -ch has only sắc or nặng: Cantonese 1 or 3 usually sắc, 6 nặng. Otherwise, usually: Mandarin tone 1 gives ngang, tone 2 huyền (ngang after m, n, l, r, y, w or none), tone 3 hỏi (ngã after them), tone 4 sắc or nặng (Cantonese 3 or 6)."}
 new_words: []
 exercises:
   translate:

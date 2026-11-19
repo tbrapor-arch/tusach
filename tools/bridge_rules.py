@@ -243,7 +243,7 @@ RULES = [
     ('T3', 'zh>vi', 'tones-yue', 'Cantonese 3, not -p -t -k → sắc', _all(YOPEN, YT(3)), HT('sắc'), None),
     ('T3', 'zh>vi', 'tones-yue', 'Cantonese 6, not -p -t -k → nặng', _all(YOPEN, YT(6)), HT('nặng'), None),
     ('T4', 'zh>vi', 'tones-yue', 'Cantonese -p -t -k in tone 1 or 3 → sắc', _all(YCHK, YT(1, 3)), HT('sắc'), None),
-    ('T4', 'zh>vi', 'tones-yue', 'Cantonese -p -t -k in tone 2 4 5 6 → nặng', _all(YCHK, YT(2, 4, 5, 6)), HT('nặng'), None),
+    ('T4', 'zh>vi', 'tones-yue', 'Cantonese -p -t -k in tone 6 → nặng', _all(YCHK, YT(6)), HT('nặng'), None),
     ('T*', 'zh>vi', 'tones-yue', 'every tone from Cantonese (the rules above together)', _is('yt', 1, 2, 3, 4, 5, 6),
      lambda f: None if f['ychk'] is None or f['yson'] is None else f['ht'] == yue_tone(f), None),
     ('T1x', 'drop', 'tones-yue', 'Cantonese 4 → huyền, whatever the initial (first proposal)', _all(YOPEN, YT(4)),

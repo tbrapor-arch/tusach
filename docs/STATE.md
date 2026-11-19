@@ -4,7 +4,7 @@
 <!-- state:numbers -->
 - Course lexicon: 539 rows (doubt 14, likely 97, sure 428; 51 with an override; 254 with an example written by Claude); golden cards: 555.
 - Top 1,000 cards, labels: same 385, gram 7, hv-vn 13, doubtful 12, opaque 18, older-loan 111, loan 9, native 200, compound 111, false-friend 10, unknown 124.
-- Cards showing chữ Hán (Hán-Việt analysis) among the top 1,000 / 3,000 / 5,000: 433 / 1499 / 2569.
+- Cards showing chữ Hán (Hán-Việt analysis) among the top 1,000 / 3,000 / 5,000: 433 / 1499 / 2570.
 - Taigi: 180 characters with a reading found colloquial (coda class or 麻 rhyme).
 - Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 41 with no etymology recorded.
 - Sound rules: 993 syllables (character + Hán-Việt reading) of 1499 Hán-Việt cards of rank <= 3000. 132 measured: 91 rules, 14 tendencies, 16 that narrow the choice, 2 facts of spelling, 9 dropped. Every tone from Cantonese: main 910 / 993, 92 %, strict 797 / 993, 80 %; from Taigi: main 878 / 959, 92 %, strict 853 / 959, 89 %.

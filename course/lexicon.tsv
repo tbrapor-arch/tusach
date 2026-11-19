@@ -26,7 +26,7 @@ Minh	name	Minh (a name; 明 bright)	hv	明				sure	wikt: a unisex given name fro
 người	noun	person, people; (before a nationality) a … person	native				người Pháp "a French person": the modifier follows the noun	sure	wikt: person, people		Tôi là người Pháp.	I'm French.
 nước~water	noun	water; drink	native					sure	wikt ety 1: water	en-item: "drink" (nước uống) is everyday use		
 nước~country	noun	country, nation	native				nước Pháp "France", {nước ngoài} "abroad"	likely	wikt ety 2: country, nation		Anh là người nước nào?	Which country are you from?
-nào	det	which; (after a noun) any	unknown				After the noun: người nước nào? "from which country?"; at the end of a sentence it urges, "come on, let's": {Đi} nào! "Let's go!"	sure	wikt: which; every, any		Chị là người nước nào?	What country are you from?
+nào	det	which; any; (at the end) come on, let's	unknown				After the noun: người nước nào? "from which country?"; at the end of a sentence it urges, the speaker included: {Đi} nào! "Let's go!"	sure	wikt: which; every, any		Chị là người nước nào?	What country are you from?
 ở	prep	at, in; to live, to be (somewhere)	native					sure	wikt: at, in; to be, to live, to stay		Em ở Hà Nội.	I live in Hanoi.
 đâu	pron	where; (emphatic) not at all	unknown				ở đâu? "where?"; không … đâu "not at all"	sure	wikt: where; no, not		Anh ở đâu?	Where do you live?
 à	particle	(final particle: checking or surprised) so …?; oh	unknown				Anh là người Pháp à? "So you're French?"; {Thế à?} "Really?"	sure	wikt: question particle; surprise or a sudden recollection	en-item: a particle, described in English	Anh là người Pháp à?	So you're French?
@@ -189,7 +189,7 @@ hay~often	adv	often	unknown				Before the verb: Tôi hay đi bộ	sure	wikt ety 
 bao giờ	pron	when; ever	compound				At the start, future: Bao giờ anh đi?; at the end, past: Anh {đến} bao giờ?	sure	wikt: when		Bao giờ anh về Pháp?	When are you going back to France?
 mệt	adj	tired	unknown					sure	wikt: tired		Hôm nay em mệt quá.	I'm so tired today.
 ốm	adj	ill, sick (Northern)	native				Northern; in the South ốm is "thin" and "ill" is {bệnh}	sure	wikt: sick, ill (Northern); thin (Southern)		Cháu bị ốm à?	Are you ill?
-đau	adj	to hurt, painful	native				đau đầu "headache"	sure	wikt: painful, to hurt		Tôi đau đầu quá.	I have a bad headache.
+đau	adj	to hurt, painful	native				Before the body part: đau đầu "to have a headache", đau {bụng} "to have a stomach ache"	sure	wikt: painful, to hurt		Tôi đau đầu quá.	I have a bad headache.
 đầu	noun	head; beginning, first (part)	hv	頭			{lần} đầu "the first time"	sure	wikt: head; an end or extremity		Bác ơi, cháu đau đầu.	I've got a headache (to someone older).
 bụng	noun	belly, stomach	native				đau bụng "stomach ache"	sure	wikt: belly			
 sốt	noun	fever; to have a fever	unknown				bị sốt "to have a fever"	sure	wikt: fever			
@@ -335,7 +335,7 @@ sinh	verb	to be born; to give birth	hv	生			sinh năm 1990 "born in 1990"	sure	
 tất cả	det	all, everything, everyone	compound					likely	wikt: all, everything, everybody		Tất cả chúng tôi đều là người Pháp.	We are all French.
 đủ	adj	enough	native					sure	wikt: sufficiently, enough			
 chiếc	classifier	(classifier for vehicles and single objects)	older-loan		隻		chiếc xe "a car", chiếc giày "a shoe"	sure	wikt: Indicates vehicles; a single one (隻)			
-sao~why	adv	why; how (Sao thế? "What's wrong?")	unknown				Northern Sao thế?, Southern {Sao vậy?}	sure	wikt ety 1: why; how		Sao thế, cháu?	What's wrong?
+sao~why	adv	why; how (Sao thế? "What's wrong?")	unknown				Northern Sao thế? "What's wrong?", Southern {Sao vậy?}; Không sao (đâu) "it's nothing, no problem"	sure	wikt ety 1: why; how		Sao thế, cháu?	What's wrong?
 sao~star	noun	star	native					sure	wikt ety 2: star			
 yêu	verb	to love	native					sure	wikt: to love		Anh ấy yêu vợ lắm.	He loves his wife very much.
 thế giới	noun	world	hv	世界				sure	wikt: world			

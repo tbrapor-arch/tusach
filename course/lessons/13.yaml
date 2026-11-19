@@ -6,10 +6,10 @@ setting: >-
   covered market near the Old Quarter. At a clothes stall, the stallholder is a woman of about forty. Thảo is the
   same size as her mother.
 dialogue:
-- {n: 1, speaker: Sacha, vi: "Thảo ơi, chủ_nhật là sinh_nhật mẹ em. Anh muốn mua quà.", en: "Thảo, Sunday is your mother's birthday. I'd like to buy a present.", lit: "Thảo hey, Sunday be birthday mother younger-sibling. elder-brother want buy present."}
+- {n: 1, speaker: Sacha, vi: "Thảo ơi, ngày_mai là sinh_nhật mẹ em, phải~right không? Anh muốn mua quà.", en: "Thảo, tomorrow is your mother's birthday, isn't it? I'd like to buy a present.", lit: "Thảo hey, tomorrow be birthday mother younger-sibling, right not? elder-brother want buy present."}
 - {n: 2, speaker: Thảo, vi: "Anh định tặng mẹ em gì?", en: "What are you planning to give my mother?", lit: "elder-brother intend give-as-present mother younger-sibling what?"}
 - {n: 3, speaker: Sacha, vi: "Một cái áo. Anh mua ở cửa_hàng nhé?", en: "A top. Shall I buy it in a shop?", lit: "one (thing) top. elder-brother buy at shop, OK?"}
-- {n: 4, speaker: Thảo, vi: "Đừng mua ở cửa_hàng, đắt lắm! Đi chợ đi.", en: "Don't buy it in a shop, it's very expensive! Go to the market.", lit: "don't buy at shop, expensive very! go market (urging)."}
+- {n: 4, speaker: Thảo, vi: "Đừng mua ở cửa_hàng, đắt lắm! Đi chợ đi.", en: "Don't buy it in a shop, it's very expensive! Let's go to the market.", lit: "don't buy at shop, expensive very! go market (urging)."}
 - {n: 5, speaker: Sacha, vi: "Chị ơi, cái áo đỏ này bao_nhiêu tiền?", en: "Excuse me, how much is this red top?", lit: "elder-sister hey, (thing) top red this how-much money?"}
 - {n: 6, speaker: Stall owner, vi: "Hai trăm nghìn. Áo này cũng có màu trắng và màu đen.", en: "Two hundred thousand. This top also comes in white and black.", lit: "two hundred thousand. top this also have colour white and colour black."}
 - {n: 7, speaker: Thảo, vi: "Mẹ em thích màu đỏ. Chị ơi, em mặc thử nhé?", en: "My mother likes red. Excuse me, can I try it on?", lit: "mother younger-sibling like colour red. elder-sister hey, younger-sibling wear try, OK?"}
@@ -24,7 +24,7 @@ notes:
 - {ref: 6, topic: grammar, text: "Colours: màu \"colour\" + its name: màu đỏ \"red\", màu trắng \"white\", màu đen \"black\". After a noun, màu is often left out: áo đỏ \"a red top\"."}
 - {ref: 7, topic: grammar, text: "Em mặc thử nhé? \"can I try it on?\": mặc \"to wear, to put on\" + thử \"to try\"; thử after a verb is \"try and see\"."}
 - {ref: 8, topic: grammar, text: "Size and fit: to \"big\", nhỏ \"small\": Cái này hơi nhỏ; cái to \"a big one\". vừa \"to fit\": Cái này vừa (line 9). lấy \"to take\" is what one says when choosing in a shop: Anh lấy cái này đi!"}
-- {ref: 1, topic: bridge, text: "Checked syllables: nhật is 日 (Mandarin rì, Cantonese jat6). A syllable in -p, -t, -c, -ch has only sắc or nặng; the Cantonese tone tells which: 1 or 3 gives sắc (法 Pháp, faat3), 2, 4, 5 or 6 gives nặng (日 nhật, 學 học, hok6)."}
+- {ref: 1, topic: bridge, text: "Checked syllables: nhật is 日 (Mandarin rì, Cantonese jat6). A syllable in -p, -t, -c, -ch has only sắc or nặng; the Cantonese tone usually tells which: 1 or 3 sắc (法 Pháp, faat3), 6 nặng (日 nhật, jat6; 學 học, hok6)."}
 new_words:
 - {w: chợ, en: market}
 - {w: cửa_hàng, en: "shop, store"}
@@ -46,7 +46,7 @@ new_words:
 - {w: mua, en: to buy}
 exercises:
   translate:
-  - {vi: "Tôi muốn mua một cái áo trắng.", en: "I'd like to buy a white top."}
+  - {vi: "Chị Lan có hai cái áo trắng.", en: "Lan has two white tops."}
   - {vi: "Cái áo đen này hơi to.", en: "This black top is a bit big."}
   - {vi: "Bin thích màu đỏ.", en: "Bin likes red."}
   - {vi: "Hôm_qua anh Minh mua quà sinh_nhật ở cửa_hàng.", en: "Yesterday Minh bought a birthday present in a shop."}
@@ -54,4 +54,4 @@ exercises:
   fill:
   - {vi: "Em mặc ___ cái áo này nhé?", answer: thử, en: "Shall I try this top on?"}
   - {vi: "Cái áo này ___ lắm!", answer: vừa, en: "This top fits perfectly!"}
-  - {vi: "Tôi ___ cái này.", answer: lấy, en: "I'll take this one."}
+  - {vi: "Em ___ cái màu đen.", answer: lấy, en: "I'll take the black one. (to an older stallholder)"}

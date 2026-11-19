@@ -47,7 +47,7 @@ he lands with no Vietnamese and rents a room in chị Lan's family house near th
 | ông Hùng, the old neighbour | 78 | grandparents' generation | ông / cháu |
 
 **trà or chè.** The previous session's lexicon row (trà~tea, kept): trà is the usual word, Hà Nội included (trà đá,
-trà chanh, trà sữa at every café and stall), and is more frequent: <!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11198; tools/freq.py, chè counting the dessert too)<!-- /plan -->. The card adds: in the North chè is also tea, at home and for the leaf
+trà chanh, trà sữa at every café and stall), and is more frequent: <!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11197; tools/freq.py, chè counting the dessert too)<!-- /plan -->. The card adds: in the North chè is also tea, at home and for the leaf
 (nước chè, chè xanh), and everywhere chè is a sweet dessert soup. Who still says chè at home in Hà Nội is not
 checked (to-check list, item 1).
 
@@ -166,7 +166,7 @@ Taigi decides.
 | T3 | Cantonese 3, not -p -t -k → sắc | zh→vi | 122 / 137, 89 % | 139 / 180, 77 % |  |  | **rule** | 過 qua 間 gian 轉 chuyển 句 câu 處 xử 載 tải 計 kê 撰 soạn |
 | T3 | Cantonese 6, not -p -t -k → nặng | zh→vi | 134 / 149, 90 % | 144 / 180, 80 % |  |  | **rule** | 問 vấn 士 sĩ 義 nghĩa 互 hỗ 調 điều 靜 tĩnh 技 kỹ 彈 đàn |
 | T4 | Cantonese -p -t -k in tone 1 or 3 → sắc | zh→vi | 83 / 85, 98 % | 88 / 99, 89 % |  |  | **rule** | 絡 lạc 協 hiệp |
-| T4 | Cantonese -p -t -k in tone 2 4 5 6 → nặng | zh→vi | 78 / 81, 96 % | 83 / 88, 94 % |  |  | **rule** | 隰 thấp 率 suất 摘 trích |
+| T4 | Cantonese -p -t -k in tone 6 → nặng | zh→vi | 78 / 81, 96 % | 83 / 88, 94 % |  |  | **rule** | 隰 thấp 率 suất 摘 trích |
 | T* | every tone from Cantonese (the rules above together) | zh→vi | 910 / 993, 92 % | 797 / 993, 80 % |  |  | **rule** | 數 số 分 phần 過 qua 間 gian 問 vấn 重 trọng 轉 chuyển 社 xã |
 | T1x | Cantonese 4 → huyền, whatever the initial (first proposal) | dropped | 97 / 179, 54 % | 100 / 200, 50 % |  |  | **drop** | 如 như 仍 nhưng 南 nam 由 do 重 trọng 民 dân 員 viên 查 tra |
 | T1x | Cantonese 4 → ngang when the VIETNAMESE initial is m n nh ng l v d (proposal 2: circular) | dropped | 76 / 76, 100 % | 77 / 79, 97 % |  |  | **drop** | — |

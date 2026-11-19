@@ -13,16 +13,16 @@ dialogue:
 - {n: 6, speaker: Sacha, vi: "Phim Việt_Nam. Tôi đang học tiếng_Việt.", en: "Vietnamese films. I'm learning Vietnamese.", lit: "film Vietnam. I (now) study Vietnamese."}
 - {n: 7, speaker: Mai, vi: "Bao_giờ bạn về Pháp?", en: "When are you going back to France?", lit: "when you return France?"}
 - {n: 8, speaker: Sacha, vi: "Tháng tám. Tôi định ở Hà_Nội một năm~year.", en: "In August. I'm planning to stay in Hà Nội for a year.", lit: "month eight. I intend stay Hà Nội one year."}
-- {n: 9, speaker: Mai, vi: "Một năm~year à? Cuối_tuần đi chơi với tôi và bạn tôi nhé!", en: "A year? Come out with my friend and me at weekends!", lit: "one year (surprised)? weekend go play with I and friend I, OK!"}
+- {n: 9, speaker: Mai, vi: "Một năm~year à? Bạn sẽ thích Hà_Nội lắm!", en: "A year? You'll love Hà Nội!", lit: "one year (surprised)? you will like Hà Nội very!"}
 notes:
-- {ref: 1, topic: pronouns, text: "bạn \"friend\" is also a neutral \"you\" between people of about the same age, like Sacha and Mai, colleagues of 27; with it they say tôi for \"I\". It is also the \"you\" of signs and messages."}
-- {ref: 1, topic: grammar, text: "Cuối tuần bạn có rảnh không? \"are you free at the weekend?\": rảnh \"free\" and bận \"busy\" (line 2) are asked like any adjective. cuối tuần \"weekend\" is \"the end of the week\"."}
-- {ref: 2, topic: grammar, text: "Days of the week: thứ + a number, from Monday to Saturday: {thứ hai} \"Monday\" … thứ bảy \"Saturday\"; Sunday is chủ nhật. Like other time words, they usually come first: Thứ bảy tôi bận."}
+- {ref: 1, topic: pronouns, text: "bạn \"friend\" is also a neutral \"you\" between people of about the same age, like Sacha and Mai, colleagues of 27; with it they say tôi for \"I\", still a little formal (friends say {mình}). It is also the \"you\" of signs and messages."}
+- {ref: 1, topic: false-friend, text: "Cuối tuần bạn có rảnh không? \"are you free at the weekend?\": rảnh \"free\" and bận \"busy\" (line 2) are asked like any adjective. cuối tuần \"weekend\" is \"the end of the week\"; tuần is 旬, ten days in Chinese."}
+- {ref: 2, topic: grammar, text: "Days of the week: thứ + a number, from Monday to Saturday: {thứ hai} \"Monday\" … thứ bảy \"Saturday\" (Wednesday is {thứ tư}, not bốn); Sunday is chủ nhật. Like other time words, they usually come first: Thứ bảy tôi bận."}
 - {ref: 3, topic: grammar, text: "Tôi định đi xem phim \"I'm planning to see a film\": định + verb is \"to intend to, to plan to\". với \"with\": với bạn tôi \"with a friend of mine\" (bạn tôi \"my friend\", the owner last)."}
 - {ref: 4, topic: grammar, text: "Tôi thích xem phim: thích \"to like\" goes before a noun or a verb, like muốn (lesson 3). xem is \"to watch, to look at\": xem phim \"to see a film\"."}
 - {ref: 5, topic: grammar, text: "Phim Việt Nam hay phim Pháp? \"Vietnamese films or French films?\": hay \"or\" offers a choice in a question; the answer picks one (line 6)."}
 - {ref: 7, topic: grammar, text: "Bao giờ bạn về Pháp? \"when are you going back to France?\": bao giờ \"when\" at the start of a question usually asks about the future; at the end, about the past: Bạn về bao giờ? \"when did you get back?\"."}
-- {ref: 8, topic: numbers, text: "Months are tháng + a number: tháng tám \"August\", tháng chín \"September\". A date is ngày + number + tháng + number: ngày hai mươi tám tháng chín \"28 September\". năm \"year\" is spelt like năm \"five\": một năm \"one year\"."}
+- {ref: 8, topic: numbers, text: "Months are tháng + a number (April: {tháng tư}): tháng tám \"August\", tháng chín \"September\". A date is ngày + number + tháng + number: ngày hai mươi tám tháng chín \"28 September\". năm \"year\" is spelt like năm \"five\": một năm \"one year\"."}
 - {ref: 2, topic: bridge, text: "chủ nhật is 主日 (Mandarin zhǔrì): a Mandarin tone 3 usually gives hỏi, as in chủ; after m, n, l, r, y, w or no initial, it usually gives ngã: 美 {mỹ} (Mandarin měi)."}
 new_words:
 - {w: tuần, en: week}
@@ -46,13 +46,13 @@ new_words:
 - {w: Mai, en: "Mai (a woman's name)", name: true}
 exercises:
   translate:
-  - {vi: "Một tuần có bảy ngày.", en: "A week has seven days."}
+  - {vi: "Anh Minh đi làm sáu ngày một tuần.", en: "Minh works six days a week."}
   - {vi: "Chủ_nhật chị Lan không đi làm.", en: "Lan doesn't go to work on Sundays."}
   - {vi: "Bạn thích trà hay~or cà_phê?", en: "Do you like tea or coffee? (to someone of your age)"}
   - {vi: "Tháng chín ở Hà_Nội nóng lắm.", en: "September in Hà Nội is very hot."}
   - {vi: "Thứ_bảy anh Minh đi chơi với Bin và Na.", en: "On Saturday Minh goes out with Bin and Na."}
   - {vi: "Mai cũng làm ở công_ty này.", en: "Mai works for this company too."}
   fill:
-  - {vi: "Cuối_tuần bạn ___ làm gì?", answer: định, en: "What are you planning to do at the weekend?"}
+  - {vi: "Hôm_nay chị Lan ___ đi xem phim với anh Minh.", answer: định, en: "Today Lan is planning to see a film with Minh."}
   - {vi: "Hôm_nay tôi ___ quá, tôi không rảnh.", answer: bận, en: "I'm so busy today: I'm not free."}
   - {vi: "Ngày hai mươi mốt ___ chín.", answer: tháng, en: "21 September."}

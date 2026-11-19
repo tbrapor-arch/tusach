@@ -90,7 +90,7 @@ The Northern usage points of word list 2 that Claude is least sure of, most impo
 the lessons will repeat, so a wrong one would be learnt many times. Each says what Claude chose and why; none is
 decided by a native speaker yet.
 
-1. **trà or chè** (L3, decision 10). The list teaches trà: far more frequent in the corpus (<!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11198; tools/freq.py, chè counting the dessert too)<!-- /plan -->), and trà đá, trà chanh, trà sữa are what a Hà Nội café or
+1. **trà or chè** (L3, decision 10). The list teaches trà: far more frequent in the corpus (<!-- plan:tra-che -->trà 60,092 against chè 2,989 per billion words (course ranks 1345 and 11197; tools/freq.py, chè counting the dessert too)<!-- /plan -->), and trà đá, trà chanh, trà sữa are what a Hà Nội café or
    street stall sells. Is chè still the natural word at home in Hà Nội (pha chè, nước chè, chè xanh), and for whom?
 2. **tôi → em with chị Lan** (L1). Sacha (27) meets his landlady (about 35): he starts with tôi and switches to
    em when she calls him em. Chosen because tôi is the safe neutral form with a stranger; is the switch natural on
