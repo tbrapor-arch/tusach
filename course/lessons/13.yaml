@@ -1,0 +1,57 @@
+id: 13
+title: {vi: Quà sinh nhật, en: A birthday present}
+review: false
+setting: >-
+  Saturday morning. Tomorrow is the birthday of chị Lan's mother. Sacha asks Thảo for advice, and they go to a big
+  covered market near the Old Quarter. At a clothes stall, the stallholder is a woman of about forty. Thảo is the
+  same size as her mother.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Thảo ơi, chủ_nhật là sinh_nhật mẹ em. Anh muốn mua quà.", en: "Thảo, Sunday is your mother's birthday. I'd like to buy a present.", lit: "Thảo hey, Sunday be birthday mother younger-sibling. elder-brother want buy present."}
+- {n: 2, speaker: Thảo, vi: "Anh định tặng mẹ em gì?", en: "What are you planning to give my mother?", lit: "elder-brother intend give-as-present mother younger-sibling what?"}
+- {n: 3, speaker: Sacha, vi: "Một cái áo. Anh mua ở cửa_hàng nhé?", en: "A top. Shall I buy it in a shop?", lit: "one (thing) top. elder-brother buy at shop, OK?"}
+- {n: 4, speaker: Thảo, vi: "Đừng mua ở cửa_hàng, đắt lắm! Đi chợ đi.", en: "Don't buy it in a shop, it's very expensive! Go to the market.", lit: "don't buy at shop, expensive very! go market (urging)."}
+- {n: 5, speaker: Sacha, vi: "Chị ơi, cái áo đỏ này bao_nhiêu tiền?", en: "Excuse me, how much is this red top?", lit: "elder-sister hey, (thing) top red this how-much money?"}
+- {n: 6, speaker: Stall owner, vi: "Hai trăm nghìn. Áo này cũng có màu trắng và màu đen.", en: "Two hundred thousand. This top also comes in white and black.", lit: "two hundred thousand. top this also have colour white and colour black."}
+- {n: 7, speaker: Thảo, vi: "Mẹ em thích màu đỏ. Chị ơi, em mặc thử nhé?", en: "My mother likes red. Can I try it on?", lit: "mother younger-sibling like colour red. elder-sister hey, younger-sibling wear try, OK?"}
+- {n: 8, speaker: Sacha, vi: "Cái này hơi nhỏ. Chị có cái to không?", en: "This one is a bit small. Do you have a bigger one?", lit: "(thing) this slightly small. elder-sister have (thing) big not?"}
+- {n: 9, speaker: Thảo, vi: "Cái này vừa. Anh lấy cái này đi!", en: "This one fits. Take this one!", lit: "(thing) this fit. elder-brother take (thing) this (urging)!"}
+notes:
+- {ref: 1, topic: pronouns, text: "sinh nhật mẹ em \"your mother's birthday\": the owner last. To Thảo, Sacha says mẹ em \"your mum\"; to her mother herself, he says bác."}
+- {ref: 2, topic: grammar, text: "Anh định tặng mẹ em gì? \"what are you planning to give my mother?\": tặng \"to give as a present\" + the person + the thing. mua \"to buy\", quà \"a present\"."}
+- {ref: 3, topic: grammar, text: "Một cái áo \"a top\": cái is the classifier for most things: number + cái + noun. With này: cái áo này \"this top\"; alone, cái này is \"this one\" (lines 8–9)."}
+- {ref: 4, topic: grammar, text: "Đừng mua ở cửa hàng … Đi chợ đi: đừng and verb + đi, as in lesson 8. cửa hàng \"a shop\", chợ \"a market\"; ở chợ \"at the market\"."}
+- {ref: 5, topic: grammar, text: "cái áo đỏ này \"this red top\": the noun, then the colour, then này. áo is any garment for the top half: shirt, blouse, jacket."}
+- {ref: 6, topic: grammar, text: "Colours: màu \"colour\" + its name: màu đỏ \"red\", màu trắng \"white\", màu đen \"black\". After a noun, màu is often left out: áo đỏ \"a red top\"."}
+- {ref: 7, topic: grammar, text: "Em mặc thử nhé? \"can I try it on?\": mặc \"to wear, to put on\" + thử \"to try\"; thử after a verb is \"try and see\"."}
+- {ref: 8, topic: grammar, text: "Size and fit: to \"big\", nhỏ \"small\": Cái này hơi nhỏ; cái to \"a big one\". vừa \"to fit\": Cái này vừa (line 9). lấy \"to take\" is what one says when choosing in a shop: Anh lấy cái này đi!"}
+- {ref: 1, topic: bridge, text: "Checked syllables: nhật is 日 (Mandarin rì, Cantonese jat6). A syllable in -p, -t, -c, -ch has only sắc or nặng; the Cantonese tone tells which: 1 or 3 gives sắc (法 Pháp, faat3), 2, 4, 5 or 6 gives nặng (日 nhật, 學 học, hok6)."}
+new_words:
+- {w: chợ, en: market}
+- {w: cửa_hàng, en: "shop, store"}
+- {w: áo, en: "shirt, top, jacket (a garment for the upper body)"}
+- {w: mặc, en: "to wear, to put on (clothes)"}
+- {w: thử, en: "to try (out)"}
+- {w: cái, en: "(classifier for things) thing; the"}
+- {w: màu, en: colour}
+- {w: đen, en: black}
+- {w: trắng, en: white}
+- {w: đỏ, en: red}
+- {w: nhỏ, en: "small, little"}
+- {w: to, en: "big, large (in size)"}
+- {w: vừa, en: "just (now), recently; to fit"}
+- {w: lấy, en: "to take; to get; to marry"}
+- {w: tặng, en: "to give (as a present)"}
+- {w: sinh_nhật, en: birthday}
+- {w: quà, en: "present, gift"}
+- {w: mua, en: to buy}
+exercises:
+  translate:
+  - {vi: "Tôi muốn mua một cái áo trắng.", en: "I'd like to buy a white top."}
+  - {vi: "Cái áo đen này hơi to.", en: "This black top is a bit big."}
+  - {vi: "Bin thích màu đỏ.", en: "Bin likes red."}
+  - {vi: "Hôm_qua anh Minh mua quà sinh_nhật ở cửa_hàng.", en: "Yesterday Minh bought a birthday present in a shop."}
+  - {vi: "Chị Lan tặng Na một cái áo.", en: "Lan gave Na a top."}
+  fill:
+  - {vi: "Em mặc ___ cái áo này nhé?", answer: thử, en: "Shall I try this top on?"}
+  - {vi: "Cái áo này ___ lắm!", answer: vừa, en: "This top fits perfectly!"}
+  - {vi: "Tôi ___ cái này.", answer: lấy, en: "I'll take this one."}

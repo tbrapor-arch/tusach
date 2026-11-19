@@ -88,3 +88,9 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L12.4 Không sao đâu (line 5) for "it's nothing, don't worry" before advice to take medicine | kept | not reviewed | yes, low |
 | L12.5 Nghỉ một ngày, ngày mai cháu sẽ khỏe. Uống thuốc đi! (line 9): bác's bare imperative to cháu | kept | not reviewed | yes, low |
 | L12.6 the bridge note: Cantonese tone 6 → nặng, tone 3 → sắc "usually" (rules at 89–90 %, proposal section 3) | kept | not reviewed | no (measured) |
+| L13.1 to / nhỏ for clothes (word list point 6): Cái này hơi nhỏ. Chị có cái to không? (line 8); cái to hơn waits for hơn (L15); or rộng / chật? | to / nhỏ | not reviewed | yes |
+| L13.2 Cái này vừa. (line 9) for "this one fits" | kept | not reviewed | yes |
+| L13.3 Áo này cũng có màu trắng và màu đen (line 6) for "also comes in white and black" | kept | not reviewed | yes, low |
+| L13.4 Đừng mua ở cửa hàng, đắt lắm! Đi chợ đi. (line 4) from Thảo to Sacha | kept | not reviewed | yes, low |
+| L13.5 the price: 200,000 đồng for a top at a Hà Nội market (2026) | kept | not reviewed | yes, low |
+| L13.6 Một cái áo (line 3) as a present for a woman of 62: is áo the natural word, or áo len, khăn …? | áo (the word list's) | not reviewed | yes, low |
