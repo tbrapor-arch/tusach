@@ -181,3 +181,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L23.5 Những phòng ở tầng hai thì sao ạ? (line 9) "what about …?" | kept | – | yes, low |
 | L23.6 Ở quận Hoàn Kiếm, ba triệu là rẻ lắm (line 11); the price of a student room in Hoàn Kiếm in 2026 | kept | – | yes |
 | L23.7 tầng một = the ground floor (note) | kept | – | yes, low |
+| L24.1 Mũ bảo hiểm đây (line 1) without đội "to put on (a hat)", which is not taught | kept | – | yes, low |
+| L24.2 Em lên xe máy đi, anh ngồi sau (line 3): the teacher on the back seat | kept | – | yes |
+| L24.3 Đi ra ngõ, rồi rẽ phải, sang phố kia. Đi chậm thôi! (line 5) | kept | – | yes |
+| L24.4 Chú ý! Xe máy ở trước! Phanh đi! (line 7) | kept | – | yes |
+| L24.5 Tốc độ này được không ạ? (line 8): tốc độ in a learner's question | kept (word list 3's tốc độ; review finding 22 had the same doubt) | – | yes |
+| L24.6 Về nhà rồi! Em xuống đây ạ. (line 10) and Vào nhà đi (line 11) | kept | – | yes, low |
+| L24.7 Lint: the person-term check reads chú in chú_ý as the kin term chú (line 7 rewritten to avoid the warning) | a lint point, not Vietnamese | – | no |
