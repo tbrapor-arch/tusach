@@ -188,3 +188,10 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L24.5 Tốc độ này được không ạ? (line 8): tốc độ in a learner's question | kept (word list 3's tốc độ; review finding 22 had the same doubt) | – | yes |
 | L24.6 Về nhà rồi! Em xuống đây ạ. (line 10) and Vào nhà đi (line 11) | kept | – | yes, low |
 | L24.7 Lint: the person-term check reads chú in chú_ý as the kin term chú (line 7 rewritten to avoid the warning) | a lint point, not Vietnamese | – | no |
+| L25.1 Em ơi, cho chị xem thực đơn (line 1): a menu at a bún chả place, which often serves one dish; and a "special" bún chả (line 2) | kept (word list 3's thực đơn, đặc biệt) | – | yes |
+| L25.2 Dạ from a young waitress to customers (lines 2, 10) | kept | – | yes, low |
+| L25.3 Bạn cho rau, ớt và chanh vào nước mắm nhé (line 5): how bún chả is eaten (herbs into the bowl) | kept | – | yes |
+| L25.4 Nhân viên ở đây phục vụ nhanh thế! (line 6) | kept | – | yes, low |
+| L25.5 Tôi ăn xong rồi. Bún chả ngon quá, tôi ăn hết! (line 8) | kept | – | yes, low |
+| L25.6 Hai suất một trăm hai mươi nghìn (line 10): 60,000 a portion in 2026 | kept | – | yes, low |
+| L25.7 the bridge note gives th / s only (x has no Hán-Việt word taught yet: word list 3 review finding 18) | kept | – | no |

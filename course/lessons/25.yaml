@@ -1,0 +1,59 @@
+id: 25
+title: {vi: Ăn trưa gần văn phòng, en: Lunch near the office}
+review: false
+setting: >-
+  Thursday, twelve o'clock. Mai takes Sacha to a bún chả place in a lane near the office: grilled pork in a bowl of
+  fish-sauce broth, rice noodles and a plate of herbs. The waitress is a girl of about twenty.
+dialogue:
+- {n: 1, speaker: Mai, vi: "Em ơi, cho chị xem thực_đơn.", en: "Excuse me, can I see the menu?", lit: "younger-sibling hey, let elder-sister look menu."}
+- {n: 2, speaker: Waitress, vi: "Dạ, hôm_nay có bún_chả đặc_biệt ạ.", en: "Today there's a special bún chả.", lit: "yes (polite), today have bún chả special (polite)."}
+- {n: 3, speaker: Mai, vi: "Cho chị hai suất bún_chả đặc_biệt nhé.", en: "Two portions of the special bún chả, please.", lit: "give elder-sister two portion bún chả special OK."}
+- {n: 4, speaker: Sacha, vi: "Mai ơi, tôi không nhìn thấy thìa.", en: "Mai, I can't see a spoon.", lit: "Mai hey, I not look see spoon."}
+- {n: 5, speaker: Mai, vi: "Thìa đây. Bạn cho rau, ớt và chanh vào nước_mắm nhé.", en: "Here's a spoon. Put the herbs, chili and lime into the fish sauce.", lit: "spoon here. you give greens, chili and lime into fish-sauce OK."}
+- {n: 6, speaker: Sacha, vi: "Cay quá! Nhưng tôi ăn được. Nhân_viên ở đây phục_vụ nhanh thế!", en: "So hot! But I can eat it. The staff here serve so fast!", lit: "spicy so! but I eat can. staff at here serve fast so!"}
+- {n: 7, speaker: Mai, vi: "Em ơi, hết rau rồi. Cho chị thêm rau nhé!", en: "Excuse me, we've run out of herbs. Some more, please!", lit: "younger-sibling hey, finished greens already. give elder-sister more greens OK!"}
+- {n: 8, speaker: Sacha, vi: "Tôi ăn xong rồi. Bún_chả ngon quá, tôi ăn hết!", en: "I've finished. The bún chả was so good, I ate it all!", lit: "I eat finish already. bún chả tasty so, I eat all!"}
+- {n: 9, speaker: Mai, vi: "Em ơi, tính_tiền!", en: "The bill, please!", lit: "younger-sibling hey, count money!"}
+- {n: 10, speaker: Waitress, vi: "Dạ, hai suất một trăm hai mươi nghìn ạ.", en: "Two portions: a hundred and twenty thousand.", lit: "yes (polite), two portion one hundred two ten thousand (polite)."}
+- {n: 11, speaker: Sacha, vi: "Hôm_nay tôi trả. Nhưng tôi thiếu hai mươi nghìn, Mai ơi!", en: "It's on me today. But I'm twenty thousand short, Mai!", lit: "today I pay. but I lack two ten thousand, Mai hey!"}
+notes:
+- {ref: 1, topic: usage, text: "Em ơi, cho chị xem thực đơn: Mai, 27, calls the young waitress em and says chị. thực đơn \"menu\"; the waitress answers with dạ, the polite yes of service. đặc biệt \"special\"."}
+- {ref: 3, topic: usage, text: "suất \"a portion\" (Northern): hai suất bún chả. bún chả is the Hà Nội lunch: grilled pork with rice noodles, dipped in a broth of nước mắm \"fish sauce\" with rau \"herbs, greens\", ớt \"chili\" and chanh \"lime\"."}
+- {ref: 4, topic: grammar, text: "nhìn thấy \"to see\": nhìn \"to look\" + thấy, the result: looking that succeeds. Tôi không nhìn thấy thìa \"I can't see a spoon\". Likewise nghe thấy \"to hear\". thìa \"spoon\" is Northern."}
+- {ref: 5, topic: grammar, text: "cho rau vào nước mắm \"put the herbs into the fish sauce\": cho \"to give\" + vào \"into\" is \"to put in\". Direction words after a verb, as in lesson 24."}
+- {ref: 6, topic: grammar, text: "Tôi ăn được \"I can eat it\": verb + được (lesson 18). cay \"spicy, hot\". phục vụ \"to serve; the service\"; nhân viên \"staff, an employee\"."}
+- {ref: 7, topic: grammar, text: "Hết rau rồi \"there are no herbs left\": hết \"to be used up\" before a noun. After a verb, hết is \"all, completely\": ăn hết \"to eat it all\" (line 8)."}
+- {ref: 8, topic: grammar, text: "Tôi ăn xong rồi \"I have finished eating\": verb + xong says the action is done. Result words follow the verb: ăn xong \"finish eating\", ăn hết \"eat it all\", nhìn thấy \"see\", ăn được \"manage to eat\"."}
+- {ref: 9, topic: usage, text: "Em ơi, tính tiền! \"the bill, please!\": tính tiền \"to work out the bill\". trả \"to pay\": Hôm nay tôi trả \"it's on me today\". thiếu \"to be short of, to lack\": thiếu hai mươi nghìn \"twenty thousand short\"."}
+- {ref: 11, topic: bridge, text: "th and s: Mandarin sh- usually gives th, sometimes s: thiếu is 少 (Mandarin shǎo); sinh is 生 (shēng). Hán-Việt x mostly answers Mandarin ch-: a later lesson."}
+new_words:
+- {w: xong, en: "to finish; finished, done"}
+- {w: hết, en: "to be used up, to be finished; all"}
+- {w: thấy, en: "to see; to feel, to find"}
+- {w: bún_chả, en: "bún chả: grilled pork with rice noodles (a Hà Nội lunch)"}
+- {w: rau, en: "vegetables, greens"}
+- {w: nước_mắm, en: fish sauce}
+- {w: ớt, en: "chili (pepper)"}
+- {w: chanh, en: "lime; lemon"}
+- {w: thìa, en: spoon}
+- {w: tính_tiền, en: "to pay, to settle the bill; The bill, please!"}
+- {w: trả, en: "to pay; to give back"}
+- {w: cay, en: "spicy, hot"}
+- {w: nhìn, en: "to look (at)"}
+- {w: suất, en: "a portion, a serving"}
+- {w: thực_đơn, en: menu}
+- {w: phục_vụ, en: "to serve; (the) service, waiter"}
+- {w: nhân_viên, en: "employee, staff member"}
+- {w: thiếu, en: "to lack, to be short of; missing"}
+- {w: đặc_biệt, en: "special; especially"}
+exercises:
+  translate:
+  - {vi: "Bin ăn hết hai bát cơm.", en: "Bin ate two whole bowls of rice."}
+  - {vi: "Mấy giờ anh Tuấn họp xong?", en: "What time does Tuấn's meeting finish?"}
+  - {vi: "Na không thích rau, Na thích thịt.", en: "Na doesn't like vegetables: she likes meat."}
+  - {vi: "Chị Lan nghe thấy con mèo ở trong bếp.", en: "Lan hears the cat in the kitchen."}
+  - {vi: "Quán này hết cà_phê rồi.", en: "This café has no coffee left."}
+  fill:
+  - {vi: "Em viết ___ báo_cáo chưa?", answer: xong, en: "Have you finished writing the report? (to someone younger)"}
+  - {vi: "Cho anh thêm một ___ bún_chả.", answer: suất, en: "Another portion of bún chả, please. (to a young waiter)"}
+  - {vi: "Phở này không ___, em ăn được.", answer: cay, en: "This phở isn't spicy: I can eat it. (to someone older)"}
