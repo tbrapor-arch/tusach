@@ -264,3 +264,12 @@ tools/test_review3.py):
   draft (`course.plan_word_lists`), so list 3's notes may use list 2's words and a word of list 2 is refused in list 3.
 - Found by the plan check: pinyin and Jyutping in a note are read as Vietnamese (notes give characters only); "an"
   is read as English, so "an toàn" cannot be quoted in a note (its card example is flagged I, a false positive).
+
+## 2026-11-19 — word list 3 reviewed and fixed (branch wordlist-3; still NOT approved)
+- An independent review (`course/proposal/wordlist-3-review.md`, 25 findings: 3 high, 7 medium, 15 low), then, by
+  the owner's change of method, the same session applied it. High: core words the lexicon had but no list taught
+  (từ~from, trong, trước, ngồi, hiểu: in for ngọt, toa, chật, tay, an toàn); kỷ niệm's false-friend note was in the
+  etymon column (card said "same"); suất 率 a false friend, no longer a bridge word. Medium: mèo for con (L17), môn 門
+  for the labial bridge (L19), học sinh at L16, hòa bình at L27, "other loans" for ngủ / làng in the counts, two
+  examples (kể, chuyện), lint's approved-lists union now tested, and wordlist.py human_note cut a [db: …] part at
+  its first "]" (sạch's note grew at each run). Counts on plan (13 + 5 / 13 + 6).
