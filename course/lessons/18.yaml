@@ -1,0 +1,57 @@
+id: 18
+title: {vi: Ở bể bơi, en: At the swimming pool}
+review: false
+setting: >-
+  Sunday morning, hot again. Thảo has never learnt to swim, and Sacha has offered to teach her. They go to a public
+  swimming pool; a woman of about forty sells the tickets.
+dialogue:
+- {n: 1, speaker: Sacha, vi: "Chị ơi, cho em hai vé.", en: "Two tickets, please.", lit: "elder-sister hey, give younger-sibling two ticket."}
+- {n: 2, speaker: Cashier, vi: "Một trăm nghìn em nhé. Khăn và kính ở phòng kia.", en: "That's a hundred thousand. Towels and goggles are in that room.", lit: "one hundred thousand younger-sibling OK. towel and goggles at room that."}
+- {n: 3, speaker: Thảo, vi: "Bể_bơi đẹp quá! Nước~water có sâu không anh?", en: "What a lovely pool! Is the water deep?", lit: "pool swim beautiful so! water (yes) deep not elder-brother?"}
+- {n: 4, speaker: Sacha, vi: "Ở đây không sâu. Em biết bơi không?", en: "It isn't deep here. Can you swim?", lit: "at here not deep. younger-sibling know swim not?"}
+- {n: 5, speaker: Thảo, vi: "Không, đây là lần đầu em đi bơi. Em sợ nước~water lắm.", en: "No, this is the first time I've been swimming. I'm very afraid of water.", lit: "not, here be time head younger-sibling go swim. younger-sibling fear water very."}
+- {n: 6, speaker: Sacha, vi: "Đừng sợ! Ở đây em có_thể tập. Ở kia sâu, nguy_hiểm lắm.", en: "Don't be afraid! You can practise here. Over there it's deep: very dangerous.", lit: "don't fear! at here younger-sibling can practise. at there deep, dangerous very."}
+- {n: 7, speaker: Thảo, vi: "Anh dạy em bơi được không?", en: "Could you teach me to swim?", lit: "elder-brother teach younger-sibling swim can not?"}
+- {n: 8, speaker: Sacha, vi: "Được chứ! Em làm thế này nhé. Em hiểu không?", en: "Of course! Do it like this. Do you understand?", lit: "can (of-course)! younger-sibling do so this OK. younger-sibling understand not?"}
+- {n: 9, speaker: Thảo, vi: "Nước~water mát quá! Anh ơi, em bơi được rồi!", en: "The water is lovely and cool! Look, I can swim now!", lit: "water cool so! elder-brother hey, younger-sibling swim can already!"}
+- {n: 10, speaker: Sacha, vi: "Giỏi quá! Tuần sau chúng_ta tập thêm hai buổi nhé.", en: "Well done! Next week we'll practise two more times.", lit: "clever so! week after we-all practise more two session OK."}
+notes:
+- {ref: 2, topic: usage, text: "vé \"ticket\"; khăn \"towel\" (also a scarf); kính \"goggles, glasses\", in full {kính bơi} at a pool. phòng \"room\": phòng kia \"that room over there\". bể bơi \"swimming pool\" is the Northern word (bể \"tank\" + bơi \"to swim\")."}
+- {ref: 3, topic: grammar, text: "Nước có sâu không? \"is the water deep?\": nước \"water\" is spelt like nước \"country\" (lesson 2), another word. sâu \"deep\"; mát \"pleasantly cool\" (line 9), where lạnh is \"cold\"."}
+- {ref: 4, topic: grammar, text: "Em biết bơi không? \"can you swim?\": biết + verb is \"to know how to\", a skill one has learnt: biết bơi, biết nói tiếng Việt."}
+- {ref: 5, topic: grammar, text: "lần đầu \"the first time\": lần \"time, occurrence\" (hai lần \"twice\"), đầu \"first\". sợ \"to be afraid (of)\": Em sợ nước. Đừng sợ! \"don't be afraid!\" (line 6)."}
+- {ref: 6, topic: grammar, text: "Em có thể tập \"you can practise\": có thể + verb is \"can, may\": what is possible or allowed. tập \"to practise\" (tập bơi). nguy hiểm \"dangerous\"."}
+- {ref: 7, topic: grammar, text: "verb + được is \"can\", the everyday way: Em bơi được rồi! \"I can swim now!\" (line 9). As a question, … được không? also asks a favour: Anh dạy em bơi được không? \"could you teach me to swim?\". dạy \"to teach\": dạy + person + thing."}
+- {ref: 8, topic: particles, text: "Được chứ! \"of course!\": chứ at the end says \"surely, of course\". With a question, it expects yes: Em hiểu chứ? \"you understand, don't you?\". hiểu \"to understand\"; thế này \"like this\"."}
+- {ref: 10, topic: grammar, text: "hai buổi \"two sessions\": buổi is a part of the day or a session: buổi sáng \"the morning\", buổi tối \"the evening\". tập thêm hai buổi \"practise two more times\": thêm after the verb, as in ăn thêm (lesson 10)."}
+- {ref: 2, topic: bridge, text: "Labials: phòng is 房 (Mandarin fáng): ph usually answers Mandarin f-, as in Pháp 法 (fǎ). b answers Mandarin b-: bị is 被 (bèi)."}
+new_words:
+- {w: bể_bơi, en: swimming pool}
+- {w: bơi, en: to swim}
+- {w: có_thể, en: "can, may; possibly"}
+- {w: chứ, en: "(final particle) of course, surely; …, right?"}
+- {w: nước, tag: water, en: "water; drink"}
+- {w: sâu, en: deep}
+- {w: sợ, en: "to be afraid (of)"}
+- {w: dạy, en: to teach}
+- {w: lần, en: "time (occurrence)"}
+- {w: vé, en: ticket}
+- {w: mát, en: "cool, pleasantly fresh"}
+- {w: khăn, en: "towel; scarf"}
+- {w: buổi, en: "session, a part of the day (morning, afternoon, evening)"}
+- {w: phòng, en: room}
+- {w: hiểu, en: to understand}
+- {w: nguy_hiểm, en: "dangerous; danger"}
+- {w: tập, en: "to practise, to exercise"}
+- {w: kính, en: "eyeglasses, goggles; glass (pane)"}
+exercises:
+  translate:
+  - {vi: "Bin biết bơi, nhưng Na không biết bơi.", en: "Bin can swim, but Na can't."}
+  - {vi: "Buổi tối chị Lan dạy Bin đọc sách.", en: "In the evenings Lan teaches Bin to read."}
+  - {vi: "Anh có_thể mua vé ở đây.", en: "You can buy tickets here. (to a young man)"}
+  - {vi: "Em không hiểu ngữ_pháp này.", en: "I don't understand this grammar. (to someone older)"}
+  - {vi: "Hôm_nay trời mát, đi_bộ đi!", en: "It's cool today: let's walk!"}
+  fill:
+  - {vi: "Cháu nói tiếng_Việt ___ không?", answer: được, en: "Can you speak Vietnamese? (an elder to a younger person)"}
+  - {vi: "Phở ở đây ngon ___?", answer: chứ, en: "The phở here is good, isn't it?"}
+  - {vi: "Na ___ mèo đen.", answer: sợ, en: "Na is afraid of black cats."}

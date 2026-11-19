@@ -141,3 +141,9 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L17.5 Năm nghìn một tờ (line 8): a newspaper price; and 350,000 for three books and a paper (line 10) | kept | – | yes, low |
 | L17.6 Chiếc điện thoại này của em, phải không? (line 10): chiếc for a phone; or cái | chiếc (the plan's classifier) | – | yes |
 | L17.7 hiệu sách (Northern) rather than nhà sách in Hà Nội in 2026 | hiệu sách (word list 3) | – | yes |
+| L18.1 Một trăm nghìn em nhé (line 2) from the cashier: "em nhé" after a price | kept | – | yes |
+| L18.2 Khăn và kính ở phòng kia (line 2): towels and goggles handed out or hired at a Hà Nội public pool? | kept | – | yes, low |
+| L18.3 Em biết bơi không? without có (line 4) | kept | – | yes, low |
+| L18.4 Anh dạy em bơi được không? (line 7) as a request; Được chứ! as the answer | kept (the plan's chứ) | – | yes |
+| L18.5 Em làm thế này nhé (line 8) for "do it like this" | kept | – | yes |
+| L18.6 Tuần sau chúng ta tập thêm hai buổi nhé (line 10): buổi for two swimming sessions | kept | – | yes, low |
