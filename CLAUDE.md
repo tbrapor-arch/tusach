@@ -8,7 +8,7 @@ remark is one or two lines on a word he knows; no more Cantonese / Taigi reading
 ## Fixed decisions
 - Northern (Hà Nội) pronunciation. Lesson language: English.
 - Lessons are written from scratch by Claude. A course book the owner owns goes to the private repository only.
-- Syllabus and word list 2 approved by the owner (19 Nov 2026, `course/syllabus.yaml`; lint refuses lessons without).
+- Syllabus, word lists 2 and 3 approved by the owner (19 Nov 2026, `course/syllabus.yaml`; lint refuses lessons without).
 - Text is quốc ngữ in Unicode NFC. Word boundaries are written in the source (`học_sinh`), never guessed.
 - Chữ Hán appear on word cards and in the bridge, never in lesson lines.
 

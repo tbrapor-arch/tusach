@@ -6,7 +6,7 @@
 - Top 1,000 cards, labels: same 385, gram 7, hv-vn 13, doubtful 12, opaque 18, older-loan 111, loan 9, native 200, compound 111, false-friend 10, unknown 124.
 - Cards showing chữ Hán (Hán-Việt analysis) among the top 1,000 / 3,000 / 5,000: 433 / 1499 / 2570.
 - Taigi: 180 characters with a reading found colloquial (coda class or 麻 rhyme).
-- Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), other loans (French and others) 2, the rest native, compounds and 41 with no etymology recorded. Word list 3 (draft, not approved; L15–27): 221 words + 0 names (L15 18, L16 18, L17 18, L18 18, L19 18, L20 18, L22 18, L23 19, L24 19, L25 19, L26 19, L27 19); Hán-Việt 65 (29 %), older Chinese loans 32 (3 with a doubtful etymon, characters hidden), other loans (French and others) 6, the rest native, compounds and 34 with no etymology recorded.
+- Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), other loans (French and others) 2, the rest native, compounds and 41 with no etymology recorded. Word list 3 (L15–27): 221 words + 0 names (L15 18, L16 18, L17 18, L18 18, L19 18, L20 18, L22 18, L23 19, L24 19, L25 19, L26 19, L27 19); Hán-Việt 65 (29 %), older Chinese loans 32 (3 with a doubtful etymon, characters hidden), other loans (French and others) 6, the rest native, compounds and 34 with no etymology recorded.
 - Sound rules: 993 syllables (character + Hán-Việt reading) of 1499 Hán-Việt cards of rank <= 3000. 132 measured: 91 rules, 14 tendencies, 16 that narrow the choice, 2 facts of spelling, 9 dropped. Every tone from Cantonese: main 910 / 993, 92 %, strict 797 / 993, 80 %; from Taigi: main 878 / 959, 92 %, strict 853 / 959, 89 %.
 <!-- /state -->
 
@@ -15,8 +15,9 @@
 review 5, and `lessons-08-14`, merged after review 6). From a clean
 clone with nothing missing, `make data db db-nc lint test app check` and `tools/smoke.py` (with TUSACH_PRIVATE)
 pass; `make lint` also checks the plan, the draft word list and the proposal. Word list 3 (L15–27, 221 words) is
-drafted on branch `wordlist-3` (`course/proposal/wordlist-3.tsv`, the draft in syllabus.yaml; NOT approved; notes in
-`wordlist-3-NOTES.md`, doubts in `wordlist-3-to-check.md`). Next steps: the owner's reading of list 3; a native speaker, when one is found, reads NOTES-for-native-speaker.md (the two lists of eight first),
+APPROVED by the owner on 19 Nov 2026 (`course/proposal/wordlist-3.tsv`, listed with list 2 in approved.word_list.file;
+notes in `wordlist-3-NOTES.md`, doubts in `wordlist-3-to-check.md`). Next steps: lessons 15–28 (branch
+`lessons-15-28`); a native speaker, when one is found, reads NOTES-for-native-speaker.md (the two lists of eight first),
 wordlist-2-to-check.md (18 points), the lexicon's examples and the cutter sets.
 
 ## Data sources (18 Nov 2026)

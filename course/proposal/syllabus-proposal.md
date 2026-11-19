@@ -75,7 +75,7 @@ Western loans; lint counts them with the native words.
 | New words | 16–18 | 16–18 | 18 | 18–19 | 19–20 | 20–21 | 21–22 | 22–23 | 23–24 |
 | of which Hán-Việt | 0–5 | 2–6 | 5 | 5–7 | 7–8 | 9–10 | 10–11 | 11–12 | 12–13 |
 
-<!-- plan:counts -->Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), other loans (French and others) 2, the rest native, compounds and 41 with no etymology recorded. Word list 3 (draft, not approved; L15–27): 221 words + 0 names (L15 18, L16 18, L17 18, L18 18, L19 18, L20 18, L22 18, L23 19, L24 19, L25 19, L26 19, L27 19); Hán-Việt 65 (29 %), older Chinese loans 32 (3 with a doubtful etymon, characters hidden), other loans (French and others) 6, the rest native, compounds and 34 with no etymology recorded.<!-- /plan -->
+<!-- plan:counts -->Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), other loans (French and others) 2, the rest native, compounds and 41 with no etymology recorded. Word list 3 (L15–27): 221 words + 0 names (L15 18, L16 18, L17 18, L18 18, L19 18, L20 18, L22 18, L23 19, L24 19, L25 19, L26 19, L27 19); Hán-Việt 65 (29 %), older Chinese loans 32 (3 with a doubtful etymon, characters hidden), other loans (French and others) 6, the rest native, compounds and 34 with no etymology recorded.<!-- /plan -->
 The whole course: about 1,750 words (native 893, Hán-Việt 724 = 41 %, other 131).
 
 ## 2. Lesson 0 — reading quốc ngữ (outline only)

@@ -273,3 +273,5 @@ tools/test_review3.py):
   for the labial bridge (L19), học sinh at L16, hòa bình at L27, "other loans" for ngủ / làng in the counts, two
   examples (kể, chuyện), lint's approved-lists union now tested, and wordlist.py human_note cut a [db: …] part at
   its first "]" (sạch's note grew at each run). Counts on plan (13 + 5 / 13 + 6).
+- 19 Nov 2026: the owner approved word list 3 (after review and fix, 8381c89); approved.word_list.file lists
+  wordlist-2.tsv and wordlist-3.tsv. test_plan builds its draft / approved syllabi from the real file, whatever it holds.

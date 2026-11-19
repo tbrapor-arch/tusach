@@ -111,15 +111,17 @@ new_words:
 - {w: hơn, en: "more (than), -er"}
 """
 real_syl = open(os.path.join(ROOT, 'course/syllabus.yaml'), encoding='utf-8').read()
-both = re.sub(r'(?m)^(  word_list: \{.*file: )course/proposal/wordlist-2.tsv\}',
-              r'\1[course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}', real_syl)
-ok(both != real_syl, 'test syllabus: list 3 added to approved.word_list.file')
+# the test builds both states from the real file, whichever it holds (list 3 approved by the owner, 19 Nov 2026)
+approved_re = r'(?m)^(  word_list: \{.*file: )(?:\[[^\]]*\]|[^}]*)\}'
+only2 = re.sub(approved_re, r'\1course/proposal/wordlist-2.tsv}', real_syl)
+both = re.sub(approved_re, r'\1[course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}', real_syl)
+ok(both != only2, 'test syllabus: list 3 added to approved.word_list.file')
 with tempfile.TemporaryDirectory() as tmp:
     les = os.path.join(tmp, 'lessons')
     os.mkdir(les)
     open(os.path.join(les, '15.yaml'), 'w', encoding='utf-8').write(L15)
     outs_ = {}
-    for name, text in (('draft', real_syl), ('approved', both)):
+    for name, text in (('draft', only2), ('approved', both)):
         sp = os.path.join(tmp, name + '.yaml')
         open(sp, 'w', encoding='utf-8').write(text)
         r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'lint.py')], cwd=ROOT, capture_output=True,
