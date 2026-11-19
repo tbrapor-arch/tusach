@@ -162,3 +162,8 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L20.6 Nghe nhạc, tôi làm việc nhanh hơn! (line 10): a bare verb phrase as "with music on" | kept | – | yes |
 | L20.7 Hôm qua tôi làm việc muộn, chín giờ tối mới về nhà (translate 4): mới "only then", met in L15's word list only | kept | – | yes, low |
 | L18.7 buổi sáng, buổi tối: SEGMENTATION makes them one word (buổi_sáng), but word list 3 teaches buổi alone; the lessons use buổi only with a number (hai buổi) and sáng / tối alone for "in the morning / evening" (Tối, chị Lan dạy Bin đọc sách) | kept (no plan change) | – | yes, low (and a word-list point: buổi sáng as a word later) |
+| L21.1 Chú mua cho cháu đấy (line 2): Sacha to Na, 5 | kept | – | yes, low |
+| L21.2 Nhưng Bin đọc tiếng Việt giỏi hơn chú đấy (line 5): the child's name for "you" when talking to a child | kept | – | yes |
+| L21.3 Bin, con đọc với chú Sacha đi, rồi ăn cơm nhá! (line 7): Lan names Sacha chú Sacha to her son | kept | – | yes |
+| L21.4 Con và Na đều đói rồi! (line 8) from Bin, 8, to his mother (or Con với Na) | kept | – | yes, low |
+| L21.5 Hôm nay có canh cháu thích nhất đấy! (line 10): a relative clause with no linking word | kept | – | yes |
