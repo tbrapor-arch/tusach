@@ -65,3 +65,8 @@ Same columns. Reviewer: "not reviewed" until the independent reading.
 | L8.4 Anh đừng rẽ ở đây! Đi thẳng đi. (line 6) from Thảo, 24, to Sacha, 27: polite enough without ạ / anh ơi? | kept; the note says the person term in front "tends to" soften | not reviewed | yes |
 | L8.5 Hồ đó à? (line 7) for a lake just come into view; or Hồ đây à? / Hồ kia à? | đó (the lesson's word) | not reviewed | yes |
 | L8.6 Vâng, hồ Hoàn Kiếm đấy! (line 8) to point something out | kept | not reviewed | yes, low |
+| L9.1 Vâng ạ, nóng thế! (line 2) as a reply that agrees, thế as an exclamation | kept | not reviewed | yes |
+| L9.2 Ở Pháp bây giờ trời hơi lạnh (line 2) for late September in France; mát "cool" is not taught yet | hơi lạnh | not reviewed | yes, low |
+| L9.3 mùa hè, mùa đông written as two words (the word list teaches mùa and hè, đông); the dictionary has mùa hè as one word | two words | not reviewed | no (a convention point for the reviewer) |
+| L9.4 Hôm nay có mưa không ạ? (line 6) without trời or sẽ | kept | not reviewed | yes, low |
+| L9.5 hè as the everyday Northern "summer" (word list point 12) | hè | not reviewed | yes |
