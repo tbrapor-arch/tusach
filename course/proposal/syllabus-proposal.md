@@ -75,7 +75,7 @@ Western loans; lint counts them with the native words.
 | New words | 16–18 | 16–18 | 18 | 18–19 | 19–20 | 20–21 | 21–22 | 22–23 | 23–24 |
 | of which Hán-Việt | 0–5 | 2–6 | 5 | 5–7 | 7–8 | 9–10 | 10–11 | 11–12 | 12–13 |
 
-<!-- plan:counts -->Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 41 with no etymology recorded.<!-- /plan -->
+<!-- plan:counts -->Word list 2 (L1–13): 207 words + 3 names (L1 16, L2 16, L3 18, L4 18, L5 17, L6 17, L8 16, L9 17, L10 18, L11 18, L12 18, L13 18); Hán-Việt 38 (18 %), older Chinese loans 28 (6 with a doubtful etymon, characters hidden), Western loans 2, the rest native, compounds and 41 with no etymology recorded. Word list 3 (draft, not approved; L15–27): 221 words + 0 names (L15 18, L16 18, L17 18, L18 18, L19 18, L20 18, L22 18, L23 19, L24 19, L25 19, L26 19, L27 19); Hán-Việt 65 (29 %), older Chinese loans 31 (3 with a doubtful etymon, characters hidden), Western loans 6, the rest native, compounds and 35 with no etymology recorded.<!-- /plan -->
 The whole course: about 1,750 words (native 893, Hán-Việt 724 = 41 %, other 131).
 
 ## 2. Lesson 0 — reading quốc ngữ (outline only)
@@ -565,19 +565,19 @@ L1–13 are word list 2, later lessons are targets for each word list. Generated
 | 12 | Sacha has a cold | bị (something bad); nên / phải; có khỏe không?; sao / tại sao …? – vì …; Sao thế?; đâu (Không sao đâu!) | T3 departing tones: sắc / nặng; FF bác sĩ | 9 | 9 / 4 / 5 |
 | 13 | A birthday present | classifier cái; colours; to / nhỏ for size; vừa "to fit"; mua, lấy; tặng; ở chợ | T4 checked syllables: sắc / nặng only | 9 | 11 / 3 / 4 |
 | 14 | **Review 2** | recap 8–13 | — | 9 | — |
-| 15 | Which phone is cheaper? | comparison hơn / bằng / nhất; thôi "only, that's all" | T5 tones heard → Chinese tone | 9 | 11 / 5 / 2 |
-| 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái; hả (Con no rồi hả?); nhá (Ăn đi nhá!) | IK c / k / q, kh, gi | 9 | 11 / 5 / 2 |
-| 17 | At the bookshop | classifiers quyển, tờ, chiếc, con; với softening a request (Giúp em với!) | IH h and IG ng | 10 | 11 / 5 / 2 |
-| 18 | At the swimming pool | có thể; verb + được; biết + verb; chứ (Được chứ!) | IP b, ph | 10 | 11 / 5 / 2 |
+| 15 | Which phone is cheaper? | comparison hơn / bằng / nhất; thôi "only, that's all" | T5 tones heard → Chinese tone | 9 | 8 / 5 / 5 |
+| 16 | Dinner with the family | chúng tôi (exclusive) / chúng ta (inclusive); anh trai, chị gái; hả (Con no rồi hả?); nhá (Ăn đi nhá!) | IK c / k / q, kh, gi | 9 | 12 / 5 / 1 |
+| 17 | At the bookshop | classifiers quyển, tờ, chiếc, con; với softening a request (Giúp em với!) | IH h and IG ng | 10 | 8 / 5 / 5 |
+| 18 | At the swimming pool | có thể; verb + được; biết + verb; chứ (Được chứ!) | IP b, ph | 10 | 10 / 5 / 3 |
 | 19 | Tea with ông Hùng | ông / bà as "you"; cho "for, to"; dạ (answering an elder: Dạ, cháu đây ạ.) | IM m, v | 10 | 11 / 5 / 2 |
-| 20 | A day at the office | vừa … vừa; cũng / đều | ID đ, th, n, l; FF đầu tiên | 10 | 11 / 5 / 2 |
+| 20 | A day at the office | vừa … vừa; cũng / đều | ID đ, th, n, l; FF đầu tiên | 10 | 9 / 5 / 4 |
 | 21 | **Review 3** | recap 15–20 | — | 10 | — |
-| 22 | At Hà Nội station | thì; khi / lúc | IA aspiration and the old voiced tones; FF bản đồ | 10 | 11 / 5 / 2 |
-| 23 | A room for Thảo | các / những; mọi / mỗi | IS t, th from the old ts- s- series; FF quận | 11 | 11 / 6 / 2 |
+| 22 | At Hà Nội station | thì; khi / lúc | IA aspiration and the old voiced tones; FF bản đồ | 10 | 10 / 5 / 3 |
+| 23 | A room for Thảo | các / những; mọi / mỗi | IS t, th from the old ts- s- series; FF quận | 11 | 9 / 6 / 4 |
 | 24 | Learning to ride a motorbike | direction verbs ra / vào / lên / xuống / về / sang | IR tr, ch | 11 | 11 / 6 / 2 |
-| 25 | Lunch near the office | result complements xong, hết, thấy, được | IR th, s, x | 11 | 11 / 6 / 2 |
+| 25 | Lunch near the office | result complements xong, hết, thấy, được | IR th, s, x | 11 | 10 / 6 / 3 |
 | 26 | Hobbies | đã từng; thường / hay / luôn | IY nh, d, no initial | 11 | 11 / 6 / 2 |
-| 27 | Bà's stories | còn, vẫn, nữa, lại; mà (insisting: Em biết mà!) | Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x | 11 | 11 / 6 / 2 |
+| 27 | Bà's stories | còn, vẫn, nữa, lại; mà (insisting: Em biết mà!) | Z spelling what Hà Nội merges: d / gi / r, tr / ch, s / x | 11 | 10 / 6 / 3 |
 | 28 | **Review 4** | recap 22–27 | — | 11 | — |
 | 29 | At the bank | được (good passive) | initials heard → Chinese (recap) | 12 | 11 / 6 / 2 |
 | 30 | A stolen bike | bị and được with an agent | V1 -ương | 12 | 11 / 6 / 2 |
