@@ -2,7 +2,7 @@
 
 ## Layout
 ```
-course/lessons/NN.yaml   lessons (1-14 drafted 19 Nov 2026, not native-checked); nothing else may be there (lint) but
+course/lessons/NN.yaml   lessons (1-28 drafted 19 Nov 2026, not native-checked); nothing else may be there (lint) but
                          NOTES-for-native-speaker.md (Claude's hesitations, never built); template course/lesson_template.yaml
 course/lesson0.yaml      Lesson 0, "Reading Vietnamese" (tools/lesson0.py; format below); page `#reading`, linked from home
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them); the draft word list

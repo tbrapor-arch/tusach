@@ -218,3 +218,4 @@ Same columns. Reviewer: none yet (–). Neither the writer nor anyone else who r
 | L28.5 Em ăn hết rồi, em không ăn được nữa! (line 9) | kept | – | yes, low |
 | L28.6 Anh về cẩn thận nhé! Ngõ này tối lắm (line 11): tối "dark" | kept | – | yes, low |
 | L28.7 Mỗi buổi Thảo bơi khoảng một giờ (translate 2): một giờ for a duration ("an hour"), where Hà Nội speech often says một tiếng (not taught) | kept | – | yes |
+| L26.9 Thế thì (line 11) "in that case" written as two words (a fixed connective like vì vậy? not taught as one word) | two words | – | yes, low |
