@@ -1,6 +1,9 @@
 """Check the lesson files: content rules and every word against the database.
 
   python3 -I tools/lint.py [lesson.yaml ...]      (default: course/lessons/NN.yaml, or the test fixture while there is none)
+  python3 -I tools/lint.py --lessons 29-35 [--max 40]   the quiet check of a batch (`make lint-lesson L=29-35`): every
+      lesson is read, but only the errors and warnings of lessons 29-35 (and the lexicon rows of their words) are
+      printed, at most --max, then one summary line; the word lists' and the proposal's checks are left to plain lint
 
 Checks (E = error, exit 1; W = warning; I = information)
   E  a lesson exists while the syllabus or the first word list is not approved by the owner (course/syllabus.yaml)
@@ -55,6 +58,12 @@ Checks (E = error, exit 1; W = warning; I = information)
      new_words {native, hv}); W a written lesson whose dialogue length or new words (native / Hán-Việt) leave the
      plan by more than one, or whose Hán-Việt share is more than 0.2 from the plan's
   I  lesson not checked by a native speaker (no native_check: {by, date}); the app labels it
+  E  (26 Nov 2026) a new word in a review lesson (review: true, or every 7th); a `doubt` entry without text, or whose
+     line is not a dialogue line (0 = the lesson; a string names another place); doubts are never shown
+  I  (26 Nov 2026) draft words: a real lesson beyond the approved word lists declares its words in its new_words (no
+     list check); E such a word already taught by an earlier lesson or in an approved list; E chars / label in its
+     new_words (a claim belongs in a lexicon row); W a word with no lexicon row whose dictionary card shares no English
+     word with the taught English (another etymology or a poor gloss: write a row, or a ~tag naming the sense)
   E  (review 3) the draft word list (draft.word_list in course/syllabus.yaml), read after the approved ones, against
      the plan: tools/plan.py's checks (a word already in an earlier list is an error)
      (no word in a review lesson, counts, no Vietnamese word in a note, usage note or planned grammar before it is

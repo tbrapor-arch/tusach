@@ -20,6 +20,13 @@ notes in `wordlist-3-NOTES.md`, doubts in `wordlist-3-to-check.md`). Next steps:
 `lessons-15-28`); a native speaker, when one is found, reads NOTES-for-native-speaker.md (the two lists of eight first),
 wordlist-2-to-check.md (18 points), the lexicon's examples and the cutter sets.
 
+## Lesson method (26 Nov 2026, branch cheaper-batches)
+Next batches (29–35, then 36–42): one writer reads `tools/brief.py N M` only (29–35: about 25,000 characters), picks
+the words while writing (lessons beyond the approved lists lint in the draft state), checks with `make lint-lesson
+L=N-M`, writes hesitations in `doubt`; one reviewer reads `brief.py --review N M` and fixes directly (commit message,
+no findings file); then `tools/wordlist.py --from-lessons` makes the list and the approval table for the owner.
+Lexicon rows only where the dictionary alone gives a wrong or poor card. Approved lists: 2 and 3 (L1–27).
+
 ## Data sources (18 Nov 2026)
 `data/fetch.sh` pins every source by content (ATTRIBUTION.md). kaikki (Wiktionary), Tatoeba and the English
 Wiktionary's translation tables (`en-translations.tsv.gz`, derived on the runner) come from our snapshot release

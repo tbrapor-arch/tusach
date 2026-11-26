@@ -14,3 +14,5 @@ exercises:
   - {vi: "", en: ""}
   fill:
   - {vi: "___", answer: "", en: ""}
+# doubt:                          # optional, never shown: hesitations for a native speaker
+# - {line: 1, text: ""}

@@ -3,7 +3,8 @@
 ## Layout
 ```
 course/lessons/NN.yaml   lessons (1-28 drafted 19 Nov 2026, not native-checked); nothing else may be there (lint) but
-                         NOTES-for-native-speaker.md (Claude's hesitations, never built); template course/lesson_template.yaml
+                         NOTES-for-native-speaker.md (Claude's hesitations for L1-28, never built, no longer extended:
+                         later hesitations are the lessons' `doubt`); template course/lesson_template.yaml
 course/lesson0.yaml      Lesson 0, "Reading Vietnamese" (tools/lesson0.py; format below); page `#reading`, linked from home
 course/syllabus.yaml     the plan and the owner's approvals (lint refuses lessons without them); the draft word list
                          and proposal, the cast, the Northern particle strand: ONE source (tools/plan.py)
@@ -50,8 +51,12 @@ dialogue:
 notes:
 - {ref: 1, topic: bridge, text: "học sinh is 學生 …"}      # ref 0 = recap note; topic free (bridge, pronouns, false-friend…)
 new_words:
-- {w: học_sinh, en: "pupil, student"}                       # optional: tag, chars, label (same | false-friend | native)
+- {w: học_sinh, en: "pupil, student"}                       # optional: tag (chars, label: L1-28 only; later an origin
+                                                            # or characters claim is a lexicon row, lint error)
 - {w: Lan, en: "Lan (a woman's name)", name: true}
+doubt:                                                      # optional, never shown: the writer's hesitations for a
+- {line: 1, text: "Is học_sinh right for an adult learner?"}  # native speaker (line n, 0 = the lesson, or "notes[3]");
+                                                            # tools/brief.py --doubts collects them
 exercises:
   translate: [{vi: "Anh là học_sinh.", en: "You are a student."}]
   fill: [{vi: "Chị ___ là học_sinh.", answer: cũng, en: "You are a student too."}]
@@ -81,6 +86,19 @@ senses, or (no lexicon row) several etymologies, must be written with its tag (l
 A character taught without a word entry: `tam~三` (the `character-reading` entries, never ranked).
 **Syllabus plan** (`course/syllabus.yaml` lessons): `{n, en, vi, review, grammar, bridge, strand, lines, new_words:
 {native, hv}}`; lint warns when a written lesson leaves it by more than one (lines, new words) or 0.2 (Hán-Việt share).
+**Words chosen while writing** (26 Nov 2026): a real lesson beyond the approved lists (its id above their last
+lesson) is in the **draft state**: its `new_words` declare its words (lint: I "draft words"); lint still refuses a word
+taught by an earlier lesson or in an approved list, any new word in a review lesson, chars / label in new_words, and
+warns where the dictionary card's sense shares no English with the taught English (`lint.row_needed`: then a lexicon
+row or a tag). After the batch, `tools/wordlist.py --from-lessons N M course/proposal/wordlist-K.tsv` writes the list
+(english = the lesson's) and `wordlist-K-approval.md` (lesson, word, English, type); make it `draft.word_list`,
+`tools/plan.py --write`, `make lint`; the owner approves the table: the list joins `approved.word_list.file` (date),
+then `tools/test_golden.py --write` (its words join the snapshot) and `tools/state.py --write`. From then on the
+lessons are checked against the list as before (`tools/test_batches.py` runs the whole flow on copies).
+**Course lexicon rows** only where the dictionary alone gives a wrong or poor card: several senses (the row of the
+sense taught, tagged), a false friend, an origin or characters claim (a bridge pair whose card is not labelled same),
+lint's "the dictionary card says …" warning. An example is optional (else the dictionary's, as for any word). A card's
+English is the lesson's `new_words` en (`en_src` course; it wins over the lexicon and the dictionary).
 The approved word list (`approved.word_list.file`: one path, or a list of paths once a second list is approved,
 in order) is an 11-column TSV (`course.WORDLIST_COLS`); `lint.py --wordlist FILE` checks one alone. Plan, lint, the
 to-check list and the state numbers read the approved lists and then the draft (`draft.word_list`) together
@@ -257,13 +275,15 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 |---|---|
 | `make db` / `make db-nc` | `tools/build_db.py`: vi.db (public) / vi-nc.db (`--nc`, private); refuses a wrong path |
 | `make lint` | `tools/lint.py` (rules, see its docstring; the course lexicon's conflicts) + `tools/verify_words.py --lessons` (suspects by class) |
+| `make lint-lesson L=29-35` | `lint.py --lessons 29-35 [--max K]`: only those lessons' errors and warnings (and their words' lexicon rows), capped at 40, one summary line; `verify_words.py --lessons --only 29-35`: the suspects they bring in (not the standing list) |
+| `tools/brief.py N M` | the one thing a lesson writer reads: rules digest, plan rows (and their sound rules), cast, particles, every word taught before N, 120 frequent untaught words, the story so far, the two previous dialogues; prints its size (29–35: about 25,000 characters). `--review N M`: digest, words, lessons N–M compactly; `--where W…` (first taught / used, listed, rank, card); `--untaught [TOP] [--before N]`; `--doubts [N M]` |
 | `tools/lexicon.py [--all]` | validates `course/lexicon.tsv` against the database; lists open (and with --all overridden) conflicts |
 | `tools/test_golden.py [--write]` | the golden card snapshot (in `make test`); --write regenerates `tests/golden/cards.tsv` (read the diff) |
 | `tools/plan.py [--write\|--check]` | the plan from one source (above): writes the derived counts and blocks, checks the word list and notes against it (in `make lint`) |
 | `tools/state.py [--write\|--check]` | prints docs/STATE.md's numbers from the build; --check in `make test` |
 | `tools/soundfit.py` | measured fit of a Chinese reading with a Hán-Việt syllable (reading order on cards; splitters for bridge_rules) |
 | `tools/carddump.py TREE DB OUT KEYS` | real cards through a tree's own `cards.py` (used by compare; by hand for any list) |
-| `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences) + `tools/test_bridge_rules.py` (the sound-rule measure, no database) + `tools/test_plan.py` (plan checks, review 3's cases) + `tools/test_review3.py` (review 3's reproduced card cases) + `tools/test_review6.py` (exercise vs card example, false-friend notes) + `tools/test_golden.py` (golden snapshot, opaque sample) + `tools/state.py --check`, then the cutter report |
+| `make test` | `tools/vi.py` and `tools/hanviet.py` self-tests + `tools/test_fetch.py` (pins, loud failures, publication gate) + `tools/test_pipeline.py` (guards, pipeline, partial builds, card check, lint, compare) + `tools/test_db.py` (loaders, labels, bridge, Hán-Việt, Mandarin, homographs, frequency, licences) + `tools/test_bridge_rules.py` (the sound-rule measure, no database) + `tools/test_plan.py` (plan checks, review 3's cases) + `tools/test_review3.py` (review 3's reproduced card cases) + `tools/test_review6.py` (exercise vs card example, false-friend notes) + `tools/test_golden.py` (golden snapshot, opaque sample) + `tools/test_batches.py` (the batch flow on copies: draft state, generated list, approval) + `tools/state.py --check`, then the cutter report |
 | `make cutter` | `tools/cutter_test.py`: P/R/F1 of vi.cut() and underthesea (comparison only) on `tests/cutter/reference.tsv` and (`--set heldout`) `heldout.tsv`, and where they differ (`--known viet74k`: underthesea's word list as vi.cut()'s dictionary) |
 | `make app` | `tools/build_app.py`: page + record.html, font coverage check, then `tools/check_cards.py` |
 | `make check` | the card check alone: no word without a card, no card lost, no card without English, no lower English rank, no published gloss that drops senses (unless in `app/english-changes.tsv`); a changed gloss within its rank is a warning |
@@ -272,7 +292,7 @@ Tatoeba Challenge test set (corpus for the counts only). A missing file: "source
 | `tools/compare.py run` | before/after: builds a git ref and the working tree, each with its own database built by its own `build_db.py` from the sources its own `fetch.sh` pinned (`--before-db/--after-db` to reuse one), diffs the pages (lines, cuts, ids, card fields) and the REAL cards of the top 3,000 words and every course word (lost cards, English leads, labels, characters, examples; `--cards-out FILE` lists every change) |
 | `tools/published_ids.py` | after publishing: records card ids and English ranks |
 | `tools/verify_words.py FILE.tsv` | checks a word list (word, English, chữ Hán) |
-| `tools/wordlist.py FILE` | regenerates an 11-column word list's database columns from the cards (`--check`: count only; `--to-check OUT`: the lexicon's doubts and overrides) |
+| `tools/wordlist.py FILE` | regenerates an 11-column word list's database columns from the cards (`--check`: count only; `--to-check OUT`: the lexicon's doubts and overrides; `--from-lessons N M OUT [--table MD]`: the list of lessons N–M from their new_words and the owner's approval table) |
 | `tools/bridge_rules.py` | the syllabus's sound rules measured on the Hán-Việt syllables of the top 3,000 cards, on the reading the learner would use (the word's, else the source's most frequent; Cantonese changed tones counted with their base tone): per rule its direction (zh>vi, vi>zh, spell, fact, drop), main / strict / lenient rates, best single guess, kind on the main rate (rule ≥ 80 %, tendency ≥ 60 %, "narrows" when the best single guess is under 60 %) and exceptions; zh>vi conditions use only the Chinese side; `--write/--check FILE` the proposal's generated tables; `--examples FILE` its bridge examples through lint's word–character test |
 | `make coverage [LIST=FILE]` | `tools/coverage.py [TOP] [--list FILE]`: card labels, unusable English, the unknown-origin words of the top 1000, how much of the top words a list covers; of the top 1000/TOP (3000)/5000 dictionary words, English, the card's Hán-Việt analysis, 3/2/1/0 Chinese readings, Taigi attested/composed; Sino-Vietnamese share by frequency band; the 30 most frequent Sino-Vietnamese words with their bridge row and the 30 lacking a reading with the reason; then lesson coverage |
 | `tools/import_recordings.py` | imports a native speaker's zip from `record.html` into `course/audio/lessons/` |

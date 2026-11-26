@@ -47,6 +47,9 @@ Validation (validate()): every row against the data, printing conflicts instead 
   bad-row         a malformed row (unknown origin / confidence / pos, chars on a non-Chinese origin…, an override
                   of a conflict the row does not have)
 `make lint` fails on any conflict whose kind the row does not override.
+Since 26 Nov 2026 a row is written only where the dictionary alone gives a wrong or poor card (several senses, a false
+friend, an origin or characters claim, lint's "the dictionary card says …" warning); example is optional. Existing
+rows stay. A lesson word's English on the card is its new_words en.
 """
 import csv
 import os

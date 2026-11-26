@@ -305,3 +305,14 @@ tools/test_review3.py):
   two words. Left: the cutter joins cả_nhà and ăn_cơm where lessons write two words (NOTES L28.8).
 - Checks: make lint 0 errors 0 warnings (verify_words 422 suspects, new ones benign); every make test step without
   the db rebuild passes; state.py --check agrees; make app card check 0 errors; no golden change.
+
+## 2026-11-26 — cheaper batches (branch cheaper-batches, from dc61de2; approved by the owner the same day)
+- Why: a batch cost four agent passes, each reading about 230k tokens of files, and every word was written three
+  times by hand (list row, lexicon row with an example, new_words), plus a NOTES table and a findings file.
+- Now: `tools/brief.py N M` is all a writer reads (rules digest, plan, taught words, untaught pool, the story;
+  `--review` for the reviewer; `--where`, `--untaught`, `--doubts`); `make lint-lesson L=N-M` (quiet lint and the
+  verifier's new suspects only); words chosen while writing (draft state), the list generated from the lessons and
+  approved after them (`wordlist.py --from-lessons`, `tools/test_batches.py`); lexicon rows only where needed;
+  `doubt` in the lesson instead of NOTES-for-native-speaker.md; the reviewer fixes high / medium faults directly.
+- Lint: a new word in a review lesson is now an error everywhere; the copy check is memoised (make lint 41 s → 18 s,
+  same output). One short HISTORY entry per batch from now on.

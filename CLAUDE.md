@@ -6,18 +6,15 @@ Tsheh-tû. State: `docs/STATE.md`. Formats and tools: `docs/REFERENCE.md`. Past 
 remark is one or two lines on a word he knows; no more Cantonese / Taigi reading passes unless a card is plainly wrong.
 
 ## Fixed decisions
-- Northern (Hà Nội) pronunciation. Lesson language: English.
+- Northern (Hà Nội) pronunciation. Lesson language: English. Chữ Hán on word cards and in the bridge, never in lines.
 - Lessons are written from scratch by Claude. A course book the owner owns goes to the private repository only.
 - Syllabus, word lists 2 and 3 approved by the owner (19 Nov 2026, `course/syllabus.yaml`; lint refuses lessons without).
 - Text is quốc ngữ in Unicode NFC. Word boundaries are written in the source (`học_sinh`), never guessed.
-- Chữ Hán appear on word cards and in the bridge, never in lesson lines.
 
 ## The owner's standing preferences
-- English on every word card.
-- No display setting based on his Mandarin level.
+- English on every word card. No display setting based on his Mandarin level.
 - Complete, automatic solutions rather than partial manual ones.
-- Exercise sentences are new, never taken from the lesson's own dialogue.
-- A smooth growth in lines per lesson.
+- Exercise sentences are new, never taken from the lesson's own dialogue. A smooth growth in lines per lesson.
 - Everything not checked by a native speaker is labelled so (lessons, course English).
 
 ## Rules enforced by code (do not work around them)
@@ -40,12 +37,12 @@ remark is one or two lines on a word he knows; no more Cantonese / Taigi reading
    `fixture: true` counts only there; only test databases load it (`build_db --fixture`). Only `NN.yaml` in lessons.
 9. Word boundaries follow `docs/SEGMENTATION.md`; tone marks and spellings (lý do, not lí do) follow the house style (lint).
 10. The course lexicon `course/lexicon.tsv` (Claude's, not native-checked; honest `doubt`) decides a word's English,
-   sense, origin, characters, notes and example; readings come from the database. Lint refuses a conflict with the
-   data (each English item, characters vs etymology, "X only") unless overridden with a reason.
+   sense, origin, characters, notes and example where it has a row, needed only where the dictionary alone gives a
+   wrong or poor card (example optional); readings: database. Lint refuses a conflict with the data unless overridden.
 11. `make test` checks the cards against `tests/golden/cards.tsv` (reviewed snapshot of what the learner sees);
    after a deliberate change, `tools/test_golden.py --write` and read the diff.
-12. One plan source: `course/syllabus.yaml` + word list, `tools/plan.py --write` makes the rest; notes and planned
-   grammar use taught words or a `{preview}`; rule numbers only from `tools/bridge_rules.py --write`.
+12. One plan source: `course/syllabus.yaml` + word lists (from L29 generated from the lessons); `tools/plan.py --write`
+   makes the rest; notes and planned grammar use taught words or a `{preview}`; rule numbers: `bridge_rules.py --write`.
 
 ## Repository rules
 - Public repo: code and Claude's own lessons; what he owns (books, transcripts, recordings) goes to `tusach-private`.
@@ -56,4 +53,7 @@ remark is one or two lines on a word he knows; no more Cantonese / Taigi reading
   steps one at a time; commit as you go.
 - Four documents, kept apart and short: this file (under 60 lines), `docs/REFERENCE.md`, `docs/STATE.md` (one small
   entry per module), `docs/HISTORY.md`. The repository is the source of truth.
+- Per 7 lessons, one writer agent reads only `tools/brief.py N M`, picks the words while writing, puts doubts in `doubt`;
+  `make lint-lesson L=N-M` clean; one reviewer reads `brief.py --review N M`, fixes high / medium faults, lists them in the
+  commit. Then `wordlist.py --from-lessons`: the list, approved by the owner after the lessons. HISTORY: one entry a batch.
 - Before a commit: `make lint`, `make test`, `make app`. After app or template changes: `make smoke`.
