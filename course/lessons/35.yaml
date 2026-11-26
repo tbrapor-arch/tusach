@@ -1,0 +1,43 @@
+id: 35
+title: {vi: "Uống trà với ông Hùng", en: "Review 5"}
+review: true
+setting: "A Sunday afternoon in early spring. Ông Hùng, the old neighbour, is back at his tea table in front of his house, and calls Sacha over: he has not seen him for a week, and wants all the news."
+dialogue:
+- {n: 1, speaker: "Hùng", vi: "Sacha ơi, vào uống trà với ông đi! Tuần trước ông không thấy cháu.", en: "Sacha, come and have some tea with me! I didn't see you last week."}
+- {n: 2, speaker: "Sacha", vi: "Dạ, tuần trước cháu bị sốt~fever. Bác_sĩ nói cháu cần~need nằm nghỉ.", en: "Last week I had a fever. The doctor said I needed to stay in bed."}
+- {n: 3, speaker: "Hùng", vi: "Bây_giờ cháu khỏi chưa?", en: "Are you better now?"}
+- {n: 4, speaker: "Sacha", vi: "Cháu khỏi rồi ạ. Vì cháu uống thuốc và ngủ nhiều nên cháu khỏi nhanh.", en: "Yes, I'm over it. I took the medicine and slept a lot, so I got better quickly."}
+- {n: 5, speaker: "Hùng", vi: "Tốt quá. Tết cháu ở đâu?", en: "Good. Where were you for Tết?"}
+- {n: 6, speaker: "Sacha", vi: "Cháu được anh Minh đưa về quê nội~paternal của Bin và Na. Cháu được ông_nội của Bin mời ăn cơm.", en: "Minh took me to Bin and Na's village on their father's side. Bin's grandfather invited me to eat with them."}
+- {n: 7, speaker: "Hùng", vi: "Thế à! Còn Thảo thế_nào? Ông nghe nói xe_đạp của Thảo bị mất.", en: "Is that so! And how is Thảo? I heard her bike was stolen."}
+- {n: 8, speaker: "Sacha", vi: "Dạ, xe bị trộm lấy, nhưng công_an tìm_thấy rồi. Cháu sửa~repair phanh cho Thảo.", en: "Yes, a thief took it, but the police found it. I fixed the brakes for her."}
+- {n: 9, speaker: "Hùng", vi: "Cháu giỏi quá! Thế còn công_việc?", en: "Well done! And work?"}
+- {n: 10, speaker: "Sacha", vi: "Tháng này cháu được sếp thưởng. Cháu mở tài_khoản ở ngân_hàng rồi.", en: "This month the boss gave me a bonus. I've opened a bank account now."}
+- {n: 11, speaker: "Hùng", vi: "Nếu cháu có nhiều tiền thì cháu mời ông đi xem bóng_đá nhé!", en: "If you've got lots of money, then you can take me to the football!"}
+- {n: 12, speaker: "Sacha", vi: "Dạ, sắp~about có trận~match của đội_tuyển Việt_Nam. Cháu mời ông xem trực_tiếp ở sân_vận_động!", en: "The national team has a match soon. I'll take you to see it live at the stadium!"}
+- {n: 13, speaker: "Hùng", vi: "Ông già rồi, ông xem ti_vi thôi. Chúc~wish cháu luôn khỏe và may_mắn!", en: "I'm too old, I'll just watch it on TV. I wish you good health and good luck always!"}
+notes:
+- {ref: 0, topic: "grammar", text: "Recap, được (lesson 29): được + verb, the subject gets something good: cháu được thưởng. With the doer between: cháu được sếp thưởng \"the boss gave me a bonus\" (line 10)."}
+- {ref: 0, topic: "grammar", text: "Recap, bị (lesson 30): the bad counterpart, with or without a doer: xe bị trộm lấy \"the bike was taken by a thief\", xe bị mất \"the bike was stolen\" (lines 7–8)."}
+- {ref: 0, topic: "grammar", text: "Recap, sắp (lesson 31): \"about to, soon\", before the verb: sắp có trận \"there's a match soon\" (line 12). Wishes: chúc + person + wish: chúc cháu luôn khỏe (line 13)."}
+- {ref: 0, topic: "grammar", text: "Recap, kinship (lesson 32): nội is the father's side, ngoại the mother's: quê nội, ông_nội, bà_ngoại. In-laws: con dâu, con rể, anh_rể; mẹ chồng, bố vợ."}
+- {ref: 0, topic: "grammar", text: "Recap, nếu … thì (lesson 33): condition first, result after thì (line 11). cần + verb \"need to\" (line 2), có cần … không? \"is it necessary?\""}
+- {ref: 0, topic: "grammar", text: "Recap, vì … nên (lesson 34): cause, then result, both words kept (line 4). tại_vì answers a sao? question on its own."}
+- {ref: 7, topic: "usage", text: "ông nghe nói \"I heard (people say)\": nghe + nói, to pass on news."}
+- {ref: 1, topic: "pronouns", text: "With ông Hùng, Sacha is cháu and answers with dạ; ông speaks of himself as ông all through."}
+new_words: []
+exercises:
+  translate:
+  - {vi: "Nếu em cần~need tiền thì em rút ở máy này.", en: "If you need money, take it out at this machine."}
+  - {vi: "Vì đường~road đông~crowded nên chị đến muộn.", en: "The roads were busy, so I arrived late."}
+  - {vi: "Na chúc~wish bà_ngoại luôn khỏe.", en: "Na wishes her grandmother good health always."}
+  - {vi: "Anh_rể của tôi bị công_an bắt vì lái xe_máy nhanh quá.", en: "My brother-in-law was stopped by the police for riding his motorbike too fast."}
+  - {vi: "Sắp~about hết tháng rồi, tôi sắp~about được trả tiền_lương.", en: "It's nearly the end of the month: I'm about to get paid."}
+  fill:
+  - {vi: "Điện_thoại của Mai ___ hỏng rồi.", answer: "bị", en: "Mai's phone is broken."}
+  - {vi: "Thảo ___ chủ_nhà mời ăn cơm.", answer: "được", en: "Thảo was invited to dinner by her landlady."}
+  - {vi: "Mẹ của chồng tôi là mẹ ___ của tôi.", answer: "chồng", en: "My husband's mother is my mother-in-law."}
+doubt:
+- {line: 6, text: "được anh Minh đưa về quê: natural for 'Minh took me', or is it too formal in a chat with a neighbour?"}
+- {line: 11, text: "Hùng's joke Nếu cháu có nhiều tiền thì cháu mời ông …: does it sound teasing and warm, as intended?"}
+- {line: "exercises.translate[3]", text: "bị công_an bắt: does bắt imply an arrest here, too strong for a speeding stop (where giữ or phạt would fit)?"}
