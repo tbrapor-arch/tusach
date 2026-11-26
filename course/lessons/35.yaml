@@ -12,7 +12,7 @@ dialogue:
 - {n: 7, speaker: "Hùng", vi: "Thế à! Còn Thảo thế_nào? Ông nghe nói xe_đạp của Thảo bị mất.", en: "Is that so! And how is Thảo? I heard her bike was stolen."}
 - {n: 8, speaker: "Sacha", vi: "Dạ, xe bị trộm lấy, nhưng công_an tìm_thấy rồi. Cháu sửa~repair phanh cho Thảo.", en: "Yes, a thief took it, but the police found it. I fixed the brakes for her."}
 - {n: 9, speaker: "Hùng", vi: "Cháu giỏi quá! Thế còn công_việc?", en: "Well done! And work?"}
-- {n: 10, speaker: "Sacha", vi: "Tháng này cháu được sếp thưởng. Cháu mở tài_khoản ở ngân_hàng rồi.", en: "This month the boss gave me a bonus. I've opened a bank account now."}
+- {n: 10, speaker: "Sacha", vi: "Tháng trước cháu được sếp thưởng. Cháu mở tài_khoản ở ngân_hàng rồi.", en: "Last month the boss gave me a bonus. I've opened a bank account now."}
 - {n: 11, speaker: "Hùng", vi: "Nếu cháu có nhiều tiền thì cháu mời ông đi xem bóng_đá nhé!", en: "If you've got lots of money, then you can take me to the football!"}
 - {n: 12, speaker: "Sacha", vi: "Dạ, sắp~about có trận~match của đội_tuyển Việt_Nam. Cháu mời ông xem trực_tiếp ở sân_vận_động!", en: "The national team has a match soon. I'll take you to see it live at the stadium!"}
 - {n: 13, speaker: "Hùng", vi: "Ông già rồi, ông xem ti_vi thôi. Chúc~wish cháu luôn khỏe và may_mắn!", en: "I'm too old, I'll just watch it on TV. I wish you good health and good luck always!"}

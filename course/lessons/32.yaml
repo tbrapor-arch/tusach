@@ -4,7 +4,7 @@ review: false
 setting: "The second day of Tết. Anh Minh drives the family, and Sacha, to his parents' village an hour from Hà Nội. Chị Lan's mother stays in town. The house is full of relatives, and incense smoke drifts from the family altar."
 dialogue:
 - {n: 1, speaker: "Minh", vi: "Sacha ơi, đây là quê nội~paternal của Bin và Na.", en: "Sacha, this is Bin and Na's home village on their father's side."}
-- {n: 2, speaker: "Bin", vi: "Ông_nội ơi! Bà_nội ơi! Cháu về rồi!", en: "Grandpa! Grandma! We're here!"}
+- {n: 2, speaker: "Bin", vi: "Ông_nội ơi! Bà_nội ơi! Cháu về rồi!", en: "Grandpa! Grandma! I'm home!"}
 - {n: 3, speaker: "Grandpa", vi: "Cả nhà về rồi à! Vào nhà đi các cháu.", en: "So you're all here! Come in, children."}
 - {n: 4, speaker: "Sacha", vi: "Cháu chào ông, chào bà. Cháu chúc~wish ông bà năm_mới sức_khỏe ạ.", en: "Hello, sir; hello, madam. I wish you good health in the new year."}
 - {n: 5, speaker: "Grandma", vi: "Cảm_ơn cháu. Cháu ở với bà_ngoại của Bin và Na à?", en: "Thank you. So you live with Bin and Na's other grandmother?"}
@@ -20,7 +20,7 @@ notes:
 - {ref: 2, topic: "grammar", text: "ông_nội, bà_nội are the father's parents; bà_ngoại and {ông_ngoại} the mother's. Bin and Na live with their bà_ngoại, chị Lan's mother."}
 - {ref: 7, topic: "grammar", text: "In-laws: con dâu \"daughter-in-law\", con rể \"son-in-law\". Parents-in-law are made with chồng and vợ: mẹ chồng \"husband's mother\", bố vợ \"wife's father\"."}
 - {ref: 8, topic: "grammar", text: "anh_rể is an elder sister's husband: Minh is Thảo's anh_rể. An elder brother's wife is a {chị_dâu}."}
-- {ref: 8, topic: "pronouns", text: "Minh calls himself bố to his own child, and Thảo is dì to Na: dì is the mother's sister. The mother's brother is cậu; on the father's side the words are cô and chú."}
+- {ref: 8, topic: "pronouns", text: "Minh calls himself bố to his own child, and Thảo is dì to Na: dì is the mother's younger sister, cậu her brother; on the father's side cô is his sister, chú his younger brother; an elder sibling of either parent is bác."}
 - {ref: 4, topic: "pronouns", text: "To his friends' parents Sacha is cháu, and they are ông and bà, as with the old neighbour ông Hùng (lesson 19)."}
 - {ref: 9, topic: "usage", text: "thắp hương \"to light incense\" at the bàn_thờ, the family altar where the tổ_tiên, the ancestors, are honoured: the first thing done on arriving home at Tết."}
 - {ref: 11, topic: "usage", text: "đoàn_tụ \"to be reunited\": Tết is the time for it. thăm is \"to visit\" someone: đến thăm \"to come and visit\"."}
@@ -55,7 +55,7 @@ exercises:
   fill:
   - {vi: "Mẹ của mẹ tôi là ___ của tôi.", answer: "bà_ngoại", en: "My mother's mother is my grandmother."}
   - {vi: "Chồng của chị_gái tôi là ___ của tôi.", answer: "anh_rể", en: "My elder sister's husband is my brother-in-law."}
-  - {vi: "Ngày_mai chúng_tôi đi ___ họ_hàng.", answer: "thăm~visit", en: "Tomorrow afternoon we're going to visit relatives."}
+  - {vi: "Ngày_mai chúng_tôi đi ___ họ_hàng.", answer: "thăm~visit", en: "Tomorrow we're going to visit relatives."}
 doubt:
 - {line: 4, text: "Sacha greets Minh's parents as ông / bà: right for people in their sixties, or would bác be expected?"}
 - {line: 8, text: "Minh calls himself bố to his daughter and Thảo dì Thảo: is dì the Northern word here, or would the children say cô Thảo?"}

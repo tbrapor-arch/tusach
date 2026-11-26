@@ -12,7 +12,7 @@ dialogue:
 - {n: 7, speaker: "Minh", vi: "Vào! Việt_Nam ghi_bàn rồi!", en: "Goal! Vietnam has scored!"}
 - {n: 8, speaker: "Sacha", vi: "Sao~why trọng_tài không cho bàn~goal này?", en: "Why isn't the referee allowing that goal?"}
 - {n: 9, speaker: "Tuấn", vi: "Tại_vì cầu_thủ số mười đá~kick ngã cầu_thủ Thái_Lan.", en: "Because number ten kicked a Thai player over."}
-- {n: 10, speaker: "Minh", vi: "Tiếc quá! Hết trận~match rồi. Việt_Nam thua một – không.", en: "What a shame! The match is over. Vietnam lost one–nil."}
+- {n: 10, speaker: "Minh", vi: "Tiếc quá! Hết trận~match rồi. Việt_Nam thua không – một.", en: "What a shame! The match is over. Vietnam lost one–nil."}
 - {n: 11, speaker: "Sacha", vi: "Vì Thái_Lan đá~kick nhanh hơn nên họ thắng~win.", en: "Thailand played faster, so they won."}
 - {n: 12, speaker: "Tuấn", vi: "Lần sau Việt_Nam sẽ thắng~win! Chúng_ta lại xem trực_tiếp ở đây nhé.", en: "Next time Vietnam will win! We'll watch it live here again."}
 notes:
@@ -22,7 +22,7 @@ notes:
 - {ref: 11, topic: "pronouns", text: "họ is \"they, them\" for people: here the other team. Unlike anh, chị, em, it says nothing about age."}
 - {ref: 1, topic: "usage", text: "đá is \"to kick\", and \"to play\" for football: đá bóng \"to play football\", đá với … \"to play against …\". đội_tuyển is the national side; đội alone is any team."}
 - {ref: 7, topic: "usage", text: "ghi_bàn \"to score a goal\"; the goal itself is bàn (line 8). When a goal goes in, the crowd shouts vào! \"in!\""}
-- {ref: 10, topic: "usage", text: "thắng \"to win\" and thua \"to lose\" take the score straight after: thua một – không \"lose one–nil\". tiếc quá! \"what a pity!\""}
+- {ref: 10, topic: "usage", text: "thắng \"to win\" and thua \"to lose\" take the score straight after, the subject's goals first: thua không – một \"lose one–nil\". tiếc quá! \"what a pity!\""}
 - {ref: 12, topic: "usage", text: "xem trực_tiếp \"to watch live\"; trực_tiếp is also \"in person, direct\"."}
 - {ref: 5, topic: "bridge", text: "cầu_thủ is 球手 and giáo_viên is 教員: inside a Hán-Việt word the order is Chinese, the modifier first (ball + player). Outside it, native order puts the head first: đội_tuyển Việt_Nam, cầu_thủ số mười."}
 new_words:
@@ -60,5 +60,5 @@ exercises:
 doubt:
 - {line: 3, text: "vì … nên with two reasons (vé đắt và khó mua): natural in speech?"}
 - {line: 9, text: "đá ngã cầu_thủ Thái_Lan 'kicked a Thai player over': natural, or phạm lỗi với …?"}
-- {line: 10, text: "thua một – không: is the score read một – không or một – không bàn? Is 'Hết trận rồi' natural for 'the match is over'?"}
+- {line: 10, text: "thua không – một (changed from một – không: the subject's goals first, as in the press 0-1): right in speech? Is 'Hết trận rồi' natural for 'the match is over'?"}
 - {line: 0, text: "Lexicon row thắng~win (hv 勝) is Claude's: the dictionary card gave 'brake'."}

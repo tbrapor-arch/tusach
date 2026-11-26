@@ -57,7 +57,7 @@ exercises:
   - {vi: "Cháu ___ ông năm_mới sức_khỏe!", answer: "chúc~wish", en: "Grandpa, I wish you good health in the new year!"}
   - {vi: "Hôm_qua bà dạy Na ___ bánh_chưng.", answer: "gói", en: "Yesterday Grandma taught Na to wrap bánh chưng."}
 doubt:
-- {line: 8, text: "mình as inclusive 'we' from a child to her grandmother: natural here, or would Na say cả nhà?"}
+- {line: 8, text: "khi nào thì cả nhà chúc Tết: natural from a child, or would Na say khi nào mình chúc Tết?"}
 - {line: 11, text: "Cháu bà ngoan quá!: natural fond address from a Northern grandmother?"}
 - {line: 12, text: "Sacha wishes thành_công, may_mắn to Lan and Minh: is that the usual pair for adults, or would an_khang thịnh_vượng be expected?"}
 - {line: 0, text: "Setting says late January: Tết dates vary; is 'a week before Tết' enough?"}

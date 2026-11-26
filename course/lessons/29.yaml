@@ -52,7 +52,7 @@ exercises:
   - {vi: "Anh ấy được công_ty thưởng năm~five triệu.", en: "His company gave him a bonus of five million."}
   - {vi: "Ngân_hàng này mở lúc tám giờ sáng.", en: "This bank opens at eight in the morning."}
   - {vi: "Tôi không đủ tiền mua xe_máy mới.", en: "I don't have enough money to buy a new motorbike."}
-  - {vi: "Chị đưa thẻ cho em nhé.", en: "Give me the card, OK? (to a younger woman, speaking to an older one)"}
+  - {vi: "Chị đưa thẻ cho em nhé.", en: "Give me the card, OK? (to an older woman)"}
   fill:
   - {vi: "Na ___ giáo_viên khen.", answer: "được", en: "Na was praised by the teacher."}
   - {vi: "Anh muốn ___ tiền ở máy này à?", answer: "rút", en: "Do you want to take out money at this machine?"}
