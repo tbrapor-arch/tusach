@@ -1,0 +1,63 @@
+id: 30
+title: {vi: "Xe đạp bị mất", en: "A stolen bike"}
+review: false
+setting: "Wednesday morning. Thảo calls Sacha in a panic: the old red bicycle her parents gave her has gone from the yard of her building. They go to the neighbourhood police post together."
+dialogue:
+- {n: 1, speaker: "Thảo", vi: "Anh Sacha ơi, xe_đạp của em bị trộm lấy mất rồi!", en: "Sacha, my bike has been taken by a thief!", lit: "… bicycle of me suffer thief take lose already"}
+- {n: 2, speaker: "Sacha", vi: "Thật à? Em để xe ở đâu?", en: "Really? Where did you leave it?"}
+- {n: 3, speaker: "Thảo", vi: "Ở sân, gần cổng. Tối hôm_qua em quên khóa~lock xe.", en: "In the yard, near the gate. Last night I forgot to lock it."}
+- {n: 4, speaker: "Sacha", vi: "Chúng_ta đi gặp công_an đi.", en: "Let's go and see the police."}
+- {n: 5, speaker: "Policeman", vi: "Xe của cháu màu gì?", en: "What colour is your bike?"}
+- {n: 6, speaker: "Thảo", vi: "Dạ, màu đỏ, xe cũ ạ. Xe này cháu được tặng ạ.", en: "Red, an old bike. It was a present.", lit: "… vehicle this I get give (ạ)"}
+- {n: 7, speaker: "Policeman", vi: "Ở khu này hay~often bị mất xe lắm. Chú sẽ điều_tra. Sân của cháu không an_toàn đâu.", en: "Bikes often get stolen round here. I'll look into it. Your yard isn't safe at all."}
+- {n: 8, speaker: "Thảo", vi: "Anh ơi, xe của em được tìm_thấy rồi! Một thanh_niên bị công_an bắt!", en: "Guess what, my bike has been found! A young man was caught by the police!"}
+- {n: 9, speaker: "Sacha", vi: "May~lucky quá! Em được công_an giúp đấy.", en: "How lucky! The police helped you there.", lit: "lucky very! you get police help (đấy)"}
+- {n: 10, speaker: "Thảo", vi: "Vâng. Nhưng xe bị hỏng phanh rồi.", en: "Yes. But the brakes are broken.", lit: "yes. but vehicle suffer broken brake already"}
+- {n: 11, speaker: "Sacha", vi: "Anh sửa~repair cho em. Phanh xe_máy anh còn sửa~repair được mà!", en: "I'll fix it for you. I can even fix motorbike brakes, you know!"}
+- {n: 12, speaker: "Thảo", vi: "Cảm_ơn anh. Lần sau em sẽ nhớ khóa~lock xe.", en: "Thank you. Next time I'll remember to lock the bike."}
+notes:
+- {ref: 1, topic: "grammar", text: "bị + doer + verb: something bad is done to the subject. xe_đạp của em bị trộm lấy mất \"my bike was taken by a thief\". The doer, trộm, stands between bị and the verb, never after it."}
+- {ref: 8, topic: "grammar", text: "The same pattern with được, for something good, or neutral: xe được tìm_thấy \"the bike was found\"; with a doer, em được công_an giúp (line 9). A bad thing for the subject takes bị: một thanh_niên bị công_an bắt."}
+- {ref: 10, topic: "grammar", text: "bị also comes straight before a word for a bad state, with no doer: xe bị hỏng \"the bike is broken\", as in bị ốm (lesson 12)."}
+- {ref: 1, topic: "usage", text: "lấy mất \"take away (for good)\": mất after a verb says that something is lost. mất alone is \"to lose\": em mất ví \"I lost my wallet\"."}
+- {ref: 2, topic: "usage", text: "để is \"to leave, to put\" somewhere: em để xe ở đâu? \"where did you leave the bike?\" xe alone is any vehicle; context says which."}
+- {ref: 7, topic: "usage", text: "In the North, people say công_an for the police; {cảnh_sát} is the word in the South and in films."}
+- {ref: 5, topic: "pronouns", text: "The policeman is older: he is chú, Thảo is cháu, and she starts her answer with dạ (lesson 19). To Sacha she is em."}
+- {ref: 9, topic: "usage", text: "may quá! \"how lucky!\" may alone is \"lucky\"; the fuller word is {may_mắn}."}
+- {ref: 0, topic: "bridge", text: "thường is 常: where Cantonese ends a syllable in -oeng, Vietnamese has the rhyme of thường, nearly always (33 times in 35). Mandarin's ending is of no help here."}
+new_words:
+- {w: trộm, en: "thief"}
+- {w: mất, en: "to lose; (after a verb) away, for good"}
+- {w: thật, en: "true, real"}
+- {w: để, en: "to leave, to put"}
+- {w: xe, en: "vehicle (bike, car, motorbike)"}
+- {w: sân, en: "yard, courtyard"}
+- {w: cổng, en: "gate"}
+- {w: khóa, tag: lock, en: "to lock"}
+- {w: công_an, en: "police, police officer"}
+- {w: khu, en: "area, neighbourhood"}
+- {w: điều_tra, en: "to investigate"}
+- {w: an_toàn, en: "safe"}
+- {w: tìm_thấy, en: "to find"}
+- {w: thanh_niên, en: "young man, young people"}
+- {w: bắt, en: "to catch, to arrest"}
+- {w: may, tag: lucky, en: "lucky"}
+- {w: hỏng, en: "broken, out of order"}
+- {w: sửa, tag: repair, en: "to repair, to fix"}
+- {w: chắc, en: "probably, surely"}
+- {w: tức, tag: upset, en: "annoyed, upset"}
+exercises:
+  translate:
+  - {vi: "Hôm_qua anh Tuấn bị mất điện_thoại ở quán cà_phê.", en: "Yesterday Tuấn lost his phone at a café."}
+  - {vi: "Chắc em quên khóa~lock cổng rồi.", en: "I must have forgotten to lock the gate."}
+  - {vi: "Máy_tính của tôi bị hỏng, tôi phải~must đưa đi sửa~repair.", en: "My computer is broken; I have to take it to be repaired."}
+  - {vi: "Bin được giáo_viên khen, nhưng Na thì bị giáo_viên hỏi nhiều.", en: "Bin was praised by the teacher, but Na got a lot of questions from the teacher."}
+  - {vi: "Em tức~upset lắm, nhưng em không nói gì.", en: "I was really annoyed, but I said nothing."}
+  fill:
+  - {vi: "Cái ví~wallet của chị ___ trộm lấy mất rồi.", answer: "bị", en: "My wallet was taken by a thief."}
+  - {vi: "Phòng này được chủ_nhà ___ rồi.", answer: "sửa~repair", en: "This room has been repaired by the landlord."}
+  - {vi: "Khu này không ___ đâu, em đi về sớm nhé.", answer: "an_toàn", en: "This area isn't safe at all; go home early, OK?"}
+doubt:
+- {line: 1, text: "bị trộm lấy mất: natural, or is bị mất trộm / bị trộm the usual way to say a bike was stolen?"}
+- {line: 7, text: "Would a ward policeman say Ở khu này hay bị mất xe lắm, or prefer khu này hay mất trộm xe?"}
+- {line: 11, text: "còn ... được mà for 'I can even fix': natural, or should it be ... anh cũng sửa được?"}
