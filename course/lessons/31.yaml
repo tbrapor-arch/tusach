@@ -1,0 +1,63 @@
+id: 31
+title: {vi: "Sắp Tết rồi", en: "Tết is coming"}
+review: false
+setting: "Late January, a week before Tết, the Lunar New Year. Chị Lan's house smells of dong leaves and floor polish: everyone is cleaning, and anh Minh comes home with a small peach tree in blossom."
+dialogue:
+- {n: 1, speaker: "Bin", vi: "Mẹ ơi, sắp~about Tết rồi! Bao_giờ con được lì_xì?", en: "Mum, it's nearly Tết! When do I get my lucky money?"}
+- {n: 2, speaker: "Lan", vi: "Sắp~about rồi. Nhưng trước Tết, cả nhà phải~must dọn nhà.", en: "Soon. But before Tết, the whole family has to clean the house."}
+- {n: 3, speaker: "Sacha", vi: "Chị Lan ơi, ở Việt_Nam mọi người làm gì vào Tết ạ?", en: "Lan, what do people do at Tết in Vietnam?"}
+- {n: 4, speaker: "Lan", vi: "Mọi người gói bánh_chưng, mua hoa đào~peach, rồi về quê với gia_đình.", en: "People wrap bánh chưng, buy peach blossom, and go back to their home villages to be with family."}
+- {n: 5, speaker: "Minh", vi: "Cây đào~peach này anh vừa mua ở chợ hoa. Đẹp không?", en: "I've just bought this peach tree at the flower market. Isn't it pretty?"}
+- {n: 6, speaker: "Sacha", vi: "Đẹp quá! Em sắp~about được ăn bánh_chưng lần đầu_tiên.", en: "It's beautiful! I'm about to have bánh chưng for the first time."}
+- {n: 7, speaker: "Bác", vi: "Sacha ơi, bác dạy cháu gói bánh_chưng nhé. Cháu lấy lá này, rồi gói thế này.", en: "Sacha, let me teach you to wrap the cakes. Take this leaf, then wrap it like this."}
+- {n: 8, speaker: "Na", vi: "Bà ơi, khi nào thì cả nhà chúc~wish Tết ạ?", en: "Grandma, when do we give our New Year wishes?"}
+- {n: 9, speaker: "Bác", vi: "Sáng ngày đầu_tiên của năm_mới, cháu ạ.", en: "On the morning of the first day of the new year, sweetheart."}
+- {n: 10, speaker: "Na", vi: "Cháu chúc~wish bà năm_mới sức_khỏe, vạn_sự như_ý!", en: "Grandma, I wish you good health in the new year, and everything as you wish!", lit: "I wish grandma new year health, all things as wish"}
+- {n: 11, speaker: "Bác", vi: "Cháu bà ngoan quá! Nhưng chưa đến Tết mà!", en: "What a good girl! But it isn't Tết yet!"}
+- {n: 12, speaker: "Sacha", vi: "Thế thì em chúc~wish anh chị năm_mới thành_công, may_mắn!", en: "Then I wish you both success and luck in the new year!"}
+notes:
+- {ref: 1, topic: "grammar", text: "sắp before a verb or a time word: \"soon, about to\". sắp Tết rồi \"Tết is nearly here\"; rồi at the end says the moment is close. The answer sắp rồi (line 2) is \"soon\"."}
+- {ref: 6, topic: "grammar", text: "The time words before a verb: đã (done), đang (going on), sắp (about to), sẽ (will). em sắp được ăn bánh_chưng \"I'm about to get to eat bánh chưng\": sắp comes before được."}
+- {ref: 10, topic: "grammar", text: "chúc + person + wish: cháu chúc bà sức_khỏe \"I wish you good health, Grandma\". The person comes straight after chúc, with no word for \"that\"."}
+- {ref: 10, topic: "usage", text: "Set New Year wishes: sức_khỏe \"health\", vạn_sự như_ý \"may all go as you wish\", thành_công \"success\", may_mắn \"luck\". The greeting everyone says is chúc_mừng năm_mới! \"Happy New Year!\""}
+- {ref: 1, topic: "usage", text: "lì_xì is lucky money, given in a small red envelope to children (and to the old) at Tết. The word was borrowed from southern Chinese."}
+- {ref: 8, topic: "pronouns", text: "Na is bà's cháu: she calls her grandmother bà and herself cháu. chúc Tết is \"to give New Year wishes\"; cả nhà \"the whole family\" is the subject."}
+- {ref: 11, topic: "usage", text: "ngoan \"good, well-behaved\" is said of children. cháu bà \"Grandma's grandchild\": a fond way to address a grandchild."}
+- {ref: 4, topic: "usage", text: "bánh_chưng is the square sticky-rice cake of the Northern Tết, wrapped in green leaves; hoa đào, peach blossom, is the Northern Tết flower."}
+- {ref: 0, topic: "bridge", text: "tiền is 錢 and điện (in điện_thoại) is 電: where Cantonese ends a syllable in -in, Vietnamese has the rhyme of tiền (40 times in 43)."}
+new_words:
+- {w: sắp, tag: about, en: "about to, soon"}
+- {w: Tết, en: "Tết, the Lunar New Year"}
+- {w: lì_xì, en: "lucky money (at Tết)"}
+- {w: dọn, en: "to clear up, to put in order"}
+- {w: gói, en: "to wrap"}
+- {w: bánh_chưng, en: "bánh chưng: square sticky-rice cake"}
+- {w: hoa, en: "flower"}
+- {w: đào, tag: peach, en: "peach, peach blossom"}
+- {w: cây, en: "tree, plant"}
+- {w: lá, en: "leaf"}
+- {w: chúc, tag: wish, en: "to wish"}
+- {w: năm_mới, en: "New Year"}
+- {w: sức_khỏe, en: "health"}
+- {w: vạn_sự, en: "all things, everything"}
+- {w: như_ý, en: "as one wishes"}
+- {w: ngoan, en: "good, well-behaved (of a child)"}
+- {w: thành_công, en: "success; to succeed"}
+- {w: may_mắn, en: "luck; lucky"}
+- {w: chúc_mừng, en: "to congratulate, to wish well"}
+exercises:
+  translate:
+  - {vi: "Chúc_mừng sinh_nhật em! Chúc~wish em luôn vui.", en: "Happy birthday! I hope you're always happy."}
+  - {vi: "Chị Lan đang dọn bếp, còn anh Minh đi mua hoa.", en: "Lan is tidying the kitchen, and Minh has gone to buy flowers."}
+  - {vi: "Tàu sắp~about chạy, anh nhanh lên!", en: "The train is about to leave, hurry up!"}
+  - {vi: "Cây đào~peach ở sân nhà ông Hùng to lắm.", en: "The peach tree in ông Hùng's yard is very big."}
+  - {vi: "Các cháu ngoan thì bà cho tiền lì_xì.", en: "If you children are good, Grandma will give you lucky money."}
+  fill:
+  - {vi: "Phim ___ bắt_đầu, chúng_ta vào rạp đi.", answer: "sắp~about", en: "The film is about to start; let's go into the cinema."}
+  - {vi: "Cháu ___ ông năm_mới sức_khỏe!", answer: "chúc~wish", en: "Grandpa, I wish you good health in the new year!"}
+  - {vi: "Hôm_qua bà dạy Na ___ bánh_chưng.", answer: "gói", en: "Yesterday Grandma taught Na to wrap bánh chưng."}
+doubt:
+- {line: 8, text: "mình as inclusive 'we' from a child to her grandmother: natural here, or would Na say cả nhà?"}
+- {line: 11, text: "Cháu bà ngoan quá!: natural fond address from a Northern grandmother?"}
+- {line: 12, text: "Sacha wishes thành_công, may_mắn to Lan and Minh: is that the usual pair for adults, or would an_khang thịnh_vượng be expected?"}
+- {line: 0, text: "Setting says late January: Tết dates vary; is 'a week before Tết' enough?"}
