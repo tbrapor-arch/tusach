@@ -33,8 +33,9 @@ Word boundaries: underscores join one word's syllables (học_sinh, Hà_Nội, c
 Homographs: word~tag (đường~road, năm~year, ba~three, tầng ba~three). A word with several lexicon senses, or several
   dictionary etymologies and no lexicon row, MUST carry its tag (error); a tag names a lexicon row, a dictionary tag,
   a part of speech (phải~verb) or a word of one etymology's English.
+  In new_words the tag is its own key ({w: đào, tag: peach, en: …}), not w~tag. Fill answers carry tags too.
 Spelling: impossible syllables are errors; house spelling (lý do, công ty, kỹ thuật, Mỹ; but bác sĩ, bánh mì);
-  traditional tone marks (hòa, khỏe, thủy, mùa, hoàn). No chữ Hán in vi lines, titles or exercises.
+  traditional tone marks (hòa, khỏe, thủy, mùa, hoàn). No chữ Hán in vi lines, titles or exercises. TV: ti_vi.
 Every word of a line or exercise is a new word of this lesson or an earlier one (the list below). Names: declared
   once, with name: true in new_words (cast already declared: below). Numbers are not words.
 Review lessons (every 7th, review: true): no new word at all; recombine the last six lessons; recap notes.
@@ -54,10 +55,11 @@ New words (chosen while you write; the list is generated afterwards and approved
 Notes (about 9; topics grammar, usage, pronouns, particles, bridge, false-friend):
 - {ref: line n, or 0 for a recap; topic; text}. A Vietnamese word in a note or a gloss must be taught by this lesson
   or earlier, else written {in braces} (a preview, shown without braces). Cast names and grammar terms pass.
+  English words or romanisations can read as Vietnamese (tay: error even in quotes): reword them.
 - ONE bridge note (topic bridge), one or two lines, on a word he knows, Mandarin first, then Cantonese, Taigi. Its
   chữ Hán: the same word in Chinese for the sense taught (lexicon hv / hv-gram not doubtful, or card label same /
   gram), next to its Vietnamese word ("học sinh is 學生"); "phải is 被" kinds are refused. Characters, not pinyin
-  runs; avoid romanisations that read as Vietnamese (gam2, tóng, sim).
+  runs; avoid romanisations that read as Vietnamese (gam2, tóng, sim). An older loan is refused (đọc is 讀).
 - At most one false-friend note (topic false-friend), on a word whose lexicon row has false_friend: its characters
   next to it; other characters only from that note.
 - Particles: as the strand below; Northern forms (no final nha / vậy before L67). Person terms of one sentence form
