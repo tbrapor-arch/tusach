@@ -1,0 +1,64 @@
+id: 34
+title: {vi: "Một trận bóng đá", en: "A football match"}
+review: false
+setting: "Saturday evening. The national team plays Thailand. Anh Tuấn from the office takes Sacha and anh Minh to a café where the match is on a big screen; the pavement is packed with fans in red."
+dialogue:
+- {n: 1, speaker: "Tuấn", vi: "Sacha ơi, tối thứ_bảy này đội_tuyển Việt_Nam đá~kick với Thái_Lan đấy!", en: "Sacha, this Saturday evening the Vietnam team is playing Thailand!"}
+- {n: 2, speaker: "Sacha", vi: "Thế à? Chúng_ta đi sân_vận_động xem nhé!", en: "Really? Let's go to the stadium and watch!"}
+- {n: 3, speaker: "Tuấn", vi: "Vì vé đắt và khó mua nên chúng_ta xem ở quán cà_phê, trên ti_vi.", en: "Tickets are expensive and hard to get, so we'll watch it on TV at a café.", lit: "because ticket expensive and difficult buy so we watch at café, on TV"}
+- {n: 4, speaker: "Minh", vi: "Đông~crowded quá! Ai cũng cổ_vũ đội~team Việt_Nam.", en: "It's packed! Everyone is cheering for Vietnam."}
+- {n: 5, speaker: "Sacha", vi: "Cầu_thủ số mười là ai? Anh ấy đá~kick giỏi quá!", en: "Who's number ten? He plays really well!"}
+- {n: 6, speaker: "Tuấn", vi: "Đấy là cầu_thủ giỏi nhất của đội~team. Ghi_bàn đi! Ghi_bàn đi!", en: "That's the team's best player. Score! Score!"}
+- {n: 7, speaker: "Minh", vi: "Vào! Việt_Nam ghi_bàn rồi!", en: "Goal! Vietnam has scored!"}
+- {n: 8, speaker: "Sacha", vi: "Sao~why trọng_tài không cho bàn~goal này?", en: "Why isn't the referee allowing that goal?"}
+- {n: 9, speaker: "Tuấn", vi: "Tại_vì cầu_thủ số mười đá~kick ngã cầu_thủ Thái_Lan.", en: "Because number ten kicked a Thai player over."}
+- {n: 10, speaker: "Minh", vi: "Tiếc quá! Hết trận~match rồi. Việt_Nam thua một – không.", en: "What a shame! The match is over. Vietnam lost one–nil."}
+- {n: 11, speaker: "Sacha", vi: "Vì Thái_Lan đá~kick nhanh hơn nên họ thắng~win.", en: "Thailand played faster, so they won."}
+- {n: 12, speaker: "Tuấn", vi: "Lần sau Việt_Nam sẽ thắng~win! Chúng_ta lại xem trực_tiếp ở đây nhé.", en: "Next time Vietnam will win! We'll watch it live here again."}
+notes:
+- {ref: 3, topic: "grammar", text: "vì … nên: \"because … so\". Vietnamese likes both halves: vì vé đắt nên chúng_ta xem ở quán \"because tickets are dear, (so) we watch at a café\". This nên is \"so\", not nên \"should\" (lesson 12)."}
+- {ref: 11, topic: "grammar", text: "The cause comes first with vì, the result after nên: vì họ đá nhanh hơn nên họ thắng. English drops one of the two words; Vietnamese keeps both."}
+- {ref: 9, topic: "grammar", text: "tại_vì \"because\" answers a sao? question (line 8) and comes alone, without nên: sao …? – tại_vì … It is a little more colloquial than vì."}
+- {ref: 11, topic: "pronouns", text: "họ is \"they, them\" for people: here the other team. Unlike anh, chị, em, it says nothing about age."}
+- {ref: 1, topic: "usage", text: "đá is \"to kick\", and \"to play\" for football: đá bóng \"to play football\", đá với … \"to play against …\". đội_tuyển is the national side; đội alone is any team."}
+- {ref: 7, topic: "usage", text: "ghi_bàn \"to score a goal\"; the goal itself is bàn (line 8). When a goal goes in, the crowd shouts vào! \"in!\""}
+- {ref: 10, topic: "usage", text: "thắng \"to win\" and thua \"to lose\" take the score straight after: thua một – không \"lose one–nil\". tiếc quá! \"what a pity!\""}
+- {ref: 12, topic: "usage", text: "xem trực_tiếp \"to watch live\"; trực_tiếp is also \"in person, direct\"."}
+- {ref: 5, topic: "bridge", text: "cầu_thủ is 球手 and giáo_viên is 教員: inside a Hán-Việt word the order is Chinese, the modifier first (ball + player). Outside it, native order puts the head first: đội_tuyển Việt_Nam, cầu_thủ số mười."}
+new_words:
+- {w: đội_tuyển, en: "national team, selected team"}
+- {w: đá, tag: kick, en: "to kick; to play (football)"}
+- {w: Thái_Lan, name: true, en: "Thailand"}
+- {w: sân_vận_động, en: "stadium"}
+- {w: ti_vi, en: "TV, television"}
+- {w: cổ_vũ, en: "to cheer, to support"}
+- {w: đội, tag: team, en: "team"}
+- {w: cầu_thủ, en: "player (football)"}
+- {w: ghi_bàn, en: "to score a goal"}
+- {w: bàn, tag: goal, en: "goal (in football)"}
+- {w: trọng_tài, en: "referee"}
+- {w: tại_vì, en: "because"}
+- {w: tiếc, en: "to be sorry, to regret: tiếc quá! what a pity!"}
+- {w: trận, tag: match, en: "match, game"}
+- {w: thua, en: "to lose (a game)"}
+- {w: họ, en: "they, them"}
+- {w: thắng, tag: win, en: "to win, to beat"}
+- {w: trực_tiếp, en: "live, direct"}
+- {w: hét, tag: shout, en: "to shout, to scream"}
+- {w: buồn_cười, en: "funny"}
+exercises:
+  translate:
+  - {vi: "Vì trời mưa nên trận~match bóng_đá bắt_đầu muộn.", en: "Because it was raining, the football match started late."}
+  - {vi: "Tuấn không đi làm, tại_vì anh ấy ốm.", en: "Tuấn didn't go to work, because he was ill."}
+  - {vi: "Bin thích xem phim buồn_cười trên ti_vi.", en: "Bin likes watching funny films on TV."}
+  - {vi: "Mọi người hét~shout to quá, em không nghe được.", en: "Everyone is shouting so loud, I can't hear."}
+  - {vi: "Đội~team của Na thua, nhưng Na không buồn.", en: "Na's team lost, but she isn't sad."}
+  fill:
+  - {vi: "Vì anh bận ___ anh không đến được.", answer: "nên", en: "I'm busy, so I can't come."}
+  - {vi: "Hôm_qua đội~team Hà_Nội ___ hai – một.", answer: "thắng~win", en: "Yesterday the Hà Nội team won two–one."}
+  - {vi: "Cầu_thủ số chín ___ hai lần.", answer: "ghi_bàn", en: "Number nine scored twice."}
+doubt:
+- {line: 3, text: "vì … nên with two reasons (vé đắt và khó mua): natural in speech?"}
+- {line: 9, text: "đá ngã cầu_thủ Thái_Lan 'kicked a Thai player over': natural, or phạm lỗi với …?"}
+- {line: 10, text: "thua một – không: is the score read một – không or một – không bàn? Is 'Hết trận rồi' natural for 'the match is over'?"}
+- {line: 0, text: "Lexicon row thắng~win (hv 勝) is Claude's: the dictionary card gave 'brake'."}
