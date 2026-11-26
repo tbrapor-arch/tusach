@@ -4,6 +4,8 @@
 #                for test databases only)
 # make db-nc     private build: data/build/vi-nc.db (also non-commercial sources); the public page refuses it
 # make lint      lesson rules (tools/lint.py) + the word verifier (tools/verify_words.py)
+# make lint-lesson L=29-35   the quiet check of a batch: errors and warnings of those lessons only (capped), the
+#                verifier's suspects they bring in; plain `make lint` before a commit
 # make app       app/dist/index.html, then the card check (tools/check_cards.py)
 # make check     the card check alone, on the last build
 # make test      unit tests of the Vietnamese helpers, the word pipeline, the build guards, the database and bridge;
@@ -14,7 +16,7 @@ PY = python3 -I
 RAW = data/raw
 OUT = data/build
 
-.PHONY: data db db-nc lookup clean lint test app check smoke coverage cutter
+.PHONY: data db db-nc lookup clean lint lint-lesson test app check smoke coverage cutter
 data:
 	sh data/fetch.sh
 
@@ -35,6 +37,10 @@ clean:
 lint:
 	$(PY) tools/lint.py
 	$(PY) tools/verify_words.py --lessons
+
+lint-lesson:
+	$(PY) tools/lint.py --lessons $(L)
+	$(PY) tools/verify_words.py --lessons --only $(L)
 
 test: db db-nc
 	$(PY) tools/vi.py

@@ -63,6 +63,7 @@ Checks (E = error, exit 1; W = warning; I = information)
 The words of the lines are also checked by tools/verify_words.py (`make lint` runs both).
 """
 import collections
+import functools
 import os
 import re
 import sqlite3
@@ -83,10 +84,10 @@ LEX_CID, LEX_KEY = lexicon.index(LEX)
 DB = os.environ.get('TUSACH_DB') or os.path.join(ROOT, 'data/build/vi.db')
 REQUIRED = ('id', 'title', 'dialogue', 'notes', 'new_words')
 KEYS = {'top': {'id', 'title', 'review', 'setting', 'native_check', 'dialogue', 'notes', 'new_words', 'exercises',
-                'fixture'},
+                'fixture', 'doubt'},
         'title': {'vi', 'en'}, 'dialogue': {'n', 'speaker', 'vi', 'en', 'lit'}, 'notes': {'ref', 'topic', 'text'},
         'new_words': {'w', 'en', 'tag', 'chars', 'label', 'name'}, 'translate': {'vi', 'en'},
-        'fill': {'vi', 'answer', 'en'}, 'native_check': {'by', 'date'}}
+        'fill': {'vi', 'answer', 'en'}, 'native_check': {'by', 'date'}, 'doubt': {'line', 'text'}}
 SIMILAR = 0.8
 # who says which kin term to whom (review 5, finding 1): a sentence's first-person and second-person terms form one of
 # these pairs (either order); tôi goes with anything
@@ -118,21 +119,34 @@ def kin_mismatch(text):
     return out
 
 
+_display = functools.lru_cache(maxsize=None)(vi.display)
+
+
+@functools.lru_cache(maxsize=None)
+def _norm(text):
+    return tuple(t[2] for t in vi.words(text) if t[0] == 'w')
+
+
 def norm_tokens(text):
     """Word keys of a line, without punctuation or case: the unit of the exercise-copy check."""
-    return [t[2] for t in vi.words(text) if t[0] == 'w']
+    return list(_norm(text))
+
+
+@functools.lru_cache(maxsize=None)
+def _clauses(text):
+    return tuple(c for c in (_norm(x) for x in re.split(r'[,;:!?.…]+', _display(text))) if c)
 
 
 def clauses(text):
     """The clauses of a line (split at , ; : ! ? . …), each as a token list."""
-    return [c for c in (norm_tokens(x) for x in re.split(r'[,;:!?.…]+', vi.display(text))) if c]
+    return [list(c) for c in _clauses(text)]
 
 
 def copied(ex, line):
     """'copy' when the exercise is a dialogue line, part of one, or one without its first clause (or the other way
     round); a similarity ratio otherwise."""
     import difflib
-    e, l_ = norm_tokens(vi.display(ex)), norm_tokens(vi.display(line))
+    e, l_ = norm_tokens(_display(ex)), norm_tokens(_display(line))
     if not e or not l_:
         return 0.0
 
@@ -313,6 +327,14 @@ def strings(o, path=''):
 LABELS = ('same', 'false-friend', 'native', 'hv-vn', 'older-loan', 'loan', 'compound', 'doubtful', 'opaque')
 D = None          # DB_ of the run
 listed = None     # {card id: {lesson numbers}} of the approved word list, None while none is approved
+draft_from = None  # the first lesson beyond the approved word lists: from it on, words are chosen in the lesson (draft)
+
+
+def is_draft(d):
+    """A real lesson beyond the approved word lists (26 Nov 2026): its new_words are drafted in the lesson itself and
+    approved afterwards from the list tools/wordlist.py --from-lessons generates."""
+    return (draft_from is not None and not d.get('fixture') and isinstance(d.get('id'), int)
+            and d['id'] >= draft_from)
 
 
 def word_list_ids(path):
@@ -458,6 +480,65 @@ def taught_order(loaded, msgs):
                 if vi.card_id(k, t[3]) not in taught and 'name:' + t[1].replace('_', ' ') not in taught:
                     msgs.append(('E', f'{os.path.relpath(f, ROOT)}:{where}: E "{t[1]}" is taught by no lesson up to '
                                       'this one (a needed word means the plan is wrong: fix the word list)'))
+
+
+EN_STOP_ROW = {'to', 'a', 'an', 'the', 'of', 'is', 'used', 'sb', 'sth', 'etc'}
+
+
+def row_needed(k, tag, en):
+    """Why a new word with no course lexicon row may get a wrong card ('' when the dictionary alone serves): the card's
+    dictionary sense shares no English word with the English taught (another etymology, or a poor gloss)."""
+    import cards
+    cid = cards.lookup(k, tag) if cards.con else None
+    c = cards.dictionary.get(cid) if cid else None
+    if not c:
+        return ''
+    if not c.get('en'):
+        return 'the dictionary card has no English of its own'
+    if not lexicon.words(en, EN_STOP_ROW) & lexicon.words(c['en'], EN_STOP_ROW):
+        return f'the dictionary card says "{c["en"][:60]}"'
+    return ''
+
+
+def draft_checks(loaded, msgs):
+    """Lessons beyond the approved word lists (is_draft): their words are chosen in the lesson (26 Nov 2026). The list's
+    guarantees, kept: a word is new (not taught by an earlier lesson, not in an approved list); an origin or character
+    claim is a course lexicon row (validated), never new_words' chars / label; W where the dictionary alone may give a
+    wrong card (row_needed): write a lexicon row for the sense taught, or a ~tag naming it."""
+    taught = {}
+    for f, d in sorted(((f, d) for f, d in loaded if not d.get('fixture') and isinstance(d.get('id'), int)),
+                       key=lambda x: x[1]['id']):
+        rel = os.path.relpath(f, ROOT)
+        mine = []
+        for j, w in enumerate(d.get('new_words') or []):
+            if not w.get('w'):
+                continue
+            if w.get('name'):
+                cid = 'name:' + vi.nfc(w['w']).replace('_', ' ')
+            else:
+                k = D.spelling.get(vi.key(w['w']), vi.key(w['w']))
+                cid = vi.card_id(k, w.get('tag'))
+            if is_draft(d) and not w.get('name'):
+                if cid in taught:
+                    msgs.append(('E', f'{rel}:new_words[{j}]: E {w["w"]} is already taught by lesson {taught[cid]}'))
+                elif listed and cid in listed:
+                    msgs.append(('E', f'{rel}:new_words[{j}]: E {w["w"]} is already in an approved word list (lesson '
+                                      f'{", ".join(map(str, sorted(listed[cid], key=str)))})'))
+                if w.get('chars') or w.get('label'):
+                    msgs.append(('E', f'{rel}:new_words[{j}]: E {w["w"]}: chars / label in new_words: an origin or '
+                                      'character claim is a course lexicon row (course/lexicon.tsv, validated)'))
+                if cid not in LEX_CID and not (not w.get('tag') and LEX_KEY.get(k)):
+                    why = row_needed(k, w.get('tag'), w.get('en') or '')
+                    if why:
+                        msgs.append(('W', f'{rel}:new_words[{j}]: W {w["w"]} "{w.get("en")}": {why}; if that is not '
+                                          'the sense taught, add a course lexicon row for it (or a ~tag naming it)'))
+            mine.append(cid)
+        n = sum(1 for w in d.get('new_words') or [] if w.get('w') and not w.get('name'))
+        if is_draft(d) and n:
+            msgs.append(('I', f'{rel}:0: I draft words: {n} new words chosen in this lesson, not yet in an approved '
+                              'word list (after the batch: tools/wordlist.py --from-lessons, then the owner approves)'))
+        for cid in mine:
+            taught.setdefault(cid, d['id'])
 
 
 # what the order check of notes leaves out (review 5, finding 15): readings in Chinese romanisation, the letters and
@@ -612,7 +693,7 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
         check_keys(m, 'title', d['title'], 'title')
     if isinstance(d.get('native_check'), dict):
         check_keys(m, 'native_check', d['native_check'], 'native_check')
-    for kind in ('dialogue', 'notes', 'new_words'):
+    for kind in ('dialogue', 'notes', 'new_words', 'doubt'):
         for i, it in enumerate(d.get(kind) or []):
             check_keys(m, f'{kind}[{i}]', it, kind)
     for kind, items in (d.get('exercises') or {}).items():
@@ -676,6 +757,17 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
                 why = D.bridge_example(run, word or None)
                 if why:
                     m('E', f'notes[{i}]', f'bridge example {run} {word}: {why}')
+    for i, dt in enumerate(d.get('doubt') or []):     # the writer's hesitations for a native speaker (not shown)
+        if not isinstance(dt, dict) or not (dt.get('text') or '').strip():
+            m('E', f'doubt[{i}]', 'a doubt needs {line, text}')
+        elif isinstance(dt.get('line'), int) and dt['line'] != 0 and dt['line'] not in ns:
+            m('E', f'doubt[{i}]', f"doubt line {dt['line']} is not a line of the dialogue (0: the whole lesson)")
+        elif not isinstance(dt.get('line'), (int, str)):
+            m('E', f'doubt[{i}]', 'doubt line: a dialogue line number (0: the whole lesson) or a place '
+                                  '("exercises.fill[1]", "notes[3]")')
+    if (d.get('review') or (isinstance(d.get('id'), int) and d['id'] > 0 and d['id'] % 7 == 0)) and real and any(
+            w.get('w') and not w.get('name') for w in d.get('new_words') or []):
+        m('E', 'new_words', 'a review lesson has no new word')
     if sum(1 for note in d.get('notes') or [] if note.get('topic') == 'false-friend') > 1:
         m('E', 'notes', 'more than one false-friend note in the lesson (at most one, review 6)')
     for kind, items in (d.get('exercises') or {}).items():
@@ -714,14 +806,14 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
             m('E', f'new_words[{j}]', f'{w["w"]}: chars must be chữ Hán')
         if w.get('label') and w['label'] not in LABELS:
             m('E', f'new_words[{j}]', f'{w["w"]}: label must be one of {", ".join(LABELS)}')
-        if listed is not None and real and not w.get('name'):
+        if listed is not None and real and not w.get('name') and not is_draft(d):
             lk = vi.card_id(D.spelling.get(vi.key(w['w']), vi.key(w['w'])), w.get('tag'))
             if lk not in listed:
                 m('E', f'new_words[{j}]', f'{w["w"]} is not in the approved word list')
             elif d.get('id') not in listed[lk]:
                 m('E', f'new_words[{j}]', f'{w["w"]}: the approved word list gives it to lesson '
                                           f'{", ".join(map(str, sorted(listed[lk])))}')
-    if listed is not None and real:
+    if listed is not None and real and not is_draft(d):
         mine = {vi.card_id(D.spelling.get(vi.key(w['w']), vi.key(w['w'])), w.get('tag'))
                 for w in d.get('new_words') or [] if w.get('w')}
         for lk, ls in sorted(listed.items()):
@@ -730,10 +822,21 @@ def lint(path, d, keys, tags, all_tags, names, msgs, spellings):
 
 
 def main():
-    global D, listed
+    global D, listed, draft_from
     if '--wordlist' in sys.argv:          # check a word list file alone (format, words, spellings, tags)
         sys.exit(check_wordlist(sys.argv[sys.argv.index('--wordlist') + 1]))
-    files = sys.argv[1:] or course.lesson_files()
+    argv = sys.argv[1:]
+    only, cap = None, 40          # --lessons N-M: the quiet check of a batch (`make lint-lesson L=N-M`)
+    if '--max' in argv:
+        i = argv.index('--max')
+        cap = int(argv[i + 1])
+        del argv[i:i + 2]
+    if '--lessons' in argv:
+        i = argv.index('--lessons')
+        a, _, b = argv[i + 1].partition('-')
+        only = set(range(int(a), int(b or a) + 1))
+        del argv[i:i + 2]
+    files = argv or course.lesson_files()
     keys, tags = load_db()
     D = DB_(DB)
     try:
@@ -753,6 +856,8 @@ def main():
         except (OSError, ValueError) as e:
             listed = None
             msgs.append(('E', f'course/syllabus.yaml: E approved word list: {e}'))
+    if listed is not None:
+        draft_from = max([n for ls in listed.values() for n in ls if isinstance(n, int)] or [0]) + 1
     reals = [f for f in files if not course.load(f).get('fixture')] if files else []
     if reals and not (syl.get('syllabus') and syl.get('word_list')):
         msgs.append(('E', f'course/syllabus.yaml: E {len(reals)} lesson(s) drafted before the owner approved the '
@@ -786,12 +891,14 @@ def main():
         lint(f, d, keys, tags, all_tags, names, msgs, spellings)
     plan_checks(loaded, msgs)
     taught_order(loaded, msgs)
+    draft_checks(loaded, msgs)
     notes_order_and_copies(loaded, msgs)
     try:
         card_example_copies(loaded, msgs)
     except Exception as e:               # noqa: BLE001 - an old database without the card tables
         msgs.append(('W', f'lint: W card examples not checked against the exercises ({e})'))
-    lint_lesson0(keys, tags, all_tags, names, msgs)
+    if only is None:
+        lint_lesson0(keys, tags, all_tags, names, msgs)
     # pacing: a smooth growth of lines per lesson (non-review lessons, in order)
     real = sorted((d['id'], len(d.get('dialogue') or []), os.path.basename(f)) for f, d in loaded
                   if not d.get('fixture') and not d.get('review') and isinstance(d.get('id'), int))
@@ -801,13 +908,19 @@ def main():
     for f, d in loaded:
         if isinstance(d.get('id'), int) and d['id'] > 0 and not d.get('fixture') and bool(d.get('review')) != (d['id'] % 7 == 0):
             msgs.append(('W', f'{os.path.basename(f)}: W review lessons are every 7th (7, 14, …)'))
-    res = lexicon.validate(D.con, LEX)
+    if only is None:
+        res = lexicon.validate(D.con, LEX)
+    else:                                # the quiet check: the rows of the batch's words only
+        mine = {vi.key(w['w']) for _, d in loaded if d.get('id') in only for w in d.get('new_words') or [] if w.get('w')}
+        res = lexicon.validate(D.con, [r for r in LEX if r['k'] in mine])
     for r, kind, msg in res:
         if kind not in lexicon.overrides(r):
             msgs.append(('E', f'course/lexicon.tsv:{r["n"]}: E {r["key"]}: {kind}: {msg} (resolve it, or override it '
                               'with a reason: tools/lexicon.py)'))
     # the plan, the draft word list and the proposal from one source (review 3, finding 1): tools/plan.py
-    draft = (course.syllabus().get('draft') or {})
+    draft = (course.syllabus().get('draft') or {}) if only is None else {}
+    if only is not None:
+        sys.exit(quiet(loaded, msgs, only, cap))
     if draft.get('word_list'):
         import contextlib
         import io
@@ -843,6 +956,28 @@ def main():
         errors += level == 'E'
     print(f'{len(files)} file(s), {errors} error(s)')
     sys.exit(1 if errors else 0)
+
+
+def quiet(loaded, msgs, only, cap):
+    """`lint.py --lessons N-M [--max K]`: the errors and warnings of lessons N-M (and of the course lexicon) only, at
+    most K, then one summary line. The word lists' and the proposal's checks are left to plain `make lint`."""
+    pre = tuple(x for f, d in loaded if d.get('id') in only
+                for x in (os.path.relpath(f, ROOT) + ':', os.path.basename(f) + ':')) + ('course/lexicon.tsv:',)
+    mine = [(lv, t) for lv, t in msgs if t.startswith(pre)]
+    shown = [x for x in mine if x[0] == 'E'] + [x for x in mine if x[0] == 'W']
+    for lv, t in shown[:cap]:
+        print(t)
+    if len(shown) > cap:
+        print(f'… {len(shown) - cap} more (--max)')
+    e = sum(1 for lv, _ in mine if lv == 'E')
+    w = sum(1 for lv, _ in mine if lv == 'W')
+    drafts = sum(1 for lv, t in mine if lv == 'I' and ' I draft words:' in t)
+    other = sum(1 for lv, t in msgs if lv == 'E' and not t.startswith(pre))
+    lo, hi = min(only), max(only)
+    print(f'lint L{lo}-{hi}: {e} error(s), {w} warning(s) in {sum(1 for _, d in loaded if d.get("id") in only)} '
+          f'lesson(s)' + (f', {drafts} in the draft state (words chosen in the lesson)' if drafts else '')
+          + (f'; {other} error(s) elsewhere (plain make lint)' if other else ''))
+    return 1 if e else 0
 
 
 def check_wordlist(path):

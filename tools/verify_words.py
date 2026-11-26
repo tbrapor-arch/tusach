@@ -3,6 +3,8 @@
   python3 -I tools/verify_words.py --lessons        # every word of the lessons (lines, exercises, new_words): `make lint`
   python3 -I tools/verify_words.py words.tsv        # word <TAB> English [<TAB> chữ Hán], one per line (a word list)
   python3 -I tools/verify_words.py < words.tsv      # the same from stdin
+  python3 -I tools/verify_words.py --lessons --only 29-35   # only the suspects lessons 29-35 bring in (`make lint-lesson`):
+                                                            # not those an earlier lesson already has, no database classes
   options: --db PATH (default data/build/vi.db), --all (every suspect, not the first 60 of each class),
            --strict (exit 1 when there is any suspect of class 1–3)
 
@@ -22,6 +24,7 @@ Nothing here changes any file: it only prints (Tsheh-tû's verifier found 27 mis
 """
 import collections
 import os
+import re
 import sqlite3
 import sys
 
@@ -142,10 +145,24 @@ def main():
         args = [a for a in args if a != db]
     D = Dict(db)
     out = collections.defaultdict(list)
+    only = None
+    if '--only' in sys.argv:
+        a, _, b = sys.argv[sys.argv.index('--only') + 1].partition('-')
+        only = range(int(a), int(b or a) + 1)
+        args = [x for x in args if x != sys.argv[sys.argv.index('--only') + 1]]
     if '--lessons' in sys.argv:
         n = lessons(D, out)
-        database_suspects(db, out)
         what = f'{n} lesson lines and exercises'
+        if only is None:
+            database_suspects(db, out)
+        else:
+            def lesson_of(label):
+                m = re.match(r'L(\d+)\.', label)
+                return int(m.group(1)) if m else None
+            for cls in list(out):
+                before = {(w, why) for label, w, why in out[cls] if (lesson_of(label) or 0) < only.start}
+                out[cls] = [x for x in out[cls] if lesson_of(x[0]) in only and (x[1], x[2]) not in before]
+            what = f'lessons {only.start}-{only.stop - 1}: the suspects they bring in, among {n} lines and exercises'
     else:
         src = open(args[0], encoding='utf-8') if args else sys.stdin
         n = 0

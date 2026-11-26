@@ -97,7 +97,9 @@ dup = two + [dict(wrow(13, 'chào'), file='b.tsv')]
 L13d = L + [lesson(13, native=2)]
 ok(any('already in a.tsv' in m for m in run(L13d, dup)), 'a word of list a listed again in list b is refused')
 ok(plan.list_counts(two).count('Word list') == 2, 'list_counts: one sentence per list')
-# word list 3 review, finding 9: lint counts only the approved lists; a draft word in a lesson is refused
+# word list 3 review, finding 9: lint counts only the approved lists. Since 26 Nov 2026 (words chosen while writing)
+# a lesson BEYOND the approved lists is in the draft state: its own new_words declare its words (no error, an I line);
+# a lesson inside an approved list's range is still refused a word the list does not give it.
 import re, subprocess, tempfile  # noqa: E401,E402
 ROOT = os.path.dirname(HERE)
 L15 = """id: 15
@@ -117,17 +119,21 @@ only2 = re.sub(approved_re, r'\1course/proposal/wordlist-2.tsv}', real_syl)
 both = re.sub(approved_re, r'\1[course/proposal/wordlist-2.tsv, course/proposal/wordlist-3.tsv]}', real_syl)
 ok(both != only2, 'test syllabus: list 3 added to approved.word_list.file')
 with tempfile.TemporaryDirectory() as tmp:
-    les = os.path.join(tmp, 'lessons')
-    os.mkdir(les)
-    open(os.path.join(les, '15.yaml'), 'w', encoding='utf-8').write(L15)
     outs_ = {}
-    for name, text in (('draft', only2), ('approved', both)):
+    for name, text, n, quiet in (('draft', only2, 15, True), ('inside', only2, 13, True),
+                                 ('approved', both, 15, False)):
+        les = os.path.join(tmp, 'lessons-' + name)
+        os.mkdir(les)
+        open(os.path.join(les, f'{n}.yaml'), 'w', encoding='utf-8').write(L15.replace('id: 15', f'id: {n}'))
         sp = os.path.join(tmp, name + '.yaml')
         open(sp, 'w', encoding='utf-8').write(text)
-        r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'lint.py')], cwd=ROOT, capture_output=True,
+        r = subprocess.run([sys.executable, '-I', os.path.join(HERE, 'lint.py')] + (['--lessons', str(n)] if quiet
+                           else []), cwd=ROOT, capture_output=True,
                            text=True, env=dict(os.environ, TUSACH_COURSE=les, TUSACH_SYLLABUS=sp))
         outs_[name] = r.stdout + r.stderr
-ok('hơn is not in the approved word list' in outs_['draft'], 'lint: a word of the draft list 3 is not approved')
+ok('not in the approved word list' not in outs_['draft'] and 'in the draft state' in outs_['draft'],
+   'lint: L15 beyond the approved list 2 is a draft lesson, its words declared in its new_words')
+ok('hơn is not in the approved word list' in outs_['inside'], 'lint: L13, inside list 2, may not add a word')
 ok('hơn is not in the approved word list' not in outs_['approved'] and 'approved word list:' not in outs_['approved'],
    'lint: with file: [list 2, list 3] the word is approved (both lists read)')
 # a [db: …] part holding brackets is cut whole (word list 3 review, finding 24: sạch's note grew at each run)
