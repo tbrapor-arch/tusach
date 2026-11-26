@@ -12,11 +12,12 @@
 #                then the cutter report (tests/cutter, not a gate)
 # make smoke     click through the built app (Playwright)
 # make lookup W=học_sinh
+# make brief L="29 35"      tools/brief.py: the one thing a lesson writer reads (--review, --where, --untaught, --doubts)
 PY = python3 -I
 RAW = data/raw
 OUT = data/build
 
-.PHONY: data db db-nc lookup clean lint lint-lesson test app check smoke coverage cutter
+.PHONY: data db db-nc lookup brief clean lint lint-lesson test app check smoke coverage cutter
 data:
 	sh data/fetch.sh
 
@@ -30,6 +31,9 @@ db-nc: data
 
 lookup:
 	$(PY) tools/lookup.py "$(W)"
+
+brief:
+	$(PY) tools/brief.py $(L)
 
 clean:
 	rm -rf $(OUT)
@@ -57,6 +61,7 @@ test: db db-nc
 	$(PY) tools/test_review5.py
 	$(PY) tools/test_review6.py
 	$(PY) tools/test_golden.py
+	$(PY) tools/test_batches.py
 	$(PY) tools/state.py --check
 	@echo '--- cutter report (not a gate; reference NOT checked by a native speaker)'
 	-$(PY) tools/cutter_test.py --max 5

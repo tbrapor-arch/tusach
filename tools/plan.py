@@ -39,7 +39,7 @@ import course  # noqa: E402
 import lexicon  # noqa: E402
 import vi  # noqa: E402
 
-SYLLABUS = os.path.join(ROOT, 'course/syllabus.yaml')
+SYLLABUS = os.environ.get('TUSACH_SYLLABUS') or os.path.join(ROOT, 'course/syllabus.yaml')   # tests: a copy
 TO_CHECK = os.path.join(ROOT, 'course/proposal/wordlist-2-to-check.md')
 EN_COMMON = {'a', 'an', 'as', 'at', 'by', 'do', 'go', 'he', 'hi', 'in', 'is', 'it', 'me', 'my', 'no', 'of', 'on', 'or',
              'so', 'to', 'up', 'us', 'we', 'ban', 'bin', 'can', 'hot', 'long', 'man', 'men', 'mom', 'son', 'tin',
