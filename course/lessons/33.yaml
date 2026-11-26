@@ -1,0 +1,65 @@
+id: 33
+title: {vi: "Lại đi bác sĩ", en: "The doctor again"}
+review: false
+setting: "A week after Tết. The cold, damp Hà Nội spring has caught Sacha: a fever, a cough and a sore throat. Chị Lan sends him to the small clinic at the end of the lane."
+dialogue:
+- {n: 1, speaker: "Doctor", vi: "Chào anh. Anh thấy đau ở đâu?", en: "Hello. Where does it hurt?"}
+- {n: 2, speaker: "Sacha", vi: "Chào bác_sĩ. Tôi bị sốt~fever và ho~cough nhiều, họng cũng đau.", en: "Hello, doctor. I've got a fever and a bad cough, and my throat hurts too."}
+- {n: 3, speaker: "Doctor", vi: "Anh bị từ~from bao_giờ?", en: "Since when?"}
+- {n: 4, speaker: "Sacha", vi: "Từ~from hôm_qua. Đêm hôm_qua tôi không ngủ được.", en: "Since yesterday. Last night I couldn't sleep."}
+- {n: 5, speaker: "Doctor", vi: "Tôi khám~examine cho anh nhé. Anh thở đi. … Nhiệt_độ của anh hơi cao.", en: "Let me examine you. Breathe in. … Your temperature is a bit high."}
+- {n: 6, speaker: "Sacha", vi: "Tôi có cần~need đi bệnh_viện không?", en: "Do I need to go to hospital?"}
+- {n: 7, speaker: "Doctor", vi: "Không cần~need. Nếu anh nghỉ và uống nhiều nước~water thì anh sẽ khỏi.", en: "No need. If you rest and drink plenty of water, you'll get better."}
+- {n: 8, speaker: "Sacha", vi: "Tôi có phải~must tiêm không ạ?", en: "Do I have to have an injection?"}
+- {n: 9, speaker: "Doctor", vi: "Không. Đây là đơn_thuốc. Mỗi ngày anh uống thuốc ba~three lần. Đây không phải~right là kháng_sinh đâu.", en: "No. Here's the prescription. Take the medicine three times a day. It isn't an antibiotic."}
+- {n: 10, speaker: "Doctor", vi: "Nếu ba~three ngày nữa anh vẫn sốt~fever thì anh lại đến khám~examine nhé.", en: "If you still have a fever in three days, come back for another check-up."}
+- {n: 11, speaker: "Sacha", vi: "Chị Lan ơi, bác_sĩ nói em cần~need nằm nghỉ ba~three ngày.", en: "Lan, the doctor says I need to stay in bed for three days."}
+- {n: 12, speaker: "Lan", vi: "Thế thì em nằm đi. Nếu em đói thì chị nấu canh cho em.", en: "Then lie down. If you get hungry, I'll make you some soup."}
+notes:
+- {ref: 7, topic: "grammar", text: "nếu … thì: \"if … then\". The condition comes first with nếu, the result after thì: nếu anh nghỉ thì anh sẽ khỏi \"if you rest, you'll get better\". thì is the same word as in lesson 22 (khi … thì)."}
+- {ref: 10, topic: "grammar", text: "The condition can carry a time: nếu ba ngày nữa anh vẫn sốt \"if in three days you still have a fever\". ba ngày nữa is \"three more days, in three days\"."}
+- {ref: 6, topic: "grammar", text: "cần + verb: \"to need to\". The question is có cần … không? and the short answer không cần \"no need\". cần can also take a noun: em cần thuốc \"I need medicine\"."}
+- {ref: 8, topic: "grammar", text: "cần and phải~must: cần is what is needed, phải what is required. có phải tiêm không? \"do I have to have a shot?\""}
+- {ref: 2, topic: "usage", text: "Symptoms take bị: bị sốt \"to have a fever\", bị ho \"to have a cough\". A part of the body takes đau: đau họng \"sore throat\", {đau bụng} \"stomach ache\"."}
+- {ref: 3, topic: "usage", text: "từ bao_giờ? \"since when?\"; the answer is từ + time: từ hôm_qua \"since yesterday\"."}
+- {ref: 7, topic: "usage", text: "khỏi is \"to get over (an illness)\": anh sẽ khỏi \"you'll get better\"; khỏi bệnh \"to recover from an illness\"."}
+- {ref: 9, topic: "usage", text: "Frequency: mỗi ngày … ba lần \"three times a day\". đây không phải là … \"this is not …\": a {preview} of the negative of là."}
+- {ref: 0, topic: "bridge", text: "讀 is read {độc} in Hán-Việt. The everyday đọc \"to read\" is an older loan of the same character, as are được and biết: borrowed earlier, they sound further from Mandarin, Cantonese and Taigi."}
+new_words:
+- {w: sốt, tag: fever, en: "to have a fever"}
+- {w: ho, tag: cough, en: "to cough; a cough"}
+- {w: họng, en: "throat"}
+- {w: thở, en: "to breathe"}
+- {w: khám, tag: examine, en: "to examine (a patient)"}
+- {w: nhiệt_độ, en: "temperature"}
+- {w: cao, en: "high, tall"}
+- {w: cần, tag: need, en: "to need"}
+- {w: bệnh_viện, en: "hospital"}
+- {w: nếu, en: "if"}
+- {w: khỏi, en: "to recover, to get over (an illness)"}
+- {w: tiêm, en: "to give an injection; to have a shot"}
+- {w: đơn_thuốc, en: "prescription"}
+- {w: kháng_sinh, en: "antibiotic"}
+- {w: nằm, en: "to lie, to lie down"}
+- {w: bụng, en: "belly, stomach"}
+- {w: mũi, en: "nose"}
+- {w: bệnh, en: "illness, disease"}
+- {w: tay, en: "hand, arm"}
+- {w: chân, tag: leg, en: "foot, leg"}
+exercises:
+  translate:
+  - {vi: "Nếu trời mưa thì chúng_ta ở nhà xem phim.", en: "If it rains, we'll stay home and watch a film."}
+  - {vi: "Tôi cần~need mua thuốc ho~cough cho bố.", en: "I need to buy cough medicine for Dad."}
+  - {vi: "Bà bị đau bụng, phải~must đi bệnh_viện.", en: "Grandma has a stomach ache; she has to go to hospital."}
+  - {vi: "Anh khỏi bệnh chưa?", en: "Have you got over your illness yet?"}
+  - {vi: "Trời lạnh quá, mũi em đỏ rồi. Bệnh này khó khỏi lắm.", en: "It's so cold, my nose has gone red. This illness is hard to shake off."}
+  - {vi: "Bin ngã xe_đạp, bị đau tay và chân~leg.", en: "Bin fell off his bike and hurt his arm and leg."}
+  fill:
+  - {vi: "___ anh rảnh thì anh đến nhà em chơi nhé.", answer: "Nếu", en: "If you're free, come round to my place."}
+  - {vi: "Anh không ___ trả tiền, đây là quà.", answer: "cần~need", en: "You don't need to pay, it's a present."}
+  - {vi: "Bác_sĩ ___ cho Na rất cẩn_thận.", answer: "khám~examine", en: "The doctor examined Na very carefully."}
+doubt:
+- {line: 1, text: "Anh thấy đau ở đâu? as a doctor's opening: natural, or Anh bị làm sao?"}
+- {line: 5, text: "Anh thở đi for 'breathe in': would a doctor say Anh hít vào?"}
+- {line: 10, text: "thì anh lại đến khám nhé: is quay lại khám the usual phrase?"}
+- {line: 0, text: "Title Lại đi bác sĩ: natural? (đi bác sĩ for 'go to the doctor' may be colloquial or Southern; đi khám bệnh is safer)."}
