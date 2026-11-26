@@ -1,0 +1,63 @@
+id: 32
+title: {vi: "Tết ở quê anh Minh", en: "Tết in anh Minh's village"}
+review: false
+setting: "The second day of Tết. Anh Minh drives the family, and Sacha, to his parents' village an hour from Hà Nội. Chị Lan's mother stays in town. The house is full of relatives, and incense smoke drifts from the family altar."
+dialogue:
+- {n: 1, speaker: "Minh", vi: "Sacha ơi, đây là quê nội~paternal của Bin và Na.", en: "Sacha, this is Bin and Na's home village on their father's side."}
+- {n: 2, speaker: "Bin", vi: "Ông_nội ơi! Bà_nội ơi! Cháu về rồi!", en: "Grandpa! Grandma! We're here!"}
+- {n: 3, speaker: "Grandpa", vi: "Cả nhà về rồi à! Vào nhà đi các cháu.", en: "So you're all here! Come in, children."}
+- {n: 4, speaker: "Sacha", vi: "Cháu chào ông, chào bà. Cháu chúc~wish ông bà năm_mới sức_khỏe ạ.", en: "Hello, sir; hello, madam. I wish you good health in the new year."}
+- {n: 5, speaker: "Grandma", vi: "Cảm_ơn cháu. Cháu ở với bà_ngoại của Bin và Na à?", en: "Thank you. So you live with Bin and Na's other grandmother?"}
+- {n: 6, speaker: "Sacha", vi: "Dạ, cháu thuê phòng ở nhà chị Lan ạ.", en: "Yes, I rent a room in Lan's house."}
+- {n: 7, speaker: "Na", vi: "Mẹ cháu là con dâu~daughter của bà_nội, còn bố cháu là con rể của bà_ngoại đấy!", en: "My mum is Grandma's daughter-in-law here, and my dad is my other grandma's son-in-law!"}
+- {n: 8, speaker: "Minh", vi: "Na giỏi quá! Còn bố là anh_rể của dì Thảo.", en: "Clever girl! And I'm aunt Thảo's brother-in-law."}
+- {n: 9, speaker: "Grandpa", vi: "Bây_giờ cả nhà thắp hương~incense ở bàn_thờ tổ_tiên, rồi ăn cơm.", en: "Now the whole family lights incense at the ancestors' altar, and then we eat."}
+- {n: 10, speaker: "Sacha", vi: "Ở Pháp không có truyền_thống này ạ.", en: "We don't have this tradition in France."}
+- {n: 11, speaker: "Grandma", vi: "Tết là lúc gia_đình đoàn_tụ. Ngày_mai họ_hàng bên ngoại~maternal của Minh đến thăm~visit.", en: "Tết is when the family comes together. Tomorrow Minh's relatives on his mother's side are coming to visit."}
+- {n: 12, speaker: "Na", vi: "Thế thì cháu được nhiều lì_xì lắm!", en: "Then I'll get loads of lucky money!"}
+notes:
+- {ref: 1, topic: "grammar", text: "Kinship: nội is the father's side, ngoại the mother's. quê nội is the father's home village; bên ngoại (line 11) is \"the mother's side\", all its relatives."}
+- {ref: 2, topic: "grammar", text: "ông_nội, bà_nội are the father's parents; bà_ngoại and {ông_ngoại} the mother's. Bin and Na live with their bà_ngoại, chị Lan's mother."}
+- {ref: 7, topic: "grammar", text: "In-laws: con dâu \"daughter-in-law\", con rể \"son-in-law\". Parents-in-law are made with chồng and vợ: mẹ chồng \"husband's mother\", bố vợ \"wife's father\"."}
+- {ref: 8, topic: "grammar", text: "anh_rể is an elder sister's husband: Minh is Thảo's anh_rể. An elder brother's wife is a {chị_dâu}."}
+- {ref: 8, topic: "pronouns", text: "Minh calls himself bố to his own child, and Thảo is dì to Na: dì is the mother's sister. The mother's brother is cậu; on the father's side the words are cô and chú."}
+- {ref: 4, topic: "pronouns", text: "To his friends' parents Sacha is cháu, and they are ông and bà, as with the old neighbour ông Hùng (lesson 19)."}
+- {ref: 9, topic: "usage", text: "thắp hương \"to light incense\" at the bàn_thờ, the family altar where the tổ_tiên, the ancestors, are honoured: the first thing done on arriving home at Tết."}
+- {ref: 11, topic: "usage", text: "đoàn_tụ \"to be reunited\": Tết is the time for it. thăm is \"to visit\" someone: đến thăm \"to come and visit\"."}
+- {ref: 0, topic: "bridge", text: "bình_tĩnh is 平靜 and kinh_nghiệm is 經驗: a Mandarin -ing usually ends in -nh in Vietnamese (46 times in 54)."}
+new_words:
+- {w: nội, tag: paternal, en: "on the father's side"}
+- {w: ngoại, tag: maternal, en: "on the mother's side"}
+- {w: ông_nội, en: "grandfather (father's father)"}
+- {w: bà_nội, en: "grandmother (father's mother)"}
+- {w: bà_ngoại, en: "grandmother (mother's mother)"}
+- {w: dâu, tag: daughter, en: "daughter-in-law: con dâu"}
+- {w: rể, en: "son-in-law: con rể"}
+- {w: anh_rể, en: "brother-in-law (elder sister's husband)"}
+- {w: dì, en: "aunt (mother's sister)"}
+- {w: cậu, en: "uncle (mother's brother)"}
+- {w: thắp, en: "to light (incense, a lamp)"}
+- {w: hương, tag: incense, en: "incense; fragrance"}
+- {w: bàn_thờ, en: "altar"}
+- {w: tổ_tiên, en: "ancestors"}
+- {w: truyền_thống, en: "tradition; traditional"}
+- {w: đoàn_tụ, en: "to be reunited"}
+- {w: họ_hàng, en: "relatives"}
+- {w: bên, en: "side"}
+- {w: thăm, tag: visit, en: "to visit"}
+exercises:
+  translate:
+  - {vi: "Dì của tôi là em_gái của mẹ tôi.", en: "My aunt is my mother's younger sister."}
+  - {vi: "Cậu của Bin làm ở ngân_hàng.", en: "Bin's uncle (his mother's brother) works at a bank."}
+  - {vi: "Tết này chị về quê ngoại~maternal à?", en: "Are you going to your mother's home village this Tết?"}
+  - {vi: "Anh_rể của em là bác_sĩ.", en: "My brother-in-law is a doctor."}
+  - {vi: "Bà_nội thắp hương~incense mỗi sáng.", en: "Grandma (Dad's mother) lights incense every morning."}
+  fill:
+  - {vi: "Mẹ của mẹ tôi là ___ của tôi.", answer: "bà_ngoại", en: "My mother's mother is my grandmother."}
+  - {vi: "Chồng của chị_gái tôi là ___ của tôi.", answer: "anh_rể", en: "My elder sister's husband is my brother-in-law."}
+  - {vi: "Ngày_mai chúng_tôi đi ___ họ_hàng.", answer: "thăm~visit", en: "Tomorrow afternoon we're going to visit relatives."}
+doubt:
+- {line: 4, text: "Sacha greets Minh's parents as ông / bà: right for people in their sixties, or would bác be expected?"}
+- {line: 8, text: "Minh calls himself bố to his daughter and Thảo dì Thảo: is dì the Northern word here, or would the children say cô Thảo?"}
+- {line: 9, text: "thắp hương~incense ở bàn_thờ tổ_tiên: is ở right, or trên / lên bàn thờ?"}
+- {line: 0, text: "The lexicon rows for nội (hv-opaque 內) and ngoại (hv 外) are Claude's; please check the labels."}
