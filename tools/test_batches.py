@@ -3,7 +3,7 @@
   python3 -I tools/test_batches.py        (`make test`; needs the public database)
 
 1. A throwaway lesson 29 (TEST, not course content), beyond the approved word lists, in a temporary copy of the
-   lessons: plain lint passes in the draft state (its words declared in its own new_words; I "draft words").
+   real lessons 1-28 only (so the test does not depend on how many real lessons exist): plain lint passes in the draft state (its words declared in its own new_words; I "draft words").
 2. Its guarantees in the draft state: a word already taught, a new word in a review lesson, chars in new_words and a
    doubt pointing to no line are errors (lint --lessons, the quiet check).
 3. tools/wordlist.py --from-lessons generates its word list and the approval table; the list passes lint --wordlist
@@ -86,7 +86,10 @@ def errors(out):
 
 with tempfile.TemporaryDirectory() as tmp:
     les = os.path.join(tmp, 'lessons')
-    shutil.copytree(os.path.join(ROOT, 'course/lessons'), les)
+    # only the real lessons before the throwaway lesson 29: later real lessons would be checked against a plan
+    # and word lists the test replaces, and their words would no longer be new
+    shutil.copytree(os.path.join(ROOT, 'course/lessons'), les,
+                    ignore=lambda d, names: [x for x in names if re.fullmatch(r'\d\d\.yaml', x) and int(x[:2]) >= 29])
     open(os.path.join(les, '29.yaml'), 'w', encoding='utf-8').write(L29)
     syl_text = open(os.path.join(ROOT, 'course/syllabus.yaml'), encoding='utf-8').read()
     prop = os.path.join(tmp, 'syllabus-proposal.md')

@@ -1,4 +1,4 @@
-# Golden word cards (tools/test_golden.py): generated from the cards on 2026-11-19 and reviewed by Claude, NOT checked by a native speaker.
+# Golden word cards (tools/test_golden.py): generated from the cards on 2026-11-26 and reviewed by Claude, NOT checked by a native speaker.
 id	en	label	chars	hv	cmn	yue	nan	nan_layer	nan_coll	etymon	ety	ex	ex_src	use	ff
 chào	hello; goodbye; to greet	doubtful								朝 朝 triều/triêu/trào	wiktionary -	Chào chị ạ! / Hello! (politely, to a young woman a little older)	course lexicon: written	With a person term: chào anh, chào chị; any time of day, hello and goodbye	
 anh	elder brother; you (to a young man a little older); I (said by him)	native									wiktionary 1	Chào anh, tôi là Lan. / Hello, I am Lan.	course lexicon: written	A man of about the speaker's age or a little older; he says anh for "I" to someone younger	
@@ -685,3 +685,11 @@ kỷ niệm	memories; souvenir, keepsake	false-friend	紀念	紀 kỉ · 念 ni�
 mèo	cat	native									wiktionary -	Na có một con mèo. / Na has a cat.	course lexicon: written	con mèo "a cat" (classifier con)	
 môn	subject (at school), discipline	same	門	門 môn	mén	mun4	bûn				wiktionary -	Ông dạy môn văn. / He teaches literature.	course lexicon: written	môn văn "literature (as a subject)"; 門 is "door, gate" in Chinese, and the measure word of a subject (一門課)	
 hòa bình	peace; peaceful	same	和平	和 hòa/họa/hồ · 平 bình/biền	hépíng	wo4 ping4	hô-pîng				wiktionary -	Ngày đó có chiến tranh, bây giờ hòa bình rồi. / In those days there was war; now there is peace.	course lexicon: written		
+quầy	counter (in a shop, bank, office)	doubtful								櫃 櫃 quỹ	wiktionary -	Anh lấy vé ở quầy số một. / Get your ticket at counter one.	course lexicon: written	quầy vé "ticket counter"	
+tết	Tết, the Lunar New Year	older-loan								節 節 tiết/tiệt	wiktionary -	Nhà tôi ăn Tết ở quê. / My family spends Tết in our home village.	course lexicon: written	ăn Tết "to celebrate Tết"; chúc Tết "to give New Year wishes"	
+nội~paternal	on the father's side (family)	opaque	內	內 nội/nạp	nèi	noi6 (also naap6)	luē				wiktionary 1	Tết này nhà tôi về quê nội. / This Tết my family is going to my father's home village.	course lexicon: written	after a kinship word: ông nội, bà nội, quê nội	
+nội	on the father's side (family)	opaque	內	內 nội/nạp	nèi	noi6 (also naap6)	luē				wiktionary 1	Tết này nhà tôi về quê nội. / This Tết my family is going to my father's home village.	course lexicon: written	after a kinship word: ông nội, bà nội, quê nội	
+ngoại~maternal	on the mother's side (family)	same	外	外 ngoại	wài	ngoi6	guē				wiktionary -	Bà ngoại tôi sống ở Hà Nội. / My grandmother on my mother's side lives in Hà Nội.	course lexicon: written	after a kinship word: ông ngoại, bà ngoại, quê ngoại	
+ngoại	on the mother's side (family)	same	外	外 ngoại	wài	ngoi6	guē				wiktionary -	Bà ngoại tôi sống ở Hà Nội. / My grandmother on my mother's side lives in Hà Nội.	course lexicon: written	after a kinship word: ông ngoại, bà ngoại, quê ngoại	
+thắng~win	to win, to beat	same	勝	勝 thắng/thăng	shèng	sing3 (also sing1)	sìng (also sing)	unmarked			wiktionary 2	Đội của chúng tôi thắng hai – một. / Our team won two–one.	course lexicon: written	thắng + opponent or score: Việt Nam thắng Thái Lan; opposite thua	
+thắng	to win, to beat	same	勝	勝 thắng/thăng	shèng	sing3 (also sing1)	sìng (also sing)	unmarked			wiktionary 2	Đội của chúng tôi thắng hai – một. / Our team won two–one.	course lexicon: written	thắng + opponent or score: Việt Nam thắng Thái Lan; opposite thua	
