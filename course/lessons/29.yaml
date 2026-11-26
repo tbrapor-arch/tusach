@@ -1,0 +1,63 @@
+id: 29
+title: {vi: "Ở ngân hàng", en: "At the bank"}
+review: false
+setting: "Friday, payday. Mai takes Sacha to the bank near the office: he wants an account for his salary, and he has some dollars to change."
+dialogue:
+- {n: 1, speaker: "Mai", vi: "Anh Sacha ơi, ngân_hàng đây rồi. Anh phải~must xếp_hàng đấy.", en: "Sacha, here's the bank. You'll have to queue, you know."}
+- {n: 2, speaker: "Sacha", vi: "Đông~crowded quá! Mọi người đến rút tiền à?", en: "So crowded! Has everyone come to take out money?"}
+- {n: 3, speaker: "Mai", vi: "Hôm_nay mọi người được trả tiền_lương mà!", en: "Everyone gets paid today, you know!", lit: "today everyone get pay salary (mà)"}
+- {n: 4, speaker: "Clerk", vi: "Chào anh. Anh muốn làm gì ạ?", en: "Hello. What would you like to do?"}
+- {n: 5, speaker: "Sacha", vi: "Chào chị. Tôi muốn mở tài_khoản. Đây là hộ_chiếu của tôi.", en: "Hello. I'd like to open an account. Here is my passport."}
+- {n: 6, speaker: "Clerk", vi: "Vâng. Anh viết tên và số điện_thoại ở đây, rồi anh chọn mật_khẩu ạ.", en: "Right. Write your name and phone number here, then choose a password."}
+- {n: 7, speaker: "Sacha", vi: "Tôi lấy thẻ ngay được không?", en: "Can I take the card right away?"}
+- {n: 8, speaker: "Clerk", vi: "Được ạ. Anh lấy thẻ ở quầy kia. Tháng này anh được chuyển tiền miễn_phí.", en: "Yes. You can collect the card at that counter. This month you can transfer money free of charge.", lit: "… this month you get transfer money free"}
+- {n: 9, speaker: "Sacha", vi: "Tốt quá! Tôi cũng muốn đổi một trăm đô_la.", en: "Great! I'd also like to change a hundred dollars."}
+- {n: 10, speaker: "Clerk", vi: "Anh đưa em tiền ạ. … Đây ạ. Anh kiểm_tra xem đủ chưa ạ.", en: "Please give me the money. … Here you are. Check that it's all there.", lit: "you hand me money … here … you check see enough yet"}
+- {n: 11, speaker: "Sacha", vi: "Đủ rồi, cảm_ơn chị. Mai ơi, tháng trước tôi được sếp khen, tháng này tôi được thưởng!", en: "It's all there, thank you. Mai, last month the boss praised me, and this month I've got a bonus!", lit: "… last month I get boss praise, this month I get reward"}
+- {n: 12, speaker: "Mai", vi: "Thế thì anh mời em đi uống cà_phê nhé!", en: "Then you're treating me to a coffee!"}
+notes:
+- {ref: 3, topic: "grammar", text: "được before a verb: the subject receives something good. mọi người được trả tiền_lương \"everyone gets paid\". It is the pleasant counterpart of bị (lesson 12): bị ốm \"to fall ill\"."}
+- {ref: 11, topic: "grammar", text: "The doer can stand between được and the verb: tôi được sếp khen \"I was praised by the boss\", literally \"I received boss praise\". Without a doer: tôi được thưởng \"I got a bonus\"."}
+- {ref: 8, topic: "usage", text: "được + verb can also mean \"to get to, to be allowed to\": anh được chuyển tiền miễn_phí \"you get to transfer money free\". Compare được at the end of a question (line 7): lấy thẻ ngay được không? \"can I take the card right away?\""}
+- {ref: 7, topic: "usage", text: "ngay after a verb means \"right away\": lấy ngay \"take at once\", về ngay \"go home at once\"."}
+- {ref: 10, topic: "usage", text: "đủ chưa? \"is it enough yet?\": chưa turns a state into a question, as in ăn chưa? (lesson 10). The answer is đủ rồi."}
+- {ref: 9, topic: "usage", text: "đổi is \"to change, to exchange\": đổi tiền \"to change money\", đổi đô_la \"to change dollars\"."}
+- {ref: 4, topic: "pronouns", text: "The young clerk calls Sacha anh and herself em, as staff often do with customers; Sacha answers with chị and the neutral tôi."}
+- {ref: 2, topic: "usage", text: "rút tiền \"to take out money\": rút is \"to pull out\". Its opposite at the bank is {gửi tiền} \"to deposit\", with gửi \"to send\" (lesson 20)."}
+- {ref: 1, topic: "bridge", text: "ngân_hàng is 銀行, a word Mandarin, Cantonese and Taigi share. Hear the initials: Cantonese keeps the ng- of ngân that Mandarin has lost, and the h- of hàng."}
+new_words:
+- {w: ngân_hàng, en: "bank"}
+- {w: xếp_hàng, en: "to queue, to line up"}
+- {w: rút, en: "to withdraw, to pull out"}
+- {w: tiền_lương, en: "salary, pay"}
+- {w: mở, en: "to open"}
+- {w: tài_khoản, en: "account"}
+- {w: hộ_chiếu, en: "passport"}
+- {w: mật_khẩu, en: "password"}
+- {w: thẻ, en: "card"}
+- {w: ngay, en: "right away, at once"}
+- {w: quầy, en: "counter"}
+- {w: chuyển, en: "to transfer, to move"}
+- {w: miễn_phí, en: "free of charge"}
+- {w: đổi, en: "to change, to exchange"}
+- {w: đô_la, en: "dollar"}
+- {w: đưa, en: "to hand, to give"}
+- {w: đủ, en: "enough"}
+- {w: khen, en: "to praise"}
+- {w: thưởng, en: "to reward, to give a bonus"}
+- {w: ví, tag: wallet, en: "wallet, purse"}
+exercises:
+  translate:
+  - {vi: "Hôm_qua tôi được bố mẹ tặng một cái ví~wallet mới.", en: "Yesterday my parents gave me a new wallet."}
+  - {vi: "Anh ấy được công_ty thưởng năm~five triệu.", en: "His company gave him a bonus of five million."}
+  - {vi: "Ngân_hàng này mở lúc tám giờ sáng.", en: "This bank opens at eight in the morning."}
+  - {vi: "Tôi không đủ tiền mua xe_máy mới.", en: "I don't have enough money to buy a new motorbike."}
+  - {vi: "Chị đưa thẻ cho em nhé.", en: "Give me the card, OK? (to a younger woman, speaking to an older one)"}
+  fill:
+  - {vi: "Na ___ giáo_viên khen.", answer: "được", en: "Na was praised by the teacher."}
+  - {vi: "Anh muốn ___ tiền ở máy này à?", answer: "rút", en: "Do you want to take out money at this machine?"}
+  - {vi: "Em phải~must ___ ở quầy số hai.", answer: "xếp_hàng", en: "You have to queue at counter two."}
+doubt:
+- {line: 3, text: "Is được trả tiền_lương natural for 'get paid', or would nhận lương be the everyday phrase?"}
+- {line: 8, text: "được chuyển tiền miễn_phí: natural in a bank clerk's mouth?"}
+- {line: 12, text: "Mai and Sacha (same age, colleagues) use anh / em here: would bạn / mình or tớ / cậu be more likely?"}
