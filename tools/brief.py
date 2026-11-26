@@ -27,7 +27,7 @@ File course/lessons/NN.yaml (file name = id; nothing else there). Keys: id, titl
 one or two sentences), dialogue, notes, new_words, exercises, doubt (optional). Copy course/lesson_template.yaml.
 Text: Unicode NFC. QUOTE every flow value with a comma or a colon: {w: tôi, en: "I, me"} (else: unknown key, error).
 Dialogue {n, speaker, vi, en, lit?}: lit is a word-for-word gloss where the order differs. Lines: the plan's (+-1),
-  growing smoothly (+0 to +2 on the last non-review lesson). Speakers: the cast below, or a role (Landlady, Clerk).
+  growing smoothly (-1 to +2 on the last non-review lesson). Speakers: the cast below, or a role (Landlady, Clerk).
 Word boundaries: underscores join one word's syllables (học_sinh, Hà_Nội, cảm_ơn), spaces separate words, as in
   docs/SEGMENTATION.md; lint warns on a course word written apart (cảm ơn): usually a missing underscore.
 Homographs: word~tag (đường~road, năm~year, ba~three, tầng ba~three). A word with several lexicon senses, or several
